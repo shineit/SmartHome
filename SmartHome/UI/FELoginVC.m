@@ -52,7 +52,7 @@
     
     UIButton *loginbtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     loginbtn.frame = CGRectMake(100, 290, 120, 30);
-    [loginbtn setTitle:@"Login" forState:UIControlStateNormal];
+    [loginbtn setTitle:FEString(@"LOGIN") forState:UIControlStateNormal];
     [loginbtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginbtn];
     
