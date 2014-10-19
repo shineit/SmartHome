@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, FENavItemDirection) {
+	FENavItemLeftDirection,
+	FENavItemRightDirection,
+};
+
 @interface FECommonViewController : UIViewController
+
+- (void)screenOffset:(CGFloat)offset;
+
+//about keyboard
+- (void)keyboardWillShow:(NSNotification *)notification;
+- (void)keyboardWillHide:(NSNotification *)notification;
+- (void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration;
+- (void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration;
 
 @end

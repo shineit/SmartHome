@@ -7,10 +7,12 @@
 //
 
 #import "FEHomeVC.h"
+#import "FECollectionViewCell.h"
 
 @interface FEHomeVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic,strong) NSArray *functionItem;
 
 @end
 
@@ -22,6 +24,7 @@
     if (self) {
         // Custom initialization
         self.title = FEString(@"HOME");
+        self.functionItem = @[FEString(@"CLOUD_SAFE"),FEString(@"CURRENT_WARRING"),FEString(@"PROFILE"),FEString(@"CLOUD_CAMERA"),FEString(@"MOD_PSW"),FEString(@"WARRING")];
     }
     return self;
 }
@@ -39,8 +42,8 @@
     UICollectionView *cview = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     cview.delegate = self;
     cview.dataSource = self;
-    [cview registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-    cview.backgroundColor = [UIColor whiteColor];
+    [cview registerClass:[FECollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    cview.backgroundColor = [UIColor lightGrayColor];
     self.collectionView = cview;
     [self.view addSubview:cview];
     
@@ -51,12 +54,13 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString * identifier = @"cell";
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UICollectionViewCell alloc] init];
-    }
+    FECollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+//    if (!cell) {
+//        cell = [[FECollectionViewCell alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
+//    }
     
-    cell.backgroundColor = [UIColor colorWithRed:((10 * indexPath.row) / 255.0) green:((20 * indexPath.row)/255.0) blue:((30 * indexPath.row)/255.0) alpha:1.0f];
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.textlabel.text = self.functionItem[indexPath.row];
     return cell;
 }
 
@@ -66,7 +70,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 6;
+    return self.functionItem.count;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -81,6 +85,10 @@
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
+#pragma mark - UICollectionViewDelegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"tap index %d",indexPath.row);
+}
 
 
 - (void)didReceiveMemoryWarning
