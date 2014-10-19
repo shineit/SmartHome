@@ -1,25 +1,25 @@
 //
-//  FEWarringInfoVC.m
+//  FECloudCameraVC.m
 //  SmartHome
 //
 //  Created by Seven on 14-10-19.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEWarringInfoVC.h"
+#import "FECloudCameraVC.h"
 
-@interface FEWarringInfoVC ()
+@interface FECloudCameraVC ()
 
 @end
 
-@implementation FEWarringInfoVC
+@implementation FECloudCameraVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"WARRING_INFO");
+        self.title = FEString(@"CAMERA");
     }
     return self;
 }

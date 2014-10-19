@@ -31,6 +31,7 @@
     if (SYSTEM_VERSION_UP7) { // 判断是否是IOS7
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     }
+    self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

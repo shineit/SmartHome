@@ -1,25 +1,25 @@
 //
-//  FEWarringInfoVC.m
+//  FECloudSafeVC.m
 //  SmartHome
 //
 //  Created by Seven on 14-10-19.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEWarringInfoVC.h"
+#import "FECloudSafeVC.h"
 
-@interface FEWarringInfoVC ()
+@interface FECloudSafeVC ()
 
 @end
 
-@implementation FEWarringInfoVC
+@implementation FECloudSafeVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"WARRING_INFO");
+        self.title = FEString(@"SAFE");
     }
     return self;
 }

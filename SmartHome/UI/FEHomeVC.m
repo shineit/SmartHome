@@ -8,6 +8,12 @@
 
 #import "FEHomeVC.h"
 #import "FECollectionViewCell.h"
+#import "FEModifyPswVC.h"
+#import "FECurrentWarringVC.h"
+#import "FEWarringInfoVC.h"
+#import "FEProfileVC.h"
+#import "FECloudCameraVC.h"
+#import "FECloudSafeVC.h"
 
 @interface FEHomeVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -87,7 +93,42 @@
 
 #pragma mark - UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"tap index %d",indexPath.row);
+//    NSLog(@"tap index %d",indexPath.row);
+    FECloudSafeVC *safevc;
+    FECurrentWarringVC *cwarring;
+    FEProfileVC *profilevc;
+    FECloudCameraVC *camera;
+    FEModifyPswVC *psw;
+    FEWarringInfoVC *warringinfo;
+    switch (indexPath.row) {
+        case 0:
+            safevc = [FECloudSafeVC new];
+            [self.navigationController pushViewController:safevc animated:YES];
+            break;
+        case 1:
+            cwarring = [FECurrentWarringVC new];
+            [self.navigationController pushViewController:cwarring animated:YES];
+            break;
+        case 2:
+            profilevc = [FEProfileVC new];
+            [self.navigationController pushViewController:profilevc animated:YES];
+            break;
+        case 3:
+            camera = [FECloudCameraVC new];
+            [self.navigationController pushViewController:camera animated:YES];
+            break;
+        case 4:
+            psw = [FEModifyPswVC new];
+            [self.navigationController pushViewController:psw animated:YES];
+            break;
+        case 5:
+            warringinfo = [FEWarringInfoVC new];
+            [self.navigationController pushViewController:warringinfo animated:YES];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
