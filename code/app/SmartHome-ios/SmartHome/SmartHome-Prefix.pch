@@ -1,0 +1,26 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import "FESmartHomeConfig.h"
+    #import <ZBUtilities/UIImage+LogN.h>
+    #import <ZBUtilities/UIDevice+ZBUtilites.h>
+
+#define SYSTEM_VERSION_UP7                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+#define SYSTEM_VERSION_UP6                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)
+#define kFrameFullScreen                            (SYSTEM_VERSION_UP7?20:0)
+
+
+#endif
