@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>	
+  
+   <context-param>
+      <param-name>resteasy.scan</param-name>
+      <param-value>true</param-value>
+   </context-param>
+
+   <listener>
+      <listener-class>org.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+   </listener>
+
+   <servlet>
+      <servlet-name>Resteasy</servlet-name>
+      <servlet-class>org.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>Resteasy</servlet-name>
+      <url-pattern>/rest/*</url-pattern>
+   </servlet-mapping>
+  
+  <filter>
+    <display-name>EncodeFilter</display-name>
+    <filter-name>EncodeFilter</filter-name>
+    <filter-class>cn.fuego.misp.web.filter.EncodeFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <display-name>AuthenticationFilter</display-name>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>cn.fuego.misp.web.filter.AuthenticationFilter</filter-class>
+ 
+  </filter>
+  
+  <filter>         
+    <filter-name>struts2</filter-name>   
+        <filter-class>
+            org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+        </filter-class>  
+   </filter>  
+ <filter-mapping>          
+     <filter-name>AuthenticationFilter</filter-name> 
+        <url-pattern>/ss/*</url-pattern> 
+   </filter-mapping> 
+  <filter-mapping>          
+     <filter-name>struts2</filter-name> 
+        <url-pattern>/*</url-pattern> 
+   </filter-mapping> 
+    
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <el-ignored>false</el-ignored>
+    </jsp-property-group>
+  </jsp-config>
+  
+  
+ 
+
+</web-app>

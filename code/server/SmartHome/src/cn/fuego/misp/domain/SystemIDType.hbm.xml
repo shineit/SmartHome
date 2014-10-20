@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.misp.domain">
+	<class name="SystemIDType" table="SYSTEM_ID_TYPE">
+			<id name="name" column="NAME"  type="java.lang.String">
+			<generator class="assigned"/>
+			</id>
+        
+           <property name="step" column="STEP"  not-null="true" ></property>
+           <property name="length" column="LENGTH"  not-null="true" ></property>
+           <property name="incMode" column="INC_MODE"  not-null="true" ></property>	
+           <property name="currentID" column="CURRENT_ID"  not-null="true" ></property>
+           <property name="prefix" column="PREFIX"  not-null="false" ></property>
+           <property name="suffix" column="SUFFIX"  not-null="false" ></property>
+	
+				
+	</class>
+</hibernate-mapping>

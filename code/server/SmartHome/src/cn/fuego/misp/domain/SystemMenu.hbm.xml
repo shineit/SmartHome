@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.misp.domain">
+	<class name="SystemMenu" table="SYSTEM_MENU">
+			<id name="menuID" column="MENU_ID"  type="int">
+			<generator class="assigned"/>
+			</id>
+        
+           <property name="name" column="NAME"  not-null="true" ></property>
+           <property name="value" column="VALUE"  not-null="false" ></property>	
+           <property name="type" column="TYPE"  not-null="false" ></property>
+           <property name="icon" column="ICON"  not-null="false" ></property>
+           <property name="external" column="EXTERNAL"  not-null="false" ></property> 
+           <property name="fresh" column="FRESH"  not-null="false" ></property>  
+           <property name="url" column="URL"  not-null="false" ></property>  
+           <property name="parentID" column="PARENT_ID"  not-null="false" ></property> 
+           <property name="functionID" column="FUNCTION_ID"  not-null="false" ></property>
+                                      				
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,388 @@
+/* ------------------------------------------
+CSS3 GITHUB mispButtonS (Nicolas Gallagher)
+Licensed under Unlicense 
+http://github.com/necolas/css3-github-mispButtons
+------------------------------------------ */
+
+
+/* ------------------------------------------------------------------------------------------------------------- mispButton */
+
+.mispButton { 
+    position: relative; 
+    overflow: visible; 
+    display: inline-block; 
+    padding: 0.5em 1em; 
+    border: 1px solid #d4d4d4; 
+    margin: 0;
+    text-decoration: none; 
+    text-shadow: 1px 1px 0 #fff; 
+    font:11px/normal sans-serif; 
+    color: #333; 
+    white-space: nowrap; 
+    cursor: pointer; 
+    outline: none; 
+    background-color: #ececec;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
+    background-image: -moz-linear-gradient(#f4f4f4, #ececec);
+    background-image: -o-linear-gradient(#f4f4f4, #ececec);
+    background-image: linear-gradient(#f4f4f4, #ececec);
+    -webkit-background-clip: padding;
+    -moz-background-clip: padding;
+    -o-background-clip: padding-box; 
+    /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */
+    -webkit-border-radius: 0.2em; 
+    -moz-border-radius: 0.2em; 
+    border-radius: 0.2em; 
+    /* IE hacks */
+    zoom: 1; 
+    *display: inline; 
+}
+
+.mispButton:hover,
+.mispButton:focus,
+.mispButton:active {
+    border-color: #3072b3;
+    border-bottom-color: #2a65a0;
+    text-decoration: none; 
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.3); 
+    color: #fff; 
+    background-color: #3072b3;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
+    background-image: -moz-linear-gradient(#599bdc, #3072b3);
+    background-image: -o-linear-gradient(#599bdc, #3072b3);
+    background-image: linear-gradient(#599bdc, #3072b3);
+}
+
+.mispButton:active,
+.mispButton.active {
+    border-color: #2a65a0;
+    border-bottom-color: #3884CF;
+    color: #fff; 
+    background-color: #3072b3;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3072b3), to(#599bdc));
+    background-image: -moz-linear-gradient(#3072b3, #599bdc);
+    background-image: -o-linear-gradient(#3072b3, #599bdc);
+    background-image: linear-gradient(#3072b3, #599bdc);
+}
+
+/* overrides extra padding on mispButton elements in Firefox */
+.mispButton::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+/* ............................................................................................................. Icons */
+
+.mispButton.icon:before {
+    content: "";
+    position: relative; 
+    top: 1px; 
+    float:left;
+    width: 12px; 
+    height: 12px; 
+    margin: 0 0.75em 0 -0.25em; 
+    background: url(gh-icons.png) 0 99px no-repeat;
+}
+
+.mispButton.arrowup.icon:before { background-position: 0 0; }
+.mispButton.arrowup.icon:hover:before,
+.mispButton.arrowup.icon:focus:before,
+.mispButton.arrowup.icon:active:before { background-position: -12px 0; }
+
+.mispButton.arrowdown.icon:before { background-position: 0 -12px; }
+.mispButton.arrowdown.icon:hover:before,
+.mispButton.arrowdown.icon:focus:before,
+.mispButton.arrowdown.icon:active:before { background-position: -12px -12px; }
+
+.mispButton.arrowleft.icon:before { background-position: 0 -24px; }
+.mispButton.arrowleft.icon:hover:before,
+.mispButton.arrowleft.icon:focus:before,
+.mispButton.arrowleft.icon:active:before { background-position: -12px -24px; }
+
+.mispButton.arrowright.icon:before { float:right; margin: 0 -0.25em 0 0.5em; background-position: 0 -36px; }
+.mispButton.arrowright.icon:hover:before,
+.mispButton.arrowright.icon:focus:before,
+.mispButton.arrowright.icon:active:before { background-position: -12px -36px; }
+
+.mispButton.approve.icon:before { background-position: 0 -48px; }
+.mispButton.approve.icon:hover:before,
+.mispButton.approve.icon:focus:before,
+.mispButton.approve.icon:active:before { background-position: -12px -48px; }
+
+.mispButton.add.icon:before { background-position: 0 -288px; }
+.mispButton.add.icon:hover:before,
+.mispButton.add.icon:focus:before,
+.mispButton.add.icon:active:before { background-position: -12px -288px; }
+
+.mispButton.remove.icon:before { background-position: 0 -60px; }
+.mispButton.remove.icon:hover:before,
+.mispButton.remove.icon:focus:before,
+.mispButton.remove.icon:active:before { background-position: -12px -60px; }
+
+.mispButton.log.icon:before { background-position: 0 -72px; }
+.mispButton.log.icon:hover:before,
+.mispButton.log.icon:focus:before,
+.mispButton.log.icon:active:before { background-position: -12px -72px; }
+
+.mispButton.calendar.icon:before { background-position: 0 -84px; }
+.mispButton.calendar.icon:hover:before,
+.mispButton.calendar.icon:focus:before,
+.mispButton.calendar.icon:active:before { background-position: -12px -84px; }
+
+.mispButton.chat.icon:before { background-position: 0 -96px; }
+.mispButton.chat.icon:hover:before,
+.mispButton.chat.icon:focus:before,
+.mispButton.chat.icon:active:before { background-position: -12px -96px; }
+
+.mispButton.clock.icon:before { background-position: 0 -108px; }
+.mispButton.clock.icon:hover:before,
+.mispButton.clock.icon:focus:before,
+.mispButton.clock.icon:active:before { background-position: -12px -108px; }
+
+.mispButton.settings.icon:before { background-position: 0 -120px; }
+.mispButton.settings.icon:hover:before,
+.mispButton.settings.icon:focus:before,
+.mispButton.settings.icon:active:before { background-position: -12px -120px; }
+
+.mispButton.comment.icon:before { background-position: 0 -132px; }
+.mispButton.comment.icon:hover:before,
+.mispButton.comment.icon:focus:before,
+.mispButton.comment.icon:active:before { background-position: -12px -132px; }
+
+.mispButton.fork.icon:before { background-position: 0 -144px; }
+.mispButton.fork.icon:hover:before,
+.mispButton.fork.icon:focus:before,
+.mispButton.fork.icon:active:before { background-position: -12px -144px; }
+
+.mispButton.like.icon:before { background-position: 0 -156px; }
+.mispButton.like.icon:hover:before,
+.mispButton.like.icon:focus:before,
+.mispButton.like.icon:active:before { background-position: -12px -156px; }
+
+.mispButton.favorite.icon:before { background-position: 0 -348px; }
+.mispButton.favorite.icon:hover:before,
+.mispButton.favorite.icon:focus:before,
+.mispButton.favorite.icon:active:before { background-position: -12px -348px; }
+
+.mispButton.home.icon:before { background-position: 0 -168px; }
+.mispButton.home.icon:hover:before,
+.mispButton.home.icon:focus:before,
+.mispButton.home.icon:active:before { background-position: -12px -168px; }
+
+.mispButton.key.icon:before { background-position: 0 -180px; }
+.mispButton.key.icon:hover:before,
+.mispButton.key.icon:focus:before,
+.mispButton.key.icon:active:before { background-position: -12px -180px; }
+
+.mispButton.lock.icon:before { background-position: 0 -192px; }
+.mispButton.lock.icon:hover:before,
+.mispButton.lock.icon:focus:before,
+.mispButton.lock.icon:active:before { background-position: -12px -192px; }
+
+.mispButton.unlock.icon:before { background-position: 0 -204px; }
+.mispButton.unlock.icon:hover:before,
+.mispButton.unlock.icon:focus:before,
+.mispButton.unlock.icon:active:before { background-position: -12px -204px; }
+
+.mispButton.loop.icon:before { background-position: 0 -216px; }
+.mispButton.loop.icon:hover:before,
+.mispButton.loop.icon:focus:before,
+.mispButton.loop.icon:active:before { background-position: -12px -216px; }
+
+.mispButton.search.icon:before { background-position: 0 -228px; }
+.mispButton.search.icon:hover:before,
+.mispButton.search.icon:focus:before,
+.mispButton.search.icon:active:before { background-position: -12px -228px; }
+
+.mispButton.mail.icon:before { background-position: 0 -240px; }
+.mispButton.mail.icon:hover:before,
+.mispButton.mail.icon:focus:before,
+.mispButton.mail.icon:active:before { background-position: -12px -240px; }
+
+.mispButton.move.icon:before { background-position: 0 -252px; }
+.mispButton.move.icon:hover:before,
+.mispButton.move.icon:focus:before,
+.mispButton.move.icon:active:before { background-position: -12px -252px; }
+
+.mispButton.edit.icon:before { background-position: 0 -264px; }
+.mispButton.edit.icon:hover:before,
+.mispButton.edit.icon:focus:before,
+.mispButton.edit.icon:active:before { background-position: -12px -264px; }
+
+.mispButton.pin.icon:before { background-position: 0 -276px; }
+.mispButton.pin.icon:hover:before,
+.mispButton.pin.icon:focus:before,
+.mispButton.pin.icon:active:before { background-position: -12px -276px; }
+
+.mispButton.reload.icon:before { background-position: 0 -300px; }
+.mispButton.reload.icon:hover:before,
+.mispButton.reload.icon:focus:before,
+.mispButton.reload.icon:active:before { background-position: -12px -300px; }
+
+.mispButton.rss.icon:before { background-position: 0 -312px; }
+.mispButton.rss.icon:hover:before,
+.mispButton.rss.icon:focus:before,
+.mispButton.rss.icon:active:before { background-position: -12px -312px; }
+
+.mispButton.tag.icon:before { background-position: 0 -324px; }
+.mispButton.tag.icon:hover:before,
+.mispButton.tag.icon:focus:before,
+.mispButton.tag.icon:active:before { background-position: -12px -324px; }
+
+.mispButton.trash.icon:before { background-position: 0 -336px; }
+.mispButton.trash.icon:hover:before,
+.mispButton.trash.icon:focus:before,
+.mispButton.trash.icon:active:before { background-position: -12px -336px; }
+
+.mispButton.user.icon:before { background-position: 0 -360px; }
+.mispButton.user.icon:hover:before,
+.mispButton.user.icon:focus:before,
+.mispButton.user.icon:active:before { background-position: -12px -360px; }
+
+
+/* ------------------------------------------------------------------------------------------------------------- mispButton EXTENSIONS */
+
+/* ............................................................................................................. Primary */
+
+.mispButton.primary {
+    font-weight: bold;
+}
+
+/* ............................................................................................................. Danger */
+
+.mispButton.danger {
+    color: #900;
+}
+
+.mispButton.danger:hover,
+.mispButton.danger:focus,
+.mispButton.danger:active {     
+    border-color: #b53f3a;
+    border-bottom-color: #a0302a;
+    color: #fff; 
+    background-color: #dc5f59;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dc5f59), to(#b33630));
+    background-image: -moz-linear-gradient(#dc5f59, #b33630);
+    background-image: -o-linear-gradient(#dc5f59, #b33630);
+    background-image: linear-gradient(#dc5f59, #b33630);
+}
+
+.mispButton.danger:active,
+.mispButton.danger.active {   
+    border-color: #a0302a;
+    border-bottom-color: #bf4843;
+    background-color: #b33630;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b33630), to(#dc5f59));
+    background-image: -moz-linear-gradient(#b33630, #dc5f59);
+    background-image: -o-linear-gradient(#b33630, #dc5f59);
+    background-image: linear-gradient(#b33630, #dc5f59);
+}
+
+/* ............................................................................................................. Pill */
+
+.mispButton.pill {
+    -webkit-border-radius: 50em; 
+    -moz-border-radius: 50em; 
+    border-radius: 50em; 
+}
+
+/* ............................................................................................................. Big */
+
+.mispButton.big {
+    font-size: 14px; 
+}
+
+.mispButton.big.icon:before { top: 0; }
+
+
+/* ------------------------------------------------------------------------------------------------------------- mispButton GROUPS */
+
+/* ............................................................................................................. Standard */
+
+.mispButton-group {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* IE hacks */
+    zoom: 1; 
+    *display: inline; 
+}
+
+.mispButton + .mispButton,
+.mispButton + .mispButton-group,
+.mispButton-group + .mispButton,
+.mispButton-group + .mispButton-group {
+    margin-left: 15px;
+}
+
+.mispButton-group li {
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+.mispButton-group .mispButton {
+    float: left;
+    margin-left: -1px; 
+}
+
+.mispButton-group > .mispButton:not(:first-child):not(:last-child),
+.mispButton-group li:not(:first-child):not(:last-child) .mispButton { 
+    -webkit-border-radius: 0; 
+    -moz-border-radius: 0; 
+    border-radius: 0; 
+}
+
+.mispButton-group > .mispButton:first-child,
+.mispButton-group li:first-child .mispButton { 
+    margin-left: 0; 
+    -webkit-border-top-right-radius: 0; 
+    -webkit-border-bottom-right-radius: 0; 
+    -moz-border-radius-topright: 0; 
+    -moz-border-radius-bottomright: 0; 
+    border-top-right-radius: 0; 
+    border-bottom-right-radius: 0; 
+}
+
+.mispButton-group > .mispButton:last-child,
+.mispButton-group li:last-child > .mispButton { 
+    -webkit-border-top-left-radius: 0; 
+    -webkit-border-bottom-left-radius: 0; 
+    -moz-border-radius-topleft: 0; 
+    -moz-border-radius-bottomleft: 0; 
+    border-top-left-radius: 0; 
+    border-bottom-left-radius: 0; 
+}
+
+/* ............................................................................................................. Minor */
+
+.mispButton-group.minor-group .mispButton {
+    border: 1px solid #d4d4d4; 
+    text-shadow: none;
+    background-image: none;
+    background-color: #fff;
+}
+
+.mispButton-group.minor-group .mispButton:hover,
+.mispButton-group.minor-group .mispButton:focus,
+.mispButton-group.minor-group .mispButton:active {
+    background-color: #599bdc;
+}
+
+.mispButton-group.minor-group .mispButton:active,
+.mispButton-group.minor-group .mispButton.active {
+    background-color: #3072b3;
+}
+
+.mispButton-group.minor-group .mispButton.icon:before {
+    opacity: 0.8;
+}
+
+/* ------------------------------------------------------------------------------------------------------------- mispButton CONTAINER */
+/* For mixing mispButtons and mispButton groups, e.g., in a navigation bar */
+
+.mispButton-container .mispButton,
+.mispButton-container .mispButton-group {
+    vertical-align: top;
+}

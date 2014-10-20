@@ -1,0 +1,67 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+<constant name="struts.ui.theme" value="simple" />
+<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+<constant name="struts.ui.templateDir" value="template" />
+<constant  name="struts.custom.i18n.resources" value="package"></constant>   
+
+<constant name="struts.ui.templateSuffix" value="ftl" />
+<constant name="struts.action.excludePattern" value="/rest/.*"></constant> 
+ <package name="misp" namespace="/" extends="struts-default" abstract="true">
+ 
+         <global-results>
+            <result name="misp-done">/client/misp/common/mispDone.jsp</result>
+ 
+         </global-results>
+ </package>
+        
+    <package name="default" namespace="/" extends="misp">
+        
+        <global-results>
+            <result name="exception-system">/client/platform/common/systemError.jsp</result>
+ 
+            <result name="exception-service">/client/platform/common/operateError.jsp</result>
+        </global-results>
+             
+        <global-exception-mappings>
+            <exception-mapping result="exception-system" exception="cn.fuego.misp.service.exception.ServiceException"></exception-mapping>
+            
+            <exception-mapping result="exception-service" exception="cn.fuego.misp.service.exception.ServiceException"></exception-mapping>
+        </global-exception-mappings>    
+    </package>
+    
+	<package name="login" extends="default">
+		<action name="login" class="cn.fuego.misp.web.action.login.LoginAction">
+			<result type="redirect">/client/misp/dwzFrameIndex.jsp</result>
+	 
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>		    
+		</action>
+		  
+ 
+
+ 	</package>
+ 	<package name="log" extends="default">
+		<action name="LogManage" class="cn.fuego.misp.web.action.log.LogManageAction">
+			<result>/client/misp/log/logManage.jsp</result>
+ 
+ 		</action>
+ 
+ 	</package>
+
+ 	<!-- package name="user" extends="default">
+  
+  		<action name="UserManage" class="cn.fuego.remote.medical.manage.web.action.user.UserManageAction">
+			<result type="dispatcher">/client/manage/userManage.jsp</result>
+			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
+			<result type="dispatcher" name="showInfo">/client/manage/userManage.jsp</result>	
+			<result type="dispatcher" name="editInfo">/client/manage/newUser.jsp</result>
+		</action>
+ 
+ 	</package>  -->
+ 
+</struts>
+
