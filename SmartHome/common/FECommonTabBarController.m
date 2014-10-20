@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tabBar.backgroundImage = [UIImage imageFromColor:[UIColor grayColor]];
+    self.tabBar.selectionIndicatorImage = [UIImage imageFromColor:[UIColor whiteColor]];
 }
 
 - (void)didReceiveMemoryWarning

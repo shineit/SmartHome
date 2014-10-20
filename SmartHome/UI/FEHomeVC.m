@@ -46,6 +46,7 @@
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
     UICollectionView *cview = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    cview.alwaysBounceVertical = YES;
     cview.delegate = self;
     cview.dataSource = self;
     [cview registerClass:[FECollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
