@@ -8,6 +8,16 @@
 
 #import "AppDelegate.h"
 #import "FELoginVC.h"
+#import "FEHomeVC.h"
+#import "FECommonNavgationController.h"
+#import "FECommonTabBarController.h"
+#import "FENewsVC.h"
+#import "FECloudSafeVC.h"
+#import "FECloudCameraVC.h"
+#import "FECloudControlVC.h"
+#import "FESettingVC.h"
+#import <HockeySDK/HockeySDK.h>
+//#import "FEServiceListVC.h"
 
 @implementation AppDelegate
 
@@ -23,6 +33,12 @@
     FELoginVC *login = [[FELoginVC alloc] init];
     self.window.rootViewController = login;
     [self.window makeKeyAndVisible];
+    
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"4987eac73d40ca84e1d3b29111eef247"];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    [[BITHockeyManager sharedHockeyManager] testIdentifier];
+    
     return YES;
 }
 
@@ -52,6 +68,34 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+-(void)loadMain{
+    
+    //news page
+    FENewsVC *news = [FENewsVC new];
+    FECommonNavgationController *nvnews = [[FECommonNavgationController alloc] initWithRootViewController:news];
+    
+    //云安
+    FECloudSafeVC *csafe = [FECloudSafeVC new];
+    FECommonNavgationController *nvsafe = [[FECommonNavgationController alloc] initWithRootViewController:csafe];
+    
+    //云控
+    FECloudControlVC *control = [FECloudControlVC new];
+    FECommonNavgationController *controlnc = [[FECommonNavgationController alloc] initWithRootViewController:control];
+    
+    //云视
+    FECloudCameraVC *camera = [FECloudCameraVC new];
+    FECommonNavgationController *camnc = [[FECommonNavgationController alloc] initWithRootViewController:camera];
+    
+    
+    //setting
+    FESettingVC *settingvc = [FESettingVC new];
+    FECommonNavgationController *nvsetting = [[FECommonNavgationController alloc] initWithRootViewController:settingvc];
+    
+    FECommonTabBarController *tabbar = [FECommonTabBarController new];
+    [tabbar setViewControllers:@[nvnews,nvsafe,controlnc,camnc,nvsetting]];
+    [AppDelegate sharedDelegate].window.rootViewController = tabbar;
 }
 
 - (void)saveContext

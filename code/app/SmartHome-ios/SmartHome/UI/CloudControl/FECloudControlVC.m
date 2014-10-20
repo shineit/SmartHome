@@ -1,24 +1,25 @@
 //
-//  FEDeviceSettingVC.m
+//  FECloudControlVC.m
 //  SmartHome
 //
-//  Created by Seven on 14-10-19.
+//  Created by Seven on 14-10-20.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDeviceSettingVC.h"
+#import "FECloudControlVC.h"
 
-@interface FEDeviceSettingVC ()
+@interface FECloudControlVC ()
 
 @end
 
-@implementation FEDeviceSettingVC
+@implementation FECloudControlVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = FEString(@"CLOUD_CONTROL");
     }
     return self;
 }

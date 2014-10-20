@@ -19,6 +19,9 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+//load main view
+-(void)loadMain;
+
 +(AppDelegate *)sharedDelegate;
 
 @end

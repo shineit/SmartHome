@@ -7,13 +7,7 @@
 //
 
 #import "FELoginVC.h"
-#import "FEHomeVC.h"
-#import "FECommonNavgationController.h"
 #import "AppDelegate.h"
-#import "FECommonTabBarController.h"
-#import "FENewsVC.h"
-#import "FECloudSafeVC.h"
-#import "FEServiceListVC.h"
 
 @interface FELoginVC ()
 
@@ -64,29 +58,8 @@
 
 -(void)login:(UIButton *)button{
     
+    [[AppDelegate sharedDelegate] loadMain];
     
-    //news page
-    FENewsVC *news = [FENewsVC new];
-    FECommonNavgationController *nvnews = [[FECommonNavgationController alloc] initWithRootViewController:news];
-    
-    //云安防
-    FECloudSafeVC *csafe = [FECloudSafeVC new];
-    FECommonNavgationController *nvsafe = [[FECommonNavgationController alloc] initWithRootViewController:csafe];
-    
-    //service
-    FEServiceListVC *slvc = [FEServiceListVC new];
-    FECommonNavgationController *nvsl = [[FECommonNavgationController alloc] initWithRootViewController:slvc];
-    
-    FECommonTabBarController *tabbar = [FECommonTabBarController new];
-    [tabbar setViewControllers:@[nvnews,nvsafe,nvsl]];
-    [AppDelegate sharedDelegate].window.rootViewController = tabbar;
-    
-    
-//    FEHomeVC *homevc = [[FEHomeVC alloc] init];
-//    
-//    FECommonNavgationController *nc = [[FECommonNavgationController alloc] initWithRootViewController:homevc];
-//    [AppDelegate sharedDelegate].window.rootViewController = nc;
-//    self presentViewController:nc animated:YES completion:<#^(void)completion#>
 }
 
 - (void)didReceiveMemoryWarning
