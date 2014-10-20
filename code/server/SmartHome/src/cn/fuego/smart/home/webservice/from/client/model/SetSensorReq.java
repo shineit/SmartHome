@@ -14,5 +14,6 @@ import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
  */
 public class SetSensorReq extends BaseJsonReq
 {
+	private String command;
 	private SensorJson sensor;
 }

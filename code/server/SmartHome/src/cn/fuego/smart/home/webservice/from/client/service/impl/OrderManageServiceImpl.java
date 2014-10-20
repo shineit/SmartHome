@@ -28,8 +28,7 @@ public class OrderManageServiceImpl implements OrderManageService
 	 * @see cn.fuego.smart.home.webservice.from.client.service.OrderManageService#getOrderList(cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListReq)
 	 */
 	@Override
-	public GetServiceOrderListRsp getOrderList(
-			GetServiceOrderListReq orderListReq)
+	public GetServiceOrderListRsp getOrderList(	GetServiceOrderListReq orderListReq)
 	{
 		// TODO Auto-generated method stub
 		return null;

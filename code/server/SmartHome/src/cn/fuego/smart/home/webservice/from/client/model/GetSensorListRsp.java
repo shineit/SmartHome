@@ -19,6 +19,16 @@ public class GetSensorListRsp extends BaseJsonRsp
 {
 	private List<SensorJson> sensorList;
 
+	public List<SensorJson> getSensorList()
+	{
+		return sensorList;
+	}
+
+	public void setSensorList(List<SensorJson> sensorList)
+	{
+		this.sensorList = sensorList;
+	}
+
 
 
 }

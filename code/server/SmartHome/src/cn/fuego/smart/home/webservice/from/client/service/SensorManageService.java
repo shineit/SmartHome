@@ -6,7 +6,7 @@ package cn.fuego.smart.home.webservice.from.client.service;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
@@ -22,17 +22,19 @@ import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
 *
  */
 @Path("/sensor")
-@ProduceMime({ "application/json" })
-public interface SensorManageService {
+ 
+public interface SensorManageService
+{
 
 	@GET
 	@Path("/hello")
 
-	public String getWild();
+	public String getHello();
 
-	@POST
+	@GET
 	@Path("/list")
-	public GetSensorListRsp getSensorList(GetSensorListReq sensorListReq);
+	@Produces("application/json")  
+	public GetSensorListRsp getSensorList();
 	
 	@POST
 	@Path("/set")

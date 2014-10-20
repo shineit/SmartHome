@@ -8,10 +8,14 @@
 */ 
 package cn.fuego.smart.home.webservice.from.client.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
+import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
 import cn.fuego.smart.home.webservice.from.client.service.SensorManageService;
 
  /** 
@@ -28,20 +32,30 @@ public class SensorManageServiceImpl implements SensorManageService
 	 * @see cn.fuego.smart.home.webservice.from.client.service.SensorManageService#getWild()
 	 */
 	@Override
-	public String getWild()
+	public String getHello()
 	{
 		// TODO Auto-generated method stub
-		return "helllo  ";
+		return "helllo rest easy aaa";
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.SensorManageService#getSensorList(cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq)
 	 */
 	@Override
-	public GetSensorListRsp getSensorList(GetSensorListReq sensorListReq)
+	public GetSensorListRsp getSensorList()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		GetSensorListRsp rsp = new GetSensorListRsp();
+		
+		List<SensorJson> sensorList = new ArrayList<SensorJson>();
+		
+		SensorJson sensorJson = new SensorJson();
+		sensorJson.setChannelID(1);
+		sensorJson.setErrorValue(2.2);
+		
+		rsp.setSensorList(sensorList);
+		
+		return rsp;
 	}
 
 	/* (non-Javadoc)

@@ -2,7 +2,7 @@ package cn.fuego.smart.home.webservice.from.client.service;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListRsp;
@@ -19,7 +19,7 @@ import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderRsp;
  */
 
 @Path("/order")
-@ProduceMime({ "application/json" })
+@Produces("application/json")  
 public interface OrderManageService
 {
 	@POST

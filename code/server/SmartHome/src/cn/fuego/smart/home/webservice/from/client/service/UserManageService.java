@@ -2,7 +2,7 @@ package cn.fuego.smart.home.webservice.from.client.service;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListRsp;
@@ -22,7 +22,7 @@ import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
  */
 
 @Path("/user")
-@ProduceMime({ "application/json" })
+@Produces("application/json")  
 public interface UserManageService
 {
 	@POST
