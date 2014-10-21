@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - HMSegmentedControl (1.4.0)
   - HockeySDK (3.6.1)
   - MBProgressHUD (0.9)
   - RATreeView (0.9.2)
@@ -28,12 +29,14 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.4.1)
+  - HMSegmentedControl (~> 1.4.0)
   - HockeySDK (~> 3.6.1)
   - RATreeView (~> 0.9.2)
   - ZBUtilities (~> 0.0.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  HMSegmentedControl: c0517a8d4b80c978b8386f863f1c44729cfd7d6f
   HockeySDK: 15b24068466aa5ee421eed0cc1d58428d698edf6
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   RATreeView: f603a3854c9c56ac4f586fc26f1ac13af7c3d1ba

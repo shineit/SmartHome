@@ -17,6 +17,10 @@
     #import "FESmartHomeConfig.h"
     #import <ZBUtilities/UIImage+LogN.h>
     #import <ZBUtilities/UIDevice+ZBUtilites.h>
+    #import "FECommonNavgationController.h"
+    #import "FECommonViewController.h"
+    #import "FECommonTabBarController.h"
+    #import "FELabel.h"
 
 #define SYSTEM_VERSION_UP7                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
 #define SYSTEM_VERSION_UP6                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)

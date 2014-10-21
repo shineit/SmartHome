@@ -9,7 +9,7 @@
 #import "FELoginVC.h"
 #import "AppDelegate.h"
 
-@interface FELoginVC ()
+@interface FELoginVC ()<UITextFieldDelegate>
 
 @property(nonatomic, strong) UITextField *username;
 @property(nonatomic, strong) UITextField *password;
@@ -38,13 +38,17 @@
     self.view.backgroundColor = [UIColor orangeColor];
     //user name textfield
     UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 220, 30)];
+    username.placeholder = FEString(@"INPUT_USER_NAME");
     username.borderStyle = UITextBorderStyleRoundedRect;
+    username.delegate = self;
     [self.view addSubview:username];
     self.username = username;
     
     UITextField *psw = [[UITextField alloc] initWithFrame:CGRectMake(50, 250, 220, 30)];
+    psw.placeholder = FEString(@"INPUT_PASSWORD");
     psw.secureTextEntry = YES;
     psw.borderStyle = UITextBorderStyleRoundedRect;
+    psw.delegate = self;
     [self.view addSubview:psw];
     self.password = psw;
     
@@ -54,12 +58,33 @@
     [loginbtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginbtn];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 -(void)login:(UIButton *)button{
     
-    [[AppDelegate sharedDelegate] loadMain];
+    if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
+        [[AppDelegate sharedDelegate] loadMain];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:FEString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
+        [alert show];
+    }
     
+    
+}
+
+-(void)hideKeyboard{
+    [self.username resignFirstResponder];
+    [self.password resignFirstResponder];
+}
+
+-(void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [self screenOffset:0];
+}
+
+-(void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [self screenOffset:[UIDevice is4Inch]?SYSTEM_VERSION_UP7?-0:-0:SYSTEM_VERSION_UP7?-80:-80];
 }
 
 - (void)didReceiveMemoryWarning

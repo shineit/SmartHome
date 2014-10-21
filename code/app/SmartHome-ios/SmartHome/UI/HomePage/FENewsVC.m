@@ -7,8 +7,17 @@
 //
 
 #import "FENewsVC.h"
+#import <HMSegmentedControl/HMSegmentedControl.h>
+#import "FENewsTableViewCell.h"
+#import "FEWarringTableViewCell.h"
+#import "FEWarringResponse.h"
 
-@interface FENewsVC ()
+@interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *newstable;
+@property (nonatomic, strong) UITableView *warringtable;
+@property (nonatomic, strong) NSMutableArray *newsList;
+@property (nonatomic, strong) NSMutableArray *warringList;
 
 @end
 
@@ -20,6 +29,8 @@
     if (self) {
         // Custom initialization
         self.title = FEString(@"HOME_PAGE");
+        _newsList = [NSMutableArray arrayWithObjects:@"新闻1",@"新闻2",@"新闻3",@"新闻4",@"新闻5", nil];
+        _warringList = [NSMutableArray arrayWithObjects:@"warring 1",@"warring1",@"warring3",@"warring4", nil];
     }
     return self;
 }
@@ -28,6 +39,116 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initUI];
+}
+
+-(void)initUI{
+    //新闻和告警切换segment
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[FEString(@"NEWS"), FEString(@"WARRING")]];
+    segmentedControl.selectedTextColor = [UIColor orangeColor];
+//    segmentedControl.backgroundColor = [UIColor lightGrayColor];
+    segmentedControl.selectionIndicatorColor = [UIColor orangeColor];
+    segmentedControl.frame = CGRectMake(0, 0, 320, 44);
+    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    segmentedControl.selectionIndicatorHeight = 3;
+    segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:segmentedControl];
+    
+    //新闻table
+    UITableView *news = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
+    news.delegate = self;
+    news.dataSource = self;
+    [self.view addSubview:news];
+    self.newstable = news;
+    
+    //告警table
+    UITableView *warring = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
+    [warring setHidden:YES];
+    warring.delegate = self;
+    warring.dataSource = self;
+    [self.view addSubview:warring];
+    self.warringtable = warring;
+    
+    
+}
+
+-(void)segmentedControlChangedValue:(HMSegmentedControl *)control{
+    if (control.selectedSegmentIndex == 0) {
+        if (self.newstable.isHidden == NO) {
+            return;
+        }else{
+            [UIView animateWithDuration:0.2
+                                  delay:0
+                                options:UIViewAnimationOptionTransitionFlipFromLeft
+                             animations:^(void){
+                                 self.newstable.hidden = NO;
+                                 self.warringtable.hidden = YES;
+                             }
+                             completion:nil];
+        }
+    }else if(control.selectedSegmentIndex == 1){
+        if (self.warringtable.isHidden == NO) {
+            return;
+        }else{
+            [UIView animateWithDuration:0.2
+                                  delay:0
+                                options:UIViewAnimationOptionTransitionFlipFromLeft
+                             animations:^(void){
+                                 self.newstable.hidden = YES;
+                                 self.warringtable.hidden = NO;
+                             }
+                             completion:nil];
+        }
+    }
+}
+
+#pragma mark - UITableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.newstable) {
+        static NSString *identifier = @"cell";
+        FENewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[FENewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        
+        cell.titleLabel.text = self.newsList[indexPath.row];
+        cell.timeLabel.text = @"00/00/00/00";//[formatter stringFromDate:[NSDate date]];
+        return cell;
+    }else if(tableView == self.warringtable){
+        static NSString *identifier = @"cell";
+        FEWarringTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[FEWarringTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        return cell;
+    }
+    return nil;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView == self.newstable) {
+        return self.newsList.count;
+    }else if(tableView == self.warringtable){
+        return self.warringList.count;
+    }
+    return 0;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
+
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.warringtable) {
+        FEWarringResponse *response = [FEWarringResponse new];
+        response.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:response animated:YES];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
