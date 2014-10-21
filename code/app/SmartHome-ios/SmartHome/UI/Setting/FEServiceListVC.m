@@ -7,8 +7,13 @@
 //
 
 #import "FEServiceListVC.h"
+#import "FEServiceTableViewCell.h"
+#import "FEServiceRequestVC.h"
 
-@interface FEServiceListVC ()
+@interface FEServiceListVC ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *serviceTable;
+@property (nonatomic, strong) NSMutableArray *serviceDatas;
 
 @end
 
@@ -28,6 +33,67 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initUI];
+}
+
+-(void)initUI{
+    
+    [self loadRightCustomButtonItemWithTitle:FEString(@"ADD") image:nil];
+    
+    UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    table.delegate = self;
+    table.dataSource = self;
+    [self.view addSubview:table];
+    self.serviceTable = table;
+    
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [table setTableFooterView:view];
+
+}
+
+-(void)rightbarpressed:(UIButton *)button{
+//    NSLog(@"add service!");
+    FEServiceRequestVC *serviceRequest = [FEServiceRequestVC new];
+    [self.navigationController pushViewController:serviceRequest animated:YES];
+}
+
+#pragma mark - UITableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"cell";
+    FEServiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[FEServiceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 4;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 50;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 60, 30)];
+    label.text = FEString(@"ORDER");
+    [header addSubview:label];
+    
+    label = [[FELabel alloc] initWithFrame:CGRectMake(100, 20, 80, 30)];
+    label.text = FEString(@"TYPE");
+    [header addSubview:label];
+    
+    label = [[FELabel alloc] initWithFrame:CGRectMake(240, 20, 80, 30)];
+    label.text = FEString(@"STATUS");
+    [header addSubview:label];
+    return header;
 }
 
 - (void)didReceiveMemoryWarning

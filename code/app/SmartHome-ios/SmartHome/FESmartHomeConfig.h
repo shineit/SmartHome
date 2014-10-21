@@ -42,5 +42,6 @@
 //uicolor
 #define FEColor(_R,_G,_B,_A)                    [UIColor colorWithRed:_R / 255.0f green:_G / 255.0f blue: _B / 255.0f alpha:_A]
 
+#define FEThemeColor                            FEColor(252, 156, 56, 1)
 
 #endif

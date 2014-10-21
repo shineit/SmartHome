@@ -38,6 +38,7 @@
     self.view.backgroundColor = [UIColor orangeColor];
     //user name textfield
     UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 220, 30)];
+    username.returnKeyType = UIReturnKeyNext;
     username.placeholder = FEString(@"INPUT_USER_NAME");
     username.borderStyle = UITextBorderStyleRoundedRect;
     username.delegate = self;
@@ -45,6 +46,7 @@
     self.username = username;
     
     UITextField *psw = [[UITextField alloc] initWithFrame:CGRectMake(50, 250, 220, 30)];
+    psw.returnKeyType = UIReturnKeyDone;
     psw.placeholder = FEString(@"INPUT_PASSWORD");
     psw.secureTextEntry = YES;
     psw.borderStyle = UITextBorderStyleRoundedRect;
@@ -60,9 +62,11 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
+
 }
 
 -(void)login:(UIButton *)button{
+    [self hideKeyboard];
     
     if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
         [[AppDelegate sharedDelegate] loadMain];
@@ -72,6 +76,20 @@
     }
     
     
+}
+
+#pragma mark - UITextFieldDelegate
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.username) {
+        [self.password becomeFirstResponder];
+    }else if (textField == self.password){
+        [self login:nil];
+    }
+    return YES;
 }
 
 -(void)hideKeyboard{

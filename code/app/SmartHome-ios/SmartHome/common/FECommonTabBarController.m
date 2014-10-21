@@ -27,8 +27,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tabBar.backgroundImage = [UIImage imageFromColor:[UIColor grayColor]];
-    self.tabBar.selectionIndicatorImage = [[UIImage imageFromColor:[UIColor whiteColor]] resizedImageFitSize:CGSizeMake(65, 49) edgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    self.tabBar.backgroundImage = [UIImage imageFromColor:FEColor(233, 234, 237, 1)];
+    self.tabBar.selectionIndicatorImage = [self imageWithImageSimple:[UIImage imageFromColor:[UIColor whiteColor]] scaledToSize:CGSizeMake(64, 49)];
+    self.tabBar.selectedImageTintColor = FEThemeColor;
+}
+
+-(UIImage*)imageWithImageSimple:(UIImage *)image scaledToSize:(CGSize)newSize{
+    //创建一个图片容器
+    UIGraphicsBeginImageContext(newSize);
+    //将原始图片绘制到当前图片容器中
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning

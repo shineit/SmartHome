@@ -17,6 +17,9 @@ typedef NS_ENUM(NSInteger, FENavItemDirection) {
 
 - (void)screenOffset:(CGFloat)offset;
 
+- (void)loadRightCustomButtonItemWithTitle:(NSString *)title image:(UIImage *)image;
+-(void)rightbarpressed:(UIButton *)button;
+
 //about keyboard
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;

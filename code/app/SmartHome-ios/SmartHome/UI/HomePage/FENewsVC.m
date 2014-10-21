@@ -62,6 +62,11 @@
     news.dataSource = self;
     [self.view addSubview:news];
     self.newstable = news;
+    //为table添加空白view
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [news setTableFooterView:view];
+
     
     //告警table
     UITableView *warring = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
@@ -71,6 +76,9 @@
     [self.view addSubview:warring];
     self.warringtable = warring;
     
+    UIView *view1 = [UIView new];
+    view1.backgroundColor = [UIColor clearColor];
+    [warring setTableFooterView:view];
     
 }
 

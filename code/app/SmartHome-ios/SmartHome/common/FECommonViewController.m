@@ -31,7 +31,7 @@
     if (SYSTEM_VERSION_UP7) { // 判断是否是IOS7
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     }
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = FEColor(229, 229, 229, 1); //[UIColor ];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -78,10 +78,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadRightCustomButtonItemWithTitle:(NSString *)title image:(UIImage *)image{
+    [self loadNavItemWithTitle:title image:image target:self action:@selector(rightbarpressed:) direction:FENavItemRightDirection];
+}
+
+- (void)loadBackButtonItem{
+    [self loadNavItemWithTitle:nil image:[UIImage imageNamed:@"img_back"] target:self action:@selector(backpressed:) direction:FENavItemLeftDirection];
+}
+
 - (UIButton *)loadNavItemWithTitle:(NSString *)title image:(UIImage *)bimage target:(id)target action:(SEL)action direction:(FENavItemDirection)direction {
     UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
     [bt setTitle:title forState:UIControlStateNormal];
-    bt.frame = CGRectMake(0, 0, 20, 20);
+    bt.frame = CGRectMake(0, 0, 40, 30);
     [bt setBackgroundImage:bimage forState:UIControlStateNormal];
     [bt addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bt];
