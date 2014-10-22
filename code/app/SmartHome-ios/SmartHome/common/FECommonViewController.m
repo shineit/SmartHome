@@ -89,7 +89,7 @@
 - (UIButton *)loadNavItemWithTitle:(NSString *)title image:(UIImage *)bimage target:(id)target action:(SEL)action direction:(FENavItemDirection)direction {
     UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
     [bt setTitle:title forState:UIControlStateNormal];
-    bt.frame = CGRectMake(0, 0, 40, 30);
+    bt.frame = CGRectMake(0, 0, 50, 30);
     [bt setBackgroundImage:bimage forState:UIControlStateNormal];
     [bt addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bt];

@@ -27,8 +27,8 @@
         // Custom initialization
         self.title = FEString(@"SETTING");
         
-        _settingItem = @[FEString(@"SERVICE"),FEString(@"ABOUT NEWS"),FEString(@"ABOUT US"),FEString(@"FADE BACK"),FEString(@"RATE US")];
-        _settingIvocation = @[[self invocation:@selector(service)],[self invocation:@selector(aboutnews)],[self invocation:@selector(aboutus)],[self invocation:@selector(fadeback)],[self invocation:@selector(rateus)]];
+        _settingItem = @[FEString(@"SERVICE"),FEString(@"ABOUT NEWS"),FEString(@"ABOUT US"),FEString(@"FADE BACK"),FEString(@"RATE US"),FEString(@"PROFILE")];
+        _settingIvocation = @[[self invocation:@selector(service)],[self invocation:@selector(aboutnews)],[self invocation:@selector(aboutus)],[self invocation:@selector(fadeback)],[self invocation:@selector(rateus)],[self invocation:@selector(profile)]];
         
     }
     return self;
@@ -81,6 +81,10 @@
 
 -(void)rateus{
     NSLog(@"为我们评分");
+}
+
+-(void)profile{
+    NSLog(@"Profile");
 }
 
 #pragma mark - UITableViewDataSource

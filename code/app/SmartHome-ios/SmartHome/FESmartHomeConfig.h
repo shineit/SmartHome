@@ -44,4 +44,6 @@
 
 #define FEThemeColor                            FEColor(252, 156, 56, 1)
 
+#define FECoreData                              ([AppDelegate sharedDelegate].coreDataHandler)
+
 #endif

@@ -17,6 +17,7 @@
 #import "FECloudControlVC.h"
 #import "FESettingVC.h"
 #import <HockeySDK/HockeySDK.h>
+#import "FEUser.h"
 //#import "FEServiceListVC.h"
 
 @implementation AppDelegate
@@ -24,14 +25,14 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize coreDataHandler = _coreDataHandler;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    FELoginVC *login = [[FELoginVC alloc] init];
-    self.window.rootViewController = login;
+    [self loadview];
     [self.window makeKeyAndVisible];
     
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"4987eac73d40ca84e1d3b29111eef247"];
@@ -70,6 +71,22 @@
     [self saveContext];
 }
 
+//加载rootviewController
+- (void)loadview{
+    FEUser *user = [FECoreData fetchUser];
+    if (user) {
+        [self loadMain];
+    }else{
+        [self loadSigin];
+    }
+}
+
+-(void)loadSigin{
+    FELoginVC *login = [[FELoginVC alloc] init];
+    self.window.rootViewController = login;
+}
+
+//加载主页
 -(void)loadMain{
     
     //news page
@@ -195,6 +212,14 @@
 
 +(AppDelegate *)sharedDelegate{
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (FECoreDataHandler *)coreDataHandler {
+    
+    if (nil == _coreDataHandler)
+        _coreDataHandler = [[FECoreDataHandler alloc] initWithAppDelegateManagedObjectContext];
+    return _coreDataHandler;
+    
 }
 
 @end

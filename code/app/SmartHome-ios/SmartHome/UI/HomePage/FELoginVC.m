@@ -8,6 +8,7 @@
 
 #import "FELoginVC.h"
 #import "AppDelegate.h"
+#import "FEUser.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
 
@@ -39,6 +40,7 @@
     //user name textfield
     UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 220, 30)];
     username.returnKeyType = UIReturnKeyNext;
+    username.keyboardType = UIKeyboardTypeEmailAddress;
     username.placeholder = FEString(@"INPUT_USER_NAME");
     username.borderStyle = UITextBorderStyleRoundedRect;
     username.delegate = self;
@@ -69,6 +71,11 @@
     [self hideKeyboard];
     
     if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
+//        [FECoreDataHandler]
+        FEUser *user = [FECoreData touchUserByIdentifier:@"identifier"];
+        user.username = self.username.text;
+        user.password = [self.password.text MD5];
+        [FECoreData saveCoreData];
         [[AppDelegate sharedDelegate] loadMain];
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:FEString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];

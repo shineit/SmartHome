@@ -1,18 +1,13 @@
 //
-//  FEUser.m
+//  FEControlViwe.h
 //  SmartHome
 //
 //  Created by Seven on 14-10-22.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEUser.h"
+#import <UIKit/UIKit.h>
 
-
-@implementation FEUser
-
-@dynamic password;
-@dynamic userid;
-@dynamic username;
+@interface FEControlViwe : UIView
 
 @end
