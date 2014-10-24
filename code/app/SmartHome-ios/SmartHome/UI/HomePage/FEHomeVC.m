@@ -8,7 +8,6 @@
 
 #import "FEHomeVC.h"
 #import "FECollectionViewCell.h"
-#import "FEModifyPswVC.h"
 #import "FECurrentWarringVC.h"
 #import "FEWarringInfoVC.h"
 #import "FEProfileVC.h"
@@ -99,7 +98,6 @@
     FECurrentWarringVC *cwarring;
     FEProfileVC *profilevc;
     FECloudCameraVC *camera;
-    FEModifyPswVC *psw;
     FEWarringInfoVC *warringinfo;
     switch (indexPath.row) {
         case 0:
@@ -119,8 +117,8 @@
             [self.navigationController pushViewController:camera animated:YES];
             break;
         case 4:
-            psw = [FEModifyPswVC new];
-            [self.navigationController pushViewController:psw animated:YES];
+//            psw = [FEModifyPswVC new];
+//            [self.navigationController pushViewController:psw animated:YES];
             break;
         case 5:
             warringinfo = [FEWarringInfoVC new];

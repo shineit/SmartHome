@@ -43,6 +43,7 @@
     cview.alwaysBounceVertical = YES;
     cview.delegate = self;
     cview.dataSource = self;
+    cview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [cview registerClass:[FECollectionViewCameraCell class] forCellWithReuseIdentifier:@"cell"];
 //    cview.backgroundColor = [UIColor lightGrayColor];
     cview.backgroundColor = [UIColor clearColor];

@@ -12,6 +12,7 @@
 @interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *deviceTable;
+@property (nonatomic, strong) NSMutableArray *deviceList;
 
 @end
 
@@ -23,6 +24,7 @@
     if (self) {
         // Custom initialization
         self.title = FEString(@"SAFE");
+        _deviceList = [NSMutableArray arrayWithArray:@[@[@"烟雾报警器1",@"烟雾报警器2"],@[@"温度报警器1",@"温度报警器2",@"温度报警器3"]]];
     }
     return self;
 }
@@ -40,9 +42,12 @@
     
     FEControlViwe *cview = [[FEControlViwe alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     [self.view addSubview:cview];
-    _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, cview.frame.origin.y + cview.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - cview.frame.size.height - self.tabBarController.tabBar.frame.size.height) style:UITableViewStyleGrouped];
+    _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, cview.frame.origin.y + cview.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - cview.frame.size.height) style:UITableViewStyleGrouped];
     _deviceTable.dataSource = self;
     _deviceTable.delegate = self;
+    _deviceTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _deviceTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
+    _deviceTable.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:_deviceTable];
 }
@@ -59,16 +64,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         
     }
+    cell.textLabel.text = _deviceList[indexPath.section][indexPath.row];
     return cell;
     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return [_deviceList[section] count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return _deviceList.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{

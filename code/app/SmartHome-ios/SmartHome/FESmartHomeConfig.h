@@ -46,4 +46,7 @@
 
 #define FECoreData                              ([AppDelegate sharedDelegate].coreDataHandler)
 
+#define FELoginUser                             [FECoreData fetchUser]
+
+
 #endif

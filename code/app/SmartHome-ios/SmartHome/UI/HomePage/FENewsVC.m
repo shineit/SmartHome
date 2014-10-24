@@ -60,6 +60,7 @@
     UITableView *news = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
     news.delegate = self;
     news.dataSource = self;
+    news.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:news];
     self.newstable = news;
     //为table添加空白view
@@ -73,6 +74,7 @@
     [warring setHidden:YES];
     warring.delegate = self;
     warring.dataSource = self;
+    warring.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:warring];
     self.warringtable = warring;
     

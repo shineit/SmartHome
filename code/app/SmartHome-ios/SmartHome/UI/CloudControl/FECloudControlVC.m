@@ -10,6 +10,7 @@
 #import <RATreeView/RATreeView.h>
 #import "FEControlObject.h"
 #import "FEControlPointCell.h"
+#import "FETreeViewCell.h"
 
 @interface FECloudControlVC ()<RATreeViewDataSource,RATreeViewDelegate>
 
@@ -42,6 +43,7 @@
     RATreeView *treeView = [[RATreeView alloc] initWithFrame:self.view.bounds];
     treeView.delegate = self;
     treeView.dataSource = self;
+    treeView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:treeView];
     [treeView reloadData];
     self.controlTree = treeView;
@@ -79,13 +81,25 @@
 
 - (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item
 {
-//    FEControlObject *dataObject = item;
-//    
-//    NSInteger level = [self.controlTree levelForCellForItem:item];
-//    NSInteger numberOfChildren = [dataObject.children count];
-//    NSString *detailText = [NSString localizedStringWithFormat:@"Number of children %@", [@(numberOfChildren) stringValue]];
-//    BOOL expanded = [self.treeView isCellForItemExpanded:item];
-//    
+    FEControlObject *dataObject = item;
+
+    NSInteger level = [treeView levelForCellForItem:item];
+    NSInteger numberOfChildren = [dataObject.children count];
+    NSString *detailText = [NSString localizedStringWithFormat:@"Number of children %@", [@(numberOfChildren) stringValue]];
+    BOOL expanded = [treeView isCellForItemExpanded:item];
+    
+    FETreeViewCell *cell = [treeView dequeueReusableCellWithIdentifier:NSStringFromClass([FETreeViewCell class])];
+    if (!cell) {
+        cell = [[FETreeViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([FETreeViewCell class])];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+//    cell.indentationLevel = level;
+//    cell.indentationWidth = 20;
+    [cell configurelevel:level withTitle:((FEControlObject *)item).name];
+//    cell.titleLabel.text = ((FEControlObject *)item).name;
+    return cell;
+    
+//
 //    RATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([RATableViewCell class])];
 //    [cell setupWithTitle:dataObject.name detailText:detailText level:level additionButtonHidden:!expanded];
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -100,8 +114,10 @@
 //        [weakSelf.treeView insertItemsAtIndexes:[NSIndexSet indexSetWithIndex:0] inParent:dataObject withAnimation:RATreeViewRowAnimationLeft];
 //        [weakSelf.treeView reloadRowsForItems:@[dataObject] withRowAnimation:RATreeViewRowAnimationNone];
 //    };
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    cell.textLabel.text = ((FEControlObject *)item).name;
+//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+//    cell.textLabel.text = ((FEControlObject *)item).name;
+//    UITableViewCell *cell = [treeView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

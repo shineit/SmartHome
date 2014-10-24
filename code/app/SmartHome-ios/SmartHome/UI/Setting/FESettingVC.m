@@ -8,6 +8,7 @@
 
 #import "FESettingVC.h"
 #import "FEServiceListVC.h"
+#import "FEProfileVC.h"
 
 @interface FESettingVC ()<UITableViewDataSource,UITableViewDelegate>{
     NSArray *_settingItem;
@@ -55,8 +56,10 @@
     UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     table.dataSource = self;
     table.delegate = self;
+    table.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:table];
     self.settingTable = table;
+    
     
 }
 
@@ -85,6 +88,9 @@
 
 -(void)profile{
     NSLog(@"Profile");
+    FEProfileVC *profile = [FEProfileVC new];
+    profile.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:profile animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
