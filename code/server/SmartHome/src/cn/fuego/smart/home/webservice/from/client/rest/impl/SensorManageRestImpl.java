@@ -6,7 +6,7 @@
 * @date 2014-10-20 上午11:24:29 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.webservice.from.client.service.impl;
+package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
-import cn.fuego.smart.home.webservice.from.client.service.SensorManageService;
+import cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest;
 
  /** 
  * @ClassName: SensorManageServiceImpl 
@@ -25,7 +25,7 @@ import cn.fuego.smart.home.webservice.from.client.service.SensorManageService;
  * @date 2014-10-20 上午11:24:29 
  *  
  */
-public class SensorManageServiceImpl implements SensorManageService
+public class SensorManageRestImpl implements SensorManageRest
 {
 
 	/* (non-Javadoc)

@@ -1,10 +1,10 @@
 package cn.fuego.smart.home.webservice.from.client.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.from.client.model.base.BaseJsonRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.NewsJson;
-import cn.fuego.smart.home.webservice.from.client.model.base.SetResultJson;
 
 
 /**
@@ -17,6 +17,17 @@ import cn.fuego.smart.home.webservice.from.client.model.base.SetResultJson;
  */
 public class GetNewsListRsp extends BaseJsonRsp
 {
-	private List<NewsJson> newsList;
+	private List<NewsJson> newsList = new ArrayList<NewsJson>();
+
+	public List<NewsJson> getNewsList()
+	{
+		return newsList;
+	}
+
+	public void setNewsList(List<NewsJson> newsList)
+	{
+		this.newsList = newsList;
+	}
+	
  
 }

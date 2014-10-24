@@ -11,5 +11,10 @@ package cn.fuego.smart.home.domain;
  */
 public class SensorAlarm
 {
-
+	private String id;
+	private String concentratorID;
+	private int sensorID;
+	private int alarmStatus;
+	private float alarmValue;
+	private String alarmTime;
 }

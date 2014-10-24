@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.webservice.from.client.service;
+package cn.fuego.smart.home.webservice.from.client.rest;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,7 +20,7 @@ import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderRsp;
 
 @Path("/order")
 @Produces("application/json")  
-public interface OrderManageService
+public interface OrderManageRest
 {
 	@POST
 	@Path("/list")

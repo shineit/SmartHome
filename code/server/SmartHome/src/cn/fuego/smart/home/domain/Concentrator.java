@@ -10,5 +10,14 @@ package cn.fuego.smart.home.domain;
  */
 public class Concentrator
 {
-
+	private int concentratorID;
+	private String ipAddr;
+	private int status;
+	private float locationNS;
+	private float locationWE;
+	private String description;
+	private String addr;
+	private String mark;
+	
+	
 }

@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.from.client.model.base;
 
+import cn.fuego.smart.home.constant.ErrorMessageConst;
+
 
 /**
  * 
@@ -11,14 +13,15 @@ package cn.fuego.smart.home.webservice.from.client.model.base;
  */
 public class SetResultJson
 {
-	private String errorCode;
+	private int errorCode = ErrorMessageConst.SUCCESS;
 	private String errorMsg;
 	private String obj;
-	public String getErrorCode()
+ 
+	public int getErrorCode()
 	{
 		return errorCode;
 	}
-	public void setErrorCode(String errorCode)
+	public void setErrorCode(int errorCode)
 	{
 		this.errorCode = errorCode;
 	}

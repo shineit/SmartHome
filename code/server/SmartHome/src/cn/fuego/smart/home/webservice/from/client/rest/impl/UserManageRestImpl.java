@@ -6,15 +6,21 @@
 * @date 2014-10-20 上午11:25:25 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.webservice.from.client.service.impl;
+package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cn.fuego.misp.service.MISPServiceContext;
+import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.LoginReq;
 import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
-import cn.fuego.smart.home.webservice.from.client.service.UserManageService;
+import cn.fuego.smart.home.webservice.from.client.rest.UserManageRest;
 
  /** 
  * @ClassName: UserManageServiceImpl 
@@ -23,8 +29,10 @@ import cn.fuego.smart.home.webservice.from.client.service.UserManageService;
  * @date 2014-10-20 上午11:25:25 
  *  
  */
-public class UserManageServiceImpl implements UserManageService
+public class UserManageRestImpl implements UserManageRest
 {
+
+	private Log log = LogFactory.getLog(MISPUserServiceImpl.class);
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.UserManageService#login(cn.fuego.smart.home.webservice.from.client.model.LoginReq)
@@ -32,8 +40,24 @@ public class UserManageServiceImpl implements UserManageService
 	@Override
 	public LoginRsp login(LoginReq loginReq)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		LoginRsp rsp = new LoginRsp();
+		 
+		if(null != loginReq)
+		{
+			log.error("the logni request is null");
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_MSG_WRONG);
+			
+		}
+		
+		try
+		{
+			MISPServiceContext.getInstance().getUserService().Login(loginReq.getUserName(), loginReq.getPassword());
+		}
+		catch(Exception e)
+		{
+			log.error("login failed",e);
+		}
+		return rsp;
 	}
 
 	/* (non-Javadoc)

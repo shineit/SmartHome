@@ -1,7 +1,7 @@
 /**
  *  ������: RestEasy���Գ���
  */
-package cn.fuego.smart.home.webservice.from.client.service;
+package cn.fuego.smart.home.webservice.from.client.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,15 +23,15 @@ import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
  */
 @Path("/sensor")
  
-public interface SensorManageService
+public interface SensorManageRest
 {
 
-	@GET
+	@POST
 	@Path("/hello")
 
 	public String getHello();
 
-	@GET
+	@POST
 	@Path("/list")
 	@Produces("application/json")  
 	public GetSensorListRsp getSensorList();

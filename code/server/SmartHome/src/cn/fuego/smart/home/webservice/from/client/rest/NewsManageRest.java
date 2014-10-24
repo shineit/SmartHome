@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.webservice.from.client.service;
+package cn.fuego.smart.home.webservice.from.client.rest;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,10 +17,10 @@ import cn.fuego.smart.home.webservice.from.client.model.GetNewsListRsp;
  */
 @Path("/news")
 @Produces({ "application/json" })
-public interface NewsManageService
+public interface NewsManageRest
 {
 	@POST
 	@Path("/list")
-	public GetNewsListRsp getNewsList(GetNewsListReq newsListReq);
+	public GetNewsListRsp getNewsList(GetNewsListReq req);
 
 }

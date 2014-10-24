@@ -11,5 +11,17 @@ package cn.fuego.smart.home.webservice.from.client.model.base;
  */
 public class BaseJsonRsp
 {
-	private SetResultJson result;
+	private SetResultJson result = new SetResultJson();
+
+	public SetResultJson getResult()
+	{
+		return result;
+	}
+
+	public void setResult(SetResultJson result)
+	{
+		this.result = result;
+	}
+	
+	
 }

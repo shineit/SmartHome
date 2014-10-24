@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.webservice.from.client.service;
+package cn.fuego.smart.home.webservice.from.client.rest;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -23,7 +23,7 @@ import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
 
 @Path("/user")
 @Produces("application/json")  
-public interface UserManageService
+public interface UserManageRest
 {
 	@POST
 	@Path("/login")

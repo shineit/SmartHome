@@ -6,13 +6,13 @@
 * @date 2014-10-20 上午11:23:13 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.webservice.from.client.service.impl;
+package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderRsp;
-import cn.fuego.smart.home.webservice.from.client.service.OrderManageService;
+import cn.fuego.smart.home.webservice.from.client.rest.OrderManageRest;
 
  /** 
  * @ClassName: OrderManageServiceImpl 
@@ -21,7 +21,7 @@ import cn.fuego.smart.home.webservice.from.client.service.OrderManageService;
  * @date 2014-10-20 上午11:23:13 
  *  
  */
-public class OrderManageServiceImpl implements OrderManageService
+public class OrderManageRestImpl implements OrderManageRest
 {
 
 	/* (non-Javadoc)
