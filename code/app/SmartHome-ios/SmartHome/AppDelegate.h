@@ -22,6 +22,7 @@
 
 //load main view
 -(void)loadMain;
+-(void)loadSigin;
 
 +(AppDelegate *)sharedDelegate;
 

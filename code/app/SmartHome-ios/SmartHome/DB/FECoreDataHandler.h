@@ -37,5 +37,6 @@
 -(FEUser *)fetchUser;
 -(FEUser *)touchUserByIdentifier:(NSString *)identifier;
 - (void)saveCoreData;
+- (void)deleteCoreData:(NSArray *)array;
 
 @end

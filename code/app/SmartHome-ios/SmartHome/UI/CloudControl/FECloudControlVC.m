@@ -81,43 +81,15 @@
 
 - (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item
 {
-    FEControlObject *dataObject = item;
-
     NSInteger level = [treeView levelForCellForItem:item];
-    NSInteger numberOfChildren = [dataObject.children count];
-    NSString *detailText = [NSString localizedStringWithFormat:@"Number of children %@", [@(numberOfChildren) stringValue]];
-    BOOL expanded = [treeView isCellForItemExpanded:item];
     
     FETreeViewCell *cell = [treeView dequeueReusableCellWithIdentifier:NSStringFromClass([FETreeViewCell class])];
     if (!cell) {
         cell = [[FETreeViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([FETreeViewCell class])];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-//    cell.indentationLevel = level;
-//    cell.indentationWidth = 20;
     [cell configurelevel:level withTitle:((FEControlObject *)item).name];
-//    cell.titleLabel.text = ((FEControlObject *)item).name;
     return cell;
-    
-//
-//    RATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([RATableViewCell class])];
-//    [cell setupWithTitle:dataObject.name detailText:detailText level:level additionButtonHidden:!expanded];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    
-//    __weak typeof(self) weakSelf = self;
-//    cell.additionButtonTapAction = ^(id sender){
-//        if (![weakSelf.treeView isCellForItemExpanded:dataObject] || weakSelf.treeView.isEditing) {
-//            return;
-//        }
-//        FEControlObject *newDataObject = [[FEControlObject alloc] initWithName:@"Added value" children:@[]];
-//        [dataObject addChild:newDataObject];
-//        [weakSelf.treeView insertItemsAtIndexes:[NSIndexSet indexSetWithIndex:0] inParent:dataObject withAnimation:RATreeViewRowAnimationLeft];
-//        [weakSelf.treeView reloadRowsForItems:@[dataObject] withRowAnimation:RATreeViewRowAnimationNone];
-//    };
-//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//    cell.textLabel.text = ((FEControlObject *)item).name;
-//    UITableViewCell *cell = [treeView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

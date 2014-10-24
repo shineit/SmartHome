@@ -60,11 +60,27 @@
     mod.frame = CGRectMake(80, 150, 160, 30);
     [mod setTitle:FEString(@"MODIFY") forState:UIControlStateNormal];
     [self.view addSubview:mod];
+    
+    UIButton *logout = [UIButton buttonWithType:UIButtonTypeCustom];
+    logout.frame = CGRectMake(80, 180, 160, 30);
+    [logout setTitle:FEString(@"LOGOUT") forState:UIControlStateNormal];
+    [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:logout];
+    
 }
 
 -(void)rightbarpressed:(UIButton *)button{
     FEModifyPassWord *psw = [FEModifyPassWord new];
     [self.navigationController pushViewController:psw animated:YES];
+}
+
+-(void)logout:(UIButton *)button{
+//    FELoginUser
+    [FECoreData deleteCoreData:@[FELoginUser]];
+    [FECoreData saveCoreData];
+    
+    [[AppDelegate sharedDelegate] loadSigin];
+    
 }
 
 - (void)didReceiveMemoryWarning
