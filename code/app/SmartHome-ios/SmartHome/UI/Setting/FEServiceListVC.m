@@ -40,7 +40,7 @@
     
     [self loadRightCustomButtonItemWithTitle:FEString(@"ADD") image:nil];
     
-    UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -82,6 +82,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    header.backgroundColor = [UIColor whiteColor];
     FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 60, 30)];
     label.text = FEString(@"ORDER");
     [header addSubview:label];

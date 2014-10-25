@@ -1,14 +1,14 @@
 //
-//  FEControlViwe.m
+//  FEControlView.m
 //  SmartHome
 //
 //  Created by Seven on 14-10-22.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEControlViwe.h"
+#import "FEControlView.h"
 
-@implementation FEControlViwe
+@implementation FEControlView
 
 - (id)initWithFrame:(CGRect)frame
 {

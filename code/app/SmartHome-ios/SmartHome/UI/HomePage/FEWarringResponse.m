@@ -37,10 +37,10 @@
 }
 
 -(void)initUI{
-    _infoView = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 100)];
+    _infoView = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     [self.view addSubview:_infoView];
     
-    _infonInput = [[FEDeviceInfoInputView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 150)];
+    _infonInput = [[FEDeviceInfoInputView alloc] initWithFrame:CGRectMake(0, _infoView.bounds.size.height, self.view.bounds.size.width, 150)];
     [self.view addSubview:_infonInput];
     
     UIButton *cleanBtn = [UIButton buttonWithType:UIButtonTypeCustom];

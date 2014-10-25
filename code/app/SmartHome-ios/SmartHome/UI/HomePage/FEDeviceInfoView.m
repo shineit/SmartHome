@@ -24,10 +24,10 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    CGFloat xoffset = 5;
-    CGFloat yoffset = 10;
+    CGFloat xoffset = 10;
+    CGFloat yoffset = 20;
     CGFloat xspace = 10;
-    CGFloat yspace = 10;
+    CGFloat yspace = 20;
     CGFloat twidth = 80;
     CGFloat theight = 20;
     CGFloat vwidth = 100;

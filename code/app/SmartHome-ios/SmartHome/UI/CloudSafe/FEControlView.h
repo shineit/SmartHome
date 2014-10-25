@@ -1,5 +1,5 @@
 //
-//  FEControlViwe.h
+//  FEControlView.h
 //  SmartHome
 //
 //  Created by Seven on 14-10-22.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FEControlViwe : UIView
+@interface FEControlView : UIView
 
 @end

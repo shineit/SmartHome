@@ -11,6 +11,7 @@
 #import "FEControlObject.h"
 #import "FEControlPointCell.h"
 #import "FETreeViewCell.h"
+#import "FEDeviceControllVC.h"
 
 @interface FECloudControlVC ()<RATreeViewDataSource,RATreeViewDelegate>
 
@@ -112,6 +113,20 @@
     }
     
     return data.children[index];
+}
+
+#pragma mark - RATreeViewDelegate
+-(void)treeView:(RATreeView *)treeView didSelectRowForItem:(id)item{
+    FEControlObject *data = item;
+    FEControlObject *parent = [treeView parentForItem:item];
+    if (parent == nil || data.children.count != 0) {
+        return;
+    }else{
+        FEDeviceControllVC *dvc = [FEDeviceControllVC new];
+        dvc.hidesBottomBarWhenPushed = YES;
+        dvc.title = data.name;
+        [self.navigationController pushViewController:dvc animated:YES];
+    }
 }
 
 - (void)loadData

@@ -7,6 +7,7 @@
 //
 
 #import "FEDeviceWarringSettingVC.h"
+#import "FEDeviceInfoView.h"
 
 @interface FEDeviceWarringSettingVC ()
 
@@ -27,6 +28,35 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initUI];
+}
+
+-(void)initUI{
+    FEDeviceInfoView *dview = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 140)];
+    [self.view addSubview:dview];
+    
+    UIView *contentview = [[UIView alloc] initWithFrame:CGRectMake(0, dview.bounds.size.height, self.view.bounds.size.width, 230)];
+    contentview.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:contentview];
+    
+    FELabel *dlabel = [[FELabel alloc] initWithFrame:CGRectMake(10, 20, 60, 30)];
+    dlabel.text = FEString(@"DESCRIPETION");
+    [contentview addSubview:dlabel];
+    
+    
+    UIButton *configbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+    configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
+    [configbutton setTitle:FEString(@"CONFIG") forState:UIControlStateNormal];
+    [self.view addSubview:configbutton];
+    
+    UIButton *monitor = [UIButton buttonWithType:UIButtonTypeCustom];
+    monitor.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    monitor.frame = CGRectMake(self.view.bounds.size.width - 20 - 100, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
+    [monitor setTitle:FEString(@"MONITOR") forState:UIControlStateNormal];
+    [self.view addSubview:monitor];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

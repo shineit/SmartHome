@@ -7,7 +7,9 @@
 //
 
 #import "FECloudSafeVC.h"
-#import "FEControlViwe.h"
+#import "FEControlView.h"
+#import "FECloudSafeTableCell.h"
+#import "FEDeviceWarringSettingVC.h"
 
 @interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -40,7 +42,7 @@
 -(void)initUI{
     [self loadRightCustomButtonItemWithTitle:FEString(@"SEARCH") image:nil];
     
-    FEControlViwe *cview = [[FEControlViwe alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     [self.view addSubview:cview];
     _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, cview.frame.origin.y + cview.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - cview.frame.size.height) style:UITableViewStylePlain];
     _deviceTable.dataSource = self;
@@ -59,9 +61,9 @@
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    FECloudSafeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[FECloudSafeTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         
     }
     cell.textLabel.text = _deviceList[indexPath.section][indexPath.row];
@@ -82,13 +84,19 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 20;
+    return 30;
 }
 
 
 //-(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
 //    
 //}
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    FEDeviceWarringSettingVC *dvc = [FEDeviceWarringSettingVC new];
+    dvc.title = _deviceList[indexPath.section][indexPath.row];
+    [self.navigationController pushViewController:dvc animated:YES];
+}
 
 
 - (void)didReceiveMemoryWarning
