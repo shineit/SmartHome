@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  SmartHome
+
+  Created by Seven on 14-10-27.
+  Copyright (c) 2014年 FUEGO. All rights reserved.
+*/
+
+//tabbar
+"SETTING" = "Setting";
+"HOME_PAGE" = "Home";
+"CLOUD_SAFE" = "Safe";
+"CLOUD_CONTROL" = "Control";
+"CLOUD_CAMERA" = "Camera";
+
+//sigin
+"USER_NAME:" = "User name:";
+"USER_PSW:"  = "Password:";
+"LOGIN" = "Sigin";
+"LOADING" = "Loading...";
