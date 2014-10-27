@@ -25,7 +25,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"SAFE");
+        self.title = FEString(@"CLOUD_SAFE");
+        if (SYSTEM_VERSION_UP7) {
+            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"CLOUD_SAFE") image:[UIImage imageNamed:@"tabbar_safe"] selectedImage:nil];
+            self.tabBarItem = tabitem;
+        }else{
+            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_safe_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_safe"]];
+        }
+        
         _deviceList = [NSMutableArray arrayWithArray:@[@[@"烟雾报警器1",@"烟雾报警器2"],@[@"温度报警器1",@"温度报警器2",@"温度报警器3"]]];
     }
     return self;
@@ -94,6 +101,7 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FEDeviceWarringSettingVC *dvc = [FEDeviceWarringSettingVC new];
+    dvc.hidesBottomBarWhenPushed = YES;
     dvc.title = _deviceList[indexPath.section][indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
 }

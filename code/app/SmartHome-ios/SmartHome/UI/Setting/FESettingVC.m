@@ -9,6 +9,7 @@
 #import "FESettingVC.h"
 #import "FEServiceListVC.h"
 #import "FEProfileVC.h"
+#import "FESettingItemCell.h"
 
 @interface FESettingVC ()<UITableViewDataSource,UITableViewDelegate>{
     NSArray *_settingItem;
@@ -27,9 +28,16 @@
     if (self) {
         // Custom initialization
         self.title = FEString(@"SETTING");
+        if (SYSTEM_VERSION_UP7) {
+            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"SETTING") image:[UIImage imageNamed:@"tabbar_setting"] selectedImage:nil];
+            self.tabBarItem = tabitem;
+        }else{
+            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_setting_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_setting"]];
+        }
         
-        _settingItem = @[FEString(@"SERVICE"),FEString(@"ABOUT NEWS"),FEString(@"ABOUT US"),FEString(@"FADE BACK"),FEString(@"RATE US"),FEString(@"PROFILE")];
-        _settingIvocation = @[[self invocation:@selector(service)],[self invocation:@selector(aboutnews)],[self invocation:@selector(aboutus)],[self invocation:@selector(fadeback)],[self invocation:@selector(rateus)],[self invocation:@selector(profile)]];
+        
+        _settingItem = @[@[FEString(@"SERVICE"),FEString(@"ABOUT NEWS")],@[FEString(@"ABOUT US"),FEString(@"FADE BACK"),FEString(@"RATE US"),FEString(@"PROFILE")]];
+        _settingIvocation = @[@[[self invocation:@selector(service)],[self invocation:@selector(aboutnews)]],@[[self invocation:@selector(aboutus)],[self invocation:@selector(fadeback)],[self invocation:@selector(rateus)],[self invocation:@selector(profile)]]];
         
     }
     return self;
@@ -96,17 +104,22 @@
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    FESettingItemCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[FESettingItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    cell.textLabel.text = _settingItem[indexPath.row];
+    cell.titleLabel.text = _settingItem[indexPath.section][indexPath.row];
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return ((NSArray *)_settingItem[section]).count;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _settingItem.count;
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
@@ -114,7 +127,7 @@
 
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSInvocation *invocation = _settingIvocation[indexPath.row];
+    NSInvocation *invocation = _settingIvocation[indexPath.section][indexPath.row];
     [invocation invoke];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

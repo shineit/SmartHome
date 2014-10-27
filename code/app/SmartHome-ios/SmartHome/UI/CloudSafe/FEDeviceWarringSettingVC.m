@@ -35,14 +35,60 @@
     FEDeviceInfoView *dview = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 140)];
     [self.view addSubview:dview];
     
-    UIView *contentview = [[UIView alloc] initWithFrame:CGRectMake(0, dview.bounds.size.height, self.view.bounds.size.width, 230)];
+    UIView *contentview = [[UIView alloc] initWithFrame:CGRectMake(0, dview.bounds.size.height, self.view.bounds.size.width, 260)];
     contentview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentview];
     
-    FELabel *dlabel = [[FELabel alloc] initWithFrame:CGRectMake(10, 20, 60, 30)];
+    
+    CGFloat x = 10; //label 起始X
+    CGFloat y = 20; //label 起始Y
+    CGFloat xspace = 10; //space of item x
+    CGFloat yspace = 20; //space of item y
+    CGFloat lwidth = 60; //label width
+    CGFloat twidth = 200; //textFeild width
+    CGFloat height = 30;  //item (label or textFeild height)
+    
+    
+    FELabel *dlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y, lwidth, height)];
     dlabel.text = FEString(@"DESCRIPETION");
     [contentview addSubview:dlabel];
     
+    FETextField *dtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y, twidth, height)];
+    [contentview addSubview:dtextFeild];
+    
+    FELabel *elabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + height + yspace, lwidth, height)];
+    elabel.text = FEString(@"EARLY_WARRING");
+    [contentview addSubview:elabel];
+    
+    FETextField *etextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + height + yspace, twidth, height)];
+    [contentview addSubview:etextFeild];
+    
+    FELabel *vlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 2 * (height + yspace), lwidth, height)];
+    vlabel.text = FEString(@"FIRE_VALUE");
+    [contentview addSubview:vlabel];
+    
+    FETextField *vtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 2 * (height + yspace), twidth, height)];
+    [contentview addSubview:vtextFeild];
+    
+    FELabel *llabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 3 * (height + yspace), lwidth, height)];
+    llabel.text = FEString(@"LABEL");
+    [contentview addSubview:llabel];
+    
+    FETextField *ltextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 60, height)];
+    [contentview addSubview:ltextFeild];
+    
+    UIButton *add = [UIButton buttonWithType:UIButtonTypeCustom];
+    add.frame = CGRectMake(x + lwidth + xspace + twidth - 50, y + 3 * (height + yspace), 50, height);
+    [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [add setTitle:FEString(@"ADD") forState:UIControlStateNormal];
+    [contentview addSubview:add];
+    
+    FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 4 * (height + yspace), lwidth, height)];
+    clabel.text = FEString(@"CONTROL");
+    [contentview addSubview:clabel];
+    
+    FETextField *ctextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 4 * (height + yspace), twidth, height)];
+    [contentview addSubview:ctextFeild];
     
     UIButton *configbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;

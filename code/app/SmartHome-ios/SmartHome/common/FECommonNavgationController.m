@@ -22,10 +22,12 @@
         self.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor whiteColor]};
         if (SYSTEM_VERSION_UP7) {
             self.navigationBar.translucent = NO;
-            self.navigationBar.barTintColor = FEThemeColor;//[UIColor orangeColor];
+            self.navigationBar.barTintColor = FEThemeColor;
+             self.navigationBar.tintColor = [UIColor whiteColor];
         }else{
             self.navigationBar.tintColor = FEThemeColor;
         }
+       
     }
     return self;
 }
@@ -37,9 +39,11 @@
         if (SYSTEM_VERSION_UP7) {
             self.navigationBar.translucent = NO;
             self.navigationBar.barTintColor = FEThemeColor;
+            self.navigationBar.tintColor = [UIColor whiteColor];
         }else{
             self.navigationBar.tintColor = FEThemeColor;
         }
+        
     }
     return self;
 }
@@ -51,9 +55,11 @@
         if (SYSTEM_VERSION_UP7) {
             self.navigationBar.translucent = NO;
             self.navigationBar.barTintColor = FEThemeColor;
+            self.navigationBar.tintColor = [UIColor whiteColor];
         }else{
             self.navigationBar.tintColor = FEThemeColor;
         }
+        
     }
     return self;
 }

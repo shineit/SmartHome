@@ -9,6 +9,23 @@
 #ifndef SmartHome_FESmartHomeConfig_h
 #define SmartHome_FESmartHomeConfig_h
 
+//Singleton define
+#define DEFINE_SINGLETON_FOR_HEADER(className) \
+\
++ (className *)shared##className;
+//Singleton method
+#define DEFINE_SINGLETON_FOR_CLASS(className) \
+\
++ (className *)shared##className { \
+static className *shared##className = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shared##className = [[self alloc] init]; \
+}); \
+return shared##className; \
+}
+
+
 //LocalString
 #define FEString(_S)                            NSLocalizedString(_S, @"")
 
@@ -43,6 +60,7 @@
 #define FEColor(_R,_G,_B,_A)                    [UIColor colorWithRed:_R / 255.0f green:_G / 255.0f blue: _B / 255.0f alpha:_A]
 
 #define FEThemeColor                            FEColor(252, 156, 56, 1)
+#define FEButtonColor                           FEColor(250, 177, 60, 1)
 
 #define FECoreData                              ([AppDelegate sharedDelegate].coreDataHandler)
 

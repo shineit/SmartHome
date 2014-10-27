@@ -29,6 +29,12 @@
     if (self) {
         // Custom initialization
         self.title = FEString(@"HOME_PAGE");
+        if (SYSTEM_VERSION_UP7) {
+            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
+            self.tabBarItem = tabitem;
+        }else{
+            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_home_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_home"]];
+        }
         _newsList = [NSMutableArray arrayWithObjects:@"新闻1",@"新闻2",@"新闻3",@"新闻4",@"新闻5", nil];
         _warringList = [NSMutableArray arrayWithObjects:@"warring 1",@"warring1",@"warring3",@"warring4", nil];
     }
@@ -125,7 +131,7 @@
 //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         
         cell.titleLabel.text = self.newsList[indexPath.row];
-        cell.timeLabel.text = @"00/00/00/00";//[formatter stringFromDate:[NSDate date]];
+        cell.timeLabel.text = @"00/00/00/00";
         return cell;
     }else if(tableView == self.warringtable){
         static NSString *identifier = @"cell";

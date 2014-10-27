@@ -7,7 +7,7 @@
 //
 
 #import "FEProfileVC.h"
-#import "FEUser.h"
+#import "CDUser.h"
 #import "AppDelegate.h"
 #import "FEModifyPassWord.h"
 
@@ -38,7 +38,7 @@
     
     [self loadRightCustomButtonItemWithTitle:FEString(@"PASSWORD") image:nil];
     
-    FEUser *user = FELoginUser;
+    CDUser *user = FELoginUser;
     
     FELabel *username = [[FELabel alloc] initWithFrame:CGRectMake(20, 30, 60, 20)];
     username.text = FEString(@"USERNAME");

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class FEUser;
+@class CDUser;
 
 @interface FESortDescriptor : NSObject
 
@@ -34,8 +34,8 @@
 - (instancetype)initWithAppDelegateManagedObjectContext;
 
 //fetch user information
--(FEUser *)fetchUser;
--(FEUser *)touchUserByIdentifier:(NSString *)identifier;
+-(CDUser *)fetchUser;
+-(CDUser *)touchUserByIdentifier:(NSString *)identifier;
 - (void)saveCoreData;
 - (void)deleteCoreData:(NSArray *)array;
 

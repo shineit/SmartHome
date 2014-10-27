@@ -8,7 +8,8 @@
 
 #import "FELoginVC.h"
 #import "AppDelegate.h"
-#import "FEUser.h"
+#import "CDUser.h"
+#import "FEWebServiceManager.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
 
@@ -36,29 +37,55 @@
 }
 
 -(void)initUI{
-    self.view.backgroundColor = [UIColor orangeColor];
+    self.view.backgroundColor = FEThemeColor;
+    //logo
+    CGFloat adjust = [UIDevice is4Inch]?40:0;
+    
+    UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 145, 145)];
+    logo.image = [UIImage imageNamed:@"sigin_logo"];
+    logo.center = CGPointMake(self.view.bounds.size.width / 2, adjust + 120);
+    [self.view addSubview:logo];
+    
+    UIImageView *textcontent = [[UIImageView alloc] initWithFrame:CGRectMake(20, logo.frame.origin.y + logo.bounds.size.height + 30, self.view.bounds.size.width - 40, 101)];
+    textcontent.image = [UIImage imageNamed:@"sigin_input"];
+    textcontent.userInteractionEnabled = YES;
+    [self.view addSubview:textcontent];
+
+    FELabel *namelabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 10, 70, 30)];
+    namelabel.text = FEString(@"USER_NAME:");
+    [textcontent addSubview:namelabel];
+    
     //user name textfield
-    UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 220, 30)];
+    FETextField *username = [[FETextField alloc] initWithFrame:CGRectMake(namelabel.frame.origin.x + namelabel.bounds.size.width + 5, namelabel.frame.origin.y, textcontent.bounds.size.width - (namelabel.frame.origin.x + namelabel.bounds.size.width + 5) - 10, 30)];
     username.returnKeyType = UIReturnKeyNext;
     username.keyboardType = UIKeyboardTypeEmailAddress;
-    username.placeholder = FEString(@"INPUT_USER_NAME");
-    username.borderStyle = UITextBorderStyleRoundedRect;
+    username.borderStyle = UITextBorderStyleNone;
+//    username.placeholder = FEString(@"INPUT_USER_NAME");
     username.delegate = self;
-    [self.view addSubview:username];
+    [textcontent addSubview:username];
     self.username = username;
     
-    UITextField *psw = [[UITextField alloc] initWithFrame:CGRectMake(50, 250, 220, 30)];
+    
+    FELabel *pswlabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 60, 70, 30)];
+    pswlabel.text = FEString(@"USER_PSW:");
+    [textcontent addSubview:pswlabel];
+    
+    FETextField *psw = [[FETextField alloc] initWithFrame:CGRectMake(pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5, pswlabel.frame.origin.y, textcontent.bounds.size.width - (pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5) - 10, 30)];
     psw.returnKeyType = UIReturnKeyDone;
-    psw.placeholder = FEString(@"INPUT_PASSWORD");
+    psw.borderStyle = UITextBorderStyleNone;
+//    psw.placeholder = FEString(@"INPUT_PASSWORD");
     psw.secureTextEntry = YES;
-    psw.borderStyle = UITextBorderStyleRoundedRect;
     psw.delegate = self;
-    [self.view addSubview:psw];
+    [textcontent addSubview:psw];
     self.password = psw;
     
-    UIButton *loginbtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    loginbtn.frame = CGRectMake(100, 290, 120, 30);
+    UIButton *loginbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    loginbtn.frame = CGRectMake(50, textcontent.frame.origin.y + textcontent.bounds.size.height + 20, self.view.bounds.size.width - 100, 40);
+    loginbtn.layer.cornerRadius = 5;
+    loginbtn.layer.masksToBounds = YES;
     [loginbtn setTitle:FEString(@"LOGIN") forState:UIControlStateNormal];
+    [loginbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [loginbtn setBackgroundImage:[UIImage imageFromColor:FEButtonColor] forState:UIControlStateNormal];
     [loginbtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginbtn];
     
@@ -69,19 +96,28 @@
 
 -(void)login:(UIButton *)button{
     [self hideKeyboard];
-    
     if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
-//        [FECoreDataHandler]
-        FEUser *user = [FECoreData touchUserByIdentifier:@"identifier"];
-        user.username = self.username.text;
-        user.password = [self.password.text MD5];
-        [FECoreData saveCoreData];
-        [[AppDelegate sharedDelegate] loadMain];
+        [self displayHUD:FEString(@"LOADING")];
+        __weak typeof(self) weakself = self;
+        [[FEWebServiceManager sharedInstance] siginWithParam:nil response:^(NSError *error, FEDataUser *user){
+            NSLog(@"call back");
+            [weakself hideHUD:YES];
+            if (error) {
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                CDUser *user = [FECoreData touchUserByIdentifier:@"identifier"];
+                user.username = weakself.username.text;
+                user.password = [weakself.password.text MD5];
+                [FECoreData saveCoreData];
+                [[AppDelegate sharedDelegate] loadMain];
+            });
+            
+        }];
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:FEString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
         [alert show];
     }
-    
     
 }
 
@@ -109,7 +145,7 @@
 }
 
 -(void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration{
-    [self screenOffset:[UIDevice is4Inch]?SYSTEM_VERSION_UP7?-0:-0:SYSTEM_VERSION_UP7?-80:-80];
+    [self screenOffset:[UIDevice is4Inch]?SYSTEM_VERSION_UP7?-100:-100:SYSTEM_VERSION_UP7?-160:-160];
 }
 
 - (void)didReceiveMemoryWarning

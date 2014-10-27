@@ -17,7 +17,7 @@
 #import "FECloudControlVC.h"
 #import "FESettingVC.h"
 #import <HockeySDK/HockeySDK.h>
-#import "FEUser.h"
+#import "CDUser.h"
 //#import "FEServiceListVC.h"
 
 @implementation AppDelegate
@@ -32,6 +32,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [self loadview];
     [self.window makeKeyAndVisible];
     
@@ -73,7 +75,7 @@
 
 //加载rootviewController
 - (void)loadview{
-    FEUser *user = [FECoreData fetchUser];
+    CDUser *user = [FECoreData fetchUser];
     if (user) {
         [self loadMain];
     }else{

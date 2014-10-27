@@ -8,7 +8,7 @@
 
 #import "FECoreDataHandler.h"
 #import "AppDelegate.h"
-#import "FEUser.h"
+#import "CDUser.h"
 
 @implementation FESortDescriptor
 @synthesize key;
@@ -255,18 +255,18 @@ relationshipKeyPathsForPrefetching:nil
     }
 }
 
-#pragma mark - FEUser
--(FEUser *)fetchUser{
-    NSArray *array = [self fetchEntityByName:@"FEUser"
+#pragma mark - CDUser
+-(CDUser *)fetchUser{
+    NSArray *array = [self fetchEntityByName:@"CDUser"
                                    predicate:nil
                                     sortKeys:nil];
     return array.lastObject;
 }
 
--(FEUser *)touchUserByIdentifier:(NSString *)identifier{
-    FEUser *user = [self fetchUser];
+-(CDUser *)touchUserByIdentifier:(NSString *)identifier{
+    CDUser *user = [self fetchUser];
     if (!user) {
-        user = (FEUser *)[NSEntityDescription insertNewObjectForEntityForName:@"FEUser" inManagedObjectContext:self.managedObjectContext];
+        user = (CDUser *)[NSEntityDescription insertNewObjectForEntityForName:@"CDUser" inManagedObjectContext:self.managedObjectContext];
         user.userid = identifier;
     }
     return user;

@@ -28,7 +28,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"HOME");
+        self.title = FEString(@"HOME_PAGE");
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
+        self.tabBarItem = tabitem;
+        
         self.functionItem = @[FEString(@"CLOUD_SAFE"),FEString(@"CURRENT_WARRING"),FEString(@"PROFILE"),FEString(@"CLOUD_CAMERA"),FEString(@"MOD_PSW"),FEString(@"WARRING")];
     }
     return self;
