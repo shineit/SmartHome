@@ -10,10 +10,14 @@
 #import "FEServiceListVC.h"
 #import "FEProfileVC.h"
 #import "FESettingItemCell.h"
+#import "FERate.h"
+
+#define _TITLE  @"title"
+#define _IMAGE  @"image"
+#define _FUNCTION  @"function"
 
 @interface FESettingVC ()<UITableViewDataSource,UITableViewDelegate>{
     NSArray *_settingItem;
-    NSArray *_settingIvocation;
 }
 
 @property (nonatomic, strong) UITableView *settingTable;
@@ -35,10 +39,20 @@
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_setting_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_setting"]];
         }
         
-        
-        _settingItem = @[@[FEString(@"SERVICE"),FEString(@"ABOUT NEWS")],@[FEString(@"ABOUT US"),FEString(@"FADE BACK"),FEString(@"RATE US"),FEString(@"PROFILE")]];
-        _settingIvocation = @[@[[self invocation:@selector(service)],[self invocation:@selector(aboutnews)]],@[[self invocation:@selector(aboutus)],[self invocation:@selector(fadeback)],[self invocation:@selector(rateus)],[self invocation:@selector(profile)]]];
-        
+        _settingItem = @[
+                        @[
+                          @{_TITLE : FEString(@"PROFILE"),_IMAGE : [UIImage imageNamed:@"setting_profile"],_FUNCTION : [self invocation:@selector(profile)]}
+                          ],
+                        @[
+                          @{_TITLE : FEString(@"ABOUT_US"), _IMAGE : [UIImage imageNamed:@"setting_aboutus"], _FUNCTION : [self invocation:@selector(aboutus)]},
+                          @{_TITLE : FEString(@"RATE_US"), _IMAGE : [UIImage imageNamed:@"setting_rating"], _FUNCTION : [self invocation:@selector(rateus)]}
+                          ],
+                        @[
+                          @{_TITLE : FEString(@"SERVICE"), _IMAGE : [UIImage imageNamed:@"setting_service"], _FUNCTION : [self invocation:@selector(service)]},
+                          @{_TITLE : FEString(@"ABOUT_NEWS"), _IMAGE : [UIImage imageNamed:@"setting_news"], _FUNCTION : [self invocation:@selector(aboutnews)]},
+                          @{_TITLE : FEString(@"FEED_BACK"), _IMAGE : [UIImage imageNamed:@"setting_feedback"], _FUNCTION : [self invocation:@selector(feedback)]}
+                          ]
+                        ];
     }
     return self;
 }
@@ -49,7 +63,6 @@
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
     [invocation setSelector:selector];
     [invocation setTarget:self];
-//    [invocation retainArguments];
     return invocation;
 }
 
@@ -86,16 +99,15 @@
     NSLog(@"关于我们");
 }
 
--(void)fadeback{
+-(void)feedback{
     NSLog(@"反馈");
 }
 
 -(void)rateus{
-    NSLog(@"为我们评分");
+    [[FERate sharedFERate] rate];
 }
 
 -(void)profile{
-    NSLog(@"Profile");
     FEProfileVC *profile = [FEProfileVC new];
     profile.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:profile animated:YES];
@@ -108,7 +120,8 @@
     if (!cell) {
         cell = [[FESettingItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    cell.titleLabel.text = _settingItem[indexPath.section][indexPath.row];
+    cell.titleLabel.text = _settingItem[indexPath.section][indexPath.row][_TITLE];
+    cell.headImage.image = _settingItem[indexPath.section][indexPath.row][_IMAGE];
     return cell;
 }
 
@@ -127,7 +140,7 @@
 
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSInvocation *invocation = _settingIvocation[indexPath.section][indexPath.row];
+    NSInvocation *invocation = _settingItem[indexPath.section][indexPath.row][_FUNCTION];
     [invocation invoke];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

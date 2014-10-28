@@ -18,3 +18,11 @@
 "USER_PSW:"  = "Password:";
 "LOGIN" = "Sigin";
 "LOADING" = "Loading...";
+
+"SETTING" = "Setting";
+"PROFILE" = "Profile";
+"ABOUT_US" = "About";
+"RATE_US" = "Rate";
+"SERVICE" = "Service";
+"ABOUT_NEWS" = "News";
+"FADE_BACK" = "Feedback";

@@ -32,10 +32,9 @@ return shared##className; \
 // App infomation
 #define FEDidLaunchedFirstTime(_V)              [NSString stringWithFormat:@"DidLaunchedFirstTime V-%@",_V]
 #define	FEAppVersion                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
-//#define AWAppName
 #define	FEAppIdentifier                         [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"]
 #define FEAppBuildVersion                       [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
-#define FEGradeTimes                            [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"GradeTimes"] integerValue]
+#define FERateTimes                            [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"RateTimes"] integerValue]
 #define FEAppItunesID                           [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppItunesIdentifier"]
 
 //NSUserDefaults
@@ -51,7 +50,7 @@ return shared##className; \
 #define FERunTimes                              @"runTimes"
 
 //never grade
-#define FEGradeNever                            @"gradeNever"
+#define FERateNever                            @"rateNever"
 
 //itunes url
 #define FEItunesUrlString(_ID)                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",_ID]

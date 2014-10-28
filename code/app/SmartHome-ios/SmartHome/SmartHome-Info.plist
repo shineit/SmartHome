@@ -36,5 +36,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>RateTimes</key>
+	<string>5</string>
+	<key>AppItunesIdentifier</key>
+	<string>123456</string>
 </dict>
 </plist>

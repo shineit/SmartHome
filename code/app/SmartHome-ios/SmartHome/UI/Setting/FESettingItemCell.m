@@ -21,11 +21,10 @@
 }
 
 -(void)setup{
-    _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
-    _headImage.image = [UIImage imageFromColor:[UIColor redColor]];
+    _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 22, 22)];
     [self.contentView addSubview:_headImage];
     
-    _titleLabel = [[FELabel alloc] initWithFrame:CGRectMake(_headImage.frame.origin.x + _headImage.bounds.size.width + 5, 5, 280, 30)];
+    _titleLabel = [[FELabel alloc] initWithFrame:CGRectMake(_headImage.frame.origin.x + _headImage.bounds.size.width + 10, 12, 280, 22)];
     [self.contentView addSubview:_titleLabel];
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

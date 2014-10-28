@@ -20,3 +20,12 @@
 "USER_PSW:"  = "密    码:";
 "LOGIN" = "登  陆";
 "LOADING" = "连接中...";
+
+//setting
+"SETTING" = "设置";
+"PROFILE" = "个人中心";
+"ABOUT_US" = "关于我们";
+"RATE_US" = "为我们评分";
+"SERVICE" = "服务";
+"ABOUT_NEWS" = "新功能";
+"FADE_BACK" = "意见反馈";
