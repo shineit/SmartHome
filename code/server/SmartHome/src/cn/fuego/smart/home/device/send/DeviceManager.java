@@ -19,3 +19,26 @@ public class DeviceManager
 {
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,6 +15,7 @@ import cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
+import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
 import cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest;
 
@@ -64,8 +65,8 @@ public class SensorManageRestImpl implements SensorManageRest
 	@Override
 	public SetSensorRsp setSensor(SetSensorReq sensorListReq)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		SetSensorRsp rsp = new SetSensorRsp();
+		return rsp;
 	}
 
 }

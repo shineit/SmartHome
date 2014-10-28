@@ -22,8 +22,10 @@
 	<property name="hibernate.c3p0.idle_test_period">0</property>
 	<property name="hibernate.c3p0.timeout">31536000</property>
 	<property name="hibernate.c3p0.validate">true</property>
+	<!--misp po configration -->
 	<mapping resource="cn/fuego/misp/domain/SystemUser.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemMenu.hbm.xml" />
+	<mapping resource="cn/fuego/misp/domain/Privilege.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemIDType.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/OperLog.hbm.xml" />
 	

@@ -28,7 +28,7 @@ public abstract class TableAction extends MISPAction
 	private String jumpActionName;
 	private String selectedID;
 	private String[] selectedIDList;
-	private String operateType;
+	private String operateType;//对应左侧menu
 
  
 	abstract public String create();

@@ -43,8 +43,8 @@ $(function()
     var localObj = window.location;
     var contextPath = localObj.pathname.split("/")[1];
 	DWZ.init("dwz.frag.xml", {
-		loginUrl:"login_dialog.html", loginTitle:"登录",	// 弹出登录对话框
-//		loginUrl:"login.html",	// 跳到登录页面
+		//loginUrl:"login_dialog.html", loginTitle:"登录",	// 弹出登录对话框
+       		 loginUrl:"<%=request.getContextPath()%>/client/misp/login.jsp",	// 跳到登录页面
 		statusCode:{ok:200, error:300, timeout:301}, //【可选】
 		pageInfo:{pageNum:"pageNum", numPerPage:"numPerPage", orderField:"orderField", orderDirection:"orderDirection"}, //【可选】
 		keys: {statusCode:"statusCode", message:"message"}, //【可选】
@@ -56,36 +56,15 @@ $(function()
 		}
 	});
 });
+function resetForm(objForm){
 
-</script>
-<!-- 进度条CSS和js-->
-
-  <script type='text/javascript'>
-	function loading(percent){
-		$('.progress span').animate({width:percent},5000,function(){
-			$(this).children().html(percent);
-			
-            if(percent=='100%'){
-                $(this).children().html('下载完成!');
-                setTimeout(function(){
-                    $('.container').fadeOut();
-					location.href="#";
-                },1000);
-            }
-			
-		});
-		//$("#disp" ).html(percent);
-	}
-  </script>
+    $(':input',objForm).not(':button, :submit, :reset, :hidden').val('');
+    $(':select',objForm).removeAttr('selected');	  
 	
-<!-- 更改上传样式 -->
-<style type="text/css">
-input{ vertical-align:middle; margin:0; padding:0}
-.file-box{ position:relative;width:200px}
-.txt{ height:15px; border:1px solid #cdcdcd; width:90px;margin-left:5px;}
-.btn{ background-color:#FFF; border:1px solid #CDCDCD;height:21px; width:40px;}
-.file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:60px }
-</style>
+
+}
+</script>
+
 
 <!-- 省市三级联动js -->
 <script  src="<%=request.getContextPath()%>/client/lib/newJS/jsAddress.js" type="text/javascript"></script>
@@ -93,7 +72,7 @@ input{ vertical-align:middle; margin:0; padding:0}
 <link href="<%=request.getContextPath()%>/client/lib/newCSS/gh-buttons.css" rel="stylesheet" type="text/css" media="screen"/>
 <!-- 图片上传预览js -->
 
-
+<script src="<%=request.getContextPath()%>/client/lib/newJS/uploadPreview.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -109,15 +88,16 @@ input{ vertical-align:middle; margin:0; padding:0}
  
 					<li><a href="login/login!logout.action">退出</a></li>
 				</ul>
-				<ul class="themeList" id="themeList">
+<!-- 			<ul class="themeList" id="themeList">
 					<li theme="azure"><div class="selected">天蓝</div></li>
-					<!-- <li theme="default"><div >蓝色</div></li> -->
+					 <li theme="default"><div >蓝色</div></li>
 					<li theme="green"><div>绿色</div></li>
-					<!--<li theme="red"><div>红色</div></li>-->
+					<li theme="red"><div>红色</div></li>
 					<li theme="purple"><div>紫色</div></li>
 					<li theme="silver"><div>银色</div></li>
 					
 				</ul>
+ -->					
 			</div>
 
 			<!-- navMenu -->

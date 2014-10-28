@@ -18,7 +18,7 @@ package cn.fuego.misp.web.model.menu;
 
 public class MenuModel implements Cloneable
 {
-	private int menuID;
+	private String menuID;
 	private String name;
 	private String value;
 	private String type;
@@ -28,7 +28,7 @@ public class MenuModel implements Cloneable
 	private String url;
 
 
-	private int parentID;
+	private String parentID;
 	private String functionID;
 
 	private boolean selected;
@@ -45,12 +45,14 @@ public class MenuModel implements Cloneable
 		this.selected = selected;
 	}
 
-	public int getMenuID()
+ 
+
+	public String getMenuID()
 	{
 		return menuID;
 	}
 
-	public void setMenuID(int menuID)
+	public void setMenuID(String menuID)
 	{
 		this.menuID = menuID;
 	}
@@ -125,17 +127,18 @@ public class MenuModel implements Cloneable
 		this.url = url;
 	}
 
-	public int getParentID()
+ 
+ 
+	public String getParentID()
 	{
 		return parentID;
 	}
 
-	public void setParentID(int parentID)
+	public void setParentID(String parentID)
 	{
 		this.parentID = parentID;
 	}
 
- 
 	public String getFunctionID()
 	{
 		return functionID;

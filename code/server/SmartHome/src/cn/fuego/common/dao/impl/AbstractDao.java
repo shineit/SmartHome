@@ -75,48 +75,9 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 			HibernateUtil.closeSession();
 		}
 	}
-	public void delete(PersistenceObject object)
+	public void delete(List<QueryCondition> conditionList)
 	{
-		log.info("the object class is " + getFeaturedClass()+"the object is "+object.toString());
-
-		Session session = null;
-		Transaction tx = null;
-		try
-		{
-			session = HibernateUtil.getSession();
-			tx = session.beginTransaction();
-
-			Object classObj = session.load(getFeaturedClass(), object);
-
-			session.delete(classObj);
-
-			tx.commit();
-		} catch (RuntimeException re)
-		{
-			log.error("delete error",re);
-			throw re;
-
-		} finally
-		{
-			if (session != null)
-			{
-				session.close();
-			}
-		}
-	}
-	
-	public void delete(QueryCondition condition)
-	{
-		log.info("the query is " + condition.toString());
-	
-		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-		
-		if(null != condition)
-		{
-			conditionList.add(condition);
-		}Session session = null;
-		
-		
+        Session session = null;
 		Transaction tx = null;
 		try
 		{
@@ -143,6 +104,18 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 				session.close();
 			}
 		}
+	}
+
+	public void delete(QueryCondition condition)
+	{
+		log.info("the query is " + condition.toString());
+	
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		if(null != condition)
+		{
+			conditionList.add(condition);
+		}
+		this.delete(conditionList);
 	}
 
 }

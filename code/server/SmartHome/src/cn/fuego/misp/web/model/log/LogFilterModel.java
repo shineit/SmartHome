@@ -18,18 +18,19 @@ package cn.fuego.misp.web.model.log;
 
 public class LogFilterModel
 {
-	private int id;
+	private String id;
 	private String user;
 	private String name;
 	private String object;
 	private String result;
 	private String startTime;
 	private String endTime;
-	public int getId()
+
+	public String getId()
 	{
 		return id;
 	}
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

@@ -18,6 +18,7 @@ import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.LoginReq;
 import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
+import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.from.client.rest.UserManageRest;
@@ -66,8 +67,8 @@ public class UserManageRestImpl implements UserManageRest
 	@Override
 	public GetUserMarkListRsp getUserMarkList(GetUserMarkListReq req)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		GetUserMarkListRsp rsp = new GetUserMarkListRsp();
+		return rsp;
 	}
 
 	/* (non-Javadoc)
@@ -76,8 +77,8 @@ public class UserManageRestImpl implements UserManageRest
 	@Override
 	public SetUserMarkRsp getUserMarkList(SetUserMarkReq req)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		SetUserMarkRsp rsp = new SetUserMarkRsp();
+		return rsp;
 	}
 
 }

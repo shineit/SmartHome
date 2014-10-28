@@ -9,6 +9,7 @@
 package cn.fuego.misp.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,6 +25,7 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
+import cn.fuego.misp.web.model.user.UserModel;
 
 /** 
  * @ClassName: MISPUserServiceImpl 
@@ -39,7 +41,7 @@ public class MISPUserServiceImpl implements MISPUserService
 
 	private SystemUser getSystemUserByUserName(String userName)
 	{
-		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"userName",userName));
+		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserNameAttr(),userName));
 		 
 		return targetUser;
 	}
@@ -47,7 +49,7 @@ public class MISPUserServiceImpl implements MISPUserService
 	 * @see cn.fuego.misp.service.UserService#Login(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void Login(String userName, String password)
+	public UserModel Login(String userName, String password)
 	{
 		SystemUser targetUser = this.getSystemUserByUserName(userName);
 		if (null == targetUser )
@@ -68,6 +70,13 @@ public class MISPUserServiceImpl implements MISPUserService
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(userName, MISPOperLogConsant.LOGIN, null, MISPOperLogConsant.OPERATE_SUCCESS);
 
 
+		UserModel userModel = new UserModel();
+		userModel.setUserID(targetUser.getUserID());
+		userModel.setUserName(targetUser.getUserName());
+		userModel.setAccountType(targetUser.getAccountType());
+		userModel.setRegDate(targetUser.getRegDate());
+		
+		return userModel;
 	}
 
 	/* (non-Javadoc)
@@ -92,13 +101,15 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			targetUser.setPassword(newPwd);
 			MISPDaoContext.getInstance().getSystemUserDao().update(targetUser);
-			log.info(userName + "modify password success " );
+			MISPServiceContext.getInstance().getMISPOperLogService().recordLog(userName, MISPOperLogConsant.MODIFY_PASSWORD, null, MISPOperLogConsant.OPERATE_SUCCESS);
 		}
 	}
 	
 	public List<MenuTreeModel> getMenuTreeByUserID(String userID)
 	{
-		return SystemMenuCache.getInstance().getAllMenu();
+		Set<String> menuIDList = MISPServiceContext.getInstance().MISPPrivilegeManage().getMenuIDListByUser(userID);
+		
+		return SystemMenuCache.getInstance().getMenuListWithShowIDList(menuIDList);
 	}
 
 }

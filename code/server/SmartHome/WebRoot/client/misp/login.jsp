@@ -2,6 +2,11 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,9 +14,51 @@
 <title>远程诊断管理平台</title>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/login.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/client/lib/dwz/favicon.ico" rel="shortcut icon"  />
+<script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
+ <script type="text/javascript">  
+    function changeValidateCode(obj) {  
+           //获取当前的时间作为参数，无具体意义  
+        var timenow = new Date().getTime();  
+           //每次请求需要一个不同的参数，否则可能会返回同样的验证码  
+        //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。  
+        obj.src="login/ValidateImage.action?d="+timenow;  
+    } 
+    $(function(){
+    
+     	$("#Bt1").click(function(){
+        //alert('OK');
+      	   $.ajax(
+              {
+                  type:"POST",
+                  url:"login/login!validateCode.action",
+                  dataType:"text",
+                  data:{code:$("#ckey").val()},
+                  success:function(json)
+                  {
+                  	 if(json=='false')
+                  	 {
+                  	 	$("#warn").html("验证码输入错误！");
+                  	 }else{
+                  	     $("form[name='loginForm']").submit();
+                  	 }
+
+                  }
+
+              });
+     	});//Bt1 click function
+     }); //function
+          
+
+  
+
+
+</script>
+
+
+
 </head>
 
-<body>
+<body style="overflow-x:hidden;">
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
@@ -30,7 +77,9 @@
 		</div>
 		<div id="login_content">
 			<div class="loginForm">
-				<s:form action="login/login" method="POST" theme="simple">
+			    <div  id="warn" style="color:red;text-align:center;font-size:1.2em;">&nbsp${message}</div>
+			    
+				<s:form action="login/login" method="POST" theme="simple" name="loginForm">
 					<p>
 						<label>用户名：</label>
 						<input type="text" name="user.userName" size="16" class="login_input" />
@@ -41,11 +90,11 @@
 					</p>
 					<p>
 						<label>验证码：</label>
-						<input class="code" type="text" size="5" />
-						<span><img src="<%=request.getContextPath()%>/client/lib/dwz/themes/default/images/header_bg.png" alt="" width="75" height="24" /></span>
+						<input id="ckey"  class="code" type="text" size="5" name="user.validateCode" />
+						<span><img src="login/ValidateImage.action" onclick="changeValidateCode(this)" alt="" width="75" height="24" /></span>
 					</p>
 					<div class="login_bar">
-						<input class="sub" type="submit" value=" " />
+						<input  id="Bt1" class="sub" type="button" value=" " />
 					</div>
 				</s:form>
 			</div>

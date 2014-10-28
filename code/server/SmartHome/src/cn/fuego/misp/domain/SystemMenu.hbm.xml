@@ -6,20 +6,20 @@
 	
 <hibernate-mapping
 	package="cn.fuego.misp.domain">
-	<class name="SystemMenu" table="SYSTEM_MENU">
-			<id name="menuID" column="MENU_ID"  type="int">
+	<class name="SystemMenu" table="misp_system_menu">
+			<id name="menuID" column="MENU_ID"  length='20'>
 			<generator class="assigned"/>
 			</id>
         
-           <property name="name" column="NAME"  not-null="true" ></property>
-           <property name="value" column="VALUE"  not-null="false" ></property>	
-           <property name="type" column="TYPE"  not-null="false" ></property>
-           <property name="icon" column="ICON"  not-null="false" ></property>
+           <property name="name" column="NAME"  not-null="true" length='50'></property>
+           <property name="value" column="VALUE"  not-null="true" length='50'></property>	
+           <property name="type" column="TYPE"  not-null="false" length='10'></property>
+           <property name="icon" column="ICON"  not-null="false" length='50'></property>
            <property name="external" column="EXTERNAL"  not-null="false" ></property> 
            <property name="fresh" column="FRESH"  not-null="false" ></property>  
-           <property name="url" column="URL"  not-null="false" ></property>  
-           <property name="parentID" column="PARENT_ID"  not-null="false" ></property> 
-           <property name="functionID" column="FUNCTION_ID"  not-null="false" ></property>
+           <property name="url" column="URL"  not-null="false" length='100'></property>  
+           <property name="parentID" column="PARENT_ID"  not-null="false"  length='20'></property> 
+           <property name="functionID" column="FUNCTION_ID"  not-null="false" length='50' ></property>
                                       				
 	</class>
 </hibernate-mapping>

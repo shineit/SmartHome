@@ -25,9 +25,9 @@ public class MenuTreeModel
 	private MenuModel menu;
 	private List<MenuTreeModel> childMenuList;
 
-	public MenuModel getMenuModelByMenuID(int menuID)
+	public MenuModel getMenuModelByMenuID(String menuID)
 	{
-		if(menuID == menu.getMenuID())
+		if(menuID.equals(menu.getMenuID()))
 		{
 			return menu;
 		}

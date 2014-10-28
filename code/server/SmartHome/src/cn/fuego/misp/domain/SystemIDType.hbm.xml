@@ -6,8 +6,8 @@
 	
 <hibernate-mapping
 	package="cn.fuego.misp.domain">
-	<class name="SystemIDType" table="SYSTEM_ID_TYPE">
-			<id name="name" column="NAME"  type="java.lang.String">
+	<class name="SystemIDType" table="misp_system_id_type">
+			<id name="name" column="NAME"  type="java.lang.String"  length='20'>
 			<generator class="assigned"/>
 			</id>
         

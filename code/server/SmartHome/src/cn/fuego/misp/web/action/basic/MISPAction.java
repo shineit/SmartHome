@@ -10,20 +10,33 @@ import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuModel;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.message.MispMessageModel;
+import cn.fuego.misp.web.model.user.UserModel;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MISPAction extends ActionSupport
 {
-	private int selectedMenuID;
+	private static String selectedMenuID;
 	private List<MenuModel> menuHeadList;
 	private MispMessageModel operateMessage = new MispMessageModel();
 	public static final String MISP_DONE_PAGE = "misp-done";
 	
 	 
 
-
+    public UserModel getLoginUser()
+    {
+    	ActionContext actionContext = ActionContext.getContext();
+		Map<String, Object> session = actionContext.getSession();
+		if(session.get(SessionAttrNameConst.LOGIN_USER) != null)
+		{
+			return (UserModel) session.get(SessionAttrNameConst.LOGIN_USER); 
+		}
+		else
+		{
+			return null;
+		}
+    }
 	public MispMessageModel getOperateMessage()
 	{
 		return operateMessage;
@@ -56,25 +69,23 @@ public class MISPAction extends ActionSupport
 	}
 
 
-	public int getSelectedMenuID()
+	 
+	public String getSelectedMenuID()
 	{
 		return selectedMenuID;
 	}
-
-	public void setSelectedMenuID(int selectedMenuID)
+	public void setSelectedMenuID(String selectedMenuID)
 	{
 		this.selectedMenuID = selectedMenuID;
 	}
-
-
 	public List<MenuModel> getMenuHeadList()
 	{
 		
 		ActionContext actionContext = ActionContext.getContext();
 
-		if(0==selectedMenuID)
+		if("0".equals(selectedMenuID))
 		{
-			selectedMenuID=(Integer) actionContext.getSession().get(SessionAttrNameConst.SELECTED_MENU_ID);
+			selectedMenuID = (String) actionContext.getSession().get(SessionAttrNameConst.SELECTED_MENU_ID);
 		}else
 		{
 			actionContext.getSession().put(SessionAttrNameConst.SELECTED_MENU_ID,selectedMenuID);
@@ -83,7 +94,7 @@ public class MISPAction extends ActionSupport
 		List<MenuTreeModel> menuTreeList = (List<MenuTreeModel>) actionContext.getSession().get(SessionAttrNameConst.MENU_TREE);
 		
 		menuHeadList = new ArrayList<MenuModel>();
-  		int menuID = this.selectedMenuID;
+  		String menuID = this.selectedMenuID;
   		MenuModel menu = getMenuByMenuID(menuID,menuTreeList);
 		while(null != menu)
 		{
@@ -93,7 +104,7 @@ public class MISPAction extends ActionSupport
 		Collections.reverse(menuHeadList);
  		return menuHeadList;
 	}
-	private MenuModel getMenuByMenuID(int menuID,List<MenuTreeModel> menuTreeList)
+	private MenuModel getMenuByMenuID(String menuID,List<MenuTreeModel> menuTreeList)
 	{
  		if(!ValidatorUtil.isEmpty(menuTreeList))
 		{	

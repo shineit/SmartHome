@@ -11,6 +11,7 @@ package cn.fuego.misp.service;
 import java.util.List;
 
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
+import cn.fuego.misp.web.model.user.UserModel;
 
 /** 
  * @ClassName: UserService 
@@ -22,12 +23,14 @@ import cn.fuego.misp.web.model.menu.MenuTreeModel;
 
 public interface MISPUserService
 {
+	
+ 
 	/**
 	 * 用户登录
 	 * @param userName
 	 * @param password
 	 */
-	void Login(String userName,String password);
+	UserModel Login(String userName,String password);
 	
 	/**
 	 * 修改登录密码

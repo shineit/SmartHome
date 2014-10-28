@@ -32,6 +32,7 @@ public class LogManageAction extends DWZTableAction
  	private LogFilterModel filter = new LogFilterModel(); 
 	public String execute()
 	{
+		logList.setPage(this.getPage());
 		logList.setDataSource(service.getOperLogList(filter));
 		return SUCCESS;
 	}
@@ -62,7 +63,7 @@ public class LogManageAction extends DWZTableAction
 	public String deleteList()
 	{
 		service.deleteLog(Arrays.asList(this.getSelectedIDList()));
-		return  execute();
+		return  MISP_DONE_PAGE;
 	}
 
 	/* (non-Javadoc)

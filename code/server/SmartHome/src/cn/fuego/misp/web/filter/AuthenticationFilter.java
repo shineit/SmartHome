@@ -30,8 +30,8 @@ public class AuthenticationFilter implements Filter
 
 	private static final String LOGIN_URL_FLAG = "login";
 	private static final  String LOGIN_PAGE = "client/misp/login.jsp";
-
- 
+	private static final  String JS_FILE = ".js";
+	//private static final  String LOGIN_PAGE = "login/login!home.action";
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
@@ -42,12 +42,14 @@ public class AuthenticationFilter implements Filter
 		 String url = httpRequest.getRequestURL().toString();
 		  
 		 //the url does not contains login url, we should check login or not
-		 if(url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0)
+		 if(!url.endsWith(httpRequest.getContextPath()) 
+			&& !url.endsWith(httpRequest.getContextPath()+"/")
+			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.toLowerCase().endsWith(JS_FILE))
 		 {
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
 			 if(null == loginUser || ValidatorUtil.isEmpty(loginUser.getUserName()))
 			 {
-				 httpResponse.sendRedirect(httpRequest.getContextPath()+"/"+LOGIN_PAGE);
+				 httpResponse.sendRedirect(httpRequest.getContextPath() );
 			 }
 		 }
 		 

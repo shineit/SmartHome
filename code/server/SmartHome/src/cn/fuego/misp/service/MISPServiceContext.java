@@ -1,6 +1,7 @@
 package cn.fuego.misp.service;
 
 import cn.fuego.misp.service.impl.MISPOperLogServiceImpl;
+import cn.fuego.misp.service.impl.MISPPrivilegeManageImpl;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 
 public class MISPServiceContext
@@ -9,6 +10,8 @@ public class MISPServiceContext
 
 	private MISPUserService userService = null;
 	private MISPOperLogService operLogService = null;
+
+	private MISPPrivilegeManage privilegeManage = null;
 
 	private MISPServiceContext()
 	{
@@ -41,6 +44,15 @@ public class MISPServiceContext
 			operLogService = new MISPOperLogServiceImpl();
 		}
 		return operLogService;
+	}
+	
+	public synchronized MISPPrivilegeManage MISPPrivilegeManage()
+	{
+		if (null == privilegeManage)
+		{
+			privilegeManage = new MISPPrivilegeManageImpl();
+		}
+		return privilegeManage;
 	}
 
 }

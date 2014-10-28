@@ -8,6 +8,7 @@
 	
  
 	<c:forEach var="menuItem" items="${menuTreeItem}">	
+	   <c:if test="${menuItem.menu.selected == true}">
 		<c:if test="${0==menuItem.menu.parentID}"> 
 			<!---一级标题--->
 			<c:if test="${null!=menuItem.childMenuList}"> 
@@ -31,6 +32,7 @@
 		<c:if test="${menuItem.menu.parentID>=1}"> 
 				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
 		</c:if>
+	 </c:if>	
    </c:forEach>
  
  

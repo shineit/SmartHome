@@ -30,8 +30,8 @@ public class OrderManageRestImpl implements OrderManageRest
 	@Override
 	public GetServiceOrderListRsp getOrderList(	GetServiceOrderListReq orderListReq)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		GetServiceOrderListRsp rsp = new GetServiceOrderListRsp();
+		return rsp;
 	}
 
 	/* (non-Javadoc)
@@ -40,8 +40,8 @@ public class OrderManageRestImpl implements OrderManageRest
 	@Override
 	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq orderReq)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		SetServiceOrderRsp rsp = new SetServiceOrderRsp();
+		return rsp;
 	}
 
 }

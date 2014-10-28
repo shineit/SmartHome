@@ -8,6 +8,8 @@
  */
 package cn.fuego.misp.domain;
 
+import cn.fuego.common.domain.PersistenceObject;
+
 /**
  * @ClassName: SystemIDType
  * @Description: TODO
@@ -16,7 +18,7 @@ package cn.fuego.misp.domain;
  * 
  */
 
-public class SystemIDType
+public class SystemIDType implements PersistenceObject
 {
 	private String name;
 	private int step;

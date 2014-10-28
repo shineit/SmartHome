@@ -198,6 +198,11 @@ public final class HibernateUtil
 					c.add(Restrictions.in(condition.getAttrName(),listObject));
 					 
 					break;
+				case FALSE:
+					 
+					c.add(Restrictions.sqlRestriction("1=2"));
+					 
+					break;	
 				case DESC_ORDER:	
 					 c.addOrder(Order.desc(condition.getAttrName()));
 					break;	

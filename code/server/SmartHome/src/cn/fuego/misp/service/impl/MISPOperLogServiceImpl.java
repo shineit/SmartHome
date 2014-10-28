@@ -16,6 +16,7 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.OperLog;
 import cn.fuego.misp.service.MISPOperLogService;
@@ -64,7 +65,39 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 	@Override
 	public AbstractDataSource<OperLog> getOperLogList(LogFilterModel filter)
 	{
-		AbstractDataSource<OperLog> dataSource = new DataBaseSourceImpl<OperLog>(OperLog.class);
+
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		if(null != filter)
+			
+		{
+			if(!ValidatorUtil.isEmpty(filter.getId()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"id",filter.getId()));			
+			}
+
+
+			if(!ValidatorUtil.isEmpty(filter.getUser()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"user",filter.getUser()));
+				
+			}
+			if(!ValidatorUtil.isEmpty(filter.getName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"name",filter.getName()));
+				
+			}			
+			if(!ValidatorUtil.isEmpty(filter.getStartTime()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"operTime",filter.getStartTime()));
+			}
+			if(!ValidatorUtil.isEmpty(filter.getEndTime()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"operTime",filter.getEndTime()));
+			}			
+		}
+
+		AbstractDataSource<OperLog> dataSource = new DataBaseSourceImpl<OperLog>(OperLog.class,conditionList);
+	 
 		return dataSource;
 	}
 

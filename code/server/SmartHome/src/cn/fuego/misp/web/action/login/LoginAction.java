@@ -8,17 +8,23 @@
  */
 package cn.fuego.misp.web.action.login;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.action.basic.MISPAction;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
+import cn.fuego.misp.web.model.message.MispMessageModel;
+import cn.fuego.misp.web.model.user.PasswordModel;
 import cn.fuego.misp.web.model.user.UserModel;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -37,7 +43,9 @@ public class LoginAction extends MISPAction
 	private static final String LOGIN_FAILED = "LoginFailed";
 	private List<MenuTreeModel> menuTreeItem = null;
 	private UserModel user = null;
-	private String message;
+	private String message ="";
+	private String code;
+    private PasswordModel pwdModel;
 
 	public String execute()
 	{
@@ -50,11 +58,12 @@ public class LoginAction extends MISPAction
 			{
 				return SUCCESS;
 			}
+			
 
 			// User Login
-			MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
+			user = MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
 			// Loading MenuTree
-			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(user.getUserName());
+			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(String.valueOf(user.getUserID()));
 		}
 		catch (ServiceException ex)
 		{
@@ -72,12 +81,68 @@ public class LoginAction extends MISPAction
 
 		return SUCCESS;
 	}
+    public String validateCode()  
+    {  
+
+    	boolean validateResult=false;
+    	String  strv = (String)ActionContext.getContext().getSession().get("rand"); 
+        
+        try
+		{
+        	if(strv.equals(code))
+        	{
+        		validateResult=true;
+        	}
+        	HttpServletResponse response = ServletActionContext.getResponse();   
+        	response.setContentType("text/html"); //火狐浏览器必须加上这句  
+            response.setCharacterEncoding("UTF-8");
+			response.getWriter().print(validateResult);
+		} catch (IOException e)
+		{
+			log.error("validateCode failed",e);
+		} 
+    
+         return null;
+   
+
+    }    
 	public String logout()
 	{
 		ActionContext actionContext = ActionContext.getContext();
 		Map<String, Object> session = actionContext.getSession();
 		session.clear();
 		return LOGIN_FAILED;
+	}
+	
+	public String home()
+	{
+	  
+		return "home";
+	}
+	
+	public String modifyPwd()
+	{   
+
+		try
+		{
+			MISPServiceContext.getInstance().getUserService().modifyPassword(this.getLoginUser().getUserName(), this.getPwdModel().getOldPassword(), this.getPwdModel().getNewPassword());
+			this.getOperateMessage().setMessage("密码修改成功");
+			//this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+			
+			this.getOperateMessage().setCallbackType(MispMessageModel.REDIRECT);
+			this.getOperateMessage().setForwardUrl(ServletActionContext.getRequest().getContextPath());
+			ActionContext actionContext = ActionContext.getContext();
+			Map<String, Object> session = actionContext.getSession();
+			session.clear();
+		} catch (Exception e)
+		{
+			log.error("modify password failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setMessage(e.getMessage());
+	
+		}
+
+		return MISP_DONE_PAGE;		
 		
 	}
 	public UserModel getUser()
@@ -108,6 +173,22 @@ public class LoginAction extends MISPAction
 	public List<MenuTreeModel> getMenuTreeItem()
 	{
 		return menuTreeItem;
+	}
+	public PasswordModel getPwdModel()
+	{
+		return pwdModel;
+	}
+	public void setPwdModel(PasswordModel pwdModel)
+	{
+		this.pwdModel = pwdModel;
+	}
+	public String getCode()
+	{
+		return code;
+	}
+	public void setCode(String code)
+	{
+		this.code = code;
 	}
 
 }

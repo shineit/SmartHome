@@ -25,9 +25,20 @@ public class SystemUser implements PersistenceObject
 	private int userID;
 	private String userName;
 	private String password;
-	private String secondPwd;
-	private int userRole;
+	private int accountType;
 	private Date regDate;
+	
+	
+	public static String getUserIDAttr()
+	{
+		return "userID";
+	}
+	
+	public static String getUserNameAttr()
+	{
+		return "userName";
+	}
+ 
 	public int getUserID()
 	{
 		return userID;
@@ -52,21 +63,13 @@ public class SystemUser implements PersistenceObject
 	{
 		this.password = password;
 	}
-	public String getSecondPwd()
+	public int getAccountType()
 	{
-		return secondPwd;
+		return accountType;
 	}
-	public void setSecondPwd(String secondPwd)
+	public void setAccountType(int accountType)
 	{
-		this.secondPwd = secondPwd;
-	}
-	public int getUserRole()
-	{
-		return userRole;
-	}
-	public void setUserRole(int userRole)
-	{
-		this.userRole = userRole;
+		this.accountType = accountType;
 	}
 	public Date getRegDate()
 	{
@@ -76,8 +79,6 @@ public class SystemUser implements PersistenceObject
 	{
 		this.regDate = regDate;
 	}
- 
-	 
 	
 
 }
