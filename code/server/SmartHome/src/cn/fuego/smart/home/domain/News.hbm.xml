@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="News" table="news">
+
+	    <id name="newsID" column="NEWS_ID" >
+		</id>
+		 <property name="title" column="TITLE"></property>
+		 <property name="author" column="AUTHOR"></property>
+		 <property name="content" column="CONTENT"></property>
+		 <property name="date" column="RELEASE_DATE"></property>
+		 <property name="status" column="STATUS"></property>		 
+		 
+	</class>
+</hibernate-mapping>

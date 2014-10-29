@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="Concentrator" table="concentrator">
+
+	    <id name="concentratorID" column="CONCENTRATOR_ID" >
+		</id>
+		 <property name="ipAddr" column="IP_ADDR"></property>
+		 <property name="status" column="STATUS"></property>
+		 <property name="locationNS" column="LOCATION_NS"></property>
+		 <property name="locationWE" column="LOCATION_WE"></property>
+		 <property name="name" column="NAME"></property>
+		 <property name="description" column="DESPCRIPTION"></property>	
+		 <property name="addr" column="ADDR"></property>
+		 <property name="mark" column="MARK"></property>		 		 	 
+
+	</class>
+</hibernate-mapping>

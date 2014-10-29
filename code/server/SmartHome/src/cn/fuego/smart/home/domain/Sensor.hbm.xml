@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="Sensor" table="sensor">
+
+		<composite-id>
+	       <key-property name="concentratorID" column="CONCENTRATOR_ID" ></key-property>
+           <key-property name="sensorID" column="SENSOR_ID"  ></key-property>
+	    </composite-id>
+
+		 <property name="devID" column="DEV_ID"></property>
+		 <property name="channelID" column="CHANNEL_ID"></property>
+		 <property name="sensorKind" column="SENSOR_KIND"></property>
+		 <property name="sensorType" column="SENSOR_TYPE"></property>		 
+		 <property name="status" column="STATUS"></property>
+		 <property name="alarmStatus" column="ALARM_STATUS"></property>	
+		 <property name="warnValue" column="WARN_VALUE"></property>	
+		 <property name="errorValue" column="ERROR_VALUE"></property>
+		 <property name="groupID" column="GROUP_ID"></property>	
+		 <property name="ctrGroupID" column="CTL_GROUP_ID"></property>	
+		 <property name="description" column="DESCRIPTION"></property>	
+		 <property name="mark" column="MARK"></property>		 		 		 	 	 	 
+
+	</class>
+</hibernate-mapping>

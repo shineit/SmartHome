@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="ServiceOrder" table="Service_order">
+
+	    <id name="orderID" column="ORDER_ID" >
+	    	<generator class="increment"/> 
+		</id>
+	
+		 <property name="orderName" column="ORDER_NAME"></property>
+		 <property name="orderType" column="ORDER_TYPE" not-null="true"></property>	
+		 <property name="content" column="CONTENT" ></property>			 	 
+		 <property name="creator" column="CREATOR" not-null="true"></property>
+		 <property name="createTime" column="CREATE_TIME" not-null="true"></property>
+		 <property name="contactName" column="CONTACT_NAME" not-null="true"></property>	
+		 <property name="phoneNum" column="PHONE_NUM" not-null="true"></property>	
+		 <property name="contactAddr" column="CONTACT_ADDR" not-null="true"></property>	
+		 <property name="orderStatus" column="ORDER_STATUS" not-null="true"></property>		 	 
+		 <property name="handler" column="HANDLER" ></property>	
+		 <property name="handleTime" column="HANDLE_TIME" ></property>			 		 		 	 		 	
+	</class>
+</hibernate-mapping>
