@@ -10,9 +10,13 @@ package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.NewsManageService;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.webservice.from.client.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.NewsJson;
@@ -27,6 +31,7 @@ import cn.fuego.smart.home.webservice.from.client.rest.NewsManageRest;
  */
 public class NewsManageRestImpl implements NewsManageRest
 {
+	private Log log = LogFactory.getLog(NewsManageRestImpl.class);
 
 	private NewsManageService newsService = ServiceContext.getInstance().getNewsManageService();
 	/* (non-Javadoc)

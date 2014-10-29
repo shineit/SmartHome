@@ -8,14 +8,18 @@
 */ 
 package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.smart.home.domain.Sensor;
+import cn.fuego.smart.home.service.SensorManageService;
+import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
-import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
 import cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest;
 
@@ -28,6 +32,10 @@ import cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest;
  */
 public class SensorManageRestImpl implements SensorManageRest
 {
+	
+	private Log log = LogFactory.getLog(SensorManageRestImpl.class);
+
+	private SensorManageService sensorService = ServiceContext.getInstance().getSensorManageService();
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.SensorManageService#getWild()
@@ -48,14 +56,26 @@ public class SensorManageRestImpl implements SensorManageRest
 		// TODO Auto-generated method stub
 		GetSensorListRsp rsp = new GetSensorListRsp();
 		
-		List<SensorJson> sensorList = new ArrayList<SensorJson>();
-		
-		SensorJson sensorJson = new SensorJson();
-		sensorJson.setChannelID(1);
-		sensorJson.setErrorValue(2.2);
-		
-		rsp.setSensorList(sensorList);
-		
+		try
+		{
+			List<Sensor> sensorList = sensorService.getSensorDataSource().getAllPageData();
+	 		
+			for(Sensor sensor :sensorList)
+			{	
+				SensorJson json = new SensorJson();
+			
+				json.loadWithSensor(sensor);
+				rsp.getSensorList().add(json);
+			}
+			
+		}
+		catch(Exception e)
+		{
+			log.error("get sensor list error",e);
+		}
+
+
+ 		
 		return rsp;
 	}
 

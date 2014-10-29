@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.from.client.model.base;
 
+import cn.fuego.smart.home.domain.Sensor;
+
 
 /**
  * 
@@ -12,12 +14,12 @@ package cn.fuego.smart.home.webservice.from.client.model.base;
 public class SensorJson
 {
 	private int concentratorID;
-	private int sesorID;
+	private int sensorID;
 	private int devID;
 	private int channelID;
 	private int sensorKind;
 	private int sensorType;
-	private int sensorTypeName;
+	private String sensorTypeName;
 	private int status;
 	private int alarmStaus;
 	private double warnValue;
@@ -26,6 +28,25 @@ public class SensorJson
 	private int ctrGroupID;
 	private String description;
 	private String mark;
+	
+	public void loadWithSensor(Sensor sensor)
+	{
+		this.concentratorID = sensor.getConcentratorID();
+		this.sensorID = sensor.getSensorID();
+		this.devID = sensor.getDevID();
+		this.channelID = sensor.getChannelID();
+		this.sensorKind = sensor.getSensorKind();
+		this.sensorType = sensor.getSensorType();
+		this.sensorTypeName = sensor.getSensorTypeName();
+		this.status = sensor.getStatus();
+		this.alarmStaus = sensor.getAlarmStatus();
+		this.warnValue = sensor.getWarnValue();
+		this.errorValue = sensor.getErrorValue();
+		this.groupID = sensor.getGroupID();
+		this.ctrGroupID = sensor.getCtrGroupID();
+		this.description = sensor.getDescription();
+		this.mark = sensor.getMark();
+	}
 	public int getConcentratorID()
 	{
 		return concentratorID;
@@ -34,13 +55,15 @@ public class SensorJson
 	{
 		this.concentratorID = concentratorID;
 	}
-	public int getSesorID()
+ 
+	
+	public int getSensorID()
 	{
-		return sesorID;
+		return sensorID;
 	}
-	public void setSesorID(int sesorID)
+	public void setSensorID(int sensorID)
 	{
-		this.sesorID = sesorID;
+		this.sensorID = sensorID;
 	}
 	public int getDevID()
 	{
@@ -74,11 +97,12 @@ public class SensorJson
 	{
 		this.sensorType = sensorType;
 	}
-	public int getSensorTypeName()
+ 
+	public String getSensorTypeName()
 	{
 		return sensorTypeName;
 	}
-	public void setSensorTypeName(int sensorTypeName)
+	public void setSensorTypeName(String sensorTypeName)
 	{
 		this.sensorTypeName = sensorTypeName;
 	}

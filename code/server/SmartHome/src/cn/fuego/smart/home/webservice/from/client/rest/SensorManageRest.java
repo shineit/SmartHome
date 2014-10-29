@@ -8,7 +8,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
@@ -22,18 +21,17 @@ import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
 *
  */
 @Path("/sensor")
- 
+@Produces("application/json")  
 public interface SensorManageRest
 {
 
-	@POST
+	@GET
 	@Path("/hello")
 
 	public String getHello();
 
 	@POST
 	@Path("/list")
-	@Produces("application/json")  
 	public GetSensorListRsp getSensorList();
 	
 	@POST

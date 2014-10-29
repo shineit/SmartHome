@@ -16,4 +16,22 @@ public class SetSensorReq extends BaseJsonReq
 {
 	private String command;
 	private SensorJson sensor;
+	public String getCommand()
+	{
+		return command;
+	}
+	public void setCommand(String command)
+	{
+		this.command = command;
+	}
+	public SensorJson getSensor()
+	{
+		return sensor;
+	}
+	public void setSensor(SensorJson sensor)
+	{
+		this.sensor = sensor;
+	}
+	
+	
 }
