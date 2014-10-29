@@ -31,8 +31,8 @@
 }
 
 
--(AFHTTPRequestOperation *)siginWithParam:(NSString *)param response:(void (^)(NSError *, FEDataUser *))block{
-    return [self GET:@"sensor/hello" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+-(AFHTTPRequestOperation *)siginWithParam:(id)param response:(void (^)(NSError *, FEDataUser *))block{
+    return [self POST:@"user/login" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             FEDataUser *user = [FEDataUser new];
             user.userid = responseObject[@"id"];

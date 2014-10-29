@@ -15,6 +15,6 @@
 
 +(FEWebServiceManager *)sharedInstance;
 
--(AFHTTPRequestOperation *)siginWithParam:(NSString *)param response:(void (^)(NSError *error,FEDataUser *user))block;
+-(AFHTTPRequestOperation *)siginWithParam:(id )param response:(void (^)(NSError *error,FEDataUser *user))block;
 
 @end

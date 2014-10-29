@@ -99,7 +99,11 @@
     if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
         [self displayHUD:FEString(@"LOADING")];
         __weak typeof(self) weakself = self;
-        [[FEWebServiceManager sharedInstance] siginWithParam:nil response:^(NSError *error, FEDataUser *user){
+//        NSJSONSerialization *json = [NSJSONSerialization ]
+        
+//        [NSString stringWithFormat:@"username=%@,password=%@",self.username.text,[self.password.text MD5]]
+        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"userName":self.username.text,@"passWord":[self.password.text MD5]} options:NSJSONWritingPrettyPrinted error:NULL];
+        [[FEWebServiceManager sharedInstance] siginWithParam:data response:^(NSError *error, FEDataUser *user){
             NSLog(@"call back");
             [weakself hideHUD:YES];
             if (error) {
