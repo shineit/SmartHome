@@ -13,6 +13,9 @@
 "CLOUD_CONTROL" = "Control";
 "CLOUD_CAMERA" = "Camera";
 
+//NavgationBar
+"SEARCH" = "Search";
+
 //sigin
 "USER_NAME:" = "User name:";
 "USER_PSW:"  = "Password:";
@@ -25,4 +28,4 @@
 "RATE_US" = "Rate";
 "SERVICE" = "Service";
 "ABOUT_NEWS" = "News";
-"FADE_BACK" = "Feedback";
+"FEED_BACK" = "Feedback";

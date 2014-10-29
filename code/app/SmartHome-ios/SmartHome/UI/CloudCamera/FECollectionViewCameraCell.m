@@ -16,8 +16,9 @@
     if (self) {
         // Initialization code
         
-        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 20)];
-//        imagev.image = [UIImage imageFromColor:[UIColor greenColor]];
+        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+        imagev.center = CGPointMake(self.bounds.size.width / 2.0, self.bounds.size.height / 2.0);
+        imagev.image = [UIImage imageNamed:@"camera"];
         _imageView = imagev;
         [self addSubview:imagev];
         

@@ -8,7 +8,7 @@
 
 #import "FEWebServiceManager.h"
 
-#define _BASE_URL @"http://192.168.100.104:8080/webuser/"
+#define _BASE_URL @"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -32,7 +32,7 @@
 
 
 -(AFHTTPRequestOperation *)siginWithParam:(NSString *)param response:(void (^)(NSError *, FEDataUser *))block{
-    return [self POST:@"usermanager/users" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [self GET:@"sensor/hello" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             FEDataUser *user = [FEDataUser new];
             user.userid = responseObject[@"id"];

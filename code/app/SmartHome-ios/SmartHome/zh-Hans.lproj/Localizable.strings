@@ -15,6 +15,9 @@
 "CLOUD_SAFE" = "云安";
 "HOME_PAGE"  = "首页";
 
+//NavgationBar
+"SEARCH" = "搜索";
+
 //sigin
 "USER_NAME:" = "用户名:";
 "USER_PSW:"  = "密    码:";
@@ -28,4 +31,4 @@
 "RATE_US" = "为我们评分";
 "SERVICE" = "服务";
 "ABOUT_NEWS" = "新功能";
-"FADE_BACK" = "意见反馈";
+"FEED_BACK" = "意见反馈";
