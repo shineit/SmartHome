@@ -10,15 +10,15 @@ package cn.fuego.smart.home.domain;
  */
 public class Concentrator
 {
-	private int concentratorID;
-	private String ipAddr;
-	private int status;
-	private float locationNS;
-	private float locationWE;
-	private String name;
-	private String description;
-	private String addr;
-	private String mark;
+	private int concentratorID;     //集中器编号
+	private String ipAddr;			//集中器IP地址
+	private int status;				//集中器状态，0 离线 1在线
+	private float locationNS;		//集中器纬度
+	private float locationWE;		//集中器经度
+	private String name;			//集中器名称(预留字段)
+	private String description;		//集中器描述(预留字段)
+	private String addr;			//集中器地址(预留字段)
+	private String mark;			//自定义标签(预留字段)
 	public int getConcentratorID()
 	{
 		return concentratorID;

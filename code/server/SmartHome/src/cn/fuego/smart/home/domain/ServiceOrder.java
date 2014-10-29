@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class ServiceOrder
 {
-	private String orderID;         //申请单号，自增长
+	private int orderID;         //申请单号，自增长
     private String orderName;       //申请单名称
     private String orderType;		//申请单类型(维修，安装，咨询)
     private String content;			//申请单内容
@@ -25,11 +25,12 @@ public class ServiceOrder
     private String orderStatus;		//申请单状态，0-未处理，1-已处理
     private String handler;			//处理人
     private Date handleTime;		//处理时间
-	public String getOrderID()
+
+	public int getOrderID()
 	{
 		return orderID;
 	}
-	public void setOrderID(String orderID)
+	public void setOrderID(int orderID)
 	{
 		this.orderID = orderID;
 	}
