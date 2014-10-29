@@ -1,15 +1,15 @@
 package cn.fuego.smart.home.service;
 
-import cn.fuego.misp.service.MISPUserService;
-import cn.fuego.misp.service.impl.MISPOperLogServiceImpl;
-import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
+import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 
 public class ServiceContext
 {
 	private static ServiceContext instance;
 
 	private NewsManageService newsManageService  = null;
-	 
+	private SensorManageService sensorManageService  = null;
+
 	private ServiceContext()
 	{
 
@@ -27,10 +27,18 @@ public class ServiceContext
 	{
 		if (null == newsManageService)
 		{
-			newsManageService = null;//new NewsManageServiceImpl();
+			newsManageService = new NewsManageServiceImpl();
 		}
 		return newsManageService;
 	}
  
+	public synchronized SensorManageService getSensorManageService()
+	{
+		if (null == sensorManageService)
+		{
+			sensorManageService =  new SensorManageServiceImpl();
+		}
+		return sensorManageService;
+	}
 
 }

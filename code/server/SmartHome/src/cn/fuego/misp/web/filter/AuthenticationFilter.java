@@ -31,6 +31,8 @@ public class AuthenticationFilter implements Filter
 	private static final String LOGIN_URL_FLAG = "login";
 	private static final  String LOGIN_PAGE = "client/misp/login.jsp";
 	private static final  String JS_FILE = ".js";
+	private static final  String REST = "rest";
+
 	//private static final  String LOGIN_PAGE = "login/login!home.action";
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
@@ -44,6 +46,7 @@ public class AuthenticationFilter implements Filter
 		 //the url does not contains login url, we should check login or not
 		 if(!url.endsWith(httpRequest.getContextPath()) 
 			&& !url.endsWith(httpRequest.getContextPath()+"/")
+			&& !url.contains(REST)
 			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.toLowerCase().endsWith(JS_FILE))
 		 {
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
