@@ -7,8 +7,9 @@
 //
 
 #import "FEWebServiceManager.h"
+#import "FESiginData.h"
 
-#define _BASE_URL @"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -25,21 +26,21 @@
 -(instancetype)initWithBaseURL:(NSURL *)url{
     self = [super initWithBaseURL:url];
     if (self) {
-        
+        self.requestSerializer = [AFJSONRequestSerializer serializer];
+//        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain",nil];
     }
     return self;
 }
 
 
--(AFHTTPRequestOperation *)siginWithParam:(id)param response:(void (^)(NSError *, FEDataUser *))block{
-    return [self POST:@"user/login" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            FEDataUser *user = [FEDataUser new];
-            user.userid = responseObject[@"id"];
-            user.username = responseObject[@"firstName"];
-            user.password = @"112345";
-            block(NULL,user);
-        }
+-(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *, FEDataUser *))block{
+    return [self POST:sdata.method parameters:sdata.requestParam success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        FEDataUser *user = [FEDataUser new];
+        user.userid = responseObject[@"id"];
+        user.username = responseObject[@"firstName"];
+        user.password = @"112345";
+        block(NULL,user);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"sigin fail %@",error.userInfo);

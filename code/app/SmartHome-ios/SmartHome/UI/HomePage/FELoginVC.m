@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "CDUser.h"
 #import "FEWebServiceManager.h"
+#import "FESiginData.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
 
@@ -57,6 +58,7 @@
     
     //user name textfield
     FETextField *username = [[FETextField alloc] initWithFrame:CGRectMake(namelabel.frame.origin.x + namelabel.bounds.size.width + 5, namelabel.frame.origin.y, textcontent.bounds.size.width - (namelabel.frame.origin.x + namelabel.bounds.size.width + 5) - 10, 30)];
+    username.text = @"sunchao";
     username.returnKeyType = UIReturnKeyNext;
     username.keyboardType = UIKeyboardTypeEmailAddress;
     username.borderStyle = UITextBorderStyleNone;
@@ -71,6 +73,7 @@
     [textcontent addSubview:pswlabel];
     
     FETextField *psw = [[FETextField alloc] initWithFrame:CGRectMake(pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5, pswlabel.frame.origin.y, textcontent.bounds.size.width - (pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5) - 10, 30)];
+    psw.text = @"123456";
     psw.returnKeyType = UIReturnKeyDone;
     psw.borderStyle = UITextBorderStyleNone;
 //    psw.placeholder = FEString(@"INPUT_PASSWORD");
@@ -99,16 +102,15 @@
     if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
         [self displayHUD:FEString(@"LOADING")];
         __weak typeof(self) weakself = self;
-//        NSJSONSerialization *json = [NSJSONSerialization ]
         
-//        [NSString stringWithFormat:@"username=%@,password=%@",self.username.text,[self.password.text MD5]]
-        NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"userName":self.username.text,@"passWord":[self.password.text MD5]} options:NSJSONWritingPrettyPrinted error:NULL];
-        [[FEWebServiceManager sharedInstance] siginWithParam:data response:^(NSError *error, FEDataUser *user){
+        FESiginData *sdata = [[FESiginData alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0"];
+        
+        [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FEDataUser *user){
             NSLog(@"call back");
             [weakself hideHUD:YES];
-            if (error) {
-                return;
-            }
+//            if (error) {
+//                return;
+//            }
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 CDUser *user = [FECoreData touchUserByIdentifier:@"identifier"];
                 user.username = weakself.username.text;

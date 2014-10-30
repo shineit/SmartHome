@@ -8,6 +8,7 @@
 
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "FEDataUser.h"
+#import "FESiginData.h"
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -15,6 +16,6 @@
 
 +(FEWebServiceManager *)sharedInstance;
 
--(AFHTTPRequestOperation *)siginWithParam:(id )param response:(void (^)(NSError *error,FEDataUser *user))block;
+-(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *error,FEDataUser *user))block;
 
 @end
