@@ -13,7 +13,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.exception.CommonExceptionMsg;
 import cn.fuego.smart.home.domain.Sensor;
 import cn.fuego.smart.home.service.SensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -83,7 +82,7 @@ public class SensorManageRestImpl implements SensorManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.service.SensorManageService#setSensor(cn.fuego.smart.home.webservice.from.client.model.SetSensorReq)
 	 */
 	@Override
-	public SetSensorRsp setSensor(SetSensorReq sensorListReq)
+	public SetSensorRsp setSensor(SetSensorReq req)
 	{
 		SetSensorRsp rsp = new SetSensorRsp();
 		return rsp;

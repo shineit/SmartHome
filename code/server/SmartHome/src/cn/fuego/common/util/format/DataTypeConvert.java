@@ -39,7 +39,23 @@ public class DataTypeConvert
 		return strList;
 	}
 	
-
+	public static byte[] toAsciiBytes(String str)
+	{
+		byte[] bytes;
+		if(null != str)
+		{
+			bytes = new byte[str.length()];
+			for(int i=0;i<str.length();i++)
+			{
+				bytes[i]=(byte) str.charAt(i);
+			}
+ 		}
+		else
+		{
+			bytes = new byte[1];
+		}
+		return bytes;
+	}
 	public static List<String> toHexStringList(String str)
 	{
 		List<String> hexList = new ArrayList<String>();

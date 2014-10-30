@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.domain;
 
+import cn.fuego.common.domain.PersistenceObject;
+
 
 /**
  * 
@@ -9,7 +11,7 @@ package cn.fuego.smart.home.domain;
 * @date 2014-10-20 上午11:01:13 
 *
  */
-public class Sensor
+public class Sensor implements PersistenceObject
 {
 	private int concentratorID;  //集中器ID
 	private int sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID

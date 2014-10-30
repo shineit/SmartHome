@@ -13,5 +13,27 @@ public class UserMarkJson
 {
     private String userID;
     private String mark;
+	public String getUserID()
+	{
+		return userID;
+	}
+	public void setUserID(String userID)
+	{
+		this.userID = userID;
+	}
+	public String getMark()
+	{
+		return mark;
+	}
+	public void setMark(String mark)
+	{
+		this.mark = mark;
+	}
+	@Override
+	public String toString()
+	{
+		return "UserMarkJson [userID=" + userID + ", mark=" + mark + "]";
+	}
+    
 
 }

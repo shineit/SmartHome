@@ -9,19 +9,20 @@
 	<class name="ServiceOrder" table="Service_order">
 
 	    <id name="orderID" column="ORDER_ID" >
-	    	<generator class="increment"/> 
+	    	<generator class="assigned"/> 
 		</id>
 	
 		 <property name="orderName" column="ORDER_NAME"></property>
 		 <property name="orderType" column="ORDER_TYPE" not-null="true"></property>	
 		 <property name="content" column="CONTENT" ></property>			 	 
 		 <property name="creator" column="CREATOR" not-null="true"></property>
-		 <property name="createTime" column="CREATE_TIME" not-null="true"></property>
-		 <property name="contactName" column="CONTACT_NAME" not-null="true"></property>	
-		 <property name="phoneNum" column="PHONE_NUM" not-null="true"></property>	
-		 <property name="contactAddr" column="CONTACT_ADDR" not-null="true"></property>	
-		 <property name="orderStatus" column="ORDER_STATUS" not-null="true"></property>		 	 
+		 <property name="createTime" column="CREATE_TIME" ></property>
+		 <property name="contactName" column="CONTACT_NAME" ></property>	
+		 <property name="phoneNum" column="PHONE_NUM" ></property>	
+		 <property name="contactAddr" column="CONTACT_ADDR"></property>	
+		 <property name="orderStatus" column="ORDER_STATUS" ></property>		 	 
 		 <property name="handler" column="HANDLER" ></property>	
+		 <property name="handleResult" column="HANDLE_RESUlT" ></property>	
 		 <property name="handleTime" column="HANDLE_TIME" ></property>			 		 		 	 		 	
 	</class>
 </hibernate-mapping>

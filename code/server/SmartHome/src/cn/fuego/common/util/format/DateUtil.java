@@ -8,9 +8,6 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.exception.CommonExceptionMsg;
-import cn.fuego.common.exception.SystemOperateException;
-
  
 
 public class DateUtil
@@ -77,7 +74,7 @@ public class DateUtil
 		catch (Exception e)
 		{
 			log.error("Err: Date Str is:" + date);
-			throw new SystemOperateException(CommonExceptionMsg.DATE_FOMATE);
+			throw new RuntimeException(e);
 
 		}
 		return da;

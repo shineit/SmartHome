@@ -15,6 +15,28 @@ public class SetConcentratorReq extends BaseJsonReq
 {
 	private String command;
 	private ConcentratorJson concentrator;
+	public String getCommand()
+	{
+		return command;
+	}
+	public void setCommand(String command)
+	{
+		this.command = command;
+	}
+	public ConcentratorJson getConcentrator()
+	{
+		return concentrator;
+	}
+	public void setConcentrator(ConcentratorJson concentrator)
+	{
+		this.concentrator = concentrator;
+	}
+	@Override
+	public String toString()
+	{
+		return "SetConcentratorReq [command=" + command + ", concentrator="
+				+ concentrator + "]";
+	}
 
 
 

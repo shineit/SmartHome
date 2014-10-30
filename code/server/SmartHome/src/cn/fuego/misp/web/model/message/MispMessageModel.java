@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.misp.web.model.message;
 
-import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 
 /** 
  * @ClassName: AjaxDoneModel 
@@ -27,7 +27,7 @@ public class MispMessageModel
 	public static String FAILURE_CODE = "300";
 	public static String TIMEOUT_CODE = "301";
 	private String statusCode = SUCCESS_CODE;
-	private String message = CommonExceptionMsg.OPERATE_SUCCESS;
+	private String message = MISPErrorMessageConst.getMessageByErrorCode(MISPErrorMessageConst.SUCCESS);
 	private String navTabId;
 	private String rel;
 	private String callbackType;

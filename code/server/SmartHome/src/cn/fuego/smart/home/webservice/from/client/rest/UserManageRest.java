@@ -27,7 +27,7 @@ public interface UserManageRest
 {
 	@POST
 	@Path("/login")
-	LoginRsp login(LoginReq loginReq);
+	LoginRsp login(LoginReq req);
 	
 	@POST
 	@Path("/mark/list")

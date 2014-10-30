@@ -19,4 +19,21 @@ public class GetHistoryAlarmListRsp extends BaseJsonRsp
 {
 	private List<AlarmJson> sensorList;
 
+	public List<AlarmJson> getSensorList()
+	{
+		return sensorList;
+	}
+
+	public void setSensorList(List<AlarmJson> sensorList)
+	{
+		this.sensorList = sensorList;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "GetHistoryAlarmListRsp [sensorList=" + sensorList + "]";
+	}
+	
+
 }

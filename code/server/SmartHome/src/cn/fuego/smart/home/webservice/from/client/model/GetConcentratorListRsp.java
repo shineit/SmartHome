@@ -18,4 +18,22 @@ public class GetConcentratorListRsp extends BaseJsonRsp
 {
 	private List<ConcentratorJson> sensorList;
 
+	public List<ConcentratorJson> getSensorList()
+	{
+		return sensorList;
+	}
+
+	public void setSensorList(List<ConcentratorJson> sensorList)
+	{
+		this.sensorList = sensorList;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "GetConcentratorListRsp [sensorList=" + sensorList + "]";
+	}
+	
+	
+
 }

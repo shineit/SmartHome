@@ -17,6 +17,24 @@ import cn.fuego.smart.home.webservice.from.client.model.base.UserMarkJson;
  */
 public class GetUserMarkListRsp extends BaseJsonRsp
 {
-	private List<UserMarkJson> sensorList;
+	private List<UserMarkJson> markList;
+
+	public List<UserMarkJson> getMarkList()
+	{
+		return markList;
+	}
+
+	public void setMarkList(List<UserMarkJson> markList)
+	{
+		this.markList = markList;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "GetUserMarkListRsp [markList=" + markList + "]";
+	}
+	
+	
 
 }

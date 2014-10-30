@@ -11,8 +11,6 @@ package cn.fuego.common.util.meta;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.exception.CommonExceptionMsg;
-import cn.fuego.common.exception.SystemOperateException;
 import cn.fuego.common.util.format.DataTypeConvert;
 
 /** 
@@ -49,7 +47,7 @@ public class ReflectionUtil
 		{
 			log.error("can not convert to right type.the class is " + clazz + " the field name is " + fieldName + "the value is " + value);
 			log.error("convert data failed",e);
-			throw new SystemOperateException(CommonExceptionMsg.DATA_CONVERT_ERROR);
+			throw new RuntimeException(e);
 		}
 		
 	 

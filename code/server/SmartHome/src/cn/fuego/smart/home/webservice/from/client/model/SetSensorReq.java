@@ -32,6 +32,11 @@ public class SetSensorReq extends BaseJsonReq
 	{
 		this.sensor = sensor;
 	}
+	@Override
+	public String toString()
+	{
+		return "SetSensorReq [command=" + command + ", sensor=" + sensor + "]";
+	}
 	
 	
 }

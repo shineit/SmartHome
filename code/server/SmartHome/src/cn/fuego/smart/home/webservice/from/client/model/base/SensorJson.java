@@ -170,6 +170,18 @@ public class SensorJson
 	{
 		this.mark = mark;
 	}
+	@Override
+	public String toString()
+	{
+		return "SensorJson [concentratorID=" + concentratorID + ", sensorID="
+				+ sensorID + ", devID=" + devID + ", channelID=" + channelID
+				+ ", sensorKind=" + sensorKind + ", sensorType=" + sensorType
+				+ ", sensorTypeName=" + sensorTypeName + ", status=" + status
+				+ ", alarmStaus=" + alarmStaus + ", warnValue=" + warnValue
+				+ ", errorValue=" + errorValue + ", groupID=" + groupID
+				+ ", ctrGroupID=" + ctrGroupID + ", description=" + description
+				+ ", mark=" + mark + "]";
+	}
 
 
 }

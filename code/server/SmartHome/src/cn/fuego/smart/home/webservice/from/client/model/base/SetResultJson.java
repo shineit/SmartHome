@@ -41,6 +41,12 @@ public class SetResultJson
 	{
 		this.obj = obj;
 	}
+	@Override
+	public String toString()
+	{
+		return "SetResultJson [errorCode=" + errorCode + ", errorMsg="
+				+ errorMsg + ", obj=" + obj + "]";
+	}
 	
 	
 

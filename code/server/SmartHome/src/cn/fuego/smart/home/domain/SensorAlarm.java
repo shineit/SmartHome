@@ -2,6 +2,8 @@ package cn.fuego.smart.home.domain;
 
 import java.util.Date;
 
+import cn.fuego.common.domain.PersistenceObject;
+
 
 /**
  * 
@@ -11,7 +13,7 @@ import java.util.Date;
 * @date 2014-10-20 上午11:01:17 
 *
  */
-public class SensorAlarm
+public class SensorAlarm implements PersistenceObject
 {
 	private int id;  			//告警ID，自增长
 	private int concentratorID;	//集中器ID

@@ -21,4 +21,7 @@ import cn.fuego.smart.home.domain.ServiceOrder;
 public interface ServiceOrderManageService
 {
 	AbstractDataSource<ServiceOrder>  getNewsDataSource();
+	
+	void create(ServiceOrder order);
+    void handle(int orderID,String handler,String handleResult);
 }

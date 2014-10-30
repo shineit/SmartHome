@@ -29,6 +29,12 @@ public class GetSensorListRsp extends BaseJsonRsp
 		this.sensorList = sensorList;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "GetSensorListRsp [sensorList=" + sensorList + "]";
+	}
+
 
 
 }

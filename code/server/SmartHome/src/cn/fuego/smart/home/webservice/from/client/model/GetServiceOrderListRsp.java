@@ -16,6 +16,18 @@ import cn.fuego.smart.home.webservice.from.client.model.base.ServiceOrderJson;
  */
 public class GetServiceOrderListRsp extends BaseJsonRsp
 {
-	private List<ServiceOrderJson> sensorList;
+	private List<ServiceOrderJson> orderList;
+
+	public List<ServiceOrderJson> getOrderList()
+	{
+		return orderList;
+	}
+
+	public void setOrderList(List<ServiceOrderJson> orderList)
+	{
+		this.orderList = orderList;
+	}
+ 
+	
 
 }

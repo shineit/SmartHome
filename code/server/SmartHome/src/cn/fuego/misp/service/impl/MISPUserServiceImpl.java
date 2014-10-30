@@ -13,14 +13,14 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.exception.CommonExceptionMsg;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
@@ -56,12 +56,12 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			// User isnot existant
 			log.warn("User not exist：" + userName);
-			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
+			throw new MISPException(MISPErrorMessageConst.ERROR_LOGIN_FAILED);
 		}
 		else if (!targetUser.getPassword().equals(password))
 		{
 			log.warn("the password is wrong");
-			throw new ServiceException(CommonExceptionMsg.LOGIN_FAILED);
+			throw new MISPException(MISPErrorMessageConst.ERROR_LOGIN_FAILED);
 		}
 		else
 		{
@@ -90,12 +90,12 @@ public class MISPUserServiceImpl implements MISPUserService
 		{
 			// User isnot existant
 			log.warn("User not exist：" + userName);
-			throw new ServiceException(CommonExceptionMsg.USER_NOT_EXISTED);
+			throw new MISPException(MISPErrorMessageConst.ERROR_USER_NOT_EXISTED);
 		}
 		else if (!targetUser.getPassword().equals(oldPwd))
 		{
 			log.warn("the password is wrong");
-			throw new ServiceException(CommonExceptionMsg.OLD_PASSWORD_WORD);
+			throw new MISPException(MISPErrorMessageConst.ERROR_OLD_PASSWORD_WORD);
 		}
 		else
 		{

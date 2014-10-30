@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
+import org.apache.http.client.methods.HttpGet;
+
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.smart.home.domain.News;
@@ -30,7 +32,7 @@ public class NewsManageServiceImpl implements NewsManageService
 	public AbstractDataSource<News> getNewsDataSource()
 	{
 		AbstractDataSource<News> datasource = new DataBaseSourceImpl<News>(News.class);
-		
+	 
 		return datasource;
 	}
 

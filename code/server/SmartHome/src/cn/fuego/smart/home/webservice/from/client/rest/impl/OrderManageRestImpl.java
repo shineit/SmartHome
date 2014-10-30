@@ -8,10 +8,16 @@
 */ 
 package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
+import java.util.List;
+
+import cn.fuego.smart.home.domain.ServiceOrder;
+import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.ServiceOrderManageService;
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderRsp;
+import cn.fuego.smart.home.webservice.from.client.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.from.client.rest.OrderManageRest;
 
  /** 
@@ -23,22 +29,33 @@ import cn.fuego.smart.home.webservice.from.client.rest.OrderManageRest;
  */
 public class OrderManageRestImpl implements OrderManageRest
 {
+	private ServiceOrderManageService orderService = ServiceContext.getInstance().getServiceOrderManageService();
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.OrderManageService#getOrderList(cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListReq)
 	 */
 	@Override
-	public GetServiceOrderListRsp getOrderList(	GetServiceOrderListReq orderListReq)
+	public GetServiceOrderListRsp getOrderList(	GetServiceOrderListReq req)
 	{
 		GetServiceOrderListRsp rsp = new GetServiceOrderListRsp();
-		return rsp;
+		
+		List<ServiceOrder> orderList = orderService.getNewsDataSource().getAllPageData();
+		for(ServiceOrder e : orderList)
+		{
+			ServiceOrderJson orderJson = new ServiceOrderJson();
+			orderJson.loadWithOrder(e);
+			rsp.getOrderList().add(orderJson);
+		}
+	 
+ 		return rsp;
+ 
 	}
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.OrderManageService#setServiceOrder(cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderReq)
 	 */
 	@Override
-	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq orderReq)
+	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq req)
 	{
 		SetServiceOrderRsp rsp = new SetServiceOrderRsp();
 		return rsp;

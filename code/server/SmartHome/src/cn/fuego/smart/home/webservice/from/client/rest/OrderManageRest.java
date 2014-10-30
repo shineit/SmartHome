@@ -24,11 +24,11 @@ public interface OrderManageRest
 {
 	@POST
 	@Path("/list")
-	public GetServiceOrderListRsp getOrderList(GetServiceOrderListReq orderListReq);
+	public GetServiceOrderListRsp getOrderList(GetServiceOrderListReq req);
 	
 	@POST
 	@Path("/set")
-	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq orderReq);
+	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq req);
 
 
 }

@@ -4,6 +4,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.jboss.resteasy.annotations.interception.ServerInterceptor;
+
 import cn.fuego.smart.home.webservice.from.client.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetNewsListRsp;
 

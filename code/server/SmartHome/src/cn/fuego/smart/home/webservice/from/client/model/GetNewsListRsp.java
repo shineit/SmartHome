@@ -28,6 +28,12 @@ public class GetNewsListRsp extends BaseJsonRsp
 	{
 		this.newsList = newsList;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "GetNewsListRsp [newsList=" + newsList + "]";
+	}
 	
  
 }

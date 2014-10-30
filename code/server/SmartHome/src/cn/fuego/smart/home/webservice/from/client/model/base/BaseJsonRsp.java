@@ -22,6 +22,12 @@ public class BaseJsonRsp
 	{
 		this.result = result;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "BaseJsonRsp [result=" + result + "]";
+	}
 	
 	
 }

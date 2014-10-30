@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.domain;
 
+import cn.fuego.common.domain.PersistenceObject;
+
 /**
  * 
 * @ClassName: Concentrator 
@@ -8,7 +10,7 @@ package cn.fuego.smart.home.domain;
 * @date 2014-10-20 上午11:01:04 
 *
  */
-public class Concentrator
+public class Concentrator implements PersistenceObject
 {
 	private int concentratorID;     //集中器编号
 	private String ipAddr;			//集中器IP地址

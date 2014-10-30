@@ -20,4 +20,33 @@ public class GetNewsListReq extends BaseJsonReq
 	private PageJson page;
  
 	private List<AttributeJson> filterList;
+
+	public PageJson getPage()
+	{
+		return page;
+	}
+
+	public void setPage(PageJson page)
+	{
+		this.page = page;
+	}
+
+	public List<AttributeJson> getFilterList()
+	{
+		return filterList;
+	}
+
+	public void setFilterList(List<AttributeJson> filterList)
+	{
+		this.filterList = filterList;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "GetNewsListReq [page=" + page + ", filterList=" + filterList
+				+ "]";
+	}
+	
+	
 }

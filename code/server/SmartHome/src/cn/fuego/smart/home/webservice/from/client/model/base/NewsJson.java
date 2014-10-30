@@ -18,7 +18,7 @@ public class NewsJson
 	private String title;
 	private String author;
 	private String content;
-	private String date;
+	private long date;
 	
 	public void loadWithNews(News news)
 	{
@@ -26,7 +26,7 @@ public class NewsJson
 		this.title = news.getTitle();
 		this.author  = news.getAuthor();
 		this.content = news.getContent();
-		this.date = DateUtil.DateToString(news.getDate());
+		this.date = news.getDate().getTime();
 	}
 	public int getNewsID()
 	{
@@ -60,14 +60,21 @@ public class NewsJson
 	{
 		this.content = content;
 	}
-	public String getDate()
+	public long getDate()
 	{
 		return date;
 	}
-	public void setDate(String date)
+	public void setDate(long date)
 	{
 		this.date = date;
 	}
+	@Override
+	public String toString()
+	{
+		return "NewsJson [newsID=" + newsID + ", title=" + title + ", author="
+				+ author + ", content=" + content + ", date=" + date + "]";
+	}
+ 
 	
 	
 

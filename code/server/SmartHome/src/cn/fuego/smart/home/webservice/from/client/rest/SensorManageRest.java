@@ -36,6 +36,6 @@ public interface SensorManageRest
 	
 	@POST
 	@Path("/set")
-	public SetSensorRsp setSensor(SetSensorReq sensorListReq);
+	public SetSensorRsp setSensor(SetSensorReq req);
  
 }

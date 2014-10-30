@@ -2,6 +2,8 @@ package cn.fuego.smart.home.domain;
 
 import java.util.Date;
 
+import cn.fuego.common.domain.PersistenceObject;
+
 
 /**
  * 
@@ -10,10 +12,10 @@ import java.util.Date;
 * @author Tang Jun
 * @date 2014-10-20 上午11:01:22 
 *
- */
-public class ServiceOrder
+ */                                
+public class ServiceOrder implements PersistenceObject
 {
-	private int orderID;         //申请单号，自增长
+	private String orderID;         //申请单号，自增长
     private String orderName;       //申请单名称
     private String orderType;		//申请单类型(维修，安装，咨询)
     private String content;			//申请单内容
@@ -22,18 +24,33 @@ public class ServiceOrder
     private String contactName;		//联系人名称
     private String phoneNum;		//联系电话
     private String contactAddr;		//联系地址
-    private String orderStatus;		//申请单状态，0-未处理，1-已处理
+    private int orderStatus;		//申请单状态，0-未处理，1-已处理
+    private String handleResult;   //处理结果
     private String handler;			//处理人
     private Date handleTime;		//处理时间
 
-	public int getOrderID()
+    
+    public static String getOrderIDAttr()
+    {
+    	return "orderID";
+    }
+    
+    
+	 
+	public String getOrderID()
 	{
 		return orderID;
 	}
-	public void setOrderID(int orderID)
+
+
+
+	public void setOrderID(String orderID)
 	{
 		this.orderID = orderID;
 	}
+
+
+
 	public String getOrderName()
 	{
 		return orderName;
@@ -98,11 +115,12 @@ public class ServiceOrder
 	{
 		this.contactAddr = contactAddr;
 	}
-	public String getOrderStatus()
+ 
+	public int getOrderStatus()
 	{
 		return orderStatus;
 	}
-	public void setOrderStatus(String orderStatus)
+	public void setOrderStatus(int orderStatus)
 	{
 		this.orderStatus = orderStatus;
 	}
@@ -114,6 +132,20 @@ public class ServiceOrder
 	{
 		this.handler = handler;
 	}
+	
+	
+	public String getHandleResult()
+	{
+		return handleResult;
+	}
+
+
+	public void setHandleResult(String handleResult)
+	{
+		this.handleResult = handleResult;
+	}
+
+
 	public Date getHandleTime()
 	{
 		return handleTime;

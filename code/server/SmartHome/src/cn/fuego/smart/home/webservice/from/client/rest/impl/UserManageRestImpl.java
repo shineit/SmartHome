@@ -39,11 +39,11 @@ public class UserManageRestImpl implements UserManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.service.UserManageService#login(cn.fuego.smart.home.webservice.from.client.model.LoginReq)
 	 */
 	@Override
-	public LoginRsp login(LoginReq loginReq)
+	public LoginRsp login(LoginReq req)
 	{
 		LoginRsp rsp = new LoginRsp();
 		 
-		if(null != loginReq)
+		if(null == req)
 		{
 			log.error("the logni request is null");
 			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_MSG_WRONG);
@@ -52,7 +52,7 @@ public class UserManageRestImpl implements UserManageRest
 		
 		try
 		{
-			MISPServiceContext.getInstance().getUserService().Login(loginReq.getUserName(), loginReq.getPassword());
+			MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
 		}
 		catch(Exception e)
 		{

@@ -29,6 +29,12 @@ public class AttributeJson
 	{
 		this.attrValue = attrValue;
 	}
+	@Override
+	public String toString()
+	{
+		return "AttributeJson [attrName=" + attrName + ", attrValue="
+				+ attrValue + "]";
+	}
 	
 	
 }
