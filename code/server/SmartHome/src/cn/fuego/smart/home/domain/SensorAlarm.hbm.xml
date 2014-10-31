@@ -6,7 +6,7 @@
 	
 <hibernate-mapping
 	package="cn.fuego.smart.home.domain">
-	<class name="Sensor" table="sensor">
+	<class name="SensorAlarm" table="sensor_alarm">
 
 	    <id name="id" column="ID" >
 	       <generator class="increment"/> 

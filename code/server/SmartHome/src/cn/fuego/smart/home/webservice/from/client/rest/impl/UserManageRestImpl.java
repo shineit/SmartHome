@@ -11,6 +11,7 @@ package cn.fuego.smart.home.webservice.from.client.rest.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
@@ -18,7 +19,6 @@ import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.LoginReq;
 import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
-import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.from.client.rest.UserManageRest;
@@ -54,9 +54,10 @@ public class UserManageRestImpl implements UserManageRest
 		{
 			MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
 		}
-		catch(Exception e)
+		catch(MISPException e)
 		{
 			log.error("login failed",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
 		}
 		return rsp;
 	}
