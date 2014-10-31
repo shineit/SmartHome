@@ -16,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.smart.home.device.ApplicationProtocol;
 
 /**
  * 

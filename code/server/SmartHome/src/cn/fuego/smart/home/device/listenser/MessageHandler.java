@@ -3,7 +3,6 @@ package cn.fuego.smart.home.device.listenser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,7 +10,7 @@ import java.util.Queue;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
 import cn.fuego.smart.home.service.ServiceContext;
 
@@ -29,13 +28,12 @@ public class MessageHandler implements Runnable
 	private Log log = LogFactory.getLog(MessageHandler.class);	
 	private Socket socket;
  
- 	private DataCollectionCache dataCache;
  	
  	private Queue<String>  messageBuffer = new LinkedList<String>();
 	
 	public MessageHandler(Socket socket,DataCollectionCache dataCache)
 	{
-		this.dataCache = dataCache;
+ 
 		this.socket = socket;
 	}
 	

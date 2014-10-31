@@ -99,6 +99,7 @@ public class ReceiveMessage
 		Concentrator concentrator = new Concentrator();
 	 
 		concentrator.setConcentratorID(this.concentratorID);
+		concentrator.setIpAddr(ipAddr);
 		int ns = 0;
 		int byteValue = 1;
 		for (int i = DATA_START_INDEX+3; i >= CONCENTRATOR_ID_START; i--)

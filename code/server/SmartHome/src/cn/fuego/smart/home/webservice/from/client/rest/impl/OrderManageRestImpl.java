@@ -10,6 +10,8 @@ package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
 import java.util.List;
 
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.ServiceOrderManageService;
@@ -58,6 +60,22 @@ public class OrderManageRestImpl implements OrderManageRest
 	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq req)
 	{
 		SetServiceOrderRsp rsp = new SetServiceOrderRsp();
+		ServiceOrder order = req.getServiceOrder().getSergviceOrder();
+		
+		try
+		{
+			orderService.create(order);
+		}
+		catch(MISPException e)
+		{
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			rsp.getResult().setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
+
+		}
+
 		return rsp;
 	}
 

@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.webservice.from.client.rest.interceptor;
 
+import java.io.IOException;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.ext.Provider;
 
@@ -43,9 +45,8 @@ public class AuthInterceptor implements PreProcessInterceptor
 			throws Failure, WebApplicationException
 	{
 		log.info("auth");
-	 
-		log.info("request message is "+arg0.getFormParameters().toString());
-		
+		log.info("the request url is "+arg0.getUri().getPath());
+		log.info("the request call method is  "+ arg1.getMethod());
 		return  null;
 	}
 

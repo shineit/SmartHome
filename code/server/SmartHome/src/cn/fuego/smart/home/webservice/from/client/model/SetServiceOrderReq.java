@@ -15,4 +15,22 @@ public class SetServiceOrderReq extends BaseJsonReq
 {
 	private String command;
     private ServiceOrderJson serviceOrder;
+	public String getCommand()
+	{
+		return command;
+	}
+	public void setCommand(String command)
+	{
+		this.command = command;
+	}
+	public ServiceOrderJson getServiceOrder()
+	{
+		return serviceOrder;
+	}
+	public void setServiceOrder(ServiceOrderJson serviceOrder)
+	{
+		this.serviceOrder = serviceOrder;
+	}
+    
+    
 }

@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.misp.service;
 
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+
  /** 
  * @ClassName: MISPException 
  * @Description: TODO
@@ -20,6 +22,7 @@ public class MISPException extends RuntimeException
 	/**
 	 * 
 	 */
+	private int errorCode = MISPErrorMessageConst.SUCCESS;
 
 	public MISPException()
 	{
@@ -29,6 +32,8 @@ public class MISPException extends RuntimeException
 	public MISPException(int errorCode)
 	{
 		super(String.valueOf(errorCode));
+
+		this.errorCode = errorCode;
 	}
 
 	public MISPException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
@@ -49,6 +54,12 @@ public class MISPException extends RuntimeException
 	public MISPException(Throwable cause)
 	{
 		super(cause);
+	}
+
+	
+	public int getErrorCode()
+	{
+		return errorCode;
 	}
 
 	@Override

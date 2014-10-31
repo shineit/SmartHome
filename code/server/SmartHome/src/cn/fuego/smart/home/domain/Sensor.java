@@ -1,5 +1,8 @@
 package cn.fuego.smart.home.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.fuego.common.domain.PersistenceObject;
 
 
@@ -22,10 +25,10 @@ public class Sensor implements PersistenceObject
 	private String sensorTypeName;  //传感器类型名称
 	private int status;          //告警使能状态，0-禁止，1-使能，
 	private int alarmStatus;     //告警状态
-	private double warnValue;    //预警值
-	private double errorValue;   //火警值
+	private float warnValue;    //预警值
+	private float errorValue;   //火警值
 	private int groupID;         //区域ID（用于标识联动控制器）
-	private int ctrGroupID;      //联动控制器ID
+	private String ctrGroupID;      //联动控制器ID ;隔开
 	private String description;  //描述
 	private String mark;         //自定义标签
 	public int getConcentratorID()
@@ -35,6 +38,19 @@ public class Sensor implements PersistenceObject
 	public void setConcentratorID(int concentratorID)
 	{
 		this.concentratorID = concentratorID;
+	}
+	
+	public List<Integer> getCtrGroupIDList()
+	{
+		List<Integer> groupIDList = new ArrayList<Integer>();
+		String[] strAry = ctrGroupID.split(";");
+		for(int i=0;i<strAry.length;i++)
+		{
+			groupIDList.add(Integer.valueOf(strAry[i]));
+		}
+		
+		return groupIDList;
+		
 	}
 
 	public int getSensorID()
@@ -102,19 +118,20 @@ public class Sensor implements PersistenceObject
 	{
 		this.alarmStatus = alarmStatus;
 	}
-	public double getWarnValue()
+ 
+	public float getWarnValue()
 	{
 		return warnValue;
 	}
-	public void setWarnValue(double warnValue)
+	public void setWarnValue(float warnValue)
 	{
 		this.warnValue = warnValue;
 	}
-	public double getErrorValue()
+	public float getErrorValue()
 	{
 		return errorValue;
 	}
-	public void setErrorValue(double errorValue)
+	public void setErrorValue(float errorValue)
 	{
 		this.errorValue = errorValue;
 	}
@@ -126,11 +143,12 @@ public class Sensor implements PersistenceObject
 	{
 		this.groupID = groupID;
 	}
-	public int getCtrGroupID()
+ 
+	public String getCtrGroupID()
 	{
 		return ctrGroupID;
 	}
-	public void setCtrGroupID(int ctrGroupID)
+	public void setCtrGroupID(String ctrGroupID)
 	{
 		this.ctrGroupID = ctrGroupID;
 	}

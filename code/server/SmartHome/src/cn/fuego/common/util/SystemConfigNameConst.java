@@ -31,5 +31,8 @@ public class SystemConfigNameConst
 
 	public static final String TEMPLATE_PATH = "TEMPLATE_PATH";
 	public static final String COLLECT_PERIOD = "COLLECT_PERIOD";
+	
+	public static final String DEVICE_PORT = "DEVICE_PORT";
+
 
 }

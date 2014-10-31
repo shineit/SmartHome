@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.from.client.rest.interceptor;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.ws.rs.WebApplicationException;
@@ -15,10 +16,13 @@ import javax.ws.rs.ext.Provider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.util.EntityUtils;
 import org.jboss.resteasy.annotations.interception.Precedence;
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 import org.jboss.resteasy.spi.interception.MessageBodyWriterContext;
 import org.jboss.resteasy.spi.interception.MessageBodyWriterInterceptor;
+
+import com.alibaba.fastjson.JSONObject;
 
  /** 
  * @ClassName: EncodeInterceptor 
@@ -42,9 +46,8 @@ public class EncodeInterceptor  implements MessageBodyWriterInterceptor
 			WebApplicationException
 	{
 		
-		log.info("response is "+arg0.getEntity().toString());
-		arg0.proceed();
-		
+		log.info("response is "+  arg0.getEntity());
+ 
 	}
 
 }

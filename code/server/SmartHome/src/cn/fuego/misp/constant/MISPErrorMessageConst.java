@@ -18,14 +18,18 @@ package cn.fuego.misp.constant;
 public class MISPErrorMessageConst
 {
 	public static final int SUCCESS = 0;  //成功
-
+ 
 	public static final int ERROR_MSG_WRONG = 1; //消息错误
-	public static final int ERROR_USER_NOT_EXISTED = 2; //用户不存在
-	public static final int ERROR_LOGIN_FAILED = 3;  //登录失败
-	public static final int ERROR_OLD_PASSWORD_WORD = 4; //原始密码错误
 	
-	public static final int CLIENT_VERSION_LOW = 5 ; // 
+	public static final int OPERATE_FAILED = 2 ; // 
+
+	public static final int ERROR_USER_NOT_EXISTED = 3; //用户不存在
+	public static final int ERROR_LOGIN_FAILED = 4;  //登录失败
+	public static final int ERROR_OLD_PASSWORD_WORD = 5; //原始密码错误
 	
+	public static final int CLIENT_VERSION_LOW = 6 ; // 
+	
+
 	public static String getMessageByErrorCode(int errorCode)
 	{
 		return String.valueOf(errorCode);

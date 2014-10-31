@@ -25,7 +25,7 @@ public class SensorJson
 	private double warnValue;
 	private double errorValue;
 	private int groupID;
-	private int ctrGroupID;
+	private String ctrGroupID;
 	private String description;
 	private String mark;
 	
@@ -146,11 +146,12 @@ public class SensorJson
 	{
 		this.groupID = groupID;
 	}
-	public int getCtrGroupID()
+ 
+	public String getCtrGroupID()
 	{
 		return ctrGroupID;
 	}
-	public void setCtrGroupID(int ctrGroupID)
+	public void setCtrGroupID(String ctrGroupID)
 	{
 		this.ctrGroupID = ctrGroupID;
 	}

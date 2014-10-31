@@ -22,7 +22,7 @@ import cn.fuego.smart.home.domain.Sensor;
 public interface DeviceManager
 {
 
-	public List<Sensor> getSensorList(String deviceIP);
+	public List<Sensor> getSensorList();
 	
 	public void setSensor(Sensor sensor);
 	

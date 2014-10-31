@@ -39,6 +39,10 @@ public class SystemConfigInfo
 		return  getSystemRootPath() + PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.TEMPLATE_PATH);
 		
 	}
+	public static String getDevicePort()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.DEVICE_PORT);
+	}
 
  
 }

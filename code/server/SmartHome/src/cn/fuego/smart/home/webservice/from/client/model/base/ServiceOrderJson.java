@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.from.client.model.base;
 
+import java.util.Date;
+
 import cn.fuego.smart.home.domain.ServiceOrder;
 
 
@@ -47,6 +49,25 @@ public class ServiceOrderJson
 		this.handleResult = order.getHandleResult();
 		this.handleTime = order.getHandleTime().getTime();
 		
+	}
+	
+	public ServiceOrder getSergviceOrder()
+	{
+		ServiceOrder order = new ServiceOrder();
+		order.setOrderID(orderID);
+		order.setOrderName(orderName);
+		order.setOrderType(orderType);
+		order.setContent(content);
+		order.setCreator(creator);
+		order.setCreateTime(new Date(createTime));
+		order.setContactName(contactName);
+		order.setContactAddr(contactAddr);
+		order.setOrderStatus(orderStatus);
+		order.setHandler(handler);
+		order.setHandleResult(handleResult);
+		order.setHandleTime(new Date(handleTime));
+		
+		return order;
 	}
  
 	public String getOrderID()

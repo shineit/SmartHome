@@ -14,5 +14,5 @@ import cn.fuego.smart.home.webservice.from.client.model.base.ServiceOrderJson;
  */
 public class SetServiceOrderRsp extends BaseJsonRsp
 {
-	private ServiceOrderJson serviceOrder;
+	
 }

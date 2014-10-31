@@ -28,6 +28,28 @@ public class DataTypeConvert
 {
 	private static final Log log = LogFactory.getLog(DataTypeConvert.class);
 
+	public static String intToByteStr(int value)
+	{
+		 byte[] src = new byte[4];  
+		    src[3] =  (byte) ((value>>24) & 0xFF);  
+		    src[2] =  (byte) ((value>>16) & 0xFF);  
+		    src[1] =  (byte) ((value>>8) & 0xFF);    
+		    src[0] =  (byte) (value & 0xFF);     
+		 
+		 return new String(src);
+	}
+	
+	public static String floatToByteStr(float value)
+	{ 
+		int fbit = Float.floatToIntBits(value);  
+	      
+	    byte[] b = new byte[4];    
+	    for (int i = 0; i < 4; i++) {    
+	        b[i] = (byte) (fbit >> (24 - i * 8));    
+	    } 
+	    return new String(b);
+		 
+	}
 	public static List objectToList(Object str)
 	{
 		List strList = new ArrayList<Object>();
