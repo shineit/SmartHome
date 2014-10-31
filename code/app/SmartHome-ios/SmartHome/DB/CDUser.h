@@ -2,7 +2,7 @@
 //  CDUser.h
 //  SmartHome
 //
-//  Created by Seven on 14-10-27.
+//  Created by Seven on 14-10-31.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 @interface CDUser : NSManagedObject
 
 @property (nonatomic, retain) NSString * password;
+@property (nonatomic, retain) NSNumber * userid;
 @property (nonatomic, retain) NSString * username;
-@property (nonatomic, retain) NSString * userid;
 
 @end

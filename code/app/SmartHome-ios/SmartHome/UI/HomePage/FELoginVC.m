@@ -108,9 +108,11 @@
         [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FEDataUser *user){
             NSLog(@"call back");
             [weakself hideHUD:YES];
-//            if (error) {
-//                return;
-//            }
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:FEString(@"request error!") delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
+                [alert show];
+                return;
+            }
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 CDUser *user = [FECoreData touchUserByIdentifier:@"identifier"];
                 user.username = weakself.username.text;

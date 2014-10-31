@@ -11,7 +11,7 @@
 
 @interface FESiginData : FERequestBaseData
 @property (nonatomic, strong, readonly) NSString *userName;
-@property (nonatomic, strong, readonly) NSString *passWord;
+@property (nonatomic, strong, readonly) NSString *password;
 @property (nonatomic, strong, readonly) NSString *clientType;
 @property (nonatomic, strong, readonly) NSString *clientVersion;
 

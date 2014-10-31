@@ -15,7 +15,7 @@
     self = [super initWithMothed:__MODTHED_SIGIN];
     if (self) {
         _userName = name;
-        _passWord = password;
+        _password = password;
         _clientType = type;
         _clientVersion = version;
     }
