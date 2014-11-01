@@ -60,7 +60,7 @@ public class SystemMenuCache
 	public void reload()
 	{
 		// there is no parent menu when parent id is 0
-		cache = loadMenuTreeByParentID("0");
+		cache = loadMenuTreeByParentID(1);
 		log.info("loaded all menu list" + cache);
 
 	}
@@ -147,7 +147,7 @@ public class SystemMenuCache
 		return nowMenuTreeList;
 	}*/
 
-	private List<SystemMenu> getMenuByParentID(String parentID)
+	private List<SystemMenu> getMenuByParentID(int parentID)
 	{
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL,
 				"parentID", String.valueOf(parentID));
@@ -160,7 +160,7 @@ public class SystemMenuCache
 	 * @param parentID
 	 * @return
 	 */
-	private List<MenuTreeModel> loadMenuTreeByParentID(String parentID)
+	private List<MenuTreeModel> loadMenuTreeByParentID(int parentID)
 	{
 		List<MenuTreeModel> menuTreeList = new ArrayList<MenuTreeModel>();
 
@@ -168,11 +168,11 @@ public class SystemMenuCache
 		{
 			MenuTreeModel menuTreeModel = new MenuTreeModel();
 			menuTreeModel.setMenu(convertSystemMenuToMenuModel(menu));
-			if (null != getMenuByParentID(menu.getMenuID())
-					&& !getMenuByParentID(menu.getMenuID()).isEmpty())
+			if (null != getMenuByParentID(menu.getId())
+					&& !getMenuByParentID(menu.getId()).isEmpty())
 			{
 				menuTreeModel.setChildMenuList(loadMenuTreeByParentID(menu
-						.getMenuID()));
+						.getId()));
 			}
 			menuTreeList.add(menuTreeModel);
 		}
@@ -182,7 +182,7 @@ public class SystemMenuCache
 	private MenuModel convertSystemMenuToMenuModel(SystemMenu menu)
 	{
 		MenuModel menuModel = new MenuModel();
-		menuModel.setMenuID(menu.getMenuID());
+		menuModel.setMenuID(String.valueOf(menu.getId()));
 		menuModel.setFresh(menu.getFresh());
 		menuModel.setIcon(menu.getIcon());
 		menuModel.setName(menu.getName());

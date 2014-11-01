@@ -28,6 +28,10 @@ public class SystemIDType implements PersistenceObject
 	private String prefix;
 	private String suffix;
 
+	public static String getNameAttr()
+	{
+		return "name";
+	}
 	public String getName()
 	{
 		return name;

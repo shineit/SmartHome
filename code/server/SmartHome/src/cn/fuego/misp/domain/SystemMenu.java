@@ -22,7 +22,7 @@ import cn.fuego.common.domain.PersistenceObject;
 public class SystemMenu implements PersistenceObject
 {
 
-	private String menuID;
+	private int id;
 	private String name;
 	private String value;
 	private String type;
@@ -32,13 +32,14 @@ public class SystemMenu implements PersistenceObject
 	private String url;
 	private String parentID;
 	private String functionID;
-	public String getMenuID()
+ 
+	public int getId()
 	{
-		return menuID;
+		return id;
 	}
-	public void setMenuID(String menuID)
+	public void setId(int id)
 	{
-		this.menuID = menuID;
+		this.id = id;
 	}
 	public String getName()
 	{
@@ -115,12 +116,11 @@ public class SystemMenu implements PersistenceObject
 	@Override
 	public String toString()
 	{
-		return "SystemMenu [menuID=" + menuID + ", name=" + name + ", value="
-				+ value + ", type=" + type + ", icon=" + icon + ", external="
+		return "SystemMenu [id=" + id + ", name=" + name + ", value=" + value
+				+ ", type=" + type + ", icon=" + icon + ", external="
 				+ external + ", fresh=" + fresh + ", url=" + url
 				+ ", parentID=" + parentID + ", functionID=" + functionID + "]";
 	}
-
  
  
 

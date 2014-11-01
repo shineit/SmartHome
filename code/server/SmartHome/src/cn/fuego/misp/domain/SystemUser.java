@@ -25,7 +25,7 @@ public class SystemUser implements PersistenceObject
 	private int userID;
 	private String userName;
 	private String password;
-	private int accountType;
+	private int role;
 	private Date regDate;
 	
 	
@@ -63,14 +63,17 @@ public class SystemUser implements PersistenceObject
 	{
 		this.password = password;
 	}
-	public int getAccountType()
+ 
+	public int getRole()
 	{
-		return accountType;
+		return role;
 	}
-	public void setAccountType(int accountType)
+
+	public void setRole(int role)
 	{
-		this.accountType = accountType;
+		this.role = role;
 	}
+
 	public Date getRegDate()
 	{
 		return regDate;

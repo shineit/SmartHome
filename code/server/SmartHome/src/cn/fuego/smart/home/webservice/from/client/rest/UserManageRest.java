@@ -35,5 +35,5 @@ public interface UserManageRest
 	
 	@POST
 	@Path("/mark/set")
-	SetUserMarkRsp getUserMarkList(SetUserMarkReq req);
+	SetUserMarkRsp setUserMark(SetUserMarkReq req);
 }

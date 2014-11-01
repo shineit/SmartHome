@@ -7,14 +7,14 @@
 <hibernate-mapping
 	package="cn.fuego.misp.domain">
 	<class name="SystemUser" table="misp_user">
-			<id name="userID" column="Ui_ID" >
+			<id name="userID" column="user_id" >
 			<generator class="increment"/>
 			</id>
-            <property name="userName" column="Us_Account"  not-null="true" ></property>
+            <property name="userName" column="user_name"  not-null="true" ></property>
         
-            <property name="password" column="Us_PassWord"  not-null="true" ></property>
-            <property name="accountType" column="Ui_AccountType"  length='20' ></property>
-            <property name="regDate" column="Ud_RegDate"  ></property>
+            <property name="password" column="password"  not-null="true" ></property>
+            <property name="role" column="role"  length='20' ></property>
+            <property name="regDate" column="reg_date"  ></property>
 
 	
 				

@@ -10,6 +10,8 @@ package cn.fuego.misp.service;
 
 import java.util.List;
 
+import cn.fuego.misp.domain.MispButton;
+import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
 
@@ -41,11 +43,24 @@ public interface MISPUserService
 	void modifyPassword(String userName,String oldPwd,String newPwd);
 	
 	/**
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	List<SystemMenu> getMenuListByUserID(int userID);
+	
+	/**
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	List<MispButton> getButtonListByUserID(int userID);
+	/**
 	 * 根据用户ID 获取菜单树
 	 * @param userID
 	 * @return
 	 */
-	List<MenuTreeModel> getMenuTreeByUserID(String userID);
+	List<MenuTreeModel> getMenuTreeByUserID(int userID);
 	
 
 }

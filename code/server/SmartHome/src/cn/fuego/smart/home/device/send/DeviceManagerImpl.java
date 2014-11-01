@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
-import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.communicator.Communicator;
 import cn.fuego.smart.home.device.communicator.CommunicatorFactory;
@@ -30,6 +32,8 @@ import cn.fuego.smart.home.domain.HomeSensor;
  */
 public class DeviceManagerImpl implements DeviceManager
 {
+
+	private Log log = LogFactory.getLog(DeviceManagerImpl.class);	
 
 	private Concentrator concentrator;
 	private int port = Integer.valueOf(SystemConfigInfo.getDevicePort());
@@ -61,29 +65,28 @@ public class DeviceManagerImpl implements DeviceManager
 	public void setSensor(HomeSensor sensor)
 	{
 		String data = ""; 	
-		data += (byte)(sensor.getSensorID()/256);
-		data += (byte)(sensor.getSensorID()%256);
-		data += DataTypeConvert.intToByteStr(sensor.getDevID());
+		data += DataTypeConvert.intToByteStr(sensor.getSensorID(),2);
+		data += DataTypeConvert.intToByteStr(sensor.getId());
 		
-		data += (byte)sensor.getStatus();
+		data +=  DataTypeConvert.intToByteStr(sensor.getStatus(),1);
 		
-		data += (byte)(sensor.getSensorType()/256);
-		data += (byte)(sensor.getSensorType()%256);
+		data += DataTypeConvert.intToByteStr(sensor.getSensorType(),2);
+	 
 		
 		data += DataTypeConvert.floatToByteStr(sensor.getWarnValue());
 		data += DataTypeConvert.floatToByteStr(sensor.getErrorValue());
 
-		data += (byte)sensor.getGroupID();
+		data += DataTypeConvert.intToByteStr(sensor.getGroupID(),1);
 
 		for(int i=0;i<4;i++)
 		{
 		   if(i<sensor.getCtrGroupIDList().size())
 		   {
-			   data += sensor.getCtrGroupIDList().get(i).byteValue();
+			   data += DataTypeConvert.intToByteStr(sensor.getCtrGroupIDList().get(i),1);
 		   }
 		   else
 		   {
-			   data += 0xff;
+			   data += DataTypeConvert.intToByteStr(0xff,1);
 			   
 		   }
 		}
@@ -94,6 +97,8 @@ public class DeviceManagerImpl implements DeviceManager
 		
 		String sendMessage = makeSendData(DeviceCommand.SET_SENSOR_CONFIG,data);
 		String readMessage = getData(sendMessage);
+		
+		log.info("the read message is " + readMessage);
 
 		
 	}
@@ -156,6 +161,7 @@ public class DeviceManagerImpl implements DeviceManager
 		communicator.open();
 		communicator.sendData(sendMessage);
 		readMessage = communicator.readData(ApplicationProtocol.PACKET_END);
+		communicator.close();
 		
 		return readMessage;
 	}

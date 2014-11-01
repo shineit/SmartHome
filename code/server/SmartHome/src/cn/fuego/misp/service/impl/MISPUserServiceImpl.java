@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.misp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +20,8 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.dao.MISPDaoContext;
+import cn.fuego.misp.domain.MispButton;
+import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
@@ -73,7 +76,7 @@ public class MISPUserServiceImpl implements MISPUserService
 		UserModel userModel = new UserModel();
 		userModel.setUserID(targetUser.getUserID());
 		userModel.setUserName(targetUser.getUserName());
-		userModel.setAccountType(targetUser.getAccountType());
+		userModel.setAccountType(targetUser.getRole());
 		userModel.setRegDate(targetUser.getRegDate());
 		
 		return userModel;
@@ -105,11 +108,29 @@ public class MISPUserServiceImpl implements MISPUserService
 		}
 	}
 	
-	public List<MenuTreeModel> getMenuTreeByUserID(String userID)
+	public List<MenuTreeModel> getMenuTreeByUserID(int userID)
 	{
-		Set<String> menuIDList = MISPServiceContext.getInstance().MISPPrivilegeManage().getMenuIDListByUser(userID);
+		Set<String> menuIDList = MISPServiceContext.getInstance().MISPPrivilegeManage().getMenuIDListByUser(String.valueOf(userID));
 		
 		return SystemMenuCache.getInstance().getMenuListWithShowIDList(menuIDList);
 	}
-
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.MISPUserService#getMenuListByUserID(int)
+	 */
+	@Override
+	public List<SystemMenu> getMenuListByUserID(int userID)
+	{
+		List<SystemMenu> menuList = new ArrayList<SystemMenu>();
+		return menuList;
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.MISPUserService#getButtonListByUserID(int)
+	 */
+	@Override
+	public List<MispButton> getButtonListByUserID(int userID)
+	{
+		 List<MispButton> buttonList = new  ArrayList<MispButton>();
+		return buttonList;
+	}
+ 
 }

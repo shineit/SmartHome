@@ -7,7 +7,7 @@
 <hibernate-mapping
 	package="cn.fuego.misp.domain">
 	<class name="SystemMenu" table="misp_system_menu">
-			<id name="menuID" column="MENU_ID"  length='20'>
+			<id name="id" column="id"  length='20'>
 			<generator class="assigned"/>
 			</id>
         

@@ -14,7 +14,6 @@
 
 	     <property name="concentratorID" column="CONCENTRATOR_ID" ></property>
          <property name="sensorID" column="SENSOR_ID"  ></property>
-		 <property name="devID" column="DEV_ID"></property>
 		 <property name="channelID" column="CHANNEL_ID"></property>
 		 <property name="sensorKind" column="SENSOR_KIND"></property>
 		 <property name="sensorType" column="SENSOR_TYPE"></property>

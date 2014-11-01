@@ -13,10 +13,9 @@ import cn.fuego.smart.home.domain.HomeSensor;
  */
 public class HomeSensorJson
 {
-	private int id;              //唯一ID
+	private int id;              //唯一ID，终端设备的出场ID，具有唯一性
 	private int concentratorID;  //集中器ID
 	private int sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
-	private int devID;           //终端设备的出场ID，具有唯一性
 	private int channelID;       //终端设备的通道ID
 	private int sensorKind;      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
 	private int sensorType;      //传感器类型
@@ -34,8 +33,7 @@ public class HomeSensorJson
 		this.id = sensor.getId();
 		this.concentratorID = sensor.getConcentratorID();
 		this.sensorID = sensor.getSensorID();
-		this.devID = sensor.getDevID();
-		this.channelID = sensor.getChannelID();
+ 		this.channelID = sensor.getChannelID();
 		this.sensorKind = sensor.getSensorKind();
 		this.sensorType = sensor.getSensorType();
 		this.sensorTypeName = sensor.getSensorTypeName();
@@ -78,15 +76,7 @@ public class HomeSensorJson
 		this.sensorID = sensorID;
 	}
 
-	public int getDevID()
-	{
-		return devID;
-	}
-
-	public void setDevID(int devID)
-	{
-		this.devID = devID;
-	}
+ 
 
 	public int getChannelID()
 	{
@@ -202,14 +192,15 @@ public class HomeSensorJson
 	public String toString()
 	{
 		return "HomeSensorJson [id=" + id + ", concentratorID="
-				+ concentratorID + ", sensorID=" + sensorID + ", devID="
-				+ devID + ", channelID=" + channelID + ", sensorKind="
-				+ sensorKind + ", sensorType=" + sensorType
-				+ ", sensorTypeName=" + sensorTypeName + ", status=" + status
-				+ ", warnValue=" + warnValue + ", errorValue=" + errorValue
-				+ ", groupID=" + groupID + ", ctrGroupID=" + ctrGroupID
-				+ ", description=" + description + ", mark=" + mark + "]";
+				+ concentratorID + ", sensorID=" + sensorID + ", channelID="
+				+ channelID + ", sensorKind=" + sensorKind + ", sensorType="
+				+ sensorType + ", sensorTypeName=" + sensorTypeName
+				+ ", status=" + status + ", warnValue=" + warnValue
+				+ ", errorValue=" + errorValue + ", groupID=" + groupID
+				+ ", ctrGroupID=" + ctrGroupID + ", description=" + description
+				+ ", mark=" + mark + "]";
 	}
+ 
  
 
 

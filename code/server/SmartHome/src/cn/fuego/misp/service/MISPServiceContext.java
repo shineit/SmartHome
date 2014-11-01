@@ -9,6 +9,8 @@ public class MISPServiceContext
 	private static MISPServiceContext instance;
 
 	private MISPUserService userService = null;
+	
+ 
 	private MISPOperLogService operLogService = null;
 
 	private MISPPrivilegeManage privilegeManage = null;

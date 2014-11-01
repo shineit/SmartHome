@@ -41,7 +41,7 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 	{
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserIDAttr(),userID));
 
-		return String.valueOf(targetUser.getAccountType());
+		return String.valueOf(targetUser.getRole());
 	}
 
 

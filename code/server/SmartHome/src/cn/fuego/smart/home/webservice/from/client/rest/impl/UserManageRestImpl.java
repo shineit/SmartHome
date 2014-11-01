@@ -8,9 +8,14 @@
 */ 
 package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.util.format.DateCreateUtil;
+import cn.fuego.misp.domain.SystemMenu;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
@@ -21,6 +26,7 @@ import cn.fuego.smart.home.webservice.from.client.model.LoginReq;
 import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
+import cn.fuego.smart.home.webservice.from.client.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.from.client.rest.UserManageRest;
 
  /** 
@@ -53,6 +59,17 @@ public class UserManageRestImpl implements UserManageRest
 		try
 		{
 			MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
+			SystemUser user = null;
+			rsp.setToken(DateCreateUtil.getUUID());
+		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
+		    
+		    for(SystemMenu menu : menuList)
+		    {	
+		    	MenuJson menuJson = new MenuJson();
+		    	menuJson.loadWithMenu(menu);
+		    	rsp.getMenuList().add(menuJson);
+		    }
+			
 		}
 		catch(MISPException e)
 		{
@@ -76,7 +93,7 @@ public class UserManageRestImpl implements UserManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.service.UserManageService#getUserMarkList(cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq)
 	 */
 	@Override
-	public SetUserMarkRsp getUserMarkList(SetUserMarkReq req)
+	public SetUserMarkRsp setUserMark(SetUserMarkReq req)
 	{
 		SetUserMarkRsp rsp = new SetUserMarkRsp();
 		return rsp;

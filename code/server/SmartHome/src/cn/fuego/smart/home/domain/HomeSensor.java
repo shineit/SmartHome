@@ -16,11 +16,10 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class HomeSensor implements PersistenceObject
 {
-	private int id;              //唯一ID
+	private int id;              //唯一ID 终端设备的出场ID，具有唯一性
 	private int concentratorID;  //集中器ID
 	private int sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
-	private int devID;           //终端设备的出场ID，具有唯一性
-	private int channelID;       //终端设备的通道ID
+ 	private int channelID;       //终端设备的通道ID
 	private int sensorKind;      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
 	private int sensorType;      //传感器类型
 	private String sensorTypeName;  //传感器类型名称
@@ -63,6 +62,17 @@ public class HomeSensor implements PersistenceObject
 		return groupIDList;
 		
 	}
+	public void  setCtrGroupIDWithIDList(List<Integer> idList)
+	{
+  		String str = "";
+		for(int i=0;i<idList.size();i++)
+		{
+			str += idList.get(i) + ";";
+		}
+		this.ctrGroupID = str;
+		
+ 		
+	}
 
 	public int getSensorID()
 	{
@@ -72,14 +82,7 @@ public class HomeSensor implements PersistenceObject
 	{
 		this.sensorID = sensorID;
 	}
-	public int getDevID()
-	{
-		return devID;
-	}
-	public void setDevID(int devID)
-	{
-		this.devID = devID;
-	}
+ 
 	public int getChannelID()
 	{
 		return channelID;

@@ -30,11 +30,21 @@ public class DataTypeConvert
 
 	public static String intToByteStr(int value)
 	{
+		 return  intToByteStr(value,4);
+	}
+	
+	public static String intToByteStr(int value,int bit)
+	{
 		 byte[] src = new byte[4];  
-		    src[3] =  (byte) ((value>>24) & 0xFF);  
-		    src[2] =  (byte) ((value>>16) & 0xFF);  
-		    src[1] =  (byte) ((value>>8) & 0xFF);    
-		    src[0] =  (byte) (value & 0xFF);     
+		 if(bit > 4)
+		 {
+			 bit = 4;
+		 }
+		 for(int i=0;i<bit;i++)
+		 {     
+			    src[i] =  (byte) (value>>(i*8) & 0xFF);   
+		 }
+  
 		 
 		 return new String(src);
 	}
