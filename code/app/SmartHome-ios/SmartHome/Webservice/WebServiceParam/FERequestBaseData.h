@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObject+Dictionary.h"
 
-#define __MODTHED_SIGIN     @"user/login" //登陆
-
+#define __MODTHED_SIGIN    @"user/login" //登陆
+#define __GET_NEWS         @"news/list"  //news 
 
 
 @interface FERequestBaseData : NSObject
 
 @property (nonatomic, strong, readonly) NSString *method;
-@property (nonatomic, strong, readonly) NSDictionary *requestParam;
 
 -(instancetype)initWithMothed:(NSString *)mothed;
 

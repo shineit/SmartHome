@@ -263,7 +263,7 @@ relationshipKeyPathsForPrefetching:nil
     return array.lastObject;
 }
 
--(CDUser *)touchUserByIdentifier:(NSString *)identifier{
+-(CDUser *)touchUserByIdentifier:(NSNumber *)identifier{
     CDUser *user = [self fetchUser];
     if (!user) {
         user = (CDUser *)[NSEntityDescription insertNewObjectForEntityForName:@"CDUser" inManagedObjectContext:self.managedObjectContext];

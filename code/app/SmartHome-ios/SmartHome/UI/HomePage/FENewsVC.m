@@ -11,6 +11,7 @@
 #import "FENewsTableViewCell.h"
 #import "FEWarringTableViewCell.h"
 #import "FEWarringResponse.h"
+#import "FEWebServiceManager.h"
 
 @interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -46,6 +47,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    
+    //request news
+    [self requestNews];
 }
 
 -(void)initUI{
@@ -88,6 +92,19 @@
     view1.backgroundColor = [UIColor clearColor];
     [warring setTableFooterView:view];
     
+}
+
+-(void)requestNews{
+    [self displayHUD:FEString(@"LOADING...")];
+    FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:1];
+    FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
+    FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr.dictionary]];
+    [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FEDataNew *user) {
+        if (error) {
+            return ;
+        }
+        [self hideHUD:YES];
+    }];
 }
 
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)control{

@@ -9,7 +9,7 @@
 #import "FEWebServiceManager.h"
 #import "FESiginData.h"
 
-#define _BASE_URL @"http://localhost:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://163.125.161.34:9000/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -33,7 +33,7 @@
 
 
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *, FEDataUser *))block{
-    return [self POST:sdata.method parameters:sdata.requestParam success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         FEDataUser *user = [FEDataUser new];
         user.userid = responseObject[@"id"];
@@ -46,6 +46,16 @@
         block(error,nil);
     }];
     
+}
+
+-(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FEDataNew *user))block{
+    return [self POST:ndata.method parameters:ndata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"news success!");
+        FEDataNew *news = [FEDataNew new];
+        block(NULL,news);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"news fail!");
+    }];
 }
 
 

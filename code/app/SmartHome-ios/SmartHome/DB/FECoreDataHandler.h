@@ -35,7 +35,7 @@
 
 //fetch user information
 -(CDUser *)fetchUser;
--(CDUser *)touchUserByIdentifier:(NSString *)identifier;
+-(CDUser *)touchUserByIdentifier:(NSNumber *)identifier;
 - (void)saveCoreData;
 - (void)deleteCoreData:(NSArray *)array;
 
