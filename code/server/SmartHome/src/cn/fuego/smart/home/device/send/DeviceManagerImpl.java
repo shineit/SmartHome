@@ -19,7 +19,7 @@ import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.communicator.Communicator;
 import cn.fuego.smart.home.device.communicator.CommunicatorFactory;
 import cn.fuego.smart.home.domain.Concentrator;
-import cn.fuego.smart.home.domain.Sensor;
+import cn.fuego.smart.home.domain.HomeSensor;
 
  /** 
  * @ClassName: DeviceManagerImpl 
@@ -43,14 +43,14 @@ public class DeviceManagerImpl implements DeviceManager
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#getSensorList(java.lang.String)
 	 */
 	@Override
-	public List<Sensor> getSensorList()
+	public List<HomeSensor> getSensorList()
 	{
 
 		 
 		String sendMessage = makeSendData(DeviceCommand.GET_SENOR_LIST,null);
 		String readMessage = getData(sendMessage);
 		
-		List<Sensor> sensorList = new ArrayList<Sensor>();
+		List<HomeSensor> sensorList = new ArrayList<HomeSensor>();
 		return sensorList;
 	}
 
@@ -58,14 +58,14 @@ public class DeviceManagerImpl implements DeviceManager
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#setSensor(cn.fuego.smart.home.domain.Sensor)
 	 */
 	@Override
-	public void setSensor(Sensor sensor)
+	public void setSensor(HomeSensor sensor)
 	{
 		String data = ""; 	
 		data += (byte)(sensor.getSensorID()/256);
 		data += (byte)(sensor.getSensorID()%256);
 		data += DataTypeConvert.intToByteStr(sensor.getDevID());
 		
-		data += (byte)SensorStatusEnum.ENABLE.getStatusInt();
+		data += (byte)sensor.getStatus();
 		
 		data += (byte)(sensor.getSensorType()/256);
 		data += (byte)(sensor.getSensorType()%256);
@@ -92,7 +92,7 @@ public class DeviceManagerImpl implements DeviceManager
 		
 		
 		
-		String sendMessage = makeSendData(DeviceCommand.SET_SENSOR_CONFIG,null);
+		String sendMessage = makeSendData(DeviceCommand.SET_SENSOR_CONFIG,data);
 		String readMessage = getData(sendMessage);
 
 		
@@ -102,7 +102,7 @@ public class DeviceManagerImpl implements DeviceManager
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#enableSensor(java.util.List)
 	 */
 	@Override
-	public void enableSensor(List<Sensor> sensorList)
+	public void enableSensor(List<HomeSensor> sensorList)
 	{
 		// TODO Auto-generated method stub
 		
@@ -112,7 +112,7 @@ public class DeviceManagerImpl implements DeviceManager
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#disableSensor(java.util.List)
 	 */
 	@Override
-	public void disableSensor(List<Sensor> sensorList)
+	public void disableSensor(List<HomeSensor> sensorList)
 	{
 		// TODO Auto-generated method stub
 		
@@ -122,7 +122,7 @@ public class DeviceManagerImpl implements DeviceManager
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#startSensor(java.util.List)
 	 */
 	@Override
-	public void startSensor(List<Sensor> sensorList)
+	public void startSensor(List<HomeSensor> sensorList)
 	{
 		// TODO Auto-generated method stub
 		
@@ -132,7 +132,7 @@ public class DeviceManagerImpl implements DeviceManager
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#stopSensor(java.util.List)
 	 */
 	@Override
-	public void stopSensor(List<Sensor> sensorList)
+	public void stopSensor(List<HomeSensor> sensorList)
 	{
 		// TODO Auto-generated method stub
 		

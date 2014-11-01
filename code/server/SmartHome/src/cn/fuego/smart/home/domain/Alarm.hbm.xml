@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="Alarm" table="alarm">
+
+	    <id name="id" column="ID" >
+	       <generator class="increment"/> 
+		</id>
+		
+		 <property name="objType" column="OBJ_TYPE"></property>
+ 
+		 <property name="objID" column="OBJ_ID"></property>
+		 <property name="alarmType" column="ALARM_TYPE"></property>
+		 <property name="dataValue" column="DATA_VALUE"></property>
+		 <property name="alarmTime" column="ALARM_TIME"></property>
+		 <property name="clearUser" column="CLEAR_TIME"></property>
+		 
+		 <property name="clearStatus" column="CLEAR_TIME"></property>
+		 <property name="clearTime" column="CLEAR_TIME"></property>
+		 
+		 
+	</class>
+ 
+</hibernate-mapping>

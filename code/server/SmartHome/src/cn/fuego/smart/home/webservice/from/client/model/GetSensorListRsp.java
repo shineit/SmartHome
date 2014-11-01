@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.from.client.model;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.from.client.model.base.BaseJsonRsp;
-import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
+import cn.fuego.smart.home.webservice.from.client.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.from.client.model.base.SetResultJson;
 
 
@@ -17,14 +17,14 @@ import cn.fuego.smart.home.webservice.from.client.model.base.SetResultJson;
  */
 public class GetSensorListRsp extends BaseJsonRsp
 {
-	private List<SensorJson> sensorList;
+	private List<HomeSensorJson> sensorList;
 
-	public List<SensorJson> getSensorList()
+	public List<HomeSensorJson> getSensorList()
 	{
 		return sensorList;
 	}
 
-	public void setSensorList(List<SensorJson> sensorList)
+	public void setSensorList(List<HomeSensorJson> sensorList)
 	{
 		this.sensorList = sensorList;
 	}

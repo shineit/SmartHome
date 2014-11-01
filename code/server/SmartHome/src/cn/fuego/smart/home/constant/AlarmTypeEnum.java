@@ -9,7 +9,7 @@ package cn.fuego.smart.home.constant;
 * @date 2014-10-20 上午11:00:34 
 *
  */
-public enum AlarmStatusEnum
+public enum AlarmTypeEnum
 {
 	OFFLINE_ALARM(1,"掉线"),
 	FAULT_ALARM(2,"故障"),
@@ -21,21 +21,26 @@ public enum AlarmStatusEnum
 	RESET_ALARM(8,"复位"),
 	SETUP_ALARM(9,"设防"),
 	REMOVE_ALARM(10,"撤防");
-	private int statusInt;
-	private String statusStr;
-	private AlarmStatusEnum(int statusInt,String statusStr)
+	private int intValue;
+	private String strValue;
+	/**
+	 * @param intValue
+	 * @param strValue
+	 */
+	private AlarmTypeEnum(int intValue, String strValue)
 	{
-		this.statusInt = statusInt;
-		this.statusStr = statusStr;
+		this.intValue = intValue;
+		this.strValue = strValue;
 	}
-	public int getStatusInt()
+	public int getIntValue()
 	{
-		return statusInt;
+		return intValue;
 	}
-	public String getStatusStr()
+	public String getStrValue()
 	{
-		return statusStr;
+		return strValue;
 	}
+	
 	
 	
 

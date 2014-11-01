@@ -19,5 +19,25 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class UserMark implements PersistenceObject
 {
+	private int userID;
+	private String make;
+	public int getUserID()
+	{
+		return userID;
+	}
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
+	}
+	public String getMake()
+	{
+		return make;
+	}
+	public void setMake(String make)
+	{
+		this.make = make;
+	}
+	
+	
 
 }

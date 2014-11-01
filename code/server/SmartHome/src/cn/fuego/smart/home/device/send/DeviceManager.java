@@ -10,7 +10,7 @@ package cn.fuego.smart.home.device.send;
 
 import java.util.List;
 
-import cn.fuego.smart.home.domain.Sensor;
+import cn.fuego.smart.home.domain.HomeSensor;
 
  /** 
  * @ClassName: DeviceManager 
@@ -22,17 +22,17 @@ import cn.fuego.smart.home.domain.Sensor;
 public interface DeviceManager
 {
 
-	public List<Sensor> getSensorList();
+	public List<HomeSensor> getSensorList();
 	
-	public void setSensor(Sensor sensor);
+	public void setSensor(HomeSensor sensor);
 	
-	public void enableSensor(List<Sensor> sensorList);
+	public void enableSensor(List<HomeSensor> sensorList);
 	
-	public void disableSensor(List<Sensor> sensorList);
+	public void disableSensor(List<HomeSensor> sensorList);
 	
-	public void startSensor(List<Sensor> sensorList);
+	public void startSensor(List<HomeSensor> sensorList);
 	
-	public void stopSensor(List<Sensor> sensorList);
+	public void stopSensor(List<HomeSensor> sensorList);
 	
 	
 }

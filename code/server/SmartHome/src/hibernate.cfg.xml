@@ -28,10 +28,11 @@
 	<mapping resource="cn/fuego/misp/domain/Privilege.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemIDType.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/OperLog.hbm.xml" />
+	
 	<mapping resource="cn/fuego/smart/home/domain/Concentrator.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/News.hbm.xml" />
-	<mapping resource="cn/fuego/smart/home/domain/Sensor.hbm.xml" />
-	<mapping resource="cn/fuego/smart/home/domain/SensorAlarm.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/HomeSensor.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/Alarm.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/ServiceOrder.hbm.xml" />
 
 

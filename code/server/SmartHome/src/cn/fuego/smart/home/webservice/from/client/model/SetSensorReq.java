@@ -1,7 +1,7 @@
 package cn.fuego.smart.home.webservice.from.client.model;
 
 import cn.fuego.smart.home.webservice.from.client.model.base.BaseJsonReq;
-import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
+import cn.fuego.smart.home.webservice.from.client.model.base.HomeSensorJson;
 
 
 /**
@@ -15,7 +15,7 @@ import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
 public class SetSensorReq extends BaseJsonReq
 {
 	private String command;
-	private SensorJson sensor;
+	private HomeSensorJson sensor;
 	public String getCommand()
 	{
 		return command;
@@ -24,11 +24,11 @@ public class SetSensorReq extends BaseJsonReq
 	{
 		this.command = command;
 	}
-	public SensorJson getSensor()
+	public HomeSensorJson getSensor()
 	{
 		return sensor;
 	}
-	public void setSensor(SensorJson sensor)
+	public void setSensor(HomeSensorJson sensor)
 	{
 		this.sensor = sensor;
 	}

@@ -12,18 +12,27 @@ package cn.fuego.smart.home.constant;
 public enum SensorKindEunm
 {
 	
-	DISCRETE_SENSOR(0),
-	CONTIUOUS_SENSOR(1),
-	CTRL_SENSOR(2);
-	private int statusInt;
-	private SensorKindEunm(int statusInt)
+	DISCRETE_SENSOR(0,"告警类"),
+	CONTIUOUS_SENSOR(1,"模拟类"),
+	CTRL_SENSOR(2,"控制类");
+	private int intValue;
+	private String strValue;
+	/**
+	 * @param intValue
+	 * @param strValue
+	 */
+	private SensorKindEunm(int intValue, String strValue)
 	{
-		this.statusInt = statusInt;
+		this.intValue = intValue;
+		this.strValue = strValue;
 	}
-	public int getStatusInt()
+	public int getIntValue()
 	{
-		return statusInt;
+		return intValue;
 	}
-
+	public String getStrValue()
+	{
+		return strValue;
+	}
 	
 }

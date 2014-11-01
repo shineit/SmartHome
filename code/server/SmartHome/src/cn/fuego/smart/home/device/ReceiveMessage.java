@@ -11,9 +11,12 @@ package cn.fuego.smart.home.device;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
+import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
-import cn.fuego.smart.home.domain.FireAlarm;
-import cn.fuego.smart.home.domain.SensorAlarm;
+import cn.fuego.smart.home.domain.FireSensor;
+import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.service.ServiceContext;
 
  /** 
  * @ClassName: ReceiveMessage 
@@ -61,38 +64,39 @@ public class ReceiveMessage
 	    this.dataNum = dataBytes[DATA_NUM_INDEX];
 	}
 	
-	public List<SensorAlarm> getSensorAlarm()
+	public List<Alarm> getSensorAlarm()
 	{
-		List<SensorAlarm> alarmList = new ArrayList<SensorAlarm>();
+		List<Alarm> alarmList = new ArrayList<Alarm>();
 		for(int i=DATA_START_INDEX;i<this.dataNum;i+=4)
 		{
 	 
-			SensorAlarm alarm = new SensorAlarm();
-			alarm.setConcentratorID(this.concentratorID);
-			alarm.setSensorID((dataBytes[i]-127)*256 + dataBytes[i+1]);
-			alarm.setChannelID(dataBytes[i+2]);
-			alarm.setAlarmStatus(dataBytes[i+3]);
+			Alarm alarm = new Alarm();
+			if( dataBytes[i] > 128)
+			{
+				int sensorID = (dataBytes[i]-128)*256 + dataBytes[i+1];
+				int channelID = dataBytes[i+2];
+				HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
+				alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
+				alarm.setObjID(sensor.getId());
+			}
+			else
+			{
+				int machineID = dataBytes[i];
+				int loopID = dataBytes[i+1];
+				int codeID = dataBytes[i+2];
+				FireSensor sensor = ServiceContext.getInstance().getSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
+				alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
+				alarm.setObjID(sensor.getId());
+			}
+				
+ 
+			alarm.setAlarmType(dataBytes[i+3]);
 			alarmList.add(alarm);
 		}
 		return alarmList;
 	}
 	
-	public List<FireAlarm> getFireAlarm()
-	{
-		List<FireAlarm> alarmList = new ArrayList<FireAlarm>();
-		for(int i=DATA_START_INDEX;i<this.dataNum;i+=4)
-		{
-	 
-			FireAlarm alarm = new FireAlarm();
-			alarm.setConcentratorID(this.concentratorID);
-			alarm.setMachineID(dataBytes[i]);
-			alarm.setLoopID(dataBytes[i+1]);
-			alarm.setCodeID(dataBytes[i+2]);
-			alarm.setAlarmStatus(dataBytes[i+3]);
-			alarmList.add(alarm);
-		}
-		return alarmList;
-	}
+
 	
 	public Concentrator getConcentrator()
 	{

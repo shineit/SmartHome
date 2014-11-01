@@ -11,18 +11,27 @@ package cn.fuego.smart.home.constant;
  */
 public enum ConcentratorStatusEnum
 {
-	OFFLINE(0),
-	ONLINE(1);
-	private int statusInt;
-
-	private ConcentratorStatusEnum(int statusInt)
+	OFFLINE(0,"offline"),
+	ONLINE(1,"online");
+	private int intValue;
+	private String strValue;
+	
+	/**
+	 * @param intValue
+	 * @param strValue
+	 */
+	private ConcentratorStatusEnum(int intValue, String strValue)
 	{
-		this.statusInt = statusInt;
-
+		this.intValue = intValue;
+		this.strValue = strValue;
 	}
-	public int getStatusInt()
+	public int getIntValue()
 	{
-		return statusInt;
+		return intValue;
+	}
+	public String getStrValue()
+	{
+		return strValue;
 	}
 
 }

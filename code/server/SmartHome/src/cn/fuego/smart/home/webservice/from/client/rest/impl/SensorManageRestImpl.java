@@ -13,13 +13,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.smart.home.domain.Sensor;
+import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.SensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
-import cn.fuego.smart.home.webservice.from.client.model.base.SensorJson;
+import cn.fuego.smart.home.webservice.from.client.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest;
 
  /** 
@@ -57,11 +57,11 @@ public class SensorManageRestImpl implements SensorManageRest
 		
 		try
 		{
-			List<Sensor> sensorList = sensorService.getSensorDataSource().getAllPageData();
+			List<HomeSensor> sensorList = sensorService.getSensorDataSource().getAllPageData();
 	 		
-			for(Sensor sensor :sensorList)
+			for(HomeSensor sensor :sensorList)
 			{	
-				SensorJson json = new SensorJson();
+				HomeSensorJson json = new HomeSensorJson();
 			
 				json.loadWithSensor(sensor);
 				rsp.getSensorList().add(json);

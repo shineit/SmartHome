@@ -3,25 +3,24 @@ package cn.fuego.smart.home.constant;
 
 /**
  * 
-* @ClassName: SensorStatusEnum 
+* @ClassName: AlarmStatusEnum 
 * @Description: TODO
 * @author Tang Jun
-* @date 2014-10-20 上午11:00:51 
+* @date 2014-10-20 上午11:00:34 
 *
  */
-public enum SensorStatusEnum
+public enum AlarmClearEnum
 {
-
-	DISABLE(0,"禁止"),
-	ENABLE(1,"使能");
+	NONE_CLEAR(0,"未清除"),
+	MANUAL_CLEAR(1,"手动清除"),
+	AUTO_CLEAR(2,"自动清除");
 	private int intValue;
 	private String strValue;
-	
 	/**
 	 * @param intValue
 	 * @param strValue
 	 */
-	private SensorStatusEnum(int intValue, String strValue)
+	private AlarmClearEnum(int intValue, String strValue)
 	{
 		this.intValue = intValue;
 		this.strValue = strValue;
@@ -34,5 +33,8 @@ public enum SensorStatusEnum
 	{
 		return strValue;
 	}
+	
+	
+	
 
 }

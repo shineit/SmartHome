@@ -17,11 +17,28 @@ package cn.fuego.smart.home.domain;
  */
 public class FireSensor
 {
+	private int id;
 	private int concentratorID;  //集中器ID
 
 	private int machineID; //机号
 	private int loopID;    //回路号
 	private int codeID;    //编号
+	public int getId()
+	{
+		return id;
+	}
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	public int getConcentratorID()
+	{
+		return concentratorID;
+	}
+	public void setConcentratorID(int concentratorID)
+	{
+		this.concentratorID = concentratorID;
+	}
 	public int getMachineID()
 	{
 		return machineID;
@@ -46,6 +63,7 @@ public class FireSensor
 	{
 		this.codeID = codeID;
 	}
+ 
 	
 	
 

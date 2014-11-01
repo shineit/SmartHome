@@ -12,8 +12,9 @@ import java.util.List;
 
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
-import cn.fuego.smart.home.domain.Sensor;
-import cn.fuego.smart.home.domain.SensorAlarm;
+import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.FireSensor;
+import cn.fuego.smart.home.domain.HomeSensor;
 
  /** 
  * @ClassName: SensorManageService 
@@ -24,10 +25,13 @@ import cn.fuego.smart.home.domain.SensorAlarm;
  */
 public interface SensorManageService
 {
-	AbstractDataSource<Sensor>  getSensorDataSource();
+	AbstractDataSource<HomeSensor>  getSensorDataSource();
 	
-	void setSensor(SensorSetCmdEnum setCmd,Sensor sensor);
-	void createAlarm(List<SensorAlarm> alarm);
+	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor);
+	void createAlarm(List<Alarm> alarm);
+	
+	FireSensor getFireSensor(int concentratorID,int machineID,int loopID,int codeID);
+	HomeSensor getHomeSensor(int concentratorID,int sensorID,int channelID);
 
  
 }

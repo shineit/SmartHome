@@ -1,16 +1,19 @@
-package cn.fuego.smart.home.webservice.from.client.model.base;
+package cn.fuego.smart.home.domain;
 
 import java.util.Date;
 
+import cn.fuego.common.domain.PersistenceObject;
+
+
 /**
  * 
-* @ClassName: AlarmJson 
+* @ClassName: SensorAlarm 
 * @Description: TODO
 * @author Tang Jun
-* @date 2014-10-20 上午10:57:32 
+* @date 2014-10-20 上午11:01:17 
 *
  */
-public class AlarmJson
+public class Alarm implements PersistenceObject
 {
 	private int id;  			//告警ID，自增长
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
@@ -94,18 +97,8 @@ public class AlarmJson
 	{
 		this.clearTime = clearTime;
 	}
-	@Override
-	public String toString()
-	{
-		return "AlarmJson [id=" + id + ", objType=" + objType + ", objID="
-				+ objID + ", alarmType=" + alarmType + ", dataValue="
-				+ dataValue + ", alarmTime=" + alarmTime + ", clearUser="
-				+ clearUser + ", clearStatus=" + clearStatus + ", clearTime="
-				+ clearTime + "]";
-	}
-	
  
 	
+	 
 	
- 
 }

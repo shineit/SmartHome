@@ -15,6 +15,7 @@ public class LoginReq
 	private String password;
 	private String clientType;
 	private String clientVersion;
+	private String devToken;
 	public String getUserName()
 	{
 		return userName;
