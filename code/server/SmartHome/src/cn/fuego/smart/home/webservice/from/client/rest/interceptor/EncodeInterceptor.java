@@ -47,6 +47,8 @@ public class EncodeInterceptor  implements MessageBodyWriterInterceptor
 	{
 		
 		log.info("response is "+  arg0.getEntity());
+		arg0.proceed();
+		
  
 	}
 
