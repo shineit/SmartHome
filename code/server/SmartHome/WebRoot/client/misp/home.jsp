@@ -80,7 +80,7 @@ function resetForm(objForm){
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="http://www.szangell.com/">安健科技</a>
+				<a class="logo" href="javascript:void(0)">链接到云安防产品平台</a>
 				<ul class="nav">
                     <li>欢迎您，用户：${loginUser.userName}!</li>
 	 
@@ -156,7 +156,7 @@ function resetForm(objForm){
 						<div class="pageFormContent" layoutH="80" style="margin-right:230px">
 							
 
-<h2></h2>
+<h2>公告</h2>
 <div class="unit"></div>
 <div class="unit"></div>
 

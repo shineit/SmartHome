@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>远程诊断管理平台</title>
+<title>云安防管理平台</title>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/login.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/client/lib/dwz/favicon.ico" rel="shortcut icon"  />
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
@@ -82,15 +82,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<s:form action="login/login" method="POST" theme="simple" name="loginForm">
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="user.userName" size="16" class="login_input" />
+						<input type="text" name="user.userName" size="16" class="login_input" style="width:140px !important;"/>
 					</p>
 					<p>
 						<label>密码：</label>
-						<input type="password" name="user.password" size="16" class="login_input" />
+						<input type="password" name="user.password" size="16" class="login_input" style="width:140px !important;"/>
 					</p>
 					<p>
 						<label>验证码：</label>
-						<input id="ckey"  class="code" type="text" size="5" name="user.validateCode" />
+						<input id="ckey"  class="code" type="text" size="4" name="user.validateCode" style="margin-left:0px !important;"/>
 						<span><img src="login/ValidateImage.action" onclick="changeValidateCode(this)" alt="" width="75" height="24" /></span>
 					</p>
 					<div class="login_bar">
