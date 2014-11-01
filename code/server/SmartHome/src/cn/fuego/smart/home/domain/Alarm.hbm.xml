@@ -18,9 +18,9 @@
 		 <property name="alarmType" column="ALARM_TYPE"></property>
 		 <property name="dataValue" column="DATA_VALUE"></property>
 		 <property name="alarmTime" column="ALARM_TIME"></property>
-		 <property name="clearUser" column="CLEAR_TIME"></property>
+		 <property name="clearUser" column="CLEAR_USER"></property>
 		 
-		 <property name="clearStatus" column="CLEAR_TIME"></property>
+		 <property name="clearStatus" column="CLEAR_STATUS"></property>
 		 <property name="clearTime" column="CLEAR_TIME"></property>
 		 
 		 

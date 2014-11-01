@@ -20,8 +20,7 @@
 		 <property name="sensorType" column="SENSOR_TYPE"></property>
 		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>			 
 		 <property name="status" column="STATUS"></property>
-		 <property name="alarmStatus" column="ALARM_STATUS"></property>	
-		 <property name="warnValue" column="WARN_VALUE"></property>	
+ 		 <property name="warnValue" column="WARN_VALUE"></property>	
 		 <property name="errorValue" column="ERROR_VALUE"></property>
 		 <property name="groupID" column="GROUP_ID"></property>	
 		 <property name="ctrGroupID" column="CTL_GROUP_ID"></property>	
