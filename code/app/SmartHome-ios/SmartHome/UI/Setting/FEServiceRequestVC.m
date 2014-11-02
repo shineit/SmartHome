@@ -8,6 +8,8 @@
 
 #import "FEServiceRequestVC.h"
 #import "FEWebServiceManager.h"
+#import "FECheckButton.h"
+#import "FECheckButtonGroup.h"
 
 @interface FEServiceRequestVC ()
 
@@ -18,6 +20,7 @@
 @property (nonatomic, strong) UITextField *phonenumber;
 @property (nonatomic, strong) UITextField *address;
 @property (nonatomic, strong) UIScrollView *scrollContent;
+@property (nonatomic, strong) FECheckButtonGroup *checkGroup;
 
 @end
 
@@ -68,17 +71,23 @@
     type.text = FEString(@"ORDER_TYPE");
     [scrollcontent addSubview:type];
     
-    UIButton *repair = [UIButton buttonWithType:UIButtonTypeCustom];
-    repair.frame = CGRectMake(80, 60, 80, 30);
-    [repair setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [repair setTitle:FEString(@"ORDER_REPAIR") forState:UIControlStateNormal];
+    //check group
+    _checkGroup = [FECheckButtonGroup new];
+    
+//    UIButton *repair = [UIButton buttonWithType:UIButtonTypeCustom];
+    FECheckButton *repair = [[FECheckButton alloc] initWithFrame:CGRectMake(80, 60, 80, 30)];
+    [repair addObserver:self check:@selector(check:)];
+    [repair setTitle:FEString(@"ORDER_REPAIR")];
+    [_checkGroup addButton:repair];
     [scrollcontent addSubview:repair];
     
-    UIButton *consult = [UIButton buttonWithType:UIButtonTypeCustom];
-    consult.frame = CGRectMake(200, 60, 80, 30);
-    [consult setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [consult setTitle:FEString(@"ORDER_CONSULT") forState:UIControlStateNormal];
+    
+    FECheckButton *consult = [[FECheckButton alloc] initWithFrame:CGRectMake(200, 60, 80, 30)];
+    [consult addObserver:self check:@selector(check:)];
+    [consult setTitle:FEString(@"ORDER_CONSULT")];
+    [_checkGroup addButton:consult];
     [scrollcontent addSubview:consult];
+    
     
     //名称
     FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(10, 120, 60, 20)];
@@ -140,6 +149,10 @@
     [scrollcontent addSubview:submit];
     
     
+}
+
+-(void)check:(FECheckButton *)btn{
+    [_checkGroup checkButton:btn];
 }
 
 -(void)submit:(UIButton *)button{

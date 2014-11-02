@@ -7,12 +7,12 @@
 //
 
 #import "FEMarkRequest.h"
-#import "FEUserMarkRequest.h"
+#import "FEUserMark.h"
 
 
 @implementation FEMarkRequest
 
--(id)initWithCommand:(NSString *)cmd usermark:(FEUserMarkRequest *)mark{
+-(id)initWithCommand:(NSString *)cmd usermark:(FEUserMark *)mark{
     self = [super initWithMothed:@""];
     if (self) {
         _command = cmd;

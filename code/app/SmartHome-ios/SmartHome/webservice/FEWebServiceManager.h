@@ -13,6 +13,8 @@
 #import "FEDataNew.h"
 #import "FEServiceOrederRequest.h"
 #import "FEServiceOrderSetRequest.h"
+#import "FEMarkSetRequest.h"
+#import "FEMarkRequest.h"
 #import "FEBaseResponse.h"
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
@@ -27,5 +29,9 @@
 -(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
 
 -(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
+
+-(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse*response))block;
+
+-(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse*response))block;
 
 @end

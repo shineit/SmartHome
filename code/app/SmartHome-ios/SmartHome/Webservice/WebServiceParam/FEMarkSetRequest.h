@@ -1,19 +1,20 @@
 //
-//  FEMarkRequest.h
+//  FEMarkSetRequest.h
 //  SmartHome
 //
-//  Created by Seven on 14-11-1.
+//  Created by Seven on 14-11-2.
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
 #import "FERequestBaseData.h"
+
 @class FEUserMark;
 
-@interface FEMarkRequest : FERequestBaseData
+@interface FEMarkSetRequest : FERequestBaseData
+
 @property (nonatomic, strong, readonly) NSString *command;
 @property (nonatomic, strong, readonly) NSDictionary *userMark;
 
--(id)initWithCommand:(NSString *)cmd usermark:(FEUserMark *)mark;
+-(id)initWithCommand:(NSString *)cmd mark:(FEUserMark *)umark;
 
 @end

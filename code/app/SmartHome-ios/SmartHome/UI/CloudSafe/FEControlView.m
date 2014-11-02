@@ -7,6 +7,13 @@
 //
 
 #import "FEControlView.h"
+#import "FECheckButtonGroup.h"
+#import "FECheckButton.h"
+
+@interface FEControlView ()
+@property (nonatomic, strong) FECheckButtonGroup *checkGroup;
+
+@end
 
 @implementation FEControlView
 
@@ -21,21 +28,27 @@
 }
 
 -(void)setup{
+    _checkGroup = [FECheckButtonGroup new];
     
     self.backgroundColor = [UIColor whiteColor];
     
-    UIButton *open = [UIButton buttonWithType:UIButtonTypeCustom];
-    [open setTitle:FEString(@"ALL_OPEN") forState:UIControlStateNormal];
-    [open setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    open.frame = CGRectMake(20, 5, 100, 30);
+    FECheckButton *open = [[FECheckButton alloc] initWithFrame:CGRectMake(20, 5, self.bounds.size.width / 2.0f - 20, 30)];
+    [open setTitle:FEString(@"SAFE_ALL_OPEN")];
+    [_checkGroup addButton:open];
+    [open addObserver:self check:@selector(check:)];
+    
     [self addSubview:open];
     
-    UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
-    [close setTitle:FEString(@"ALL_OPEN") forState:UIControlStateNormal];
-    [close setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    close.frame = CGRectMake(200, 5, 100, 30);
+    FECheckButton *close = [[FECheckButton alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2.0f + 20, 5, self.bounds.size.width / 2.0f - 20, 30)];
+    [close setTitle:FEString(@"SAFE_ALL_CLOSE")];
+    [_checkGroup addButton:close];
+    [close addObserver:self check:@selector(check:)];
     [self addSubview:close];
     
+}
+
+-(void)check:(FECheckButton *)btn{
+    [_checkGroup checkButton:btn];
 }
 
 /*

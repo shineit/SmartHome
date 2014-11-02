@@ -69,6 +69,7 @@
     }];
 }
 
+//set order
 -(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
     return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         block(NULL,[FEBaseResponse new]);
@@ -77,6 +78,23 @@
     }];
 }
 
+//set mark
+-(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *, FEBaseResponse *))block{
+    return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block(NULL,[FEBaseResponse new]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         block(error,NULL);
+    }];
+}
+
+//get mark list
+-(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *, FEBaseResponse *))block{
+    return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block(NULL,[FEBaseResponse new]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error,NULL);
+    }];
+}
 
 
 

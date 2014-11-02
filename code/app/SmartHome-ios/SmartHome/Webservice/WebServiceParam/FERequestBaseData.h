@@ -13,6 +13,7 @@
 #define __GET_NEWS         @"news/list"  //news
 #define __SEVICE_ORDER     @"order/list" //orders
 #define __SEVICE_ORDER_SET @"order/set" //set order
+#define __MARK_SET         @""
 
 @interface FERequestBaseData : NSObject
 

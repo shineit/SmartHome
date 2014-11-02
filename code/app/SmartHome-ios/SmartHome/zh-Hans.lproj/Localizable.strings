@@ -55,3 +55,7 @@
 "ORDER_ADRESS" = "联系地址";
 "ORDER_DELET" = "删除";
 "ORDER_SUBMIT" = "提交";
+
+//safe page
+"SAFE_ALL_OPEN" = "全部打开";
+"SAFE_ALL_CLOSE" = "全部关闭";
