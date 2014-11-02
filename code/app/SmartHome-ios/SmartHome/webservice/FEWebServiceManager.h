@@ -12,6 +12,7 @@
 #import "FENewsRequest.h"
 #import "FEDataNew.h"
 #import "FESeviceOrederRequest.h"
+#import "FEBaseResponse.h"
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -21,5 +22,7 @@
 
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *error,FEDataUser *user))block;
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FEDataNew *user))block;
+
+-(AFHTTPRequestOperation *)orederList:(FESeviceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
 
 @end

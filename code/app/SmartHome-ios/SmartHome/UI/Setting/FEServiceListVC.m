@@ -9,6 +9,7 @@
 #import "FEServiceListVC.h"
 #import "FEServiceTableViewCell.h"
 #import "FEServiceRequestVC.h"
+#import "FEWebServiceManager.h"
 
 @interface FEServiceListVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -34,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    [self requestOrder];
 }
 
 -(void)initUI{
@@ -50,6 +52,26 @@
     view.backgroundColor = [UIColor clearColor];
     [table setTableFooterView:view];
 
+}
+
+//请求历史
+-(void)requestOrder{
+    
+    [self displayHUD:FEString(@"LOADING...")];
+    FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:1 count:1];
+    FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
+    FESeviceOrederRequest *rdata = [[FESeviceOrederRequest alloc] initWithPage:page attribute:@[attr] userID:@(12345)];
+    
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] orederList:rdata response:^(NSError *error, FEBaseResponse *response) {
+        
+        [weakself hideHUD:YES];
+        if (error) {
+            ;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
 }
 
 -(void)rightbarpressed:(UIButton *)button{

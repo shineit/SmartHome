@@ -10,7 +10,9 @@
 #import "NSObject+Dictionary.h"
 
 #define __MODTHED_SIGIN    @"user/login" //登陆
-#define __GET_NEWS         @"news/list"  //news 
+#define __GET_NEWS         @"news/list"  //news
+#define __SEVICE_ORDER     @"order/list" //orders
+#define __SEVICE_ORDER_SET @"order/set" //set order
 
 
 @interface FERequestBaseData : NSObject

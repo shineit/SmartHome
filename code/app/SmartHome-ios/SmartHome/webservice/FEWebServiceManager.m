@@ -9,7 +9,7 @@
 #import "FEWebServiceManager.h"
 #import "FESiginData.h"
 
-#define _BASE_URL @"http://163.125.161.34:9000/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://localhost:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -31,7 +31,7 @@
     return self;
 }
 
-
+//sigin
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *, FEDataUser *))block{
     return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -48,6 +48,7 @@
     
 }
 
+//news
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FEDataNew *user))block{
     return [self POST:ndata.method parameters:ndata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"news success!");
@@ -55,6 +56,16 @@
         block(NULL,news);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"news fail!");
+        block(error,NULL);
+    }];
+}
+
+//order list
+-(AFHTTPRequestOperation *)orederList:(FESeviceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
+    return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block(NULL,[FEBaseResponse new]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error,NULL);
     }];
 }
 

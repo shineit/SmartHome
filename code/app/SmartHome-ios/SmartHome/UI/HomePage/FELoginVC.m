@@ -109,7 +109,7 @@
             NSLog(@"call back");
             [weakself hideHUD:YES];
             if (error) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:FEString(@"request error!") delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
                 [alert show];
                 return;
             }

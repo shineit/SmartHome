@@ -100,10 +100,12 @@
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr.dictionary]];
     [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FEDataNew *user) {
-        if (error) {
-            return ;
-        }
         [self hideHUD:YES];
+        if (error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+        
     }];
 }
 

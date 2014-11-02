@@ -7,7 +7,14 @@
 //
 
 #import "FERequestBaseData.h"
+@class FEPage;
 
 @interface FESeviceOrederRequest : FERequestBaseData
+
+@property (nonatomic, strong, readonly) NSDictionary *page;
+@property (nonatomic, strong, readonly) NSNumber *userID;
+@property (nonatomic, strong, readonly) NSArray *filterList;
+
+-(id)initWithPage:(FEPage *)page attribute:(NSArray *)attr userID:(NSNumber *)uid;
 
 @end
