@@ -18,6 +18,10 @@
 //NavgationBar
 "SEARCH" = "搜索";
 
+//HOME PAGE
+"HOME_NEWS" = "新  闻";
+"HOME_WARRING" = "告  警";
+
 //sigin
 "USER_NAME:" = "用户名:";
 "USER_PSW:"  = "密    码:";
@@ -32,3 +36,22 @@
 "SERVICE" = "服务";
 "ABOUT_NEWS" = "新功能";
 "FEED_BACK" = "意见反馈";
+
+//Service page
+"ORDER_SERVICE" = "服务";
+"ORDER_NUMBER" = "单号";
+"ORDER_TYPE" = "类型";
+"ORDER_STATUS" = "状态";
+"ORDER_ADD" = "添加";
+
+//Service set page
+"SERVICE_REQUEST" = "服务申请";
+"ORDER_REPAIR" = "维修";
+"ORDER_CONSULT" = "咨询";
+"ORDER_THEME" = "标题";
+"ORDER_CONTENT" = "内容";
+"ORDER_CONTACT" = "联系人";
+"ORDER_PHONENUMBER" = "联系电话";
+"ORDER_ADRESS" = "联系地址";
+"ORDER_DELET" = "删除";
+"ORDER_SUBMIT" = "提交";

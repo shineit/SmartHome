@@ -1,5 +1,5 @@
 //
-//  FESeviceOrederRequest.h
+//  FEServiceOrederRequest.h
 //  SmartHome
 //
 //  Created by Seven on 14-11-1.
@@ -9,7 +9,7 @@
 #import "FERequestBaseData.h"
 @class FEPage;
 
-@interface FESeviceOrederRequest : FERequestBaseData
+@interface FEServiceOrederRequest : FERequestBaseData
 
 @property (nonatomic, strong, readonly) NSDictionary *page;
 @property (nonatomic, strong, readonly) NSNumber *userID;

@@ -25,7 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"SERVICE");
+        self.title = FEString(@"ORDER_SERVICE");
     }
     return self;
 }
@@ -40,7 +40,7 @@
 
 -(void)initUI{
     
-    [self loadRightCustomButtonItemWithTitle:FEString(@"ADD") image:nil];
+    [self loadRightCustomButtonItemWithTitle:FEString(@"ORDER_ADD") image:nil];
     
     UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     table.delegate = self;
@@ -60,7 +60,7 @@
     [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:1 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
-    FESeviceOrederRequest *rdata = [[FESeviceOrederRequest alloc] initWithPage:page attribute:@[attr] userID:@(12345)];
+    FEServiceOrederRequest *rdata = [[FEServiceOrederRequest alloc] initWithPage:page attribute:@[attr] userID:@(12345)];
     
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] orederList:rdata response:^(NSError *error, FEBaseResponse *response) {
@@ -106,15 +106,15 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
     header.backgroundColor = [UIColor whiteColor];
     FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 60, 30)];
-    label.text = FEString(@"ORDER");
+    label.text = FEString(@"ORDER_NUMBER");
     [header addSubview:label];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(100, 20, 80, 30)];
-    label.text = FEString(@"TYPE");
+    label.text = FEString(@"ORDER_TYPE");
     [header addSubview:label];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(240, 20, 80, 30)];
-    label.text = FEString(@"STATUS");
+    label.text = FEString(@"ORDER_STATUS");
     [header addSubview:label];
     return header;
 }

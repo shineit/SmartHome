@@ -61,13 +61,25 @@
 }
 
 //order list
--(AFHTTPRequestOperation *)orederList:(FESeviceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
+-(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
     return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         block(NULL,[FEBaseResponse new]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         block(error,NULL);
     }];
 }
+
+-(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
+    return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        block(NULL,[FEBaseResponse new]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error,NULL);
+    }];
+}
+
+
+
+
 
 
 @end

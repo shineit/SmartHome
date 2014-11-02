@@ -21,11 +21,13 @@
     #import "FECommonViewController.h"
     #import "FECommonTabBarController.h"
     #import "FELabel.h"
+    #import "FEButton.h"
     #import "FETextField.h"
     #import "FECoreDataHandler.h"
     #import "NSString+MD5.h"
     #import "NSString+UUID.h"
     #import "UIColor+Theme.h"
+    #import "UIImage+Resize.h"
     #import <ZBUtilities/UIViewController+HUD.h>
 
 #define SYSTEM_VERSION_UP7                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)

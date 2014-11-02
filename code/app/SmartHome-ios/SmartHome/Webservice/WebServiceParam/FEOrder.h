@@ -24,6 +24,6 @@
 @property (nonatomic, strong, readonly) NSString *handleResult;
 @property (nonatomic, strong, readonly) NSNumber *handleTime;
 
-
+-(id)initWithOrderID:(NSString *)oid name:(NSString *)oname type:(NSString *)otype content:(NSString *)content creater:(NSString *)creater time:(NSNumber *)time contactname:(NSString *)cname phone:(NSString *)phone address:(NSString *)addr status:(NSNumber *)stat handler:(NSString *)hand handResult:(NSString *)hresult handTime:(NSNumber *)htime;
 
 @end

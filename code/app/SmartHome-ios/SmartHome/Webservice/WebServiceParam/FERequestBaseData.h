@@ -14,7 +14,6 @@
 #define __SEVICE_ORDER     @"order/list" //orders
 #define __SEVICE_ORDER_SET @"order/set" //set order
 
-
 @interface FERequestBaseData : NSObject
 
 @property (nonatomic, strong, readonly) NSString *method;

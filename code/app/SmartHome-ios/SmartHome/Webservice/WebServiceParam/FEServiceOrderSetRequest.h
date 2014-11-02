@@ -7,8 +7,8 @@
 //
 
 #import "FERequestBaseData.h"
+#import "FEOrder.h"
 
-@class FEOrder;
 
 @interface FEServiceOrderSetRequest : FERequestBaseData
 

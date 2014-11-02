@@ -12,7 +12,7 @@
 @implementation FEServiceOrderSetRequest
 
 -(id)initWithCmd:(NSString *)cmd serviceOrder:(FEOrder *)order{
-    self = [super initWithMothed:@""];
+    self = [super initWithMothed:__SEVICE_ORDER_SET];
     if (self) {
         _command = cmd;
         _serviceOrder = order.dictionary;
