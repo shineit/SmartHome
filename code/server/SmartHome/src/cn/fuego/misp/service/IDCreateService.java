@@ -25,6 +25,8 @@ public interface IDCreateService
 	
 	public static final String ORG_ID_NAME = "ORG_ID";
 
+	public static final String ORDER_ID_NAME = "ORDER_ID";
+
 	
 	public static int INCREASE_MODE = 1;
 	public static int DECREASE_MODE = 0;
@@ -38,6 +40,8 @@ public interface IDCreateService
 	 * @return 
 	 */
 	public List<String> createIDList(int idCount);
+	
+	public String create();
 	
 	public String getUUID();
  

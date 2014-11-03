@@ -20,6 +20,8 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.misp.service.IDCreateService;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
@@ -81,6 +83,7 @@ public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
 	@Override
 	public void create(ServiceOrder order)
 	{
+		order.setOrderID(MISPServiceContext.getInstance().getIDCreateService(IDCreateService.ORDER_ID_NAME).create());
 		order.setCreateTime(DateUtil.getCurrentDateTime());
 		order.setOrderStatus(ServiceOrderStatusEnum.APPLYED.getIntValue());
 		DaoContext.getInstance().getServiceOrderDao().create(order);

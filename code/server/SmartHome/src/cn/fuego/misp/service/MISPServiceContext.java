@@ -1,8 +1,12 @@
 package cn.fuego.misp.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cn.fuego.misp.service.impl.MISPOperLogServiceImpl;
 import cn.fuego.misp.service.impl.MISPPrivilegeManageImpl;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.misp.service.impl.id.CommonIDImpl;
 
 public class MISPServiceContext
 {
@@ -14,12 +18,28 @@ public class MISPServiceContext
 	private MISPOperLogService operLogService = null;
 
 	private MISPPrivilegeManage privilegeManage = null;
+	
+	private Map<String,IDCreateService> idCreateServiceMap = new HashMap<String,IDCreateService>();
+
+
+	
 
 	private MISPServiceContext()
 	{
 
 	}
 
+	public synchronized IDCreateService getIDCreateService(String IDName) 
+	{
+		
+		if(null == idCreateServiceMap.get(IDName))
+		{
+			idCreateServiceMap.put(IDName, new CommonIDImpl(IDName));
+		}
+		
+		return idCreateServiceMap.get(IDName);
+	}
+	
 	public static synchronized MISPServiceContext getInstance()
 	{
 		if (null == instance)

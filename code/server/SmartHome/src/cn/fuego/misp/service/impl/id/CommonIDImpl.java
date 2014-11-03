@@ -41,6 +41,12 @@ public class CommonIDImpl implements IDCreateService
 	{
 		this.IDName = IDName;
 	}
+	
+	public synchronized String create()
+	{
+		List<String> idList = this.createIDList(1);
+		return idList.get(0);
+	}
 	public synchronized List<String> createIDList(int idCount)
 	{
 		//get id type by id name

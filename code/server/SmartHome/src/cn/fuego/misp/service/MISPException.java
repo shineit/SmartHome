@@ -9,6 +9,7 @@
 package cn.fuego.misp.service;
 
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.dao.file.MispMessageReader;
 
  /** 
  * @ClassName: MISPException 
@@ -60,6 +61,13 @@ public class MISPException extends RuntimeException
 	public int getErrorCode()
 	{
 		return errorCode;
+	}
+	
+	@Override
+	public String getMessage()
+	{
+		
+		return  MispMessageReader.getInstance().getPropertyByName(super.getMessage());
 	}
 
 	@Override
