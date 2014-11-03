@@ -14,7 +14,6 @@
 
 @property (nonatomic, strong, readonly) FEUser *user;
 
--(id)initWithUser:(FEUser *)user baseResult:(FEResult *)result;
 -(id)initWithResponse:(id)response;
 
 @end

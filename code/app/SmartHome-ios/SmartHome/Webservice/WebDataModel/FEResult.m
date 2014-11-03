@@ -10,12 +10,12 @@
 
 @implementation FEResult
 
--(id)initWithDictionary:(NSDictionary *)dictionary{
-    self = [super initWithDictionary:dictionary];
-    if (self) {
-        
-    }
-    return self;
-}
+//-(id)initWithDictionary:(NSDictionary *)dictionary{
+//    self = [super initWithDictionary:dictionary];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 
 @end

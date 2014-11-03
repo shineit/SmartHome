@@ -9,6 +9,7 @@
 #import "FEWebServiceManager.h"
 #import "FESiginData.h"
 #import "FESiginResponse.h"
+#import "FENewsResponse.h"
 
 #define _BASE_URL @"http://163.125.160.190:9000/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
@@ -52,10 +53,10 @@
 }
 
 //news
--(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FEDataNew *user))block{
+-(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block{
     return [self POST:ndata.method parameters:ndata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"news success!");
-        FEDataNew *news = [FEDataNew new];
+        FENewsResponse *news = [FENewsResponse new];
         block(NULL,news);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"news fail!");
@@ -75,7 +76,7 @@
 //set order
 -(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
     return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        block(NULL,[FEBaseResponse new]);
+        block(NULL,[[FEBaseResponse alloc] initWithResponse:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         block(error,NULL);
     }];

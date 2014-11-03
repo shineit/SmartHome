@@ -23,6 +23,5 @@ Pods/
 project.pbxproj
 *.class
 
-*.properties
 
 code/server/SmartHome/WebRoot/

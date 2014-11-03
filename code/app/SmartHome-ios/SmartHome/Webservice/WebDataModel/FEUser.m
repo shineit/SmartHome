@@ -11,12 +11,12 @@
 
 @implementation FEUser
 
--(id)initWithDictionary:(NSDictionary *)dic{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
+//-(id)initWithDictionary:(NSDictionary *)dic{
+//    self = [super initWithDictionary:dic];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 
 @end

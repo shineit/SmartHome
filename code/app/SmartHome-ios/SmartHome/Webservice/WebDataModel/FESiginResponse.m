@@ -13,17 +13,9 @@
 
 @implementation FESiginResponse
 
--(id)initWithUser:(FEUser *)user baseResult:(FEResult *)result{
-    self = [super initWithResult:result];
-    if (self) {
-        _user = user;
-    }
-    return self;
-}
 
 -(id)initWithResponse:(id)response{
-    FEResult *result = [[FEResult alloc] initWithDictionary:response[@"result"]];
-    self = [super initWithResult:result];
+    self = [super initWithResponse:response];
     if (self) {
         _user = [[FEUser alloc] initWithDictionary:response[@"user"]];
     }

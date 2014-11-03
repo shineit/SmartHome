@@ -99,6 +99,7 @@
     
     _titleTextField = [[UITextField alloc] initWithFrame:CGRectMake(80, 120, 220, 30)];
     _titleTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _titleTextField.text = @"test";
     [scrollcontent addSubview:_titleTextField];
     
     FELabel *content = [[FELabel alloc] initWithFrame:CGRectMake(10, 160, 60, 20)];
@@ -107,6 +108,7 @@
     
     _contentTextField = [[UITextField alloc] initWithFrame:CGRectMake(80, 160, 220, 30)];
     _contentTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _contentTextField.text = @"test content!";
     [scrollcontent addSubview:_contentTextField];
     
     //联系人
@@ -114,9 +116,10 @@
     contact.text = FEString(@"ORDER_CONTACT");
     [scrollcontent addSubview:contact];
     
-    _contentTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 230, 190, 30)];
-    _contentTextField.borderStyle = UITextBorderStyleRoundedRect;
-    [scrollcontent addSubview:_contentTextField];
+    _contact = [[UITextField alloc] initWithFrame:CGRectMake(110, 230, 190, 30)];
+    _contact.borderStyle = UITextBorderStyleRoundedRect;
+    _contact.text = @"tester";
+    [scrollcontent addSubview:_contact];
     
     //电话
     FELabel *phone = [[FELabel alloc] initWithFrame:CGRectMake(10, 270, 80, 20)];
@@ -125,6 +128,7 @@
     
     _phonenumber = [[UITextField alloc] initWithFrame:CGRectMake(110, 270, 190, 30)];
     _phonenumber.borderStyle = UITextBorderStyleRoundedRect;
+    _phonenumber.text = @"123456";
     [scrollcontent addSubview:_phonenumber];
     
     //adress
@@ -134,6 +138,7 @@
     
     _address = [[UITextField alloc] initWithFrame:CGRectMake(110, 310, 190, 30)];
     _address.borderStyle = UITextBorderStyleRoundedRect;
+    _address.text = @"test address";
     [scrollcontent addSubview:_address];
     
     //删除按钮
@@ -162,9 +167,12 @@
     
     FEOrder *order = [[FEOrder alloc] initWithOrderID:[NSString UUID] name:_titleTextField.text type:@"repair" content:_contentTextField.text creater:FELoginUser.username time:@([[NSDate date] timeIntervalSince1970]) contactname:_contact.text phone:_phonenumber.text address:_address.text status:@(1) handler:nil handResult:nil handTime:nil];
     FEServiceOrderSetRequest *sdata = [[FEServiceOrderSetRequest alloc] initWithCmd:@"test" serviceOrder:order];
-    
+    [self hideKeyboard:nil];
+    [self displayHUD:FEString(@"LOADING...")];
+    __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] orederSet:sdata response:^(NSError *error, FEBaseResponse *response) {
-       
+        [weakself hideHUD:YES];
+        NSLog(@"set order %@",response);
         if (error) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

@@ -7,13 +7,15 @@
 //
 
 #import "FEBaseResponse.h"
+#import "FEResult.h"
 
 @implementation FEBaseResponse
 
--(id)initWithResult:(FEResult *)result{
+
+-(id)initWithResponse:(id)obj{
     self = [super init];
     if (self) {
-        _result = result;
+        _result = [[FEResult alloc] initWithDictionary:obj[@"result"]];
     }
     return self;
 }

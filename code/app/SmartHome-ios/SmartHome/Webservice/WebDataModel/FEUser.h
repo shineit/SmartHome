@@ -14,6 +14,5 @@
 @property (nonatomic, strong, readonly) NSNumber *userID;
 @property (nonatomic, strong, readonly) NSNumber *userName;
 
-//-(id)initWithDictionary:(NSDictionary *)dic;
 
 @end

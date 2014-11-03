@@ -9,7 +9,6 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "FESiginData.h"
 #import "FENewsRequest.h"
-#import "FEDataNew.h"
 #import "FEServiceOrederRequest.h"
 #import "FEServiceOrderSetRequest.h"
 #import "FEMarkSetRequest.h"
@@ -17,6 +16,7 @@
 #import "FEBaseResponse.h"
 //#import "FESiginResponse.h"
 @class FESiginResponse;
+@class FENewsResponse;
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -25,7 +25,8 @@
 +(FEWebServiceManager *)sharedInstance;
 
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *error,FESiginResponse *user))block;
--(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FEDataNew *user))block;
+
+-(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block;
 
 -(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
 

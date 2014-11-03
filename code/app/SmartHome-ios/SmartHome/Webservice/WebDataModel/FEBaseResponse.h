@@ -12,6 +12,8 @@
 @interface FEBaseResponse : NSObject
 
 @property (nonatomic, strong, readonly) FEResult *result;
--(id)initWithResult:(FEResult *)result;
+
+-(id)initWithResponse:(id)obj;
+
 
 @end

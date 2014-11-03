@@ -12,6 +12,7 @@
 #import "FEWarringTableViewCell.h"
 #import "FEWarringResponse.h"
 #import "FEWebServiceManager.h"
+#import "FENewsRequest.h"
 
 @interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -100,7 +101,7 @@
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr.dictionary]];
-    [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FEDataNew *user) {
+    [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FENewsResponse *news) {
         [self hideHUD:YES];
         if (error) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
