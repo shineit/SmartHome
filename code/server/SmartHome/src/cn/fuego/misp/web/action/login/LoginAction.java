@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.action.basic.MISPAction;
@@ -61,7 +62,11 @@ public class LoginAction extends MISPAction
 			
 
 			// User Login
-			user = MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
+			SystemUser systemUser = MISPServiceContext.getInstance().getUserService().Login(user.getUserName(), user.getPassword());
+			
+			user.setUserID(systemUser.getUserID());
+			user.setRegDate(systemUser.getRegDate());
+			user.setAccountType(systemUser.getRole());
 			// Loading MenuTree
 			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(user.getUserID());
 		}

@@ -52,7 +52,7 @@ public class MISPUserServiceImpl implements MISPUserService
 	 * @see cn.fuego.misp.service.UserService#Login(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public UserModel Login(String userName, String password)
+	public SystemUser Login(String userName, String password)
 	{
 		SystemUser targetUser = this.getSystemUserByUserName(userName);
 		if (null == targetUser )
@@ -71,15 +71,8 @@ public class MISPUserServiceImpl implements MISPUserService
 			log.info("User Login : " + userName);
 		}
 		MISPServiceContext.getInstance().getMISPOperLogService().recordLog(userName, MISPOperLogConsant.LOGIN, null, MISPOperLogConsant.OPERATE_SUCCESS);
-
-
-		UserModel userModel = new UserModel();
-		userModel.setUserID(targetUser.getUserID());
-		userModel.setUserName(targetUser.getUserName());
-		userModel.setAccountType(targetUser.getRole());
-		userModel.setRegDate(targetUser.getRegDate());
-		
-		return userModel;
+ 
+		return targetUser;
 	}
 
 	/* (non-Javadoc)

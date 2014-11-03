@@ -24,6 +24,15 @@ public class DateUtil
 		return newDate;
 
 	}
+	
+	public static long getDateTime(Date date)
+	{
+		if(null != date)
+		{
+			return date.getTime();
+		}
+		return 0 ;
+	}
 
 	public static String DateToString(Date date)
 	{

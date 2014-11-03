@@ -26,7 +26,7 @@ public class NewsJson
 		this.title = news.getTitle();
 		this.author  = news.getAuthor();
 		this.content = news.getContent();
-		this.date = news.getDate().getTime();
+		this.date = DateUtil.getDateTime(news.getDate());
 	}
 	public int getNewsID()
 	{

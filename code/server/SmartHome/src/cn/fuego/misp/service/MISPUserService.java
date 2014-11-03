@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.fuego.misp.domain.MispButton;
 import cn.fuego.misp.domain.SystemMenu;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.user.UserModel;
 
@@ -32,7 +33,7 @@ public interface MISPUserService
 	 * @param userName
 	 * @param password
 	 */
-	UserModel Login(String userName,String password);
+    SystemUser  Login(String userName,String password);
 	
 	/**
 	 * 修改登录密码

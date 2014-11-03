@@ -27,6 +27,7 @@ import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.MenuJson;
+import cn.fuego.smart.home.webservice.from.client.model.base.UserJson;
 import cn.fuego.smart.home.webservice.from.client.rest.UserManageRest;
 
  /** 
@@ -58,8 +59,8 @@ public class UserManageRestImpl implements UserManageRest
 		
 		try
 		{
-			MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
-			SystemUser user = null;
+			SystemUser user = MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
+
 			rsp.setToken(DateCreateUtil.getUUID());
 		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
 		    
@@ -69,6 +70,9 @@ public class UserManageRestImpl implements UserManageRest
 		    	menuJson.loadWithMenu(menu);
 		    	rsp.getMenuList().add(menuJson);
 		    }
+		    
+		    UserJson userJson = new UserJson();
+		    rsp.setUser(userJson);
 			
 		}
 		catch(MISPException e)

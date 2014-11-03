@@ -8,8 +8,8 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
-import cn.fuego.misp.web.model.user.UserModel;
 
  /** 
  * @ClassName: UserManageSerivceImpl 
@@ -21,9 +21,9 @@ import cn.fuego.misp.web.model.user.UserModel;
 public class UserManageSerivceImpl extends MISPUserServiceImpl
 {
 
-	public UserModel Login(String userName, String password)
+	public SystemUser Login(String userName, String password)
 	{
-		UserModel user = super.Login(userName, password);
+		SystemUser user = super.Login(userName, password);
 		
 		
 		return user;

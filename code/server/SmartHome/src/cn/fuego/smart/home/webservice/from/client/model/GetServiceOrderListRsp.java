@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.webservice.from.client.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.from.client.model.base.BaseJsonRsp;
@@ -16,7 +17,7 @@ import cn.fuego.smart.home.webservice.from.client.model.base.ServiceOrderJson;
  */
 public class GetServiceOrderListRsp extends BaseJsonRsp
 {
-	private List<ServiceOrderJson> orderList;
+	private List<ServiceOrderJson> orderList = new ArrayList<ServiceOrderJson>();
 
 	public List<ServiceOrderJson> getOrderList()
 	{

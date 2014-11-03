@@ -10,11 +10,15 @@ package cn.fuego.smart.home.webservice.from.client.rest.impl;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.ServiceOrderManageService;
+import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetServiceOrderReq;
@@ -31,6 +35,8 @@ import cn.fuego.smart.home.webservice.from.client.rest.OrderManageRest;
  */
 public class OrderManageRestImpl implements OrderManageRest
 {
+	private Log log = LogFactory.getLog(SensorManageServiceImpl.class);
+
 	private ServiceOrderManageService orderService = ServiceContext.getInstance().getServiceOrderManageService();
 
 	/* (non-Javadoc)
@@ -41,7 +47,7 @@ public class OrderManageRestImpl implements OrderManageRest
 	{
 		GetServiceOrderListRsp rsp = new GetServiceOrderListRsp();
 		
-		List<ServiceOrder> orderList = orderService.getNewsDataSource().getAllPageData();
+		List<ServiceOrder> orderList = orderService.getOrderDataSource(null).getAllPageData();
 		for(ServiceOrder e : orderList)
 		{
 			ServiceOrderJson orderJson = new ServiceOrderJson();
@@ -69,10 +75,12 @@ public class OrderManageRestImpl implements OrderManageRest
 		catch(MISPException e)
 		{
 			rsp.getResult().setErrorCode(e.getErrorCode());
+			log.error("create order failed",e);
 		}
 		catch(Exception e)
 		{
 			rsp.getResult().setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
+			log.error("create order failed",e);
 
 		}
 

@@ -50,9 +50,15 @@ public class CommonIDImpl implements IDCreateService
 	public synchronized List<String> createIDList(int idCount)
 	{
 		//get id type by id name
-		SystemIDType idType = (SystemIDType) idDao.getAll(new QueryCondition(ConditionTypeEnum.EQUAL,SystemIDType.getNameAttr(),this.IDName));
+		SystemIDType idType = (SystemIDType) idDao.getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemIDType.getNameAttr(),this.IDName));
 		
 		List<String> idList = new ArrayList<String>();
+
+		if(null == idDao)
+		{
+			log.error("can not find id config.id name is "+ this.IDName);
+			return idList; 
+		}
 
 		int currentID = idType.getCurrentID();
 		for(int i=0;i<idCount;i++)
@@ -83,7 +89,7 @@ public class CommonIDImpl implements IDCreateService
 	{
 		String curID = "";
 		curID = String.valueOf(currentID);
-		curID = curID + getZeroStr(length-curID.length());
+		curID = getZeroStr(length-curID.length()) + curID ;
 		if(!ValidatorUtil.isEmpty(prefix))
 		{
 			curID = prefix + curID;
