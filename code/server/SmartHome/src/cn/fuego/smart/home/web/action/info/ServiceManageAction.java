@@ -65,8 +65,9 @@ public class ServiceManageAction  extends DWZTableAction
 	@Override
 	public String modify()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		orderService.handle(order.getOrderID(), this.getLoginUser().getUserName(), order.getHandleResult());
+		
+		return MISP_DONE_PAGE;
 	}
 
 	@Override
@@ -76,15 +77,7 @@ public class ServiceManageAction  extends DWZTableAction
 		return EDIT_INFO;
 	}
 	
-	/**
-	 * 服务申请单处理
-	 */
-	public String handle()
-	{
-		return null;
 
-		
-	}
 	public ServiceOrderManageService getOrderService()
 	{
 		return orderService;

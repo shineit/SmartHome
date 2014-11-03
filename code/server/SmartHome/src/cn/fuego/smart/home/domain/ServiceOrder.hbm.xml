@@ -22,7 +22,7 @@
 		 <property name="contactAddr" column="CONTACT_ADDR"></property>	
 		 <property name="orderStatus" column="ORDER_STATUS" ></property>		 	 
 		 <property name="handler" column="HANDLER" ></property>	
-		 <property name="handleResult" column="HANDLE_RESUlT" ></property>	
+		 <property name="handleResult" column="HANDLE_RESULT" ></property>	
 		 <property name="handleTime" column="HANDLE_TIME" ></property>			 		 		 	 		 	
 	</class>
 </hibernate-mapping>

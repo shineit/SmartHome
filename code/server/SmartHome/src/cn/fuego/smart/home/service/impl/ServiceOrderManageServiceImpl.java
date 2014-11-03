@@ -20,8 +20,6 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
-import cn.fuego.misp.service.IDCreateService;
-import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
@@ -83,7 +81,6 @@ public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
 	@Override
 	public void create(ServiceOrder order)
 	{
-		order.setOrderID(MISPServiceContext.getInstance().getIDCreateService(IDCreateService.ORDER_ID_NAME).create());
 		order.setCreateTime(DateUtil.getCurrentDateTime());
 		order.setOrderStatus(ServiceOrderStatusEnum.APPLYED.getIntValue());
 		DaoContext.getInstance().getServiceOrderDao().create(order);
@@ -94,9 +91,9 @@ public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
 	 * @see cn.fuego.smart.home.service.ServiceOrderManageService#handle(cn.fuego.smart.home.domain.ServiceOrder)
 	 */
 	@Override
-	public void handle(int orderID,String handler,String handleResult)
+	public void handle(String orderID,String handler,String handleResult)
 	{
-		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, ServiceOrder.getOrderIDAttr(),String.valueOf(orderID));
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, ServiceOrder.getOrderIDAttr(),orderID);
 		ServiceOrder order = (ServiceOrder) DaoContext.getInstance().getServiceOrderDao().getUniRecord(condition);
 		order.setHandler(handler);
 		order.setHandleResult(handleResult);
@@ -113,6 +110,7 @@ public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
 
 		return order;
 	}
+
 
 
 

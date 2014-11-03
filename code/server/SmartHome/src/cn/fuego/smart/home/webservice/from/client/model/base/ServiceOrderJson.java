@@ -17,7 +17,7 @@ public class ServiceOrderJson
 {
 	private String orderID;
     private String orderName;
-    private String orderType;
+    private int orderType;
     private String content;
     private String creator;
     private long createTime;
@@ -86,14 +86,23 @@ public class ServiceOrderJson
 	{
 		this.orderName = orderName;
 	}
-	public String getOrderType()
+
+	/**
+	 * @return the orderType
+	 */
+	public int getOrderType()
 	{
 		return orderType;
 	}
-	public void setOrderType(String orderType)
+
+	/**
+	 * @param orderType the orderType to set
+	 */
+	public void setOrderType(int orderType)
 	{
 		this.orderType = orderType;
 	}
+
 	public String getContent()
 	{
 		return content;

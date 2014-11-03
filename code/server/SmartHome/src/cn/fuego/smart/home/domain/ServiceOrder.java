@@ -17,7 +17,7 @@ public class ServiceOrder implements PersistenceObject
 {
 	private String orderID;         //申请单号，
     private String orderName;       //申请单名称
-    private String orderType;		//申请单类型(维修，安装，咨询)
+    private int orderType;		//申请单类型(维修，安装，咨询)
     private String content;			//申请单内容
     private String creator;			//申请人
     private Date createTime;		//申请时间
@@ -59,14 +59,27 @@ public class ServiceOrder implements PersistenceObject
 	{
 		this.orderName = orderName;
 	}
-	public String getOrderType()
+
+	/**
+	 * @return the orderType
+	 */
+	public int getOrderType()
 	{
 		return orderType;
 	}
-	public void setOrderType(String orderType)
+
+
+
+	/**
+	 * @param orderType the orderType to set
+	 */
+	public void setOrderType(int orderType)
 	{
 		this.orderType = orderType;
 	}
+
+
+
 	public String getContent()
 	{
 		return content;

@@ -24,8 +24,9 @@ public interface ServiceOrderManageService
 	AbstractDataSource<ServiceOrder>  getOrderDataSource(OrderFilterModel orderFilter);
 	
 	void create(ServiceOrder order);
-    void handle(int orderID,String handler,String handleResult);
+    void handle(String orderID,String handler,String handleResult);
 
 	ServiceOrder getOrderById(String orderID);
+	
 	
 }

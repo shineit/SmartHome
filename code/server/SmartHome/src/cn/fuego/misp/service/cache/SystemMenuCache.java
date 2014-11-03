@@ -60,7 +60,7 @@ public class SystemMenuCache
 	public void reload()
 	{
 		// there is no parent menu when parent id is 0
-		cache = loadMenuTreeByParentID(1);
+		cache = loadMenuTreeByParentID(0);
 		log.info("loaded all menu list" + cache);
 
 	}

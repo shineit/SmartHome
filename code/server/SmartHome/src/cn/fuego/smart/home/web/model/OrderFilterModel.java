@@ -1,6 +1,7 @@
 package cn.fuego.smart.home.web.model;
 
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
+import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
 
 /** 
 * @ClassName: OrderFilterModel 
@@ -17,6 +18,7 @@ public class OrderFilterModel
     private String startDate;
     private String endDate;
     private ServiceOrderStatusEnum[] statusList =ServiceOrderStatusEnum.values();
+    private ServiceOrderTypeEnum[] typeList = ServiceOrderTypeEnum.values();
 	public String getOrderID()
 	{
 		return orderID;
@@ -70,6 +72,20 @@ public class OrderFilterModel
 	public void setStatusList(ServiceOrderStatusEnum[] statusList)
 	{
 		this.statusList = statusList;
+	}
+	/**
+	 * @return the typeList
+	 */
+	public ServiceOrderTypeEnum[] getTypeList()
+	{
+		return typeList;
+	}
+	/**
+	 * @param typeList the typeList to set
+	 */
+	public void setTypeList(ServiceOrderTypeEnum[] typeList)
+	{
+		this.typeList = typeList;
 	}
 	
 	
