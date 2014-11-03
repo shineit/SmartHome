@@ -11,7 +11,7 @@
 #import "FESiginResponse.h"
 #import "FENewsResponse.h"
 
-#define _BASE_URL @"http://163.125.160.190:9000/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 

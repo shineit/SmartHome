@@ -23,5 +23,4 @@ Pods/
 project.pbxproj
 *.class
 
-
-code/server/SmartHome/WebRoot/
+code/server/SmartHome/WebRoot/WEB-INF/classes/
