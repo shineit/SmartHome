@@ -10,6 +10,9 @@
 #import "FEServiceTableViewCell.h"
 #import "FEServiceRequestVC.h"
 #import "FEWebServiceManager.h"
+#import "AppDelegate.h"
+#import "FECoreDataHandler.h"
+#import "CDUser.h"
 
 @interface FEServiceListVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -60,7 +63,8 @@
     [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:1 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
-    FEServiceOrederRequest *rdata = [[FEServiceOrederRequest alloc] initWithPage:page attribute:@[attr] userID:@(12345)];
+    
+    FEServiceOrederRequest *rdata = [[FEServiceOrederRequest alloc] initWithPage:page attribute:@[attr] userID:FELoginUser.userid];
     
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] orederList:rdata response:^(NSError *error, FEBaseResponse *response) {

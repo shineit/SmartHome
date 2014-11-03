@@ -10,4 +10,12 @@
 
 @implementation FEBaseResponse
 
+-(id)initWithResult:(FEResult *)result{
+    self = [super init];
+    if (self) {
+        _result = result;
+    }
+    return self;
+}
+
 @end

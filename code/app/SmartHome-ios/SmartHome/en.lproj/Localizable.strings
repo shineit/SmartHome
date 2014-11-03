@@ -16,6 +16,10 @@
 //NavgationBar
 "SEARCH" = "Search";
 
+//HOME PAGE
+"HOME_NEWS" = "News";
+"HOME_WARRING" = "Warring";
+
 //sigin
 "USER_NAME:" = "User name:";
 "USER_PSW:"  = "Password:";
@@ -29,3 +33,26 @@
 "SERVICE" = "Service";
 "ABOUT_NEWS" = "News";
 "FEED_BACK" = "Feedback";
+
+//Service page
+"ORDER_SERVICE" = "Service";
+"ORDER_NUMBER" = "Number";
+"ORDER_TYPE" = "Type";
+"ORDER_STATUS" = "Status";
+"ORDER_ADD" = "Add";
+
+//Service set page
+"SERVICE_REQUEST" = "Service Request";
+"ORDER_REPAIR" = "Repair";
+"ORDER_CONSULT" = "Consult";
+"ORDER_THEME" = "Theme";
+"ORDER_CONTENT" = "Content";
+"ORDER_CONTACT" = "Contact";
+"ORDER_PHONENUMBER" = "Phome";
+"ORDER_ADRESS" = "Adress";
+"ORDER_DELET" = "Delet";
+"ORDER_SUBMIT" = "Submit";
+
+//safe page
+"SAFE_ALL_OPEN" = "All open";
+"SAFE_ALL_CLOSE" = "All close";

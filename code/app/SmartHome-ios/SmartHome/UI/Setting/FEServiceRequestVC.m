@@ -10,6 +10,9 @@
 #import "FEWebServiceManager.h"
 #import "FECheckButton.h"
 #import "FECheckButtonGroup.h"
+#import "AppDelegate.h"
+#import "CDUser.h"
+#import "FECoreDataHandler.h"
 
 @interface FEServiceRequestVC ()
 
@@ -157,7 +160,7 @@
 
 -(void)submit:(UIButton *)button{
     
-    FEOrder *order = [[FEOrder alloc] initWithOrderID:[NSString UUID] name:_titleTextField.text type:@"repair" content:_contentTextField.text creater:@"admin" time:@([[NSDate date] timeIntervalSince1970]) contactname:_contact.text phone:_phonenumber.text address:_address.text status:@(1) handler:nil handResult:nil handTime:nil];
+    FEOrder *order = [[FEOrder alloc] initWithOrderID:[NSString UUID] name:_titleTextField.text type:@"repair" content:_contentTextField.text creater:FELoginUser.username time:@([[NSDate date] timeIntervalSince1970]) contactname:_contact.text phone:_phonenumber.text address:_address.text status:@(1) handler:nil handResult:nil handTime:nil];
     FEServiceOrderSetRequest *sdata = [[FEServiceOrderSetRequest alloc] initWithCmd:@"test" serviceOrder:order];
     
     [[FEWebServiceManager sharedInstance] orederSet:sdata response:^(NSError *error, FEBaseResponse *response) {

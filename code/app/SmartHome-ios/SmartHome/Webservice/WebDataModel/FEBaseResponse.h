@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class FEResult;
 
 @interface FEBaseResponse : NSObject
+
+@property (nonatomic, strong, readonly) FEResult *result;
+-(id)initWithResult:(FEResult *)result;
 
 @end

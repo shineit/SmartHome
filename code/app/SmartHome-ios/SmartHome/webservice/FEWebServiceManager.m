@@ -8,8 +8,9 @@
 
 #import "FEWebServiceManager.h"
 #import "FESiginData.h"
+#import "FESiginResponse.h"
 
-#define _BASE_URL @"http://localhost:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://163.125.160.190:9000/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -32,14 +33,16 @@
 }
 
 //sigin
--(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *, FEDataUser *))block{
+-(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *, FESiginResponse *))block{
     return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        FEDataUser *user = [FEDataUser new];
-        user.userid = responseObject[@"id"];
-        user.username = responseObject[@"firstName"];
-        user.password = @"112345";
-        block(NULL,user);
+//        NSInteger code = [((NSDictionary *)responseObject)[@"result"][@"errorCode"] integerValue];
+        FESiginResponse *sresponse = [[FESiginResponse alloc] initWithResponse:responseObject];
+        if (sresponse.result.errorCode.integerValue == 0) {
+            block(NULL,sresponse);
+        }else{
+            NSError *error = [[NSError alloc] initWithDomain:nil code:sresponse.result.errorCode.integerValue userInfo:sresponse.result.dictionary];
+            block(error,sresponse);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"sigin fail %@",error.userInfo);

@@ -11,6 +11,7 @@
 #import "CDUser.h"
 #import "FEWebServiceManager.h"
 #import "FESiginData.h"
+#import "FESiginResponse.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
 
@@ -73,7 +74,7 @@
     [textcontent addSubview:pswlabel];
     
     FETextField *psw = [[FETextField alloc] initWithFrame:CGRectMake(pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5, pswlabel.frame.origin.y, textcontent.bounds.size.width - (pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5) - 10, 30)];
-    psw.text = @"1234";
+    psw.text = @"123456";
     psw.returnKeyType = UIReturnKeyDone;
     psw.borderStyle = UITextBorderStyleNone;
 //    psw.placeholder = FEString(@"INPUT_PASSWORD");
@@ -105,7 +106,7 @@
         
         FESiginData *sdata = [[FESiginData alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0"];
         
-        [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FEDataUser *user){
+        [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FESiginResponse *user){
             NSLog(@"call back");
             [weakself hideHUD:YES];
             if (error) {
@@ -114,9 +115,10 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                CDUser *user = [FECoreData touchUserByIdentifier:@(12345)];
-                user.username = weakself.username.text;
-                user.password = [weakself.password.text MD5];
+                CDUser *cduser = [FECoreData touchUserByIdentifier:@(12345)];
+                cduser.username = weakself.username.text;
+                cduser.password = [weakself.password.text MD5];
+                cduser.userid = user.user.userID;
                 [FECoreData saveCoreData];
                 [[AppDelegate sharedDelegate] loadMain];
             });
