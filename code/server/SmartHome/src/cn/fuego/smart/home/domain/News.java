@@ -20,7 +20,7 @@ public class News implements PersistenceObject
 	private String author; //发布人
 	private String content; //分布内容
 	private Date date;     //发布时间
-	private String status; //发布状态，0-未发布，1-已发布
+	private int status; //发布状态，0-未发布，1-已发布
 	public int getNewsID()
 	{
 		return newsID;
@@ -61,14 +61,14 @@ public class News implements PersistenceObject
 	{
 		this.date = date;
 	}
-	public String getStatus()
+	public int getStatus()
 	{
 		return status;
 	}
-	public void setStatus(String status)
+	public void setStatus(int status)
 	{
 		this.status = status;
 	}
-	
+ 
 	
 }
