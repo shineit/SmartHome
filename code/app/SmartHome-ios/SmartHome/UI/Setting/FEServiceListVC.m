@@ -13,6 +13,9 @@
 #import "AppDelegate.h"
 #import "FECoreDataHandler.h"
 #import "CDUser.h"
+#import "FEOrderListResponse.h"
+#import "FEOrder.h"
+#import "FEResult.h"
 
 @interface FEServiceListVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -29,6 +32,7 @@
     if (self) {
         // Custom initialization
         self.title = FEString(@"ORDER_SERVICE");
+        _serviceDatas = [NSMutableArray new];
     }
     return self;
 }
@@ -67,13 +71,22 @@
     FEServiceOrederRequest *rdata = [[FEServiceOrederRequest alloc] initWithPage:page attribute:@[attr] userID:FELoginUser.userid];
     
     __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] orederList:rdata response:^(NSError *error, FEBaseResponse *response) {
+    [[FEWebServiceManager sharedInstance] orederList:rdata response:^(NSError *error, FEOrderListResponse *response) {
         
         [weakself hideHUD:YES];
         if (error) {
             ;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
+        }else{
+            if (response.result.errorCode.intValue != 0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"error code %@",response.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                return;
+            }
+            [weakself.serviceDatas removeAllObjects];
+            [weakself.serviceDatas addObjectsFromArray:response.orderList];
+            [weakself.serviceTable reloadData];
         }
     }];
 }
@@ -91,11 +104,15 @@
     if (!cell) {
         cell = [[FEServiceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    FEOrder *order = self.serviceDatas[indexPath.row];
+    cell.numberLabel.text = order.orderID;
+    cell.typeLabel.text = order.orderType.boolValue?FEString(@"SEVICE_INSTALL"):FEString(@"SEVICE_REPAIR");
+    cell.statusLabel.text = order.orderStatus.integerValue?FEString(@"SERVICE_WAIT"):FEString(@"SERVICE_DEAL");
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return self.serviceDatas.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -1,5 +1,5 @@
 //
-//  FEDictionaryToObject.h
+//  FEDictionaryObject.h
 //  SmartHome
 //
 //  Created by Seven on 14-11-3.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FEDictionaryToObject : NSObject
+@interface FEDictionaryObject : NSObject
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 

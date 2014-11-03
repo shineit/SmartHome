@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FERequestBaseData.h"
+#import "FEDictionaryObject.h"
 
-@interface FEPage : FERequestBaseData
+@interface FEPage : FEDictionaryObject
 
 @property (nonatomic, strong, readonly) NSNumber *pageSize;
 @property (nonatomic, strong, readonly) NSNumber *currentPage;

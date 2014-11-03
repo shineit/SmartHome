@@ -165,7 +165,7 @@
 
 -(void)submit:(UIButton *)button{
     
-    FEOrder *order = [[FEOrder alloc] initWithOrderID:[NSString UUID] name:_titleTextField.text type:@"repair" content:_contentTextField.text creater:FELoginUser.username time:@([[NSDate date] timeIntervalSince1970]) contactname:_contact.text phone:_phonenumber.text address:_address.text status:@(1) handler:nil handResult:nil handTime:nil];
+    FEOrder *order = [[FEOrder alloc] initWithOrderID:[NSString UUID] name:_titleTextField.text type:@(1) content:_contentTextField.text creater:FELoginUser.username time:@([[NSDate date] timeIntervalSince1970]) contactname:_contact.text phone:_phonenumber.text address:_address.text status:@(1) handler:nil handResult:nil handTime:nil];
     FEServiceOrderSetRequest *sdata = [[FEServiceOrderSetRequest alloc] initWithCmd:@"test" serviceOrder:order];
     [self hideKeyboard:nil];
     [self displayHUD:FEString(@"LOADING...")];

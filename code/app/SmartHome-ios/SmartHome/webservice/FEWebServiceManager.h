@@ -13,10 +13,12 @@
 #import "FEServiceOrderSetRequest.h"
 #import "FEMarkSetRequest.h"
 #import "FEMarkRequest.h"
-#import "FEBaseResponse.h"
+//#import "FEBaseResponse.h"
 //#import "FESiginResponse.h"
 @class FESiginResponse;
 @class FENewsResponse;
+@class FEOrderListResponse;
+@class FEBaseResponse;
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -28,12 +30,12 @@
 
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block;
 
--(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
+-(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEOrderListResponse *response))block;
 
 -(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
 
--(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse*response))block;
+-(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
--(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse*response))block;
+-(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 @end

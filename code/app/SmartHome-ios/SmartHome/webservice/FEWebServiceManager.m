@@ -10,6 +10,8 @@
 #import "FESiginData.h"
 #import "FESiginResponse.h"
 #import "FENewsResponse.h"
+#import "FEOrderListResponse.h"
+
 
 #define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
@@ -65,9 +67,10 @@
 }
 
 //order list
--(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block{
+-(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEOrderListResponse *response))block{
     return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        block(NULL,[FEBaseResponse new]);
+        FEOrderListResponse *olist = [[FEOrderListResponse alloc] initWithResponse:responseObject];
+        block(NULL,olist);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         block(error,NULL);
     }];
@@ -85,7 +88,7 @@
 //set mark
 -(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *, FEBaseResponse *))block{
     return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        block(NULL,[FEBaseResponse new]);
+        block(NULL,[[FEBaseResponse alloc] initWithResponse:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          block(error,NULL);
     }];

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryToObject.h"
+#import "FEDictionaryObject.h"
 //#import "NSObject+Dictionary.h"
 
-@interface FEResult : FEDictionaryToObject
+@interface FEResult : FEDictionaryObject
 @property (nonatomic, strong, readonly) NSNumber *errorCode;
 @property (nonatomic, strong, readonly) NSString *errorMsg;
 @property (nonatomic, strong, readonly) NSString *obj;

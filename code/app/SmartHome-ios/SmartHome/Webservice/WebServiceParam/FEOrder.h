@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FERequestBaseData.h"
+#import "FEDictionaryObject.h"
 
-@interface FEOrder : FERequestBaseData
+@interface FEOrder : FEDictionaryObject
 
 @property (nonatomic, strong, readonly) NSString *orderID;
 @property (nonatomic, strong, readonly) NSString *orderName;
-@property (nonatomic, strong, readonly) NSString *orderType;
+@property (nonatomic, strong, readonly) NSNumber *orderType;
 @property (nonatomic, strong, readonly) NSString *content;
 @property (nonatomic, strong, readonly) NSString *creator;
 @property (nonatomic, strong, readonly) NSNumber *createTime;
@@ -24,6 +24,6 @@
 @property (nonatomic, strong, readonly) NSString *handleResult;
 @property (nonatomic, strong, readonly) NSNumber *handleTime;
 
--(id)initWithOrderID:(NSString *)oid name:(NSString *)oname type:(NSString *)otype content:(NSString *)content creater:(NSString *)creater time:(NSNumber *)time contactname:(NSString *)cname phone:(NSString *)phone address:(NSString *)addr status:(NSNumber *)stat handler:(NSString *)hand handResult:(NSString *)hresult handTime:(NSNumber *)htime;
+-(id)initWithOrderID:(NSString *)oid name:(NSString *)oname type:(NSNumber *)otype content:(NSString *)content creater:(NSString *)creater time:(NSNumber *)time contactname:(NSString *)cname phone:(NSString *)phone address:(NSString *)addr status:(NSNumber *)stat handler:(NSString *)hand handResult:(NSString *)hresult handTime:(NSNumber *)htime;
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FERequestBaseData.h"
+#import "FEDictionaryObject.h"
 
-@interface FEAttribute : FERequestBaseData
+@interface FEAttribute : FEDictionaryObject
 
 @property (nonatomic, strong, readonly) NSString *attrName;
 @property (nonatomic, strong, readonly) NSString *attrValue;
