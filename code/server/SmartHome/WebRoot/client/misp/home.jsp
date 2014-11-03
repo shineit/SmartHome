@@ -35,7 +35,7 @@
 
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/dwz.regional.zh.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/progressbar.css" rel="stylesheet" type="text/css" media="screen"/>
- 
+<script src="<%=request.getContextPath()%>/client/lib/newJS/jQuery.md5.js" type="text/javascript"></script> 
 
 <script type="text/javascript">
 $(function()

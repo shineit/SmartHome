@@ -15,7 +15,7 @@ import cn.fuego.common.domain.PersistenceObject;
  */                                
 public class ServiceOrder implements PersistenceObject
 {
-	private String orderID;         //申请单号，自增长
+	private String orderID;         //申请单号，
     private String orderName;       //申请单名称
     private String orderType;		//申请单类型(维修，安装，咨询)
     private String content;			//申请单内容

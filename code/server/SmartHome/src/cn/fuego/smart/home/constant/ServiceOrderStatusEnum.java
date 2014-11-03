@@ -1,6 +1,5 @@
 package cn.fuego.smart.home.constant;
 
-
 /**
  * 
 * @ClassName: ServiceOrderStatusEnum 
@@ -11,18 +10,49 @@ package cn.fuego.smart.home.constant;
  */
 public enum ServiceOrderStatusEnum
 {
-	APPLYED(0),
-	HANDLED(1);
-	private int statusInt;
-
-	private ServiceOrderStatusEnum(int statusInt)
+	APPLYED(0,"待处理"),
+	HANDLED(1,"已处理");
+	private int intValue;
+	private String strValue;
+	/**
+	 * @param intValue
+	 * @param strValue
+	 */
+	private ServiceOrderStatusEnum(int intValue,String strValue)
 	{
-		this.statusInt = statusInt;
-
+		this.intValue = intValue;
+		this.strValue = strValue;
 	}
-	public int getStatusInt()
+	public int getIntValue()
 	{
-		return statusInt;
+		return intValue;
 	}
+	public String getStrValue()
+	{
+		return strValue;
+	}
+	
+	public static ServiceOrderStatusEnum getEnumByInt(int intValue)
+	{
+		for (ServiceOrderStatusEnum c : ServiceOrderStatusEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	public static ServiceOrderStatusEnum getEnumByStr(String strValue)
+	{
+		for (ServiceOrderStatusEnum c : ServiceOrderStatusEnum.values())
+		{
+			if (strValue.equals(c.strValue) )
+			{
+				return c;
+			}
+		}
+		return null;
+	}	 
 
 }

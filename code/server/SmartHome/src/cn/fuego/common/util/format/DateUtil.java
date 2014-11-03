@@ -144,5 +144,14 @@ public class DateUtil
 		return dayNum;
 
 	}
+	public static Date dayCalculate(Date date,int num)
+	{
+		Calendar convertDate=Calendar.getInstance();
+		convertDate.setTime(date); 
+		convertDate.add(Calendar.DATE, num);
+		Date result=convertDate.getTime();
+		return result;
+		
+	}
 
 }

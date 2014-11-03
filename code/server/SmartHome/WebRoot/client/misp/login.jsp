@@ -15,18 +15,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/login.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/client/lib/dwz/favicon.ico" rel="shortcut icon"  />
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/client/lib/newJS/jQuery.md5.js" type="text/javascript"></script>
  <script type="text/javascript">  
-    function changeValidateCode(obj) {  
+    function changeValidateCode(obj)
+     {  
            //获取当前的时间作为参数，无具体意义  
         var timenow = new Date().getTime();  
            //每次请求需要一个不同的参数，否则可能会返回同样的验证码  
         //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。  
         obj.src="login/ValidateImage.action?d="+timenow;  
-    } 
+     } 
     $(function(){
     
      	$("#Bt1").click(function(){
-        //alert('OK');
+    		var newCode=$.md5($('#realPwd').val());
+    		$("#convertPwd").val(newCode);
       	   $.ajax(
               {
                   type:"POST",
@@ -62,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
-				<a href="http://www.szangell.com/"><img src="<%=request.getContextPath()%>/client/lib/dwz/themes/default/images/login_logo.gif" /></a>
+				<a href="#"><img src="<%=request.getContextPath()%>/client/lib/dwz/themes/default/images/login_logo.gif" /></a>
 			</h1>
 			<div class="login_headerContent">
 				<div class="navList">
@@ -86,7 +89,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</p>
 					<p>
 						<label>密码：</label>
-						<input type="password" name="user.password" size="16" class="login_input" style="width:140px !important;"/>
+						<input type="password" id="realPwd" size="16" class="login_input" style="width:140px !important;" />
+						<input type="hidden" id="convertPwd" name="user.password"  style="width:140px !important;"  />
 					</p>
 					<p>
 						<label>验证码：</label>

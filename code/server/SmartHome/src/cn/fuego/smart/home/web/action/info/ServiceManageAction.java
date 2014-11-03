@@ -8,7 +8,18 @@
 */ 
 package cn.fuego.smart.home.web.action.info;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.ServiceOrder;
+import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.ServiceOrderManageService;
+import cn.fuego.smart.home.web.model.OrderFilterModel;
 
 /** 
  * @ClassName: ServiceManageAction 
@@ -19,9 +30,15 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
  */ 
 public class ServiceManageAction  extends DWZTableAction
 {
-
+	private Log log = LogFactory.getLog(ServiceManageAction.class);
+	private ServiceOrderManageService orderService = ServiceContext.getInstance().getServiceOrderManageService();
+	private TableDataModel<ServiceOrder> serviceOrderTable = new  TableDataModel<ServiceOrder>();
+	private OrderFilterModel filter = new OrderFilterModel();
+	private ServiceOrder order;
 	public String execute()
 	{
+		serviceOrderTable.setPage(this.getPage());
+		serviceOrderTable.setDataSource(orderService.getOrderDataSource(filter));
 		return SUCCESS;
 	}
 	@Override
@@ -55,8 +72,8 @@ public class ServiceManageAction  extends DWZTableAction
 	@Override
 	public String show()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		order = orderService.getOrderById(this.getSelectedID());
+		return EDIT_INFO;
 	}
 	
 	/**
@@ -64,8 +81,48 @@ public class ServiceManageAction  extends DWZTableAction
 	 */
 	public String handle()
 	{
-		return EDIT_INFO;
+		return null;
+
 		
+	}
+	public ServiceOrderManageService getOrderService()
+	{
+		return orderService;
+	}
+	public void setOrderService(ServiceOrderManageService orderService)
+	{
+		this.orderService = orderService;
+	}
+
+	public TableDataModel<ServiceOrder> getServiceOrderTable()
+	{
+		return serviceOrderTable;
+	}
+	public void setServiceOrderTable(TableDataModel<ServiceOrder> serviceOrderTable)
+	{
+		this.serviceOrderTable = serviceOrderTable;
+	}
+	public OrderFilterModel getFilter()
+	{
+		return filter;
+	}
+	public void setFilter(OrderFilterModel filter)
+	{
+		this.filter = filter;
+	}
+	/**
+	 * @return the order
+	 */
+	public ServiceOrder getOrder()
+	{
+		return order;
+	}
+	/**
+	 * @param order the order to set
+	 */
+	public void setOrder(ServiceOrder order)
+	{
+		this.order = order;
 	}
 
 }

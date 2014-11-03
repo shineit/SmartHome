@@ -10,6 +10,7 @@ package cn.fuego.smart.home.service;
 
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.smart.home.domain.ServiceOrder;
+import cn.fuego.smart.home.web.model.OrderFilterModel;
 
  /** 
  * @ClassName: ServiceOrderManageService 
@@ -20,8 +21,11 @@ import cn.fuego.smart.home.domain.ServiceOrder;
  */
 public interface ServiceOrderManageService
 {
-	AbstractDataSource<ServiceOrder>  getNewsDataSource();
+	AbstractDataSource<ServiceOrder>  getOrderDataSource(OrderFilterModel orderFilter);
 	
 	void create(ServiceOrder order);
     void handle(int orderID,String handler,String handleResult);
+
+	ServiceOrder getOrderById(String orderID);
+	
 }
