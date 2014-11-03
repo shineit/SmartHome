@@ -15,7 +15,7 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class News implements PersistenceObject
 {
-	private int   newsID; //新闻编号
+	private int   newsID; //新闻编号,自增长
 	private String title; //新闻标题
 	private String author; //发布人
 	private String content; //分布内容
@@ -61,14 +61,21 @@ public class News implements PersistenceObject
 	{
 		this.date = date;
 	}
+	/**
+	 * @return the status
+	 */
 	public int getStatus()
 	{
 		return status;
 	}
+	/**
+	 * @param status the status to set
+	 */
 	public void setStatus(int status)
 	{
 		this.status = status;
 	}
- 
+
+	
 	
 }

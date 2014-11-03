@@ -4,16 +4,16 @@
 
 
 <struts>
-   	<package name="info" extends="default">
+    <package name="info"  extends="misp">
   
-   		<action name="ServiceManage" class="cn.fuego.smart.home.web.action.info.ServiceManageAction">
+   		<action name="OrderManage" class="cn.fuego.smart.home.web.action.info.OrderManageAction">
 			<result type="dispatcher">/client/manage/serviceManage.jsp</result>
  			<result type="dispatcher" name="editInfo">/client/manage/serviceHandle.jsp</result>
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
- 
- 	</package> 
- 
+
+ 	</package>
+
  
 </struts>
 

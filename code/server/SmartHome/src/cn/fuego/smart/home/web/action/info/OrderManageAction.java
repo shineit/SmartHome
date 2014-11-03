@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.ServiceOrder;
@@ -28,13 +29,18 @@ import cn.fuego.smart.home.web.model.OrderFilterModel;
  * @date 2014-11-1 上午10:15:44 
  *  
  */ 
-public class ServiceManageAction  extends DWZTableAction
+public class OrderManageAction  extends DWZTableAction
 {
-	private Log log = LogFactory.getLog(ServiceManageAction.class);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Log log = LogFactory.getLog(OrderManageAction.class);
 	private ServiceOrderManageService orderService = ServiceContext.getInstance().getServiceOrderManageService();
 	private TableDataModel<ServiceOrder> serviceOrderTable = new  TableDataModel<ServiceOrder>();
 	private OrderFilterModel filter = new OrderFilterModel();
 	private ServiceOrder order;
+	public static final String PARENT_PAGE="info/OrderManage"; 
 	public String execute()
 	{
 		serviceOrderTable.setPage(this.getPage());
@@ -66,7 +72,9 @@ public class ServiceManageAction  extends DWZTableAction
 	public String modify()
 	{
 		orderService.handle(order.getOrderID(), this.getLoginUser().getUserName(), order.getHandleResult());
-		
+		//this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+		//this.getOperateMessage().setForwardUrl(PARENT_PAGE);
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 		return MISP_DONE_PAGE;
 	}
 
