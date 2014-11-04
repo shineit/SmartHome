@@ -54,11 +54,11 @@ function submitForm(url){
 			<li><a class="delete" href="NewsManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="118">
+	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
-				<th width="15%" align="center">公告编号</th>
+				<th width="10%" align="center">公告编号</th>
 				<th width="15%" align="center">标题</th>
 				<th width="30%" align="center">公告内容</th>
 				<th width="15%" align="center">发布时间</th>

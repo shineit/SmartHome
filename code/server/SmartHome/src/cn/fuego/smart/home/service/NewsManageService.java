@@ -26,5 +26,9 @@ public interface NewsManageService
 {
 
 	AbstractDataSource<News>  getNewsDataSource(List<QueryCondition> conditionList);
+
+	void saveNewsInfo(News news);
+
+	void deleteNewsList(List<String> newsIDList);
 	
 }

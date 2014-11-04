@@ -8,10 +8,14 @@
 */ 
 package cn.fuego.smart.home.web.action.info;
 
+import java.util.Arrays;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.misp.dao.file.MispMessageReader;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.NewsManageService;
@@ -52,8 +56,9 @@ public class NewsManageAction extends DWZTableAction
 	@Override
 	public String create()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		newsService.saveNewsInfo(news);
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		return MISP_DONE_PAGE;
 	}
 
 	@Override
@@ -66,8 +71,8 @@ public class NewsManageAction extends DWZTableAction
 	@Override
 	public String deleteList()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		newsService.deleteNewsList(Arrays.asList(this.getSelectedIDList()));
+		return  MISP_DONE_PAGE;
 	}
 
 	@Override
@@ -81,6 +86,7 @@ public class NewsManageAction extends DWZTableAction
 	public String show()
 	{
 		news = new News();
+		news.setAuthor(this.getLoginUser().getUserName());
 		return EDIT_INFO;
 	}
 

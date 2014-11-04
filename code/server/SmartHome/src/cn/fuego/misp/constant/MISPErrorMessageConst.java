@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.misp.constant;
 
+import cn.fuego.misp.dao.file.MispMessageReader;
+
  /** 
  * @ClassName: ErrorMessageConst 
  * @Description: TODO
@@ -32,7 +34,7 @@ public class MISPErrorMessageConst
 
 	public static String getMessageByErrorCode(int errorCode)
 	{
-		return String.valueOf(errorCode);
+		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));
 	}
 	
 }
