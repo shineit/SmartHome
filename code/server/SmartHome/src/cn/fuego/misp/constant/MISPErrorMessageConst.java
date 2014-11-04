@@ -30,6 +30,8 @@ public class MISPErrorMessageConst
 	public static final int ERROR_OLD_PASSWORD_WORD = 5; //原始密码错误
 	
 	public static final int CLIENT_VERSION_LOW = 6 ; // 
+
+	public static final int USER_EXISTED = 7;//用户已存在
 	
 
 	public static String getMessageByErrorCode(int errorCode)

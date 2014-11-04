@@ -27,6 +27,7 @@ public class SystemUser implements PersistenceObject
 	private String password;
 	private int role;
 	private Date regDate;
+	private int status; //0-已创建，1-已申请，2-已注册，3-已注销
 	
 	
 	public static String getUserIDAttr()
@@ -81,6 +82,16 @@ public class SystemUser implements PersistenceObject
 	public void setRegDate(Date regDate)
 	{
 		this.regDate = regDate;
+	}
+
+	public int getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(int status)
+	{
+		this.status = status;
 	}
 	
 

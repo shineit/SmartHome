@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });//dialog 宽度重新定义
 </script>
 <div class="pageContent">
-	<s:form method="POST" action="info/OrderManage" class="pageForm required-validate"   name="handleForm" onsubmit="return iframeCallback(this,dialogAjaxDone);" >
+	<s:form method="POST" action="info/OrderManage!modify.action" class="pageForm required-validate"   name="handleForm" onsubmit="return iframeCallback(this,dialogAjaxDone);" >
 		<input type="text" name="selectedID" value="${selectedID}"  style="display:none;"/>	
 		<div class="pageFormContent" layoutH="58">
 			<dl style="width:50%;">
@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:20%;">名称：</dt>			
-				<dd style="width:70%;"><input type="text" name="order.orderName"  size="37" readonly="readonly" value="${order.orderName}"/></dd>
+				<dd style="width:70%;"><input type="text" name="order.orderName"  size="32" readonly="readonly" value="${order.orderName}"/></dd>
 			</dl>			
 			<dl style="width:50%;">
 				<dt style="width:20%;">服务类型：</dt>			
@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</dl>					
 			<dl style="width:100%;">
 				<dt style="width:10%;">联系地址：</dt>			
-				<dd style="width:80%;"><input type="text" name="order.contactAddr"  size="90" readonly="readonly" value="${order.contactAddr}"/></dd>
+				<dd style="width:80%;"><input type="text" name="order.contactAddr"  size="85" readonly="readonly" value="${order.contactAddr}"/></dd>
 			</dl>								
 			<dl style="width:100%;">
 				<dt style="width:10%;">解决措施：</dt>			
@@ -62,9 +62,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</dl>
 		</div>
 		<div class="formBar">
-			<ul style="margin-right:220px !important;" >
-					<li style="padding:0px 30px 0px 10px;"><s:submit method="modify" value="确 认" ></s:submit></li>
-					<li style="padding:0px 30px 0px 10px;"></li>			
+			<ul style="margin-right:250px !important;" >
+				<li ><div class="buttonActive"><div class="buttonContent"><button type="submit">提 交</button></div></div></li>
+				<li style="padding-left:30px;"><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>			
+
 			</ul>
 		</div>
 	</s:form>

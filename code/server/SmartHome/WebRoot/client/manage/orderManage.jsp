@@ -61,7 +61,7 @@
 </div>
 <div class="pageContent">
 
-	<table class="table" width="100%" layoutH="88">
+	<table class="table" width="100%" layoutH="86">
 		<thead>
 			<tr>
 			

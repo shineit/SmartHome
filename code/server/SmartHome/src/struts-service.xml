@@ -7,17 +7,25 @@
     <package name="info"  extends="misp">
  
    		<action name="OrderManage" class="cn.fuego.smart.home.web.action.info.OrderManageAction">
-			<result type="dispatcher">/client/manage/serviceManage.jsp</result>
- 			<result type="dispatcher" name="editInfo">/client/manage/serviceHandle.jsp</result>
+			<result type="dispatcher">/client/manage/orderManage.jsp</result>
+ 			<result type="dispatcher" name="editInfo">/client/manage/orderHandle.jsp</result>
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
    		<action name="NewsManage" class="cn.fuego.smart.home.web.action.info.NewsManageAction">
 			<result type="dispatcher"  >/client/manage/newsManage.jsp</result>
  			<result type="dispatcher" name="editInfo">/client/manage/newsCreate.jsp</result>
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+	    
 		</action> 
  	</package>
+    <package name="sys"  extends="misp">
+ 
+   		<action name="UserManage" class="cn.fuego.smart.home.web.action.sys.UserManageAction">
+			<result type="dispatcher">/client/manage/userManage.jsp</result>
+ 			<result type="dispatcher" name="editInfo">/client/manage/userCreate.jsp</result>
+			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+		</action>
 
+ 	</package>
  
 </struts>
 
