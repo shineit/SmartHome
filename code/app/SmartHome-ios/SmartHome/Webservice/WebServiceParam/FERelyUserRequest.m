@@ -12,8 +12,8 @@
 
 @implementation FERelyUserRequest
 
--(id)initWithUserID:(NSNumber *)uid page:(FEPage *)page attributes:(NSArray *)attrs{
-    self = [super initWithMothed:__HISTORY_ALARM];
+-(id)initWithUserID:(NSNumber *)uid page:(FEPage *)page attributes:(NSArray *)attrs method:(NSString *)method{
+    self = [super initWithMothed:method];
     if (self) {
         _userID = uid;
         _page = page.dictionary;
@@ -26,6 +26,11 @@
         }
         
     }
+    return self;
+}
+
+-(id)initWithUserID:(NSNumber *)uid page:(FEPage *)page attributes:(NSArray *)attrs{
+    self = [super initWithMothed:@""];
     return self;
 }
 

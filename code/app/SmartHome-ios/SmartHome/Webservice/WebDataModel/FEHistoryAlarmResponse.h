@@ -10,4 +10,6 @@
 
 @interface FEHistoryAlarmResponse : FEBaseResponse
 
+@property (nonatomic, strong, readonly) NSArray *alarmList;
+
 @end

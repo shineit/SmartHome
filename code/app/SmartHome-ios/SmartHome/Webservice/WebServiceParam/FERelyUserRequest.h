@@ -16,6 +16,7 @@
 @property (nonatomic, strong, readonly) NSNumber *userID;
 @property (nonatomic, strong, readonly) NSArray *filterList;
 
+-(id)initWithUserID:(NSNumber *)uid page:(FEPage *)page attributes:(NSArray *)attrs method:(NSString *)method;
 -(id)initWithUserID:(NSNumber *)uid page:(FEPage *)page attributes:(NSArray *)attrs;
 
 @end

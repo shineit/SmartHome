@@ -10,4 +10,14 @@
 
 @implementation FEHistoryAlarmResponse
 
+-(id)initWithResponse:(id)obj{
+    self = [super initWithResponse:obj];
+    if (self) {
+        if (![obj[@"alarmList"] isKindOfClass:[NSNull class]] && [obj[@"alarmList"] count]) {
+            NSLog(@"alarmList");
+        }
+    }
+    return self;
+}
+
 @end

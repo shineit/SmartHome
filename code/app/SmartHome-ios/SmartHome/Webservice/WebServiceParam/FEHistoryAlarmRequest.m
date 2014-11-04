@@ -12,4 +12,12 @@
 
 @implementation FEHistoryAlarmRequest
 
+-(id)initWithUserID:(NSNumber *)uid page:(FEPage *)page attributes:(NSArray *)attrs{
+    self = [super initWithUserID:uid page:page attributes:attrs method:__HISTORY_ALARM];
+    if (self) {
+        
+    }
+    return self;
+}
+
 @end

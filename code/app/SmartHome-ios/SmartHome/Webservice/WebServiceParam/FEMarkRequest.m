@@ -7,16 +7,16 @@
 //
 
 #import "FEMarkRequest.h"
-#import "FEUserMark.h"
+#import "FEPage.h"
 
 
 @implementation FEMarkRequest
 
--(id)initWithCommand:(NSString *)cmd usermark:(FEUserMark *)mark{
+-(id)initWithUserid:(NSNumber *)uid page:(FEPage *)page{
     self = [super initWithMothed:@""];
     if (self) {
-        _command = cmd;
-        _userMark = mark.dictionary;
+        _userID = uid;
+        _page = page.dictionary;
     }
     return self;
 }

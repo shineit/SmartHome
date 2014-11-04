@@ -8,12 +8,12 @@
 
 //#import <Foundation/Foundation.h>
 #import "FERequestBaseData.h"
-@class FEUserMark;
+@class FEPage;
 
 @interface FEMarkRequest : FERequestBaseData
-@property (nonatomic, strong, readonly) NSString *command;
-@property (nonatomic, strong, readonly) NSDictionary *userMark;
+@property (nonatomic, strong, readonly) NSNumber *userID;
+@property (nonatomic, strong, readonly) NSDictionary *page;
 
--(id)initWithCommand:(NSString *)cmd usermark:(FEUserMark *)mark;
+-(id)initWithUserid:(NSNumber *)uid page:(FEPage *)page;
 
 @end

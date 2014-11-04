@@ -14,7 +14,11 @@
 #define __SEVICE_ORDER     @"order/list" //orders
 #define __SEVICE_ORDER_SET @"order/set" //set order
 #define __MARK_SET         @""
-#define __HISTORY_ALARM    @""
+#define __HISTORY_ALARM    @"sensor/alarm"
+#define __SENSOR_LIST      @"sensor/list"
+#define __SENSOR_SET       @"sensor/set"
+#define __SENSOR_ENABLE    @"sensor/batch/enable"
+#define __SENSOR_DISABLE   @"sensor/batch/disable"
 
 @interface FERequestBaseData : NSObject
 
