@@ -7,18 +7,20 @@
 //
 
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
-#import "FESiginData.h"
+#import "FESiginRequest.h"
 #import "FENewsRequest.h"
 #import "FEServiceOrederRequest.h"
 #import "FEServiceOrderSetRequest.h"
 #import "FEMarkSetRequest.h"
 #import "FEMarkRequest.h"
-//#import "FEBaseResponse.h"
-//#import "FESiginResponse.h"
+
 @class FESiginResponse;
 @class FENewsResponse;
 @class FEOrderListResponse;
 @class FEBaseResponse;
+@class FEOrderSetResponse;
+@class FEHistoryAlarmRequest;
+@class FEHistoryAlarmResponse;
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -26,16 +28,18 @@
 
 +(FEWebServiceManager *)sharedInstance;
 
--(AFHTTPRequestOperation *)siginWithParam:(FESiginData *)sdata response:(void (^)(NSError *error,FESiginResponse *user))block;
+-(AFHTTPRequestOperation *)siginWithParam:(FESiginRequest *)sdata response:(void (^)(NSError *error,FESiginResponse *user))block;
 
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block;
 
 -(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEOrderListResponse *response))block;
 
--(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEBaseResponse*response))block;
+-(AFHTTPRequestOperation *)orederSet:(FEServiceOrderSetRequest *)odata response:(void (^)(NSError *error, FEOrderSetResponse *response))block;
 
 -(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 -(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+//history alarm
+-(AFHTTPRequestOperation *)historyAlarmList:(FEHistoryAlarmRequest *)hdata reponse:(void (^)(NSError *error, FEHistoryAlarmResponse *response))block;
 
 @end

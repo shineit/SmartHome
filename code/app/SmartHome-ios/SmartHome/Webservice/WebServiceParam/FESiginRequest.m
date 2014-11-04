@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FESiginData.h"
+#import "FESiginRequest.h"
 
-@implementation FESiginData
+@implementation FESiginRequest
 
 
 -(instancetype)initWtihUserName:(NSString *)name password:(NSString *)password clientType:(NSString *)type clientVersion:(NSString *)version{

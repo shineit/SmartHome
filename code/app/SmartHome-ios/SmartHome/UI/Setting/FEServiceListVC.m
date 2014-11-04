@@ -126,15 +126,18 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
     header.backgroundColor = [UIColor whiteColor];
-    FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 60, 30)];
+    FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 20, 80, 30)];
+    label.textAlignment = NSTextAlignmentCenter;
     label.text = FEString(@"ORDER_NUMBER");
     [header addSubview:label];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(100, 20, 80, 30)];
+    label.textAlignment = NSTextAlignmentCenter;
     label.text = FEString(@"ORDER_TYPE");
     [header addSubview:label];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(240, 20, 80, 30)];
+    label.textAlignment = NSTextAlignmentCenter;
     label.text = FEString(@"ORDER_STATUS");
     [header addSubview:label];
     return header;

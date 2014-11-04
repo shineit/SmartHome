@@ -61,7 +61,7 @@
     [self.scrollContent addGestureRecognizer:tges];
     
     //编号
-    FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 10, 80, 20)];
+    FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 15, 80, 20)];
     label.text = FEString(@"ORDER_NUMBER");
     [scrollcontent addSubview:label];
     
@@ -70,7 +70,7 @@
     [scrollcontent addSubview:_number];
     
     //类型
-    UILabel *type = [[FELabel alloc] initWithFrame:CGRectMake(10, 60, 60, 20)];
+    FELabel *type = [[FELabel alloc] initWithFrame:CGRectMake(10, 65, 60, 20)];
     type.text = FEString(@"ORDER_TYPE");
     [scrollcontent addSubview:type];
     
@@ -78,14 +78,14 @@
     _checkGroup = [FECheckButtonGroup new];
     
 //    UIButton *repair = [UIButton buttonWithType:UIButtonTypeCustom];
-    FECheckButton *repair = [[FECheckButton alloc] initWithFrame:CGRectMake(80, 60, 80, 30)];
+    FECheckButton *repair = [[FECheckButton alloc] initWithFrame:CGRectMake(80, 60, 100, 30)];
     [repair addObserver:self check:@selector(check:)];
     [repair setTitle:FEString(@"ORDER_REPAIR")];
     [_checkGroup addButton:repair];
     [scrollcontent addSubview:repair];
     
     
-    FECheckButton *consult = [[FECheckButton alloc] initWithFrame:CGRectMake(200, 60, 80, 30)];
+    FECheckButton *consult = [[FECheckButton alloc] initWithFrame:CGRectMake(200, 60, 100, 30)];
     [consult addObserver:self check:@selector(check:)];
     [consult setTitle:FEString(@"ORDER_CONSULT")];
     [_checkGroup addButton:consult];
@@ -93,7 +93,7 @@
     
     
     //名称
-    FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(10, 120, 60, 20)];
+    FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(10, 125, 60, 20)];
     title.text = FEString(@"ORDER_THEME");
     [scrollcontent addSubview:title];
     
@@ -102,7 +102,7 @@
     _titleTextField.text = @"test";
     [scrollcontent addSubview:_titleTextField];
     
-    FELabel *content = [[FELabel alloc] initWithFrame:CGRectMake(10, 160, 60, 20)];
+    FELabel *content = [[FELabel alloc] initWithFrame:CGRectMake(10, 165, 60, 20)];
     content.text = FEString(@"ORDER_CONTENT");
     [scrollcontent addSubview:content];
     
@@ -112,31 +112,31 @@
     [scrollcontent addSubview:_contentTextField];
     
     //联系人
-    FELabel *contact = [[FELabel alloc] initWithFrame:CGRectMake(10, 230, 80, 20)];
+    FELabel *contact = [[FELabel alloc] initWithFrame:CGRectMake(10, 235, 70, 20)];
     contact.text = FEString(@"ORDER_CONTACT");
     [scrollcontent addSubview:contact];
     
-    _contact = [[UITextField alloc] initWithFrame:CGRectMake(110, 230, 190, 30)];
+    _contact = [[UITextField alloc] initWithFrame:CGRectMake(85, 230, 205, 30)];
     _contact.borderStyle = UITextBorderStyleRoundedRect;
     _contact.text = @"tester";
     [scrollcontent addSubview:_contact];
     
     //电话
-    FELabel *phone = [[FELabel alloc] initWithFrame:CGRectMake(10, 270, 80, 20)];
+    FELabel *phone = [[FELabel alloc] initWithFrame:CGRectMake(10, 275, 70, 20)];
     phone.text = FEString(@"ORDER_PHONENUMBER");
     [scrollcontent addSubview:phone];
     
-    _phonenumber = [[UITextField alloc] initWithFrame:CGRectMake(110, 270, 190, 30)];
+    _phonenumber = [[UITextField alloc] initWithFrame:CGRectMake(85, 270, 205, 30)];
     _phonenumber.borderStyle = UITextBorderStyleRoundedRect;
     _phonenumber.text = @"123456";
     [scrollcontent addSubview:_phonenumber];
     
     //adress
-    FELabel *adress = [[FELabel alloc] initWithFrame:CGRectMake(10, 310, 80, 20)];
+    FELabel *adress = [[FELabel alloc] initWithFrame:CGRectMake(10, 315, 70, 20)];
     adress.text = FEString(@"ORDER_ADRESS");
     [scrollcontent addSubview:adress];
     
-    _address = [[UITextField alloc] initWithFrame:CGRectMake(110, 310, 190, 30)];
+    _address = [[UITextField alloc] initWithFrame:CGRectMake(85, 310, 205, 30)];
     _address.borderStyle = UITextBorderStyleRoundedRect;
     _address.text = @"test address";
     [scrollcontent addSubview:_address];
@@ -156,6 +156,8 @@
     [submit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     [scrollcontent addSubview:submit];
     
+    [self check:repair];
+    
     
 }
 
@@ -170,15 +172,13 @@
     [self hideKeyboard:nil];
     [self displayHUD:FEString(@"LOADING...")];
     __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] orederSet:sdata response:^(NSError *error, FEBaseResponse *response) {
+    [[FEWebServiceManager sharedInstance] orederSet:sdata response:^(NSError *error, FEOrderSetResponse *response) {
         [weakself hideHUD:YES];
         NSLog(@"set order %@",response);
         if (error) {
-            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
         }
-        
     }];
 }
 

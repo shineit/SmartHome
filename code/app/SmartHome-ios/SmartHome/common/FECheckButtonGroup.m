@@ -38,6 +38,8 @@
         for (FECheckButton *btn in _buttonGroup) {
             if (checkButon != btn) {
                 [btn setChecked:NO];
+            }else{
+                [btn setChecked:YES];
             }
         }
     }

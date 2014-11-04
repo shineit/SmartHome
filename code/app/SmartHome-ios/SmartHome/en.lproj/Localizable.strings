@@ -48,7 +48,7 @@
 "ORDER_THEME" = "Theme";
 "ORDER_CONTENT" = "Content";
 "ORDER_CONTACT" = "Contact";
-"ORDER_PHONENUMBER" = "Phome";
+"ORDER_PHONENUMBER" = "Phone";
 "ORDER_ADRESS" = "Adress";
 "ORDER_DELET" = "Delet";
 "ORDER_SUBMIT" = "Submit";

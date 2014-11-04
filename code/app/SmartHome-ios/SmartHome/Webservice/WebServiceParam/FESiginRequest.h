@@ -6,10 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
 #import "FERequestBaseData.h"
 
-@interface FESiginData : FERequestBaseData
+@interface FESiginRequest : FERequestBaseData
 @property (nonatomic, strong, readonly) NSString *userName;
 @property (nonatomic, strong, readonly) NSString *password;
 @property (nonatomic, strong, readonly) NSString *clientType;

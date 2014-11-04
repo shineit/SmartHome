@@ -16,6 +16,12 @@
 #import "FENewsResponse.h"
 #import "FENews.h"
 #import "FEResult.h"
+#import "FEHistoryAlarmRequest.h"
+#import "FECoreDataHandler.h"
+#import "AppDelegate.h"
+#import "CDUser.h"
+#import "FEHistoryAlarmResponse.h"
+
 
 @interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -126,11 +132,36 @@
     }];
 }
 
+-(void)requestHistoryWarring{
+    [self displayHUD:FEString(@"LOADING...")];
+    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+    FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
+    FEHistoryAlarmRequest *hdata = [[FEHistoryAlarmRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:@[attr]];
+    
+     __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] historyAlarmList:hdata reponse:^(NSError *error, FEHistoryAlarmResponse *response) {
+        [self hideHUD:YES];
+        if (error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }else{
+            if (response.result.errorCode.integerValue != 0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"Error code %@!",response.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                return ;
+            }
+            [weakself.warringtable reloadData];
+        }
+    }];
+    
+}
+
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)control{
     if (control.selectedSegmentIndex == 0) {
         if (self.newstable.isHidden == NO) {
             return;
         }else{
+            [self requestNews];
             [UIView animateWithDuration:0.2
                                   delay:0
                                 options:UIViewAnimationOptionTransitionFlipFromLeft
@@ -144,6 +175,7 @@
         if (self.warringtable.isHidden == NO) {
             return;
         }else{
+            [self requestHistoryWarring];
             [UIView animateWithDuration:0.2
                                   delay:0
                                 options:UIViewAnimationOptionTransitionFlipFromLeft

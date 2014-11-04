@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) UIImageView *checkImageView;
 @property (nonatomic, strong) UILabel *checkTitle;
-@property (nonatomic, assign, getter=isChecked) BOOL checked;
 @property (nonatomic, weak) id observer;
 @property (nonatomic, assign) SEL checkSelector;
 
@@ -46,9 +45,13 @@
         return;
     }
     if ([self.observer respondsToSelector:self.checkSelector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [self.observer performSelector:self.checkSelector withObject:self];
+#pragma clang diagnostic pop
+        
     }
-    [self setChecked:!_checked];
+    [self setChecked:YES];
     
 }
 

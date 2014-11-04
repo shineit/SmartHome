@@ -14,6 +14,7 @@
 #define __SEVICE_ORDER     @"order/list" //orders
 #define __SEVICE_ORDER_SET @"order/set" //set order
 #define __MARK_SET         @""
+#define __HISTORY_ALARM    @""
 
 @interface FERequestBaseData : NSObject
 

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "CDUser.h"
 #import "FEWebServiceManager.h"
-#import "FESiginData.h"
+#import "FESiginRequest.h"
 #import "FESiginResponse.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
@@ -104,7 +104,7 @@
         [self displayHUD:FEString(@"LOADING")];
         __weak typeof(self) weakself = self;
         
-        FESiginData *sdata = [[FESiginData alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0"];
+        FESiginRequest *sdata = [[FESiginRequest alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0"];
         
         [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FESiginResponse *user){
             NSLog(@"call back");

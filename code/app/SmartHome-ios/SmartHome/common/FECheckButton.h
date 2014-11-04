@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UIImage *checkedImage;
 @property (nonatomic, strong) UIImage *uncheckedImage;
+@property (nonatomic, assign, getter=isChecked) BOOL checked;
 
 
 -(void)setTitle:(NSString *)title;
