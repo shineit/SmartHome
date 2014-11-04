@@ -44,6 +44,7 @@
 //Service set page
 "SERVICE_REQUEST" = "Service Request";
 "ORDER_REPAIR" = "Repair";
+"ORDER_INSTALL" = "Install";
 "ORDER_CONSULT" = "Consult";
 "ORDER_THEME" = "Theme";
 "ORDER_CONTENT" = "Content";
@@ -52,6 +53,8 @@
 "ORDER_ADRESS" = "Adress";
 "ORDER_DELET" = "Delet";
 "ORDER_SUBMIT" = "Submit";
+"ORDER_DEAL" = "Handled";
+"ORDER_WAIT" = "Wait";
 
 //safe page
 "SAFE_ALL_OPEN" = "All open";

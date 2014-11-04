@@ -35,6 +35,7 @@
 
 -(void)checkButton:(FECheckButton *)checkButon{
     if ([_buttonGroup containsObject:checkButon]) {
+        _checkedindex = [_buttonGroup indexOfObject:checkButon];
         for (FECheckButton *btn in _buttonGroup) {
             if (checkButon != btn) {
                 [btn setChecked:NO];

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class FEOrder;
 
 @interface FEServiceTableViewCell : UITableViewCell
 
 @property (nonatomic, strong, readonly) FELabel *numberLabel;
 @property (nonatomic, strong, readonly) FELabel *typeLabel;
 @property (nonatomic, strong, readonly) FELabel *statusLabel;
+
+-(void)configWithOrder:(FEOrder *)order;
 
 @end

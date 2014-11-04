@@ -50,6 +50,7 @@
     [self loadRightCustomButtonItemWithTitle:FEString(@"ORDER_ADD") image:nil];
     
     UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    table.backgroundColor = [UIColor clearColor];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -105,9 +106,10 @@
         cell = [[FEServiceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     FEOrder *order = self.serviceDatas[indexPath.row];
-    cell.numberLabel.text = order.orderID;
-    cell.typeLabel.text = order.orderType.boolValue?FEString(@"SEVICE_INSTALL"):FEString(@"SEVICE_REPAIR");
-    cell.statusLabel.text = order.orderStatus.integerValue?FEString(@"SERVICE_WAIT"):FEString(@"SERVICE_DEAL");
+    [cell configWithOrder:order];
+//    cell.numberLabel.text = order.orderID;
+//    cell.typeLabel.text = order.orderType.boolValue?FEString(@"SEVICE_INSTALL"):FEString(@"SEVICE_REPAIR");
+//    cell.statusLabel.text = order.orderStatus.integerValue?FEString(@"SERVICE_WAIT"):FEString(@"SERVICE_DEAL");
     return cell;
 }
 
@@ -125,9 +127,9 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
-    header.backgroundColor = [UIColor whiteColor];
+    header.backgroundColor = FEColor(229, 229, 229, 1);
     FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 20, 80, 30)];
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentLeft;
     label.text = FEString(@"ORDER_NUMBER");
     [header addSubview:label];
     
@@ -136,8 +138,8 @@
     label.text = FEString(@"ORDER_TYPE");
     [header addSubview:label];
     
-    label = [[FELabel alloc] initWithFrame:CGRectMake(240, 20, 80, 30)];
-    label.textAlignment = NSTextAlignmentCenter;
+    label = [[FELabel alloc] initWithFrame:CGRectMake(240, 20, 75, 30)];
+    label.textAlignment = NSTextAlignmentRight;
     label.text = FEString(@"ORDER_STATUS");
     [header addSubview:label];
     return header;

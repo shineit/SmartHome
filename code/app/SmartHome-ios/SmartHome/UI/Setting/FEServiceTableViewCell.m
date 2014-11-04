@@ -7,6 +7,13 @@
 //
 
 #import "FEServiceTableViewCell.h"
+#import "FEOrder.h"
+
+@interface FEServiceTableViewCell ()
+
+@property (nonatomic, strong) NSArray *typeArray;
+
+@end
 
 @implementation FEServiceTableViewCell
 
@@ -16,24 +23,34 @@
     if (self) {
         // Initialization code
         [self setup];
+        _typeArray = [NSArray arrayWithObjects:FEString(@"ORDER_INSTALL"),FEString(@"ORDER_REPAIR"), nil];
     }
     return self;
 }
 
 -(void)setup{
-    _numberLabel = [[FELabel alloc] initWithFrame:CGRectMake(10, 20, 60, 20)];
-    _numberLabel.text = @"001";
+    _numberLabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 80, 20)];
+    _numberLabel.textAlignment = NSTextAlignmentCenter;
+//    _numberLabel.text = @"001";
     [self.contentView addSubview:_numberLabel];
     
-    _typeLabel = [[FELabel alloc] initWithFrame:CGRectMake(100, 20, 130, 20)];
-    _typeLabel.text = @"安装服务";
+    _typeLabel = [[FELabel alloc] initWithFrame:CGRectMake(95, 20, 115, 20)];
+    _typeLabel.textAlignment = NSTextAlignmentCenter;
+//    _typeLabel.text = @"安装服务";
     [self.contentView addSubview:_typeLabel];
     
-    _statusLabel = [[FELabel alloc] initWithFrame:CGRectMake(250, 20, 70, 20)];
+    _statusLabel = [[FELabel alloc] initWithFrame:CGRectMake(225, 20, 90, 20)];
+    _statusLabel.textAlignment = NSTextAlignmentCenter;
     _statusLabel.textColor = [UIColor orangeColor];
-    _statusLabel.text = @"待处理";
+//    _statusLabel.text = @"待处理";
     [self.contentView addSubview:_statusLabel];
     
+}
+
+-(void)configWithOrder:(FEOrder *)order{
+    self.numberLabel.text = order.orderID;
+    _statusLabel.text = order.orderStatus.boolValue?FEString(@"ORDER_DEAL"):FEString(@"ORDER_WAIT");
+    _typeLabel.text = _typeArray[order.orderType.integerValue];
 }
 
 - (void)awakeFromNib

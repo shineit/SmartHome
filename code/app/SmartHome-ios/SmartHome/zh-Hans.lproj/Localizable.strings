@@ -46,8 +46,9 @@
 
 //Service set page
 "SERVICE_REQUEST" = "服务申请";
-"ORDER_REPAIR" = "维修";
-"ORDER_CONSULT" = "咨询";
+"ORDER_REPAIR" = "维 修";
+"ORDER_INSTALL" = "安 装";
+"ORDER_CONSULT" = "咨 询";
 "ORDER_THEME" = "标题";
 "ORDER_CONTENT" = "内容";
 "ORDER_CONTACT" = "联系人";
@@ -55,6 +56,8 @@
 "ORDER_ADRESS" = "联系地址";
 "ORDER_DELET" = "删除";
 "ORDER_SUBMIT" = "提交";
+"ORDER_DEAL" = "已处理";
+"ORDER_WAIT" = "待处理";
 
 //safe page
 "SAFE_ALL_OPEN" = "全部打开";

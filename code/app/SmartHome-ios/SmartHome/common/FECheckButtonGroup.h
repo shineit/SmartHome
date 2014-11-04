@@ -12,6 +12,8 @@
 
 @interface FECheckButtonGroup : NSObject
 
+@property (nonatomic, assign) NSInteger checkedindex;
+
 -(void)addButton:(FECheckButton *)checkbutton;
 -(void)removeButton:(FECheckButton *)checkbutton;
 -(void)checkButton:(FECheckButton *)checkButon;
