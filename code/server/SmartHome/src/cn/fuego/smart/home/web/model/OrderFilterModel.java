@@ -1,7 +1,16 @@
 package cn.fuego.smart.home.web.model;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
+import cn.fuego.smart.home.domain.ServiceOrder;
 
 /** 
 * @ClassName: OrderFilterModel 
@@ -19,6 +28,35 @@ public class OrderFilterModel
     private String endDate;
     private ServiceOrderStatusEnum[] statusList =ServiceOrderStatusEnum.values();
     private ServiceOrderTypeEnum[] typeList = ServiceOrderTypeEnum.values();
+    
+    public List<QueryCondition> getConidtionList()
+    {
+    	List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		 
+			if(!ValidatorUtil.isEmpty(this.getOrderID()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,ServiceOrder.getOrderIDAttr(),this.getOrderID()));
+			}
+			if(!ValidatorUtil.isEmpty(this.getOrderName()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"orderName",this.getOrderName()));
+			}
+			if(!ValidatorUtil.isEmpty(this.getOrderStatus()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"orderStatus",String.valueOf(ServiceOrderStatusEnum.getEnumByStr(this.getOrderStatus()).getIntValue())));
+			}
+			if(!ValidatorUtil.isEmpty(this.getStartDate()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"createTime",this.getStartDate()));
+			}
+			if(!ValidatorUtil.isEmpty(this.getEndDate()))
+			{
+				Date endDate = DateUtil.stringToDate(this.getEndDate());
+				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER,"createTime",DateUtil.DateToString(DateUtil.dayCalculate(endDate, 1))));
+			}				
+		 
+		return conditionList;
+    }
 	public String getOrderID()
 	{
 		return orderID;

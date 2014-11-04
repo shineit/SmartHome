@@ -41,7 +41,7 @@ public class NewsManageRestImpl implements NewsManageRest
 	public GetNewsListRsp getNewsList(GetNewsListReq req)
 	{
 		GetNewsListRsp rsp = new GetNewsListRsp();
-		List<News> newsList = newsService.getNewsDataSource().getAllPageData();
+		List<News> newsList = newsService.getNewsDataSource(null).getAllPageData();
 		for(News e : newsList)
 		{
 			NewsJson newsJson = new NewsJson();

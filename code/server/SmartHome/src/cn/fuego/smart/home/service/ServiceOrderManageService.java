@@ -8,6 +8,9 @@
 */ 
 package cn.fuego.smart.home.service;
 
+import java.util.List;
+
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.web.model.OrderFilterModel;
@@ -21,7 +24,7 @@ import cn.fuego.smart.home.web.model.OrderFilterModel;
  */
 public interface ServiceOrderManageService
 {
-	AbstractDataSource<ServiceOrder>  getOrderDataSource(OrderFilterModel orderFilter);
+	AbstractDataSource<ServiceOrder>  getOrderDataSource(List<QueryCondition> conditionList);
 	
 	void create(ServiceOrder order);
     void handle(String orderID,String handler,String handleResult);

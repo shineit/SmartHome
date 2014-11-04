@@ -41,10 +41,11 @@ public class OrderManageAction  extends DWZTableAction
 	private OrderFilterModel filter = new OrderFilterModel();
 	private ServiceOrder order;
 	public static final String PARENT_PAGE="info/OrderManage"; 
+	@Override
 	public String execute()
 	{
 		serviceOrderTable.setPage(this.getPage());
-		serviceOrderTable.setDataSource(orderService.getOrderDataSource(filter));
+		serviceOrderTable.setDataSource(orderService.getOrderDataSource(filter.getConidtionList()));
 		return SUCCESS;
 	}
 	@Override

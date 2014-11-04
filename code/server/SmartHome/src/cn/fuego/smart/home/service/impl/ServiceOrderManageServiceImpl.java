@@ -45,33 +45,9 @@ public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
 	private Log log = LogFactory.getLog(ServiceOrderManageServiceImpl.class);
 	@Override
 	
-	public AbstractDataSource<ServiceOrder> getOrderDataSource(	OrderFilterModel orderFilter)
+	public AbstractDataSource<ServiceOrder> getOrderDataSource(List<QueryCondition> conditionList)
 	{
-		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-		if(null != orderFilter)
-		{
-			if(!ValidatorUtil.isEmpty(orderFilter.getOrderID()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"orderID",orderFilter.getOrderID()));
-			}
-			if(!ValidatorUtil.isEmpty(orderFilter.getOrderName()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"orderName",orderFilter.getOrderName()));
-			}
-			if(!ValidatorUtil.isEmpty(orderFilter.getOrderStatus()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"orderStatus",String.valueOf(ServiceOrderStatusEnum.getEnumByStr(orderFilter.getOrderStatus()).getIntValue())));
-			}
-			if(!ValidatorUtil.isEmpty(orderFilter.getStartDate()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"createTime",orderFilter.getStartDate()));
-			}
-			if(!ValidatorUtil.isEmpty(orderFilter.getEndDate()))
-			{
-				Date endDate = DateUtil.stringToDate(orderFilter.getEndDate());
-				conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,"createTime",DateUtil.dayCalculate(endDate, 1).toString()));
-			}				
-		}
+		 
 		
 		AbstractDataSource<ServiceOrder> datasource = new DataBaseSourceImpl<ServiceOrder>(ServiceOrder.class,conditionList);
 		
