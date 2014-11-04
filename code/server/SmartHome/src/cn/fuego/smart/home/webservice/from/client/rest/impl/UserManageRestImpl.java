@@ -97,9 +97,25 @@ public class UserManageRestImpl implements UserManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.service.UserManageService#getUserMarkList(cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq)
 	 */
 	@Override
-	public SetUserMarkRsp setUserMark(SetUserMarkReq req)
+	public SetUserMarkRsp addUserMark(SetUserMarkReq req)
 	{
 		SetUserMarkRsp rsp = new SetUserMarkRsp();
+ 
+		return rsp;
+	}
+
+	public SetUserMarkRsp deleteUserMark(SetUserMarkReq req)
+	{
+		SetUserMarkRsp rsp = new SetUserMarkRsp();
+		return rsp;
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.from.client.rest.UserManageRest#logout(cn.fuego.smart.home.webservice.from.client.model.LoginReq)
+	 */
+	@Override
+	public LoginRsp logout(LoginReq req)
+	{
+		LoginRsp rsp = new LoginRsp();
 		return rsp;
 	}
 

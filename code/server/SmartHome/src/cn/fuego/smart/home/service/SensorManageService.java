@@ -27,6 +27,9 @@ public interface SensorManageService
 {
 	AbstractDataSource<HomeSensor>  getSensorDataSource();
 	
+	AbstractDataSource<Alarm>  getAlarmDataSource(int userID);
+
+	
 	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor);
 	void createAlarm(List<Alarm> alarm);
 	

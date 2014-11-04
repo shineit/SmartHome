@@ -2,6 +2,9 @@ package cn.fuego.smart.home.webservice.from.client.model.base;
 
 import java.util.Date;
 
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.smart.home.domain.Alarm;
+
 /**
  * 
 * @ClassName: AlarmJson 
@@ -18,10 +21,24 @@ public class AlarmJson
 	
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private float dataValue;	//告警值,模拟量类型 才有
-	private Date alarmTime;	//告警产生的时间
+	private long alarmTime;	//告警产生的时间
 	private String clearUser;  //清除人 手动清除需要填写
 	private int clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
-	private Date clearTime;	//告警清除的时间
+	private long clearTime;	//告警清除的时间
+	
+	public void loadWithAlarm(Alarm alarm)
+	{
+		this.id = alarm.getId();
+		this.objType = alarm.getObjType();
+		this.objID = alarm.getObjID();
+		this.alarmType = alarm.getAlarmType();
+		this.dataValue = alarm.getDataValue();
+		this.alarmTime = DateUtil.getDateTime(alarm.getAlarmTime());
+		this.clearUser = alarm.getClearUser();
+		this.clearStatus = alarm.getClearStatus();
+		this.clearTime = DateUtil.getDateTime(alarm.getClearTime());
+		
+	}
 	public int getId()
 	{
 		return id;
@@ -62,13 +79,22 @@ public class AlarmJson
 	{
 		this.dataValue = dataValue;
 	}
-	public Date getAlarmTime()
+ 
+	public long getAlarmTime()
 	{
 		return alarmTime;
 	}
-	public void setAlarmTime(Date alarmTime)
+	public void setAlarmTime(long alarmTime)
 	{
 		this.alarmTime = alarmTime;
+	}
+	public long getClearTime()
+	{
+		return clearTime;
+	}
+	public void setClearTime(long clearTime)
+	{
+		this.clearTime = clearTime;
 	}
 	public String getClearUser()
 	{
@@ -86,14 +112,7 @@ public class AlarmJson
 	{
 		this.clearStatus = clearStatus;
 	}
-	public Date getClearTime()
-	{
-		return clearTime;
-	}
-	public void setClearTime(Date clearTime)
-	{
-		this.clearTime = clearTime;
-	}
+ 
 	@Override
 	public String toString()
 	{

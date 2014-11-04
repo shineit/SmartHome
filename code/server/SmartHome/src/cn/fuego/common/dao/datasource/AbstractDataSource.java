@@ -20,7 +20,7 @@ import java.util.List;
 
 public interface AbstractDataSource<E>
 {
-	public List<E> getCurrentPageData(int startNum,int endNum);
+	public List<E> getCurrentPageData(int startNum,int pageSize);
 	
 	public List<E> getAllPageData();
 	

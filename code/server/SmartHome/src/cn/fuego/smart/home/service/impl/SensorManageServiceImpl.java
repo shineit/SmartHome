@@ -45,6 +45,18 @@ public class SensorManageServiceImpl implements SensorManageService
 	}
 
 	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.service.SensorManageService#getAlarmDataSource(int)
+	 */
+	@Override
+	public AbstractDataSource<Alarm> getAlarmDataSource(int userID)
+	{
+		AbstractDataSource<Alarm> datasource = new DataBaseSourceImpl<Alarm>(HomeSensor.class);
+
+		return datasource;
+		
+	}
+
+	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#setSensor(cn.fuego.smart.home.constant.SensorSetCmdEnum, cn.fuego.smart.home.domain.Sensor)
 	 */
 	@Override
@@ -85,5 +97,6 @@ public class SensorManageServiceImpl implements SensorManageService
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

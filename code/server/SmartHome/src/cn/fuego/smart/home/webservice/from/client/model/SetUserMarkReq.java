@@ -14,16 +14,9 @@ import cn.fuego.smart.home.webservice.from.client.model.base.UserMarkJson;
  */
 public class SetUserMarkReq extends BaseJsonReq
 {
-	private String command;
+ 
 	private UserMarkJson userMark;
-	public String getCommand()
-	{
-		return command;
-	}
-	public void setCommand(String command)
-	{
-		this.command = command;
-	}
+ 
 	public UserMarkJson getUserMark()
 	{
 		return userMark;
@@ -35,9 +28,9 @@ public class SetUserMarkReq extends BaseJsonReq
 	@Override
 	public String toString()
 	{
-		return "SetUserMarkReq [command=" + command + ", userMark=" + userMark
-				+ "]";
+		return "SetUserMarkReq [userMark=" + userMark + "]";
 	}
+ 
 	
 	
 }

@@ -13,12 +13,18 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.SensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.webservice.from.client.model.BatchSetSensorReq;
+import cn.fuego.smart.home.webservice.from.client.model.BatchSetSensorRsp;
+import cn.fuego.smart.home.webservice.from.client.model.GetHistoryAlarmListReq;
+import cn.fuego.smart.home.webservice.from.client.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetSensorRsp;
+import cn.fuego.smart.home.webservice.from.client.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.from.client.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest;
 
@@ -85,6 +91,43 @@ public class SensorManageRestImpl implements SensorManageRest
 	public SetSensorRsp setSensor(SetSensorReq req)
 	{
 		SetSensorRsp rsp = new SetSensorRsp();
+		return rsp;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest#setSensor(cn.fuego.smart.home.webservice.from.client.model.GetHistoryAlarmListReq)
+	 */
+	@Override
+	public GetHistoryAlarmListRsp setSensor(GetHistoryAlarmListReq req)
+	{
+		GetHistoryAlarmListRsp rsp = new GetHistoryAlarmListRsp();
+		List<Alarm> alarmList = sensorService.getAlarmDataSource(req.getUserID()).getAllPageData();
+		for(Alarm alarm : alarmList)
+		{
+			AlarmJson alarmJson = new AlarmJson();
+			alarmJson.loadWithAlarm(alarm);
+			rsp.getAlarmList().add(alarmJson);
+		}
+		return rsp;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest#enable(cn.fuego.smart.home.webservice.from.client.model.BatchSetSensorReq)
+	 */
+	@Override
+	public BatchSetSensorRsp enable(BatchSetSensorReq req)
+	{
+		BatchSetSensorRsp rsp = new BatchSetSensorRsp();
+		return rsp;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest#disable(cn.fuego.smart.home.webservice.from.client.model.BatchSetSensorReq)
+	 */
+	@Override
+	public BatchSetSensorRsp disable(BatchSetSensorReq req)
+	{
+		BatchSetSensorRsp rsp = new BatchSetSensorRsp();
 		return rsp;
 	}
 

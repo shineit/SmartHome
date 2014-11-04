@@ -10,6 +10,7 @@ package cn.fuego.smart.home.device.send;
 
 import java.util.List;
 
+import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeSensor;
 
  /** 
@@ -21,6 +22,30 @@ import cn.fuego.smart.home.domain.HomeSensor;
  */
 public interface DeviceManager
 {
+
+	/**
+	 * 集中器复位
+	 * @param concentrator
+	 */
+	public void reset(Concentrator concentrator);
+	
+	/**
+	 * 集中器清除
+	 * @param concentrator
+	 */
+	public void clear(Concentrator concentrator);
+	
+	/**
+	 * 集中器配置，设置连接服务器的IP地址和端口号
+	 * @param concentrator
+	 */
+	public void setConfig(Concentrator concentrator);
+	
+	/**
+	 * 获取集中器配置
+	 * @return
+	 */
+	public Concentrator getConfig();
 
 	public List<HomeSensor> getSensorList();
 	
@@ -34,6 +59,11 @@ public interface DeviceManager
 	
 	public void stopSensor(List<HomeSensor> sensorList);
 	
+	/**
+	 * 获取模拟量终端采集数据
+	 * @param sensorList
+	 */
+	public void getSensorData(List<HomeSensor> sensorList);
 	
 }
 

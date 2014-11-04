@@ -15,19 +15,21 @@ import cn.fuego.smart.home.domain.ServiceOrder;
  */
 public class ServiceOrderJson
 {
-	private String orderID;
-    private String orderName;
-    private int orderType;
-    private String content;
-    private String creator;
-    private long createTime;
-    private String contactName;
-    private String phoneNum;
-    private String contactAddr;
-    private int orderStatus;
-    private String handler;
-    private String handleResult;
-    private long handleTime;
+	
+	private String orderID;         //申请单号，
+    private String orderName;       //申请单名称
+    private int orderType;		//申请单类型(维修，安装，咨询)
+    private String content;			//申请单内容
+    private String creator;			//申请人
+    private long createTime;		//申请时间
+    private String contactName;		//联系人名称
+    private String phoneNum;		//联系电话
+    private String contactAddr;		//联系地址
+    private int orderStatus;		//申请单状态，0-未处理，1-已处理
+    private String handleResult;   //处理结果
+    private String handler;			//处理人
+    private long handleTime;		//处理时间
+ 
     
     
 	/**
@@ -62,6 +64,7 @@ public class ServiceOrderJson
 		order.setCreateTime(new Date(createTime));
 		order.setContactName(contactName);
 		order.setContactAddr(contactAddr);
+		order.setPhoneNum(phoneNum);
 		order.setOrderStatus(orderStatus);
 		order.setHandler(handler);
 		order.setHandleResult(handleResult);

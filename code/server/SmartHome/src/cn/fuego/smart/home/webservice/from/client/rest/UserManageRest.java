@@ -30,10 +30,18 @@ public interface UserManageRest
 	LoginRsp login(LoginReq req);
 	
 	@POST
+	@Path("/logout")
+	LoginRsp logout(LoginReq req);
+	
+	@POST
 	@Path("/mark/list")
 	GetUserMarkListRsp getUserMarkList(GetUserMarkListReq req);
 	
 	@POST
-	@Path("/mark/set")
-	SetUserMarkRsp setUserMark(SetUserMarkReq req);
+	@Path("/mark/add")
+	SetUserMarkRsp addUserMark(SetUserMarkReq req);
+	
+	@POST
+	@Path("/mark/delete")
+	SetUserMarkRsp deleteUserMark(SetUserMarkReq req);
 }

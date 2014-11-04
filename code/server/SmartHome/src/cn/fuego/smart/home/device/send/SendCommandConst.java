@@ -15,7 +15,7 @@ package cn.fuego.smart.home.device.send;
  * @date 2014-10-30 下午3:26:42 
  *  
  */
-public class DeviceCommand
+public class SendCommandConst
 {
 	public static final int CTL =  1; //查询/控制 命令
 	public static final int RESET_CONCENTRATOR =  2; //集中器复位 命令

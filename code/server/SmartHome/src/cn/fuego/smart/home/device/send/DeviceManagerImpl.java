@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.device.ApplicationProtocol;
+import cn.fuego.smart.home.device.ReceiveMessage;
 import cn.fuego.smart.home.device.communicator.Communicator;
 import cn.fuego.smart.home.device.communicator.CommunicatorFactory;
 import cn.fuego.smart.home.domain.Concentrator;
@@ -43,6 +44,53 @@ public class DeviceManagerImpl implements DeviceManager
 	{
 		this.concentrator = concentrator;
 	}
+	
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.device.send.DeviceManager#reset(cn.fuego.smart.home.domain.Concentrator)
+	 */
+	@Override
+	public void reset(Concentrator concentrator)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.device.send.DeviceManager#clear(cn.fuego.smart.home.domain.Concentrator)
+	 */
+	@Override
+	public void clear(Concentrator concentrator)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.device.send.DeviceManager#setConfig(cn.fuego.smart.home.domain.Concentrator)
+	 */
+	@Override
+	public void setConfig(Concentrator concentrator)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.device.send.DeviceManager#getConfig()
+	 */
+	@Override
+	public Concentrator getConfig()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.device.send.DeviceManager#getSensorData(java.util.List)
+	 */
+	@Override
+	public void getSensorData(List<HomeSensor> sensorList)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#getSensorList(java.lang.String)
 	 */
@@ -51,10 +99,12 @@ public class DeviceManagerImpl implements DeviceManager
 	{
 
 		 
-		String sendMessage = makeSendData(DeviceCommand.GET_SENOR_LIST,null);
+		String sendMessage = makeSendData(SendCommandConst.GET_SENOR_LIST,null);
 		String readMessage = getData(sendMessage);
 		
-		List<HomeSensor> sensorList = new ArrayList<HomeSensor>();
+		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getAddr());
+		
+		List<HomeSensor> sensorList =recvMessage.getHomeSensorList();
 		return sensorList;
 	}
 
@@ -95,7 +145,7 @@ public class DeviceManagerImpl implements DeviceManager
 		
 		
 		
-		String sendMessage = makeSendData(DeviceCommand.SET_SENSOR_CONFIG,data);
+		String sendMessage = makeSendData(SendCommandConst.SET_SENSOR_CONFIG,data);
 		String readMessage = getData(sendMessage);
 		
 		log.info("the read message is " + readMessage);
@@ -163,7 +213,7 @@ public class DeviceManagerImpl implements DeviceManager
 		readMessage = communicator.readData(ApplicationProtocol.PACKET_END);
 		communicator.close();
 		
-		return readMessage;
+		return ApplicationProtocol.decode(readMessage);
 	}
 
 }

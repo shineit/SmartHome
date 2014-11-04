@@ -17,23 +17,26 @@ import cn.fuego.smart.home.webservice.from.client.model.base.ServiceOrderJson;
  */
 public class GetHistoryAlarmListRsp extends BaseJsonRsp
 {
-	private List<AlarmJson> sensorList;
+	private List<AlarmJson> alarmList;
 
-	public List<AlarmJson> getSensorList()
+	public List<AlarmJson> getAlarmList()
 	{
-		return sensorList;
+		return alarmList;
 	}
 
-	public void setSensorList(List<AlarmJson> sensorList)
+	public void setAlarmList(List<AlarmJson> alarmList)
 	{
-		this.sensorList = sensorList;
+		this.alarmList = alarmList;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "GetHistoryAlarmListRsp [sensorList=" + sensorList + "]";
+		return "GetHistoryAlarmListRsp [alarmList=" + alarmList + "]";
 	}
+
+	
+ 
 	
 
 }

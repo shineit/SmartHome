@@ -11,7 +11,11 @@ package cn.fuego.smart.home.device;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
+import cn.fuego.smart.home.device.send.DeviceManagerImpl;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.FireSensor;
@@ -27,6 +31,8 @@ import cn.fuego.smart.home.service.ServiceContext;
  */
 public class ReceiveMessage
 {
+	private Log log = LogFactory.getLog(DeviceManagerImpl.class);	
+
 	public static final int CONCENTRATOR_ID_START = 0;
 	public static final int CONCENTRATOR_ID_END = 3;
 	
@@ -108,6 +114,59 @@ public class ReceiveMessage
 			alarmList.add(alarm);
 		}
 		return alarmList;
+	}
+	
+	public boolean isStart()
+	{
+		int index = this.DATA_START_INDEX;
+		int cnt = this.getIntValue(index,index+1);
+ 
+		int endNum = this.getIntValue(index+2,index+3);
+		if(cnt == endNum)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	public boolean isEnd()
+	{
+		int index = this.DATA_START_INDEX;
+		int cnt = this.getIntValue(index,index+1);
+ 
+		int endNum = this.getIntValue(index+2,index+3);
+		if(cnt == endNum)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public List<HomeSensor> getHomeSensorList()
+	{
+		List<HomeSensor> sensorList = new ArrayList<HomeSensor>();
+		int index = this.DATA_START_INDEX;
+		int cnt = this.getIntValue(index,index+1);
+		if(cnt > 8)
+		{
+			log.info("");
+			cnt = 8;
+		}
+		int endNum = this.getIntValue(index+2,index+3);
+		for(int i=0;i<cnt;i++)
+		{
+			int sensorID = this.getIntValue(index+4+i*4,index+4+i*4+3);
+			int channelNum = this.getIntValue(index+4+i*4+4);
+			for(int j=0;j<channelNum;j++)
+			{
+				HomeSensor sensor = new HomeSensor();
+				sensor.setId(sensorID);
+				sensor.setChannelID(j);
+			}
+		}
+		
+		return sensorList;
 	}
 	
 	public HomeSensor getHomeSensor()

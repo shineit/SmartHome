@@ -48,6 +48,22 @@ public class LoginReq
 	{
 		this.clientVersion = clientVersion;
 	}
+	public String getDevToken()
+	{
+		return devToken;
+	}
+	public void setDevToken(String devToken)
+	{
+		this.devToken = devToken;
+	}
+	@Override
+	public String toString()
+	{
+		return "LoginReq [userName=" + userName + ", password=" + password
+				+ ", clientType=" + clientType + ", clientVersion="
+				+ clientVersion + ", devToken=" + devToken + "]";
+	}
+
 	
 
 }
