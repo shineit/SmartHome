@@ -7,16 +7,23 @@
 //
 
 #import "FENewsResponse.h"
-#import "FEResult.h"
+#import "FENews.h"
 
 @implementation FENewsResponse
 
 -(id)initWithResponse:(id)responseObj{
     
-//    FEResult *result = [[FEResult alloc] initWithDictionary:responseObj[@"result"]];
     self = [super initWithResponse:responseObj];
     if (self) {
         
+        NSArray *responseNews = responseObj[@"newsList"];
+        if (![responseNews isKindOfClass:[NSNull class]] && responseNews.count) {
+            NSMutableArray *nlist = [NSMutableArray new];
+            for (NSDictionary *newitem in responseNews) {
+                [nlist addObject:[[FENews alloc] initWithDictionary:newitem]];
+            }
+            _newsList = nlist;
+        }
     }
     return self;
 }

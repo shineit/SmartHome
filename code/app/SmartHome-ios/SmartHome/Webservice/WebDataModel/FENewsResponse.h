@@ -10,4 +10,6 @@
 
 @interface FENewsResponse : FEBaseResponse
 
+@property (nonatomic, strong, readonly) NSArray *newsList;
+
 @end

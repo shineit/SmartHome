@@ -21,11 +21,11 @@
 }
 
 -(void)setup{
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 200, 20)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 180, 20)];
     _titleLabel.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_titleLabel];
     
-    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(250, 10, 60, 20)];
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 15, 100, 20)];
     _timeLabel.backgroundColor = [UIColor clearColor];
     _timeLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_timeLabel];

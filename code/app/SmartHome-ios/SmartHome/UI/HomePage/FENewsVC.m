@@ -13,6 +13,9 @@
 #import "FEWarringResponse.h"
 #import "FEWebServiceManager.h"
 #import "FENewsRequest.h"
+#import "FENewsResponse.h"
+#import "FENews.h"
+#import "FEResult.h"
 
 @interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -37,7 +40,7 @@
         }else{
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_home_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_home"]];
         }
-        _newsList = [NSMutableArray arrayWithObjects:@"新闻1",@"新闻2",@"新闻3",@"新闻4",@"新闻5", nil];
+        _newsList = [NSMutableArray new];
         _warringList = [NSMutableArray arrayWithObjects:@"warring 1",@"warring1",@"warring3",@"warring4", nil];
     }
     return self;
@@ -101,11 +104,23 @@
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr.dictionary]];
+    
+    __weak typeof(self) weakself = self;
+    
     [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FENewsResponse *news) {
-        [self hideHUD:YES];
+        [weakself hideHUD:YES];
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
+        }else{
+            if (news.result.errorCode.integerValue != 0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"Error code %@!",news.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                return ;
+            }
+            [weakself.newsList removeAllObjects];
+            [weakself.newsList addObjectsFromArray:news.newsList];
+            [weakself.newstable reloadData];
         }
         
     }];
@@ -149,10 +164,9 @@
         if (!cell) {
             cell = [[FENewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        
-        cell.titleLabel.text = self.newsList[indexPath.row];
-        cell.timeLabel.text = @"00/00/00/00";
+        FENews *fnew = self.newsList[indexPath.row];
+        cell.titleLabel.text = fnew.title;
+        cell.timeLabel.text = [[NSDate dateWithTimeIntervalSince1970:(fnew.date.longLongValue / 1000)] defaultFormat];
         return cell;
     }else if(tableView == self.warringtable){
         static NSString *identifier = @"cell";

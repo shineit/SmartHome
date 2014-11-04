@@ -192,9 +192,6 @@
 
 -(void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration{
     [UIView animateWithDuration:duration animations:^{
-//        CGRect frame = self.view.bounds;
-//        frame.size.height -= newRect.size.height;
-//        self.scrollContent.frame = frame;
         self.scrollContent.frame = self.view.bounds;
     }];
 }

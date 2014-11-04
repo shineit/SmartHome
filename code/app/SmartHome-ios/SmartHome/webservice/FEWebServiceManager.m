@@ -13,7 +13,7 @@
 #import "FEOrderListResponse.h"
 
 
-#define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://192.168.1.203:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -48,7 +48,6 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"sigin fail %@",error.userInfo);
         block(error,nil);
     }];
     
@@ -58,7 +57,7 @@
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block{
     return [self POST:ndata.method parameters:ndata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"news success!");
-        FENewsResponse *news = [FENewsResponse new];
+        FENewsResponse *news = [[FENewsResponse alloc] initWithResponse:responseObject];
         block(NULL,news);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"news fail!");

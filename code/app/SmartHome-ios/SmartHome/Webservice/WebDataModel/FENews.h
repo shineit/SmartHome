@@ -10,4 +10,10 @@
 
 @interface FENews : FEDictionaryObject
 
+@property (nonatomic, strong, readonly) NSString *author;
+@property (nonatomic, strong, readonly) NSString *content;
+@property (nonatomic, strong, readonly) NSNumber *date;
+@property (nonatomic, strong, readonly) NSNumber *newsID;
+@property (nonatomic, strong, readonly) NSString *title;
+
 @end
