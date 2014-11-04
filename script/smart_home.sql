@@ -159,7 +159,9 @@ CREATE TABLE `misp_system_menu` (
 # Data for table "misp_system_menu"
 #
 
-INSERT INTO `misp_system_menu` VALUES (1001,'首页','首页',NULL,NULL,NULL,NULL,'#','0',NULL),(1002,'我的主页','我的主页',NULL,NULL,NULL,NULL,NULL,'1001',NULL),(1003,'设备管理','设备管理',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1004,'集中器管理','集中器管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1005,'平面图管理','平面图管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1006,'客户分布','客户分布',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1007,'公共服务','公共服务 ',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1008,'公告管理','公告管理',NULL,NULL,NULL,NULL,NULL,'1007',NULL),(1009,'服务申请','服务申请',NULL,NULL,NULL,NULL,'info/OrderManage','1007',NULL),(1010,'系统管理','系统管理',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1011,'用户管理','用户管理',NULL,NULL,NULL,NULL,NULL,'1010',NULL);
+/*!40000 ALTER TABLE `misp_system_menu` DISABLE KEYS */;
+INSERT INTO `misp_system_menu` VALUES (1001,'首页','首页',NULL,NULL,NULL,NULL,'#','0',NULL),(1002,'我的主页','我的主页',NULL,NULL,NULL,NULL,NULL,'1001',NULL),(1003,'设备管理','设备管理',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1004,'集中器管理','集中器管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1005,'平面图管理','平面图管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1006,'客户分布','客户分布',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1007,'公共服务','公共服务 ',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1008,'公告管理','公告管理',NULL,NULL,NULL,NULL,'info/NewsManage','1007',NULL),(1009,'服务申请','服务申请',NULL,NULL,NULL,NULL,'info/OrderManage','1007',NULL),(1010,'系统管理','系统管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1011,'用户管理','用户管理',NULL,NULL,NULL,NULL,'sys/UserManage','1010',NULL);
+/*!40000 ALTER TABLE `misp_system_menu` ENABLE KEYS */;
 
 #
 # Structure for table "misp_user"
@@ -171,6 +173,7 @@ CREATE TABLE `misp_user` (
   `password` varchar(255) NOT NULL,
   `role` int(11) DEFAULT NULL,
   `reg_date` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -178,7 +181,9 @@ CREATE TABLE `misp_user` (
 # Data for table "misp_user"
 #
 
-INSERT INTO `misp_user` VALUES (1,'admin','e10adc3949ba59abbe56e057f20f883e',99,NULL);
+/*!40000 ALTER TABLE `misp_user` DISABLE KEYS */;
+INSERT INTO `misp_user` VALUES (1,'admin','81dc9bdb52d04dc20036dbd8313ed055',99,'2014-11-04 00:00:00',2);
+/*!40000 ALTER TABLE `misp_user` ENABLE KEYS */;
 
 #
 # Structure for table "news"
@@ -190,7 +195,7 @@ CREATE TABLE `news` (
   `AUTHOR` varchar(255) DEFAULT NULL,
   `CONTENT` varchar(255) DEFAULT NULL,
   `RELEASE_DATE` datetime DEFAULT NULL,
-  `STATUS` int(11) DEFAULT NULL,
+  `STATUS` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`NEWS_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -207,7 +212,7 @@ INSERT INTO `news` VALUES (1,'通知','admin','放假三天','2014-11-03 00:00:0
 CREATE TABLE `service_order` (
   `ORDER_ID` varchar(255) NOT NULL,
   `ORDER_NAME` varchar(255) DEFAULT NULL,
-  `ORDER_TYPE` int(11) NOT NULL,
+  `ORDER_TYPE` int(11) NOT NULL DEFAULT '0',
   `CONTENT` varchar(255) DEFAULT NULL,
   `CREATOR` varchar(255) NOT NULL,
   `CREATE_TIME` datetime DEFAULT NULL,
