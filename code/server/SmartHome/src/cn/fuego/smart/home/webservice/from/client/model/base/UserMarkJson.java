@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.from.client.model.base;
 
+import cn.fuego.smart.home.domain.UserMark;
+
 
 /**
  * 
@@ -11,16 +13,33 @@ package cn.fuego.smart.home.webservice.from.client.model.base;
  */
 public class UserMarkJson
 {
-    private String userID;
+    private int userID;
     private String mark;
-	public String getUserID()
+    
+    public void load(UserMark userMark)
+    {
+    	this.userID = userMark.getUserID();
+    	this.mark = userMark.getMark();
+    }
+    
+    public UserMark getUserMark()
+    {
+    	UserMark userMark = new UserMark();
+    	userMark.setUserID(userID);
+    	userMark.setMark(mark);
+    	return userMark;
+    }
+ 
+	public int getUserID()
 	{
 		return userID;
 	}
-	public void setUserID(String userID)
+
+	public void setUserID(int userID)
 	{
 		this.userID = userID;
 	}
+
 	public String getMark()
 	{
 		return mark;

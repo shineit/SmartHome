@@ -1,9 +1,9 @@
 package cn.fuego.smart.home.webservice.from.client.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.from.client.model.base.BaseJsonRsp;
-import cn.fuego.smart.home.webservice.from.client.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.from.client.model.base.UserMarkJson;
 
 
@@ -17,7 +17,7 @@ import cn.fuego.smart.home.webservice.from.client.model.base.UserMarkJson;
  */
 public class GetUserMarkListRsp extends BaseJsonRsp
 {
-	private List<UserMarkJson> markList;
+	private List<UserMarkJson> markList = new ArrayList<UserMarkJson>();
 
 	public List<UserMarkJson> getMarkList()
 	{

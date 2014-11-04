@@ -6,6 +6,7 @@ import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
+import cn.fuego.smart.home.domain.UserMark;
 
 
 /**
@@ -25,6 +26,7 @@ public class DaoContext
 	private Dao newsDao = null;
 	private Dao serviceOrderDao = null;
 	private Dao concentratorDao = null;
+	private Dao userMarkDao = null;
 
 
 	private DaoContext()
@@ -74,8 +76,15 @@ public class DaoContext
 		}
 		return sensorDao;
 	}
- 
-	 
+  
+	public Dao getUserMarkDao()
+	{
+		if (null == userMarkDao)
+		{
+			userMarkDao = getDaoInstanceByClass(UserMark.class);
+		}
+		return userMarkDao;
+	}
 	
 	private Dao getDaoInstanceByClass(Class clazz)
 	{

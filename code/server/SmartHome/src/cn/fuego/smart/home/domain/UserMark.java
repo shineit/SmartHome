@@ -20,7 +20,18 @@ import cn.fuego.common.domain.PersistenceObject;
 public class UserMark implements PersistenceObject
 {
 	private int userID;
-	private String make;
+	private String mark;
+	
+	public static String getUserIDAttr()
+	{
+		return "userID";
+	}
+	
+	public static String getMarkAttr()
+	{
+		return "mark";
+	}
+	
 	public int getUserID()
 	{
 		return userID;
@@ -29,14 +40,20 @@ public class UserMark implements PersistenceObject
 	{
 		this.userID = userID;
 	}
-	public String getMake()
+	public String getMark()
 	{
-		return make;
+		return mark;
 	}
-	public void setMake(String make)
+	public void setMark(String mark)
 	{
-		this.make = make;
+		this.mark = mark;
 	}
+	@Override
+	public String toString()
+	{
+		return "UserMark [userID=" + userID + ", mark=" + mark + "]";
+	}
+ 
 	
 	
 

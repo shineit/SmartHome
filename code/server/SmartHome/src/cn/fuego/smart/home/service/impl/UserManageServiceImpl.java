@@ -8,11 +8,11 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.service.spi.ServiceException;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
@@ -27,6 +27,7 @@ import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.UserStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.UserManageService;
 
  /** 
@@ -81,6 +82,41 @@ public class UserManageServiceImpl extends MISPUserServiceImpl implements UserMa
 	{
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		
 		MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.service.UserManageService#getUseMark()
+	 */
+	@Override
+	public List<UserMark> getUseMark(int userID)
+	{
+		 List<UserMark> list  = (List<UserMark>) DaoContext.getInstance().getUserMarkDao().getAll();
+		 return list;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.service.UserManageService#deleteUserMark(cn.fuego.smart.home.domain.UserMark)
+	 */
+	@Override
+	public void deleteUserMark(UserMark userMark)
+	{
+		
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,UserMark.getUserIDAttr(),String.valueOf(userMark.getUserID())));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,UserMark.getMarkAttr(),userMark.getMark()));
+
+		DaoContext.getInstance().getUserMarkDao().delete(conditionList);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.service.UserManageService#createUserMark(cn.fuego.smart.home.domain.UserMark)
+	 */
+	@Override
+	public void createUserMark(UserMark userMark)
+	{
+		DaoContext.getInstance().getUserMarkDao().create(userMark);
 		
 	}
 

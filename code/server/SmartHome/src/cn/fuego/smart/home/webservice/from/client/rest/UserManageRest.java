@@ -8,6 +8,8 @@ import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.LoginReq;
 import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
+import cn.fuego.smart.home.webservice.from.client.model.ModifyPwdReq;
+import cn.fuego.smart.home.webservice.from.client.model.ModifyPwdRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
 
@@ -32,6 +34,11 @@ public interface UserManageRest
 	@POST
 	@Path("/logout")
 	LoginRsp logout(LoginReq req);
+	
+	
+	@POST
+	@Path("/password/modify")
+    ModifyPwdRsp modifyPassword(ModifyPwdReq req);
 	
 	@POST
 	@Path("/mark/list")

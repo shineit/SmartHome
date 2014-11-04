@@ -20,14 +20,19 @@ import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.domain.UserMark;
+import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.from.client.model.LoginReq;
 import cn.fuego.smart.home.webservice.from.client.model.LoginRsp;
+import cn.fuego.smart.home.webservice.from.client.model.ModifyPwdReq;
+import cn.fuego.smart.home.webservice.from.client.model.ModifyPwdRsp;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.from.client.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.from.client.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.from.client.model.base.UserJson;
+import cn.fuego.smart.home.webservice.from.client.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.from.client.rest.UserManageRest;
 
  /** 
@@ -84,12 +89,31 @@ public class UserManageRestImpl implements UserManageRest
 	}
 
 	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.from.client.rest.UserManageRest#logout(cn.fuego.smart.home.webservice.from.client.model.LoginReq)
+	 */
+	@Override
+	public LoginRsp logout(LoginReq req)
+	{
+		LoginRsp rsp = new LoginRsp();
+		return rsp;
+	}
+	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.UserManageService#getUserMarkList(cn.fuego.smart.home.webservice.from.client.model.GetUserMarkListReq)
 	 */
 	@Override
 	public GetUserMarkListRsp getUserMarkList(GetUserMarkListReq req)
 	{
 		GetUserMarkListRsp rsp = new GetUserMarkListRsp();
+		List<UserMark> userMarkList  = ServiceContext.getInstance().getUserManageService().getUseMark(req.getUserID());
+		
+		for(UserMark mark : userMarkList)
+		{
+			UserMarkJson json = new UserMarkJson();
+			json.load(mark);
+			rsp.getMarkList().add(json);
+		}
+		
+		
 		return rsp;
 	}
 
@@ -100,6 +124,21 @@ public class UserManageRestImpl implements UserManageRest
 	public SetUserMarkRsp addUserMark(SetUserMarkReq req)
 	{
 		SetUserMarkRsp rsp = new SetUserMarkRsp();
+		try
+		{
+			UserMarkJson userMarkJson = req.getUserMark();
+			ServiceContext.getInstance().getUserManageService().createUserMark(userMarkJson.getUserMark());
+		}
+		catch(MISPException e)
+		{
+			log.error("create mark failed",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+			log.error("create mark failed",e);
+		}
  
 		return rsp;
 	}
@@ -107,16 +146,49 @@ public class UserManageRestImpl implements UserManageRest
 	public SetUserMarkRsp deleteUserMark(SetUserMarkReq req)
 	{
 		SetUserMarkRsp rsp = new SetUserMarkRsp();
+		try
+		{
+			UserMarkJson userMarkJson = req.getUserMark();
+			ServiceContext.getInstance().getUserManageService().deleteUserMark(userMarkJson.getUserMark());
+		}
+		catch(MISPException e)
+		{
+			log.error("create mark failed",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+			log.error("create mark failed",e);
+		}
+ 
 		return rsp;
 	}
+
 	/* (non-Javadoc)
-	 * @see cn.fuego.smart.home.webservice.from.client.rest.UserManageRest#logout(cn.fuego.smart.home.webservice.from.client.model.LoginReq)
+	 * @see cn.fuego.smart.home.webservice.from.client.rest.UserManageRest#modifyPassword(cn.fuego.smart.home.webservice.from.client.model.LoginReq)
 	 */
 	@Override
-	public LoginRsp logout(LoginReq req)
+	public ModifyPwdRsp modifyPassword(ModifyPwdReq req)
 	{
-		LoginRsp rsp = new LoginRsp();
+		ModifyPwdRsp rsp = new ModifyPwdRsp();
+		try
+		{
+ 			MISPServiceContext.getInstance().getUserService().modifyPassword(req.getUserName(),req.getOldPwd(),req.getNewPwd());
+		}
+		catch(MISPException e)
+		{
+			log.error("create mark failed",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+			log.error("create mark failed",e);
+		}
+ 
 		return rsp;
 	}
+
 
 }

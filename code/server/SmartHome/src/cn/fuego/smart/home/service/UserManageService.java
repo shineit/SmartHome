@@ -5,6 +5,7 @@ import java.util.List;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.smart.home.domain.UserMark;
 
 
 public interface UserManageService
@@ -15,5 +16,10 @@ public interface UserManageService
 
 	void deleteUserList(List<String> userIDList);
 	
+	List<UserMark> getUseMark(int userID);
+	
+	void deleteUserMark(UserMark userMark);
+	void createUserMark(UserMark userMark);
+
 	
 }

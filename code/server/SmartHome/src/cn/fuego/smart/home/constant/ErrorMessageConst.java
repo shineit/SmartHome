@@ -21,6 +21,6 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 {
  
 	
-	public static final int 操作设备失败 = 10000 ; // 
+	public static final int OPREATE_DEVICE_FAiLED= 10000 ; // 操作设备失败 
 
 }
