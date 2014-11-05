@@ -175,7 +175,7 @@ public class UserManageRestImpl implements UserManageRest
 		ModifyPwdRsp rsp = new ModifyPwdRsp();
 		try
 		{
- 			MISPServiceContext.getInstance().getUserService().modifyPassword(req.getUserName(),req.getOldPwd(),req.getNewPwd());
+ 			MISPServiceContext.getInstance().getUserService().modifyPassword(req.getUserName(),req.getOldPwd(),req.getPwdNew());
 		}
 		catch(MISPException e)
 		{

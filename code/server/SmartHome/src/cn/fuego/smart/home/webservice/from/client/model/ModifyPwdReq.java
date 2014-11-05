@@ -22,7 +22,7 @@ public class ModifyPwdReq extends BaseJsonReq
 	 
 	private String userName;
 	private String oldPwd;
-	private String newPwd;
+	private String pwdNew;
 	public String getUserName()
 	{
 		return userName;
@@ -39,21 +39,22 @@ public class ModifyPwdReq extends BaseJsonReq
 	{
 		this.oldPwd = oldPwd;
 	}
-	public String getNewPwd()
+ 
+	public String getPwdNew()
 	{
-		return newPwd;
+		return pwdNew;
 	}
-	public void setNewPwd(String newPwd)
+	public void setPwdNew(String pwdNew)
 	{
-		this.newPwd = newPwd;
+		this.pwdNew = pwdNew;
 	}
 	@Override
 	public String toString()
 	{
 		return "ModifyPwdReq [userName=" + userName + ", oldPwd=" + oldPwd
-				+ ", newPwd=" + newPwd + "]";
+				+ ", pwdNew=" + pwdNew + "]";
 	}
-	
+ 
 	
 
 }
