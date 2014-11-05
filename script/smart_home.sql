@@ -47,9 +47,7 @@ CREATE TABLE `concentrator` (
 # Data for table "concentrator"
 #
 
-/*!40000 ALTER TABLE `concentrator` DISABLE KEYS */;
-INSERT INTO `concentrator` VALUES (1,'192.168.1.1',1,0,0,'名字','描述',NULL,NULL);
-/*!40000 ALTER TABLE `concentrator` ENABLE KEYS */;
+INSERT INTO `concentrator` VALUES (1,'192.168.1.1:8080',1,114.068,22.6328,'集中器','描述',NULL,NULL),(2,'192.168.1.1:8080',1,114.066,22.5824,'集中器','描述',NULL,NULL),(3,'192.168.1.1:8080',1,114.007,22.5968,'集中器','描述',NULL,NULL),(5,'192.168.1.1:8080',1,116.418,39.922,'集中器5','地址：北京市东城区王府井大街88号乐天银泰百货八层',NULL,NULL),(6,'192.168.1.1:8080',1,116.407,39.9216,'集中器6','地址：北京市东城区东华门大街',NULL,NULL),(7,'192.168.1.1:8080',1,116.412,39.9123,'集中器7','地址：北京市东城区正义路甲5号',NULL,NULL),(8,'192.168.1.1:8080',1,114.016,22.6327,'集中器7','描述',NULL,NULL);
 
 #
 # Structure for table "home_sensor"
@@ -162,9 +160,7 @@ CREATE TABLE `misp_system_menu` (
 # Data for table "misp_system_menu"
 #
 
-/*!40000 ALTER TABLE `misp_system_menu` DISABLE KEYS */;
-INSERT INTO `misp_system_menu` VALUES (1001,'首页','首页',NULL,NULL,NULL,NULL,'#','0',NULL),(1002,'我的主页','我的主页',NULL,NULL,NULL,NULL,NULL,'1001',NULL),(1003,'设备管理','设备管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1004,'集中器管理','集中器管理',NULL,NULL,NULL,NULL,'device/ConcentratorManage','1003',NULL),(1005,'平面图管理','平面图管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1006,'客户分布','客户分布',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1007,'公共服务','公共服务 ',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1008,'公告管理','公告管理',NULL,NULL,NULL,NULL,'info/NewsManage','1007',NULL),(1009,'服务申请','服务申请',NULL,NULL,NULL,NULL,'info/OrderManage','1007',NULL),(1010,'系统管理','系统管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1011,'用户管理','用户管理',NULL,NULL,NULL,NULL,'sys/UserManage','1010',NULL);
-/*!40000 ALTER TABLE `misp_system_menu` ENABLE KEYS */;
+INSERT INTO `misp_system_menu` VALUES (1001,'首页','首页',NULL,NULL,NULL,NULL,'#','0',NULL),(1002,'我的主页','我的主页',NULL,NULL,NULL,NULL,NULL,'1001',NULL),(1003,'设备管理','设备管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1004,'集中器管理','集中器管理',NULL,NULL,NULL,NULL,'device/ConcentratorManage','1003',NULL),(1005,'平面图管理','平面图管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1006,'客户分布','客户分布',NULL,NULL,NULL,NULL,'device/CustomerDistribution','1003',NULL),(1007,'公共服务','公共服务 ',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1008,'公告管理','公告管理',NULL,NULL,NULL,NULL,'info/NewsManage','1007',NULL),(1009,'服务申请','服务申请',NULL,NULL,NULL,NULL,'info/OrderManage','1007',NULL),(1010,'系统管理','系统管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1011,'用户管理','用户管理',NULL,NULL,NULL,NULL,'sys/UserManage','1010',NULL);
 
 #
 # Structure for table "misp_user"
