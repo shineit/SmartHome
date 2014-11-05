@@ -9,16 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+Dictionary.h"
 
-#define __MODTHED_SIGIN    @"user/login" //登陆
-#define __GET_NEWS         @"news/list"  //news
-#define __SEVICE_ORDER     @"order/list" //orders
-#define __SEVICE_ORDER_SET @"order/set" //set order
-#define __MARK_SET         @""
-#define __HISTORY_ALARM    @"sensor/alarm"
-#define __SENSOR_LIST      @"sensor/list"
-#define __SENSOR_SET       @"sensor/set"
-#define __SENSOR_ENABLE    @"sensor/batch/enable"
-#define __SENSOR_DISABLE   @"sensor/batch/disable"
+#define __METHOD_SIGIN              @"user/login" //登陆
+#define __METHOD_MARK_LIST          @"user/mark/list"
+#define __METHOD_MARK_ADD           @"user/mark/add"
+#define __METHOD_MARK_DELET         @"user/mark/delet"
+#define __METHOD_SIGOUT             @"user/logout"
+#define __METHOD_MODIFY_PASSWORD    @"user/password/modify"
+
+#define __METHOD_GET_NEWS           @"news/list"  //news
+#define __METHOD_SEVICE_ORDER       @"order/list" //orders
+#define __METHOD_SEVICE_ORDER_SET   @"order/set" //set order
+
+#define __METHOD_HISTORY_ALARM      @"sensor/alarm"
+#define __METHOD_SENSOR_LIST        @"sensor/list"
+#define __METHOD_SENSOR_SET         @"sensor/set"
+#define __METHOD_SENSOR_ENABLE      @"sensor/batch/enable"
+#define __METHOD_SENSOR_DISABLE     @"sensor/batch/disable"
+
+#define __
 
 @interface FERequestBaseData : NSObject
 

@@ -12,7 +12,7 @@
 
 
 -(id)initWithPage:(FEPage *)page filter:(NSArray *)filer{
-    self = [super initWithMothed:__GET_NEWS];
+    self = [super initWithMothed:__METHOD_GET_NEWS];
     if (self) {
         _page = page.dictionary;
         _filterList = filer;

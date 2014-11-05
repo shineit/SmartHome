@@ -13,7 +13,7 @@
 @implementation FEServiceOrederRequest
 
 -(id)initWithPage:(FEPage *)page attribute:(NSArray *)attr userID:(NSNumber *)uid{
-    self = [super initWithMothed:__SEVICE_ORDER];
+    self = [super initWithMothed:__METHOD_SEVICE_ORDER];
     if (self) {
         _page = page.dictionary;
         NSMutableArray *attrarray = [NSMutableArray array];

@@ -13,7 +13,8 @@
 @property (nonatomic, strong, readonly) NSString *password;
 @property (nonatomic, strong, readonly) NSString *clientType;
 @property (nonatomic, strong, readonly) NSString *clientVersion;
+@property (nonatomic, strong, readonly) NSString *devToken;
 
--(instancetype)initWtihUserName:(NSString *)name password:(NSString *)password clientType:(NSString *)type clientVersion:(NSString *)version;
+-(instancetype)initWtihUserName:(NSString *)name password:(NSString *)password clientType:(NSString *)type clientVersion:(NSString *)version devToken:(NSString *)dToken;
 
 @end

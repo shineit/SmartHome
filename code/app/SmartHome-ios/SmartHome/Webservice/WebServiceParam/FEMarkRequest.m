@@ -13,7 +13,7 @@
 @implementation FEMarkRequest
 
 -(id)initWithUserid:(NSNumber *)uid page:(FEPage *)page{
-    self = [super initWithMothed:@""];
+    self = [super initWithMothed:__METHOD_MARK_LIST];
     if (self) {
         _userID = uid;
         _page = page.dictionary;

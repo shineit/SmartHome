@@ -45,6 +45,8 @@ return shared##className; \
 #define FEUserDefaultsRemoveForKey(_KEY)        [FEUserDefaults removeObjectForKey:_KEY]
 #define FEUserDefaultsSync                      [FEUserDefaults synchronize]
 
+//device token
+#define FEDeviceToken                           @"deviceToken"
 
 //Run times
 #define FERunTimes                              @"runTimes"

@@ -12,7 +12,7 @@
 @implementation FEMarkSetRequest
 
 -(id)initWithCommand:(NSString *)cmd mark:(FEUserMark *)umark{
-    self = [super initWithMothed:__MARK_SET];
+    self = [super initWithMothed:__METHOD_MARK_ADD];
     if (self) {
         _command = cmd;
         _userMark = umark.dictionary;

@@ -7,14 +7,23 @@
 //
 
 #import "FEHistoryAlarmResponse.h"
+#import "FEAlarm.h"
 
 @implementation FEHistoryAlarmResponse
 
 -(id)initWithResponse:(id)obj{
     self = [super initWithResponse:obj];
     if (self) {
+        
+        NSArray *alarmList = obj[@"alarmList"];
+        
         if (![obj[@"alarmList"] isKindOfClass:[NSNull class]] && [obj[@"alarmList"] count]) {
-            NSLog(@"alarmList");
+            
+            NSMutableArray *alarms = [NSMutableArray new];
+            for (NSDictionary *item in alarmList) {
+                [alarms addObject:[[FEAlarm alloc] initWithDictionary:item]];
+            }
+            _alarmList = alarms;
         }
     }
     return self;
