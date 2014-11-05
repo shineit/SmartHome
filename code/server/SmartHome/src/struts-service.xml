@@ -26,6 +26,14 @@
 		</action>
 
  	</package>
+    <package name="device"  extends="misp">
  
+   		<action name="ConcentratorManage" class="cn.fuego.smart.home.web.action.device.ConcentratorManageAction">
+			<result type="dispatcher">/client/manage/concentratorManage.jsp</result>
+ 			<result type="dispatcher" name="editInfo">/client/manage/concentratorModify.jsp</result>
+		    
+		</action>
+
+ 	</package> 
 </struts>
 

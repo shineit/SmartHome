@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="pageHeader">
-	<s:form id="pagerForm" onsubmit="return navTabSearch(this);" action="log/LogManage" method="POST" >
+	<s:form id="pagerForm" onsubmit="return navTabSearch(this);" action="device/ConcentratorManage" method="POST" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	<div class="searchBar">
@@ -12,23 +12,32 @@
 		<table class="searchContent">
 			<tr >
 				<td>
-					集中器编号：<input type="text" name="filter.id" value="${filter.id}"/>
+					集中器编号：<input type="text" name="filter.concentratorID" value="${filter.concentratorID}"/>
 				</td>
-			 
-			 
+ 
 				<td>
-					操作人：<input type="text" name="filter.user" value="${filter.user}"/>
+					集中器描述：<input type="text" name="filter.description" value="${filter.description}"/>
 				</td>
-	
-				
 				<td>
-					操作：<input type="text" name="filter.name" value="${filter.name}"/>
-				</td>
-				<td class="dateRange">
-					操作时间段:
-					<input type="text"  readonly="readonly" class="date" name="filter.startTime" value="${filter.startTime}">
-					<span class="limit">-</span>
-					<input type="text"  readonly="readonly" class="date" name="filter.endTime" value="${filter.endTime}">
+					<select  name="filter.status" >
+						 <option value="">集中器状态</option>
+
+					 		<c:forEach var="st" items="${filter.concentStatusList}">
+
+ 						  		 <c:choose>		       
+							   		 <c:when test="${st.strValue == filter.status}">  
+	                            		       <option value="${st.strValue}" selected='selected'> ${st.strValue}</option>
+	                            		 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   			    <option value="${st.strValue}" > ${st.strValue}</option>
+							   		   </c:otherwise>
+							   
+						   		 </c:choose> 
+						    </c:forEach>								
+				 											
+
+					</select>
 				</td>
 				<td>
 					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
@@ -47,34 +56,48 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="delete" href="log/LogManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除操作日志</span></a></li>
+			<li><a class="delete" href="device/ConcentratorManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除集中器</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="118">
+	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>			
-				<th width="80" align="center">编号</th>
-				<th width="100" align="center">操作人</th>
-				<th width="80" align="center">操作名称</th>
-				<th width="100" align="center">操作对象</th>
-				<th width="100" align="center">操作结果</th>
-				<th width="150" align="center">操作时间</th>
+				<th width="15%" align="center">编号</th>
+				<th width="15%" align="center">IP地址</th>
+				<th width="15%" align="center">名称</th>
+				<th width="30%" align="center">集中器描述</th>
+				<th width="10%" align="center">状态</th>
+				<th width="10%" align="center">操作</th>
 
 			</tr>
 		</thead>
-	<s:form  id="logForm"  method="POST"  name="logForm" >			
+	<s:form  id="concentForm"  method="POST"  name="concentForm" >			
 	<tbody>
 	
-	    <c:forEach var="e" items="${logList.currentPageData}"> 		
-	        <tr target="sid_user" rel="${e.id}" >
+	    <c:forEach var="e" items="${concentTable.currentPageData}"> 		
+	        <tr target="sid_user" rel="${e.concentratorID}" >
 				<td><input name="selectedIDList" value="" type="checkbox" style="margin-top:5px;"></td>	        
-	            <td>${e.id}</td>
-	            <td>${e.user}</td>
+	            <td>${e.concentratorID}</td>
+	            <td>${e.ipAddr}</td>
 	            <td>${e.name}</td>
-	            <td>${e.object}</td>
-	            <td>${e.result}</td>
-	            <td>${e.operTime}</td>
+	            <td>${e.description}</td>
+	            <td>
+	            	<c:forEach var="t" items="${filter.concentStatusList}">
+						  <c:choose>		       
+							   <c:when test="${t.intValue == e.status}">  
+	                             ${t.strValue}
+							   </c:when>
+							   <c:otherwise>  
+							   	   
+							   </c:otherwise>
+							   
+						   </c:choose>
+					</c:forEach>
+	            </td>
+	            <td>
+	            <a title="集中器信息修改" target="dialog" href="device/ConcentratorManage!show.action?selectedID=${e.concentratorID}" class="btnEdit" >修改</a>
+	            </td>
 
 			</tr>
 		</c:forEach>
@@ -85,7 +108,7 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${logList.page}" scope="request"/>
+	        <c:set var="page" value="${concentTable.page}" scope="request"/>
 			     
 			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	

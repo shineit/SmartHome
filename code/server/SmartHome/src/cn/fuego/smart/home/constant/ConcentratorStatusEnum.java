@@ -11,8 +11,8 @@ package cn.fuego.smart.home.constant;
  */
 public enum ConcentratorStatusEnum
 {
-	OFFLINE(0,"offline"),
-	ONLINE(1,"online");
+	OFFLINE(0,"离线"),
+	ONLINE(1,"在线");
 	private int intValue;
 	private String strValue;
 	
@@ -33,5 +33,26 @@ public enum ConcentratorStatusEnum
 	{
 		return strValue;
 	}
-
+	public static ConcentratorStatusEnum getEnumByInt(int intValue)
+	{
+		for (ConcentratorStatusEnum c : ConcentratorStatusEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	public static ConcentratorStatusEnum getEnumByStr(String strValue)
+	{
+		for (ConcentratorStatusEnum c : ConcentratorStatusEnum.values())
+		{
+			if (strValue.equals(c.strValue) )
+			{
+				return c;
+			}
+		}
+		return null;
+	} 
 }

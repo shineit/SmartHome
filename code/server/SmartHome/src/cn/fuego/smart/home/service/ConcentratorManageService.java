@@ -8,6 +8,10 @@
 */ 
 package cn.fuego.smart.home.service;
 
+import java.util.List;
+
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.smart.home.domain.Concentrator;
 
  /** 
@@ -21,5 +25,6 @@ public interface ConcentratorManageService
 {
 	void online(Concentrator concentrator);
 	void offline(Concentrator concentrator);
+	AbstractDataSource<Concentrator> getConcentDataSource(List<QueryCondition> conidtionList);
 
 }

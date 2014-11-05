@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.service;
 
+import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ServiceOrderManageServiceImpl;
@@ -59,7 +60,7 @@ public class ServiceContext
 	{
 		if (null == concentratorManageService)
 		{
-			concentratorManageService =  null;
+			concentratorManageService =  new ConcentratorManageServiceImpl();
 		}
 		return concentratorManageService;
 	}
