@@ -29,6 +29,8 @@ public class ConcentFilterModel
 	private String status;				//集中器状态，0 离线 1在线
 	private String name;			//集中器名称(预留字段)
 	private String description;		//集中器描述(预留字段)
+	private String cityName;//仅提供页面交互，数据库中不存在
+
 	private ConcentratorStatusEnum[]  concentStatusList = ConcentratorStatusEnum.values();
 	
 	public List<QueryCondition> getConidtionList()
@@ -54,7 +56,6 @@ public class ConcentFilterModel
 		 
 		return conditionList;
     }
-	
 
 	public String getConcentratorID()
 	{
@@ -104,5 +105,17 @@ public class ConcentFilterModel
 	{
 		this.concentStatusList = concentStatusList;
 	}
+
+	public String getCityName()
+	{
+		return cityName;
+	}
+
+	public void setCityName(String cityName)
+	{
+		this.cityName = cityName;
+	}
+
+
 
 }

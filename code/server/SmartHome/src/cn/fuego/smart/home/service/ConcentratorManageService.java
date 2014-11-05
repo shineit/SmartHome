@@ -29,6 +29,7 @@ public interface ConcentratorManageService
 	Concentrator getConcentByID(String concentID);
 	void modifyConcentInfo(Concentrator concent);
 	void deleteConcentList(List<String> concentIDList);
+	Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList);
 	
 
 }

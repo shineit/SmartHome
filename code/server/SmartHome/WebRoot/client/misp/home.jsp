@@ -73,7 +73,7 @@ function resetForm(objForm){
 <!-- 图片上传预览js -->
 
 <script src="<%=request.getContextPath()%>/client/lib/newJS/uploadPreview.min.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KYG3EoZed6p8UMSCZlQ3VmCp"></script>
 </head>
 
 <body scroll="no">

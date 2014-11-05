@@ -17,15 +17,11 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
-import cn.fuego.common.util.format.DateUtil;
-import cn.fuego.misp.service.IDCreateService;
-import cn.fuego.misp.service.MISPServiceContext;
-import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Concentrator;
-import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ConcentratorManageService;
-import cn.fuego.smart.home.service.ServiceOrderManageService;
 
  /** 
  * @ClassName: ServiceOrderManageServiceImpl 
@@ -88,6 +84,18 @@ public class ConcentratorManageServiceImpl implements ConcentratorManageService
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentIDList);	
 		DaoContext.getInstance().getConcentratorDao().delete(condition);
 		
+	}
+
+	@Override
+	public Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList)
+	{
+		Concentrator concent= (Concentrator) DaoContext.getInstance().getConcentratorDao().getAll(mapConidtionList);
+		if(concent==null)
+		{
+			log.warn("get DistributionInfo from Concentrator failed");
+			throw new MISPException(MISPErrorMessageConst.RESULT_NULL);
+		}
+		return concent;
 	}
 
 

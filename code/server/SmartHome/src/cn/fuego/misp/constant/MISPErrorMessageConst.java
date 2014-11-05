@@ -19,7 +19,7 @@ import cn.fuego.misp.dao.file.MispMessageReader;
  */
 public class MISPErrorMessageConst
 {
-	public static final int SUCCESS = 0;  //成功
+	public static final int SUCCESS = 0;  //操作成功
  
 	public static final int ERROR_MSG_WRONG = 1; //消息错误
 	
@@ -32,6 +32,8 @@ public class MISPErrorMessageConst
 	public static final int CLIENT_VERSION_LOW = 6 ; // 
 
 	public static final int USER_EXISTED = 7;//用户已存在
+
+	public static final int RESULT_NULL = 8;//搜索结果为空
 	
 
 	public static String getMessageByErrorCode(int errorCode)

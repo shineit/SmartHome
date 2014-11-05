@@ -33,7 +33,11 @@
  			<result type="dispatcher" name="editInfo">/client/manage/concentratorModify.jsp</result>
 		    
 		</action>
-
+		
+   		<action name="CustomerDistribution" class="cn.fuego.smart.home.web.action.device.CustomerDistributionAction">
+			<result type="dispatcher">/client/manage/customerDistribution.jsp</result>
+ 		    
+		</action>
  	</package> 
 </struts>
 
