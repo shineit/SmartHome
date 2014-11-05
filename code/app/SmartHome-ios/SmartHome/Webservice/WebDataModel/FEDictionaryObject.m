@@ -16,7 +16,7 @@
     if (self) {
         NSArray *property = [self getAllProperty];
         for (NSString *key in property) {
-            if (![dictionary[key] isKindOfClass:[NSNull class]]) {
+            if (![dictionary[key] isKindOfClass:[NSNull class]] && dictionary[key] != nil) {
                 [self setValue:dictionary[key] forKey:key];
             }
         }

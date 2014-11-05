@@ -115,15 +115,7 @@
     
     [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FENewsResponse *news) {
         [weakself hideHUD:YES];
-        if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }else{
-            if (news.result.errorCode.integerValue != 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"Error code %@!",news.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                return ;
-            }
+        if (!error && news.result.errorCode.integerValue == 0){
             [weakself.newsList removeAllObjects];
             [weakself.newsList addObjectsFromArray:news.newsList];
             [weakself.newstable reloadData];
@@ -141,15 +133,7 @@
      __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] historyAlarmList:hdata reponse:^(NSError *error, FEHistoryAlarmResponse *response) {
         [self hideHUD:YES];
-        if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }else{
-            if (response.result.errorCode.integerValue != 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"Error code %@!",response.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                return ;
-            }
+        if (!error && response.result.errorCode.integerValue == 0){
             [weakself.warringtable reloadData];
         }
     }];

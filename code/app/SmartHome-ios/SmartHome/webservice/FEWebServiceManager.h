@@ -21,6 +21,8 @@
 @class FEOrderSetResponse;
 @class FEHistoryAlarmRequest;
 @class FEHistoryAlarmResponse;
+@class FELogoutRequest;
+@class FESigoutResponse;
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -29,6 +31,8 @@
 +(FEWebServiceManager *)sharedInstance;
 
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginRequest *)sdata response:(void (^)(NSError *error,FESiginResponse *user))block;
+//sigout
+-(AFHTTPRequestOperation *)sigoutWithParam:(FELogoutRequest *)udata response:(void (^)(NSError *error, FESigoutResponse *response))block;
 
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block;
 

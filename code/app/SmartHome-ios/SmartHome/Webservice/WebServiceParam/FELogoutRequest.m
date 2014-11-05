@@ -10,4 +10,12 @@
 
 @implementation FELogoutRequest
 
+-(id)initWithUserName:(NSString *)uname{
+    self = [super initWithMothed:__METHOD_SIGOUT];
+    if (self) {
+        _userName = uname;
+    }
+    return self;
+}
+
 @end

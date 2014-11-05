@@ -10,6 +10,9 @@
 #import "CDUser.h"
 #import "AppDelegate.h"
 #import "FEModifyPassWord.h"
+#import "FEWebServiceManager.h"
+#import "FELogoutRequest.h"
+#import "FESigoutResponse.h"
 
 @interface FEProfileVC ()
 
@@ -75,11 +78,18 @@
 }
 
 -(void)logout:(UIButton *)button{
-//    FELoginUser
-    [FECoreData deleteCoreData:@[FELoginUser]];
-    [FECoreData saveCoreData];
     
-    [[AppDelegate sharedDelegate] loadSigin];
+    [self displayHUD:FEString(@"LOADING...")];
+    FELogoutRequest *request = [[FELogoutRequest alloc] initWithUserName:FELoginUser.username];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] sigoutWithParam:request response:^(NSError *error, FESigoutResponse *response) {
+        [weakself hideHUD:YES];
+        if (!error && response.result.errorCode.integerValue == 0) {
+            [FECoreData deleteCoreData:@[FELoginUser]];
+            [FECoreData saveCoreData];
+            [[AppDelegate sharedDelegate] loadSigin];
+        }
+    }];
     
 }
 

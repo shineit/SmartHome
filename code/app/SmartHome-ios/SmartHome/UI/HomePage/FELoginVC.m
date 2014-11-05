@@ -109,19 +109,16 @@
         [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FESiginResponse *user){
             NSLog(@"call back");
             [weakself hideHUD:YES];
-            if (error) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
-                [alert show];
-                return;
+            if (!error && user.result.errorCode.integerValue == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^(void){
+                    CDUser *cduser = [FECoreData touchUserByIdentifier:user.user.userID];
+                    cduser.username = weakself.username.text;
+                    cduser.password = [weakself.password.text MD5];
+                    cduser.userid = user.user.userID;
+                    [FECoreData saveCoreData];
+                    [[AppDelegate sharedDelegate] loadMain];
+                });
             }
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                CDUser *cduser = [FECoreData touchUserByIdentifier:user.user.userID];
-                cduser.username = weakself.username.text;
-                cduser.password = [weakself.password.text MD5];
-                cduser.userid = user.user.userID;
-                [FECoreData saveCoreData];
-                [[AppDelegate sharedDelegate] loadMain];
-            });
             
         }];
     }else{

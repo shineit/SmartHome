@@ -75,16 +75,8 @@
     [[FEWebServiceManager sharedInstance] orederList:rdata response:^(NSError *error, FEOrderListResponse *response) {
         
         [weakself hideHUD:YES];
-        if (error) {
-            ;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }else{
-            if (response.result.errorCode.intValue != 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"error code %@",response.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                return;
-            }
+        if (!error && response.result.errorCode.integerValue == 0){
+            
             [weakself.serviceDatas removeAllObjects];
             [weakself.serviceDatas addObjectsFromArray:response.orderList];
             [weakself.serviceTable reloadData];
@@ -107,9 +99,6 @@
     }
     FEOrder *order = self.serviceDatas[indexPath.row];
     [cell configWithOrder:order];
-//    cell.numberLabel.text = order.orderID;
-//    cell.typeLabel.text = order.orderType.boolValue?FEString(@"SEVICE_INSTALL"):FEString(@"SEVICE_REPAIR");
-//    cell.statusLabel.text = order.orderStatus.integerValue?FEString(@"SERVICE_WAIT"):FEString(@"SERVICE_DEAL");
     return cell;
 }
 

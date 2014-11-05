@@ -182,15 +182,7 @@
     [[FEWebServiceManager sharedInstance] orederSet:sdata response:^(NSError *error, FEOrderSetResponse *response) {
         [weakself hideHUD:YES];
         NSLog(@"set order %@",response);
-        if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:[NSString stringWithFormat:@"%@",error.userInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }else{
-            if (response.result.errorCode.integerValue != 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:[NSString stringWithFormat:@"error code %@",response.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
-                return;
-            }
+        if (!error && response.result.errorCode.integerValue == 0){
             [weakself.navigationController popViewControllerAnimated:YES];
         }
     }];

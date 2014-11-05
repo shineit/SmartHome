@@ -10,4 +10,8 @@
 
 @interface FELogoutRequest : FERequestBaseData
 
+@property (nonatomic, strong, readonly) NSString *userName;
+
+-(id)initWithUserName:(NSString *)uname;
+
 @end

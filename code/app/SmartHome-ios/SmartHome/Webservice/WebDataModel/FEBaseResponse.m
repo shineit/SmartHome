@@ -15,7 +15,10 @@
 -(id)initWithResponse:(id)obj{
     self = [super init];
     if (self) {
-        _result = [[FEResult alloc] initWithDictionary:obj[@"result"]];
+        id object = obj[@"result"];
+        if (![object isKindOfClass:[NSNull class]]) {
+            _result = [[FEResult alloc] initWithDictionary:obj[@"result"]];
+        }
     }
     return self;
 }

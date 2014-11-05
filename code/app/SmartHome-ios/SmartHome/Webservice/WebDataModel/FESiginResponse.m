@@ -17,7 +17,10 @@
 -(id)initWithResponse:(id)response{
     self = [super initWithResponse:response];
     if (self) {
-        _user = [[FEUser alloc] initWithDictionary:response[@"user"]];
+        id user = response[@"user"];
+        if (![user isKindOfClass:[NSNull class]]) {
+            _user = [[FEUser alloc] initWithDictionary:user];
+        }
     }
     return self;
 }
