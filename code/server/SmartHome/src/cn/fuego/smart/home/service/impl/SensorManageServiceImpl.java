@@ -50,7 +50,7 @@ public class SensorManageServiceImpl implements SensorManageService
 	@Override
 	public AbstractDataSource<Alarm> getAlarmDataSource(int userID)
 	{
-		AbstractDataSource<Alarm> datasource = new DataBaseSourceImpl<Alarm>(HomeSensor.class);
+		AbstractDataSource<Alarm> datasource = new DataBaseSourceImpl<Alarm>(Alarm.class);
 
 		return datasource;
 		

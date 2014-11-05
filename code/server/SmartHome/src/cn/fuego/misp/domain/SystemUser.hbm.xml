@@ -15,7 +15,7 @@
             <property name="password" column="password"  not-null="true" ></property>
             <property name="role" column="role"  length='20' ></property>
             <property name="regDate" column="reg_date"  ></property>
-			<property name="status" column="status"  ></property>
+			<property name="status" column="status"  not-null="true" ></property>
 	
 				
 	</class>

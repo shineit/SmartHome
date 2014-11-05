@@ -77,6 +77,7 @@ public class UserManageRestImpl implements UserManageRest
 		    }
 		    
 		    UserJson userJson = new UserJson();
+		    userJson.loadWithUser(user);
 		    rsp.setUser(userJson);
 			
 		}
