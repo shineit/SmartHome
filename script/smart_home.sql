@@ -47,6 +47,9 @@ CREATE TABLE `concentrator` (
 # Data for table "concentrator"
 #
 
+/*!40000 ALTER TABLE `concentrator` DISABLE KEYS */;
+INSERT INTO `concentrator` VALUES (1,'192.168.1.1',1,0,0,'名字','描述',NULL,NULL);
+/*!40000 ALTER TABLE `concentrator` ENABLE KEYS */;
 
 #
 # Structure for table "home_sensor"
@@ -160,7 +163,7 @@ CREATE TABLE `misp_system_menu` (
 #
 
 /*!40000 ALTER TABLE `misp_system_menu` DISABLE KEYS */;
-INSERT INTO `misp_system_menu` VALUES (1001,'首页','首页',NULL,NULL,NULL,NULL,'#','0',NULL),(1002,'我的主页','我的主页',NULL,NULL,NULL,NULL,NULL,'1001',NULL),(1003,'设备管理','设备管理',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1004,'集中器管理','集中器管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1005,'平面图管理','平面图管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1006,'客户分布','客户分布',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1007,'公共服务','公共服务 ',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1008,'公告管理','公告管理',NULL,NULL,NULL,NULL,'info/NewsManage','1007',NULL),(1009,'服务申请','服务申请',NULL,NULL,NULL,NULL,'info/OrderManage','1007',NULL),(1010,'系统管理','系统管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1011,'用户管理','用户管理',NULL,NULL,NULL,NULL,'sys/UserManage','1010',NULL);
+INSERT INTO `misp_system_menu` VALUES (1001,'首页','首页',NULL,NULL,NULL,NULL,'#','0',NULL),(1002,'我的主页','我的主页',NULL,NULL,NULL,NULL,NULL,'1001',NULL),(1003,'设备管理','设备管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1004,'集中器管理','集中器管理',NULL,NULL,NULL,NULL,'device/ConcentratorManage','1003',NULL),(1005,'平面图管理','平面图管理',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1006,'客户分布','客户分布',NULL,NULL,NULL,NULL,NULL,'1003',NULL),(1007,'公共服务','公共服务 ',NULL,NULL,NULL,NULL,NULL,'0',NULL),(1008,'公告管理','公告管理',NULL,NULL,NULL,NULL,'info/NewsManage','1007',NULL),(1009,'服务申请','服务申请',NULL,NULL,NULL,NULL,'info/OrderManage','1007',NULL),(1010,'系统管理','系统管理',NULL,NULL,NULL,NULL,'#','0',NULL),(1011,'用户管理','用户管理',NULL,NULL,NULL,NULL,'sys/UserManage','1010',NULL);
 /*!40000 ALTER TABLE `misp_system_menu` ENABLE KEYS */;
 
 #
