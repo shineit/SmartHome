@@ -16,9 +16,10 @@
 #import "FEHistoryAlarmResponse.h"
 #import "FELogoutRequest.h"
 #import "FESigoutResponse.h"
+#import "FEModifyPasswordRequest.h"
 
 
-#define _BASE_URL @"http://163.125.220.75:9000/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -65,6 +66,17 @@
         block(error,nil);
     }];
     
+}
+
+//modify password
+-(AFHTTPRequestOperation *)modifyPassword:(FEModifyPasswordRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block{
+    return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FEBaseResponse *base = [[FEBaseResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:base];
+        block(NULL,base);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error,NULL);
+    }];
 }
 
 //news

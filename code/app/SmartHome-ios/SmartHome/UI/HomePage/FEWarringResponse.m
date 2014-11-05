@@ -9,8 +9,12 @@
 #import "FEWarringResponse.h"
 #import "FEDeviceInfoView.h"
 #import "FEDeviceInfoInputView.h"
+#import "FEAlarm.h"
 
-@interface FEWarringResponse ()
+@interface FEWarringResponse (){
+    FEAlarm *_alarm;
+    NSArray *_alarmDevices;
+}
 
 @property (nonatomic, strong) FEDeviceInfoView *infoView;
 @property (nonatomic, strong) FEDeviceInfoInputView *infonInput;
@@ -29,6 +33,16 @@
     return self;
 }
 
+-(id)initWithAlarm:(FEAlarm *)alarm{
+    self = [super init];
+    if (self) {
+        self.title = FEString(@"CLOUD_SAFE");
+        _alarm = alarm;
+        _alarmDevices = [NSArray arrayWithObjects:FEString(@"CONCENTRATOR_ALARM"),FEString(@"HOME_SENSOR"),FEString(@"FIRE_SENSOR"), nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,6 +52,9 @@
 
 -(void)initUI{
     _infoView = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+    _infoView.controlPoint.text = [NSString stringWithFormat:@"%@",_alarm.objID];
+    _infoView.deviceNumber.text = [NSString stringWithFormat:@"%@",_alarm.id];
+    _infoView.deviceType.text = _alarmDevices[_alarm.objType.integerValue];
     [self.view addSubview:_infoView];
     
     _infonInput = [[FEDeviceInfoInputView alloc] initWithFrame:CGRectMake(0, _infoView.bounds.size.height, self.view.bounds.size.width, 150)];

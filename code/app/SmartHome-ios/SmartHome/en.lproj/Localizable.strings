@@ -59,3 +59,34 @@
 //safe page
 "SAFE_ALL_OPEN" = "All open";
 "SAFE_ALL_CLOSE" = "All close";
+
+//alarm
+"OFFLINE_ALARM" = "Offline";
+"FAULT_ALARM" = "Fault";
+"SUBPRESSURE_ALARM" = "Subpressure";
+"WARN_ALARM" = "Warn";
+"ERROR_ALARM" = "Error";
+"FEEDBACK_ALARM" = "Feedback";
+"ACTION_ALARM" = "Action";
+"RESET_ALARM" = "Reset";
+"SETUP_ALARM" = "Setup";
+"REMOVE_ALARM" = "Femove";
+
+"CONCENTRATOR_ALARM" = "Concentrator";
+"HOME_SENSOR" = "Home terminal";
+"FIRE_SENSOR" = "Fire terminal";
+"NONE_CLEAR" = "None clear";
+"MANUAL_CLEAR" = "Hand clear";
+"AUTO_CLEAR" = "Auto clear";
+
+"ALARM_CONCENTRATOR" = "Concentrator:";
+"ALARM_DEVICENUMBER" = "Device number:";
+"ALARM_DEVICETYPE" = "Device type:";
+
+//password
+"PSW_OLD_PASSWORD" = "Original:";
+"PSW_NEW_PSW" = "New Password:";
+"PSW_CONFIRM" = "Confirm:";
+"PSW_MODIFY_PASSWORD" = "Modify password";
+
+

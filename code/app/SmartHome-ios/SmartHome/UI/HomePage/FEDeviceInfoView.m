@@ -28,35 +28,35 @@
     CGFloat yoffset = 20;
     CGFloat xspace = 10;
     CGFloat yspace = 20;
-    CGFloat twidth = 80;
+    CGFloat twidth = 100;
     CGFloat theight = 20;
-    CGFloat vwidth = 100;
+    CGFloat vwidth = 150;
     CGFloat vheight = 20;
     CGFloat xvoffset = xoffset + twidth + xspace;
     
     
     FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset, twidth, theight)];
-    clabel.text = FEString(@"CONTROLPOINT");
+    clabel.text = FEString(@"ALARM_CONCENTRATOR");
     [self addSubview:clabel];
     
     _controlPoint = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset, vwidth, vheight)];
-    _controlPoint.text = @"021";
+//    _controlPoint.text = @"021";
     [self addSubview:_controlPoint];
     
     FELabel *dNumber = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset + theight + yspace, twidth, theight)];
-    dNumber.text = FEString(@"DEVICENUMBER");
+    dNumber.text = FEString(@"ALARM_DEVICENUMBER");
     [self addSubview:dNumber];
     
     _deviceNumber = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset + vheight + yspace, vwidth, vheight)];
-    _deviceNumber.text = @"021";
+//    _deviceNumber.text = @"021";
     [self addSubview:_deviceNumber];
     
     FELabel *dtype = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset + 2 * theight + 2 * yspace, twidth, theight)];
-    dtype.text = FEString(@"DEVICETYPE");
+    dtype.text = FEString(@"ALARM_DEVICETYPE");
     [self addSubview:dtype];
     
     _deviceType = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset + 2 * vheight + 2 * yspace, vwidth, vheight)];
-    _deviceType.text = @"烟雾报警器";
+//    _deviceType.text = @"烟雾报警器";
     [self addSubview:_deviceType];
     
 }

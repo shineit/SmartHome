@@ -23,6 +23,7 @@
 @class FEHistoryAlarmResponse;
 @class FELogoutRequest;
 @class FESigoutResponse;
+@class FEModifyPasswordRequest;
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -31,8 +32,12 @@
 +(FEWebServiceManager *)sharedInstance;
 
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginRequest *)sdata response:(void (^)(NSError *error,FESiginResponse *user))block;
+
 //sigout
 -(AFHTTPRequestOperation *)sigoutWithParam:(FELogoutRequest *)udata response:(void (^)(NSError *error, FESigoutResponse *response))block;
+
+//modify password
+-(AFHTTPRequestOperation *)modifyPassword:(FEModifyPasswordRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 -(AFHTTPRequestOperation *)news:(FENewsRequest *)ndata response:(void (^)(NSError *error,FENewsResponse *news))block;
 

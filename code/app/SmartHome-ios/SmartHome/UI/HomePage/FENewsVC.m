@@ -47,7 +47,8 @@
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_home_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_home"]];
         }
         _newsList = [NSMutableArray new];
-        _warringList = [NSMutableArray arrayWithObjects:@"warring 1",@"warring1",@"warring3",@"warring4", nil];
+        _warringList = [NSMutableArray new];
+        
     }
     return self;
 }
@@ -134,6 +135,8 @@
     [[FEWebServiceManager sharedInstance] historyAlarmList:hdata reponse:^(NSError *error, FEHistoryAlarmResponse *response) {
         [self hideHUD:YES];
         if (!error && response.result.errorCode.integerValue == 0){
+            [weakself.warringList removeAllObjects];
+            [weakself.warringList addObjectsFromArray:response.alarmList];
             [weakself.warringtable reloadData];
         }
     }];
@@ -190,6 +193,7 @@
         if (!cell) {
             cell = [[FEWarringTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
+        [cell configWithAlarm:_warringList[indexPath.row]];
         return cell;
     }
     return nil;
@@ -211,7 +215,7 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.warringtable) {
-        FEWarringResponse *response = [FEWarringResponse new];
+        FEWarringResponse *response = [[FEWarringResponse alloc] initWithAlarm:_warringList[indexPath.row]];
         response.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:response animated:YES];
     }

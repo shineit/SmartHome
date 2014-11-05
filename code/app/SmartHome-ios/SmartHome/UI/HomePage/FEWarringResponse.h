@@ -7,7 +7,10 @@
 //
 
 #import "FECommonViewController.h"
+@class FEAlarm;
 
 @interface FEWarringResponse : FECommonViewController
+
+-(id)initWithAlarm:(FEAlarm *)alarm;
 
 @end

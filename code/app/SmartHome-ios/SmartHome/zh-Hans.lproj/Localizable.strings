@@ -62,3 +62,31 @@
 //safe page
 "SAFE_ALL_OPEN" = "全部打开";
 "SAFE_ALL_CLOSE" = "全部关闭";
+
+//alarm
+"OFFLINE_ALARM" = "掉线";
+"FAULT_ALARM" = "故障";
+"SUBPRESSURE_ALARM" = "欠压";
+"WARN_ALARM" = "预警";
+"ERROR_ALARM" = "火警";
+"FEEDBACK_ALARM" = "反馈";
+"ACTION_ALARM" = "动作";
+"RESET_ALARM" = "复位";
+"SETUP_ALARM" = "设防";
+"REMOVE_ALARM" = "撤防";
+
+"CONCENTRATOR_ALARM" = "集中器";
+"HOME_SENSOR" = "家庭终端";
+"FIRE_SENSOR" = "消防终端";
+"NONE_CLEAR" = "未清除";
+"MANUAL_CLEAR" = "手动清除";
+"AUTO_CLEAR" = "自动清除";
+
+"ALARM_CONCENTRATOR" = "集 中 器:";
+"ALARM_DEVICENUMBER" = "设备编号:";
+"ALARM_DEVICETYPE" = "设备类型:";
+
+"PSW_OLD_PASSWORD" = "原始密码:";
+"PSW_NEW_PSW" = "新 密 码:";
+"PSW_CONFIRM" = "验证密码:";
+"PSW_MODIFY_PASSWORD" = "修改密码";

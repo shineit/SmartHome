@@ -11,7 +11,7 @@
 @implementation NSDate (Formatter)
 
 -(NSString *)defaultFormat{
-    return [self stringForDateWithFormatterString:@"MM/dd/HH/mm"];
+    return [self stringForDateWithFormatterString:@"MM/dd HH:mm"];
 }
 
 - (NSString *)stringForDateWithFormatterString:(NSString *)dateFormatterString {
