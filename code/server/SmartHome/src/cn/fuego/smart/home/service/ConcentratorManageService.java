@@ -26,5 +26,9 @@ public interface ConcentratorManageService
 	void online(Concentrator concentrator);
 	void offline(Concentrator concentrator);
 	AbstractDataSource<Concentrator> getConcentDataSource(List<QueryCondition> conidtionList);
+	Concentrator getConcentByID(String concentID);
+	void modifyConcentInfo(Concentrator concent);
+	void deleteConcentList(List<String> concentIDList);
+	
 
 }

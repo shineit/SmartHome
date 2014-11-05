@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
 
-function submitForm(url){
+function submitFormN(url){
     var thisForm = document.userForm;
 	thisForm.action="info/NewsManage!"+url;
 	return validateCallback(thisForm,navTabAjax);
@@ -51,7 +51,7 @@ function submitForm(url){
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="NewsManage!show.action" target="dialog" mask="true" title="新增公告"><span>新增公告</span></a></li>
-			<li><a class="delete" href="NewsManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
+			<li><a class="delete" href="NewsManage!deleteList.action" onclick="submitFormN('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">

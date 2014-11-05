@@ -2,7 +2,15 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<script type="text/javascript">
 
+function submitFormC(url){
+    var thisForm = document.concentForm;
+	thisForm.action="device/ConcentratorManage!"+url;
+	return validateCallback(thisForm,navTabAjax);
+}
+
+</script>
 <div class="pageHeader">
 	<s:form id="pagerForm" onsubmit="return navTabSearch(this);" action="device/ConcentratorManage" method="POST" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
@@ -56,7 +64,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="delete" href="device/ConcentratorManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除集中器</span></a></li>
+			<li><a class="delete" href="device/ConcentratorManage!deleteList.action" onclick="submitFormC('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>批量删除</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
@@ -77,7 +85,7 @@
 	
 	    <c:forEach var="e" items="${concentTable.currentPageData}"> 		
 	        <tr target="sid_user" rel="${e.concentratorID}" >
-				<td><input name="selectedIDList" value="" type="checkbox" style="margin-top:5px;"></td>	        
+				<td><input name="selectedIDList" value="${e.concentratorID}" type="checkbox" style="margin-top:5px;"></td>	        
 	            <td>${e.concentratorID}</td>
 	            <td>${e.ipAddr}</td>
 	            <td>${e.name}</td>
@@ -97,7 +105,7 @@
 	            </td>
 	            <td>
 	            <a title="集中器信息修改" target="dialog" href="device/ConcentratorManage!show.action?selectedID=${e.concentratorID}" class="btnEdit" >修改</a>
-	            </td>
+	            </td> 
 
 			</tr>
 		</c:forEach>

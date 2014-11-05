@@ -63,8 +63,32 @@ public class ConcentratorManageServiceImpl implements ConcentratorManageService
 		
 	}
 
+	@Override
+	public Concentrator getConcentByID(String concentID)
+	{
+		Concentrator concent= (Concentrator) DaoContext.getInstance().getConcentratorDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentID));
+		return concent;
+	}
 
+	@Override
+	public void modifyConcentInfo(Concentrator concent)
+	{
+		Concentrator oldConcent= (Concentrator) DaoContext.getInstance().getConcentratorDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID" ,String.valueOf(concent.getConcentratorID())));
+		concent.setStatus(oldConcent.getStatus());
+		concent.setAddr(oldConcent.getAddr());
+		concent.setLocationNS(oldConcent.getLocationNS());
+		concent.setLocationWE(oldConcent.getLocationWE());
+		concent.setMark(oldConcent.getMark());
+		DaoContext.getInstance().getConcentratorDao().update(concent);
+	}
 
+	@Override
+	public void deleteConcentList(List<String> concentIDList)
+	{
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentIDList);	
+		DaoContext.getInstance().getConcentratorDao().delete(condition);
+		
+	}
 
 
 
