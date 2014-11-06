@@ -30,6 +30,7 @@
 @class FESensorBatchEnableRequest;
 @class FESensorSetRequest;
 @class FESensorSetResponse;
+@class FEMarkDeletRequest;
 
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
@@ -55,6 +56,9 @@
 -(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 -(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+//mark delet
+-(AFHTTPRequestOperation *)markDelete:(FEMarkDeletRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+
 //history alarm
 -(AFHTTPRequestOperation *)historyAlarmList:(FEHistoryAlarmRequest *)hdata reponse:(void (^)(NSError *error, FEHistoryAlarmResponse *response))block;
 //sensor list
@@ -67,6 +71,7 @@
 
 //sensor batch disable
 -(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorBatchDisableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+
 
 
 

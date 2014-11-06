@@ -23,6 +23,7 @@
 #import "FESensorBatchEnableRequest.h"
 #import "FESensorSetRequest.h"
 #import "FESensorSetResponse.h"
+#import "FEMarkDeletRequest.h"
 
 
 #define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
@@ -140,6 +141,18 @@
     return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        [self showerrorResponse:operation];
         block(NULL,[FEBaseResponse new]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showerror:error];
+        block(error,NULL);
+    }];
+}
+
+//delete mark
+-(AFHTTPRequestOperation *)markDelete:(FEMarkDeletRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block{
+    return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FEBaseResponse *response = [[FEBaseResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self showerror:error];
         block(error,NULL);
