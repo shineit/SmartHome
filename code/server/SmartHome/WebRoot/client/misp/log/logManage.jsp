@@ -55,10 +55,10 @@ function submitForm(url){
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="delete" href="log/LogManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除操作日志</span></a></li>
+			<li><a class="delete" href="log/LogManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除日志</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="118">
+	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>			

@@ -2,6 +2,12 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!-- 去logo-->
+<style type="text/css">
+ .anchorBL {
+            display: none; 
+        }
+</style>
 <!-- 自适应屏幕高度 -->
 <script type="text/javascript">
 
@@ -12,7 +18,7 @@
 	$("#all_map").height(colHeight - 45+ "px");
 </script> 
 <div class="pageContent">
-	<div class="accordion" style="width:99%;margin:0px;" id="">
+	<div class="accordion" style="width:100%;margin:0px;" id="">
 
 		<div class="accordionContent" style="width:30%;float:left;" id="">
 
@@ -74,7 +80,7 @@
 </s:form>
 		</div>
 		<div class="accordionContent" style="width:70%;float:right;" id="accordionR">
-			<div id="all_map" style="width:100%;"></div>
+			<div id="all_map" style="width:100%;float:right;"></div>
 		</div>
 	</div>
 </div>
@@ -85,10 +91,12 @@ map.addControl(new BMap.NavigationControl());     //地图平移缩放控件
 map.addControl(new BMap.ScaleControl());    	  //比例尺控件，默认位于地图左下方，显示地图的比例关系。
 map.addControl(new BMap.OverviewMapControl());    //缩略地图控件  
 map.enableScrollWheelZoom(true); 
+
 //map.addControl(new BMap.MapTypeControl()); 		  //地图类型控件
 	//setTimeout(function(){
 	//	map.setZoom(14);   
 	//}, 2000);  //2秒后放大到14级
+
 
 	if($("#cityName").val()!='')
 	{
@@ -100,31 +108,21 @@ map.enableScrollWheelZoom(true);
 			map.centerAndZoom(new BMap.Point(obj[0].locationNS,obj[0].locationWE),15);
 		}else
 		{
-			//var myCity = new BMap.LocalCity();
-			//myCity.get(myFun);
-			map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-			map.setCurrentCity("北京");
+				var myCity = new BMap.LocalCity();
+				myCity.get(myFun);
+				function myFun(result)
+				{
+					var cityName = result.name;
+					//map.setCenter(cityName);
+					map.centerAndZoom(cityName,11);
+					//alert("当前定位城市:"+cityName);
+				}	
+			//map.centerAndZoom(new BMap.Point(116.404, 39.915), 11); //调试使用
+			//map.setCurrentCity("北京");
 		}
 
-	
-	
-/*     if($.trim($("#cityName").val()).length<=0)
-      {
 
-		var myCity = new BMap.LocalCity();
-		myCity.get(myFun);      	
-      }else{
-      	var city=$.trim($("#cityName").val());
-      	map.centerAndZoom(city,11);
 
-      }  
-*/  
-	function myFun(result){
-		var cityName = result.name;
-		map.setCenter(cityName);
-		alert("当前定位城市:"+cityName);
-	}
-	
     var a= '<%=request.getAttribute("locationJson")%>';
     var obj = $.parseJSON(a);
  	var data_info = new Array();
@@ -142,6 +140,7 @@ map.enableScrollWheelZoom(true);
 				width : 250,     // 信息窗口宽度
 				height: 80,     // 信息窗口高度
 				title : "集中器信息" , // 信息窗口标题
+				panel : "panel", //检索结果面板
 				enableMessage:false//设置允许信息窗发送短息
 			   };
 	for(var i=0;i<data_info.length;i++){

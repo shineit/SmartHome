@@ -38,6 +38,10 @@
 			<result type="dispatcher">/client/manage/customerDistribution.jsp</result>
  		    
 		</action>
+   		<action name="PlanManage" class="cn.fuego.smart.home.web.action.device.PlanManageAction">
+			<result type="dispatcher">/client/manage/planManage.jsp</result>
+ 		    
+		</action>		
  	</package> 
 </struts>
 
