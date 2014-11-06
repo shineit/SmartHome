@@ -17,6 +17,12 @@
 #import "FELogoutRequest.h"
 #import "FESigoutResponse.h"
 #import "FEModifyPasswordRequest.h"
+#import "FESensorListRequest.h"
+#import "FESensorListResponse.h"
+#import "FESensorBatchDisableRequest.h"
+#import "FESensorBatchEnableRequest.h"
+#import "FESensorSetRequest.h"
+#import "FESensorSetResponse.h"
 
 
 #define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
@@ -146,6 +152,55 @@
         FEHistoryAlarmResponse *hresponse = [[FEHistoryAlarmResponse alloc] initWithResponse:responseObject];
         [self showerrorResponse:hresponse];
         block(NULL,hresponse);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showerror:error];
+        block(error,NULL);
+    }];
+}
+
+//get sensor list
+-(AFHTTPRequestOperation *)sensorList:(FESensorListRequest *)sdata response:(void (^)(NSError *error, FESensorListResponse *response))block{
+    return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FESensorListResponse *response = [[FESensorListResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error,NULL);
+        [self showerror:error];
+    }];
+}
+
+//sensor set
+-(AFHTTPRequestOperation *)sensorSet:(FESensorSetRequest *)sdata response:(void (^)(NSError *error, FESensorSetResponse *respone))block{
+    return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FESensorSetResponse *response = [[FESensorSetResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showerror:error];
+        block(error,NULL);
+    }];
+}
+
+//batch enable
+-(AFHTTPRequestOperation *)SensorBatchEnable:(FESensorBatchEnableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *respone))block{
+    return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FEBaseResponse *response = [[FEBaseResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showerror:error];
+        block(error,NULL);
+    }];
+}
+
+//batch disable
+-(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorBatchDisableRequest *)sdata response:(void (^)(NSError *, FEBaseResponse *))block{
+    return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FEBaseResponse *response = [[FEBaseResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self showerror:error];
         block(error,NULL);

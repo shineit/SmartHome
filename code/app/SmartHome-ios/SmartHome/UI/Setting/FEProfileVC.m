@@ -25,7 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"PROFILE");
+        self.title = FEString(@"PROFILE_TITLE");
     }
     return self;
 }
@@ -39,34 +39,38 @@
 
 -(void)initUI{
     
-    [self loadRightCustomButtonItemWithTitle:FEString(@"PASSWORD") image:nil];
+    [self loadRightCustomButtonItemWithTitle:FEString(@"PRODILE_PASSWORD") image:nil];
+    
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 120)];
+    content.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:content];
     
     CDUser *user = FELoginUser;
     
-    FELabel *username = [[FELabel alloc] initWithFrame:CGRectMake(20, 30, 60, 20)];
-    username.text = FEString(@"USERNAME");
-    [self.view addSubview:username];
+    FELabel *username = [[FELabel alloc] initWithFrame:CGRectMake(20, 30 , 60, 20)];
+    username.text = FEString(@"PROFILE_USERNAME");
+    [content addSubview:username];
     
     FELabel *name = [[FELabel alloc] initWithFrame:CGRectMake(90, 30, 200, 20)];
     name.text = user.username;
-    [self.view addSubview:name];
+    [content addSubview:name];
     
-    FELabel *email = [[FELabel alloc] initWithFrame:CGRectMake(20, 70, 60, 20)];
-    email.text = FEString(@"EMAIL");
-    [self.view addSubview:email];
+    FELabel *email = [[FELabel alloc] initWithFrame:CGRectMake(20, 70 + 5, 60, 20)];
+    email.text = FEString(@"PROFILE_EMAIL");
+    [content addSubview:email];
     
     UITextField *emailText = [[UITextField alloc] initWithFrame:CGRectMake(90, 70, 200, 30)];
     emailText.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:emailText];
+    [content addSubview:emailText];
     
-    UIButton *mod = [UIButton buttonWithType:UIButtonTypeCustom];
-    mod.frame = CGRectMake(80, 150, 160, 30);
-    [mod setTitle:FEString(@"MODIFY") forState:UIControlStateNormal];
+    FEButton *mod = [FEButton buttonWithType:UIButtonTypeCustom];
+    mod.frame = CGRectMake(20, content.frame.origin.y + content.bounds.size.height + 20, 280, 40);
+    [mod setTitle:FEString(@"PROFILE_MODIFY") forState:UIControlStateNormal];
     [self.view addSubview:mod];
     
-    UIButton *logout = [UIButton buttonWithType:UIButtonTypeCustom];
-    logout.frame = CGRectMake(80, 180, 160, 30);
-    [logout setTitle:FEString(@"LOGOUT") forState:UIControlStateNormal];
+    FEButton *logout = [FEButton buttonWithType:UIButtonTypeCustom];
+    logout.frame = CGRectMake(20, mod.frame.origin.y + mod.bounds.size.height + 20, 280, 40);
+    [logout setTitle:FEString(@"PROFILE_LOGOUT") forState:UIControlStateNormal];
     [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logout];
     

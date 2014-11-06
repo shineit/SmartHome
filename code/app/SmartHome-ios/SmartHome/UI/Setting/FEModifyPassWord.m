@@ -16,7 +16,7 @@
 #import "FEBaseResponse.h"
 
 
-@interface FEModifyPassWord ()
+@interface FEModifyPassWord ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *oldpswText;
 @property (nonatomic, strong) UITextField *newpswText;
@@ -45,40 +45,58 @@
 -(void)initUI{
     
     CGFloat yoffset = 30;
-    CGFloat xoffset = 20;
+    CGFloat xoffset = 10;
+    
+    UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
+    [self.view addGestureRecognizer:gest];
+    self.view.userInteractionEnabled = YES;
+    
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180)];
+    content.userInteractionEnabled = YES;
+    content.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:content];
     
     //旧密码
     FELabel *oldpsw = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset + 5, 80, 20)];
     oldpsw.text = FEString(@"PSW_OLD_PASSWORD");
-    [self.view addSubview:oldpsw];
+    [content addSubview:oldpsw];
     
     UITextField *oldpswText = [[UITextField alloc] initWithFrame:CGRectMake(oldpsw.frame.origin.x + oldpsw.frame.size.width + 10, yoffset, 200, 30)];
+    oldpswText.secureTextEntry = YES;
+    oldpswText.delegate = self;
     oldpswText.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:oldpswText];
+    oldpswText.returnKeyType = UIReturnKeyNext;
+    [content addSubview:oldpswText];
     self.oldpswText = oldpswText;
     
     //新密码
     FELabel *newpsw = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, oldpswText.frame.origin.y + oldpswText.bounds.size.height + 10 + 5, 80, 20)];
     newpsw.text = FEString(@"PSW_NEW_PSW");
-    [self.view addSubview:newpsw];
+    [content addSubview:newpsw];
     
     UITextField *newpswText = [[UITextField alloc] initWithFrame:CGRectMake(newpsw.frame.origin.x + newpsw.frame.size.width + 10, newpsw.frame.origin.y, 200, 30)];
+    newpswText.delegate = self;
     newpswText.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:newpswText];
+    newpswText.returnKeyType = UIReturnKeyNext;
+    newpswText.secureTextEntry = YES;
+    [content addSubview:newpswText];
     self.newpswText = newpswText;
     
     //校验密码
     FELabel *confirmpsw = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, newpswText.frame.origin.y + newpswText.bounds.size.height + 10 + 5, 80, 20)];
     confirmpsw.text = FEString(@"PSW_CONFIRM");
-    [self.view addSubview:confirmpsw];
+    [content addSubview:confirmpsw];
     
     UITextField *confirmpswText = [[UITextField alloc] initWithFrame:CGRectMake(confirmpsw.frame.origin.x + confirmpsw.frame.size.width + 10, confirmpsw.frame.origin.y, 200, 30)];
+    confirmpswText.delegate = self;
+    confirmpswText.secureTextEntry = YES;
+    confirmpswText.returnKeyType = UIReturnKeyDone;
     confirmpswText.borderStyle = UITextBorderStyleRoundedRect;
-    [self.view addSubview:confirmpswText];
+    [content addSubview:confirmpswText];
     self.confirmpswText = confirmpswText;
     
     FEButton *submit = [FEButton buttonWithType:UIButtonTypeCustom];
-    submit.frame = CGRectMake(80, confirmpswText.frame.origin.y + confirmpswText.frame.size.height + 40, 160, 30);
+    submit.frame = CGRectMake(20, content.frame.origin.y + content.bounds.size.height + 40, self.view.bounds.size.width - 40, 40);
     [submit addTarget:self action:@selector(modify:) forControlEvents:UIControlEventTouchUpInside];
     [submit setTitle:FEString(@"PSW_MODIFY_PASSWORD") forState:UIControlStateNormal];
     [self.view addSubview:submit];
@@ -87,7 +105,8 @@
 
 -(void)modify:(UIButton *)btn{
     CDUser *user = FELoginUser;
-    
+//    [self screenOffset:0];
+    [self hideKeyboard:nil];
     if ([user.password isEqualToString:[self.oldpswText.text MD5]]) {
         if ([self.newpswText.text isEqualToString:self.confirmpswText.text]) {
             [self displayHUD:FEString(@"LOADING...")];
@@ -101,6 +120,37 @@
             }];
         }
     }
+}
+
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    if (textField == self.oldpswText) {
+        [self.newpswText becomeFirstResponder];
+    }else if(textField == self.newpswText){
+        [self.confirmpswText becomeFirstResponder];
+    }else if(textField == self.confirmpswText){
+        [self modify:nil];
+    }
+    return YES;
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (textField == self.oldpswText) {
+        [self screenOffset:SYSTEM_VERSION_UP7?64:0];
+    }else if(textField == self.newpswText){
+        [self screenOffset:SYSTEM_VERSION_UP7?64:0];
+    }else if(textField == self.confirmpswText){
+        [self screenOffset:[UIDevice is4Inch]?SYSTEM_VERSION_UP7?64:0:SYSTEM_VERSION_UP7?-20:-40];
+    }
+    return YES;
+}
+
+-(void)hideKeyboard:(UIGestureRecognizer *)ges{
+    [self screenOffset:SYSTEM_VERSION_UP7?64:0];
+    [self.oldpswText resignFirstResponder];
+    [self.newpswText resignFirstResponder];
+    [self.confirmpswText resignFirstResponder];
 }
 
 

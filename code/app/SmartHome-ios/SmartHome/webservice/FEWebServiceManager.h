@@ -13,6 +13,7 @@
 #import "FEServiceOrderSetRequest.h"
 #import "FEMarkSetRequest.h"
 #import "FEMarkRequest.h"
+#import "FESensorListRequest.h"
 
 @class FESiginResponse;
 @class FENewsResponse;
@@ -24,6 +25,12 @@
 @class FELogoutRequest;
 @class FESigoutResponse;
 @class FEModifyPasswordRequest;
+@class FESensorListResponse;
+@class FESensorBatchDisableRequest;
+@class FESensorBatchEnableRequest;
+@class FESensorSetRequest;
+@class FESensorSetResponse;
+
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
 
@@ -50,5 +57,17 @@
 -(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 //history alarm
 -(AFHTTPRequestOperation *)historyAlarmList:(FEHistoryAlarmRequest *)hdata reponse:(void (^)(NSError *error, FEHistoryAlarmResponse *response))block;
+//sensor list
+-(AFHTTPRequestOperation *)sensorList:(FESensorListRequest *)sdata response:(void (^)(NSError *error, FESensorListResponse *response))block;
+//sensor set
+-(AFHTTPRequestOperation *)sensorSet:(FESensorSetRequest *)sdata response:(void (^)(NSError *error, FESensorSetResponse *response))block;
+
+//sensor batch enable
+-(AFHTTPRequestOperation *)SensorBatchEnable:(FESensorBatchEnableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+
+//sensor batch disable
+-(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorBatchDisableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+
+
 
 @end

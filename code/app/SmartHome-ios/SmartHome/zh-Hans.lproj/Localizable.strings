@@ -90,3 +90,11 @@
 "PSW_NEW_PSW" = "新 密 码:";
 "PSW_CONFIRM" = "验证密码:";
 "PSW_MODIFY_PASSWORD" = "修改密码";
+
+//profile
+"PROFILE_TITLE" = "个人中心";
+"PRODILE_PASSWORD" = "修改密码";
+"PROFILE_USERNAME" = "用户名";
+"PROFILE_EMAIL" = "邮  箱";
+"PROFILE_MODIFY" = "修改资料";
+"PROFILE_LOGOUT" = "登   出";

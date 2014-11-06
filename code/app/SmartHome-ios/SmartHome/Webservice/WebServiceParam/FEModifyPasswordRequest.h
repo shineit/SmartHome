@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong, readonly) NSString *userName;
 @property (nonatomic, strong, readonly) NSString *oldPwd;
-//@property (nonatomic, strong, readonly) NSString *newPwd;
+@property (nonatomic, strong, readonly) NSString *pwdNew;
 
 -(id)initWithUname:(NSString *)uname oldPwd:(NSString *)oldpwd newPwd:(NSString *)newpwd;
 

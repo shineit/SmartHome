@@ -26,7 +26,6 @@
 #define __METHOD_SENSOR_ENABLE      @"sensor/batch/enable"
 #define __METHOD_SENSOR_DISABLE     @"sensor/batch/disable"
 
-#define __
 
 @interface FERequestBaseData : NSObject
 

@@ -17,7 +17,7 @@
     if (self) {
         _userName = uname;
         _oldPwd = oldpwd;
-//        _newPwd = newpwd;
+        _pwdNew = newpwd;
     }
     return self;
 }

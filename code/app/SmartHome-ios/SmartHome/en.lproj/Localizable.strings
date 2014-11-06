@@ -89,4 +89,12 @@
 "PSW_CONFIRM" = "Confirm:";
 "PSW_MODIFY_PASSWORD" = "Modify password";
 
+//profile
+"PROFILE_TITLE" = "Profile";
+"PRODILE_PASSWORD" = "Modify password";
+"PROFILE_USERNAME" = "User name";
+"PROFILE_EMAIL" = "Email";
+"PROFILE_MODIFY" = "Modify profile";
+"PROFILE_LOGOUT" = "Sigout";
+
 

@@ -10,4 +10,6 @@
 
 @interface FESensorListResponse : FEBaseResponse
 
+@property (nonatomic, strong, readonly) NSArray *sensorList;
+
 @end

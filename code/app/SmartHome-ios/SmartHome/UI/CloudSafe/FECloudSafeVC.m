@@ -10,6 +10,12 @@
 #import "FEControlView.h"
 #import "FECloudSafeTableCell.h"
 #import "FEDeviceWarringSettingVC.h"
+#import "FEWebServiceManager.h"
+#import "FESensorListRequest.h"
+#import "FESensorListResponse.h"
+#import "AppDelegate.h"
+#import "FECoreDataHandler.h"
+#import "CDUser.h"
 
 @interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -43,6 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    [self requestSensor];
     
 }
 
@@ -65,6 +72,19 @@
     NSLog(@"search!");
 }
 
+-(void)requestSensor{
+    [self displayHUD:FEString(@"LOADING...")];
+    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
+        [weakself hideHUD:YES];
+        if (!error && response.result.errorCode.integerValue == 0) {
+            [weakself.deviceTable reloadData];
+        }
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"cell";
@@ -79,7 +99,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_deviceList[section] count];
+    return [(NSArray *)_deviceList[section] count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
