@@ -30,7 +30,7 @@
     
 	<package name="login" extends="default">
 		<action name="login" class="cn.fuego.misp.web.action.login.LoginAction">
-			<result type="redirect">/client/misp/home.jsp</result>
+			<result type="redirectAction">Index</result>
 			<result name="home">/client/misp/login.jsp</result>
 			
 			<result type="chain" name="LoginFailed">
@@ -47,8 +47,10 @@
                  <param name="contentType">image/jpeg</param>    
                  <param name="inputName">codeStream</param>    
              </result>      
-		</action> 		  
- 
+		</action> 
+		<action name="Index" class="cn.fuego.misp.web.action.login.IndexAction">
+			<result type="redirect">/client/misp/home.jsp</result>
+		</action>		  
 
  	</package>
  	<package name="log" extends="default">

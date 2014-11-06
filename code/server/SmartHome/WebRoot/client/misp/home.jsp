@@ -137,45 +137,20 @@ function resetForm(objForm){
 					<div class="tabsRight">right</div><!-- 禁用只需要添加一个样式 class="tabsRight tabsRightDisabled" -->
 					<div class="tabsMore">more</div>
 				</div>
-				<ul class="tabsMoreList">
-					<li><a href="javascript:;">我的主页</a></li>
-				</ul>
+
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox">
 						<div class="accountInfo">
+							
 							<div class="alertInfo">
-								<p><a href="#"  style="line-height:19px"><span>待办工作32项，消息212条</span></a></p>
+								<p><a href="#"  style="line-height:19px"><span>已发公告32项</span></a></p>
 								<p><a href="#"  style="line-height:19px">2014年09月30日，星期二</a></p>
 							</div>
-							<div class="right">
-								<p style="color:red"> </p>
-							</div>
-							<p><span></span></p>
-							<p></p>
+							<div class="left"><p><a href="#"  style="line-height:20px;color:red;"><span>今日报警信息：50条</span></a></p></div>
 						</div>
-						<div class="pageFormContent" layoutH="80" style="margin-right:230px">
-							
 
-<h2>公告</h2>
-<div class="unit"></div>
-<div class="unit"></div>
-
-<div class="divider"></div>
-<h2></h2>
-<pre style="margin:5px;line-height:1.4em">
-
-</pre>
-
-<div class="divider"></div>
-<h2><span style="color:red;"></span></h2><br/>
-<pre style="margin:5px;line-height:1.4em;">
-
-</pre>
-						</div>
 						
-						<div style="width:230px;position: absolute;top:60px;right:0" layoutH="80">
-							<iframe width="100%" height="430" class="share_self"  frameborder="0" scrolling="no" src=""></iframe>
-						</div>
+
 					</div>
 					
 				</div>
