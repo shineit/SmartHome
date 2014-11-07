@@ -47,8 +47,25 @@
     
 }
 
+-(void)cancelSelected{
+    [_checkGroup uncheckButton:_checkGroup.checkedbtn];
+}
+
 -(void)check:(FECheckButton *)btn{
+    if (btn == _checkGroup.checkedbtn) {
+        return;
+    }
     [_checkGroup checkButton:btn];
+    if (_checkGroup.checkedindex == 0) {
+        if ([self.delegate respondsToSelector:@selector(controlViewDidSelectAllOpen:)]) {
+            [self.delegate controlViewDidSelectAllOpen:self];
+        }
+    }else{
+        if ([self.delegate respondsToSelector:@selector(controlViewDidSelectAllClose:)]) {
+            [self.delegate controlViewDidSelectAllClose:self];
+        }
+    }
+    
 }
 
 /*

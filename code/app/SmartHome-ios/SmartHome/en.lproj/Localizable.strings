@@ -97,4 +97,12 @@
 "PROFILE_MODIFY" = "Modify profile";
 "PROFILE_LOGOUT" = "Sigout";
 
-
+//sensor setting page
+"SENSOR_DESCRIPETION" = "Description";
+"SENSOR_EARLY_WARRING" = "Early warring";
+"SENSOR_FIRE_VALUE" = "Fire value";
+"SENSOR_LABEL" = "Mark";
+"SENSOR_ADD" = "Add";
+"SENSOR_CONTROL" = "Control";
+"SENSOR_CONFIG" = "Config";
+"SONSER_MONITOR" = "Monitor";

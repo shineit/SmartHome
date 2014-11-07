@@ -8,8 +8,11 @@
 
 #import "FEDeviceWarringSettingVC.h"
 #import "FEDeviceInfoView.h"
+#import "FESensor.h"
 
 @interface FEDeviceWarringSettingVC ()
+
+@property (nonatomic, strong) FESensor *sensor;
 
 @end
 
@@ -24,6 +27,15 @@
     return self;
 }
 
+-(id)initWithSensor:(FESensor *)sensor{
+    self = [super init];
+    if (self) {
+        _sensor = sensor;
+        self.title = sensor.sensorTypeName;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -32,12 +44,19 @@
 }
 
 -(void)initUI{
+    
+    UIScrollView *scrollview = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollview.userInteractionEnabled = YES;
+    [self.view addSubview:scrollview];
+    
     FEDeviceInfoView *dview = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 140)];
-    [self.view addSubview:dview];
+    dview.deviceNumber.text = [NSString stringWithFormat:@"%@",self.sensor.id];
+    dview.controlPoint.text = [NSString stringWithFormat:@"%@",self.sensor.concentratorID];
+    [scrollview addSubview:dview];
     
     UIView *contentview = [[UIView alloc] initWithFrame:CGRectMake(0, dview.bounds.size.height, self.view.bounds.size.width, 260)];
     contentview.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:contentview];
+    [scrollview addSubview:contentview];
     
     
     CGFloat x = 10; //label 起始X
@@ -50,41 +69,45 @@
     
     
     FELabel *dlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y, lwidth, height)];
-    dlabel.text = FEString(@"DESCRIPETION");
+    dlabel.text = FEString(@"SENSOR_DESCRIPETION");
     [contentview addSubview:dlabel];
     
     FETextField *dtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y, twidth, height)];
+    dtextFeild.text = self.sensor.descriptions;
     [contentview addSubview:dtextFeild];
     
     FELabel *elabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + height + yspace, lwidth, height)];
-    elabel.text = FEString(@"EARLY_WARRING");
+    elabel.text = FEString(@"SENSOR_EARLY_WARRING");
     [contentview addSubview:elabel];
     
     FETextField *etextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + height + yspace, twidth, height)];
+    etextFeild.text = [NSString stringWithFormat:@"%@",self.sensor.errorValue];
     [contentview addSubview:etextFeild];
     
     FELabel *vlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 2 * (height + yspace), lwidth, height)];
-    vlabel.text = FEString(@"FIRE_VALUE");
+    vlabel.text = FEString(@"SENSOR_FIRE_VALUE");
     [contentview addSubview:vlabel];
     
     FETextField *vtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 2 * (height + yspace), twidth, height)];
+    vtextFeild.text = [NSString stringWithFormat:@"%@",self.sensor.errorValue];
     [contentview addSubview:vtextFeild];
     
     FELabel *llabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 3 * (height + yspace), lwidth, height)];
-    llabel.text = FEString(@"LABEL");
+    llabel.text = FEString(@"SENSOR_LABEL");
     [contentview addSubview:llabel];
     
     FETextField *ltextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 60, height)];
+    ltextFeild.text = self.sensor.mark;
     [contentview addSubview:ltextFeild];
     
     UIButton *add = [UIButton buttonWithType:UIButtonTypeCustom];
     add.frame = CGRectMake(x + lwidth + xspace + twidth - 50, y + 3 * (height + yspace), 50, height);
     [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [add setTitle:FEString(@"ADD") forState:UIControlStateNormal];
+    [add setTitle:FEString(@"SENSOR_ADD") forState:UIControlStateNormal];
     [contentview addSubview:add];
     
     FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 4 * (height + yspace), lwidth, height)];
-    clabel.text = FEString(@"CONTROL");
+    clabel.text = FEString(@"SENSOR_CONTROL");
     [contentview addSubview:clabel];
     
     FETextField *ctextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 4 * (height + yspace), twidth, height)];
@@ -93,15 +116,17 @@
     UIButton *configbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
     configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
-    [configbutton setTitle:FEString(@"CONFIG") forState:UIControlStateNormal];
-    [self.view addSubview:configbutton];
+    [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
+    [scrollview addSubview:configbutton];
     
     UIButton *monitor = [UIButton buttonWithType:UIButtonTypeCustom];
     monitor.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     monitor.frame = CGRectMake(self.view.bounds.size.width - 20 - 100, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
-    [monitor setTitle:FEString(@"MONITOR") forState:UIControlStateNormal];
-    [self.view addSubview:monitor];
+    [monitor setTitle:FEString(@"SONSER_MONITOR") forState:UIControlStateNormal];
+    [scrollview addSubview:monitor];
     
+    scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, monitor.frame.origin.y + monitor.bounds.size.height + 20);
+    scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
 }
 

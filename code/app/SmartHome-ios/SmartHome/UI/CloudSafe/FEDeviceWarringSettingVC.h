@@ -7,7 +7,10 @@
 //
 
 #import "FECommonViewController.h"
+@class FESensor;
 
 @interface FEDeviceWarringSettingVC : FECommonViewController
+
+-(id)initWithSensor:(FESensor *)sensor;
 
 @end

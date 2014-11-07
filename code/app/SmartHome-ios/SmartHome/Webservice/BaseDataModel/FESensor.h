@@ -22,11 +22,13 @@
 //private float errorValue;   //火警值
 //private int groupID;         //区域ID（用于标识联动控制器）
 //private String ctrGroupID;      //联动控制器ID ;隔开
-//private String description;  //描述
+//private String descriptions;  //描述
 //private String mark;         //自定义标签
+
 @property (nonatomic, strong, readonly) NSNumber *id;
 @property (nonatomic, strong, readonly) NSNumber *concentratorID;
 @property (nonatomic, strong, readonly) NSNumber *sensorID;
+@property (nonatomic, strong, readonly) NSNumber *channelID;
 @property (nonatomic, strong, readonly) NSNumber *sensorKind;
 @property (nonatomic, strong, readonly) NSNumber *sensorType;
 @property (nonatomic, strong, readonly) NSString *sensorTypeName;

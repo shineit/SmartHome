@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class FEControlView;
+
+@protocol FEControlViewDelegate <NSObject>
+
+@optional
+-(void)controlViewDidSelectAllOpen:(FEControlView *)cview;
+-(void)controlViewDidSelectAllClose:(FEControlView *)cview;
+
+@end
+
 @interface FEControlView : UIView
+
+@property (nonatomic, weak) id<FEControlViewDelegate> delegate;
+
+-(void)cancelSelected;
 
 @end

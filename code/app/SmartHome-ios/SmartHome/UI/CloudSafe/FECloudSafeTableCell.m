@@ -7,6 +7,7 @@
 //
 
 #import "FECloudSafeTableCell.h"
+#import "FESensor.h"
 
 @interface FECloudSafeTableCell (){
     
@@ -38,8 +39,15 @@
 }
 
 -(void)setDeviceOpen:(BOOL)deviceOpen{
-    
+    [self.deviceSwitch setOn:deviceOpen];
 }
+
+
+-(void)configWithSensor:(FESensor *)sensor{
+    self.textLabel.text = sensor.sensorTypeName;
+    self.deviceOpen = sensor.status.boolValue;
+}
+
 -(BOOL)isDeviceOpen{
     return YES;
 }

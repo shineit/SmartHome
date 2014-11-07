@@ -98,3 +98,12 @@
 "PROFILE_EMAIL" = "邮  箱";
 "PROFILE_MODIFY" = "修改资料";
 "PROFILE_LOGOUT" = "登   出";
+
+"SENSOR_DESCRIPETION" = "描 述";
+"SENSOR_EARLY_WARRING" = "预 警";
+"SENSOR_FIRE_VALUE"  = "火 警";
+"SENSOR_LABEL"  = "标 签";
+"SENSOR_ADD" = "增 加";
+"SENSOR_CONTROL" = "联 防";
+"SENSOR_CONFIG" = "配 置";
+"SONSER_MONITOR" = "监 控";

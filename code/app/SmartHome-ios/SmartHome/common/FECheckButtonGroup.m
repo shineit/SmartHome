@@ -34,6 +34,7 @@
 }
 
 -(void)checkButton:(FECheckButton *)checkButon{
+    _checkedbtn = checkButon;
     if ([_buttonGroup containsObject:checkButon]) {
         _checkedindex = [_buttonGroup indexOfObject:checkButon];
         for (FECheckButton *btn in _buttonGroup) {
@@ -43,6 +44,13 @@
                 [btn setChecked:YES];
             }
         }
+    }
+}
+
+-(void)uncheckButton:(FECheckButton *)checkButton{
+    if (checkButton == _checkedbtn) {
+        [checkButton setChecked:NO];
+        _checkedbtn = nil;
     }
 }
 

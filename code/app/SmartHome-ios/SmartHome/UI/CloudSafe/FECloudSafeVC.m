@@ -13,11 +13,15 @@
 #import "FEWebServiceManager.h"
 #import "FESensorListRequest.h"
 #import "FESensorListResponse.h"
+#import "FESensorBatchEnableRequest.h"
+#import "FESensorBatchDisableRequest.h"
+#import "FESensor.h"
 #import "AppDelegate.h"
 #import "FECoreDataHandler.h"
+#import "FESensor.h"
 #import "CDUser.h"
 
-@interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource,FEControlViewDelegate>
 
 @property (nonatomic, strong) UITableView *deviceTable;
 @property (nonatomic, strong) NSMutableArray *deviceList;
@@ -39,7 +43,7 @@
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_safe_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_safe"]];
         }
         
-        _deviceList = [NSMutableArray arrayWithArray:@[@[@"烟雾报警器1",@"烟雾报警器2"],@[@"温度报警器1",@"温度报警器2",@"温度报警器3"]]];
+        _deviceList = [NSMutableArray new];//[NSMutableArray arrayWithArray:@[@[@"烟雾报警器1",@"烟雾报警器2"],@[@"温度报警器1",@"温度报警器2",@"温度报警器3"]]];
     }
     return self;
 }
@@ -57,6 +61,7 @@
     [self loadRightCustomButtonItemWithTitle:FEString(@"SEARCH") image:nil];
     
     FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    cview.delegate = self;
     [self.view addSubview:cview];
     _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, cview.frame.origin.y + cview.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - cview.frame.size.height) style:UITableViewStylePlain];
     _deviceTable.dataSource = self;
@@ -80,6 +85,8 @@
     [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
         [weakself hideHUD:YES];
         if (!error && response.result.errorCode.integerValue == 0) {
+            [weakself.deviceList removeAllObjects];
+            [weakself.deviceList addObject:response.sensorList];
             [weakself.deviceTable reloadData];
         }
     }];
@@ -93,7 +100,9 @@
         cell = [[FECloudSafeTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         
     }
-    cell.textLabel.text = _deviceList[indexPath.section][indexPath.row];
+    
+    FESensor *sensor = _deviceList[indexPath.section][indexPath.row];
+    [cell configWithSensor:sensor];
     return cell;
     
 }
@@ -120,10 +129,35 @@
 //}
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FEDeviceWarringSettingVC *dvc = [FEDeviceWarringSettingVC new];
+    FEDeviceWarringSettingVC *dvc = [[FEDeviceWarringSettingVC alloc] initWithSensor:_deviceList[indexPath.section][indexPath.row]];
     dvc.hidesBottomBarWhenPushed = YES;
-    dvc.title = _deviceList[indexPath.section][indexPath.row];
+//    dvc.title = _deviceList[indexPath.section][indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
+}
+
+#pragma mark - FEContrilViewDelegate
+-(void)controlViewDidSelectAllOpen:(FEControlView *)cview{
+    [self displayHUD:FEString(@"LOADING...")];
+    FESensorBatchEnableRequest *edata = [[FESensorBatchEnableRequest alloc] initWithSensorList:self.deviceList];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] SensorBatchEnable:edata response:^(NSError *error, FEBaseResponse *response) {
+        [weakself hideHUD:YES];
+        if (!error && !response.result.errorCode.integerValue == 0) {
+            NSLog(@"all opened!");
+        }
+    }];
+}
+
+-(void)controlViewDidSelectAllClose:(FEControlView *)cview{
+    [self displayHUD:FEString(@"LOADING...")];
+    FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:self.deviceList];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] SensorBatchDisable:sdata response:^(NSError *error, FEBaseResponse *response) {
+        [weakself hideHUD:YES];
+        if (!error && response.result.errorCode.integerValue == 0) {
+            NSLog(@"ALL close!");
+        }
+    }];
 }
 
 
