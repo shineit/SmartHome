@@ -17,7 +17,16 @@
         NSArray *property = [self getAllProperty];
         for (NSString *key in property) {
             if (![dictionary[key] isKindOfClass:[NSNull class]] && dictionary[key] != nil) {
-                [self setValue:dictionary[key] forKey:key];
+                @try {
+                    [self setValue:dictionary[key] forKey:key];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"error create object %@",exception);
+                }
+                @finally {
+                    
+                }
+                
             }
         }
     }

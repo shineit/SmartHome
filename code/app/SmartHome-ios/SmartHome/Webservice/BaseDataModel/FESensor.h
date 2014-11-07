@@ -35,7 +35,7 @@
 @property (nonatomic, strong, readonly) NSNumber *errorValue;
 @property (nonatomic, strong, readonly) NSNumber *groupID;
 @property (nonatomic, strong, readonly) NSString *ctrGroupID;
-@property (nonatomic, strong, readonly) NSString *description;
+@property (nonatomic, strong, readonly) NSString *descriptions;
 @property (nonatomic, strong, readonly) NSString *mark;
 
 
