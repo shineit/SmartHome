@@ -11,9 +11,11 @@
 	    <id name="newsID" column="NEWS_ID" >
 	     <generator class="increment"/> 
 		</id>
-		 <property name="title" column="TITLE"></property>
-		 <property name="author" column="AUTHOR"></property>
-		 <property name="content" column="CONTENT"></property>
+		 <property name="title" column="TITLE" length="128"></property>
+		 <property name="author" column="AUTHOR" ></property>
+		 <property name="content" >
+		 <column name="CONTENT"  sql-type="text"></column>
+		 </property>
 		 <property name="date" column="RELEASE_DATE"></property>
 		 <property name="status" column="STATUS"></property>		 
 		 

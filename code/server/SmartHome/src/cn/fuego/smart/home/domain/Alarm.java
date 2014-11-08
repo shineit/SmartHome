@@ -3,6 +3,8 @@ package cn.fuego.smart.home.domain;
 import java.util.Date;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
 
 
 /**
@@ -25,6 +27,7 @@ public class Alarm implements PersistenceObject
 	private String clearUser;  //清除人 手动清除需要填写
 	private int clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private Date clearTime;	//告警清除的时间
+	private String statusColor;//状态颜色，对应清除状态
 	public int getId()
 	{
 		return id;
@@ -98,7 +101,21 @@ public class Alarm implements PersistenceObject
 		this.clearTime = clearTime;
 	}
  
-	
+	public String getStatusColor()
+	{
+	  
+	    if(AlarmClearEnum.NONE_CLEAR.getIntValue()==this.getClearStatus())
+	    {
+	    	statusColor= "red";
+	    }
+	    else
+	    {
+	    	statusColor= "green";
+
+	    }
+		return statusColor;
+	}
+
 	 
 	
 }

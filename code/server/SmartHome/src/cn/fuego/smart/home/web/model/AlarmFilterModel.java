@@ -13,6 +13,8 @@ import java.util.List;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 
 /** 
  * @ClassName: AlarmFilterModel 
@@ -24,6 +26,8 @@ import cn.fuego.common.dao.QueryCondition;
 public class AlarmFilterModel
 {
 
+	private AlarmTypeEnum[] alarmTypeList = AlarmTypeEnum.values();
+	private AlarmClearEnum[] alarmClearList = AlarmClearEnum.values();
 	public List<QueryCondition> getConidtionList()
     {
     	List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
@@ -33,4 +37,22 @@ public class AlarmFilterModel
 		 
 		return conditionList;
     }
+	public AlarmTypeEnum[] getAlarmTypeList()
+	{
+		return alarmTypeList;
+	}
+	public void setAlarmTypeList(AlarmTypeEnum[] alarmTypeList)
+	{
+		this.alarmTypeList = alarmTypeList;
+	}
+	public AlarmClearEnum[] getAlarmClearList()
+	{
+		return alarmClearList;
+	}
+	public void setAlarmClearList(AlarmClearEnum[] alarmClearList)
+	{
+		this.alarmClearList = alarmClearList;
+	}
+	
+	
 }

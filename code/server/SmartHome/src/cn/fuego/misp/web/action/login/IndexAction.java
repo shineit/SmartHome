@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.misp.web.action.login;
 
+import java.util.Arrays;
 import java.util.List;
 
 import cn.fuego.misp.web.action.basic.DWZTableAction;
@@ -69,8 +70,8 @@ public class IndexAction extends DWZTableAction
 	@Override
 	public String deleteList()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		alarmService.deleteAlarmList(Arrays.asList(this.getSelectedIDList()));
+		return  MISP_DONE_PAGE;
 	}
 
 	@Override

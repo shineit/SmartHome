@@ -18,7 +18,7 @@
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:20%;">标题：</dt>			
-				<dd style="width:70%;"><input type="text" name="news.title"  size="30" value="${news.title}"/></dd>
+				<dd style="width:70%;"><input type="text" name="news.title"  size="30" value="${news.title}" class="required"/></dd>
 			</dl>
 			<dl style="width:100%;">
 				<dt style="width:10%;">公告内容：</dt>			
