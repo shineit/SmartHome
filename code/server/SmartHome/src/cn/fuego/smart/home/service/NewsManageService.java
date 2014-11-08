@@ -30,5 +30,8 @@ public interface NewsManageService
 	void saveNewsInfo(News news);
 
 	void deleteNewsList(List<String> newsIDList);
+
+	List<News> getIndexNews(String userName);
+	
 	
 }

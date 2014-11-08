@@ -25,12 +25,23 @@
 			</c:if>
 			<c:if test="${null==menuItem.childMenuList}"> 
 				<!----无子标题--->
-				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
-									
+				
+
+				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>					
 		    </c:if>
 		</c:if>
 		<c:if test="${menuItem.menu.parentID>=1}"> 
-				<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
+
+				
+				<c:choose>
+					<c:when test="${menuItem.menu.menuID==1002}"> <!----主页判断--->
+					<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="main" id="Home">${menuItem.menu.value}</a></li>
+					</c:when>
+					<c:otherwise>
+					<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="Menu${menuItem.menu.menuID}">${menuItem.menu.value}</a></li>
+					</c:otherwise>
+				
+				</c:choose>
 		</c:if>
 	 </c:if>	
    </c:forEach>

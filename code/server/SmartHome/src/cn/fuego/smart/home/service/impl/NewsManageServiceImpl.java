@@ -8,7 +8,12 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
@@ -55,6 +60,21 @@ public class NewsManageServiceImpl implements NewsManageService
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "newsID", newsIDList);	
 		DaoContext.getInstance().getNewsDao().delete(condition);
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<News> getIndexNews(String userName)
+	{
+		List<News> newsList = new ArrayList<News>();
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		Date today=DateUtil.getCurrentDateTime();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"date",DateUtil.DateToString(today)));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER,"date",DateUtil.DateToString(DateUtil.dayCalculate(today, 1))));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"author",userName));
+		
+		newsList = (List<News>) DaoContext.getInstance().getNewsDao().getAll(conditionList);
+		return newsList;
 	}
 
 

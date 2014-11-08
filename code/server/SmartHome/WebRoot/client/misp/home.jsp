@@ -56,6 +56,22 @@ $(function()
 		}
 	});
 });
+
+// 进入首页准备
+ $(document).ready(function(){
+ 	setTimeout(function() {
+	// IE
+	if(document.all) {
+		document.getElementById("Home").click();
+	}
+	// 其它浏览器
+	else {
+		var e = document.createEvent("MouseEvents");
+		e.initEvent("click", true, true);
+		document.getElementById("Home").dispatchEvent(e);
+	}
+	}, 500);
+ });
 function resetForm(objForm){
 
     $(':input',objForm).not(':button, :submit, :reset, :hidden').val('');
@@ -130,7 +146,7 @@ function resetForm(objForm){
 				<div class="tabsPageHeader">
 					<div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
 						<ul class="navTab-tab">
-							<li tabid="main" class="main"><a href="javascript:;"><span><span class="home_icon">我的主页</span></span></a></li>
+							<li tabid="main" class="main"><a href="javascript:;"><span>我的主页</span></a></li>
 						</ul>
 					</div>
 					<div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
@@ -139,19 +155,12 @@ function resetForm(objForm){
 				</div>
 
 				<div class="navTab-panel tabsPageContent layoutBox">
-					<div class="page unitBox">
-						<div class="accountInfo">
-							
-							<div class="alertInfo">
-								<p><a href="#"  style="line-height:19px"><span>已发公告32项</span></a></p>
-								<p><a href="#"  style="line-height:19px">2014年09月30日，星期二</a></p>
-							</div>
-							<div class="left"><p><a href="#"  style="line-height:20px;color:red;"><span>今日报警信息：50条</span></a></p></div>
-						</div>
-
-						
+				
+					<div class="page unitBox" >
 
 					</div>
+					
+
 					
 				</div>
 			</div>

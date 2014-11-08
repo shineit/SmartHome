@@ -3,6 +3,7 @@ package cn.fuego.smart.home.dao;
 import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.impl.CommonDaoImpl;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
@@ -27,7 +28,8 @@ public class DaoContext
 	private Dao serviceOrderDao = null;
 	private Dao concentratorDao = null;
 	private Dao userMarkDao = null;
-
+    
+	private Dao alarmDao =null;
 
 	private DaoContext()
 	{
@@ -93,5 +95,13 @@ public class DaoContext
 		dao = new CommonDaoImpl(clazz); 
 		return dao;
 	}
-	 
+	public Dao getAlarmDao()
+	{
+		if (null == alarmDao)
+		{
+			alarmDao = getDaoInstanceByClass(Alarm.class);
+		}
+		return alarmDao;
+	}
+  	 
 }

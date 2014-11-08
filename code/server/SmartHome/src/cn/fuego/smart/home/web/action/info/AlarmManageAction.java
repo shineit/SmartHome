@@ -1,57 +1,55 @@
 /**   
-* @Title: IndexAction.java 
-* @Package cn.fuego.misp.web.action.login 
+* @Title: AlarmManageAction.java 
+* @Package cn.fuego.smart.home.web.action.info 
 * @Description: TODO
 * @author Aether
-* @date 2014-11-6 下午10:35:25 
+* @date 2014-11-7 上午10:01:27 
 * @version V1.0   
 */ 
-package cn.fuego.misp.web.action.login;
+package cn.fuego.smart.home.web.action.info;
 
-import java.util.List;
+import java.util.Arrays;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.Alarm;
-import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.AlarmManageService;
-import cn.fuego.smart.home.service.NewsManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.AlarmFilterModel;
-import cn.fuego.smart.home.web.model.NewsFilterModel;
 
 /** 
- * @ClassName: IndexAction 
+ * @ClassName: AlarmManageAction 
  * @Description: TODO
  * @author Aether
- * @date 2014-11-6 下午10:35:25 
+ * @date 2014-11-7 上午10:01:27 
  *  
  */
-public class IndexAction extends DWZTableAction
+public class AlarmManageAction extends DWZTableAction
 {
-
 	/**
 	 * 
 	 */
+	private Log log = LogFactory.getLog(NewsManageAction.class);
+	
+	
 	private static final long serialVersionUID = 1L;
-    //首页获取内容
-    private List<News> newsContent ;
-    private NewsManageService newsService = ServiceContext.getInstance().getNewsManageService();
+	private AlarmManageService alarmService = ServiceContext.getInstance().getAlarmManageService();
 
-    private AlarmManageService alarmService = ServiceContext.getInstance().getAlarmManageService();
 	private TableDataModel<Alarm> alarmTable = new TableDataModel<Alarm>();
     private AlarmFilterModel alarmFilter = new AlarmFilterModel();
-    
-	public String execute()
-	{
-		
-		newsContent = newsService.getIndexNews(this.getLoginUser().getUserName());
-		alarmTable.setPage(this.getPage());
+
+    @Override
+    public String execute()
+    {
+      	
+    	alarmTable.setPage(this.getPage());
     	alarmTable.setDataSource(alarmService.getAlarmDataSource(alarmFilter.getConidtionList()));
-		return SUCCESS;
-	}
-
-
+    	return SUCCESS;
+    	
+    }
 	@Override
 	public String create()
 	{
@@ -69,8 +67,8 @@ public class IndexAction extends DWZTableAction
 	@Override
 	public String deleteList()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		alarmService.deleteAlarmList(Arrays.asList(this.getSelectedIDList()));
+		return  MISP_DONE_PAGE;
 	}
 
 	@Override
@@ -86,66 +84,29 @@ public class IndexAction extends DWZTableAction
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
-	public List<News> getNewsContent()
-	{
-		return newsContent;
-	}
-
-
-	public void setNewsContent(List<News> newsContent)
-	{
-		this.newsContent = newsContent;
-	}
-
-
 	public AlarmManageService getAlarmService()
 	{
 		return alarmService;
 	}
-
 	public void setAlarmService(AlarmManageService alarmService)
 	{
 		this.alarmService = alarmService;
 	}
-
-
 	public TableDataModel<Alarm> getAlarmTable()
 	{
 		return alarmTable;
 	}
-
-
 	public void setAlarmTable(TableDataModel<Alarm> alarmTable)
 	{
 		this.alarmTable = alarmTable;
 	}
-
-
 	public AlarmFilterModel getAlarmFilter()
 	{
 		return alarmFilter;
 	}
-
-
 	public void setAlarmFilter(AlarmFilterModel alarmFilter)
 	{
 		this.alarmFilter = alarmFilter;
 	}
 
-
-	public NewsManageService getNewsService()
-	{
-		return newsService;
-	}
-
-
-	public void setNewsService(NewsManageService newsService)
-	{
-		this.newsService = newsService;
-	}
-
-	
 }
