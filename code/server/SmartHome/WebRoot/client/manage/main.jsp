@@ -12,7 +12,7 @@ function submitFormAlarm(url){
 }
 
 </script>
-<div class="panel collapse" minH="100" defH="200">
+<div class="panel " minH="100" defH="200" >
 	<h1>今日公告</h1>
 	<div align="center">
 			<c:choose>
@@ -44,7 +44,7 @@ function submitFormAlarm(url){
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 </form>
 <div class="pageHeader">
-<h1>告警消息</h1>
+<h1 style="font-size:1.2em;color:red;">告警消息</h1>
 </div>
 <div class="pageCentent">
 

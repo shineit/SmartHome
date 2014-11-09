@@ -58,9 +58,9 @@ function submitFormN(url){
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
-				<th width="10%" align="center">公告编号</th>
-				<th width="15%" align="center">标题</th>
-				<th width="30%" align="center">公告内容</th>
+				<th width="15%" align="center">公告编号</th>
+				<th width="25%" align="center">标题</th>
+				<th width="15%" align="center">公告内容</th>
 				<th width="15%" align="center">发布时间</th>
 				<th width="10%" align="center">发布人</th>
 			</tr>
@@ -73,7 +73,8 @@ function submitFormN(url){
 				<td><input name="selectedIDList" value="${e.newsID}" type="checkbox" style="margin-top:5px;"></td>
 				<td>${e.newsID}</td>
 				<td>${e.title}</td>
-				<td>${e.content}</td>
+				<td>
+				<a style="color:blue !important;text-decoration:underline;" title="新闻内容" target="dialog" href="<%=request.getContextPath()%>/client/manage/newsDetail.jsp?newsContent=${e.content}"  rel="Menu${selectedMenuID}" mask="true" >查看内容详情</a></td>
 				<td>${e.date}</td>
 				<td>${e.author}</td>
 
