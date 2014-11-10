@@ -18,7 +18,8 @@ function submitFormAlarm(url){
 			<c:choose>
 				<c:when test="${newsContent==null || fn:length(newsContent)==0}">
 					<div style="padding:5px 50px 10px 5px;">
-						<span style="text-align:center;font-size:1.7em;color:orange;">今日暂无公告</span>
+						<span style="text-align:center;font-size:1.7em;color:orange;">今日未发布公告
+						</span>
 
 					</div>
 				</c:when>
