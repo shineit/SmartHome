@@ -10,7 +10,7 @@
 #import <HMSegmentedControl/HMSegmentedControl.h>
 #import "FENewsTableViewCell.h"
 #import "FEWarringTableViewCell.h"
-#import "FEWarringResponse.h"
+#import "FEWarringDetailVC.h"
 #import "FEWebServiceManager.h"
 #import "FENewsRequest.h"
 #import "FENewsResponse.h"
@@ -21,9 +21,13 @@
 #import "AppDelegate.h"
 #import "CDUser.h"
 #import "FEHistoryAlarmResponse.h"
+#import "FENewsDetailVC.h"
 
 
-@interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface FENewsVC ()<UITableViewDataSource,UITableViewDelegate>{
+    BOOL _isNewsResquested;
+    BOOL _isWarringRequested;
+}
 
 @property (nonatomic, strong) UITableView *newstable;
 @property (nonatomic, strong) UITableView *warringtable;
@@ -106,7 +110,9 @@
     
 }
 
+//request news
 -(void)requestNews{
+    _isNewsResquested = YES;
     [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
@@ -125,7 +131,9 @@
     }];
 }
 
+//request alarm list
 -(void)requestHistoryWarring{
+    _isWarringRequested = YES;
     [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
@@ -148,7 +156,9 @@
         if (self.newstable.isHidden == NO) {
             return;
         }else{
-            [self requestNews];
+            if (!_isNewsResquested) {
+                [self requestNews];
+            }
             [UIView animateWithDuration:0.2
                                   delay:0
                                 options:UIViewAnimationOptionTransitionFlipFromLeft
@@ -162,7 +172,9 @@
         if (self.warringtable.isHidden == NO) {
             return;
         }else{
-            [self requestHistoryWarring];
+            if (!_isWarringRequested) {
+                [self requestHistoryWarring];
+            }
             [UIView animateWithDuration:0.2
                                   delay:0
                                 options:UIViewAnimationOptionTransitionFlipFromLeft
@@ -215,9 +227,14 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.warringtable) {
-        FEWarringResponse *response = [[FEWarringResponse alloc] initWithAlarm:_warringList[indexPath.row]];
+        FEWarringDetailVC *response = [[FEWarringDetailVC alloc] initWithAlarm:_warringList[indexPath.row]];
         response.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:response animated:YES];
+    }else if(tableView == self.newstable){
+        FENews *news = self.newsList[indexPath.row];
+        FENewsDetailVC *detail = [[FENewsDetailVC alloc] initWithNews:news];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

@@ -85,6 +85,14 @@
 "ALARM_CONCENTRATOR" = "集 中 器:";
 "ALARM_DEVICENUMBER" = "设备编号:";
 "ALARM_DEVICETYPE" = "设备类型:";
+"ALARM_DESCRIPTION" = "描   述";
+"ALARM_INPUT_DESCRIPTION" = "";
+"ALARM_EARLYWARRING" = "预警值";
+"ALARM_INPUT_EARLYWARRING_VALUE" = "";
+"ALARM_INPUT_VALUE" = "报警值";
+"ALARM_INPUT_WARRING_VALUE" = "";
+"ALARM_CLEAN_WARRING" = "清除告警";
+"ALARM_ALARM" = "告 警:";
 
 "PSW_OLD_PASSWORD" = "原始密码:";
 "PSW_NEW_PSW" = "新 密 码:";
@@ -107,3 +115,10 @@
 "SENSOR_CONTROL" = "联 防";
 "SENSOR_CONFIG" = "配 置";
 "SONSER_MONITOR" = "监 控";
+
+//rate
+"RATE_RATE" = "为我们平分!";
+"RATE_LARER" = "下次提醒";
+"RATE_GOTORATE" = "去评分";
+"RATE_NEVER" = "不再提醒";
+

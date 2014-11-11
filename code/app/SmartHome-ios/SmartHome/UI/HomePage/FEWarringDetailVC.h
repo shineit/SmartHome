@@ -1,5 +1,5 @@
 //
-//  FEWarringResponse.h
+//  FEWarringDetailVC.h
 //  SmartHome
 //
 //  Created by Seven on 14-10-21.
@@ -9,7 +9,7 @@
 #import "FECommonViewController.h"
 @class FEAlarm;
 
-@interface FEWarringResponse : FECommonViewController
+@interface FEWarringDetailVC : FECommonViewController
 
 -(id)initWithAlarm:(FEAlarm *)alarm;
 

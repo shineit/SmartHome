@@ -86,7 +86,9 @@
         [weakself hideHUD:YES];
         if (!error && response.result.errorCode.integerValue == 0) {
             [weakself.deviceList removeAllObjects];
-            [weakself.deviceList addObject:response.sensorList];
+            if (response.sensorList.count) {
+                [weakself.deviceList addObject:response.sensorList];
+            }
             [weakself.deviceTable reloadData];
         }
     }];

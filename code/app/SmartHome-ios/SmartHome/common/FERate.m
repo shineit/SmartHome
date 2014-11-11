@@ -25,7 +25,7 @@ DEFINE_SINGLETON_FOR_CLASS(FERate);
 }
 
 -(void)rate:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:FEString(@"SMART_HOME") message:FEString(@"RATE") delegate:self cancelButtonTitle:FEString(@"RATE_LARER") otherButtonTitles:FEString(@"GOTORATE"),FEString(@"RATENEVER"), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:FEString(@"SMART_HOME") message:FEString(@"RATE_RATE") delegate:self cancelButtonTitle:FEString(@"RATE_LARER") otherButtonTitles:FEString(@"RATE_GOTORATE"),FEString(@"RATE_NEVER"), nil];
     [alert show];
 }
 

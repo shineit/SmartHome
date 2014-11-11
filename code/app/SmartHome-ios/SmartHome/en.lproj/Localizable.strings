@@ -82,6 +82,14 @@
 "ALARM_CONCENTRATOR" = "Concentrator:";
 "ALARM_DEVICENUMBER" = "Device number:";
 "ALARM_DEVICETYPE" = "Device type:";
+"ALARM_DESCRIPTION" = "Descriotion";
+"ALARM_INPUT_DESCRIPTION" = "";
+"ALARM_EARLYWARRING" = "Earlay warring";
+"ALARM_INPUT_EARLYWARRING_VALUE" = "";
+"ALARM_INPUT_VALUE" = "Fire value";
+"ALARM_INPUT_WARRING_VALUE" = "";
+"ALARM_CLEAN_WARRING" = "Clear alarm";
+"ALARM_ALARM" = "Alarm:";
 
 //password
 "PSW_OLD_PASSWORD" = "Original:";
@@ -106,3 +114,9 @@
 "SENSOR_CONTROL" = "Control";
 "SENSOR_CONFIG" = "Config";
 "SONSER_MONITOR" = "Monitor";
+
+//rate
+"RATE_RATE" = "Rate for us!";
+"RATE_LARER" = "Remind next";
+"RATE_GOTORATE" = "Rate now";
+"RATE_NEVER" = "Remide never";

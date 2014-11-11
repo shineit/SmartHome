@@ -6,22 +6,24 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEWarringResponse.h"
+#import "FEWarringDetailVC.h"
 #import "FEDeviceInfoView.h"
 #import "FEDeviceInfoInputView.h"
 #import "FEAlarm.h"
+#import "FEEnumString.h"
 
-@interface FEWarringResponse (){
+@interface FEWarringDetailVC (){
     FEAlarm *_alarm;
     NSArray *_alarmDevices;
 }
 
 @property (nonatomic, strong) FEDeviceInfoView *infoView;
 @property (nonatomic, strong) FEDeviceInfoInputView *infonInput;
+@property (nonatomic, strong) UIScrollView *scrollContent;
 
 @end
 
-@implementation FEWarringResponse
+@implementation FEWarringDetailVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,20 +53,56 @@
 }
 
 -(void)initUI{
+    
+    UIScrollView *scrollview = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    scrollview.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height);
+    self.scrollContent = scrollview;
+    [self.view addSubview:scrollview];
+    
     _infoView = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     _infoView.controlPoint.text = [NSString stringWithFormat:@"%@",_alarm.objID];
     _infoView.deviceNumber.text = [NSString stringWithFormat:@"%@",_alarm.id];
     _infoView.deviceType.text = _alarmDevices[_alarm.objType.integerValue];
-    [self.view addSubview:_infoView];
+    [scrollview addSubview:_infoView];
     
     _infonInput = [[FEDeviceInfoInputView alloc] initWithFrame:CGRectMake(0, _infoView.bounds.size.height, self.view.bounds.size.width, 150)];
-    [self.view addSubview:_infonInput];
+    [scrollview addSubview:_infonInput];
     
-    UIButton *cleanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIView *typeview = [[UIView alloc] initWithFrame:CGRectMake(0, _infonInput.frame.origin.y + _infonInput.bounds.size.height, self.view.bounds.size.width, 40)];
+    typeview.backgroundColor = [UIColor whiteColor];
+    [scrollview addSubview:typeview];
+    
+    FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
+    label.textColor = FEThemeColor;
+    label.text = FEString(@"ALARM_ALARM");
+    [typeview addSubview:label];
+    
+    FELabel *labelAlarmType = [[FELabel alloc] initWithFrame:CGRectMake(75, 10, 100, 20)];
+    labelAlarmType.textColor = FEThemeColor;
+    labelAlarmType.text = [FEEnumString alarmType:_alarm.alarmType];
+    [typeview addSubview:labelAlarmType];
+    
+    FEButton *cleanBtn = [FEButton buttonWithType:UIButtonTypeCustom];
     [cleanBtn addTarget:self action:@selector(cleanwarring:) forControlEvents:UIControlEventTouchUpInside];
-    cleanBtn.frame = CGRectMake(40, _infonInput.frame.origin.y + _infonInput.frame.size.height + 20, 240, 40);
-    [cleanBtn setTitle:FEString(@"CLEAN_WARRING") forState:UIControlStateNormal];
-    [self.view addSubview:cleanBtn];
+    cleanBtn.frame = CGRectMake(40, typeview.frame.origin.y + typeview.frame.size.height + 20, 240, 40);
+    [cleanBtn setTitle:FEString(@"ALARM_CLEAN_WARRING") forState:UIControlStateNormal];
+    [scrollview addSubview:cleanBtn];
+    
+    
+}
+
+#pragma override
+-(void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration{
+    self.scrollContent.frame = self.view.bounds;
+}
+
+-(void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [UIView animateWithDuration:duration animations:^(void){
+        CGRect frame = self.view.bounds;
+        frame.size.height -= newRect.size.height;
+        self.scrollContent.frame = frame;
+    }];
 }
 
 //

@@ -13,6 +13,7 @@
 @interface FEDeviceWarringSettingVC ()
 
 @property (nonatomic, strong) FESensor *sensor;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -48,6 +49,7 @@
     UIScrollView *scrollview = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     scrollview.userInteractionEnabled = YES;
     [self.view addSubview:scrollview];
+    self.scrollView = scrollview;
     
     FEDeviceInfoView *dview = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 140)];
     dview.deviceNumber.text = [NSString stringWithFormat:@"%@",self.sensor.id];
@@ -119,7 +121,7 @@
     [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
     [scrollview addSubview:configbutton];
     
-    UIButton *monitor = [UIButton buttonWithType:UIButtonTypeCustom];
+    FEButton *monitor = [FEButton buttonWithType:UIButtonTypeCustom];
     monitor.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     monitor.frame = CGRectMake(self.view.bounds.size.width - 20 - 100, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
     [monitor setTitle:FEString(@"SONSER_MONITOR") forState:UIControlStateNormal];
@@ -128,6 +130,19 @@
     scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, monitor.frame.origin.y + monitor.bounds.size.height + 20);
     scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
+}
+
+#pragma override
+-(void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration{
+    self.scrollView.frame = self.view.bounds;
+}
+
+-(void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [UIView animateWithDuration:duration animations:^(void){
+        CGRect frame = self.view.bounds;
+        frame.size.height -= newRect.size.height;
+        self.scrollView.frame = frame;
+    }];
 }
 
 - (void)didReceiveMemoryWarning

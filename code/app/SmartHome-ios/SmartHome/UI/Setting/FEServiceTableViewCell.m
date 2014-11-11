@@ -29,6 +29,10 @@
 }
 
 -(void)setup{
+    
+    self.backgroundView = [UIView new];
+    self.backgroundView.backgroundColor = [UIColor whiteColor];
+    
     _numberLabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 80, 20)];
     _numberLabel.textAlignment = NSTextAlignmentCenter;
 //    _numberLabel.text = @"001";
