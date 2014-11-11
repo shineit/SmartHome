@@ -26,7 +26,7 @@
 #import "FEMarkDeletRequest.h"
 
 
-#define _BASE_URL @"http://192.168.1.101:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://192.168.100.189:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -128,8 +128,9 @@
 //set mark
 -(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block{
     return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        block(NULL,[[FEBaseResponse alloc] initWithResponse:responseObject]);
+        FEBaseResponse *response = [[FEBaseResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self showerror:error];
          block(error,NULL);

@@ -23,7 +23,7 @@
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        _checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, self.bounds.size.height)];
+        _checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.bounds.size.height - 25) / 2.0f, 25, 25)];
         [self addSubview:_checkImageView];
         
         _checkTitle = [[FELabel alloc] initWithFrame:CGRectMake(_checkImageView.bounds.size.width + 5, 0, self.bounds.size.width - _checkImageView.bounds.size.width - 5, self.bounds.size.height)];
@@ -32,8 +32,8 @@
         [self addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
         [self setChecked:NO];
         
-        [self setCheckedImage:[UIImage imageNamed:@"setting_aboutus"]];
-        [self setUncheckedImage:[UIImage imageNamed:@"setting_alert"]];
+        [self setCheckedImage:[UIImage imageNamed:@"checked"]];
+        [self setUncheckedImage:[UIImage imageNamed:@"unchecked"]];
         
     }
     return self;

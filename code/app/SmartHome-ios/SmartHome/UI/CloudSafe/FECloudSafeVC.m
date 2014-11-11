@@ -135,6 +135,7 @@
     dvc.hidesBottomBarWhenPushed = YES;
 //    dvc.title = _deviceList[indexPath.section][indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - FEContrilViewDelegate

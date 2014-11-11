@@ -62,6 +62,7 @@ return shared##className; \
 
 #define FEThemeColor                            FEColor(252, 156, 56, 1)
 #define FEButtonColor                           FEColor(250, 177, 60, 1)
+#define FEGrayButtonColor                       FEColor(202,202,202,1)
 
 #define FECoreData                              ([AppDelegate sharedDelegate].coreDataHandler)
 

@@ -9,6 +9,13 @@
 #import "FEDeviceWarringSettingVC.h"
 #import "FEDeviceInfoView.h"
 #import "FESensor.h"
+#import "FEWebServiceManager.h"
+#import "FEMarkSetRequest.h"
+#import "FEBaseResponse.h"
+#import "FEUserMark.h"
+#import "AppDelegate.h"
+#import "CDUser.h"
+#import "FECoreDataHandler.h"
 
 @interface FEDeviceWarringSettingVC ()
 
@@ -102,9 +109,11 @@
     ltextFeild.text = self.sensor.mark;
     [contentview addSubview:ltextFeild];
     
-    UIButton *add = [UIButton buttonWithType:UIButtonTypeCustom];
+    FEButton *add = [FEButton buttonWithType:UIButtonTypeCustom];
     add.frame = CGRectMake(x + lwidth + xspace + twidth - 50, y + 3 * (height + yspace), 50, height);
+    [add addTarget:self action:@selector(addUserMark:) forControlEvents:UIControlEventTouchUpInside];
     [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [add setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
     [add setTitle:FEString(@"SENSOR_ADD") forState:UIControlStateNormal];
     [contentview addSubview:add];
     
@@ -115,9 +124,10 @@
     FETextField *ctextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 4 * (height + yspace), twidth, height)];
     [contentview addSubview:ctextFeild];
     
-    UIButton *configbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    FEButton *configbutton = [FEButton buttonWithType:UIButtonTypeCustom];
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
     configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
+    [configbutton setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
     [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
     [scrollview addSubview:configbutton];
     
@@ -130,6 +140,19 @@
     scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, monitor.frame.origin.y + monitor.bounds.size.height + 20);
     scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
+}
+
+-(void)addUserMark:(UIButton *)button{
+    [self displayHUD:FEString(@"LOADING...")];
+    
+    FEUserMark *mark = [[FEUserMark alloc] initWithUserID:FELoginUser.userid mark:@"Test"];
+    FEMarkSetRequest *markRequest = [[FEMarkSetRequest alloc] initWithMark:mark];
+    [[FEWebServiceManager sharedInstance] markSet:markRequest response:^(NSError *error, FEBaseResponse *response) {
+        [self hideHUD:YES];
+        if (!error && response.result.errorCode.integerValue == 0) {
+            NSLog(@"add mark success!");
+        }
+    }];
 }
 
 #pragma override

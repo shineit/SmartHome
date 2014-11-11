@@ -14,4 +14,6 @@
 @property (nonatomic, strong, readonly) NSNumber *userID;
 @property (nonatomic, strong, readonly) NSString *mark;
 
+-(id)initWithUserID:(NSNumber *)uid mark:(NSString *)mark;
+
 @end
