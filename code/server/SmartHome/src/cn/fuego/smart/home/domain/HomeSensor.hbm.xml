@@ -9,7 +9,7 @@
 	<class name="HomeSensor" table="home_sensor">
 
 	    <id name="id" column="ID" >
-	       <generator class="increment"/> 
+	       <generator class="identity"/> 
 		</id>
 
 	     <property name="concentratorID" column="CONCENTRATOR_ID" ></property>

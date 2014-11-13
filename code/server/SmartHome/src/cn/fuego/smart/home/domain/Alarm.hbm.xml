@@ -9,7 +9,7 @@
 	<class name="Alarm" table="alarm">
 
 	    <id name="id" column="ID" >
-	       <generator class="increment"/> 
+	       <generator class="identity"/> 
 		</id>
 		
 		 <property name="objType" column="OBJ_TYPE"></property>

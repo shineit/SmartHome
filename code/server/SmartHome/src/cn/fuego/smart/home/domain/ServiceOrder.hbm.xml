@@ -6,7 +6,7 @@
 	
 <hibernate-mapping
 	package="cn.fuego.smart.home.domain">
-	<class name="ServiceOrder" table="Service_order">
+	<class name="ServiceOrder" table="service_order">
 
 	    <id name="orderID" column="ORDER_ID" >
 	    	<generator class="assigned"/> 

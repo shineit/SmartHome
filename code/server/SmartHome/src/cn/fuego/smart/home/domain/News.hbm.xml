@@ -9,7 +9,7 @@
 	<class name="News" table="news">
 
 	    <id name="newsID" column="NEWS_ID" >
-	     <generator class="increment"/> 
+	     <generator class="identity"/> 
 		</id>
 		 <property name="title" column="TITLE" length="128"></property>
 		 <property name="author" column="AUTHOR" ></property>

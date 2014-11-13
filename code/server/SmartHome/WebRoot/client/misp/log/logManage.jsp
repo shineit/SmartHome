@@ -58,7 +58,8 @@ function submitForm(url){
 			<li><a class="delete" href="log/LogManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除日志</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="113">
+	<s:form  id="logForm"  method="POST"  name="logForm" >
+	<table class="table" width="100%" layoutH="115">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>			
@@ -71,7 +72,7 @@ function submitForm(url){
 
 			</tr>
 		</thead>
-	<s:form  id="logForm"  method="POST"  name="logForm" >			
+				
 	<tbody>
 	
 	    <c:forEach var="e" items="${logList.currentPageData}"> 		
@@ -88,8 +89,9 @@ function submitForm(url){
 		</c:forEach>
 			
 		</tbody>
-		</s:form>
+		
 	</table>
+	</s:form>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
