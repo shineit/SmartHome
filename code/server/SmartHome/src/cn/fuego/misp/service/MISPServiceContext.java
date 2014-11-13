@@ -5,8 +5,8 @@ import java.util.Map;
 
 import cn.fuego.misp.service.impl.MISPOperLogServiceImpl;
 import cn.fuego.misp.service.impl.MISPPrivilegeManageImpl;
-import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.misp.service.impl.id.CommonIDImpl;
+import cn.fuego.smart.home.service.impl.UserManageServiceImpl;
 
 public class MISPServiceContext
 {
@@ -53,7 +53,7 @@ public class MISPServiceContext
 	{
 		if (null == userService)
 		{
-			userService = new MISPUserServiceImpl();
+			userService = new UserManageServiceImpl();
 		}
 		return userService;
 	}

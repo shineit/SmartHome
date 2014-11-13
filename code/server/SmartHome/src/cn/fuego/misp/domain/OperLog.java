@@ -85,6 +85,14 @@ public class OperLog implements PersistenceObject
 	{
 		this.operTime = operTime;
 	}
+	@Override
+	public String toString()
+	{
+		return "OperLog [id=" + id + ", user=" + user + ", name=" + name
+				+ ", object=" + object + ", result=" + result + ", desp="
+				+ desp + ", operTime=" + operTime + "]";
+	}
 	 
+	
 
 }

@@ -53,6 +53,7 @@ public class AuthenticationFilter implements Filter
 			 if(null == loginUser || ValidatorUtil.isEmpty(loginUser.getUserName()))
 			 {
 				 httpResponse.sendRedirect(httpRequest.getContextPath() );
+				 return;
 			 }
 		 }
 		 

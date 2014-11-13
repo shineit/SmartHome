@@ -2,14 +2,12 @@ package cn.fuego.common.util;
 
 import java.io.UnsupportedEncodingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.file.PropertyReader;
 
 public class SystemConfigInfo
 {
-    private static final Log log = LogFactory.getLog(SystemConfigInfo.class);
+    private static final FuegoLog log = FuegoLog.getLog(SystemConfigInfo.class);
 
 	public static String getSystemRootPath()
 	{
@@ -38,6 +36,23 @@ public class SystemConfigInfo
 	{
 		return  getSystemRootPath() + PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.TEMPLATE_PATH);
 		
+	}
+	public static String getMessageUserID()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_USER_ID);
+
+	}
+
+	public static String getMessageAccount()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_ACCOUNT);
+
+	}
+	
+	public static String getMessagePassword()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_PASSWORD);
+
 	}
 	public static String getDevicePort()
 	{

@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.misp.domain;
 
+import cn.fuego.common.domain.PersistenceObject;
+
  /** 
  * @ClassName: MispButton 
  * @Description: TODO
@@ -15,7 +17,7 @@ package cn.fuego.misp.domain;
  * @date 2014-11-1 下午5:17:52 
  *  
  */
-public class MispButton
+public class MispButton implements PersistenceObject
 {
 	private int id;
 	private String module;

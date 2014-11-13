@@ -5,14 +5,13 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import cn.fuego.common.log.FuegoLog;
 
  
 
 public class DateUtil
 {
-	private static final Log log = LogFactory.getLog(DateUtil.class);
+	private static final FuegoLog log = FuegoLog.getLog(DateUtil.class);
 
 	public static Date addYear(Date date, int year)
 	{

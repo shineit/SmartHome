@@ -8,9 +8,7 @@
 */ 
 package cn.fuego.common.util.meta;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DataTypeConvert;
 
 /** 
@@ -23,7 +21,7 @@ import cn.fuego.common.util.format.DataTypeConvert;
 
 public class ReflectionUtil
 {
-	private static final Log log = LogFactory.getLog(ReflectionUtil.class);
+	private static final FuegoLog log = FuegoLog.getLog(ReflectionUtil.class);
 
 	public static Class getTypeByFieldName(Class clazz,String fieldName) throws NoSuchFieldException, SecurityException
 	{

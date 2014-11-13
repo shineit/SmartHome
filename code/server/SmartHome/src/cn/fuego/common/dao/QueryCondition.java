@@ -107,6 +107,14 @@ public class QueryCondition
 	{
 		this.listValue = listValue;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "QueryCondition [conditionType=" + conditionType + ", attrName="
+				+ attrName + ", firstValue=" + firstValue + ", secondValue="
+				+ secondValue + ", listValue=" + listValue + "]";
+	}
 	
 
 }

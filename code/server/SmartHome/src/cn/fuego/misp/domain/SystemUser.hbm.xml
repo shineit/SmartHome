@@ -8,7 +8,7 @@
 	package="cn.fuego.misp.domain">
 	<class name="SystemUser" table="misp_user">
 			<id name="userID" column="user_id" >
-			<generator class="increment"/>
+			<generator class="identity"/>
 			</id>
             <property name="userName" column="user_name"  not-null="true" ></property>
         

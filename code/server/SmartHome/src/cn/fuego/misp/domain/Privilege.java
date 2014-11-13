@@ -94,6 +94,15 @@ public class Privilege implements PersistenceObject
 	{
 		this.operation = operation;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Privilege [id=" + id + ", masterType=" + masterType
+				+ ", masterValue=" + masterValue + ", accessObjType="
+				+ accessObjType + ", accessObjValue=" + accessObjValue
+				+ ", operation=" + operation + "]";
+	}
  
 	
 	

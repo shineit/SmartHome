@@ -8,7 +8,7 @@
 	package="cn.fuego.misp.domain">
 	<class name="Privilege" table="misp_privilege">
 			<id name="id" column="ID"  type="int">
-			<generator class="increment"/>
+			<generator class="identity"/>
 			</id>
            <property name="masterType" column="master_type"  not-null="true" length='20'></property>
            <property name="masterValue" column="master_value"  not-null="true" ></property>	

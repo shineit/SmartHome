@@ -7,8 +7,7 @@ package cn.fuego.misp.dao.file;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import cn.fuego.common.log.FuegoLog;
 
 /**
  * @author Administrator
@@ -17,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
 public class MispMessageReader
 {
 
-    private static final Log log = LogFactory.getLog(MispMessageReader.class);
+    private static final FuegoLog log = FuegoLog.getLog(MispMessageReader.class);
  
     private static final String CONFIG_PATH = "mispMessage_en_US.properties";
     private static MispMessageReader instance;

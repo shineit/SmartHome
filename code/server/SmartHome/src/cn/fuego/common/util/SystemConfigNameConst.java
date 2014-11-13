@@ -32,6 +32,9 @@ public class SystemConfigNameConst
 	public static final String TEMPLATE_PATH = "TEMPLATE_PATH";
 	public static final String COLLECT_PERIOD = "COLLECT_PERIOD";
 	
+	public static final String MESSAGE_USER_ID = "MESSAGE_USER_ID";
+	public static final String MESSAGE_ACCOUNT = "MESSAGE_ACCOUNT";
+	public static final String MESSAGE_PASSWORD = "MESSAGE_PASSWORD";
 	public static final String DEVICE_PORT = "DEVICE_PORT";
 
 

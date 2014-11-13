@@ -56,6 +56,9 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 		{
 			HibernateUtil.closeSession();
 		}
+		
+		log.info("the create success.");
+
 	}
 
 	public void update(PersistenceObject object)
@@ -74,9 +77,12 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 		{
 			HibernateUtil.closeSession();
 		}
+		log.info("the update success.");
 	}
 	public void delete(List<QueryCondition> conditionList)
 	{
+		log.info("the object class is " + getFeaturedClass()+"the condition is " + conditionList.toString());
+
         Session session = null;
 		Transaction tx = null;
 		try
@@ -85,6 +91,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 			tx = session.beginTransaction();
 			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
 			List<PersistenceObject> objectList =c.list();
+			log.info("delete object is " + objectList.toString()); 
 			for(PersistenceObject object : objectList)
 			{
 				session.delete(object);
@@ -104,12 +111,13 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 				session.close();
 			}
 		}
+		log.info("the delete success.");
 	}
 
 	public void delete(QueryCondition condition)
 	{
-		log.info("the query is " + condition.toString());
-	
+		log.info("the object class is " + getFeaturedClass()+"the condition is " + condition.toString());
+  
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		if(null != condition)
 		{

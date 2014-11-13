@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import cn.fuego.common.log.FuegoLog;
 
 /** 
  * @ClassName: DataConvert 
@@ -26,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DataTypeConvert
 {
-	private static final Log log = LogFactory.getLog(DataTypeConvert.class);
+	private static final FuegoLog log = FuegoLog.getLog(DataTypeConvert.class);
 
 	public static String intToByteStr(int value)
 	{
