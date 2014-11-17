@@ -76,8 +76,7 @@ public class MXShortMessageServiceImpl implements MISPShortMessageService
 		HttpResponse response = null;
 		try
 		{
-
-			response = httpClient.execute(httpget);
+ 			response = httpClient.execute(httpget);
 
 			HttpEntity entity = response.getEntity();
 			if (entity != null)

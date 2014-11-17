@@ -6,29 +6,35 @@
 <struts>
  
  <package name="misp" namespace="/" extends="struts-default" abstract="true">
+     <interceptors>
+           <interceptor-stack name="logException">
+              <interceptor-ref name="defaultStack" />
  
+              <interceptor-ref name="exception">
+                  <param name="logEnabled">true</param>
+                  <param name="logLevel">info</param>             
+              </interceptor-ref>
+           </interceptor-stack>
+       </interceptors>
+ 
+       <default-interceptor-ref name="logException"/>
+   
          <global-results>
             <result name="misp-done">/client/misp/common/mispDone.jsp</result>
+             
+            <result name="exception-system">/client/misp/common/systemError.jsp</result>
  
-         </global-results>
- </package>
-        
-    <package name="default" namespace="/" extends="misp">
-        
-        <global-results>
-            <result name="exception-system">/client/platform/common/systemError.jsp</result>
- 
-            <result name="exception-service">/client/platform/common/operateError.jsp</result>
+            <result name="exception-service">/client/misp/common/operateError.jsp</result>
         </global-results>
              
         <global-exception-mappings>
-            <exception-mapping result="exception-system" exception="cn.fuego.misp.service.exception.ServiceException"></exception-mapping>
+            <exception-mapping result="exception-system" exception="java.lang.Exception"></exception-mapping>
             
-            <exception-mapping result="exception-service" exception="cn.fuego.misp.service.exception.ServiceException"></exception-mapping>
+            <exception-mapping result="exception-service" exception="cn.fuego.common.exception.SystemOperateException"></exception-mapping>
         </global-exception-mappings>    
     </package>
     
-	<package name="login" extends="default">
+	<package name="login" extends="misp">
 		<action name="login" class="cn.fuego.misp.web.action.login.LoginAction">
 			<result type="redirect">/client/misp/home.jsp</result>
 			<result name="home">/client/misp/login.jsp</result>
@@ -53,7 +59,7 @@
 		</action>		  
 
  	</package>
- 	<package name="log" extends="default">
+ 		<package name="log" extends="misp">
 		<action name="LogManage" class="cn.fuego.misp.web.action.log.LogManageAction">
 			<result>/client/misp/log/logManage.jsp</result>
  

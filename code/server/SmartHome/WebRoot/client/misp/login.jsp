@@ -28,7 +28,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(function(){
     
      	$("#Bt1").click(function(){
-    		var newCode=$.md5($('#realPwd').val());
+        //alert($.trim($("#uaseName").val()).length);
+        if ($.trim($("#userName").val()).length<=0)
+        {
+        	$("#warn").html("用户名输入不能为空！");
+        }else if($.trim($("#userPwd").val()).length<=0)
+        {
+        	$("#warn").html("密码输入不能为空！");
+        }else if($.trim($("#ckey").val()).length<=0)
+        {
+        	$("#warn").html("验证码输入不能为空！");
+        }
+        else{
+    		var newCode=$.md5($('#userPwd').val());
     		$("#convertPwd").val(newCode);
       	   $.ajax(
               {
@@ -48,6 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   }
 
               });
+        }                
+
      	});//Bt1 click function
      }); //function
           
@@ -89,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</p>
 					<p>
 						<label>密码：</label>
-						<input type="password" id="realPwd" size="16" class="login_input" style="width:140px !important;" />
+						<input id="userPwd" type="password" size="16" class="login_input" style="width:140px !important;" />
 						<input type="hidden" id="convertPwd" name="user.password"  style="width:140px !important;"  />
 					</p>
 					<p>

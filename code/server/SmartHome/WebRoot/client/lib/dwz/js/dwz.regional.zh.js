@@ -24,7 +24,10 @@
 		
 		alphanumeric: "字母、数字、下划线",
 		lettersonly: "必须是字母",
-		phone: "数字、空格、括号"
+		phone: "请输入有效的移动电话号码",
+	    telephone:"请输入有效的座机号码",
+	    QQ:"请输入正确的QQ号",
+	    phonelist:"请输入正确电话组格式"
 	});
 	
 	// DWZ regional

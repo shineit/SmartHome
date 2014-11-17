@@ -68,6 +68,7 @@ public abstract class AbstractViewDao implements ViewDao
 	
 	public Collection getAll(List<QueryCondition> conditionList)
 	{
+		log.info("the condition list is " + conditionList);
 		List objectList = null;
 		Session session = null;
 		Transaction tx = null;
@@ -114,6 +115,8 @@ public abstract class AbstractViewDao implements ViewDao
 	
 	public PersistenceObject getUniRecord(List<QueryCondition>  conditionList)
 	{
+		log.info("the condition list is " + conditionList);
+
 		PersistenceObject record = null;
 		Session session = null;
 		Transaction tx = null;
@@ -146,6 +149,10 @@ public abstract class AbstractViewDao implements ViewDao
 	
 	public Collection getAll(List<QueryCondition> conditionList,int startNum,int pageSize)
 	{
+		log.info("the condition list is " + conditionList);
+		log.info("the start number is " + startNum);
+		log.info("the page size is " + pageSize);
+
 		List objectList = null;
 		Session session = null;
 		Transaction tx = null;
@@ -162,7 +169,6 @@ public abstract class AbstractViewDao implements ViewDao
 		{
 			log.error("getAll error",re);
 
-			
 			throw re;
 		} finally
 		{
@@ -178,6 +184,8 @@ public abstract class AbstractViewDao implements ViewDao
 	}
 	public long getCount(List<QueryCondition> conditionList)
 	{
+		log.info("the condition list is " + conditionList);
+
 		long count = 0;
 		Session session = null;
 		Transaction tx = null;

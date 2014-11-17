@@ -44,7 +44,13 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 
 	public void create(PersistenceObject object)
 	{
-		log.info("the object class is " + getFeaturedClass()+"the object is "+object.toString());
+		log.info("the object class is " + getFeaturedClass());
+		if(null == object)
+		{
+			log.warn("the object is null");
+			return;
+		}
+		log.info("the object is "+object);
 		try
 		{
 			HibernateUtil.add(object);
@@ -63,8 +69,12 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 
 	public void update(PersistenceObject object)
 	{
-		log.info("the object class is " + getFeaturedClass()+"the object is "+object.toString());
-
+		log.info("the object class is " + getFeaturedClass());
+		if(null == object)
+		{
+			log.warn("the object is null");
+			return;
+		}
 		try
 		{
 			HibernateUtil.update(object);
@@ -81,7 +91,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 	}
 	public void delete(List<QueryCondition> conditionList)
 	{
-		log.info("the object class is " + getFeaturedClass()+"the condition is " + conditionList.toString());
+		log.info("the object class is " + getFeaturedClass()+"the condition is " + conditionList);
 
         Session session = null;
 		Transaction tx = null;
@@ -116,7 +126,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 
 	public void delete(QueryCondition condition)
 	{
-		log.info("the object class is " + getFeaturedClass()+"the condition is " + condition.toString());
+		log.info("the object class is " + getFeaturedClass()+"the condition is " + condition);
   
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		if(null != condition)
