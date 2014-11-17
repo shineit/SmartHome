@@ -31,7 +31,7 @@
     if (SYSTEM_VERSION_UP7) { // 判断是否是IOS7
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     }
-    self.view.backgroundColor = FEColor(229, 229, 229, 1); //[UIColor ];
+    self.view.backgroundColor = FEViewBackGroundColor;
 }
 
 -(void)viewWillAppear:(BOOL)animated{

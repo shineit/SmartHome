@@ -25,6 +25,7 @@
 
 @property (nonatomic, strong) UITableView *deviceTable;
 @property (nonatomic, strong) NSMutableArray *deviceList;
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 @end
 
@@ -58,9 +59,12 @@
 }
 
 -(void)initUI{
-    [self loadRightCustomButtonItemWithTitle:FEString(@"SEARCH") image:nil];
+//    [self loadRightCustomButtonItemWithTitle:FEString(@"SEARCH") image:nil];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    [self.view addSubview:_searchBar];
     
-    FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    
+    FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y + _searchBar.bounds.size.height, self.view.frame.size.width, 40)];
     cview.delegate = self;
     [self.view addSubview:cview];
     _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, cview.frame.origin.y + cview.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - cview.frame.size.height) style:UITableViewStylePlain];
