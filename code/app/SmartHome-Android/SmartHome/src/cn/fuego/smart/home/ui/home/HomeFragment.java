@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SimpleAdapter;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -52,8 +55,6 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 		R.id.item_news_title,R.id.item_news_time
 	};
 	private static final String[] newsItemAttrs = new String[]{"title","time"};
-	private String[] values = new String[]
-	{ "侏儒", "人类", "暗夜精灵", "矮人", "德莱尼", "狼人" };
 
     private ListView alarmViewList ;
     private ListView newsViewList ;
@@ -62,9 +63,9 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
     private List<Map<String, Object>> alarmItems = new ArrayList<Map<String, Object>>();
     private SimpleAdapter adapterAlarm ;
     private int flag=0;
-   
-    private Handler handle ;
     
+    private Handler handle ;
+    private int threadID =0; //0-告警线程，1-新闻线程
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,10 +93,11 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 			//执行完毕后给handler发送一个空消息
 				switch (msg.what)
 				{
-					//定义0对应新闻公告消息处理
-					case 0:adapterNews.notifyDataSetChanged();
-					//定义1对应告警线程处理
-					case 1:adapterAlarm.notifyDataSetChanged();
+				//定义1对应告警线程处理
+				case 0:adapterAlarm.notifyDataSetChanged();					
+				//定义0对应新闻公告消息处理
+				case 1:adapterNews.notifyDataSetChanged();
+
 				
 				}
 				
@@ -147,18 +149,19 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 				 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)msg.obj;
 				 for(AlarmJson json : rsp.getAlarmList()){
 					 Map<String, Object> listItem = new HashMap<String, Object>();
-						listItem.put(alarmItemAttrs[0], R.drawable.smoke);
-						listItem.put(alarmItemAttrs[1], ""+json.getAlarmType());
+						//String[] alarmIcon =getResources().getStringArray(R.array.alarm_icons);
+						TypedArray alarmIcon=getResources().obtainTypedArray(R.array.alarm_icons);
+						listItem.put(alarmItemAttrs[0], alarmIcon.getResourceId(json.getAlarmType(), 0));
+						listItem.put(alarmItemAttrs[1], AlarmTypeEnum.getEnumByInt(json.getAlarmType()).getStrValue());
 						listItem.put(alarmItemAttrs[2], null);
-						listItem.put(alarmItemAttrs[3], null);
-						listItem.put(alarmItemAttrs[4], null);
+						listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
+						listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
 						alarmItems.add(listItem);
-					 
 				 }
 				//alarmViewList.setAdapter(adapterAlarm);
 				adapterAlarm.notifyDataSetChanged();
 			}
-		}).setSensor(req);
+		}).getAlarmList(req);
 	}
  
 	private void updateNews()
@@ -184,6 +187,5 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 				adapterNews.notifyDataSetChanged();
 			}
 		}).getNewsList(req);
- 
 	}
 }

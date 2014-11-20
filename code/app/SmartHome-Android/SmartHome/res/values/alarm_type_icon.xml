@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="alarm_text">
+	    <item >未定义</item>
+	    <item >故障</item>
+	    <item >欠压</item>
+	    <item >预警</item>
+	    <item >火警</item>
+	    <item >反馈</item>
+	    <item >动作</item>
+	    <item >复位</item>
+	    <item >设防</item>
+	    <item >撤防</item>
+	</string-array>
+	<string-array name="alarm_icons">
+	    <item name="0" >@drawable/prealarm</item>
+	    <item name="1">@drawable/prealarm</item>
+	    <item name="2">@drawable/prealarm</item>
+	    <item name="3">@drawable/prealarm</item>
+	    <item name="4">@drawable/fire</item>
+	    <item name="5">@drawable/prealarm</item>
+	    <item name="6">@drawable/prealarm</item>
+	    <item name="7">@drawable/prealarm</item>
+	    <item name="8">@drawable/prealarm</item>
+	    <item name="9">@drawable/prealarm</item>
+	    <item name="10">@drawable/prealarm</item>
+
+	</string-array>
+   
+
+</resources>

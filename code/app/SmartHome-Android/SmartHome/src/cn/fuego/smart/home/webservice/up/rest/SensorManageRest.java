@@ -55,7 +55,7 @@ public interface SensorManageRest
 	
 	@POST
 	@Path("/alarm")
-	public GetHistoryAlarmListRsp setSensor(GetHistoryAlarmListReq req);
+	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req);
 	
  
 }
