@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,11 +20,16 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SimpleAdapter;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
+import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
+import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
@@ -47,8 +53,6 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
 		R.id.item_news_title,R.id.item_news_time
 	};
 	private static final String[] newsItemAttrs = new String[]{"title","time"};
-	private String[] values = new String[]
-	{ "侏儒", "人类", "暗夜精灵", "矮人", "德莱尼", "狼人" };
 
     private ListView alarmViewList ;
     private ListView newsViewList ;
@@ -57,9 +61,9 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
     private List<Map<String, Object>> alarmItems = new ArrayList<Map<String, Object>>();
     private SimpleAdapter adapterAlarm ;
     private int flag=0;
-   
-    private Handler handle ;
     
+    private Handler handle ;
+    private int threadID =0; //0-告警线程，1-新闻线程
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,10 +91,11 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
 			//执行完毕后给handler发送一个空消息
 				switch (msg.what)
 				{
-					//定义0对应新闻公告消息处理
-					case 0:adapterNews.notifyDataSetChanged();
-					//定义1对应告警线程处理
-					case 1:adapterAlarm.notifyDataSetChanged();
+				//定义1对应告警线程处理
+				case 0:adapterAlarm.notifyDataSetChanged();					
+				//定义0对应新闻公告消息处理
+				case 1:adapterNews.notifyDataSetChanged();
+
 				
 				}
 				
@@ -131,29 +136,14 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
 	
 	private void updateAlarms()
 	{
-		//List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
-		//SimpleAdapter adapterAlarm = new SimpleAdapter(getActivity(),listItems,R.layout.alarm_item,alarmItemAttrs, alarmViewAttrs);
-		   alarmItems.clear();
-
-			for (int i = 0; i < values.length; i++)
-			{
-				Map<String, Object> listItem = new HashMap<String, Object>();
-				listItem.put(alarmItemAttrs[0], R.drawable.smoke);
-				listItem.put(alarmItemAttrs[1], values[i]);
-				listItem.put(alarmItemAttrs[2], null);
-				listItem.put(alarmItemAttrs[3], null);
-				listItem.put(alarmItemAttrs[4], null);
-				alarmItems.add(listItem);
-			}
-			
-			
-			//alarmViewList.setAdapter(adapterAlarm);
-			adapterAlarm.notifyDataSetChanged();
+		threadID=0;
+		new Thread(this).start();
 	}
  
 	private void updateNews()
 	{
   
+		threadID=1;
 		new Thread(this).start();
  
 	}
@@ -161,36 +151,76 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
 	@Override
 	public void run()
 	{
-		newsItems.clear();
-		//GetSensorListRsp str = null;
-		try
+		if(threadID==1)
 		{
-		 
-			GetNewsListReq req = new GetNewsListReq();
-			req.setToken(MemoryCache.getToken());
-			GetNewsListRsp rsp = WebServiceContext.getInstance().getNewsManageRest().getNewsList(req);
-			if(ErrorMessageConst.SUCCESS == rsp.getResult().getErrorCode())
+			newsItems.clear();
+			try
 			{
-				for(NewsJson json : rsp.getNewsList())
-				{
-					Map<String, Object> listItem = new HashMap<String, Object>();
-					listItem.put(newsItemAttrs[0], json.getTitle());
-					listItem.put(newsItemAttrs[1], DateUtil.getStrTime(json.getDate()));
-					//listItem.put(newsItemAttrs[1], json.getDate());
-					newsItems.add(listItem);
-
-				}
-			}
 			 
-				
-			Message msg = new Message();
-			msg.what = 0; 
-			handle.sendMessage(msg);
+				GetNewsListReq req = new GetNewsListReq();
+				req.setToken(MemoryCache.getToken());
+				GetNewsListRsp rsp = WebServiceContext.getInstance().getNewsManageRest().getNewsList(req);
+				if(ErrorMessageConst.SUCCESS == rsp.getResult().getErrorCode())
+				{
+					for(NewsJson json : rsp.getNewsList())
+					{
+						Map<String, Object> listItem = new HashMap<String, Object>();
+						listItem.put(newsItemAttrs[0], json.getTitle());
+						listItem.put(newsItemAttrs[1], DateUtil.getStrTime(json.getDate()));
+						
+						newsItems.add(listItem);
+
+					}
+				}
+				 
+					
+				Message msg = new Message();
+				msg.what = 1; 
+				handle.sendMessage(msg);
+			}
+			catch(Exception e)
+			{
+				log.info(e.getMessage());
+			}
 		}
-		catch(Exception e)
+		if(threadID==0)
 		{
-			//log.info("",e);
-			log.info(e.getMessage());
+			alarmItems.clear();
+			try
+			{
+			 
+				GetHistoryAlarmListReq req = new GetHistoryAlarmListReq();
+				
+				req.setToken(MemoryCache.getToken());
+				GetHistoryAlarmListRsp rsp = WebServiceContext.getInstance().getSensorManageRest().getAlarmList(req);
+				if(ErrorMessageConst.SUCCESS == rsp.getResult().getErrorCode())
+				{
+					for(AlarmJson json : rsp.getAlarmList())
+					{
+						Map<String, Object> listItem = new HashMap<String, Object>();
+						//String[] alarmIcon =getResources().getStringArray(R.array.alarm_icons);
+						TypedArray alarmIcon=getResources().obtainTypedArray(R.array.alarm_icons);
+						listItem.put(alarmItemAttrs[0], alarmIcon.getResourceId(json.getAlarmType(), 0));
+						//listItem.put(alarmItemAttrs[0], R.drawable.smoke);
+						listItem.put(alarmItemAttrs[1], AlarmTypeEnum.getEnumByInt(json.getAlarmType()).getStrValue());
+						listItem.put(alarmItemAttrs[2], null);
+						listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
+						listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
+						alarmItems.add(listItem);
+
+					}
+				}
+				 
+					
+				Message msg = new Message();
+				msg.what = 0; 
+				handle.sendMessage(msg);
+			}
+			catch(Exception e)
+			{
+				log.info(e.getMessage());
+			}			
+			
 		}
 		
 	}

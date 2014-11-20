@@ -41,7 +41,18 @@ public enum AlarmTypeEnum
 		return strValue;
 	}
 	
-	
+	public static AlarmTypeEnum getEnumByInt(int intValue)
+	{
+		for (AlarmTypeEnum c : AlarmTypeEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}	
+		
 	
 
 }

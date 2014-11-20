@@ -33,7 +33,17 @@ public enum AlarmClearEnum
 	{
 		return strValue;
 	}
-	
+	public static AlarmClearEnum getEnumByInt(int intValue)
+	{
+		for (AlarmClearEnum c : AlarmClearEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}	
 	
 	
 

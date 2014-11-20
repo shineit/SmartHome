@@ -166,7 +166,7 @@ public class DateUtil
 	{
 		String strTime=null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		//long l_stamp = Long.valueOf(l_stamp);
+		
 		strTime=sdf.format(new Date(l_stamp));
 		return strTime;
 		
