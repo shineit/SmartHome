@@ -12,6 +12,8 @@ import java.lang.reflect.Proxy;
 
 import org.apache.http.client.HttpClient;
 
+import android.os.Handler;
+
  /** 
  * @ClassName: MispProxyFactory 
  * @Description: TODO
@@ -21,11 +23,11 @@ import org.apache.http.client.HttpClient;
  */
 public class MispProxyFactory
 {
-	public static <T> T create(String base,Class<T> clazz, HttpClient httpClient)
+	public static <T> T create(String base,Class<T> clazz, HttpClient httpClient, Handler handler)
 	{
 	 
 	   
-		 MispHttpClientProxy clientProxy = new MispHttpClientProxy(base,clazz,httpClient);
+		 MispHttpClientProxy clientProxy = new MispHttpClientProxy(base,clazz,httpClient,handler);
 		 
 		 Class<?>[] intfs = {clazz};
 		 

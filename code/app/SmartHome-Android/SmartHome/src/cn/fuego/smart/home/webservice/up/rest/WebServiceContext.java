@@ -6,6 +6,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispProxyFactory;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
@@ -16,8 +19,7 @@ public class WebServiceContext
 
 	private static WebServiceContext instance;
 
-	public static String hostURL = "http://192.168.1.101:9000/SmartHome/rest";
-
+	public static String hostURL = "http://192.168.1.103:8080/SmartHome/rest";
 	
 	private WebServiceContext()
 	{
@@ -32,18 +34,18 @@ public class WebServiceContext
 		}
 		return instance;
 	}
-	public SensorManageRest getSensorManageRest()
+	public SensorManageRest getSensorManageRest(Handler handler)
 	{
- 
-		SensorManageRest rest = MispProxyFactory.create( hostURL,SensorManageRest.class, getHttpClient());
-
+		
+		SensorManageRest rest = MispProxyFactory.create( hostURL,SensorManageRest.class, getHttpClient(),handler);
+		
 		return rest;
 	}
 	
-	public NewsManageRest getNewsManageRest()
+	public NewsManageRest getNewsManageRest(Handler handler)
 	{
  
-		NewsManageRest rest = MispProxyFactory.create( hostURL,NewsManageRest.class, getHttpClient());
+		NewsManageRest rest = MispProxyFactory.create( hostURL,NewsManageRest.class, getHttpClient(),handler);
 
 		return rest;
 	}

@@ -3,6 +3,7 @@ package cn.fuego.smart.home.ui.home;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +23,18 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
+import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
+import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 import com.fuego.smarthome.R;
 
-public class HomeFragment extends Fragment implements OnCheckedChangeListener,Runnable
+public class HomeFragment extends Fragment implements OnCheckedChangeListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
@@ -131,46 +136,42 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
 	
 	private void updateAlarms()
 	{
-		//List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
-		//SimpleAdapter adapterAlarm = new SimpleAdapter(getActivity(),listItems,R.layout.alarm_item,alarmItemAttrs, alarmViewAttrs);
-		   alarmItems.clear();
-
-			for (int i = 0; i < values.length; i++)
-			{
-				Map<String, Object> listItem = new HashMap<String, Object>();
-				listItem.put(alarmItemAttrs[0], R.drawable.smoke);
-				listItem.put(alarmItemAttrs[1], values[i]);
-				listItem.put(alarmItemAttrs[2], null);
-				listItem.put(alarmItemAttrs[3], null);
-				listItem.put(alarmItemAttrs[4], null);
-				alarmItems.add(listItem);
+		GetHistoryAlarmListReq req = new GetHistoryAlarmListReq();
+		req.setUserID(1);
+		WebServiceContext.getInstance().getSensorManageRest(new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				 alarmItems.clear();
+				 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)msg.obj;
+				 for(AlarmJson json : rsp.getAlarmList()){
+					 Map<String, Object> listItem = new HashMap<String, Object>();
+						listItem.put(alarmItemAttrs[0], R.drawable.smoke);
+						listItem.put(alarmItemAttrs[1], ""+json.getAlarmType());
+						listItem.put(alarmItemAttrs[2], null);
+						listItem.put(alarmItemAttrs[3], null);
+						listItem.put(alarmItemAttrs[4], null);
+						alarmItems.add(listItem);
+					 
+				 }
+				//alarmViewList.setAdapter(adapterAlarm);
+				adapterAlarm.notifyDataSetChanged();
 			}
-			
-			
-			//alarmViewList.setAdapter(adapterAlarm);
-			adapterAlarm.notifyDataSetChanged();
+		}).setSensor(req);
 	}
  
 	private void updateNews()
 	{
-  
-		new Thread(this).start();
- 
-	}
-
-	@Override
-	public void run()
-	{
-		newsItems.clear();
-		//GetSensorListRsp str = null;
-		try
-		{
-		 
-			GetNewsListReq req = new GetNewsListReq();
-			req.setToken(MemoryCache.getToken());
-			GetNewsListRsp rsp = WebServiceContext.getInstance().getNewsManageRest().getNewsList(req);
-			if(ErrorMessageConst.SUCCESS == rsp.getResult().getErrorCode())
-			{
+		GetNewsListReq req = new GetNewsListReq();
+		req.setToken(MemoryCache.getToken());
+		WebServiceContext.getInstance().getNewsManageRest(new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				super.handleMessage(msg);
+				newsItems.clear();
+				GetNewsListRsp rsp = (GetNewsListRsp)msg.obj;
 				for(NewsJson json : rsp.getNewsList())
 				{
 					Map<String, Object> listItem = new HashMap<String, Object>();
@@ -178,21 +179,11 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener,Ru
 					listItem.put(newsItemAttrs[1], DateUtil.getStrTime(json.getDate()));
 					//listItem.put(newsItemAttrs[1], json.getDate());
 					newsItems.add(listItem);
-
+					
 				}
+				adapterNews.notifyDataSetChanged();
 			}
-			 
-				
-			Message msg = new Message();
-			msg.what = 0; 
-			handle.sendMessage(msg);
-		}
-		catch(Exception e)
-		{
-			//log.info("",e);
-			log.info(e.getMessage());
-		}
-		
+		}).getNewsList(req);
+ 
 	}
-
 }

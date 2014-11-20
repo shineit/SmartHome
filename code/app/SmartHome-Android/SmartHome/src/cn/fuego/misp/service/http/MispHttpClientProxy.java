@@ -17,6 +17,8 @@ import java.util.Map;
 
 import org.apache.http.client.HttpClient;
 
+import android.os.Handler;
+
 /**
  * @ClassName: MispClientProxy
  * @Description: TODO
@@ -29,14 +31,14 @@ public class MispHttpClientProxy implements InvocationHandler
 	private Map<Method, MispHttpClientInvoker> methodMap = new HashMap<Method,MispHttpClientInvoker>();
 	private Class<?> clazz;
 
-	public MispHttpClientProxy(String base, Class<?> clazz, HttpClient httpClient)
+	public MispHttpClientProxy(String base, Class<?> clazz, HttpClient httpClient, Handler handler)
 	{
 
 		this.clazz = clazz;
 		for (Method method : clazz.getMethods())
 		{
 			MispHttpClientInvoker invoker = new MispHttpClientInvoker(createUri(base),
-					clazz, method, httpClient);
+					clazz, method, httpClient,handler);
 			methodMap.put(method, invoker);
 		}
  
@@ -96,7 +98,8 @@ public class MispHttpClientProxy implements InvocationHandler
 			throw new RuntimeException("Could not find a method for: " + method);
 		}
 
-		return clientInvoker.invoke(args);
+		clientInvoker.invoke(args).start();
+		return null;
 	}
 
 	@Override

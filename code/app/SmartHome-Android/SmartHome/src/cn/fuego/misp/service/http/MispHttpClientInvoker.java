@@ -31,8 +31,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.jboss.resteasy.specimpl.UriBuilderImpl;
 import org.jboss.resteasy.util.IsHttpMethod;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
-
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.ui.home.HomeFragment;
@@ -44,7 +45,8 @@ import cn.fuego.smart.home.ui.home.HomeFragment;
  * @date 2014-11-13 上午9:19:59
  * 
  */
-public class MispHttpClientInvoker
+
+public class MispHttpClientInvoker extends Thread
 {
 	
 	private FuegoLog log = FuegoLog.getLog(getClass());
@@ -55,12 +57,14 @@ public class MispHttpClientInvoker
 	private static final String CODE_WITH_UTF_8 = "utf-8";
  	protected UriBuilderImpl uri;
 	protected Method method;
-
+	protected Object[] argObjects;
 	protected HttpClient httpClient;
+	protected Handler handler;
  
-	public MispHttpClientInvoker(URI baseUri,Class<?> calzz,Method method,HttpClient httpClient)
+	public MispHttpClientInvoker(URI baseUri,Class<?> calzz,Method method,HttpClient httpClient, Handler handler)
 	{
 		this.uri = new UriBuilderImpl();
+		this.handler = handler;
 		uri.uri(baseUri);
 		if (calzz.isAnnotationPresent(Path.class)) 
 		{
@@ -74,15 +78,18 @@ public class MispHttpClientInvoker
 		this.method = method;
 		this.httpClient = httpClient;
 	}
-	public Object invoke(Object[] args)
-	{
- 
+	
+	
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		super.run();
 		Object rspObj = null;
 		try
 		{
 			
-			
-		   HttpUriRequest httpMethod = getHttpMethod(args[0]);
+		   HttpUriRequest httpMethod = getHttpMethod(argObjects[0]);
 			
 			
 			
@@ -94,14 +101,48 @@ public class MispHttpClientInvoker
 			ObjectMapper mapper = new ObjectMapper();
 			
 			rspObj = mapper.readValue(content,method.getReturnType());
+			Message msg = new Message();
+			msg.obj = rspObj;
+			handler.sendMessage(msg);
 			 
 		} catch (Exception e)
 		{
 			throw new MISPException("call http failed",e);
 		}
-
 		
-		return rspObj;
+	}
+
+
+
+	public MispHttpClientInvoker invoke(Object[] args)
+	{
+		this.argObjects = args;
+		return this;
+//		
+//		Object rspObj = null;
+//		try
+//		{
+//			
+//		   HttpUriRequest httpMethod = getHttpMethod(args[0]);
+//			
+//			
+//			
+// 			HttpResponse response = httpClient.execute(httpMethod); // 发起GET请求
+//			
+//			
+//			String content = EntityUtils.toString(response.getEntity(), CODE_WITH_UTF_8);
+//			
+//			ObjectMapper mapper = new ObjectMapper();
+//			
+//			rspObj = mapper.readValue(content,method.getReturnType());
+//			 
+//		} catch (Exception e)
+//		{
+//			throw new MISPException("call http failed",e);
+//		}
+//
+//		
+//		return rspObj;
 	}
 	
 	private HttpUriRequest  getHttpMethod(Object args)

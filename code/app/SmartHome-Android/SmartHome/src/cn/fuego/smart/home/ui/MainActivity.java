@@ -42,7 +42,7 @@ public class MainActivity extends Activity
 				{
 					GetNewsListReq req = new GetNewsListReq();
 					req.setToken(MemoryCache.getToken());
-					GetNewsListRsp rsp = WebServiceContext.getInstance().getNewsManageRest().getNewsList(req);
+					GetNewsListRsp rsp = WebServiceContext.getInstance().getNewsManageRest(null).getNewsList(req);
 					log.info("rsp is " + rsp);
 				}
 				catch(Exception e)

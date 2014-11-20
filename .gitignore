@@ -24,3 +24,4 @@ project.pbxproj
 *.class
 
 code/server/SmartHome/WebRoot/WEB-INF/classes/
+code/app/SmartHome-Android/SmartHome/bin/

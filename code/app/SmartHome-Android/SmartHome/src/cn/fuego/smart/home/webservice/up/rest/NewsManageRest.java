@@ -5,6 +5,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import android.R.bool;
+import android.os.Message;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 
@@ -25,4 +27,7 @@ public interface NewsManageRest
 	@Path("/list")
 	public GetNewsListRsp getNewsList(GetNewsListReq req);
 
+	public interface Callback{
+		public boolean recieveNews(GetNewsListReq req);
+	}
 }
