@@ -11,9 +11,15 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        /**  主题橘色 
+         */
+        public static final int backcolor=0x7f040007;
         /** 白色 
          */
         public static final int black=0x7f040001;
+        /**  背景墙纸颜色 
+         */
+        public static final int focuscolor=0x7f040008;
         /**  黑色 
          */
         public static final int ivory=0x7f040002;
@@ -41,56 +47,180 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int app_icon=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int tabbar_background=0x7f020002;
-        public static final int tabbar_camera=0x7f020003;
-        public static final int tabbar_camera_select=0x7f020004;
-        public static final int tabbar_control=0x7f020005;
-        public static final int tabbar_control_select=0x7f020006;
-        public static final int tabbar_home=0x7f020007;
-        public static final int tabbar_home_select=0x7f020008;
-        public static final int tabbar_safe=0x7f020009;
-        public static final int tabbar_safe_select=0x7f02000a;
-        public static final int tabbar_selected=0x7f02000b;
-        public static final int tabbar_setting=0x7f02000c;
-        public static final int tabbar_setting_select=0x7f02000d;
+        public static final int alarm=0x7f020000;
+        public static final int app_icon=0x7f020001;
+        public static final int app_logo=0x7f020002;
+        public static final int back=0x7f020003;
+        public static final int camera=0x7f020004;
+        public static final int checkbox=0x7f020005;
+        public static final int checkbox_off=0x7f020006;
+        public static final int checkbox_on=0x7f020007;
+        public static final int curtain=0x7f020008;
+        public static final int door=0x7f020009;
+        public static final int down=0x7f02000a;
+        public static final int edittext_focused=0x7f02000b;
+        public static final int edittext_nomal=0x7f02000c;
+        public static final int edittext_sel=0x7f02000d;
+        public static final int fire=0x7f02000e;
+        public static final int forward=0x7f02000f;
+        public static final int history=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int info=0x7f020012;
+        public static final int login_button=0x7f020013;
+        public static final int login_input=0x7f020014;
+        public static final int nav=0x7f020015;
+        public static final int nav_btn=0x7f020016;
+        public static final int nav_btn_focuse=0x7f020017;
+        public static final int nav_btn_unsel=0x7f020018;
+        public static final int nav_text_color=0x7f020019;
+        public static final int personal=0x7f02001a;
+        public static final int prealarm=0x7f02001b;
+        public static final int safe=0x7f02001c;
+        public static final int setting_aboutus=0x7f02001d;
+        public static final int setting_alert=0x7f02001e;
+        public static final int setting_fadeback=0x7f02001f;
+        public static final int setting_news=0x7f020020;
+        public static final int setting_profile=0x7f020021;
+        public static final int setting_rating=0x7f020022;
+        public static final int setting_service=0x7f020023;
+        public static final int smoke=0x7f020024;
+        public static final int tabbar_background=0x7f020025;
+        public static final int tabbar_camera_icon=0x7f020026;
+        public static final int tabbar_camera_select=0x7f020027;
+        public static final int tabbar_camera_unsel=0x7f020028;
+        public static final int tabbar_control_icon=0x7f020029;
+        public static final int tabbar_control_select=0x7f02002a;
+        public static final int tabbar_control_unsel=0x7f02002b;
+        public static final int tabbar_home_icon=0x7f02002c;
+        public static final int tabbar_home_select=0x7f02002d;
+        public static final int tabbar_home_select2=0x7f02002e;
+        public static final int tabbar_home_unsel=0x7f02002f;
+        public static final int tabbar_safe_icon=0x7f020030;
+        public static final int tabbar_safe_select=0x7f020031;
+        public static final int tabbar_safe_unsel=0x7f020032;
+        public static final int tabbar_selected=0x7f020033;
+        public static final int tabbar_service=0x7f020034;
+        public static final int tabbar_setting_icon=0x7f020035;
+        public static final int tabbar_setting_select=0x7f020036;
+        public static final int tabbar_setting_unsel=0x7f020037;
+        public static final int tabbar_text_color=0x7f020038;
+        public static final int tabbar_unselected=0x7f020039;
+        public static final int temperature=0x7f02003a;
+        public static final int un_focuse_btn=0x7f02003b;
+        public static final int up=0x7f02003c;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000f;
-        public static final int button1=0x7f090005;
-        public static final int editText1=0x7f09000a;
-        public static final int editText2=0x7f09000b;
-        public static final int imageview=0x7f09000d;
-        public static final int password=0x7f090003;
-        public static final int realtabcontent=0x7f090006;
-        public static final int siginbutton=0x7f09000c;
-        public static final int textView1=0x7f090008;
-        public static final int textView2=0x7f090009;
-        public static final int textview=0x7f09000e;
-        public static final int title_name_text=0x7f090007;
-        public static final int txt_loginerror=0x7f090000;
-        public static final int txt_password=0x7f090004;
-        public static final int txt_username=0x7f090002;
-        public static final int username=0x7f090001;
+        public static final int Button02=0x7f090039;
+        public static final int Button03=0x7f09003a;
+        public static final int Button04=0x7f09003b;
+        public static final int Button05=0x7f09003d;
+        public static final int Button06=0x7f09003c;
+        public static final int CheckBox01=0x7f09002b;
+        public static final int EditText01=0x7f090032;
+        public static final int EditText06=0x7f090034;
+        public static final int EditText07=0x7f090036;
+        public static final int EditText08=0x7f090038;
+        public static final int ImageButton01=0x7f090010;
+        public static final int ImageButton02=0x7f09000f;
+        public static final int ImageButton03=0x7f090013;
+        public static final int ImageButton04=0x7f09000c;
+        public static final int ImageButton05=0x7f09000b;
+        public static final int ImageButton06=0x7f090014;
+        public static final int ImageView01=0x7f090026;
+        public static final int LinearLayout1=0x7f09000a;
+        public static final int RadioButton01=0x7f090023;
+        public static final int RadioButton02=0x7f090043;
+        public static final int RadioButton03=0x7f090042;
+        public static final int RadioButton04=0x7f090045;
+        public static final int RadioButton05=0x7f090044;
+        public static final int TableRow01=0x7f090031;
+        public static final int TextView01=0x7f090012;
+        public static final int TextView03=0x7f090015;
+        public static final int TextView04=0x7f09000e;
+        public static final int TextView06=0x7f090016;
+        public static final int TextView07=0x7f090027;
+        public static final int TextView09=0x7f090037;
+        public static final int TextView10=0x7f090035;
+        public static final int TextView11=0x7f090033;
+        public static final int alarm=0x7f090049;
+        public static final int alarmlist=0x7f090022;
+        public static final int button2=0x7f09001e;
+        public static final int checkBox1=0x7f09002c;
+        public static final int editText1=0x7f09003e;
+        public static final int editText2=0x7f09003f;
+        public static final int imageView2=0x7f090002;
+        public static final int imageview=0x7f090046;
+        public static final int item_alarm_content=0x7f09001b;
+        public static final int item_alarm_icon=0x7f090019;
+        public static final int item_alarm_status=0x7f09001c;
+        public static final int item_alarm_time=0x7f09001d;
+        public static final int item_alarm_title=0x7f09001a;
+        public static final int item_icon=0x7f090000;
+        public static final int item_news_time=0x7f090011;
+        public static final int item_news_title=0x7f090028;
+        public static final int item_status=0x7f09000d;
+        public static final int item_time=0x7f090025;
+        public static final int item_title=0x7f090001;
+        public static final int loginbtn=0x7f090008;
+        public static final int nav_alarm=0x7f090021;
+        public static final int nav_group=0x7f09001f;
+        public static final int nav_news=0x7f090020;
+        public static final int news=0x7f090048;
+        public static final int news_item=0x7f09004a;
+        public static final int newslist=0x7f090018;
+        public static final int password=0x7f090005;
+        public static final int radio0=0x7f090024;
+        public static final int radioButton1=0x7f09002a;
+        public static final int realtabcontent=0x7f090017;
+        public static final int siginbutton=0x7f090040;
+        public static final int tab_radiogroup=0x7f090041;
+        public static final int tableRow1=0x7f09002d;
+        public static final int tableRow2=0x7f090030;
+        public static final int textView3=0x7f090029;
+        public static final int textView4=0x7f09002f;
+        public static final int textView5=0x7f09002e;
+        public static final int textview=0x7f090047;
+        public static final int txt_loginerror=0x7f090007;
+        public static final int txt_password=0x7f090003;
+        public static final int txt_username=0x7f090006;
+        public static final int updatebtn=0x7f090009;
+        public static final int username=0x7f090004;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_main_tabbar=0x7f030002;
-        public static final int camera_fragment=0x7f030003;
-        public static final int control_fragment=0x7f030004;
-        public static final int home_fragment=0x7f030005;
-        public static final int safe_fragment=0x7f030006;
-        public static final int setting_fragment=0x7f030007;
-        public static final int sigin_activity=0x7f030008;
-        public static final int tabbar_item_view=0x7f030009;
+        public static final int alarm_item=0x7f030003;
+        public static final int camera_fragment=0x7f030004;
+        public static final int control_fragment=0x7f030005;
+        public static final int head=0x7f030006;
+        public static final int home_fragment=0x7f030007;
+        public static final int login=0x7f030008;
+        public static final int main_tabbar=0x7f030009;
+        public static final int message=0x7f03000a;
+        public static final int news_item=0x7f03000b;
+        public static final int personal_info=0x7f03000c;
+        public static final int safe_fragment=0x7f03000d;
+        public static final int service=0x7f03000e;
+        public static final int service_apply=0x7f03000f;
+        public static final int setting=0x7f030010;
+        public static final int setting_fragment=0x7f030011;
+        public static final int sigin_activity=0x7f030012;
+        public static final int tab=0x7f030013;
+        public static final int tab2=0x7f030014;
+        public static final int tabbar_item_view=0x7f030015;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int home=0x7f080000;
+        public static final int login=0x7f080001;
+        public static final int main=0x7f080002;
+        public static final int main_tabbar=0x7f080003;
+        public static final int sin=0x7f080004;
     }
     public static final class string {
         public static final int action_settings=0x7f060005;
+        public static final int actionbar_alarm=0x7f06000d;
+        public static final int actionbar_news=0x7f06000c;
         public static final int app_name=0x7f060000;
         public static final int hello_world=0x7f060004;
         public static final int tabbar_camera=0x7f06000a;
@@ -98,8 +228,10 @@ public final class R {
         public static final int tabbar_home=0x7f060007;
         public static final int tabbar_safe=0x7f060008;
         public static final int tabbar_setting=0x7f06000b;
+        public static final int title_activity_login=0x7f060010;
         public static final int title_activity_main_tabbar=0x7f060006;
-        public static final int title_activity_sigin=0x7f06000c;
+        public static final int title_activity_sigin=0x7f06000e;
+        public static final int title_activity_sin=0x7f06000f;
         public static final int title_section1=0x7f060001;
         public static final int title_section2=0x7f060002;
         public static final int title_section3=0x7f060003;
@@ -131,5 +263,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int tab_button_bottom=0x7f070002;
     }
 }

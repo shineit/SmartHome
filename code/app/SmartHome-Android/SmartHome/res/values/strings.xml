@@ -8,11 +8,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_tabbar">MainTabbarActivity</string>
-    <string name="tabbar_home">Home</string>
-    <string name="tabbar_safe">Safe</string>
-    <string name="tabbar_control">Control</string>
-    <string name="tabbar_camera">Camera</string>
-    <string name="tabbar_setting">Setting</string>
+    <string name="tabbar_home">首页</string>
+    <string name="tabbar_safe">云安</string>
+    <string name="tabbar_control">云控</string>
+    <string name="tabbar_camera">云视</string>
+    <string name="tabbar_setting">设置</string>
+    <string name="actionbar_news">新闻公告</string>
+    <string name="actionbar_alarm">告警信息</string>
     <string name="title_activity_sigin">SiginActivity</string>
+    <string name="title_activity_sin">SinActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>

@@ -8,4 +8,6 @@
 	<color name="tabbarback">#E9EAED</color>
 	<color name="themecolor">#FC9C38</color> <!-- 主题橘色 -->
 	
-</resources>
+	<color name="backcolor">#E7E6E3</color>  <!-- 背景墙纸颜色 -->
+	<color name="focuscolor">#0378FF</color> <!-- nav 选中字体颜色 -->
+	</resources>

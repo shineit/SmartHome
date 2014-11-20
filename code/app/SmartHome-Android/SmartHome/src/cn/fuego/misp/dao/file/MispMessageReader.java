@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
 
 /**
  * @author Administrator
@@ -38,7 +39,7 @@ public class MispMessageReader
 
         } catch (Exception e)
         {
-            throw new ExceptionInInitializerError(e);
+            log.error("load misp message failed",e);
         }
     }
     
@@ -53,7 +54,18 @@ public class MispMessageReader
 
     public String getPropertyByName(String name)
     {
-        return prop.getProperty(name);
+    	if(null == prop)
+    	{
+    	    log.warn("the property  is null");	
+    		return name;
+    	}
+    	String message = prop.getProperty(name);
+    	if(ValidatorUtil.isEmpty(message))
+    	{
+    		log.warn("can not get the value by name. name is " + name);
+    		return name;
+    	}
+        return message;
     }
 
     

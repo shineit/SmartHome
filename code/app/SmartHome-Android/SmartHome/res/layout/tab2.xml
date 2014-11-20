@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+ <LinearLayout android:orientation="vertical"
+android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+       <FrameLayout
+           android:id="@android:id/tabcontent"
+           android:layout_width="fill_parent"
+           android:layout_height="0.0dip"
+           android:layout_weight="1.0"
+           android:background="@color/backcolor" />
+
+<TabWidget android:id="@android:id/tabs" android:visibility="gone"
+android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:layout_weight="0.0" />
+
+       <RadioGroup
+           android:id="@+id/tab_radiogroup"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="bottom"
+           android:background="@drawable/nav_btn_unsel"
+           android:gravity="center_vertical"
+           android:orientation="horizontal" >
+
+           <RadioButton
+               android:id="@+id/RadioButton03"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@drawable/tabbar_background"
+               android:checked="true"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_home_icon"
+               android:padding="1dp"
+               android:text="@string/tabbar_home"
+               android:textColor="@drawable/tabbar_text_color" />
+
+           <RadioButton
+               android:id="@+id/RadioButton05"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@drawable/tabbar_background"
+               android:checked="false"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_safe_icon"
+               android:padding="1dp"
+               android:text="@string/tabbar_safe"
+               android:textColor="@drawable/tabbar_text_color" />
+
+           <RadioButton
+               android:id="@+id/RadioButton04"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@drawable/tabbar_background"
+               android:checked="false"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_control_icon"
+               android:padding="1dp"
+               android:text="@string/tabbar_control"
+               android:textColor="@drawable/tabbar_text_color" />
+
+           <RadioButton
+               android:id="@+id/RadioButton02"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@drawable/tabbar_background"
+               android:checked="false"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_camera_icon"
+               android:padding="1dp"
+               android:text="@string/tabbar_camera"
+               android:textColor="@drawable/tabbar_text_color" />
+
+           <RadioButton
+               android:id="@+id/RadioButton01"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@drawable/tabbar_background"
+               android:checked="false"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_setting_icon"
+               android:padding="1dp"
+               android:text="@string/tabbar_setting"
+               android:textColor="@drawable/tabbar_text_color" />
+
+       </RadioGroup>
+
+    </LinearLayout>    
+
+</TabHost>

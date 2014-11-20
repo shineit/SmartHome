@@ -32,28 +32,27 @@ public class WebServiceContext
 		}
 		return instance;
 	}
-	public SensorManageRest getSensorManage()
+	public SensorManageRest getSensorManageRest()
 	{
-		
-		HttpGet getMethod = new HttpGet(hostURL+"/sensor/hello");  
-        
-		HttpClient httpClient = new DefaultHttpClient();  
-		  
-		try {  
-		    HttpResponse response = httpClient.execute(getMethod); //发起GET请求  
-		  
-		    log.info("resCode = " + response.getStatusLine().getStatusCode()); //获取响应码  
-		    log.info("result = " + EntityUtils.toString(response.getEntity(), "utf-8"));//获取服务器响应内容  
  
-		} catch (Exception e) {  
-		    // TODO Auto-generated catch block  
-		    e.printStackTrace();  
-		} 
-		
-		  
-		SensorManageRest proxy = MispProxyFactory.create( hostURL,SensorManageRest.class, httpClient);
+		SensorManageRest rest = MispProxyFactory.create( hostURL,SensorManageRest.class, getHttpClient());
 
-		return proxy;
+		return rest;
+	}
+	
+	public NewsManageRest getNewsManageRest()
+	{
+ 
+		NewsManageRest rest = MispProxyFactory.create( hostURL,NewsManageRest.class, getHttpClient());
+
+		return rest;
+	}
+	private HttpClient getHttpClient()
+	{
+		HttpClient httpClient = new DefaultHttpClient();  
+
+		return httpClient;
+
 	}
 	
 	

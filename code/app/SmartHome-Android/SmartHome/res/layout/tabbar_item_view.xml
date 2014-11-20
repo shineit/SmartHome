@@ -10,7 +10,7 @@
         android:layout_height="35dp"
         android:focusable="false"
         android:padding="3dp"
-        android:src="@drawable/tabbar_home" >
+        android:src="@drawable/tabbar_home_icon" >
   
     </ImageView>  
       
@@ -21,7 +21,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="10sp"
-        android:textColor="#ffffff">  
+        android:textColor="@drawable/tabbar_text_color">  
     </TextView>
     
 

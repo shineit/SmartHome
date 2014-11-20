@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
+import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
@@ -37,7 +40,10 @@ public class MainActivity extends Activity
 				GetSensorListRsp str = null;
 				try
 				{
-					str = WebServiceContext.getInstance().getSensorManage().getSensorList();	
+					GetNewsListReq req = new GetNewsListReq();
+					req.setToken(MemoryCache.getToken());
+					GetNewsListRsp rsp = WebServiceContext.getInstance().getNewsManageRest().getNewsList(req);
+					log.info("rsp is " + rsp);
 				}
 				catch(Exception e)
 				{
@@ -84,7 +90,7 @@ public class MainActivity extends Activity
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings)
+		if (id == R.id.news_item)
 		{
 			return true;
 		}
@@ -94,5 +100,10 @@ public class MainActivity extends Activity
 	public void myClickButton2(View v)
 	{  
  		Log.e(this.getClass().toString(), "aaaa");
-    } 
+    }
+	
+	public void loginClick(View v)
+	{  
+ 		Log.e(this.getClass().toString(), "aaaa");
+    }
 }

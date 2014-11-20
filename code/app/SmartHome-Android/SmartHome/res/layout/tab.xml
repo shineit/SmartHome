@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+ <LinearLayout android:orientation="vertical"
+android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+       <FrameLayout
+           android:id="@android:id/tabcontent"
+           android:layout_width="fill_parent"
+           android:layout_height="0.0dip"
+           android:layout_weight="1.0"
+           android:background="@color/white" />
+
+<TabWidget android:id="@android:id/tabs" android:visibility="gone"
+android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:layout_weight="0.0" />
+
+       <RadioGroup
+           android:id="@+id/tab_radiogroup"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="bottom"
+           android:background="@drawable/nav_btn_unsel"
+           android:gravity="center_vertical"
+           android:orientation="horizontal" >
+
+           <RadioButton
+               android:id="@+id/RadioButton03"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@color/white"
+               android:checked="true"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_home_select"
+               android:padding="1dp"
+               android:text="首页"
+               android:textColor="@color/themecolor" />
+
+           <RadioButton
+               android:id="@+id/RadioButton02"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@color/backcolor"
+               android:checked="true"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_control_unsel"
+               android:padding="1dp"
+               android:text="云安防"
+               android:textColor="@color/black" />
+
+           <RadioButton
+               android:id="@+id/RadioButton01"
+               style="@style/tab_button_bottom"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:background="@color/backcolor"
+               android:checked="true"
+               android:drawablePadding="0dp"
+               android:drawableTop="@drawable/tabbar_service"
+               android:padding="1dp"
+               android:text="服务"
+               android:textColor="@color/black" />
+
+       </RadioGroup>
+    </LinearLayout>    
+
+</TabHost>
