@@ -40,7 +40,7 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/person_info_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/loginbtn"
@@ -294,7 +294,7 @@
         android:layout_marginTop="20dp" >
 
         <Button
-            android:id="@+id/updatebtn"
+            android:id="@+id/about_btn"
             style="@null"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -306,13 +306,13 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/Button02"
+            android:id="@+id/rank_btn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/updatebtn"
+            android:layout_toRightOf="@+id/about_btn"
             android:background="@drawable/login_button"
             android:enabled="true"
             android:focusableInTouchMode="true"

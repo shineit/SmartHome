@@ -47,7 +47,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/person_info_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
@@ -67,7 +67,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/updatebtn"
+            android:id="@+id/about_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
@@ -87,7 +87,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/Button02"
+            android:id="@+id/rank_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"
@@ -107,7 +107,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/Button03"
+            android:id="@+id/notice_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
@@ -127,7 +127,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/Button04"
+            android:id="@+id/service_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"
@@ -147,7 +147,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/Button06"
+            android:id="@+id/new_function_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"
@@ -167,7 +167,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/Button05"
+            android:id="@+id/feedbck_btn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:layout_marginTop="1dp"

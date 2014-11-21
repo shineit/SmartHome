@@ -3,21 +3,71 @@ package cn.fuego.smart.home.ui.setting;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.fuego.smarthome.R;
 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends Fragment implements View.OnClickListener
+{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.setting_fragment, null);
+		View rootView = inflater.inflate(R.layout.setting_fragment, null);
+		
+		Button person_btn=(Button) rootView.findViewById(R.id.person_info_btn);
+		person_btn.setOnClickListener(this);
+		person_btn.setTag(1);
+		
+		Button about_btn=(Button) rootView.findViewById(R.id.about_btn);
+		about_btn.setOnClickListener(this);
+		about_btn.setTag(2);
+		
+		Button rank_btn=(Button) rootView.findViewById(R.id.rank_btn);
+		rank_btn.setOnClickListener(this);
+		rank_btn.setTag(3);
+		
+		Button notice_btn=(Button) rootView.findViewById(R.id.notice_btn);
+		notice_btn.setOnClickListener(this);
+		notice_btn.setTag(4);	
+		
+		Button service_btn=(Button) rootView.findViewById(R.id.service_btn);
+		service_btn.setOnClickListener(this);
+		service_btn.setTag(5);
+		
+		Button new_f_btn=(Button) rootView.findViewById(R.id.new_function_btn);
+		new_f_btn.setOnClickListener(this);
+		new_f_btn.setTag(6);
+		
+		Button feedbck_btn=(Button) rootView.findViewById(R.id.feedbck_btn);
+		feedbck_btn.setOnClickListener(this);
+		feedbck_btn.setTag(7);
+		
+		return rootView;
 	}
 	
+	@Override
+	public void onClick(View v)
+	{
+		int tag = (Integer) v.getTag();
+		switch(tag)
+		{
+		case 1:;
+		case 2:;
+		case 3:;
+		case 4:;
+		case 5:;
+		case 6:;
+		case 7:;
+		default:break;
+		}
+		
+	}
 	
 	
 }

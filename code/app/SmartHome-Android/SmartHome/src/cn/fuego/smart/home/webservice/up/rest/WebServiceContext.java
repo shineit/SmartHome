@@ -56,7 +56,13 @@ public class WebServiceContext
 		return httpClient;
 
 	}
-	
+	public UserManageRest getUserManageRest(Handler handler)
+	{
+ 
+		UserManageRest rest = MispProxyFactory.create( hostURL,UserManageRest.class, getHttpClient(),handler);
+
+		return rest;
+	}	
 	
 
 }

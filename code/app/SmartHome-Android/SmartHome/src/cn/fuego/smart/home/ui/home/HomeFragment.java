@@ -1,9 +1,7 @@
 package cn.fuego.smart.home.ui.home;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +21,11 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
-import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -64,8 +59,7 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
     private SimpleAdapter adapterAlarm ;
     private int flag=0;
     
-    private Handler handle ;
-    private int threadID =0; //0-告警线程，1-新闻线程
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,24 +80,6 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
         	updateAlarms();
         	flag=1;
         }
-        handle = new Handler(){
-			@Override
-			public void handleMessage(Message msg){
-			//你要执行的方法
-			//执行完毕后给handler发送一个空消息
-				switch (msg.what)
-				{
-				//定义1对应告警线程处理
-				case 0:adapterAlarm.notifyDataSetChanged();					
-				//定义0对应新闻公告消息处理
-				case 1:adapterNews.notifyDataSetChanged();
-
-				
-				}
-				
-				 
-			}
-			};
 	    
 	    // 切换radiobutton监听
 		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.nav_group);
