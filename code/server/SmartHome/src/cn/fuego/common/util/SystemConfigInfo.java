@@ -22,6 +22,11 @@ public class SystemConfigInfo
 		}  
 		return path;
 	}
+	
+	public static String getConfigItem(String itemName)
+	{
+		return  PropertyReader.getInstance().getPropertyByName(itemName);
+	}
 
 	public static String getProductName()
 	{

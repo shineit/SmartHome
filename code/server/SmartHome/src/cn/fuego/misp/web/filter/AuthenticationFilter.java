@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.user.UserModel;
@@ -32,9 +33,7 @@ public class AuthenticationFilter implements Filter
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
 	private static final String LOGIN_URL_FLAG = "login";
-	private static final  String REST = "rest";
-	private static final  String RES_PAGE = ".js";
-	private static final  String RESOURCE = "resource";
+ 
 
 	//private static final  String LOGIN_PAGE = "login/login!home.action";
 
@@ -49,8 +48,7 @@ public class AuthenticationFilter implements Filter
 		 //the url does not contains login url, we should check login or not
 		 if(!url.endsWith(httpRequest.getContextPath()) 
 			&& !url.endsWith(httpRequest.getContextPath()+"/")
-			&& !url.contains(REST)
-			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !url.contains(RES_PAGE) && !url.contains(RESOURCE))
+			&& url.toLowerCase().indexOf(LOGIN_URL_FLAG)<0 && !isExcludePath(url))
 		 {
 			 log.info("the url need verify");
 		     UserModel loginUser = (UserModel) session.getAttribute(SessionAttrNameConst.LOGIN_USER);
@@ -66,7 +64,26 @@ public class AuthenticationFilter implements Filter
 		chain.doFilter(request, httpResponse);
 	}
 
+	private boolean isExcludePath(String url)
+	{
+		 String exPath = SystemConfigInfo.getConfigItem("EXCLUDLE_PATH");
+		 if(ValidatorUtil.isEmpty(exPath))
+		 {
+			 log.warn("the exclude path is empty");
+			 return false;
+		 }
+		 log.info("the exclude path is " + exPath);
 
+		 String[] pathArry = exPath.split(",");
+		 for(int i=0;i<pathArry.length;i++)
+		 {
+			 if(url.contains(pathArry[i]))
+			 {
+				 return true;
+			 }
+		 }
+		 return false;
+	}
 	/* (non-Javadoc)
 	 * @see javax.servlet.Filter#destroy()
 	 */
