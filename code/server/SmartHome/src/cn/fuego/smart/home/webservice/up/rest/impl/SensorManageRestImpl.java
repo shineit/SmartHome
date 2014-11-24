@@ -99,7 +99,7 @@ public class SensorManageRestImpl implements SensorManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest#setSensor(cn.fuego.smart.home.webservice.from.client.model.GetHistoryAlarmListReq)
 	 */
 	@Override
-	public GetHistoryAlarmListRsp setSensor(GetHistoryAlarmListReq req)
+	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req)
 	{
 		GetHistoryAlarmListRsp rsp = new GetHistoryAlarmListRsp();
 		List<Alarm> alarmList = sensorService.getAlarmDataSource(req.getUserID()).getAllPageData();

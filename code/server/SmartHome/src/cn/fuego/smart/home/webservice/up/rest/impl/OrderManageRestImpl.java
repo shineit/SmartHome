@@ -19,6 +19,7 @@ import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.ServiceOrderManageService;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
+import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderReq;
@@ -66,7 +67,7 @@ public class OrderManageRestImpl implements OrderManageRest
 	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq req)
 	{
 		SetServiceOrderRsp rsp = new SetServiceOrderRsp();
-		ServiceOrder order = req.getServiceOrder().getSergviceOrder();
+		ServiceOrder order = ModelConvert.jsonToServiceOrder(req.getServiceOrder());
 		
 		try
 		{

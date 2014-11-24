@@ -84,7 +84,7 @@ function resetForm(objForm){
 			<div class="headerNav">
 				<a class="logo" href="javascript:void(0)">链接到云安防产品平台</a>
 				<ul class="nav">
-                    <li>欢迎您，用户：${loginUser.userName}!</li>
+                    <li>欢迎您，用户：${loginUser.userName}</li>
 	 
 					<li><a href="<%=request.getContextPath()%>/client/manage/passwordModify.jsp" target="dialog" width="600">密码修改</a></li> 
  
@@ -169,7 +169,7 @@ function resetForm(objForm){
 		e.initEvent("click", true, true);
 		document.getElementById("Home").dispatchEvent(e);
 	}
-	}, 500);
+	}, 1000);
  });
 </script>
 </body>

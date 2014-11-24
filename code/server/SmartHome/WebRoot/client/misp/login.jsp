@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<s:form action="login/login" method="POST" theme="simple" name="loginForm">
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="user.userName" size="16" class="login_input" style="width:140px !important;"/>
+						<input id ="userName" type="text" name="user.userName" size="16" class="login_input" style="width:140px !important;"/>
 					</p>
 					<p>
 						<label>密码：</label>
