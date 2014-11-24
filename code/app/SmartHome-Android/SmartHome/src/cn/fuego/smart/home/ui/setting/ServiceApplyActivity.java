@@ -117,8 +117,8 @@ public class ServiceApplyActivity extends Activity implements View.OnClickListen
 		serviceOrder.setOrderType(this.getApplyType());
 		serviceOrder.setOrderName(this.getTextName().getText().toString().trim());
 		serviceOrder.setContent(this.getTextContent().getText().toString().trim());
-		//serviceOrder.setContactName(this.getTextPerson().getText().toString().trim());
-		serviceOrder.setContactName("你好");
+		serviceOrder.setContactName(this.getTextPerson().getText().toString().trim());
+	
 		serviceOrder.setPhoneNum(this.getTextPhone().getText().toString().trim());
 		serviceOrder.setContactAddr(this.getTextAddr().getText().toString().trim());
 		

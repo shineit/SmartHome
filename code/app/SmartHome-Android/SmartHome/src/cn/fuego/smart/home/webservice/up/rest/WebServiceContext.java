@@ -1,14 +1,8 @@
 package cn.fuego.smart.home.webservice.up.rest;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-
 import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispProxyFactory;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
