@@ -42,7 +42,7 @@ public class ServiceActivity extends Activity implements View.OnClickListener
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.service);
-		Button back_btn=(Button)findViewById(R.id.apply_back);
+		Button back_btn=(Button)findViewById(R.id.service_back);
 		back_btn.setOnClickListener(this);
 		back_btn.setTag(1);
 		

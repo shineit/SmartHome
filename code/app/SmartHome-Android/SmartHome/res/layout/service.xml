@@ -27,7 +27,7 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/apply_back"
+                android:id="@+id/service_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -45,12 +45,12 @@
                 android:id="@+id/add_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/apply_back"
-                android:layout_alignBottom="@+id/apply_back"
+                android:layout_alignBaseline="@+id/service_back"
+                android:layout_alignBottom="@+id/service_back"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:background="@null"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="添加"
                 android:textColor="@color/white" />
 
@@ -101,7 +101,8 @@
             android:id="@+id/order_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@null" >
+            android:divider="@color/backcolor"
+            android:dividerHeight="1dp" >
 
         </ListView>
 

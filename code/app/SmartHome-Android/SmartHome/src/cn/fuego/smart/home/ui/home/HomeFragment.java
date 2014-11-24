@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
         }
 	    
 	    // 切换radiobutton监听
-		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.apply_type_group);
+		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.nav_group);
 		group.setOnCheckedChangeListener(this);
 		return rootView;
 	}

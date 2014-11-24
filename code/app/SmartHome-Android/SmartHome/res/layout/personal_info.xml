@@ -27,7 +27,7 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/apply_back"
+                android:id="@+id/personInfo_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -61,7 +61,7 @@
                 android:src="@drawable/login_input" />
 
             <TextView
-                android:id="@+id/item_time"
+                android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/item_icon"
@@ -73,7 +73,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/TextView01"
+                android:id="@+id/txt_email"
                 style="android:editTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             </EditText>
 
             <TextView
-                android:id="@+id/item_news_time"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/item_time"
@@ -105,7 +105,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/item_news_time"
+                android:layout_alignBottom="@+id/service_id"
                 android:layout_alignLeft="@+id/TextView01"
                 android:layout_alignRight="@+id/item_icon"
                 android:paddingLeft="15dp"
@@ -116,7 +116,7 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/person_info_btn"
+            android:id="@+id/modify_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
