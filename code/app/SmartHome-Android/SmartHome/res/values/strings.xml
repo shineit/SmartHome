@@ -19,5 +19,6 @@
     <string name="title_activity_sin">SinActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_service">ServiceActivity</string>
+    <string name="title_activity_service_apply">ServiceApplyActivity</string>
 
 </resources>

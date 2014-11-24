@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 	
 	private static final int[] newsViewAttrs= new int[]
 	{
-		R.id.item_news_title,R.id.item_news_time
+		R.id.item_news_title,R.id.service_id
 	};
 	private static final String[] newsItemAttrs = new String[]{"title","time"};
 
@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
         }
 	    
 	    // 切换radiobutton监听
-		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.nav_group);
+		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.apply_type_group);
 		group.setOnCheckedChangeListener(this);
 		return rootView;
 	}

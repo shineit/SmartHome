@@ -113,30 +113,25 @@
         android:layout_gravity="center_horizontal" >
 
         <Button
-            android:id="@+id/loginbtn"
-            style="@null"
-            android:layout_width="120dp"
+            android:id="@+id/update_btn"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:alpha="255"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/login_button"
-            android:enabled="true"
-            android:focusableInTouchMode="true"
-            android:onClick="loginClick"
-            android:text="登    录"
+            android:text="更    新"
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/about_btn"
-            android:layout_width="120dp"
+            android:id="@+id/login_btn"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/loginbtn"
+            android:layout_marginRight="10dp"
             android:background="@drawable/login_button"
-            android:enabled="true"
-            android:focusableInTouchMode="true"
-            android:text="更    新"
+            android:text="登    录"
             android:textColor="@color/white" />
 
     </RelativeLayout>

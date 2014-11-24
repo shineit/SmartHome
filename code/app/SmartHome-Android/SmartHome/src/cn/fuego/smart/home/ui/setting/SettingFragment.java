@@ -1,9 +1,9 @@
 package cn.fuego.smart.home.ui.setting;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,15 +20,15 @@ public class SettingFragment extends Fragment implements View.OnClickListener
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.setting_fragment, null);
 		
-		Button person_btn=(Button) rootView.findViewById(R.id.person_info_btn);
+		Button person_btn=(Button) rootView.findViewById(R.id.add_apply);
 		person_btn.setOnClickListener(this);
 		person_btn.setTag(1);
 		
-		Button about_btn=(Button) rootView.findViewById(R.id.about_btn);
+		Button about_btn=(Button) rootView.findViewById(R.id.apply_cancel_btn);
 		about_btn.setOnClickListener(this);
 		about_btn.setTag(2);
 		
-		Button rank_btn=(Button) rootView.findViewById(R.id.rank_btn);
+		Button rank_btn=(Button) rootView.findViewById(R.id.apply_sure_btn);
 		rank_btn.setOnClickListener(this);
 		rank_btn.setTag(3);
 		
@@ -55,13 +55,15 @@ public class SettingFragment extends Fragment implements View.OnClickListener
 	public void onClick(View v)
 	{
 		int tag = (Integer) v.getTag();
+		Intent intent = null;
 		switch(tag)
 		{
 		case 1:;
 		case 2:;
 		case 3:;
 		case 4:;
-		case 5:;
+		case 5:  intent = new Intent(this.getActivity(),ServiceActivity.class);
+	    		 startActivity(intent);
 		case 6:;
 		case 7:;
 		default:break;

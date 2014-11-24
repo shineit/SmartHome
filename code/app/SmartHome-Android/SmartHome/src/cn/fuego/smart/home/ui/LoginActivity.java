@@ -11,6 +11,7 @@ import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
@@ -23,6 +24,7 @@ import com.fuego.smarthome.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
@@ -43,6 +45,8 @@ public class LoginActivity extends Activity
 	private FuegoLog log = FuegoLog.getLog(getClass());
 	private Button loginBtn;
     private EditText textName,textPwd;
+    private String 	userName,password;
+
 
     @Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +55,7 @@ public class LoginActivity extends Activity
 		setContentView(R.layout.login);
 		textName = (EditText) findViewById(R.id.txt_username);
 		textPwd =(EditText) findViewById(R.id.txt_password);
-		loginBtn = (Button)findViewById(R.id.loginbtn);
+		loginBtn = (Button)findViewById(R.id.login_btn);
 		loginBtn.setOnClickListener(loginClick);
 
 		
@@ -71,11 +75,9 @@ public class LoginActivity extends Activity
 	private void checkLogin()
 	{
 
-		
-		String userName,password;
-		userName =textName.getText().toString();
+		userName =textName.getText().toString().trim();
 		//password =textPwd.getText().toString();
-		password =MD5(textPwd.getText().toString());
+		password =MD5(textPwd.getText().toString().trim());
 		LoginReq req = new LoginReq();
 		req.setPassword(password);
 		req.setUserName(userName);
@@ -94,9 +96,15 @@ public class LoginActivity extends Activity
 				LoginRsp rsp = (LoginRsp)msg.obj;
 				if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
 				{
+					//存放个人信息cookie
+					SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
+					userInfo.edit().putString(SharedPreferenceConst.NAME, userName).commit();
+					userInfo.edit().putString(SharedPreferenceConst.PASSWORD, password).commit();
+
 					Intent intent = new Intent();
 					intent.setClass(LoginActivity.this, MainTabbarActivity.class);
 					startActivity(intent);
+					MemoryCache.setToken(rsp.getToken());
 					LoginActivity.this.finish();					
 					
 				}

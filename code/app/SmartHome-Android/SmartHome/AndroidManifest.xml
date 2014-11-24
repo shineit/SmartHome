@@ -34,12 +34,12 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".ServiceActivity"
-            android:label="@string/title_activity_service"
-            android:parentActivityName="android.support.v4.app.FragmentActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.support.v4.app.FragmentActivity" />
+            android:name="cn.fuego.smart.home.ui.setting.ServiceActivity"
+            android:label="@string/title_activity_service" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.setting.ServiceApplyActivity"
+            android:label="@string/title_activity_service_apply" >
         </activity>
     </application>
 
