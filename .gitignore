@@ -26,3 +26,4 @@ project.pbxproj
 code/server/SmartHome/WebRoot/WEB-INF/classes/
 code/app/SmartHome-Android/SmartHome/bin/
 code/app/SmartHome-Android/SmartHome/gen/
+code/app/SmartHome-Android/SmartHome/gen/com/fuego/smarthome/R.java

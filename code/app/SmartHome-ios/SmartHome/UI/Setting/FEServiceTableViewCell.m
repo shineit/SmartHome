@@ -23,7 +23,7 @@
     if (self) {
         // Initialization code
         [self setup];
-        _typeArray = [NSArray arrayWithObjects:FEString(@"ORDER_INSTALL"),FEString(@"ORDER_REPAIR"), nil];
+        _typeArray = [NSArray arrayWithObjects:FEString(@"ORDER_INSTALL"),FEString(@"ORDER_REPAIR"),FEString(@"ORDER_CONSULT"), nil];
     }
     return self;
 }
