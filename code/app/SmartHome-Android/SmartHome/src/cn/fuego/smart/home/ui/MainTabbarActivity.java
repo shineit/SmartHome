@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.camera.CameraFragment;
 import cn.fuego.smart.home.ui.control.ControlFragment;
 import cn.fuego.smart.home.ui.home.HomeFragment;
@@ -45,7 +46,7 @@ public class MainTabbarActivity extends FragmentActivity
     public void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
         setContentView(R.layout.activity_main_tabbar);  
-        
+        ExitApplication.getInstance().addActivity(this);
               
         initView();  
     }  

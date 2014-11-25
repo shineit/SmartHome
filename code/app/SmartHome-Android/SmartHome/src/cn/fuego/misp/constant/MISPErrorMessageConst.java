@@ -34,6 +34,11 @@ public class MISPErrorMessageConst
 	public static final int USER_EXISTED = 7;//用户已存在
 	
 
+	public static final int RESULT_NULL = 8;//搜索结果为空
+	
+	
+	public static final int NET_FAIL = 9 ; // 
+
 	public static String getMessageByErrorCode(int errorCode)
 	{
 		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));

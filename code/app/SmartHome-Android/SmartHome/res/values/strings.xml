@@ -20,5 +20,9 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_service">ServiceActivity</string>
     <string name="title_activity_service_apply">ServiceApplyActivity</string>
+    <string name="title_activity_user_manage">UserManageActivity</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
+    <string name="title_activity_modify_pwd">ModifyPwdActivity</string>
+    <string name="title_activity_logout">LogoutActivity</string>
 
 </resources>

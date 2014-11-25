@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
+import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
+
 import com.fuego.smarthome.R;
 
 public class SettingFragment extends Fragment implements View.OnClickListener
@@ -20,7 +23,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.setting_fragment, null);
 		
-		Button person_btn=(Button) rootView.findViewById(R.id.person_info_btn);
+		Button person_btn=(Button) rootView.findViewById(R.id.user_center_btn);
 		person_btn.setOnClickListener(this);
 		person_btn.setTag(1);
 		
@@ -58,7 +61,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener
 		Intent intent = null;
 		switch(tag)
 		{
-		case 1:;
+		case 1: intent = new Intent(this.getActivity(),UserManageActivity.class);
+				startActivity(intent);
+				break;
 		case 2:;
 		case 3:;
 		case 4:;

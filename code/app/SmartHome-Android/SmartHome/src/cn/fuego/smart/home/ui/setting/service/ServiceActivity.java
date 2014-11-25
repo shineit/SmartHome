@@ -1,34 +1,31 @@
-package cn.fuego.smart.home.ui.setting;
+package cn.fuego.smart.home.ui.setting.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.base.BaseActivtiy;
+import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
-import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 import com.fuego.smarthome.R;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-
-public class ServiceActivity extends Activity implements View.OnClickListener
+public class ServiceActivity extends BaseActivtiy implements View.OnClickListener
 {
 	private static final int[] serviceViewAttrs = new int[]
 	{ R.id.service_id, R.id.service_title,R.id.apply_name };
@@ -42,6 +39,8 @@ public class ServiceActivity extends Activity implements View.OnClickListener
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.service);
+		ExitApplication.getInstance().addActivity(this);
+		
 		Button back_btn=(Button)findViewById(R.id.service_back);
 		back_btn.setOnClickListener(this);
 		back_btn.setTag(1);

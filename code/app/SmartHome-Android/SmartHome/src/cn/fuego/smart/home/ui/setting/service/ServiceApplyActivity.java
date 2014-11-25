@@ -1,38 +1,30 @@
-package cn.fuego.smart.home.ui.setting;
+package cn.fuego.smart.home.ui.setting.service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.base.BaseActivtiy;
+import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderReq;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderRsp;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 import com.fuego.smarthome.R;
-import com.fuego.smarthome.R.layout;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-
-public class ServiceApplyActivity extends Activity implements View.OnClickListener,OnCheckedChangeListener
+public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickListener,OnCheckedChangeListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 	private EditText textName,textContent,textPerson,textPhone,textAddr;
@@ -42,6 +34,8 @@ public class ServiceApplyActivity extends Activity implements View.OnClickListen
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.service_apply);
+		ExitApplication.getInstance().addActivity(this);
+		
 		Button back_btn=(Button)findViewById(R.id.apply_back);
 		back_btn.setOnClickListener(this);
 		back_btn.setTag(1);
@@ -134,19 +128,15 @@ public class ServiceApplyActivity extends Activity implements View.OnClickListen
 				// TODO Auto-generated method stub
 				super.handleMessage(msg);
 				SetServiceOrderRsp rsp = (SetServiceOrderRsp) msg.obj;
-				Toast toast;
+				
 				if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
 				{
-					toast = Toast.makeText(getApplicationContext(), MISPErrorMessageConst.getMessageByErrorCode(rsp.getResult().getErrorCode()), Toast.LENGTH_SHORT);
-					toast.show();
+
 					Intent intent = new Intent(ServiceApplyActivity.this, ServiceActivity.class);  
 	                startActivity(intent);
 				}
-				else
-				{
-					toast = Toast.makeText(getApplicationContext(), MISPErrorMessageConst.getMessageByErrorCode(rsp.getResult().getErrorCode()), Toast.LENGTH_SHORT);
-					toast.show();
-				}
+
+				showMessage(rsp);
 				
 			}
 		}).setServiceOrder(req);
