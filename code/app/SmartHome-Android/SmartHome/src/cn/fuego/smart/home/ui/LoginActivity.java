@@ -1,5 +1,8 @@
 package cn.fuego.smart.home.ui;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
@@ -77,37 +81,36 @@ public class LoginActivity extends BaseActivtiy
 		req.setClientVersion(MemoryCache.getVersion());
 		req.setDevToken( getDeviceID());
 		
-		WebServiceContext.getInstance().getUserManageRest(new Handler(){
+		WebServiceContext.getInstance().getUserManageRest(this).login(req);
+ 
+	}
 
-			@Override
-			public void handleMessage(Message msg)
-			{
-				// TODO Auto-generated method stub
-				super.handleMessage(msg);
-				//LoginRsp rsp = WebServiceContext.getInstance().getUserManageRest(null).login(req);
-				LoginRsp rsp = (LoginRsp)msg.obj;
-				if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
-				{
-					//存放个人信息cookie
-					SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
-					userInfo.edit().putString(SharedPreferenceConst.NAME, userName).commit();
-					userInfo.edit().putString(SharedPreferenceConst.PASSWORD, password).commit();
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		if (this.isMessageSuccess(message))
+		{
+			LoginRsp rsp = (LoginRsp) message.getMessage().obj;
 
-					Intent intent = new Intent();
-					intent.setClass(LoginActivity.this, MainTabbarActivity.class);
-					startActivity(intent);
-					MemoryCache.setToken(rsp.getToken());
-					LoginActivity.this.finish();					
-					
-				}
-				proDialog.dismiss();
-				showMessage(rsp);
-                 
+			// 存放个人信息cookie
+			SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
+			userInfo.edit().putString(SharedPreferenceConst.NAME, userName).commit();
+			userInfo.edit().putString(SharedPreferenceConst.PASSWORD, password).commit();
 
-			}
-			
-		}).login(req);
+			Intent intent = new Intent();
+			intent.setClass(LoginActivity.this, MainTabbarActivity.class);
+			startActivity(intent);
+			MemoryCache.setToken(rsp.getToken());
+			LoginActivity.this.finish();
+
+		}
+		else
+		{
+			this.showMessage(message);
+		}
 		
+		proDialog.dismiss();
+
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

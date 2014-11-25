@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
@@ -50,6 +51,8 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 		group.setOnCheckedChangeListener(this); 
 		
 		textName =(EditText) findViewById(R.id.apply_name);
+		textName.requestFocus();            
+		textName.requestFocusFromTouch();
 		textContent =(EditText) findViewById(R.id.apply_content);
 		textPerson = (EditText) findViewById(R.id.contact_person);
 		textPhone = (EditText) findViewById(R.id.contact_phone);
@@ -121,25 +124,7 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 		serviceOrder.setCreator(userInfo.getString(SharedPreferenceConst.NAME, ""));
 		//URLEncoder.encode(serviceOrder.getOrderName(), "utf-8");
 		req.setServiceOrder(serviceOrder);
-		WebServiceContext.getInstance().getOrderManageRest(new Handler(){
-			@Override
-			public void handleMessage(Message msg)
-			{
-				// TODO Auto-generated method stub
-				super.handleMessage(msg);
-				SetServiceOrderRsp rsp = (SetServiceOrderRsp) msg.obj;
-				
-				if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
-				{
-
-					Intent intent = new Intent(ServiceApplyActivity.this, ServiceActivity.class);  
-	                startActivity(intent);
-				}
-
-				showMessage(rsp);
-				
-			}
-		}).setServiceOrder(req);
+		WebServiceContext.getInstance().getOrderManageRest(this).setServiceOrder(req);
 		
 	}
 
@@ -172,6 +157,21 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	public EditText getTextAddr()
 	{
 		return textAddr;
+	}
+
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		SetServiceOrderRsp rsp = (SetServiceOrderRsp) message.getMessage().obj;
+		
+		if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
+		{
+
+			Intent intent = new Intent(ServiceApplyActivity.this, ServiceActivity.class);  
+            startActivity(intent);
+		}
+
+		showMessage(message);
 	}
 	
 }

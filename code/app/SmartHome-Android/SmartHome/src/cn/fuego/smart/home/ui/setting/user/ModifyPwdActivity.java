@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.ui.LoginActivity;
@@ -76,24 +77,7 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 				req.setPwdNew(this.MD5(this.getTrimText(txt_newPwd1)));
 				SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
 				req.setUserName(userInfo.getString(SharedPreferenceConst.NAME, ""));
-				WebServiceContext.getInstance().getUserManageRest(new Handler(){
-					@Override
-					public void handleMessage(Message msg)
-					{
-						// TODO Auto-generated method stub
-						super.handleMessage(msg);
-						ModifyPwdRsp rsp = (ModifyPwdRsp) msg.obj;
-						if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
-						{
-
-							Intent intent = new Intent(ModifyPwdActivity.this, LoginActivity.class);  
-			                startActivity(intent);
-			                finish();
-						}
-
-						showMessage(rsp);
-					}
-				}).modifyPassword(req);
+				WebServiceContext.getInstance().getUserManageRest(this).modifyPassword(req);
 				
 			}
 			else
@@ -110,5 +94,22 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 		
 		
 		
+	}
+
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+
+		ModifyPwdRsp rsp = (ModifyPwdRsp) message.getMessage().obj;
+		if (ErrorMessageConst.SUCCESS == rsp.getResult().getErrorCode())
+		{
+
+			Intent intent = new Intent(ModifyPwdActivity.this,LoginActivity.class);
+			startActivity(intent);
+			finish();
+		}
+
+		showMessage(message);
+
 	}
 }

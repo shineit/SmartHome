@@ -23,7 +23,7 @@ import android.os.Handler;
  */
 public class MispProxyFactory
 {
-	public static <T> T create(String base,Class<T> clazz, HttpClient httpClient, Handler handler)
+	public static <T> T create(String base,Class<T> clazz, HttpClient httpClient, HttpListener handler)
 	{
 	 
 	   

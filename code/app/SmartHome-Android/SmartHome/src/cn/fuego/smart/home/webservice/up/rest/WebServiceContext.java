@@ -2,8 +2,10 @@ package cn.fuego.smart.home.webservice.up.rest;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
-import android.os.Handler;
+import org.apache.http.params.CoreConnectionPNames;
+
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispProxyFactory;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 
@@ -28,7 +30,7 @@ public class WebServiceContext
 		}
 		return instance;
 	}
-	public SensorManageRest getSensorManageRest(Handler handler)
+	public SensorManageRest getSensorManageRest(HttpListener handler)
 	{
 		
 		SensorManageRest rest = MispProxyFactory.create( hostURL,SensorManageRest.class, getHttpClient(),handler);
@@ -36,7 +38,7 @@ public class WebServiceContext
 		return rest;
 	}
 	
-	public NewsManageRest getNewsManageRest(Handler handler)
+	public NewsManageRest getNewsManageRest(HttpListener handler)
 	{
  
 		NewsManageRest rest = MispProxyFactory.create( hostURL,NewsManageRest.class, getHttpClient(),handler);
@@ -45,12 +47,15 @@ public class WebServiceContext
 	}
 	private HttpClient getHttpClient()
 	{
-		HttpClient httpClient = new DefaultHttpClient();  
-
+		HttpClient httpClient = new DefaultHttpClient();
+		//请求超时
+		httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+		//读取超时
+		httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
 		return httpClient;
 
 	}
-	public UserManageRest getUserManageRest(Handler handler)
+	public UserManageRest getUserManageRest(HttpListener handler)
 	{
  
 		UserManageRest rest = MispProxyFactory.create( hostURL,UserManageRest.class, getHttpClient(),handler);
@@ -58,7 +63,7 @@ public class WebServiceContext
 		return rest;
 	}	
 
-	public  OrderManageRest getOrderManageRest(Handler handler)
+	public  OrderManageRest getOrderManageRest(HttpListener handler)
 	{
 		OrderManageRest rest = MispProxyFactory.create( hostURL,OrderManageRest.class, getHttpClient(),handler);
 		return rest;

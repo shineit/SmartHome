@@ -28,6 +28,7 @@ import org.jboss.resteasy.util.IsHttpMethod;
 import android.os.Handler;
 import android.os.Message;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 
 /**
@@ -51,9 +52,9 @@ public class MispHttpClientInvoker extends Thread
 	protected Method method;
 	protected Object[] argObjects;
 	protected HttpClient httpClient;
-	protected Handler handler;
+	protected HttpListener handler;
  
-	public MispHttpClientInvoker(URI baseUri,Class<?> calzz,Method method,HttpClient httpClient, Handler handler)
+	public MispHttpClientInvoker(URI baseUri,Class<?> calzz,Method method,HttpClient httpClient, HttpListener handler)
 	{
 		this.uri = new UriBuilderImpl();
 		this.handler = handler;
@@ -77,6 +78,9 @@ public class MispHttpClientInvoker extends Thread
 	public void run() {
 		// TODO Auto-generated method stub
 		super.run();
+		
+		MispHttpMessage msg = new MispHttpMessage();
+
 		Object rspObj = null;
 		try
 		{
@@ -93,14 +97,15 @@ public class MispHttpClientInvoker extends Thread
 			ObjectMapper mapper = new ObjectMapper();
 			
 			rspObj = mapper.readValue(content,method.getReturnType());
-			Message msg = new Message();
-			msg.obj = rspObj;
-			handler.sendMessage(msg);
+			msg.getMessage().obj = rspObj;
+			
 			 
 		} catch (Exception e)
 		{
-			throw new MISPException("call http failed",e);
+			log.error("call http failed.",e);
+			msg.getMessage().what = MISPErrorMessageConst.NET_FAIL;
 		}
+		handler.sendMessage(msg);
 		
 	}
 

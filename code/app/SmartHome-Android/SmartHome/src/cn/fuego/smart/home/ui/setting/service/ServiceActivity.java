@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.service.MemoryCache;
@@ -59,32 +60,7 @@ public class ServiceActivity extends BaseActivtiy implements View.OnClickListene
 		GetServiceOrderListReq req = new GetServiceOrderListReq();
 		req.setToken(MemoryCache.getToken());
 		//req.setUserID(userID);
-		WebServiceContext.getInstance().getOrderManageRest(new Handler(){
-			@Override
-			public void handleMessage(Message msg)
-			{
-				// TODO Auto-generated method stub
-				super.handleMessage(msg);
-				GetServiceOrderListRsp rsp = (GetServiceOrderListRsp) msg.obj;
-				serviceItems.clear();
-				if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
-				{
-					for(ServiceOrderJson json : rsp.getOrderList())
-					{
-						 Map<String, Object> listItem = new HashMap<String, Object>();
-						 listItem.put(serviceItemAttrs[0], json.getOrderID());
-						 listItem.put(serviceItemAttrs[1], json.getOrderName());
-						 listItem.put(serviceItemAttrs[2], ServiceOrderStatusEnum.getEnumByInt(json.getOrderStatus()).getStrValue());
-						 serviceItems.add(listItem);
-						 
-					}
-					serviceAdapter.notifyDataSetChanged();
-					
-				}
-
-			}
-			
-		}).getOrderList(req);
+		WebServiceContext.getInstance().getOrderManageRest(this).getOrderList(req);
 		
 	}
 
@@ -103,6 +79,31 @@ public class ServiceActivity extends BaseActivtiy implements View.OnClickListene
 
 		default:break;
 		}
+		
+	}
+
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		Message msg = message.getMessage();
+	 
+		GetServiceOrderListRsp rsp = (GetServiceOrderListRsp) msg.obj;
+		serviceItems.clear();
+		if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
+		{
+			for(ServiceOrderJson json : rsp.getOrderList())
+			{
+				 Map<String, Object> listItem = new HashMap<String, Object>();
+				 listItem.put(serviceItemAttrs[0], json.getOrderID());
+				 listItem.put(serviceItemAttrs[1], json.getOrderName());
+				 listItem.put(serviceItemAttrs[2], ServiceOrderStatusEnum.getEnumByInt(json.getOrderStatus()).getStrValue());
+				 serviceItems.add(listItem);
+				 
+			}
+			serviceAdapter.notifyDataSetChanged();
+			
+		}
+
 		
 	}
 

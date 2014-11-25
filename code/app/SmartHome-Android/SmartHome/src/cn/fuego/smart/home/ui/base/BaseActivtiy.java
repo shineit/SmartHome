@@ -7,15 +7,52 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.EditText;
-import cn.fuego.misp.ui.base.MispBaseActivtiy;
+import cn.fuego.misp.service.http.HttpListener;
+import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.base.MispHttpActivtiy;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 
-public class BaseActivtiy extends MispBaseActivtiy
+public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListener
 {
 
 	private Context contextDialog ;
-	
+
+	 
+	public boolean isNetSuccess(MispHttpMessage message)
+	{
+		if(ErrorMessageConst.SUCCESS != message.getMessage().what)
+		{
+			return false;
+		}
+		return true;
+	}
+	public boolean isMessageSuccess(MispHttpMessage message)
+	{
+		if(ErrorMessageConst.SUCCESS != message.getMessage().what)
+		{
+			return false;
+		}
+		if(ErrorMessageConst.SUCCESS != getErrorCode(message))
+		{
+			return false;
+		}
+		return true;
+		 
+	}
+	public int getErrorCode(MispHttpMessage message)
+	{
+		BaseJsonRsp rsp = (BaseJsonRsp) message.getMessage().obj;
+		if(null != rsp)
+		{
+			if(null != rsp.getResult())
+			{
+ 				return rsp.getResult().getErrorCode();
+			}
+		}
+		return ErrorMessageConst.NET_FAIL;
+	}
+ 
 	public void showMessage(String message)
 	{
 		super.showMessage(message);
@@ -24,17 +61,9 @@ public class BaseActivtiy extends MispBaseActivtiy
 	{
 		super.showMessage(errorCode);
 	}
-	public void showMessage(BaseJsonRsp rsp)
+	public void showMessage(MispHttpMessage message)
 	{
-		if(null != rsp)
-		{
-			if(null != rsp.getResult())
-			{
-				super.showMessage(rsp.getResult().getErrorCode());
-				return ;
-			}
-		}
-		super.showMessage(ErrorMessageConst.NET_FAIL);
+		super.showMessage(getErrorCode(message));
 		
 	}
 	public void exitDialog(Context context) { 

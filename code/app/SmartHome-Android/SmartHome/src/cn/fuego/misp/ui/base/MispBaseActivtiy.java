@@ -1,10 +1,13 @@
 package cn.fuego.misp.ui.base;
 
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.Toast;
 
-public class MispBaseActivtiy extends Activity
+public class MispBaseActivtiy extends Activity 
 {
 
 	public void showMessage(int errorCode)

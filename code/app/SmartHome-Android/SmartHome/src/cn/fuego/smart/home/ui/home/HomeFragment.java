@@ -7,9 +7,6 @@ import java.util.Map;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +16,12 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SimpleAdapter;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.base.BaseFragment;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
@@ -32,7 +32,7 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 import com.fuego.smarthome.R;
 
-public class HomeFragment extends Fragment implements OnCheckedChangeListener
+public class HomeFragment extends BaseFragment implements OnCheckedChangeListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
@@ -116,13 +116,13 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 	{
 		GetHistoryAlarmListReq req = new GetHistoryAlarmListReq();
 		req.setUserID(1);
-		WebServiceContext.getInstance().getSensorManageRest(new Handler(){
+		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
 			@Override
-			public void handleMessage(Message msg) {
+			public void handle(MispHttpMessage msg) {
 				// TODO Auto-generated method stub
-				super.handleMessage(msg);
+			 
 				 alarmItems.clear();
-				 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)msg.obj;
+				 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)msg.getMessage().obj;
 				 for(AlarmJson json : rsp.getAlarmList()){
 					 Map<String, Object> listItem = new HashMap<String, Object>();
 						//String[] alarmIcon =getResources().getStringArray(R.array.alarm_icons);
@@ -144,13 +144,13 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 	{
 		GetNewsListReq req = new GetNewsListReq();
 		req.setToken(MemoryCache.getToken());
-		WebServiceContext.getInstance().getNewsManageRest(new Handler(){
+		WebServiceContext.getInstance().getNewsManageRest(new MispHttpHandler(){
 			@Override
-			public void handleMessage(Message msg) {
+			public void handle(MispHttpMessage msg) {
 				// TODO Auto-generated method stub
-				super.handleMessage(msg);
+			 
 				newsItems.clear();
-				GetNewsListRsp rsp = (GetNewsListRsp)msg.obj;
+				GetNewsListRsp rsp = (GetNewsListRsp)msg.getMessage().obj;
 				for(NewsJson json : rsp.getNewsList())
 				{
 					Map<String, Object> listItem = new HashMap<String, Object>();
@@ -163,5 +163,26 @@ public class HomeFragment extends Fragment implements OnCheckedChangeListener
 				adapterNews.notifyDataSetChanged();
 			}
 		}).getNewsList(req);
+	}
+
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		alarmItems.clear();
+		 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)message.getMessage().obj;
+		 for(AlarmJson json : rsp.getAlarmList()){
+			 Map<String, Object> listItem = new HashMap<String, Object>();
+				//String[] alarmIcon =getResources().getStringArray(R.array.alarm_icons);
+				TypedArray alarmIcon=getResources().obtainTypedArray(R.array.alarm_icons);
+				listItem.put(alarmItemAttrs[0], alarmIcon.getResourceId(json.getAlarmType(), 0));
+				listItem.put(alarmItemAttrs[1], AlarmTypeEnum.getEnumByInt(json.getAlarmType()).getStrValue());
+				listItem.put(alarmItemAttrs[2], null);
+				listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
+				listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
+				alarmItems.add(listItem);
+		 }
+		//alarmViewList.setAdapter(adapterAlarm);
+		adapterAlarm.notifyDataSetChanged();
+		
 	}
 }

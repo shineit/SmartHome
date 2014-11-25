@@ -31,7 +31,7 @@ public class MispHttpClientProxy implements InvocationHandler
 	private Map<Method, MispHttpClientInvoker> methodMap = new HashMap<Method,MispHttpClientInvoker>();
 	private Class<?> clazz;
 
-	public MispHttpClientProxy(String base, Class<?> clazz, HttpClient httpClient, Handler handler)
+	public MispHttpClientProxy(String base, Class<?> clazz, HttpClient httpClient, HttpListener handler)
 	{
 
 		this.clazz = clazz;
