@@ -87,6 +87,7 @@
 -(void)rightbarpressed:(UIButton *)button{
 //    NSLog(@"add service!");
     FEServiceRequestVC *serviceRequest = [FEServiceRequestVC new];
+    serviceRequest.type = EDIT_SERVICE;
     [self.navigationController pushViewController:serviceRequest animated:YES];
 }
 
@@ -132,6 +133,16 @@
     label.text = FEString(@"ORDER_STATUS");
     [header addSubview:label];
     return header;
+}
+
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    FEServiceRequestVC *service = [FEServiceRequestVC new];
+    service.type = SHOW_SERVICE;
+    service.order = self.serviceDatas[indexPath.row];
+    
+    [service disableAllItem];
+    [self.navigationController pushViewController:service animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

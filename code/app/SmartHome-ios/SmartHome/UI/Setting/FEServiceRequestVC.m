@@ -15,6 +15,7 @@
 #import "FECoreDataHandler.h"
 #import "FEResult.h"
 #import "FEOrderSetResponse.h"
+#import "FEOrder.h"
 
 @interface FEServiceRequestVC (){
     NSArray *_ordertype;
@@ -149,24 +150,33 @@
     _address.text = @"test address";
     [content addSubview:_address];
     
-    //删除按钮
-    UIButton *del = [UIButton buttonWithType:UIButtonTypeCustom];
-    del.frame = CGRectMake(20, 360, 80, 40);
-    [del setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [del setTitle:FEString(@"ORDER_DELET") forState:UIControlStateNormal];
-    [scrollcontent addSubview:del];
-    
-    //提交按钮
-    FEButton *submit = [FEButton buttonWithType:UIButtonTypeCustom];
-    submit.frame = CGRectMake(220, 360, 80, 40);
-    [submit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [submit setTitle:FEString(@"ORDER_SUBMIT") forState:UIControlStateNormal];
-    [submit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
-    [scrollcontent addSubview:submit];
+    if (self.type == EDIT_SERVICE) {
+        //删除按钮
+        UIButton *del = [UIButton buttonWithType:UIButtonTypeCustom];
+        del.frame = CGRectMake(20, 360, 80, 40);
+        [del setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [del setTitle:FEString(@"ORDER_DELET") forState:UIControlStateNormal];
+        [scrollcontent addSubview:del];
+        
+        //提交按钮
+        FEButton *submit = [FEButton buttonWithType:UIButtonTypeCustom];
+        submit.frame = CGRectMake(220, 360, 80, 40);
+        [submit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [submit setTitle:FEString(@"ORDER_SUBMIT") forState:UIControlStateNormal];
+        [submit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+        [scrollcontent addSubview:submit];
+    }else if(self.order){
+        _titleTextField.text = self.order.orderName;
+        
+    }
     
     [self check:repair];
     
     
+}
+
+-(void)disableAllItem{
+    self.view.userInteractionEnabled = NO;
 }
 
 -(void)check:(FECheckButton *)btn{

@@ -8,6 +8,18 @@
 
 #import "FECommonViewController.h"
 
+@class FEOrder;
+
+typedef enum : NSUInteger {
+    SHOW_SERVICE,
+    EDIT_SERVICE,
+} SERVICE_TYPE;
+
 @interface FEServiceRequestVC : FECommonViewController
+
+@property (nonatomic, assign) SERVICE_TYPE type;
+@property (nonatomic, assign) FEOrder *order;
+
+-(void)disableAllItem;
 
 @end
