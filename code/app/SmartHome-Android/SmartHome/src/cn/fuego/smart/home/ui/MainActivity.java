@@ -18,31 +18,35 @@ public class MainActivity extends Activity
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.welcome);
+		setContentView(R.layout.main_welcome);
 
-		new CountDownTimer(2000,1000) {
-
-		@Override
-		public void onTick(long millisUntilFinished) {
-		}
-		@Override
-		public void onFinish() 
+		new CountDownTimer(2000, 1000)
 		{
-		Intent intent = new Intent();
-		intent.setClass(MainActivity.this, LoginActivity.class);
-		startActivity(intent);
 
-		int VERSION=Integer.parseInt(android.os.Build.VERSION.SDK);
-		if(VERSION >= 5)
-		{
-			MainActivity.this.overridePendingTransition(R.anim.alpha_in, R.anim.alpha_out);
-		}
-		finish();
-		}
+			@Override
+			public void onTick(long millisUntilFinished)
+			{
+			}
+
+			@Override
+			public void onFinish()
+			{
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, LoginActivity.class);
+				startActivity(intent);
+
+				@SuppressWarnings("deprecation")
+				int VERSION = Integer.parseInt(android.os.Build.VERSION.SDK);
+				if (VERSION >= 5)
+				{
+					MainActivity.this.overridePendingTransition(
+							R.anim.alpha_in, R.anim.alpha_out);
+				}
+				finish();
+			}
 		}.start();
-		}
+	}
 		
 }
