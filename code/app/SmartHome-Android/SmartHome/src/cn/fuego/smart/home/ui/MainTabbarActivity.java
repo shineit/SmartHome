@@ -82,7 +82,7 @@ public class MainTabbarActivity extends FragmentActivity
      */
     private View getTabItemView(int index){  
         View view = layoutInflater.inflate(R.layout.tabbar_item_view, null);  
-          
+        view.setPadding(0, 0, 0, 10);  
         ImageView imageView = (ImageView) view.findViewById(R.id.imageview);  
         imageView.setImageResource(mImageViewArray[index]);  
               

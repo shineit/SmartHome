@@ -63,15 +63,20 @@ public class SettingFragment extends Fragment implements View.OnClickListener
 		{
 		case 1: intent = new Intent(this.getActivity(),UserManageActivity.class);
 				startActivity(intent);
+				break;//个人中心
+		case 2: //关于我们
 				break;
-		case 2:;
-		case 3:;
-		case 4:;
+		case 3: //为我们评分
+				break;
+		case 4: //通知设置
+				break;
 		case 5:  intent = new Intent(this.getActivity(),ServiceActivity.class);
 	    		 startActivity(intent);
-	    		 break;
-		case 6:;
-		case 7:;
+	    		 break;//服务
+		case 6: //新功能
+				break;
+		case 7: //意见反馈
+				break;
 		default:break;
 		}
 		

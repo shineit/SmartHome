@@ -17,7 +17,7 @@
             android:layout_weight="1" >
 
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/alarm_event_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -42,8 +42,9 @@
 
             <RadioButton
                 android:id="@+id/nav_news"
-                android:layout_width="160dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_weight="1"
                 android:background="@drawable/nav_btn"
                 android:button="@null"
                 android:checked="false"
@@ -56,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
                 android:background="@drawable/nav_btn"
                 android:button="@null"
                 android:checked="true"

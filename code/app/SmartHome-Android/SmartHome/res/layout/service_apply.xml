@@ -89,7 +89,7 @@
                         <RadioButton
                             android:id="@+id/apply_repair"
                             android:layout_width="86dp"
-                            android:layout_height="31dp"
+                            android:layout_height="32dp"
                             android:checked="true"
                             android:text="维修"
                             android:textColor="@color/black" />
@@ -97,7 +97,7 @@
                         <RadioButton
                             android:id="@+id/apply_consult"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="32dp"
                             android:text="咨询"
                             android:textColor="@color/black" />
                     </RadioGroup>
@@ -128,7 +128,7 @@
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:paddingLeft="10dp"
-                        android:text="测试"
+                        android:singleLine="true"
                         android:textColor="@color/black" >
 
                         <requestFocus />
@@ -160,9 +160,7 @@
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:paddingLeft="10dp"
-                        android:text="测试"
                         android:textColor="@color/black" />
-
                 </RelativeLayout>
             </LinearLayout>
 
@@ -189,7 +187,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="5dp"
-                        android:text="联 系  人"
+                        android:text="联  系  人"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -201,7 +199,7 @@
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:paddingLeft="10dp"
-                        android:text="s&apos;c"
+                        android:singleLine="true"
                         android:textColor="@color/black" >
 
                         <requestFocus />
@@ -233,7 +231,7 @@
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:paddingLeft="10dp"
-                        android:text="1766666666"
+                        android:singleLine="true"
                         android:textColor="@color/black" />
 
                 </RelativeLayout>
@@ -263,7 +261,7 @@
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:paddingLeft="10dp"
-                        android:text="测试地址"
+                        android:singleLine="true"
                         android:textColor="@color/black" />
 
                 </RelativeLayout>

@@ -1,7 +1,5 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import java.util.List;
-
 import cn.fuego.smart.home.service.MemoryCache;
 
 /**

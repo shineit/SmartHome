@@ -40,5 +40,16 @@ public enum AlarmObjTypeEnmu
 	{
 		return strValue;
 	}
- 
+	public static AlarmObjTypeEnmu getEnumByInt(int intValue)
+	{
+		for (AlarmObjTypeEnmu c : AlarmObjTypeEnmu.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}	
+	
 }

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="个人信息"
+                android:text="个人中心"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
@@ -40,30 +40,121 @@
                 android:text="返回"
                 android:textColor="@color/white" />
 
+            <Button
+                android:id="@+id/modify_pwd_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/user_info_back"
+                android:layout_alignBottom="@+id/user_info_back"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:text="修改密码"
+                android:textColor="@color/white" />
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="321dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.06"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white" >
+            android:layout_marginBottom="20dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp" >
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="用户名"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/alarm_event_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@+id/TextView02"
+                    android:text="admin"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:id="@+id/alarm_view_objID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="邮    箱"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="70dp"
+                    android:background="@drawable/edittext_sel"
+                    android:ems="10"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true" >
+
+                    <requestFocus />
+                </EditText>
+
+            </RelativeLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/modify_userinfo_sure"
             android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:layout_margin="10dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/nav"
             android:text="修    改"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/un_focuse_btn"
+            android:text="退    出"
             android:textColor="@color/white" />
 
     </LinearLayout>

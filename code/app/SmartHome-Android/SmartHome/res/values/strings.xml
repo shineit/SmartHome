@@ -24,5 +24,6 @@
     <string name="title_activity_user_info">UserInfoActivity</string>
     <string name="title_activity_modify_pwd">ModifyPwdActivity</string>
     <string name="title_activity_logout">LogoutActivity</string>
+    <string name="title_activity_alarm_manage">AlarmManageActivity</string>
 
 </resources>

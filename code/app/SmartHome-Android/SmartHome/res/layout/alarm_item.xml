@@ -6,6 +6,15 @@
     android:background="@color/white"
     android:orientation="horizontal" >
 
+    <TextView
+        android:id="@+id/alarm_view_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="火警"
+        android:textColor="@color/black"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/item_alarm_icon"
         android:layout_width="wrap_content"
@@ -24,6 +33,20 @@
         android:textColor="@color/black" />
 
     <TextView
+        android:id="@+id/alarm_view_objID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="对象ID"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/alarm_view_obj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="告警对象"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/item_alarm_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,8 +54,15 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="30dp"
         android:layout_weight="0.43"
-        android:text="烟雾报警器"
+        android:text="暂未描述"
         android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/alarm_view_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="当前告警值"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="wrap_content"

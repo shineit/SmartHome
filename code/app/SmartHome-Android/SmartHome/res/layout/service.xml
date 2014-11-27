@@ -78,7 +78,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/alarm_manage_type"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"

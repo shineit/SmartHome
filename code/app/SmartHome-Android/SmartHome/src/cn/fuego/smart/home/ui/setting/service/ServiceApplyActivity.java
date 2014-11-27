@@ -169,6 +169,8 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 
 			Intent intent = new Intent(ServiceApplyActivity.this, ServiceActivity.class);  
             startActivity(intent);
+            
+            this.finish();
 		}
 
 		showMessage(message);
