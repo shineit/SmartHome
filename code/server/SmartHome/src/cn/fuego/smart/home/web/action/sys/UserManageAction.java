@@ -10,9 +10,6 @@ package cn.fuego.smart.home.web.action.sys;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.domain.SystemUser;
@@ -44,6 +41,11 @@ public class UserManageAction extends DWZTableAction<SystemUser>
        return this.filter.getConidtionList();	
     }
  
+	public String addUser()
+	{
+    	this.execute();
+		return "addUser";
+	}
 	public MispCommonService<SystemUser> getService()
 	{
 		return userService;

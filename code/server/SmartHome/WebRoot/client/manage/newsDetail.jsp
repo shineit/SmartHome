@@ -11,7 +11,7 @@
 <%
 String newsContent=request.getParameter("newsContent");
  %>
-<textarea style="width:98%;height:200px;font-size:1.5em;line-height:20px;">
+<textarea style="width:98%;height:200px;font-size:1.5em;line-height:20px;" readonly="readonly">
 
 <%=newsContent%>
 </textarea>

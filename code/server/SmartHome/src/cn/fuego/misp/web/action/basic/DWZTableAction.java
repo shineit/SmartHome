@@ -11,6 +11,7 @@ package cn.fuego.misp.web.action.basic;
 import java.util.Arrays;
 
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.web.model.message.MispMessageModel;
@@ -48,8 +49,11 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	}
 	
 	public String show()
-	{
-		 this.setObj(getService().get(this.getSelectedID()));
+	{ 
+		if(!ValidatorUtil.isEmpty(this.getSelectedID()))
+		{
+			this.setObj(getService().get(this.getSelectedID()));
+		}
 		
 		return this.getNextPage();
 	}
@@ -121,6 +125,8 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 		try
         {
 			this.getService().modify(this.getObj());
+			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+
         }
 		catch(MISPException e)
 		{

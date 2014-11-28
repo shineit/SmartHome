@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
 
 /**
  * @author Administrator
@@ -18,8 +19,11 @@ public class MispMessageReader
 
     private static final FuegoLog log = FuegoLog.getLog(MispMessageReader.class);
  
-    private static final String CONFIG_PATH = "mispMessage_en_US.properties";
+    private static final String MISP_MSG_PATH = "mispMessage_en_US.properties";
+    private static final String ERROR_MSG_PATH = "errorMessage_en_US.properties";
+
     private static MispMessageReader instance;
+    private Properties mispProp;
     private Properties prop;
 
     private MispMessageReader()
@@ -29,16 +33,23 @@ public class MispMessageReader
         {
             /* 而采用类加载器的话，能够更具有通用性 */
             /* 使用文件的读写的方式，文件的路径的相对路径确定了，不能修改 */
+        	mispProp = new Properties();
+            InputStream inStream = MispMessageReader.class.getClassLoader().getResourceAsStream(MISP_MSG_PATH);
+            mispProp.load(inStream);
+            
+            log.info(mispProp.toString());
+            
+            /* 而采用类加载器的话，能够更具有通用性 */
+            /* 使用文件的读写的方式，文件的路径的相对路径确定了，不能修改 */
             prop = new Properties();
-            InputStream inStream = MispMessageReader.class.getClassLoader()
-                    .getResourceAsStream(CONFIG_PATH);
-            prop.load(inStream);
+ 
+            prop.load(MispMessageReader.class.getClassLoader().getResourceAsStream(ERROR_MSG_PATH));
             
             log.info(prop.toString());
 
         } catch (Exception e)
         {
-            throw new ExceptionInInitializerError(e);
+            log.error("load misp message failed",e);
         }
     }
     
@@ -53,7 +64,34 @@ public class MispMessageReader
 
     public String getPropertyByName(String name)
     {
-        return prop.getProperty(name);
+    	String message = name;
+    	if(null == mispProp)
+    	{
+    	    log.warn("the misp property  is null");	
+    	}
+    	else
+    	{
+    		message = mispProp.getProperty(name);
+        	if(!ValidatorUtil.isEmpty(message))
+        	{
+        		return message;
+        	}
+    	}
+    	
+    	if(null == prop)
+    	{
+    	    log.warn("the property  is null");	
+    	}
+    	else
+    	{
+        	 message = prop.getProperty(name);
+        	if(ValidatorUtil.isEmpty(message))
+        	{
+        		log.warn("can not get the value by name. name is " + name);
+        		return name;
+        	}
+    	}
+        return message;
     }
 
     

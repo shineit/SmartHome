@@ -9,6 +9,7 @@
 package cn.fuego.smart.home.constant;
 
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.dao.file.MispMessageReader;
 
  /** 
  * @ClassName: ErrorMessageConst 
@@ -22,5 +23,11 @@ public class ErrorMessageConst extends MISPErrorMessageConst
  
 	
 	public static final int OPREATE_DEVICE_FAiLED= 10000 ; // 操作设备失败 
+	public static final int PERMISSION_EXISTED= 10001 ; // 该用户对集中器权限已经存在
+	
+	public static String getMessageByErrorCode(int errorCode)
+	{
+		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));
+	}
 
 }

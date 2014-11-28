@@ -1,12 +1,21 @@
 package cn.fuego.smart.home.web.action.device;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.ConcentFilterModel;
@@ -18,57 +27,83 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private TableDataModel<Concentrator> concentTable = new TableDataModel<Concentrator>();
+	private Log log = LogFactory.getLog(this.getClass());
+	
 	private ConcentratorManageService concentService = ServiceContext.getInstance().getConcentratorManageService();
 	private ConcentFilterModel filter = new ConcentFilterModel();
-	private Concentrator concent ;
-	@Override
-	public String execute()
+ 	
+	private TableDataModel<UserConcentrator> permissionTable = new TableDataModel<UserConcentrator>();
+	private UserConcentrator userPermission;
+	private String concentratorID;
+	
+	
+    @Override
+    public List<QueryCondition> getFilterCondition()
+    {
+    	return filter.getConidtionList();
+    }
+ 
+	public String showPermission()
 	{
-		concentTable.setPage(this.getPage());
-		concentTable.setDataSource(concentService.getDataSource(filter.getConidtionList()));
-
-		return SUCCESS;
+		concentratorID = this.getSelectedID();
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
+		permissionTable.setPage(this.getPage());
+		permissionTable.setDataSource(concentService.getPermissionDataSourceByID(conditionList));
+		return "addInfo";
+		
 	}
-	 
 
-	@Override
-	public String deleteList()
+	public String addPermission()
 	{
-		concentService.deleteConcentList(Arrays.asList(this.getSelectedIDList()));
-		return  MISP_DONE_PAGE;
+		
+		try
+		{
+			concentService.addPermission(userPermission);
+			this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
+			this.getOperateMessage().setNavTabId("peDialog");
+		
+		} catch (MISPException e)
+		{
+			
+			log.error("create user-concentrator permission failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			
+			log.error("create user-concentrator permission failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+
+		
+		return MISP_DONE_PAGE;
+		
 	}
-
-	@Override
-	public String modify()
+	public String modifyPermission()
 	{
-		concentService.modifyConcentInfo(concent);
+		userPermission = concentService.getPermissionByID(this.getSelectedID(),this.getConcentratorID());
+		return "modifyPermission";
+		
+	}
+	public String modifySure()
+	{
+		concentService.modifyPermission(userPermission);
 		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		this.getOperateMessage().setNavTabId("peDialog");
+		return MISP_DONE_PAGE;
+		
+	}	
+	public String deletePermission()
+	{
+		concentService.deletePermissionByID(this.getSelectedID(),this.getConcentratorID());
+		this.getOperateMessage().setNavTabId("peDialog");
 		return MISP_DONE_PAGE;
 	}
-
-	@Override
-	public String show()
-	{
-		concent = concentService.getConcentByID(this.getSelectedID());
-		return EDIT_INFO;
-	}
-	public TableDataModel<Concentrator> getConcentTable()
-	{
-		return concentTable;
-	}
-	public void setConcentTable(TableDataModel<Concentrator> concentTable)
-	{
-		this.concentTable = concentTable;
-	}
-	public ConcentratorManageService getConcentService()
-	{
-		return concentService;
-	}
-	public void setConcentService(ConcentratorManageService concentService)
-	{
-		this.concentService = concentService;
-	}
+ 
+ 
 	public ConcentFilterModel getFilter()
 	{
 		return filter;
@@ -77,13 +112,30 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	{
 		this.filter = filter;
 	}
-	public Concentrator getConcent()
+ 
+	public TableDataModel<UserConcentrator> getPermissionTable()
 	{
-		return concent;
+		return permissionTable;
 	}
-	public void setConcent(Concentrator concent)
+	public void setPermissionTable(TableDataModel<UserConcentrator> permissionTable)
 	{
-		this.concent = concent;
+		this.permissionTable = permissionTable;
+	}
+	public UserConcentrator getUserPermission()
+	{
+		return userPermission;
+	}
+	public void setUserPermission(UserConcentrator userPermission)
+	{
+		this.userPermission = userPermission;
+	}
+	public String getConcentratorID()
+	{
+		return concentratorID;
+	}
+	public void setConcentratorID(String concentratorID)
+	{
+		this.concentratorID = concentratorID;
 	}
 
 

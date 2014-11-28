@@ -8,8 +8,7 @@
 */ 
 package cn.fuego.smart.home.web.action.device;
 
-import cn.fuego.misp.service.MispCommonService;
-import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.action.basic.MISPAction;
 
 /** 
  * @ClassName: PlanManageAction 
@@ -18,17 +17,20 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
  * @date 2014-11-6 下午3:05:30 
  *  
  */
-public class PlanManageAction extends DWZTableAction
+public class PlanManageAction extends MISPAction
 {
 
-	/* (non-Javadoc)
-	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
+	/**
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Override
-	public MispCommonService getService()
+	public String execute()
 	{
-		// TODO Auto-generated method stub
-		return null;
+
+		return SUCCESS;
+		
 	}
 
 	 

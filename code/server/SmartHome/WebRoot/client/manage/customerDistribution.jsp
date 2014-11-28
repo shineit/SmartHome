@@ -12,15 +12,18 @@
 <script type="text/javascript">
 
 	//版面布局自适应
-	total = document.documentElement.clientHeight;
-	colHeight = total - 74;//84
+	totalHeight = document.documentElement.clientHeight;
+	totalWidth = document.documentElement.clientWidth;
+	colHeight = totalHeight - 74;//84
+	colWidth =totalWidth -200;
+	$("#accordionR").width(colWidth - 297 + "px");
 	$("#accordionR").height(colHeight - 30 + "px");
 	$("#all_map").height(colHeight - 45+ "px");
 </script> 
 <div class="pageContent">
 	<div class="accordion" style="width:100%;margin:0px;" id="">
 
-		<div class="accordionContent" style="width:30%;float:left;" id="">
+		<div class="accordionContent" style="width:280px;;float:left;" id="">
 
 		<s:form id="pagerForm" onsubmit="return navTabSearch(this);" action="device/CustomerDistribution" method="POST" >	
 				<div class="pageFormContent" style="overflow:hidden;">
@@ -28,13 +31,13 @@
 					<dl id="result">
 						<dt style="text-align:center;width:20%;">城市名称：</dt>
 						<dd>
-							<input id="cityName" type="text" size="30"  name="filter.cityName" value="${filter.cityName}"/>
+							<input id="cityName" type="text" size="20"  name="filter.cityName" value="${filter.cityName}"/>
 						</dd>
 					</dl>
 					<dl>
 						<dt style="text-align:center;width:20%;">集中器编号：</dt>
 						<dd>
-							<input id="conID" type="text" size="30"  name="filter.concentratorID" value="${filter.concentratorID}"/>
+							<input id="conID" type="text" size="20"  name="filter.concentratorID" value="${filter.concentratorID}"/>
 						</dd>
 					</dl>
 					<dl>
@@ -79,7 +82,7 @@
 			</div>
 </s:form>
 		</div>
-		<div class="accordionContent" style="width:70%;float:right;" id="accordionR">
+		<div class="accordionContent" style="float:right;" id="accordionR">
 			<div id="all_map" style="width:100%;float:right;"></div>
 		</div>
 	</div>
@@ -144,6 +147,8 @@ map.enableScrollWheelZoom(true);
 				enableMessage:false//设置允许信息窗发送短息
 			   };
 	for(var i=0;i<data_info.length;i++){
+	    //var icon = new BMap.Icon('pin.png', new BMap.Size(20, 32), { anchor: new BMap.Size(10, 30)});
+	   // var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]),{icon:icon});
 		var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]));  // 创建标注
 		var content = data_info[i][2];
 		map.addOverlay(marker);               // 将标注添加到地图中

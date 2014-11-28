@@ -8,15 +8,15 @@
 */ 
 package cn.fuego.misp.web.action.log;
 
-import java.util.Arrays;
+import java.util.List;
 
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.domain.OperLog;
 import cn.fuego.misp.service.MISPOperLogService;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.log.LogFilterModel;
-import cn.fuego.misp.web.model.page.TableDataModel;
 
 /** 
  * @ClassName: LogManageAction 
@@ -34,6 +34,11 @@ public class LogManageAction extends DWZTableAction<OperLog>
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
+    @Override
+    public List<QueryCondition> getFilterCondition()
+    {
+    	return filter.getConidtionList();
+    }
 	@Override
 	public MispCommonService<OperLog> getService()
 	{

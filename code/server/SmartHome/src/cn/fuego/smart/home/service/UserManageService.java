@@ -12,9 +12,6 @@ import cn.fuego.smart.home.domain.UserMark;
 public interface UserManageService extends MISPUserService
 {
  
-	void saveUserInfo(SystemUser sysUser);
-
-	void deleteUserList(List<String> userIDList);
 	
 	List<UserMark> getUseMark(int userID);
 	

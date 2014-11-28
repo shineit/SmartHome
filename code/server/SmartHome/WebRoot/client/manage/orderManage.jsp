@@ -60,19 +60,23 @@
 	</s:form>
 </div>
 <div class="pageContent">
-
-	<table class="table" width="100%" layoutH="86">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="delete" href="OrderManage!deleteList.action" onclick="submitFormN('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>批量删除</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
-			
+			<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
 				<th width="100" align="center">服务单号</th>
 				<th width="150" align="center">名称</th>
 				<th width="80" align="center">服务类型</th>
 				<th width="150" align="center">提交时间</th>
 				<th width="100" align="center">提交人</th>
-				<th width="80" align="center">处理状态</th>
-				<th width="150" align="center">处理时间</th>
+				<th width="80" align="center">处理状态</th>	
 				<th width="100" align="center">处理人</th>
+				<th width="150" align="center">处理时间</th>
 				<th width="80" align="center">操作</th>
 
 			</tr>
@@ -82,6 +86,7 @@
 
 	    <c:forEach var="e" items="${table.currentPageData}"> 		
 	        <tr target="sid_user" rel="${e.orderID}" > 
+	           	<td><input name="selectedIDList" value="${e.orderID}" type="checkbox" style="margin-top:5px;"></td>
 	            <td>${e.orderID}</td>
 	            <td>${e.orderName}</td>
 	            <td>
@@ -109,7 +114,7 @@
 	            </td>
 	            <td>${e.handler}</td>
 	            <td>${e.handleTime}</td>
-	        	<td><a title="处理申请" target="dialog" href="info/OrderManage!show.action?selectedID=${e.orderID}" class="btnEdit" >处理</a>
+	        	<td><a title="处理申请" target="dialog" href="info/OrderManage!show.action?selectedID=${e.orderID}&operateType=modify" class="btnEdit" >处理</a>
 	        	</td>
 			</tr>
 		</c:forEach> 

@@ -14,6 +14,7 @@ import java.util.List;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.ConcentratorPermissionEnum;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 
 /** 
@@ -32,6 +33,8 @@ public class ConcentFilterModel
 	private String cityName;//仅提供页面交互，数据库中不存在
 
 	private ConcentratorStatusEnum[]  concentStatusList = ConcentratorStatusEnum.values();
+	
+	private ConcentratorPermissionEnum[] permissionTypeList = ConcentratorPermissionEnum.values();
 	
 	public List<QueryCondition> getConidtionList()
     {
@@ -116,6 +119,15 @@ public class ConcentFilterModel
 		this.cityName = cityName;
 	}
 
+	public ConcentratorPermissionEnum[] getPermissionTypeList()
+	{
+		return permissionTypeList;
+	}
 
+	public void setPermissionTypeList(
+			ConcentratorPermissionEnum[] permissionTypeList)
+	{
+		this.permissionTypeList = permissionTypeList;
+	}
 
 }

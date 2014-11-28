@@ -64,13 +64,13 @@ function submitFormC(url){
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="delete" href="device/ConcentratorManage!deleteList.action" onclick="submitFormC('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>批量删除</span></a></li>
+			<!-- <li><a class="delete" href="device/ConcentratorManage!deleteList.action" onclick="submitFormC('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>批量删除</span></a></li> -->
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
-				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>			
+				<!-- <th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th> -->			
 				<th width="15%" align="center">编号</th>
 				<th width="15%" align="center">IP地址</th>
 				<th width="15%" align="center">名称</th>
@@ -83,9 +83,9 @@ function submitFormC(url){
 	<s:form  id="concentForm"  method="POST"  name="concentForm" >			
 	<tbody>
 	
-	    <c:forEach var="e" items="${concentTable.currentPageData}"> 		
+	    <c:forEach var="e" items="${table.currentPageData}"> 		
 	        <tr target="sid_user" rel="${e.concentratorID}" >
-				<td><input name="selectedIDList" value="${e.concentratorID}" type="checkbox" style="margin-top:5px;"></td>	        
+				<%-- <td><input name="selectedIDList" value="${e.concentratorID}" type="checkbox" style="margin-top:5px;"></td> --%>	        
 	            <td>${e.concentratorID}</td>
 	            <td>${e.ipAddr}</td>
 	            <td>${e.name}</td>
@@ -96,15 +96,16 @@ function submitFormC(url){
 							   <c:when test="${t.intValue == e.status}">  
 	                             ${t.strValue}
 							   </c:when>
-							   <c:otherwise>  
-							   	   
+							   <c:otherwise>		   	   
 							   </c:otherwise>
 							   
 						   </c:choose>
 					</c:forEach>
 	            </td>
 	            <td>
-	            <a title="集中器信息修改" target="dialog" href="device/ConcentratorManage!show.action?selectedID=${e.concentratorID}" class="btnEdit" >修改</a>
+	            <a title="集中器信息修改" target="dialog" href="device/ConcentratorManage!show.action?selectedID=${e.concentratorID}&operateType=modify" class="btnEdit" mask="true">修改</a>
+	            <a title="添加管理用户" target="dialog" href="device/ConcentratorManage!showPermission.action?selectedID=${e.concentratorID}" rel="peDialog"
+	            class="btnAdd" mask="true" style="margin-left:10px;">添加</a>
 	            </td> 
 
 			</tr>
@@ -116,7 +117,7 @@ function submitFormC(url){
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${concentTable.page}" scope="request"/>
+	        <c:set var="page" value="${table.page}" scope="request"/>
 			     
 			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	

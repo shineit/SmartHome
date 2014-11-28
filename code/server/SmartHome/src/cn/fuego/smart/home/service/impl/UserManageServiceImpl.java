@@ -26,6 +26,7 @@ import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.UserStatusEnum;
+import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.UserManageService;
@@ -49,31 +50,30 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 		
 		return user;
 	}
+    @Override
+    public void create(SystemUser user)
+    {
+    	user.setPassword(SystemConfigInfo.getDefaultPassword());
+    	user.setStatus(UserStatusEnum.REGISTERED.getIntValue());//默认已注册
+    	super.create(user);
+    }
  
-	@Override
-	public void saveUserInfo(SystemUser sysUser)
-	{
-		SystemUser oldUser= (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userName", sysUser.getUserName()));
-		if(null != oldUser)
-		{
-			log.error("create user failed,the user name "+ sysUser.getUserName() +" is existed." );
-			throw new MISPException(MISPErrorMessageConst.USER_EXISTED);
-		}
-		SystemUser newUser = new SystemUser();
-		newUser.setUserName(sysUser.getUserName());
-		newUser.setRole(sysUser.getRole());
-		newUser.setRegDate(DateUtil.getCurrentDateTime());
-		newUser.setStatus(UserStatusEnum.REGISTERED.getIntValue());
-		newUser.setPassword(SystemConfigInfo.getDefaultPassword());
-		MISPDaoContext.getInstance().getSystemUserDao().update(newUser);		
-		
-	}
 
 	@Override
-	public void deleteUserList(List<String> userIDList)
+	public void delete(List<String> userIDList)
 	{
-		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		
-		MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
+		for(int i=0;i<userIDList.size();i++)
+		{
+			String userID = userIDList.get(i);
+			SystemUser oldUser= MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userID", userID));
+			if(oldUser.getRole()==UserTypeEnum.ADMIN.getTypeValue())
+			{
+				throw new MISPException(MISPErrorMessageConst.ADMIN_NOT_DELETED);
+			}
+		}
+		//QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		
+		//MISPDaoContext.getInstance().getSystemUserDao().delete(condition);
+		super.delete(userIDList);
 		
 	}
 

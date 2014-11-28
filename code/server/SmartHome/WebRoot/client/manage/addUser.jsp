@@ -2,28 +2,17 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<script type="text/javascript">
 
-function submitForm(url){
-    var thisForm = document.userForm;
-	thisForm.action="sys/UserManage!"+url;
-	return validateCallback(thisForm,navTabAjax);
-}
 
-</script>
 <div class="pageHeader">
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="sys/UserManage" method="post" name="userSearch">
+	<form id="pagerForm" method="post" action="sys/UserManage!addUser.action" onsubmit="return dwzSearch(this, 'dialog');">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
-	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
-	
+	    <input type="hidden" name="numPerPage" value="${numPerPage}" />	
 	<div class="searchBar">
+		
 		<table class="searchContent">
 			<tr>
-			<!-- <td>
-					用户编号：<input type="text" name="filter.userID" />
-				</td>
-			 -->	
-				<td>
+<td>
 					用户名称：<input type="text" name="filter.userName" value="${filter.userName}" />
 				</td>				
 				<td>
@@ -52,44 +41,39 @@ function submitForm(url){
 					<input type="text"  readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}"/>
 					<span class="limit">-</span>
 					<input type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
-				</td>
-				<td>
-					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
-				</td>
-				<td>
-					<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
 				</td>				
 			</tr>
-		</table>
 
+		</table> 
+		<div class="subBar">
+			<ul>
+			    <li><button type="submit" class="mispButton primary" style="margin-right:15px;">查 询</button></li>
+            	<li><button class="mispButton primary" onclick="resetForm(this.form)">重 置</button></li>
+<!-- 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查 询</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="resetForm(this.form);">重 置</button></div></div></li> -->
+			</ul>
+		</div>
 	</div>
-	</s:form>
+	</form>
 </div>
 <div class="pageContent">
-	<div class="panelBar">
-		<ul class="toolBar">
-			<li><a class="add" href="sys/UserManage!show.action?operateType=create" target="dialog" mask="true" title="新增用户"><span>新增用户</span></a></li>
-			<li><a class="delete" href="sys/UserManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除用户</span></a></li>
-		</ul>
-	</div>
-	<table class="table" width="100%" layoutH="113">
+<s:form    method="POST"  name="userAddForm" action="sys/UserManage!addUser.action" >
+	<table class="table" layoutH="110" targetType="dialog" width="100%">
 		<thead>
+				
 			<tr>
-				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
 				<th width="20%" align="center">用户编号</th>
 				<th width="20%" align="center">用户名称</th>
 				<th width="15%" align="center">账号类型</th>
 				<th width="25%" align="center">注册时间</th>
-				<th width="20%" align="center">用户状态</th>
+				<th width="10%" align="center">用户状态</th>
+				<th width="10%" align="center">添加</th>
 			</tr>
 		</thead>
-		<s:form  id="userForm"  method="POST"  name="userForm" >
 		<tbody>
-		
+
 		<c:forEach var="e" items="${table.currentPageData}"> 
-			
 			<tr target="sid_user" rel="${e.userID}">
-				<td><input name="selectedIDList" value="${e.userID}" type="checkbox" style="margin-top:5px;"></td>
 				<td>${e.userID}</td>
 				<td>${e.userName}</td>
 				<td>
@@ -120,19 +104,21 @@ function submitForm(url){
 						   </c:choose>
 				    </c:forEach>
 				</td>
+				<td>
+					<a class="btnSelect"  href="javascript:$.bringBack({userID:'${e.userID}'})" title="添加用户">选择</a>
+				</td>
 			</tr>
-		</c:forEach>	
-	
+		</c:forEach>
 
 		</tbody>
-		</s:form>
 	</table>
+</s:form>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${userTable.page}" scope="request"/>
+	        <c:set var="page" value="${table.page}" scope="request"/>
 			
-			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
+			<select class="combox"  onchange="dwzPageBreak({targetType:'dialog',rel:'',data:{numPerPage:this.value}})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	
 			       <c:if test="${e==page.pageSize}">
 			         <option value="${e}" selected>${e}</option>
@@ -143,12 +129,8 @@ function submitForm(url){
 				</c:forEach>
  
 			</select>
-			<span>条，共${page.count}条</span>
+			<span>条，共${page.count}条</span>			
 		</div>
-		
-		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
-
+		<div class="pagination" targetType="dialog" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 	</div>
 </div>
-
-

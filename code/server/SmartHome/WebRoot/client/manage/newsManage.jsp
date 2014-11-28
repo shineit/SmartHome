@@ -50,7 +50,7 @@ function submitFormN(url){
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="NewsManage!show.action" target="dialog" mask="true" title="新增公告"><span>新增公告</span></a></li>
+			<li><a class="add" href="NewsManage!show.action?operateType=create" target="dialog" mask="true" title="新增公告"><span>新增公告</span></a></li>
 			<li><a class="delete" href="NewsManage!deleteList.action" onclick="submitFormN('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
 		</ul>
 	</div>
@@ -88,7 +88,7 @@ function submitFormN(url){
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${newsTable.page}" scope="request"/>
+	        <c:set var="page" value="${table.page}" scope="request"/>
 			
 			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	

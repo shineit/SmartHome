@@ -11,6 +11,7 @@ package cn.fuego.misp.domain;
 import java.util.Date;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.format.DateUtil;
 
 /** 
  * @ClassName: User 
@@ -26,7 +27,7 @@ public class SystemUser implements PersistenceObject
 	private String userName;
 	private String password;
 	private int role;
-	private Date regDate;
+	private Date regDate=DateUtil.getCurrentDate();
 	private int status; //0-已创建，1-已申请，2-已注册，3-已注销
 	
 	

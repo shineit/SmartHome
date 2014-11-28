@@ -2,6 +2,7 @@ package cn.fuego.common.util.format;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -159,6 +160,15 @@ public class DateUtil
 		convertDate.add(Calendar.DATE, num);
 		Date result=convertDate.getTime();
 		return result;
+		
+	}
+	public static String getStrTime(long l_stamp)
+	{
+		String strTime=null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		strTime=sdf.format(new Date(l_stamp));
+		return strTime;
 		
 	}
 

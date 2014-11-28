@@ -3,6 +3,7 @@ package cn.fuego.smart.home.domain;
 import java.util.Date;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.format.DateUtil;
 
 
 /**
@@ -21,7 +22,7 @@ public class News implements PersistenceObject
 	private String title; //新闻标题
 	private String author; //发布人
 	private String content; //分布内容
-	private Date date;     //发布时间
+	private Date date= DateUtil.getCurrentDate();     //发布时间
 	private int status; //发布状态，0-未发布，1-已发布
 	public int getNewsID()
 	{

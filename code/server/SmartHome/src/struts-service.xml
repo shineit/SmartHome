@@ -8,12 +8,12 @@
  
    		<action name="OrderManage" class="cn.fuego.smart.home.web.action.info.OrderManageAction">
 			<result type="dispatcher">/client/manage/orderManage.jsp</result>
- 			<result type="dispatcher" name="editInfo">/client/manage/orderHandle.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/orderHandle.jsp</result>
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
    		<action name="NewsManage" class="cn.fuego.smart.home.web.action.info.NewsManageAction">
 			<result type="dispatcher"  >/client/manage/newsManage.jsp</result>
- 			<result type="dispatcher" name="editInfo">/client/manage/newsCreate.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/newsCreate.jsp</result>
 	    
 		</action> 
  	</package>
@@ -23,6 +23,7 @@
 			<result type="dispatcher">/client/manage/userManage.jsp</result>
  			<result type="dispatcher" name="create">/client/manage/userCreate.jsp</result>
  			<result type="dispatcher" name="modify">/client/manage/userCreate.jsp</result>
+			<result type="dispatcher" name="addUser">/client/manage/addUser.jsp</result>
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
 
@@ -31,8 +32,11 @@
  
    		<action name="ConcentratorManage" class="cn.fuego.smart.home.web.action.device.ConcentratorManageAction">
 			<result type="dispatcher">/client/manage/concentratorManage.jsp</result>
- 			<result type="dispatcher" name="editInfo">/client/manage/concentratorModify.jsp</result>
-		    
+  			<result type="dispatcher" name="create">/client/manage/concentratorModify.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/concentratorModify.jsp</result>
+ 			
+		    <result type="dispatcher" name="addInfo">/client/manage/concentratorPermission.jsp</result>
+			<result type="dispatcher" name="modifyPermission">/client/manage/permissionModify.jsp</result>
 		</action>
 		
    		<action name="CustomerDistribution" class="cn.fuego.smart.home.web.action.device.CustomerDistributionAction">

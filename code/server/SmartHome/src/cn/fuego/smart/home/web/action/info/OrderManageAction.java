@@ -15,10 +15,12 @@ import org.apache.commons.logging.LogFactory;
 
 
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -56,20 +58,13 @@ public class OrderManageAction  extends DWZTableAction<ServiceOrder>
 	@Override
 	public String modify()
 	{
-		orderService.handle(order.getOrderID(), this.getLoginUser().getUserName(), order.getHandleResult());
-		//this.getOperateMessage().setCallbackType(MispMessageModel.FORWARD);
-		//this.getOperateMessage().setForwardUrl(PARENT_PAGE);
-		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+		
+ 		orderService.handle(this.getObj().getOrderID(), this.getLoginUser().getUserName(), this.getObj().getHandleResult());
+ 		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 		return MISP_DONE_PAGE;
 	}
 
-	@Override
-	public String show()
-	{
-		order = orderService.getOrderById(this.getSelectedID());
-		return EDIT_INFO;
-	}
-	
+
 
 	public ServiceOrderManageService getOrderService()
 	{

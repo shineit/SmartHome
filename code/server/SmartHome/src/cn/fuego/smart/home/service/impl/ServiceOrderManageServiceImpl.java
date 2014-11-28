@@ -8,27 +8,19 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.dao.datasource.AbstractDataSource;
-import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.IDCreateService;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ServiceOrderManageService;
-import cn.fuego.smart.home.web.model.OrderFilterModel;
 
  /** 
  * @ClassName: ServiceOrderManageServiceImpl 
@@ -53,6 +45,7 @@ public class ServiceOrderManageServiceImpl extends MispCommonServiceImpl<Service
 	{
 		order.setOrderID(MISPServiceContext.getInstance().getIDCreateService(IDCreateService.ORDER_ID_NAME).create());
 		order.setCreateTime(DateUtil.getCurrentDateTime());
+		order.setHandleTime(null);
 		order.setOrderStatus(ServiceOrderStatusEnum.APPLYED.getIntValue());
 		DaoContext.getInstance().getServiceOrderDao().create(order);
 		

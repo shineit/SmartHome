@@ -42,10 +42,8 @@ public class NewsManageAction extends DWZTableAction<News>
 	
 	private static final long serialVersionUID = 1L;
 	private NewsManageService newsService = ServiceContext.getInstance().getNewsManageService();
-	private TableDataModel<News> newsTable = new TableDataModel<News>();
-    private NewsFilterModel newsFilter = new NewsFilterModel();
-    private News news ;
-    
+     private NewsFilterModel newsFilter = new NewsFilterModel();
+     
     
     
     @Override
@@ -56,36 +54,14 @@ public class NewsManageAction extends DWZTableAction<News>
     	
     }
     
-	@Override
-	public String create()
-	{
-		newsService.saveNewsInfo(news);
-		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
-		return MISP_DONE_PAGE;
-	}
-
- 
-	@Override
-	public String deleteList()
-	{
-		newsService.deleteNewsList(Arrays.asList(this.getSelectedIDList()));
-		return  MISP_DONE_PAGE;
-	}
-
- 
-
-	@Override
-	public String show()
-	{
-		news = new News();
-		news.setAuthor(this.getLoginUser().getUserName());
-		return EDIT_INFO;
-	}
-
- 
-
+    @Override
+    public String show()
+    {
+    	this.getObj().setAuthor(this.getLoginUser().getUserName());
+    	return super.show();
+    }
+    
   
- 
 	public NewsFilterModel getNewsFilter()
 	{
 		return newsFilter;

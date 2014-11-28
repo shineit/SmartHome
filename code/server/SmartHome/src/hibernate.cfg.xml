@@ -38,6 +38,7 @@
 	<mapping resource="cn/fuego/smart/home/domain/HomeSensor.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Alarm.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/ServiceOrder.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/UserConcentrator.hbm.xml" />
 
 
 

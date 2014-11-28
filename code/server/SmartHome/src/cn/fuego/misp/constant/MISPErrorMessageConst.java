@@ -35,7 +35,14 @@ public class MISPErrorMessageConst
 
 	public static final int RESULT_NULL = 8;//搜索结果为空
 	
+	
+	public static final int NET_FAIL = 9 ; // 网络连接异常
+	
+	public static final int INPUT_NULL = 10 ; // 输入为空
+	
+	public static final int TARGET_NOT_EXISTED = 11; // 操作对象已经不存在
 
+	public static final int ADMIN_NOT_DELETED = 12; //超级管理员不能被删除
 	public static String getMessageByErrorCode(int errorCode)
 	{
 		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));

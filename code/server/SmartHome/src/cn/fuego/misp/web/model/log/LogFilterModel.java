@@ -8,6 +8,16 @@
 */ 
 package cn.fuego.misp.web.model.log;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
+
 /** 
  * @ClassName: LogFilterModel 
  * @Description: TODO
@@ -25,6 +35,37 @@ public class LogFilterModel
 	private String result;
 	private String startTime;
 	private String endTime;
+	
+	public List<QueryCondition> getConidtionList()
+    {
+    	List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		 
+		if(!ValidatorUtil.isEmpty(this.getId()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"id",this.getId()));
+		}
+			
+
+		if(!ValidatorUtil.isEmpty(this.getUser()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"user",this.getUser()));
+		}
+		if(!ValidatorUtil.isEmpty(this.getName()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"name",this.getName()));
+		}
+		if(!ValidatorUtil.isEmpty(this.getStartTime()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"operTime",this.getStartTime()));
+		}
+		if(!ValidatorUtil.isEmpty(this.getEndTime()))
+		{
+			Date endDate = DateUtil.stringToDate(this.getEndTime());
+			conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER,"operTime",DateUtil.DateToString(DateUtil.dayCalculate(endDate, 1))));
+		}			
+		 
+		return conditionList;
+    }
 
 	public String getId()
 	{

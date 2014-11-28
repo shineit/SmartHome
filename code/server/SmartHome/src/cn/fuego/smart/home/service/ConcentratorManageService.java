@@ -9,10 +9,11 @@
 package cn.fuego.smart.home.service;
 
 import java.util.List;
-
-import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.MispCommonService;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.UserConcentrator;
 
  /** 
  * @ClassName: ConcentratorManageService 
@@ -29,6 +30,14 @@ public interface ConcentratorManageService extends MispCommonService<Concentrato
 	void modifyConcentInfo(Concentrator concent);
 	void deleteConcentList(List<String> concentIDList);
 	Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList);
+	
+	AbstractDataSource<UserConcentrator> getPermissionDataSourceByID(List<QueryCondition> conidtionList);
+	void addPermission(UserConcentrator userConcentrator);
+	void deletePermissionByID(String userID, String concentratorID);
+	UserConcentrator getPermissionByID(String userID, String concentratorID);
+	void modifyPermission(UserConcentrator userPermission);
+	//单条集中器信息删除，同时删除相应的关联权限
+	void deleteConcentByConcentID(String concentratorID);
 	
 
 }
