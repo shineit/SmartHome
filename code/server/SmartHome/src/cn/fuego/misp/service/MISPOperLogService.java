@@ -22,7 +22,7 @@ import cn.fuego.misp.web.model.log.LogFilterModel;
  *  
  */
 
-public interface MISPOperLogService
+public interface MISPOperLogService extends MispCommonService<OperLog>
 {
 	void recordLog(String user,String opeateName,String object,String result,String desp);
 	void recordLog(String user,String opeateName,String object,String result);

@@ -10,16 +10,15 @@ package cn.fuego.smart.home.service.impl;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
-import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 
@@ -30,22 +29,15 @@ import cn.fuego.smart.home.service.ConcentratorManageService;
  * @date 2014-10-29 下午3:05:35 
  *  
  */
-public class ConcentratorManageServiceImpl implements ConcentratorManageService
+public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concentrator> implements ConcentratorManageService
 {
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.ServiceOrderManageService#getNewsDataSource()
 	 */
-	private Log log = LogFactory.getLog(ConcentratorManageServiceImpl.class);
+	private FuegoLog log =  FuegoLog.getLog(getClass());
 
-	@Override
-	public AbstractDataSource<Concentrator> getConcentDataSource(List<QueryCondition> conidtionList)
-	{
-		AbstractDataSource<Concentrator> datasource = new DataBaseSourceImpl<Concentrator>(Concentrator.class,conidtionList);
-		
-		return datasource;
-	}	
-
+ 
 	@Override
 	public void online(Concentrator concentrator)
 	{
@@ -96,6 +88,16 @@ public class ConcentratorManageServiceImpl implements ConcentratorManageService
 			throw new MISPException(MISPErrorMessageConst.RESULT_NULL);
 		}
 		return concent;
+	}
+ 
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
+	 */
+	@Override
+	public String GetPrimaryName()
+	{
+		// TODO Auto-generated method stub
+		return Concentrator.PRI_KEY;
 	}
 
 

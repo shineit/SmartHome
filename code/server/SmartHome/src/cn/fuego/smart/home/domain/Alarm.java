@@ -28,6 +28,9 @@ public class Alarm implements PersistenceObject
 	private int clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private Date clearTime;	//告警清除的时间
 	private String statusColor;//状态颜色，对应清除状态
+	
+	public static final String PRI_KEY = "id";
+	
 	public int getId()
 	{
 		return id;

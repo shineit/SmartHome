@@ -15,7 +15,9 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
+import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
+import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.Alarm;
@@ -28,34 +30,12 @@ import cn.fuego.smart.home.service.SensorManageService;
  * @date 2014-10-29 下午2:56:31 
  *  
  */
-public class SensorManageServiceImpl implements SensorManageService
+public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> implements SensorManageService
 {
 
 	private Log log = LogFactory.getLog(SensorManageServiceImpl.class);
 
-	/* (non-Javadoc)
-	 * @see cn.fuego.smart.home.service.SensorManageService#getSensorDataSource()
-	 */
-	@Override
-	public AbstractDataSource<HomeSensor> getSensorDataSource()
-	{
-		AbstractDataSource<HomeSensor> datasource = new DataBaseSourceImpl<HomeSensor>(HomeSensor.class);
-		
-		return datasource;
-	}
-
-	/* (non-Javadoc)
-	 * @see cn.fuego.smart.home.service.SensorManageService#getAlarmDataSource(int)
-	 */
-	@Override
-	public AbstractDataSource<Alarm> getAlarmDataSource(int userID)
-	{
-		AbstractDataSource<Alarm> datasource = new DataBaseSourceImpl<Alarm>(Alarm.class);
-
-		return datasource;
-		
-	}
-
+ 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#setSensor(cn.fuego.smart.home.constant.SensorSetCmdEnum, cn.fuego.smart.home.domain.Sensor)
 	 */
@@ -87,12 +67,23 @@ public class SensorManageServiceImpl implements SensorManageService
 		return null;
 	}
 
+ 
+ 
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
+	 */
+	@Override
+	public String GetPrimaryName()
+	{
+		// TODO Auto-generated method stub
+		return HomeSensor.PRI_KEY;
+	}
+
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#getHomeSensor(int, int, int)
 	 */
 	@Override
-	public HomeSensor getHomeSensor(int concentratorID, int sensorID,
-			int channelID)
+	public HomeSensor getHomeSensor(int concentratorID, int sensorID, int channelID)
 	{
 		// TODO Auto-generated method stub
 		return null;

@@ -21,6 +21,10 @@ public class Concentrator implements PersistenceObject
 	private String description;		//集中器描述(预留字段)
 	private String addr;			//集中器地址(预留字段)
 	private String mark;			//自定义标签(预留字段)
+	
+	public static final String PRI_KEY = "concentratorID";
+
+	
 	public int getConcentratorID()
 	{
 		return concentratorID;

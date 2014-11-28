@@ -37,7 +37,7 @@ import cn.fuego.smart.home.service.UserManageService;
  * @date 2014-10-29 下午9:07:54 
  *  
  */
-public class UserManageServiceImpl extends MISPUserServiceImpl implements UserManageService
+public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> implements UserManageService
 {
 
 	private Log log = LogFactory.getLog(UserManageServiceImpl.class);
@@ -49,15 +49,7 @@ public class UserManageServiceImpl extends MISPUserServiceImpl implements UserMa
 		
 		return user;
 	}
-
-	@Override
-	public AbstractDataSource<SystemUser> getUserDataSource(List<QueryCondition> conditionList)
-	{
-		AbstractDataSource<SystemUser> datasource = new DataBaseSourceImpl<SystemUser>(SystemUser.class,conditionList);
-		
-		return datasource;
-	}
-
+ 
 	@Override
 	public void saveUserInfo(SystemUser sysUser)
 	{
@@ -73,7 +65,7 @@ public class UserManageServiceImpl extends MISPUserServiceImpl implements UserMa
 		newUser.setRegDate(DateUtil.getCurrentDateTime());
 		newUser.setStatus(UserStatusEnum.REGISTERED.getIntValue());
 		newUser.setPassword(SystemConfigInfo.getDefaultPassword());
-		DaoContext.getInstance().getNewsDao().update(newUser);		
+		MISPDaoContext.getInstance().getSystemUserDao().update(newUser);		
 		
 	}
 

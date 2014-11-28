@@ -8,11 +8,14 @@
 */ 
 package cn.fuego.smart.home.web.action.info;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
@@ -29,7 +32,7 @@ import cn.fuego.smart.home.web.model.OrderFilterModel;
  * @date 2014-11-1 上午10:15:44 
  *  
  */ 
-public class OrderManageAction  extends DWZTableAction
+public class OrderManageAction  extends DWZTableAction<ServiceOrder>
 {
 	/**
 	 * 
@@ -42,32 +45,13 @@ public class OrderManageAction  extends DWZTableAction
 	private ServiceOrder order;
 	public static final String PARENT_PAGE="info/OrderManage"; 
 	@Override
-	public String execute()
+	public List<QueryCondition> getFilterCondition()
 	{
-		serviceOrderTable.setPage(this.getPage());
-		serviceOrderTable.setDataSource(orderService.getOrderDataSource(filter.getConidtionList()));
-		return SUCCESS;
+	      	
+	    return this.filter.getConidtionList();
+	    	
 	}
-	@Override
-	public String create()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String delete()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deleteList()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+ 
 
 	@Override
 	public String modify()
@@ -125,6 +109,15 @@ public class OrderManageAction  extends DWZTableAction
 	public void setOrder(ServiceOrder order)
 	{
 		this.order = order;
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
+	 */
+	@Override
+	public MispCommonService<ServiceOrder> getService()
+	{
+		// TODO Auto-generated method stub
+		return this.orderService;
 	}
 
 }

@@ -64,7 +64,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		
 		try
 		{
-			List<HomeSensor> sensorList = sensorService.getSensorDataSource().getAllPageData();
+			List<HomeSensor> sensorList = sensorService.getDataSource().getAllPageData();
 	 		
 			for(HomeSensor sensor :sensorList)
 			{	
@@ -102,7 +102,7 @@ public class SensorManageRestImpl implements SensorManageRest
 	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req)
 	{
 		GetHistoryAlarmListRsp rsp = new GetHistoryAlarmListRsp();
-		List<Alarm> alarmList = sensorService.getAlarmDataSource(req.getUserID()).getAllPageData();
+		List<Alarm> alarmList = ServiceContext.getInstance().getAlarmManageService().getDataSource().getAllPageData();
 		for(Alarm alarm : alarmList)
 		{
 			AlarmJson alarmJson = ModelConvert.AlarmToJson(alarm);

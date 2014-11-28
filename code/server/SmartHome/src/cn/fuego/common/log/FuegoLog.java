@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-public class FuegoLog
+public class FuegoLog implements Log
 {
 	private Log log;
 	private Class clazz;
@@ -20,44 +20,134 @@ public class FuegoLog
 		return instance;
 	}
 
-	public void info(String message)
+	public void info(Object message)
 	{
 		log.info(message);
 	}
 
-	public void info(String message,Throwable e)
+	public void info(Object message,Throwable e)
 	{
 		log.info(message, e);
 	}
 	
-	public void warn(String message)
+	public void warn(Object message)
 	{
 		log.warn(message);
 	}
 	
-	public void warn(String message,Throwable e)
+	public void warn(Object message,Throwable e)
 	{
 		log.warn(message, e);
 	}
-	public void error(String message)
+	public void error(Object message)
 	{
 		log.error(message);
 	}
 
-	public void error(String message,Throwable e)
+	public void error(Object message,Throwable e)
 	{
 		log.error(message, e);
 	}
 
 
-	public void trace(String message)
+	public void trace(Object message)
 	{
 		log.trace(message);
 	}
 	
-	public void trace(String message,Throwable e)
+	public void trace(Object message,Throwable e)
 	{
 		log.trace(message, e);
 	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#debug(java.lang.Object)
+	 */
+	@Override
+	public void debug(Object arg0)
+	{
+		log.debug(arg0);
+		
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#debug(java.lang.Object, java.lang.Throwable)
+	 */
+	@Override
+	public void debug(Object arg0, Throwable arg1)
+	{
+		log.debug(arg0, arg1);
+		
+	}
+ 
+	@Override
+	public void fatal(Object arg0)
+	{
+		log.fatal(arg0);
+		
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#fatal(java.lang.Object, java.lang.Throwable)
+	 */
+	@Override
+	public void fatal(Object arg0, Throwable arg1)
+	{
+		log.fatal(arg0, arg1);
+		
+	}
+	 
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#isDebugEnabled()
+	 */
+	@Override
+	public boolean isDebugEnabled()
+	{
+		// TODO Auto-generated method stub
+		return log.isDebugEnabled();
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#isErrorEnabled()
+	 */
+	@Override
+	public boolean isErrorEnabled()
+	{
+		// TODO Auto-generated method stub
+		return log.isErrorEnabled();
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#isFatalEnabled()
+	 */
+	@Override
+	public boolean isFatalEnabled()
+	{
+		// TODO Auto-generated method stub
+		return log.isFatalEnabled();
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#isInfoEnabled()
+	 */
+	@Override
+	public boolean isInfoEnabled()
+	{
+		// TODO Auto-generated method stub
+		return log.isInfoEnabled();
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#isTraceEnabled()
+	 */
+	@Override
+	public boolean isTraceEnabled()
+	{
+		// TODO Auto-generated method stub
+		return log.isTraceEnabled();
+	}
+	/* (non-Javadoc)
+	 * @see org.apache.commons.logging.Log#isWarnEnabled()
+	 */
+	@Override
+	public boolean isWarnEnabled()
+	{
+		// TODO Auto-generated method stub
+		return log.isWarnEnabled();
+	}
+ 
 
 }

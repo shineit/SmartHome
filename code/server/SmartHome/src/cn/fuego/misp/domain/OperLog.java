@@ -22,6 +22,7 @@ import cn.fuego.common.domain.PersistenceObject;
 
 public class OperLog implements PersistenceObject
 {
+	public static final String PRI_KEY = "id";
 	private int id;
 	private String user;
 	private String name;

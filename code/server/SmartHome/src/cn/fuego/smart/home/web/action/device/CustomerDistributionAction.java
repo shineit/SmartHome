@@ -6,6 +6,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.action.basic.MISPAction;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -18,7 +19,7 @@ import cn.fuego.smart.home.web.model.ConcentFilterModel;
 * @date 2014-11-5 下午12:00:46 
 *  
 */ 
-public class CustomerDistributionAction extends DWZTableAction
+public class CustomerDistributionAction extends MISPAction
 {
 
 	/**
@@ -33,7 +34,7 @@ public class CustomerDistributionAction extends DWZTableAction
 	@Override
 	public String execute()
 	{
-		AbstractDataSource<Concentrator> dataSource= concentService.getConcentDataSource(filter.getConidtionList());
+		AbstractDataSource<Concentrator> dataSource= concentService.getDataSource(filter.getConidtionList());
 		ObjectMapper mapper = new ObjectMapper();  
 		try
 		{
@@ -47,41 +48,7 @@ public class CustomerDistributionAction extends DWZTableAction
 		
 	}
 
-	@Override
-	public String create()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String delete()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deleteList()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String modify()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String show()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+ 
 
 	public ConcentratorManageService getConcentService()
 	{

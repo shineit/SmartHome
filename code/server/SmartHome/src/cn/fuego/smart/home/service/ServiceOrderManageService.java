@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.web.model.OrderFilterModel;
 
@@ -22,10 +23,9 @@ import cn.fuego.smart.home.web.model.OrderFilterModel;
  * @date 2014-10-29 下午3:04:40 
  *  
  */
-public interface ServiceOrderManageService
+public interface ServiceOrderManageService extends MispCommonService<ServiceOrder>
 {
-	AbstractDataSource<ServiceOrder>  getOrderDataSource(List<QueryCondition> conditionList);
-	
+	 
 	void create(ServiceOrder order);
     void handle(String orderID,String handler,String handleResult);
 

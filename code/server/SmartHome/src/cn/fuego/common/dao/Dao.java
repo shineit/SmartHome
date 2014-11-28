@@ -24,12 +24,15 @@ import cn.fuego.common.domain.PersistenceObject;
  *  
  */
 
-public interface Dao extends ViewDao
+public interface Dao<E> extends ViewDao<E>
 {
 
-	void create(PersistenceObject object);
+	void create(E object);
 
-	void update(PersistenceObject object);
+	void update(E object);
+	
+	void update(List<E> objList);
+
  
 	void delete(List<QueryCondition> conditionList);
 	

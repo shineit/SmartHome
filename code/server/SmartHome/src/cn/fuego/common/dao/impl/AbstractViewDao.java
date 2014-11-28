@@ -8,23 +8,23 @@
 */ 
 package cn.fuego.common.dao.impl;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
+import cn.fuego.common.dao.GenricTypeClass;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.ViewDao;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.domain.PersistenceObject;
-import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.common.log.FuegoLog;
 
 /** 
  * @ClassName: AbstractViewDao 
@@ -34,25 +34,30 @@ import cn.fuego.misp.domain.SystemUser;
  *  
  */
 
-public abstract class AbstractViewDao implements ViewDao
+public class AbstractViewDao<E> extends GenricTypeClass<E> implements ViewDao<E>
 {
-	private Log log = LogFactory.getLog(AbstractDao.class);
+	private FuegoLog log = FuegoLog.getLog(getClass());
 
-	public abstract Class getFeaturedClass();
-	public Collection getAll()
+	public AbstractViewDao(Class clazz)
+	{
+		this.persistentClass= clazz;
+	}
+ 
+	
+ 	public List<E> getAll()
 	{
 		
 		QueryCondition conditon = null;
-		Collection objectList = this.getAll(conditon);
+		List<E> objectList = this.getAll(conditon);
 
 		return objectList;
  
 	}
  
  
-	public Collection getAll(QueryCondition condition)
+	public List<E> getAll(QueryCondition condition)
 	{
-		Collection objectList = null;
+		List<E> objectList = null;
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		
 		if(null != condition)
@@ -66,10 +71,10 @@ public abstract class AbstractViewDao implements ViewDao
 
 	}
 	
-	public Collection getAll(List<QueryCondition> conditionList)
+	public List<E> getAll(List<QueryCondition> conditionList)
 	{
 		log.info("the condition list is " + conditionList);
-		List objectList = null;
+		List<E> objectList = null;
 		Session session = null;
 		Transaction tx = null;
  		try
@@ -98,9 +103,9 @@ public abstract class AbstractViewDao implements ViewDao
 
 	}
 	
-	public PersistenceObject getUniRecord(QueryCondition condition)
+	public E getUniRecord(QueryCondition condition)
 	{
- 		PersistenceObject record = null;
+ 		E record = null;
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		
 		if(null != condition)
@@ -113,11 +118,11 @@ public abstract class AbstractViewDao implements ViewDao
  
 	}
 	
-	public PersistenceObject getUniRecord(List<QueryCondition>  conditionList)
+	public E getUniRecord(List<QueryCondition>  conditionList)
 	{
 		log.info("the condition list is " + conditionList);
 
-		PersistenceObject record = null;
+		E record = null;
 		Session session = null;
 		Transaction tx = null;
  		try
@@ -126,7 +131,7 @@ public abstract class AbstractViewDao implements ViewDao
 			tx = session.beginTransaction();
  
 			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
-			record = (PersistenceObject) c.uniqueResult();
+			record = (E) c.uniqueResult();
 			tx.commit();
 		} catch (RuntimeException re)
 		{
@@ -147,13 +152,13 @@ public abstract class AbstractViewDao implements ViewDao
  
 	}
 	
-	public Collection getAll(List<QueryCondition> conditionList,int startNum,int pageSize)
+	public List<E> getAll(List<QueryCondition> conditionList,int startNum,int pageSize)
 	{
 		log.info("the condition list is " + conditionList);
 		log.info("the start number is " + startNum);
 		log.info("the page size is " + pageSize);
 
-		List objectList = null;
+		List<E> objectList = null;
 		Session session = null;
 		Transaction tx = null;
  		try

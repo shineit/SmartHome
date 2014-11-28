@@ -9,12 +9,12 @@
 
 			<div class="unit">
 				<label>用户名称：</label>
-				<input type="text" size="30" name="sysUser.userName" class="required"/>
+				<input type="text" size="30" name="obj.userName" class="required" value="${obj.userName}"/>
 			</div>
 			<div class="divider"></div>
 			<div class="unit">
 				<label>账户类型：</label>
-				<select class="combox" name="sysUser.role" >
+				<select class="combox" name="obj.role" >
 						 <c:forEach var="ut2" items="${filter.userTypeList}">
 						  		 <c:choose>		       
 							   		 <c:when test="${ut2.type=='超级管理员'}">  

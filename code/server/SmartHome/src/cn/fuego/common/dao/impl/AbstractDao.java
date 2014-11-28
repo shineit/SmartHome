@@ -9,25 +9,18 @@
 package cn.fuego.common.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
-import com.sun.corba.se.spi.copyobject.ObjectCopier;
-
-import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
 import cn.fuego.common.domain.PersistenceObject;
-import cn.fuego.common.util.meta.ReflectionUtil;
+import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
 
 /** 
  * @ClassName: AbstractDao 
@@ -37,12 +30,19 @@ import cn.fuego.common.util.meta.ReflectionUtil;
  *  
  */
 
-public abstract  class AbstractDao extends AbstractViewDao implements Dao
+public class AbstractDao<E> extends AbstractViewDao<E> implements Dao<E>
 {
+	private FuegoLog log = FuegoLog.getLog(getClass());
+	/**
+	 * @param clazz
+	 */
+	public AbstractDao(Class clazz)
+	{
+		super(clazz);
+		// TODO Auto-generated constructor stub
+	}
 
-	private Log log = LogFactory.getLog(AbstractDao.class);
-
-	public void create(PersistenceObject object)
+	public void create(E object)
 	{
 		log.info("the object class is " + getFeaturedClass());
 		if(null == object)
@@ -67,7 +67,7 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 
 	}
 
-	public void update(PersistenceObject object)
+	public void update(E object)
 	{
 		log.info("the object class is " + getFeaturedClass());
 		if(null == object)
@@ -89,6 +89,43 @@ public abstract  class AbstractDao extends AbstractViewDao implements Dao
 		}
 		log.info("the update success.");
 	}
+	
+	 public void update(List<E> objList)
+     {
+         log.info("the object class is " + getFeaturedClass());
+         if (ValidatorUtil.isEmpty(objList))
+         {
+             log.warn("the object list is empty");
+             return;
+         }
+
+         log.info("the object list count is  " + objList.size());
+         Session session = null;
+         try
+         {
+             session = HibernateUtil.getSession();
+             Transaction tx = session.beginTransaction();
+             for(E obj : objList)
+             {
+                 session.update(obj);
+             }
+             tx.commit();
+             
+         }
+         catch (RuntimeException re)
+         {
+             log.error("update error", re);
+             throw re;
+
+         }
+         finally
+         {
+             if (null != session)
+             {
+                 session.close();
+             }
+         }
+     }
 	public void delete(List<QueryCondition> conditionList)
 	{
 		log.info("the object class is " + getFeaturedClass()+"the condition is " + conditionList);

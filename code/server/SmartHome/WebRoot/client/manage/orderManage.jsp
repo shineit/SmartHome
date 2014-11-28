@@ -80,7 +80,7 @@
 	<s:form  id="order"  method="POST"  name="order" >			
 	<tbody>
 
-	    <c:forEach var="e" items="${serviceOrderTable.currentPageData}"> 		
+	    <c:forEach var="e" items="${table.currentPageData}"> 		
 	        <tr target="sid_user" rel="${e.orderID}" > 
 	            <td>${e.orderID}</td>
 	            <td>${e.orderName}</td>

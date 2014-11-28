@@ -16,6 +16,7 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class HomeSensor implements PersistenceObject
 {
+	public static final String PRI_KEY = "id";
 	private int id;              //唯一ID 终端设备的出场ID，具有唯一性
 	private int concentratorID;  //集中器ID
 	private int sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
@@ -30,6 +31,7 @@ public class HomeSensor implements PersistenceObject
 	private String ctrGroupID;      //联动控制器ID ;隔开
 	private String description;  //描述
 	private String mark;         //自定义标签
+	
 	
 	
 	

@@ -18,21 +18,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="pageFormContent" layoutH="58">
 			<dl style="width:50%;">
 				<dt style="width:20%;">服务单号：</dt>			
-				<dd style="width:70%;"><input type="text" name="order.orderID"  size="30" readonly="readonly" value="${order.orderID}"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.orderID"  size="30" readonly="readonly" value="${obj.orderID}"/></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:20%;">名称：</dt>			
-				<dd style="width:70%;"><input type="text" name="order.orderName"  size="32" readonly="readonly" value="${order.orderName}"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.orderName"  size="32" readonly="readonly" value="${obj.orderName}"/></dd>
 			</dl>			
 			<dl style="width:50%;">
 				<dt style="width:20%;">服务类型：</dt>			
 				<dd style="width:70%;">
 					<c:forEach var="ot" items="${filter.typeList}">
 						  <c:choose>		       
-							   <c:when test="${ot.intValue == order.orderType}">  
+							   <c:when test="${ot.intValue == obj.orderType}">  
 	                             
 	                             <input type="text" name="ot"  size="30" readonly="readonly" value="${ot.strValue}"/>
-	                             <input type="hidden" name="order.orderType"  size="30" readonly="readonly" value="${ot.intValue}"/>
+	                             <input type="hidden" name="obj.orderType"  size="30" readonly="readonly" value="${ot.intValue}"/>
 							   </c:when>
 							   <c:otherwise></c:otherwise>					   
 						   </c:choose>
@@ -42,23 +42,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<dl style="width:50%;">
 				<dt style="width:20%;">内容：</dt>			
-				<dd style="width:70%;"><textarea name="order.content" cols="34" rows="4" maxlength="200" readonly="readonly">${order.content}</textarea></dd>
+				<dd style="width:70%;"><textarea name="obj.content" cols="34" rows="4" maxlength="200" readonly="readonly">${obj.content}</textarea></dd>
 			</dl>
 			<dl style="width:100%;">
 				<dt style="width:10%;">联系人：</dt>			
-				<dd style="width:80%;"><input type="text" name="order.contactName"  size="30" readonly="readonly" value="${order.contactName}"/></dd>
+				<dd style="width:80%;"><input type="text" name="obj.contactName"  size="30" readonly="readonly" value="${obj.contactName}"/></dd>
 			</dl>			
 			<dl style="width:50%;">
 				<dt style="width:20%;">联系电话：</dt>			
-				<dd style="width:70%;"><input type="text" name="order.phoneNum"  size="30" readonly="readonly" value="${order.phoneNum}"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.phoneNum"  size="30" readonly="readonly" value="${obj.phoneNum}"/></dd>
 			</dl>					
 			<dl style="width:100%;">
 				<dt style="width:10%;">联系地址：</dt>			
-				<dd style="width:80%;"><input type="text" name="order.contactAddr"  size="85" readonly="readonly" value="${order.contactAddr}"/></dd>
+				<dd style="width:80%;"><input type="text" name="obj.contactAddr"  size="85" readonly="readonly" value="${obj.contactAddr}"/></dd>
 			</dl>								
 			<dl style="width:100%;">
 				<dt style="width:10%;">解决措施：</dt>			
-				<dd style="width:80%;"><textarea name="order.handleResult" cols="87" rows="5" maxlength="200">${order.handleResult}</textarea></dd>
+				<dd style="width:80%;"><textarea name="obj.handleResult" cols="87" rows="5" maxlength="200">${obj.handleResult}</textarea></dd>
 			</dl>
 		</div>
 		<div class="formBar">

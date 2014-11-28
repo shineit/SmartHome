@@ -20,7 +20,9 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.NewsManageService;
 import cn.fuego.smart.home.web.model.NewsFilterModel;
@@ -32,19 +34,10 @@ import cn.fuego.smart.home.web.model.NewsFilterModel;
  * @date 2014-10-29 下午2:46:32 
  *  
  */
-public class NewsManageServiceImpl implements NewsManageService
+public class NewsManageServiceImpl extends MispCommonServiceImpl<News> implements NewsManageService
 {
 
-	/* (non-Javadoc)
-	 * @see cn.fuego.smart.home.service.NewsManageService#getNewsDataSource()
-	 */
-	@Override
-	public AbstractDataSource<News> getNewsDataSource(List<QueryCondition> conditionList)
-	{
-		AbstractDataSource<News> datasource = new DataBaseSourceImpl<News>(News.class,conditionList);
 	 
-		return datasource;
-	}
 
 	@Override
 	public void saveNewsInfo(News news)
@@ -75,6 +68,16 @@ public class NewsManageServiceImpl implements NewsManageService
 		
 		newsList = (List<News>) DaoContext.getInstance().getNewsDao().getAll(conditionList);
 		return newsList;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
+	 */
+	@Override
+	public String GetPrimaryName()
+	{
+		// TODO Auto-generated method stub
+		return News.PRI_KEY;
 	}
 
 

@@ -14,7 +14,6 @@ import cn.fuego.misp.domain.MispButton;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
-import cn.fuego.misp.web.model.user.UserModel;
 
 /** 
  * @ClassName: UserService 
@@ -24,7 +23,7 @@ import cn.fuego.misp.web.model.user.UserModel;
  *  
  */
 
-public interface MISPUserService
+public interface MISPUserService extends MispCommonService<SystemUser>
 {
 	
  

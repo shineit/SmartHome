@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.web.action.device;
 
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 
 /** 
@@ -20,51 +21,16 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 public class PlanManageAction extends DWZTableAction
 {
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
-	private static final long serialVersionUID = 1L;
 	@Override
-	public String execute()
-	{
-		
-		return SUCCESS;
-		
-	}
-
-	@Override
-	public String create()
+	public MispCommonService getService()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public String delete()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deleteList()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String modify()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String show()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 
 
 }

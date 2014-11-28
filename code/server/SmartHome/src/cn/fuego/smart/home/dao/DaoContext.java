@@ -1,10 +1,11 @@
 package cn.fuego.smart.home.dao;
 
 import cn.fuego.common.dao.Dao;
-import cn.fuego.common.dao.impl.CommonDaoImpl;
+import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
@@ -23,13 +24,13 @@ public class DaoContext
 	private static DaoContext instance;
  
  
-	private Dao sensorDao = null;
-	private Dao newsDao = null;
-	private Dao serviceOrderDao = null;
-	private Dao concentratorDao = null;
-	private Dao userMarkDao = null;
+	private Dao<HomeSensor> sensorDao = null;
+	private Dao<News> newsDao = null;
+	private Dao<ServiceOrder> serviceOrderDao = null;
+	private Dao<Concentrator> concentratorDao = null;
+	private Dao<UserMark> userMarkDao = null;
     
-	private Dao alarmDao =null;
+	private Dao<Alarm> alarmDao =null;
 
 	private DaoContext()
 	{
@@ -45,61 +46,55 @@ public class DaoContext
 		return instance;
 	}
 	
-	public Dao getNewsDao()
+	public Dao<News> getNewsDao()
 	{
 		if (null == newsDao)
 		{
-			newsDao = getDaoInstanceByClass(News.class);
+			newsDao = new AbstractDao<News>(News.class);
 		}
 		return newsDao;
 	}
  
-	public Dao getServiceOrderDao()
+	public Dao<ServiceOrder> getServiceOrderDao()
 	{
 		if (null == serviceOrderDao)
 		{
-			serviceOrderDao = getDaoInstanceByClass(ServiceOrder.class);
+			serviceOrderDao = new AbstractDao<ServiceOrder>(ServiceOrder.class);
 		}
 		return serviceOrderDao;
 	}
-	public Dao getConcentratorDao()
+	public Dao<Concentrator> getConcentratorDao()
 	{
 		if (null == concentratorDao)
 		{
-			concentratorDao = getDaoInstanceByClass(Concentrator.class);
+			concentratorDao = new AbstractDao<Concentrator>(Concentrator.class);
 		}
 		return concentratorDao;
 	}
-	public Dao getSensorDao()
+	public Dao<HomeSensor> getSensorDao()
 	{
 		if (null == sensorDao)
 		{
-			sensorDao = getDaoInstanceByClass(SystemUser.class);
+			sensorDao = new AbstractDao<HomeSensor>(HomeSensor.class);
 		}
 		return sensorDao;
 	}
   
-	public Dao getUserMarkDao()
+	public Dao<UserMark> getUserMarkDao()
 	{
 		if (null == userMarkDao)
 		{
-			userMarkDao = getDaoInstanceByClass(UserMark.class);
+			userMarkDao = new AbstractDao<UserMark>(UserMark.class);
 		}
 		return userMarkDao;
 	}
 	
-	private Dao getDaoInstanceByClass(Class clazz)
-	{
-		Dao dao;
  
-		dao = new CommonDaoImpl(clazz); 
-		return dao;
-	}
-	public Dao getAlarmDao()
+	public Dao<Alarm> getAlarmDao()
 	{
 		if (null == alarmDao)
 		{
-			alarmDao = getDaoInstanceByClass(Alarm.class);
+			alarmDao = new AbstractDao<Alarm>(Alarm.class);
 		}
 		return alarmDao;
 	}

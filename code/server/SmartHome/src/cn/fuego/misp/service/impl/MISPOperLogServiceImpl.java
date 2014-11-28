@@ -30,7 +30,7 @@ import cn.fuego.misp.web.model.log.LogFilterModel;
  *  
  */
 
-public class MISPOperLogServiceImpl implements MISPOperLogService
+public class MISPOperLogServiceImpl extends MispCommonServiceImpl<OperLog> implements MISPOperLogService
 {
 
 	/* (non-Javadoc)
@@ -96,9 +96,9 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 			}			
 		}
 
-		AbstractDataSource<OperLog> dataSource = new DataBaseSourceImpl<OperLog>(OperLog.class,conditionList);
+		
 	 
-		return dataSource;
+		return this.getDataSource(conditionList);
 	}
 
 	/* (non-Javadoc)
@@ -122,6 +122,16 @@ public class MISPOperLogServiceImpl implements MISPOperLogService
 		logIDList.add(logID);
 		deleteLog(logIDList);
 
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
+	 */
+	@Override
+	public String GetPrimaryName()
+	{
+		// TODO Auto-generated method stub
+		return OperLog.PRI_KEY;
 	}
 
 }

@@ -30,7 +30,7 @@
         <global-exception-mappings>
             <exception-mapping result="exception-system" exception="java.lang.Exception"></exception-mapping>
             
-            <exception-mapping result="exception-service" exception="cn.fuego.common.exception.SystemOperateException"></exception-mapping>
+            <exception-mapping result="exception-service" exception="cn.fuego.misp.service.MISPException"></exception-mapping>
         </global-exception-mappings>    
     </package>
     
@@ -67,16 +67,7 @@
  
  	</package>
 
- 	<!-- package name="user" extends="default">
-  
-  		<action name="UserManage" class="cn.fuego.remote.medical.manage.web.action.user.UserManageAction">
-			<result type="dispatcher">/client/manage/userManage.jsp</result>
-			<result type="dispatcher" name="LoginFailed">/client/misp/login.jsp</result>	
-			<result type="dispatcher" name="showInfo">/client/manage/userManage.jsp</result>	
-			<result type="dispatcher" name="editInfo">/client/manage/newUser.jsp</result>
-		</action>
  
- 	</package>  -->
  
 </struts>
 

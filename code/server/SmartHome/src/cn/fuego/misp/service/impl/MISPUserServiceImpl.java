@@ -28,7 +28,6 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.misp.service.cache.SystemMenuCache;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
-import cn.fuego.misp.web.model.user.UserModel;
 
 /** 
  * @ClassName: MISPUserServiceImpl 
@@ -38,10 +37,21 @@ import cn.fuego.misp.web.model.user.UserModel;
  *  
  */
 
-public class MISPUserServiceImpl implements MISPUserService
+public class MISPUserServiceImpl<E> extends MispCommonServiceImpl<SystemUser> implements MISPUserService
 {
 	private Log log = LogFactory.getLog(MISPUserServiceImpl.class);
 
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
+	 */
+	@Override
+	public String GetPrimaryName()
+	{
+		// TODO Auto-generated method stub
+		return SystemUser.getUserIDAttr();
+	}
+	
+	
 	private SystemUser getSystemUserByUserName(String userName)
 	{
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserNameAttr(),userName));
@@ -125,5 +135,6 @@ public class MISPUserServiceImpl implements MISPUserService
 		 List<MispButton> buttonList = new  ArrayList<MispButton>();
 		return buttonList;
 	}
+
  
 }

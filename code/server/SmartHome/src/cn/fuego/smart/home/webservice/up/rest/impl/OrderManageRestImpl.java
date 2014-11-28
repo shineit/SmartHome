@@ -48,7 +48,7 @@ public class OrderManageRestImpl implements OrderManageRest
 	{
 		GetServiceOrderListRsp rsp = new GetServiceOrderListRsp();
 		
-		List<ServiceOrder> orderList = orderService.getOrderDataSource(null).getAllPageData();
+		List<ServiceOrder> orderList = orderService.getDataSource().getAllPageData();
 		for(ServiceOrder e : orderList)
 		{
 			ServiceOrderJson orderJson = new ServiceOrderJson();

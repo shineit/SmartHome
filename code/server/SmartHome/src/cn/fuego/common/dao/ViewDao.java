@@ -21,16 +21,16 @@ import cn.fuego.common.domain.PersistenceObject;
  *  
  */
 
-public interface ViewDao
+public interface ViewDao<E>
 {
-	Collection getAll();
+	List<E> getAll();
 	long getCount(List<QueryCondition> conditionList);
-	Collection getAll(List<QueryCondition> conditionList);
-	Collection getAll(List<QueryCondition> conditionList,int startNum,int pageSize);
-	Collection getAll(QueryCondition condition);
+	List<E> getAll(List<QueryCondition> conditionList);
+	List<E> getAll(List<QueryCondition> conditionList,int startNum,int pageSize);
+	List<E> getAll(QueryCondition condition);
 
-	PersistenceObject getUniRecord(QueryCondition condition);
-	PersistenceObject getUniRecord(List<QueryCondition> conditionList);
+	E getUniRecord(QueryCondition condition);
+	E getUniRecord(List<QueryCondition> conditionList);
 
 
 }

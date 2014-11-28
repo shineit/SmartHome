@@ -11,6 +11,7 @@ package cn.fuego.misp.web.action.login;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.Alarm;
@@ -28,7 +29,7 @@ import cn.fuego.smart.home.web.model.NewsFilterModel;
  * @date 2014-11-6 下午10:35:25 
  *  
  */
-public class IndexAction extends DWZTableAction
+public class IndexAction extends DWZTableAction<Alarm>
 {
 
 	/**
@@ -48,8 +49,18 @@ public class IndexAction extends DWZTableAction
 		
 		newsContent = newsService.getIndexNews(this.getLoginUser().getUserName());
 		alarmTable.setPage(this.getPage());
-    	alarmTable.setDataSource(alarmService.getAlarmDataSource(alarmFilter.getConidtionList()));
+    	alarmTable.setDataSource(alarmService.getDataSource(alarmFilter.getConidtionList()));
 		return SUCCESS;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
+	 */
+	@Override
+	public MispCommonService<Alarm> getService()
+	{
+		// TODO Auto-generated method stub
+		return alarmService;
 	}
 
 
@@ -147,6 +158,7 @@ public class IndexAction extends DWZTableAction
 	{
 		this.newsService = newsService;
 	}
+
 
 	
 }

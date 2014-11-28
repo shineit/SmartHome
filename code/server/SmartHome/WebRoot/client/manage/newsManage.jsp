@@ -68,7 +68,7 @@ function submitFormN(url){
 		<s:form  id="newsForm"  method="POST"  name="newsForm" >
 		<tbody>
 
- 		<c:forEach var="e" items="${newsTable.currentPageData}"> 	
+ 		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.newsID}">
 				<td><input name="selectedIDList" value="${e.newsID}" type="checkbox" style="margin-top:5px;"></td>
 				<td>${e.newsID}</td>

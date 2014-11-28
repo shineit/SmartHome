@@ -22,6 +22,7 @@ import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.IDCreateService;
 import cn.fuego.misp.service.MISPServiceContext;
+import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
@@ -36,23 +37,14 @@ import cn.fuego.smart.home.web.model.OrderFilterModel;
  * @date 2014-10-29 下午3:05:35 
  *  
  */
-public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
+public class ServiceOrderManageServiceImpl extends MispCommonServiceImpl<ServiceOrder> implements ServiceOrderManageService
 {
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.ServiceOrderManageService#getNewsDataSource()
 	 */
 	private Log log = LogFactory.getLog(ServiceOrderManageServiceImpl.class);
-	@Override
-	
-	public AbstractDataSource<ServiceOrder> getOrderDataSource(List<QueryCondition> conditionList)
-	{
-		 
-		
-		AbstractDataSource<ServiceOrder> datasource = new DataBaseSourceImpl<ServiceOrder>(ServiceOrder.class,conditionList);
-		
-		return datasource;
-	}
+	 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.ServiceOrderManageService#create(cn.fuego.smart.home.domain.ServiceOrder)
 	 */
@@ -88,6 +80,16 @@ public class ServiceOrderManageServiceImpl implements ServiceOrderManageService
 		ServiceOrder order= (ServiceOrder) DaoContext.getInstance().getServiceOrderDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "orderID", orderID));
 
 		return order;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
+	 */
+	@Override
+	public String GetPrimaryName()
+	{
+		// TODO Auto-generated method stub
+		return ServiceOrder.PRI_KEY;
 	}
 
 

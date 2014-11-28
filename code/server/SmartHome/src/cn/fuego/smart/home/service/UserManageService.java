@@ -5,13 +5,13 @@ import java.util.List;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.misp.service.MISPUserService;
 import cn.fuego.smart.home.domain.UserMark;
 
 
-public interface UserManageService
+public interface UserManageService extends MISPUserService
 {
-	AbstractDataSource<SystemUser>  getUserDataSource(List<QueryCondition> conditionList);
-
+ 
 	void saveUserInfo(SystemUser sysUser);
 
 	void deleteUserList(List<String> userIDList);

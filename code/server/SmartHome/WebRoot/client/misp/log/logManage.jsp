@@ -75,7 +75,7 @@ function submitForm(url){
 				
 	<tbody>
 	
-	    <c:forEach var="e" items="${logList.currentPageData}"> 		
+	    <c:forEach var="e" items="${table.currentPageData}"> 		
 	        <tr target="sid_user" rel="${e.id}" >
 				<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>	        
 	            <td>${e.id}</td>
@@ -95,7 +95,7 @@ function submitForm(url){
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${logList.page}" scope="request"/>
+	        <c:set var="page" value="${table.page}" scope="request"/>
 			     
 			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	

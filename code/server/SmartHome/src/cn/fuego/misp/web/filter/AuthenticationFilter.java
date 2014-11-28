@@ -72,15 +72,25 @@ public class AuthenticationFilter implements Filter
 			 log.warn("the exclude path is empty");
 			 return false;
 		 }
-		 log.info("the exclude path is " + exPath);
 
 		 String[] pathArry = exPath.split(",");
 		 for(int i=0;i<pathArry.length;i++)
 		 {
-			 if(url.contains(pathArry[i]))
+			 if(pathArry[i].startsWith("."))
 			 {
-				 return true;
+				 if(url.endsWith(pathArry[i]))
+				 {
+					 return true;
+				 }
 			 }
+			 else
+			 {
+				 if(url.contains(pathArry[i]))
+				 {
+					 return true;
+				 }
+			 }
+			 
 		 }
 		 return false;
 	}

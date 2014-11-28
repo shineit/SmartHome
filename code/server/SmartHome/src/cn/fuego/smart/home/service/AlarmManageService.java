@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.Alarm;
 
 /** 
@@ -21,8 +22,7 @@ import cn.fuego.smart.home.domain.Alarm;
  * @date 2014-11-7 上午10:16:42 
  *  
  */
-public interface AlarmManageService
+public interface AlarmManageService extends MispCommonService<Alarm>
 {
-	AbstractDataSource<Alarm>  getAlarmDataSource(List<QueryCondition> conditionList);
-	void deleteAlarmList(List<String> alarmIDList);
+ 	void deleteAlarmList(List<String> alarmIDList);
 }

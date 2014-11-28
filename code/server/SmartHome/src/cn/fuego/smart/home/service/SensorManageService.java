@@ -10,7 +10,7 @@ package cn.fuego.smart.home.service;
 
 import java.util.List;
 
-import cn.fuego.common.dao.datasource.AbstractDataSource;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.FireSensor;
@@ -23,12 +23,10 @@ import cn.fuego.smart.home.domain.HomeSensor;
  * @date 2014-10-24 下午10:58:38 
  *  
  */
-public interface SensorManageService
+public interface SensorManageService extends MispCommonService<HomeSensor>
 {
-	AbstractDataSource<HomeSensor>  getSensorDataSource();
-	
-	AbstractDataSource<Alarm>  getAlarmDataSource(int userID);
-
+ 	
+ 
 	
 	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor);
 	void createAlarm(List<Alarm> alarm);

@@ -14,15 +14,15 @@
 
 			<dl style="width:100%;">
 				<dt style="width:10%;">创建人：</dt>			
-				<dd style="width:80%;"><input type="text" name="news.author"  size="30" readonly="readonly" value="${news.author}"/></dd>
+				<dd style="width:80%;"><input type="text" name="obj.author"  size="30" readonly="readonly" value="${obj.author}"/></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:20%;">标题：</dt>			
-				<dd style="width:70%;"><input type="text" name="news.title"  size="30" value="${news.title}" class="required"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.title"  size="30" value="${obj.title}" class="required"/></dd>
 			</dl>
 			<dl style="width:100%;">
 				<dt style="width:10%;">公告内容：</dt>			
-				<dd style="width:80%;"><textarea name="news.content" cols="87" rows="8" maxlength="500">${news.content}</textarea></dd>
+				<dd style="width:80%;"><textarea name="obj.content" cols="87" rows="8" maxlength="500">${obj.content}</textarea></dd>
 			</dl>						
 		</div>		
 

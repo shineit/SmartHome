@@ -27,7 +27,8 @@ public class MispMessageModel
 	public static String FAILURE_CODE = "300";
 	public static String TIMEOUT_CODE = "301";
 	private String statusCode = SUCCESS_CODE;
-	private String message = MISPErrorMessageConst.getMessageByErrorCode(MISPErrorMessageConst.SUCCESS);
+	private int errorCode = MISPErrorMessageConst.SUCCESS;
+	private String message;
 	private String navTabId;
 	private String rel;
 	private String callbackType;
@@ -43,6 +44,7 @@ public class MispMessageModel
 	}
 	public String getMessage()
 	{
+		message = MISPErrorMessageConst.getMessageByErrorCode(errorCode);
 		return message;
 	}
 	public void setMessage(String message)
@@ -88,6 +90,14 @@ public class MispMessageModel
 	public void setConfirmMsg(String confirmMsg)
 	{
 		this.confirmMsg = confirmMsg;
+	}
+	public int getErrorCode()
+	{
+		return errorCode;
+	}
+	public void setErrorCode(int errorCode)
+	{
+		this.errorCode = errorCode;
 	}
  
 }

@@ -20,8 +20,8 @@ public enum TableOperateTypeEnum
 {
 	DELETE("delete"),
 	MODIFY("modify"),
-	VIEW("create"),
-	CREATE("view");
+	VIEW("view"),
+	CREATE("create");
 	
     private String type;  
     private TableOperateTypeEnum(String type)

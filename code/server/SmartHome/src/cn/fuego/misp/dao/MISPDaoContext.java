@@ -1,7 +1,7 @@
 package cn.fuego.misp.dao;
 
 import cn.fuego.common.dao.Dao;
-import cn.fuego.common.dao.impl.CommonDaoImpl;
+import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.misp.domain.OperLog;
 import cn.fuego.misp.domain.Privilege;
 import cn.fuego.misp.domain.SystemIDType;
@@ -21,16 +21,16 @@ public class MISPDaoContext
 {
 	private static MISPDaoContext instance;
  
-	private Dao systemMenuDao = null;
+	private Dao<SystemMenu> systemMenuDao = null;
  
   
-	private Dao systemIDTypeDao = null;
+	private Dao<SystemIDType> systemIDTypeDao = null;
  
-	private Dao systemUserDao = null;
-	private Dao operLogDao = null;
+	private Dao<SystemUser> systemUserDao = null;
+	private Dao<OperLog> operLogDao = null;
 
 	
-	private Dao privilegeDao = null;
+	private Dao<Privilege> privilegeDao = null;
 
 
 	private MISPDaoContext()
@@ -48,58 +48,52 @@ public class MISPDaoContext
 	}
  
 	
-	public synchronized Dao getSystemUserDao() 
+	public synchronized Dao<SystemUser> getSystemUserDao() 
 	{
 		if (null == systemUserDao)
 		{
-			systemUserDao = getDaoInstanceByClass(SystemUser.class);
+			systemUserDao = new AbstractDao<SystemUser>(SystemUser.class);
 		}
 		return systemUserDao;
 	}
 	
-	public synchronized Dao getSystemMenuDao() 
+	public synchronized Dao<SystemMenu> getSystemMenuDao() 
 	{
 		if (null == systemMenuDao)
 		{
-			systemMenuDao = getDaoInstanceByClass(SystemMenu.class);
+			systemMenuDao = new AbstractDao<SystemMenu>(SystemMenu.class);
 		}
 		return systemMenuDao;
 	}
 	
  
 	
-	public synchronized Dao getSystemIDTypeDao() 
+	public synchronized Dao<SystemIDType> getSystemIDTypeDao() 
 	{
 		if (null == systemIDTypeDao)
 		{
-			systemIDTypeDao = getDaoInstanceByClass(SystemIDType.class);
+			systemIDTypeDao = new AbstractDao<SystemIDType>(SystemIDType.class);
 		}
 		return systemIDTypeDao;
 	}
-	public synchronized Dao getOperLogDao() 
+	public synchronized Dao<OperLog> getOperLogDao() 
 	{
 		if (null == operLogDao)
 		{
-			operLogDao = getDaoInstanceByClass(OperLog.class);
+			operLogDao = new AbstractDao<OperLog>(OperLog.class);
 		}
 		return operLogDao;
 	}
 	
-	public synchronized Dao getPrivilegeDao() 
+	public synchronized Dao<Privilege> getPrivilegeDao() 
 	{
 		if (null == privilegeDao)
 		{
-			privilegeDao = getDaoInstanceByClass(Privilege.class);
+			privilegeDao = new AbstractDao<Privilege>(Privilege.class);
 		}
 		return privilegeDao;
 	}
 	
-	private Dao getDaoInstanceByClass(Class clazz)
-	{
-		Dao dao;
  
-		dao = new CommonDaoImpl(clazz); 
-		return dao;
-	}
 	 
 }

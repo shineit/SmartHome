@@ -17,6 +17,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MISPAction extends ActionSupport
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static String selectedMenuID;
 	private List<MenuModel> menuHeadList;
 	private MispMessageModel operateMessage = new MispMessageModel();

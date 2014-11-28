@@ -9,11 +9,13 @@
 package cn.fuego.smart.home.web.action.info;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.misp.dao.file.MispMessageReader;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
@@ -29,7 +31,7 @@ import cn.fuego.smart.home.web.model.NewsFilterModel;
  * @date 2014-11-3 下午5:43:58 
  *  
  */
-public class NewsManageAction extends DWZTableAction
+public class NewsManageAction extends DWZTableAction<News>
 {
 
 	/**
@@ -43,13 +45,14 @@ public class NewsManageAction extends DWZTableAction
 	private TableDataModel<News> newsTable = new TableDataModel<News>();
     private NewsFilterModel newsFilter = new NewsFilterModel();
     private News news ;
+    
+    
+    
     @Override
-    public String execute()
+    public List<QueryCondition> getFilterCondition()
     {
       	
-    	newsTable.setPage(this.getPage());
-    	newsTable.setDataSource(newsService.getNewsDataSource(newsFilter.getConidtionList()));
-    	return SUCCESS;
+    	return this.newsFilter.getConidtionList();
     	
     }
     
@@ -61,13 +64,7 @@ public class NewsManageAction extends DWZTableAction
 		return MISP_DONE_PAGE;
 	}
 
-	@Override
-	public String delete()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+ 
 	@Override
 	public String deleteList()
 	{
@@ -75,12 +72,7 @@ public class NewsManageAction extends DWZTableAction
 		return  MISP_DONE_PAGE;
 	}
 
-	@Override
-	public String modify()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+ 
 
 	@Override
 	public String show()
@@ -90,26 +82,10 @@ public class NewsManageAction extends DWZTableAction
 		return EDIT_INFO;
 	}
 
-	public NewsManageService getNewsService()
-	{
-		return newsService;
-	}
+ 
 
-	public void setNewsService(NewsManageService newsService)
-	{
-		this.newsService = newsService;
-	}
-
-	public TableDataModel<News> getNewsTable()
-	{
-		return newsTable;
-	}
-
-	public void setNewsTable(TableDataModel<News> newsTable)
-	{
-		this.newsTable = newsTable;
-	}
-
+  
+ 
 	public NewsFilterModel getNewsFilter()
 	{
 		return newsFilter;
@@ -119,15 +95,15 @@ public class NewsManageAction extends DWZTableAction
 	{
 		this.newsFilter = newsFilter;
 	}
-
-	public News getNews()
+ 
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
+	 */
+	@Override
+	public MispCommonService<News> getService()
 	{
-		return news;
-	}
-
-	public void setNews(News news)
-	{
-		this.news = news;
+		// TODO Auto-generated method stub
+		return this.newsService;
 	}
 
 }

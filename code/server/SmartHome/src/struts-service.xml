@@ -21,7 +21,8 @@
  
    		<action name="UserManage" class="cn.fuego.smart.home.web.action.sys.UserManageAction">
 			<result type="dispatcher">/client/manage/userManage.jsp</result>
- 			<result type="dispatcher" name="editInfo">/client/manage/userCreate.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/userCreate.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/userCreate.jsp</result>
 			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
 		</action>
 

@@ -11,7 +11,7 @@ package cn.fuego.smart.home.service;
 import java.util.List;
 
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.dao.datasource.AbstractDataSource;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.Concentrator;
 
  /** 
@@ -21,12 +21,11 @@ import cn.fuego.smart.home.domain.Concentrator;
  * @date 2014-10-31 上午12:21:07 
  *  
  */
-public interface ConcentratorManageService
+public interface ConcentratorManageService extends MispCommonService<Concentrator>
 {
 	void online(Concentrator concentrator);
 	void offline(Concentrator concentrator);
-	AbstractDataSource<Concentrator> getConcentDataSource(List<QueryCondition> conidtionList);
-	Concentrator getConcentByID(String concentID);
+ 	Concentrator getConcentByID(String concentID);
 	void modifyConcentInfo(Concentrator concent);
 	void deleteConcentList(List<String> concentIDList);
 	Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList);

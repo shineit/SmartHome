@@ -15,6 +15,8 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class News implements PersistenceObject
 {
+	public static final String PRI_KEY = "newsID";
+	
 	private int   newsID; //新闻编号,自增长
 	private String title; //新闻标题
 	private String author; //发布人

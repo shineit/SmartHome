@@ -2,6 +2,7 @@ package cn.fuego.smart.home.web.action.device;
 
 import java.util.Arrays;
 
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
@@ -10,7 +11,7 @@ import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.ConcentFilterModel;
 
-public class ConcentratorManageAction extends DWZTableAction
+public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 {
 
 	/**
@@ -25,22 +26,11 @@ public class ConcentratorManageAction extends DWZTableAction
 	public String execute()
 	{
 		concentTable.setPage(this.getPage());
-		concentTable.setDataSource(concentService.getConcentDataSource(filter.getConidtionList()));
+		concentTable.setDataSource(concentService.getDataSource(filter.getConidtionList()));
+
 		return SUCCESS;
 	}
-	@Override
-	public String create()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String delete()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+	 
 
 	@Override
 	public String deleteList()
@@ -94,6 +84,17 @@ public class ConcentratorManageAction extends DWZTableAction
 	public void setConcent(Concentrator concent)
 	{
 		this.concent = concent;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
+	 */
+	@Override
+	public MispCommonService<Concentrator> getService()
+	{
+		// TODO Auto-generated method stub
+		return this.concentService;
 	}
 
 

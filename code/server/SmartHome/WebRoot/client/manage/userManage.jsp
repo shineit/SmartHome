@@ -68,7 +68,7 @@ function submitForm(url){
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="UserManage!show.action" target="dialog" mask="true" title="新增用户"><span>新增用户</span></a></li>
+			<li><a class="add" href="UserManage!show.action?operateType=create" target="dialog" mask="true" title="新增用户"><span>新增用户</span></a></li>
 			<li><a class="delete" href="UserManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除用户</span></a></li>
 		</ul>
 	</div>
@@ -86,7 +86,7 @@ function submitForm(url){
 		<s:form  id="userForm"  method="POST"  name="userForm" >
 		<tbody>
 		
-		<c:forEach var="e" items="${userTable.currentPageData}"> 
+		<c:forEach var="e" items="${table.currentPageData}"> 
 			
 			<tr target="sid_user" rel="${e.userID}">
 				<td><input name="selectedIDList" value="${e.userID}" type="checkbox" style="margin-top:5px;"></td>

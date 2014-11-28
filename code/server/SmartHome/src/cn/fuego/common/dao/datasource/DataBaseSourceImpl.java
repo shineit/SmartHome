@@ -22,22 +22,20 @@ import cn.fuego.common.dao.impl.AbstractDao;
  *  
  */
 
-public class DataBaseSourceImpl<E> extends AbstractDao implements AbstractDataSource<E>
+public class DataBaseSourceImpl<E> extends AbstractDao<E> implements AbstractDataSource<E>
 {
 
-	private Class clazz;
-	private List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-	
+ 	private List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+ 
 	public DataBaseSourceImpl(Class clazz)
 	{
-		this.clazz = clazz;
+ 		 super(clazz);
 	}
-	
 	public DataBaseSourceImpl(Class clazz,List<QueryCondition> conditionList)
 	{
-		this.clazz = clazz;
-		this.conditionList = conditionList;
-	}
+		 super(clazz);
+ 		this.conditionList = conditionList;
+	}		
 	/* (non-Javadoc)
 	 * @see cn.fuego.common.service.datasource.AbstractDataSource#getCurrentPageData(int, int)
 	 */
@@ -68,14 +66,6 @@ public class DataBaseSourceImpl<E> extends AbstractDao implements AbstractDataSo
 		return this.getCount(conditionList);
 	}
 
-	/* (non-Javadoc)
-	 * @see cn.fuego.common.dao.AbstractDao#getFeaturedClass()
-	 */
-	@Override
-	public Class getFeaturedClass()
-	{
-		// TODO Auto-generated method stub
-		return clazz;
-	}
+ 
 
 }

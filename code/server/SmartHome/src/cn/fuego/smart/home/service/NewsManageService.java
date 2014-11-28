@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
+import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.web.model.NewsFilterModel;
 
@@ -22,11 +23,10 @@ import cn.fuego.smart.home.web.model.NewsFilterModel;
  * @date 2014-10-24 下午11:21:55 
  *  
  */
-public interface NewsManageService
+public interface NewsManageService extends MispCommonService<News>
 {
 
-	AbstractDataSource<News>  getNewsDataSource(List<QueryCondition> conditionList);
-
+ 
 	void saveNewsInfo(News news);
 
 	void deleteNewsList(List<String> newsIDList);
