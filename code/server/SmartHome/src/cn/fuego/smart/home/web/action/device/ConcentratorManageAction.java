@@ -42,14 +42,64 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
     {
     	return filter.getConidtionList();
     }
- 
+    @Override
+    public String show()
+    {
+    	try
+		{
+    		this.setOperatePemission(concentService.getOperatePemission(this.getLoginUser().getUserID(),this.getSelectedID()));
+			super.show();
+		}catch (MISPException e)
+		{
+			
+			log.error("show  permission-modify page failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+			return MISP_DONE_PAGE;
+		} 
+    	catch (Exception e)
+		{
+			log.error("show  permission-modify page failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+			return MISP_DONE_PAGE;
+		}
+    	return "modify";
+    }
+    @Override
+    public String delete()
+    {
+		super.delete();
+		this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+    	return MISP_DONE_PAGE;
+    	
+    }
 	public String showPermission()
 	{
-		concentratorID = this.getSelectedID();
-		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
-		permissionTable.setPage(this.getPage());
-		permissionTable.setDataSource(concentService.getPermissionDataSourceByID(conditionList));
+		try
+		{
+			concentratorID = this.getSelectedID();
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
+			permissionTable.setPage(this.getPage());
+			permissionTable.setDataSource(concentService.getPermissionDataSource(this.getLoginUser().getAccountType(),conditionList));
+		}catch (MISPException e)
+		{
+			
+			log.error("show permission page failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+			return MISP_DONE_PAGE;
+		} 		
+		catch (Exception e)
+		{
+			log.error("show permission page failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+			return MISP_DONE_PAGE;
+		}
 		return "addInfo";
 		
 	}

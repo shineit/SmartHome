@@ -17,59 +17,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=request.getContextPath()%>/client/lib/dwz/js/jquery-1.7.2.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/client/lib/newJS/jQuery.md5.js" type="text/javascript"></script>
  <script type="text/javascript">  
-    function changeValidateCode(obj)
-     {  
-           //获取当前的时间作为参数，无具体意义  
-        var timenow = new Date().getTime();  
-           //每次请求需要一个不同的参数，否则可能会返回同样的验证码  
-        //这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。  
-        obj.src="login/ValidateImage.action?d="+timenow;  
-     } 
-    $(function(){
-    
-     	$("#Bt1").click(function(){
-        //alert($.trim($("#uaseName").val()).length);
-        if ($.trim($("#userName").val()).length<=0)
-        {
-        	$("#warn").html("用户名输入不能为空！");
-        }else if($.trim($("#userPwd").val()).length<=0)
-        {
-        	$("#warn").html("密码输入不能为空！");
-        }else if($.trim($("#ckey").val()).length<=0)
-        {
-        	$("#warn").html("验证码输入不能为空！");
-        }
-        else{
-    		var newCode=$.md5($('#userPwd').val());
-    		$("#convertPwd").val(newCode);
-      	   $.ajax(
-              {
-                  type:"POST",
-                  url:"login/login!validateCode.action",
-                  dataType:"text",
-                  data:{code:$("#ckey").val()},
-                  success:function(json)
-                  {
-                  	 if(json=='false')
-                  	 {
-                  	 	$("#warn").html("验证码输入错误！");
-                  	 }else{
-                  	     $("form[name='loginForm']").submit();
-                  	 }
 
-                  }
+		function changeValidateCode(obj) {
+			//获取当前的时间作为参数，无具体意义  
+			var timenow = new Date().getTime();
+			//每次请求需要一个不同的参数，否则可能会返回同样的验证码  
+			//这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。  
+			obj.src = "login/ValidateImage.action?d=" + timenow;
+		}
+		//enter 按下提交表单
 
-              });
-        }                
+		$(function() {
+			document.onkeydown = function(e) {
+				var ev = document.all ? window.event : e;
+				if (ev.keyCode == 13) {// 如（ev.ctrlKey && ev.keyCode==13）为ctrl+Center 触发  
+					//要处理的事件  
+					submitLogin();
+				}
+			};
+		});
+		function submitLogin() {
+			if ($.trim($("#userName").val()).length <= 0) {
+				$("#warn").html("用户名输入不能为空！");
+			} else if ($.trim($("#userPwd").val()).length <= 0) {
+				$("#warn").html("密码输入不能为空！");
+			} else if ($.trim($("#ckey").val()).length <= 0) {
+				$("#warn").html("验证码输入不能为空！");
+			} else {
+				var newCode = $.md5($('#userPwd').val());
+				$("#convertPwd").val(newCode);
+				$.ajax({
+					type : "POST",
+					url : "login/login!validateCode.action",
+					dataType : "text",
+					data : {
+						code : $("#ckey").val()
+					},
+					success : function(json) {
+						if (json == 'false') {
+							$("#warn").html("验证码输入错误！");
+						} else {
+							$("form[name='loginForm']").submit();
+						}
 
-     	});//Bt1 click function
-     }); //function
-          
+					}
 
-  
+				});
+			}
+		}
+		$(function() {
 
+			$("#Bt1").click(function() {
+				//alert($.trim($("#uaseName").val()).length);
 
-</script>
+				submitLogin();
+			});//Bt1 click function
+		}); //function
+	</script>
 
 
 

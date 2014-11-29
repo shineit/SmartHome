@@ -16,13 +16,14 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
+import cn.fuego.smart.home.constant.ConcentratorPermissionEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
@@ -56,12 +57,28 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
-	public Concentrator getConcentByID(String concentID)
+	public String getOperatePemission(int userID, String concentratorID)
 	{
-		Concentrator concent= (Concentrator) DaoContext.getInstance().getConcentratorDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentID));
-		return concent;
+		String operatePemission=null;
+		UserConcentrator oldPermission =getPermissionByID(String.valueOf(userID),concentratorID);
+		SystemUser user = MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"userID",String.valueOf(userID)));
+		if(user.getRole()==UserTypeEnum.ADMIN.getTypeValue())
+		{
+			operatePemission = String.valueOf(ConcentratorPermissionEnum.ALL.getIntValue());//超级管理员默认有全部权限
+			return operatePemission;
+		}
+		if(oldPermission!=null)
+		{
+			operatePemission = String.valueOf( ConcentratorPermissionEnum.getEnumByInt(oldPermission.getOperate()).getIntValue());
+		}
+		else
+		{
+			log.info("the user don't have the permission");
+			throw new MISPException(MISPErrorMessageConst.OPERATE_PROHIBITED);
+		}
+		
+		return operatePemission;
 	}
 
 	@Override
@@ -96,11 +113,20 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		return concent;
 	}
 
+
 	@Override
-	public AbstractDataSource<UserConcentrator> getPermissionDataSourceByID(List<QueryCondition> conidtionList)
+	public AbstractDataSource<UserConcentrator> getPermissionDataSource(int accountType, List<QueryCondition> conditionList)
 	{
-		AbstractDataSource<UserConcentrator> datasource = new DataBaseSourceImpl<UserConcentrator>(UserConcentrator.class,conidtionList);
-		
+		AbstractDataSource<UserConcentrator> datasource =null;
+		if(accountType==UserTypeEnum.ADMIN.getTypeValue())
+		{
+			datasource = new DataBaseSourceImpl<UserConcentrator>(UserConcentrator.class,conditionList);
+		}
+		else
+		{
+			log.info("the user don't have the permission");
+			throw new MISPException(MISPErrorMessageConst.OPERATE_PROHIBITED);
+		}
 		return datasource;
 	}
 
@@ -164,31 +190,36 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	@Override
 	public void modifyPermission(UserConcentrator userPermission)
 	{
-		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",String.valueOf(userPermission.getConcentratorID())));
-	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"userID",String.valueOf(userPermission.getUserID())));
-	    
-	    UserConcentrator oldPermission =(UserConcentrator) DaoContext.getInstance().getUserConcentratorDao().getUniRecord(conditionList);
+    
+	    UserConcentrator oldPermission =getPermissionByID(String.valueOf(userPermission.getUserID()),String.valueOf(userPermission.getConcentratorID()));
 	    oldPermission.setOperate(userPermission.getOperate());
 	    DaoContext.getInstance().getUserConcentratorDao().update(oldPermission);
 	}
-
+    /**
+     * 删除集中器同时删除相应的关联权限信息
+     */
 	@Override
-	public void deleteConcentByConcentID(String concentratorID)
+	public void delete(String concentratorID)
 	{
 		
-		Concentrator oldConcentrator= (Concentrator) DaoContext.getInstance().getConcentratorDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID",concentratorID));
-		//UserConcentrator oldPermission = (UserConcentrator) DaoContext.getInstance().getUserConcentratorDao().getAll(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID",concentratorID));
+		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID",concentratorID);
+		Concentrator oldConcentrator= (Concentrator) DaoContext.getInstance().getConcentratorDao().getUniRecord(condition);
+		List<UserConcentrator> permissionList = new ArrayList<UserConcentrator>();
+		permissionList = (List<UserConcentrator>) DaoContext.getInstance().getUserConcentratorDao().getAll(condition);
+		
 		if(oldConcentrator!=null)
 		{
-			DaoContext.getInstance().getConcentratorDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID",concentratorID));
+			DaoContext.getInstance().getConcentratorDao().delete(condition);
 		}
 		else
 		{
 			throw new MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
 		}
+		if(permissionList!=null)
+		{
+			DaoContext.getInstance().getUserConcentratorDao().delete(condition);
+		}
 		
-		DaoContext.getInstance().getUserConcentratorDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID",concentratorID));
 	}
 	@Override
 	public String GetPrimaryName()
@@ -196,8 +227,6 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		// TODO Auto-generated method stub
 		return Concentrator.PRI_KEY;
 	}
-
-
 
 
 }

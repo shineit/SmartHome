@@ -39,6 +39,8 @@ public abstract class TableAction<E> extends MISPAction
 	protected String selectedID;
 	protected String[] selectedIDList;
 	protected String operateType;//对应左侧menu
+	
+	protected String operatePemission;//用于控制不同操作权限下的界面显示内容
 	protected TableDataModel<E> table = new TableDataModel<E>();
  
 	protected E obj;
@@ -148,6 +150,16 @@ public abstract class TableAction<E> extends MISPAction
 	public void setObj(E obj)
 	{
 		this.obj = obj;
+	}
+
+	public String getOperatePemission()
+	{
+		return operatePemission;
+	}
+
+	public void setOperatePemission(String operatePemission)
+	{
+		this.operatePemission = operatePemission;
 	}
 
 	
