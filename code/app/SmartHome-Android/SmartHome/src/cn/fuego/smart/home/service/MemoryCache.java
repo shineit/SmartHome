@@ -9,10 +9,10 @@ public class MemoryCache
 	private static String version = "0.1";
 	private static String serverIp = "192.168.1.102";
 	private static String serverPort= "8080";
-	 
+	private static AppDeviceInfo pushInfo= new AppDeviceInfo() ;
     public static Boolean isLogin()
     {
-    	Boolean result=null;
+    	Boolean result= false;
     	if(getToken()!=null)
     	{
     		result = true;
@@ -52,6 +52,16 @@ public class MemoryCache
 	public static String getServerPort()
 	{
 		return serverPort;
+	}
+
+	public static AppDeviceInfo getPushInfo()
+	{
+		return pushInfo;
+	}
+
+	public static void setPushInfo(AppDeviceInfo pushInfo)
+	{
+		MemoryCache.pushInfo = pushInfo;
 	}
  
 	

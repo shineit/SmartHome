@@ -1,5 +1,8 @@
 package cn.fuego.smart.home.ui;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +23,7 @@ import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.bdsend.Utils;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -72,6 +76,10 @@ public class LoginActivity extends BaseActivtiy
 		req.setClientVersion(MemoryCache.getVersion());
 		req.setDevToken( getDeviceID());
 		
+		req.setPush_appID(MemoryCache.getPushInfo().getBaidu_push_appID());
+		req.setPush_userID(MemoryCache.getPushInfo().getBaidu_push_userID());
+		req.setPush_channelID(MemoryCache.getPushInfo().getBaidu_push_channelID());
+		
 		WebServiceContext.getInstance().getUserManageRest(this).login(req);
  
 	}
@@ -84,7 +92,7 @@ public class LoginActivity extends BaseActivtiy
 			LoginRsp rsp = (LoginRsp) message.getMessage().obj;
 
 			// 存放个人信息cookie
-			SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
+			SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, Context.MODE_PRIVATE);
 			userInfo.edit().putString(SharedPreferenceConst.NAME, userName).commit();
 			userInfo.edit().putString(SharedPreferenceConst.PASSWORD, password).commit();
 
@@ -92,6 +100,8 @@ public class LoginActivity extends BaseActivtiy
 			intent.setClass(LoginActivity.this, MainTabbarActivity.class);
 			startActivity(intent);
 			MemoryCache.setToken(rsp.getToken());
+           
+	              
 			LoginActivity.this.finish();
 
 		}

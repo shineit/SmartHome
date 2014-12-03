@@ -11,9 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
-
 import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.ui.MainActivity;
+import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.MainTabbarActivity;
 
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
@@ -71,7 +70,11 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
                 + appid + " userId=" + userId + " channelId=" + channelId
                 + " requestId=" + requestId;
         Log.d(TAG, responseString);
-
+        
+        MemoryCache.getPushInfo().setBaidu_push_appID(appid);
+        MemoryCache.getPushInfo().setBaidu_push_userID(userId);
+        MemoryCache.getPushInfo().setBaidu_push_channelID(channelId);
+        
         // 绑定成功，设置已绑定flag，可以有效的减少不必要的绑定请求
         if (errorCode == 0) {
             Utils.setBind(context, true);
@@ -269,10 +272,20 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 
         Intent intent = new Intent();
         //自定义跳转模式
-
-        intent.setClass(context.getApplicationContext(), MainTabbarActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.getApplicationContext().startActivity(intent);
+		if(MemoryCache.isLogin())
+        {
+        	
+        	intent.setClass(context.getApplicationContext(), MainTabbarActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            
+        }
+		else
+		{
+        	intent.setClass(context.getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		}
+		context.getApplicationContext().startActivity(intent);
+        
     }
 
 }
