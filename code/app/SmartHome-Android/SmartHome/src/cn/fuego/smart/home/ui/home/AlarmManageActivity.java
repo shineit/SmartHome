@@ -6,12 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.ui.MainTabbarActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
-
-import com.fuego.smarthome.R;
 
 public class AlarmManageActivity extends BaseActivtiy implements View.OnClickListener
 {

@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
 import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
-
-import com.fuego.smarthome.R;
 
 public class SettingFragment extends Fragment implements View.OnClickListener
 {

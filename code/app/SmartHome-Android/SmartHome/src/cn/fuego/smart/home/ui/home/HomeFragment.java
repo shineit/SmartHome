@@ -22,6 +22,7 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
@@ -35,8 +36,6 @@ import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
-
-import com.fuego.smarthome.R;
 
 public class HomeFragment extends BaseFragment implements OnCheckedChangeListener,OnItemClickListener
 {

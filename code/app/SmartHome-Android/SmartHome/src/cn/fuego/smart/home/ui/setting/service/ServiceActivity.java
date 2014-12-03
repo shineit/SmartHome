@@ -7,13 +7,13 @@ import java.util.Map;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
 import cn.fuego.smart.home.service.MemoryCache;
@@ -23,8 +23,6 @@ import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
-
-import com.fuego.smarthome.R;
 
 public class ServiceActivity extends BaseActivtiy implements View.OnClickListener
 {

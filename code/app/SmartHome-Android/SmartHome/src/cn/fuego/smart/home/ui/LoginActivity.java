@@ -1,15 +1,10 @@
 package cn.fuego.smart.home.ui;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,12 +12,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
@@ -30,8 +23,6 @@ import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
-
-import com.fuego.smarthome.R;
 
 public class LoginActivity extends BaseActivtiy
 {

@@ -1,5 +1,8 @@
 package cn.fuego.smart.home.ui;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -8,14 +11,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.bdsend.Utils;
 import cn.fuego.smart.home.ui.camera.CameraFragment;
 import cn.fuego.smart.home.ui.control.ControlFragment;
 import cn.fuego.smart.home.ui.home.HomeFragment;
 import cn.fuego.smart.home.ui.safe.SafeFragment;
 import cn.fuego.smart.home.ui.setting.SettingFragment;
-
-import com.fuego.smarthome.R;
 
 /** 
 * @ClassName: MainTabbarActivity 
@@ -47,6 +50,14 @@ public class MainTabbarActivity extends FragmentActivity
         super.onCreate(savedInstanceState);  
         setContentView(R.layout.activity_main_tabbar);  
         ExitApplication.getInstance().addActivity(this);
+        // Push: 以apikey的方式登录，一般放在主Activity的onCreate中。
+        // 这里把apikey存放于manifest文件中，只是一种存放方式，
+        // 您可以用自定义常量等其它方式实现，来替换参数中的Utils.getMetaValue(PushDemoActivity.this,
+        // "api_key")
+        PushManager.startWork(getApplicationContext(),PushConstants.LOGIN_TYPE_API_KEY,
+                Utils.getMetaValue(MainTabbarActivity.this, "api_key"));
+        // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
+        // PushManager.enableLbs(getApplicationContext());
               
         initView();  
     }  

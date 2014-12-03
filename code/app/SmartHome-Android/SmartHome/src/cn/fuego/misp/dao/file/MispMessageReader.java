@@ -20,7 +20,7 @@ public class MispMessageReader
     private static final FuegoLog log = FuegoLog.getLog(MispMessageReader.class);
  
     private static final String MISP_MSG_PATH = "/assets/mispMessage_en_US.properties";
-    private static final String ERROR_MSG_PATH = "/assets/mispMessage_en_US.properties";
+    private static final String ERROR_MSG_PATH = "/assets/errorMessage_en_US.properties";
 
     private static MispMessageReader instance;
     private Properties mispProp;

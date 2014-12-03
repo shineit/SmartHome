@@ -3,25 +3,20 @@ package cn.fuego.smart.home.ui.setting.user;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
-import cn.fuego.smart.home.ui.setting.service.ServiceApplyActivity;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdReq;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
-
-import com.fuego.smarthome.R;
 
 public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListener
 {

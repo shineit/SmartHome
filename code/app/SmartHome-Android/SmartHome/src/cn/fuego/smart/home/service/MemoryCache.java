@@ -1,7 +1,5 @@
 package cn.fuego.smart.home.service;
 
-import android.content.Context;
-import android.telephony.TelephonyManager;
 
 
 public class MemoryCache
@@ -12,7 +10,20 @@ public class MemoryCache
 	private static String serverIp = "192.168.1.102";
 	private static String serverPort= "8080";
 	 
- 
+    public static Boolean isLogin()
+    {
+    	Boolean result=null;
+    	if(getToken()!=null)
+    	{
+    		result = true;
+    	}
+    	else
+    	{
+    		result = false;
+    	}
+		return result;
+		
+    }
 	 
 	public static String getToken()
 	{

@@ -5,8 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.fuego.smarthome.R;
+import cn.fuego.smart.home.R;
 
 public class CameraFragment extends Fragment {
 

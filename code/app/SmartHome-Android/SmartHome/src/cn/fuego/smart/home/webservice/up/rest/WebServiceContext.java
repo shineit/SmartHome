@@ -14,8 +14,8 @@ public class WebServiceContext
 	private FuegoLog log = FuegoLog.getLog(AuthInterceptor.class);
 
 	private static WebServiceContext instance;
-
-	public static String hostURL = "http://192.168.1.103:8080/SmartHome/rest";
+	//public static String hostURL = "http://192.168.0.104:8080/SmartHome/rest";
+	public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
 	
 	private WebServiceContext()
 	{
