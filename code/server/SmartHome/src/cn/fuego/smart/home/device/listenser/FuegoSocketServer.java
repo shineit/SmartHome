@@ -25,9 +25,9 @@ import org.apache.commons.logging.LogFactory;
  *  
  */
 
-public class Server extends Thread
+public class FuegoSocketServer extends Thread
 {
-	private Log log = LogFactory.getLog(Server.class);
+	private Log log = LogFactory.getLog(FuegoSocketServer.class);
 
 	private ServerSocket serverSocket;
 	private Socket socket;

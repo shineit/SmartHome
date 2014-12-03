@@ -19,11 +19,15 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jboss.resteasy.specimpl.UriBuilderImpl;
 import org.jboss.resteasy.util.IsHttpMethod;
 
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.MISPException;
 
 /**
@@ -35,6 +39,8 @@ import cn.fuego.misp.service.MISPException;
  */
 public class MispHttpClientInvoker
 {
+	private FuegoLog log = FuegoLog.getLog(getClass());
+
 	private static final String GET_METHOD = "GET";
 	private static final String POST_METHOD = "POST";
 	
@@ -66,16 +72,23 @@ public class MispHttpClientInvoker
 		Object rspObj = null;
 		try
 		{
-			HttpUriRequest httpMethod = getHttpMethod();
+			
+		   HttpUriRequest httpMethod = getHttpMethod(args[0]);
+			
+			
+			
  			HttpResponse response = httpClient.execute(httpMethod); // 发起GET请求
 			
 			ObjectMapper mapper = new ObjectMapper();
 			String content = EntityUtils.toString(response.getEntity(), CODE_WITH_UTF_8);
 			
+			log.info("the response json is " + content);
 			rspObj = mapper.readValue(content,method.getReturnType());
+			
 			 
 		} catch (Exception e)
 		{
+			log.error("call http failed",e);
 			throw new MISPException("call http failed");
 		}
 
@@ -83,7 +96,7 @@ public class MispHttpClientInvoker
 		return rspObj;
 	}
 	
-	private HttpUriRequest  getHttpMethod()
+	private HttpUriRequest  getHttpMethod(Object args)
 	{
 		Set<String> httpMethods = IsHttpMethod.getHttpMethods(method);
 	    if (httpMethods == null || httpMethods.size() != 1)
@@ -101,7 +114,24 @@ public class MispHttpClientInvoker
 		}
 		else if(POST_METHOD.equals(httpMethods.iterator().next()))
 		{
+			ObjectMapper mapper = new ObjectMapper();
+			
+			StringEntity se = null;
+			try
+			{
+				String json = mapper.writeValueAsString(args);
+				log.info("the request json is " + json);
+				se = new StringEntity( json);
+	            se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+			} catch (Exception e)
+			{
+				log.error("covert object to json failed.object is " + args,e);
+			} 
+        
 			HttpPost postMethod = new HttpPost(absPath);
+			postMethod.setHeader(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+			postMethod.setEntity(se);
 			return postMethod;
 		}
 		

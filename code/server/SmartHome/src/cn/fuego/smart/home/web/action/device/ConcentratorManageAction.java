@@ -79,6 +79,7 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	{
 		try
 		{
+			
 			concentratorID = this.getSelectedID();
 			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));

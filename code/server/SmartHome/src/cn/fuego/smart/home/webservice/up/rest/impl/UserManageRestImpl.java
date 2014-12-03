@@ -22,6 +22,8 @@ import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.cache.AppLoginCache;
+import cn.fuego.smart.home.service.cache.AppLoginInfo;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
@@ -68,6 +70,18 @@ public class UserManageRestImpl implements UserManageRest
 
 			rsp.setToken(DateCreateUtil.getUUID());
 		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
+		    
+		    AppLoginInfo deviceInfo = new AppLoginInfo();
+		    deviceInfo.getDeviceInfo().setClientType(req.getClientType());
+		    deviceInfo.getDeviceInfo().setClientVersion(req.getClientVersion());
+		    deviceInfo.getDeviceInfo().setDevToken(req.getDevToken());
+		    
+		    deviceInfo.getPushInfo().setAppID(req.getPush_appID());
+		    deviceInfo.getPushInfo().getChannelID();
+		    deviceInfo.getPushInfo().setUser_id(req.getPush_userID());
+		    deviceInfo.setUser(user);
+		    
+		    AppLoginCache.loginUser.put(rsp.getToken(), deviceInfo);
 		    
 		    for(SystemMenu menu : menuList)
 		    {	

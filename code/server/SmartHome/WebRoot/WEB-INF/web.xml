@@ -28,7 +28,11 @@
       <servlet-name>Resteasy</servlet-name>
       <url-pattern>/rest/*</url-pattern>
    </servlet-mapping>
-  
+   
+  <listener>  
+      <listener-class>cn.fuego.smart.home.web.listener.DeviceListener</listener-class>  
+   </listener>  
+   
   <filter>
     <display-name>EncodeFilter</display-name>
     <filter-name>EncodeFilter</filter-name>

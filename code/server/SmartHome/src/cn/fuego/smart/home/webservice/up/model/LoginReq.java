@@ -16,6 +16,36 @@ public class LoginReq
 	private String clientType;
 	private String clientVersion;
 	private String devToken;
+	private  String push_appID;
+	private  String push_userID;
+	private  String push_channelID;
+	
+	
+	
+	public String getPush_appID()
+	{
+		return push_appID;
+	}
+	public void setPush_appID(String push_appID)
+	{
+		this.push_appID = push_appID;
+	}
+	public String getPush_userID()
+	{
+		return push_userID;
+	}
+	public void setPush_userID(String push_userID)
+	{
+		this.push_userID = push_userID;
+	}
+	public String getPush_channelID()
+	{
+		return push_channelID;
+	}
+	public void setPush_channelID(String push_channelID)
+	{
+		this.push_channelID = push_channelID;
+	}
 	public String getUserName()
 	{
 		return userName;
@@ -61,9 +91,11 @@ public class LoginReq
 	{
 		return "LoginReq [userName=" + userName + ", password=" + password
 				+ ", clientType=" + clientType + ", clientVersion="
-				+ clientVersion + ", devToken=" + devToken + "]";
+				+ clientVersion + ", devToken=" + devToken + ", push_appID="
+				+ push_appID + ", push_userID=" + push_userID
+				+ ", push_channelID=" + push_channelID + "]";
 	}
-
+ 
 	
 
 }

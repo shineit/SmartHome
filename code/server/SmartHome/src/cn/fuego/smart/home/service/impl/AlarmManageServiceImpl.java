@@ -18,6 +18,7 @@ import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.service.AlarmManageService;
+import cn.fuego.smart.home.webservice.down.service.WebServiceContext;
 
 /** 
  * @ClassName: AlarmManageServiceImpl 
@@ -37,6 +38,14 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, Alarm.PRI_KEY, alarmIDList);	
 		DaoContext.getInstance().getAlarmDao().delete(condition);
 		
+	}
+
+	@Override
+	public void create(List<Alarm> objList)
+	{
+		
+		super.create(objList); 
+		WebServiceContext.getInstance().getPushService().pushAlarm(objList);
 	}
 
 	/* (non-Javadoc)

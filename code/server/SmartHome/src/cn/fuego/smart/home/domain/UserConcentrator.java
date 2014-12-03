@@ -19,6 +19,9 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class UserConcentrator implements PersistenceObject
 {
+	
+	public static String attr_concentratorID = "concentratorID";
+	
 	/**
 	 * 
 	 */

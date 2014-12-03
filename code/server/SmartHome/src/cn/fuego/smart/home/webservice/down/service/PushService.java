@@ -8,6 +8,10 @@
 */ 
 package cn.fuego.smart.home.webservice.down.service;
 
+import java.util.List;
+
+import cn.fuego.smart.home.domain.Alarm;
+
  /** 
  * @ClassName: AlarmPushService 
  * @Description: TODO
@@ -15,7 +19,8 @@ package cn.fuego.smart.home.webservice.down.service;
  * @date 2014-10-20 上午11:19:25 
  *  
  */
-public interface AlarmPushService
+public interface PushService
 {
+	void pushAlarm(List<Alarm> alarmList);
 
 }

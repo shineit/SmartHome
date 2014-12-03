@@ -8,8 +8,8 @@
 */ 
 package cn.fuego.smart.home.device;
 
-import java.util.Collection;
-import java.util.List;
+import cn.fuego.common.util.format.DataTypeConvert;
+
 
 /** 
  * @ClassName: CollectProtocol 
@@ -21,21 +21,29 @@ import java.util.List;
 
 public class ApplicationProtocol
 {
+	public static final int MAX_LENGTH = 512;
+	
+	public static final int MIN_LENGTH = 12;
 	public static final String PACKET_HEAD = "@@";
-	public static final String PACKET_END = "go";
+	public static final String PACKET_END = "##";
 	
   
 	public static final int DATA_NUM_LENGTH = 48;
 	
 	
-	public static final int HOLD_CONN_TIME = 60*1000; //unit is second 
+	public static final int HOLD_CONN_TIME = 10*1000; //unit is second 
 	public static boolean isValid(String data)
 	{
+		
 		if(!data.startsWith(PACKET_HEAD))
 		{
 			return false;
 		}
 		if(!data.endsWith(PACKET_END))
+		{
+			return false;
+		}
+		if(data.length() < MIN_LENGTH)
 		{
 			return false;
 		}
@@ -70,7 +78,12 @@ public class ApplicationProtocol
 	
 	public static String encode(String encode)
 	{
-		return PACKET_HEAD+encode+PACKET_END;
+		return PACKET_HEAD+encode+ DataTypeConvert.intToByteStr(getCRC8(encode), 1) + PACKET_END;
+	}
+	
+	public static int getCRC8(String encode)
+	{
+		return 0;
 	}
 	
 

@@ -6,7 +6,7 @@
 * @date 2014-6-27 下午07:00:11 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.device.listenser;
+package cn.fuego.smart.home.device.read;
 
 import java.io.IOException;
 import java.io.InputStream;

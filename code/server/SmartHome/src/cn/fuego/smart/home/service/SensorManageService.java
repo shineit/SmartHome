@@ -29,7 +29,6 @@ public interface SensorManageService extends MispCommonService<HomeSensor>
  
 	
 	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor);
-	void createAlarm(List<Alarm> alarm);
 	
 	FireSensor getFireSensor(int concentratorID,int machineID,int loopID,int codeID);
 	HomeSensor getHomeSensor(int concentratorID,int sensorID,int channelID);

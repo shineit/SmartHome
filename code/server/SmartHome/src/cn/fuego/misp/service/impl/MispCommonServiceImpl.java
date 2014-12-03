@@ -8,8 +8,7 @@
  */
 package cn.fuego.misp.service.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
@@ -22,7 +21,6 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.meta.ReflectionUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
-import cn.fuego.smart.home.dao.DaoContext;
 
 /**
  * @ClassName: MispCommonServiceImpl
@@ -43,6 +41,10 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 	private Dao<E> getDao()
 	{
 		return new AbstractDao<E>(clazz);
+	}
+	private Dao getDao(Class clazz)
+	{
+		return new AbstractDao(clazz);
 	}
 
 	
@@ -91,6 +93,17 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 	{
 		validator(obj);
 		this.getDao().create(obj);
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cn.fuego.misp.service.MispCommonService#create(java.lang.Object)
+	 */
+	@Override
+	public void create(List<E> objList)
+	{
+		 
+		this.getDao().create(objList);
 	}
 
 	/*
@@ -198,7 +211,22 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, GetPrimaryName(), idList);
         return this.getDao().getAll(condition);
 	}
-	
+	@Override
+	public  List get(Class clazz,QueryCondition condition)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		if(null != condition)
+		{
+			conditionList.add(condition);
+		}
+        return this.getDao(clazz).getAll(conditionList);
+	}
+	@Override
+	public  List get(Class clazz,List<QueryCondition> conditionList)
+	{
+         
+        return this.getDao(clazz).getAll(conditionList);
+	}
 	public abstract String GetPrimaryName();
 	
    

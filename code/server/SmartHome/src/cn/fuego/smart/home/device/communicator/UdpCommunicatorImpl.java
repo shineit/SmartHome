@@ -9,9 +9,9 @@
 package cn.fuego.smart.home.device.communicator;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -19,10 +19,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.format.DataTypeConvert;
-import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.read.ReadStreamThread;
+import cn.fuego.smart.home.device.read.UdpDataReadThread;
 
 /**
  * @ClassName: SocketCommunicatorImpl
@@ -31,18 +31,19 @@ import cn.fuego.smart.home.device.read.ReadStreamThread;
  * @date 2014-10-31 下午3:23:18
  * 
  */
-public class SocketCommunicatorImpl implements Communicator
+public class UdpCommunicatorImpl implements Communicator
 {
 	private Log log = LogFactory.getLog(ReadStreamThread.class);
 
 	private Queue<String> messageBuffer = new LinkedList<String>();
 
-	private Socket socket;
+	private DatagramSocket socket;
+	private DatagramPacket packet;
 	private String ip;
 	private int port;
 
 	
-	public SocketCommunicatorImpl(String ip, int port)
+	public UdpCommunicatorImpl(String ip, int port)
 	{
 		this.ip = ip;
 		this.port = port;
@@ -59,14 +60,10 @@ public class SocketCommunicatorImpl implements Communicator
 	{
 		try
 		{
-			socket = new Socket(ip, port);
+			socket = new DatagramSocket();
+			
 
-		} catch (UnknownHostException e)
-		{
-			log.error("can not connect to server " + ip + " the port is " + port, e);
-			throw new MISPException(e);
-		
-		} catch (IOException e)
+		} catch (Exception e)
 		{
 			log.error("can not connect to server " + ip + " the port is " + port, e);
 			throw new MISPException(e);
@@ -88,9 +85,9 @@ public class SocketCommunicatorImpl implements Communicator
 		log.info("the send byte is :"+DataTypeConvert.toHexStringList(data));
 		try
 		{
-			OutputStream os = socket.getOutputStream();
-
-			os.write(data.getBytes());
+			packet=new DatagramPacket(data.getBytes(),data.length(),InetAddress.getByName(ip),port);
+			socket.send(packet);
+ 
 		} catch (IOException e)
 		{
 			log.error("send data error",e);
@@ -122,12 +119,12 @@ public class SocketCommunicatorImpl implements Communicator
 	public String readData(String end)
 	{
 		String message = null;
-		ReadStreamThread readThread = null;
+		UdpDataReadThread readThread = null;
 
 		try
 		{
-			readThread = new ReadStreamThread(this.socket.getInputStream(),
-					messageBuffer);
+			
+			readThread = new UdpDataReadThread(this.socket,messageBuffer);
 
 		} catch (Exception e)
 		{
@@ -190,8 +187,6 @@ public class SocketCommunicatorImpl implements Communicator
 	{
 		try
 		{
-			this.socket.getInputStream().close();
-			this.socket.getOutputStream().close();
 			this.socket.close();
 		}
 		catch(Exception e)

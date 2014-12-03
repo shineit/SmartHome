@@ -63,6 +63,9 @@ public class SystemConfigInfo
 	{
 		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.DEVICE_PORT);
 	}
-
+	public static String getServerPort()
+	{
+		return PropertyReader.getInstance().getPropertyByName("SERVER_PORT");
+	}
  
 }

@@ -66,7 +66,43 @@ public class AbstractDao<E> extends AbstractViewDao<E> implements Dao<E>
 		log.info("the create success.");
 
 	}
+	public void create(List<E> objList)
+	{
+        log.info("the object class is " + getFeaturedClass());
+        if (ValidatorUtil.isEmpty(objList))
+        {
+            log.warn("the object list is empty");
+            return;
+        }
 
+        log.info("the object list count is  " + objList.size());
+        Session session = null;
+        try
+        {
+            session = HibernateUtil.getSession();
+            Transaction tx = session.beginTransaction();
+            for(E obj : objList)
+            {
+                session.save(obj);
+            }
+            tx.commit();
+            
+        }
+        catch (RuntimeException re)
+        {
+            log.error("create error", re);
+            throw re;
+
+        }
+        finally
+        {
+            if (null != session)
+            {
+                session.close();
+            }
+        }
+
+	}
 	public void update(E object)
 	{
 		log.info("the object class is " + getFeaturedClass());

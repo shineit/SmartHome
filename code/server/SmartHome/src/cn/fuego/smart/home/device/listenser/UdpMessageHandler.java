@@ -4,7 +4,7 @@ package cn.fuego.smart.home.device.listenser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
+import java.net.DatagramSocket;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,7 +15,7 @@ import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
-import cn.fuego.smart.home.device.read.ReadStreamThread;
+import cn.fuego.smart.home.device.read.UdpDataReadThread;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 
@@ -28,18 +28,18 @@ import cn.fuego.smart.home.service.ServiceContext;
 *
  */
 
-public class MessageHandler implements Runnable
+public class UdpMessageHandler implements Runnable
 {
-	private Log log = LogFactory.getLog(MessageHandler.class);	
-	private Socket socket;
- 
+	private Log log = LogFactory.getLog(UdpMessageHandler.class);	
+  
+	private String message; 
+	private String ipAddr;
  	
- 	private Queue<String>  messageBuffer = new LinkedList<String>();
-	
-	public MessageHandler(Socket socket,DataCollectionCache dataCache)
+	public UdpMessageHandler(String ipAddr,String message)
 	{
  
-		this.socket = socket;
+		this.ipAddr = ipAddr;
+		this.message = message;
 	}
 	
 	/* (non-Javadoc)
@@ -54,95 +54,9 @@ public class MessageHandler implements Runnable
 	
 	private void handle()
 	{
-		InputStream inputStream = null;
-		ReadStreamThread readThread = null;
- 		if(null != socket)
-		{
-			log.info("handling a new connection.the remote socket address is " + socket.getRemoteSocketAddress());
-			try
-			{
-				inputStream = socket.getInputStream();
-				
-				
-				//start a thread to read data from input stream.
-				readThread = new ReadStreamThread(inputStream,messageBuffer);
-				readThread.start();
- 				while(true)
-				{	
- 
-					try
-					{
-						//wait client send data to server
-						synchronized(messageBuffer)
-						{
-							messageBuffer.wait(ApplicationProtocol.HOLD_CONN_TIME);
-						}
-					}
-					catch (InterruptedException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
- 					if(!this.messageBuffer.isEmpty())
-					{
- 
- 						while(!this.messageBuffer.isEmpty())
- 						{	
-	 						String nowMessage = messageBuffer.poll();
-	 						
-							parseData(nowMessage);
- 						}
- 					}
- 					else
- 					{
-						log.error("the connection time out, now release the connection," + this.socket.getRemoteSocketAddress());
- 						break;
- 					}
-  
-				}
-				
- 			}
-			catch (IOException e)
-			{
-				log.error("read data error",e);
-			}
-			finally
-			{
-				if(null != inputStream)
-				{	
-					if(null != readThread)
-					{
-						readThread.stop();
-					}
-
-					try
-					{
-						inputStream.close();
-						
-					}
-					catch (IOException e)
-					{
-						log.error("colse input stream failed");
-					}
-					if(socket!=null)
-					{
-						try
-						{
-							socket.close();
-						}
-						catch (IOException e)
-						{
-							log.error("colse socket error",e);
-						}
-					}
-	                    
-				}
-			}
-
-		}
- 
-		log.info("handle done.the connection is " + socket.getRemoteSocketAddress());
+	    log.info("the device is " + ipAddr);
+	    log.info("the message is " + message);
+		parseData(message);
 
 
 	}
@@ -153,7 +67,7 @@ public class MessageHandler implements Runnable
 		{
 			String decodeMessage = ApplicationProtocol.decode(nowMessage);
 		 
-			ReceiveMessage message = new ReceiveMessage(decodeMessage,this.socket.getRemoteSocketAddress().toString());
+			ReceiveMessage message = new ReceiveMessage(decodeMessage,ipAddr);
 			try
 			{
 				dispatchCmd(message);
@@ -205,10 +119,8 @@ public class MessageHandler implements Runnable
 	
 	private void returnData(ReceiveMessage message)
 	{
-		OutputStream outputStream = null;
-		try
+ 		try
 		{
-			outputStream = this.socket.getOutputStream();
 			StringBuffer buf = new StringBuffer();
  
 			buf.append(DataTypeConvert.intToByteStr(message.getConcentrator().getConcentratorID()));
@@ -217,9 +129,9 @@ public class MessageHandler implements Runnable
 
 			String encodeStr = ApplicationProtocol.encode(buf.toString());
 			 
-			outputStream.write(encodeStr.getBytes());
-		}
-		catch (IOException e)
+			//todo send message
+ 		}
+		catch (Exception e)
 		{
 			log.error("write data error",e);
 		}

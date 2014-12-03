@@ -18,6 +18,8 @@ import cn.fuego.smart.home.constant.AlarmClearEnum;
 public class Alarm implements PersistenceObject
 {
 	private int id;  			//告警ID，自增长
+	
+	private int concenratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
 	private int objID;        //对象ID
 	
@@ -31,6 +33,15 @@ public class Alarm implements PersistenceObject
 	
 	public static final String PRI_KEY = "id";
 	
+	
+	public int getConcenratorID()
+	{
+		return concenratorID;
+	}
+	public void setConcenratorID(int concenratorID)
+	{
+		this.concenratorID = concenratorID;
+	}
 	public int getId()
 	{
 		return id;

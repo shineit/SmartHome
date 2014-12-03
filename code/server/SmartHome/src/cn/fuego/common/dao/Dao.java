@@ -28,6 +28,9 @@ public interface Dao<E> extends ViewDao<E>
 {
 
 	void create(E object);
+	
+	void create(List<E> objList);
+
 
 	void update(E object);
 	

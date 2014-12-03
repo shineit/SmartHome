@@ -26,9 +26,14 @@ public interface MispCommonService<E>
     AbstractDataSource<E> getDataSource();
     AbstractDataSource<E> getDataSource(List<QueryCondition> conditionList);
     void create(E obj);
+    void create(List<E> objList);
     void modify(E obj);
+    
     void delete(String id);
     void delete(List<String> idList);
     E get(String id);
     List<E> get(List<String> idList);
+    List get(Class clazz ,QueryCondition  condition);
+
+    List get(Class clazz,List<QueryCondition> conditionList);
 }

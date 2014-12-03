@@ -1,0 +1,63 @@
+/**   
+* @Title: AppLoginCache.java 
+* @Package cn.fuego.smart.home.service.cache 
+* @Description: TODO
+* @author Tang Jun   
+* @date 2014-12-3 上午11:29:20 
+* @version V1.0   
+*/ 
+package cn.fuego.smart.home.service.cache;
+
+import java.util.HashMap;
+import java.util.Map;
+
+ /** 
+ * @ClassName: AppLoginCache 
+ * @Description: TODO
+ * @author Tang Jun
+ * @date 2014-12-3 上午11:29:20 
+ *  
+ */
+public class AppLoginCache
+{
+	public static Map<String,AppLoginInfo> loginUser = new HashMap<String,AppLoginInfo>();
+	
+	
+	
+	public static boolean tokenValid(String token)
+	{
+		AppLoginInfo app = loginUser.get(token);
+		if(null == app)
+		{
+			return false; 
+		}
+		return true;
+	}
+	
+	public static boolean userLogined(String userName)
+	{
+		for (Map.Entry<String,AppLoginInfo> entry : loginUser.entrySet())
+		{
+			AppLoginInfo appInfo = entry.getValue();
+			if(appInfo.getUser().getUserName() == userName)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static BaiduPushInfo getPushInfo(int userID)
+	{
+		for (Map.Entry<String,AppLoginInfo> entry : loginUser.entrySet())
+		{
+			AppLoginInfo appInfo = entry.getValue();
+			if(appInfo.getUser().getUserID() == userID)
+			{
+				return appInfo.getPushInfo();
+			}
+		}
+		return null;
+	}
+
+}

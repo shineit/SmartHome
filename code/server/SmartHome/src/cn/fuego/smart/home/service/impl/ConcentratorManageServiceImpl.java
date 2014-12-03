@@ -22,6 +22,7 @@ import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.ConcentratorPermissionEnum;
+import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
@@ -48,13 +49,27 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	@Override
 	public void online(Concentrator concentrator)
 	{
-		// TODO Auto-generated method stub
-		
+		Concentrator old = super.get(String.valueOf(concentrator.getConcentratorID()));
+	    if(null != old)
+	    {
+	    	old.setAddr(concentrator.getAddr());
+	    	old.setConcentratorID(concentrator.getConcentratorID());
+	    	old.setStatus(concentrator.getStatus());
+	    	old.setLocationNS(concentrator.getLocationNS());
+	    	old.setLocationWE(concentrator.getLocationWE());
+	    	super.modify(concentrator);
+	    }
+	    else
+	    {
+	    	log.info("the concentrator is new " + concentrator);
+	    	super.create(concentrator);
+	    }
 	}
 	@Override
 	public void offline(Concentrator concentrator)
 	{
-		// TODO Auto-generated method stub
+		Concentrator old = super.get(String.valueOf(concentrator.getConcentratorID()));
+		old.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
 		
 	}
 	@Override

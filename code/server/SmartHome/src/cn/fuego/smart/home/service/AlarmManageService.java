@@ -25,4 +25,6 @@ import cn.fuego.smart.home.domain.Alarm;
 public interface AlarmManageService extends MispCommonService<Alarm>
 {
  	void deleteAlarmList(List<String> alarmIDList);
+ 
+	
 }

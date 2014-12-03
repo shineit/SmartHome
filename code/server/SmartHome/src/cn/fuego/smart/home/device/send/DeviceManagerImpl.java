@@ -115,9 +115,10 @@ public class DeviceManagerImpl implements DeviceManager
 	public void setSensor(HomeSensor sensor)
 	{
 		String data = ""; 	
-		data += DataTypeConvert.intToByteStr(sensor.getSensorID(),2);
-		data += DataTypeConvert.intToByteStr(sensor.getId());
 		
+		data += DataTypeConvert.intToByteStr(sensor.getSensorID(),4);
+		data += DataTypeConvert.intToByteStr(sensor.getChannelID(),1);
+
 		data +=  DataTypeConvert.intToByteStr(sensor.getStatus(),1);
 		
 		data += DataTypeConvert.intToByteStr(sensor.getSensorType(),2);
@@ -128,7 +129,7 @@ public class DeviceManagerImpl implements DeviceManager
 
 		data += DataTypeConvert.intToByteStr(sensor.getGroupID(),1);
 
-		for(int i=0;i<4;i++)
+		for(int i=0;i<5;i++)
 		{
 		   if(i<sensor.getCtrGroupIDList().size())
 		   {
@@ -136,7 +137,7 @@ public class DeviceManagerImpl implements DeviceManager
 		   }
 		   else
 		   {
-			   data += DataTypeConvert.intToByteStr(0xff,1);
+			   data += DataTypeConvert.intToByteStr(0x00,1);
 			   
 		   }
 		}
@@ -198,8 +199,8 @@ public class DeviceManagerImpl implements DeviceManager
 		Random random1 = new Random(128);
 		String sendMessage; 
 		sendMessage = DataTypeConvert.intToByteStr(this.concentrator.getConcentratorID());
-		sendMessage += (char)random1.nextInt();
-		sendMessage += (char)cmdCode;
+		sendMessage += DataTypeConvert.intToByteStr(random1.nextInt(), 1);
+		sendMessage +=  DataTypeConvert.intToByteStr(cmdCode, 1); 
 	 
 		return ApplicationProtocol.encode(sendMessage);
 		

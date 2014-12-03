@@ -46,15 +46,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see cn.fuego.smart.home.service.SensorManageService#alarm(cn.fuego.smart.home.domain.SensorAlarm)
-	 */
-	@Override
-	public void createAlarm(List<Alarm> alarm)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+ 
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#getFireSensor(int, int, int, int)

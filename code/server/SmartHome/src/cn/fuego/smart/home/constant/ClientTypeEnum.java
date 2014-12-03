@@ -18,8 +18,8 @@ package cn.fuego.smart.home.constant;
 public enum ClientTypeEnum 
 {
 	WEB_CLIENT(0,"WEB"),
-	ANDRIOD_CLIENT(1,"ANDRIOD"),
-	IOS_CLIENT(2,"IOS");
+	ANDRIOD_CLIENT(3,"ANDRIOD"),
+	IOS_CLIENT(4,"IOS");
 	private int intValue;
 	private String strValue;
 	

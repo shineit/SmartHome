@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.device.send.DeviceManagerImpl;
 import cn.fuego.smart.home.domain.Alarm;
@@ -87,30 +88,34 @@ public class ReceiveMessage
 	public List<Alarm> getSensorAlarm()
 	{
 		List<Alarm> alarmList = new ArrayList<Alarm>();
-		for(int i=DATA_START_INDEX;i<this.dataNum;i+=4)
+		for(int i=DATA_START_INDEX;i<this.dataNum;i+=6)
 		{
 	 
 			Alarm alarm = new Alarm();
-			if( dataBytes[i] > 128)
+			if( dataBytes[i] == 256 && dataBytes[i+1] == 256)
 			{
-				int sensorID = (dataBytes[i]-128)*256 + dataBytes[i+1];
-				int channelID = getIntValue(i+2,i+2);;
+				int machineID = getIntValue(i+2,i+2);
+				int loopID = getIntValue(i+3,i+3);
+				int codeID = getIntValue(i+4,i+4);
+				FireSensor sensor = ServiceContext.getInstance().getSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
+				alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
+				alarm.setObjID(sensor.getId());
+		
+				
+			}
+			else
+			{
+				int sensorID = getIntValue(i,i+3);
+				int channelID = getIntValue(i+4,i+4);;
 				HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
 				alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
 				alarm.setObjID(sensor.getId());
 			}
-			else
-			{
-				int machineID = getIntValue(i,i);
-				int loopID = getIntValue(i+1,i+1);
-				int codeID = getIntValue(i+2,i+2);
-				FireSensor sensor = ServiceContext.getInstance().getSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
-				alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
-				alarm.setObjID(sensor.getId());
-			}
 				
  
-			alarm.setAlarmType(getIntValue(i+3,i+3));
+			alarm.setAlarmType(getIntValue(i+5,i+5));
+			alarm.setAlarmTime(DateUtil.getCurrentDateTime());
+		 
 			alarmList.add(alarm);
 		}
 		return alarmList;
@@ -122,7 +127,7 @@ public class ReceiveMessage
 		int cnt = this.getIntValue(index,index+1);
  
 		int endNum = this.getIntValue(index+2,index+3);
-		if(cnt == endNum)
+		if(0 == endNum)
 		{
 			return true;
 		}
@@ -135,7 +140,7 @@ public class ReceiveMessage
 		int cnt = this.getIntValue(index,index+1);
  
 		int endNum = this.getIntValue(index+2,index+3);
-		if(cnt == endNum)
+		if(cnt <= endNum + 8)
 		{
 			return true;
 		}
@@ -143,16 +148,22 @@ public class ReceiveMessage
 		return false;
 	}
 	
+	/**
+	 * 解析终端列表
+	 * @return
+	 */
 	public List<HomeSensor> getHomeSensorList()
 	{
 		List<HomeSensor> sensorList = new ArrayList<HomeSensor>();
 		int index = this.DATA_START_INDEX;
+		//获取终端总数
 		int cnt = this.getIntValue(index,index+1);
 		if(cnt > 8)
 		{
 			log.info("");
 			cnt = 8;
 		}
+		//获取本次包起始ID
 		int endNum = this.getIntValue(index+2,index+3);
 		for(int i=0;i<cnt;i++)
 		{
@@ -163,6 +174,7 @@ public class ReceiveMessage
 				HomeSensor sensor = new HomeSensor();
 				sensor.setId(sensorID);
 				sensor.setChannelID(j);
+				sensorList.add(sensor);
 			}
 		}
 		
@@ -175,17 +187,16 @@ public class ReceiveMessage
 		sensor.setConcentratorID(this.concentratorID);
 		
 		int index = DATA_START_INDEX;
-		sensor.setSensorID(getIntValue(index,index+1));
-		sensor.setId(getIntValue(index+2,index+5));
-		sensor.setChannelID(getIntValue(index+6,index+6));
-		sensor.setStatus(getIntValue(index+7,index+7));
-		sensor.setSensorType(getIntValue(index+8,index+9));
-		sensor.setWarnValue(getFloatValue(index+10,index+13));
-		sensor.setErrorValue(getFloatValue(index+14,index+17));
-		sensor.setGroupID(getIntValue(index+18,index+18));
+		sensor.setSensorID(getIntValue(index,index+3));
+		sensor.setChannelID(getIntValue(index+4,index+4));
+		sensor.setStatus(getIntValue(index+5,index+5));
+		sensor.setSensorType(getIntValue(index+6,index+7));
+		sensor.setWarnValue(getFloatValue(index+8,index+11));
+		sensor.setErrorValue(getFloatValue(index+12,index+15));
+		sensor.setGroupID(getIntValue(index+16,index+16));
 		
 		List<Integer> idList = new ArrayList<Integer>();
-		for(int i=index + 19; i<=index+23;i++)
+		for(int i=index + 17; i<=index+22;i++)
 		{
 			int id = getIntValue(i,i);
 			if(i != CTL_GROUP_DEFAULT)
@@ -195,7 +206,7 @@ public class ReceiveMessage
 		}
  
 		sensor.setCtrGroupIDWithIDList(idList);
-		sensor.setDescription(getStrValue(index+24,index+47));
+		sensor.setDescription(getStrValue(index+22,index+47));
 
 		return sensor;
 	}
