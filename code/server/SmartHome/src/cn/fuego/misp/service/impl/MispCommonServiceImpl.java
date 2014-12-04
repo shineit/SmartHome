@@ -38,11 +38,11 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 	{
 		clazz = ReflectionUtil.getSuperClassGenricType(getClass());
 	}
-	private Dao<E> getDao()
+	public Dao<E> getDao()
 	{
 		return new AbstractDao<E>(clazz);
 	}
-	private Dao getDao(Class clazz)
+	public Dao getDao(Class clazz)
 	{
 		return new AbstractDao(clazz);
 	}
@@ -211,6 +211,19 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, GetPrimaryName(), idList);
         return this.getDao().getAll(condition);
 	}
+	
+ 
+	public  List<E> get(QueryCondition condition)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		if(null != condition)
+		{
+			conditionList.add(condition);
+		}
+        return this.getDao().getAll(conditionList);
+	}
+	
+	
 	@Override
 	public  List get(Class clazz,QueryCondition condition)
 	{
