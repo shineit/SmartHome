@@ -24,13 +24,13 @@ public class MainActivity extends Activity
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main_welcome);
-        // Push: ÒÔapikeyµÄ·½Ê½µÇÂ¼£¬Ò»°ã·ÅÔÚÖ÷ActivityµÄonCreateÖĞ¡£
-        // ÕâÀï°Ñapikey´æ·ÅÓÚmanifestÎÄ¼şÖĞ£¬Ö»ÊÇÒ»ÖÖ´æ·Å·½Ê½£¬
-        // Äú¿ÉÒÔÓÃ×Ô¶¨Òå³£Á¿µÈÆäËü·½Ê½ÊµÏÖ£¬À´Ìæ»»²ÎÊıÖĞµÄUtils.getMetaValue(PushDemoActivity.this,
+        // Push: ä»¥apikeyçš„æ–¹å¼ç™»å½•ï¼Œä¸€èˆ¬æ”¾åœ¨ä¸»Activityçš„onCreateä¸­ã€‚
+        // è¿™é‡ŒæŠŠapikeyå­˜æ”¾äºmanifestæ–‡ä»¶ä¸­ï¼Œåªæ˜¯ä¸€ç§å­˜æ”¾æ–¹å¼ï¼Œ
+        // æ‚¨å¯ä»¥ç”¨è‡ªå®šä¹‰å¸¸é‡ç­‰å…¶å®ƒæ–¹å¼å®ç°ï¼Œæ¥æ›¿æ¢å‚æ•°ä¸­çš„Utils.getMetaValue(PushDemoActivity.this,
         // "api_key")
         PushManager.startWork(getApplicationContext(),PushConstants.LOGIN_TYPE_API_KEY,
                 Utils.getMetaValue(MainActivity.this, "api_key"));
-        // Push: Èç¹ûÏë»ùÓÚµØÀíÎ»ÖÃÍÆËÍ£¬¿ÉÒÔ´ò¿ªÖ§³ÖµØÀíÎ»ÖÃµÄÍÆËÍµÄ¿ª¹Ø
+        // Push: å¦‚æœæƒ³åŸºäºåœ°ç†ä½ç½®æ¨é€ï¼Œå¯ä»¥æ‰“å¼€æ”¯æŒåœ°ç†ä½ç½®çš„æ¨é€çš„å¼€å…³
         // PushManager.enableLbs(getApplicationContext());
 
 	new CountDownTimer(2000, 1000)

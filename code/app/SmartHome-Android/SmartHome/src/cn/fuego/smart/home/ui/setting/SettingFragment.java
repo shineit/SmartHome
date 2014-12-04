@@ -61,19 +61,19 @@ public class SettingFragment extends Fragment implements View.OnClickListener
 		{
 		case 1: intent = new Intent(this.getActivity(),UserManageActivity.class);
 				startActivity(intent);
-				break;//¸öÈËÖĞĞÄ
-		case 2: //¹ØÓÚÎÒÃÇ
+				break;//ä¸ªäººä¸­å¿ƒ
+		case 2: //å…³äºæˆ‘ä»¬
 				break;
-		case 3: //ÎªÎÒÃÇÆÀ·Ö
+		case 3: //ä¸ºæˆ‘ä»¬è¯„åˆ†
 				break;
-		case 4: //Í¨ÖªÉèÖÃ
+		case 4: //é€šçŸ¥è®¾ç½®
 				break;
 		case 5:  intent = new Intent(this.getActivity(),ServiceActivity.class);
 	    		 startActivity(intent);
-	    		 break;//·şÎñ
-		case 6: //ĞÂ¹¦ÄÜ
+	    		 break;//æœåŠ¡
+		case 6: //æ–°åŠŸèƒ½
 				break;
-		case 7: //Òâ¼û·´À¡
+		case 7: //æ„è§åé¦ˆ
 				break;
 		default:break;
 		}
