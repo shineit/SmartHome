@@ -80,6 +80,7 @@ public class FuegoUdpServer extends Thread
  				
  				
  				String ipAddr =  packet.getAddress().getHostAddress();
+ 				int port = packet.getPort();
  				String message = DataTypeConvert.bytesToStr(buf);
  				message = message.substring(0, packet.getLength());
  				
@@ -87,7 +88,7 @@ public class FuegoUdpServer extends Thread
  				this.deviceCache.put(ipAddr, System.currentTimeMillis());
  				
  				
-  				threadPool.execute(new UdpMessageHandler(ipAddr,message));
+  				threadPool.execute(new UdpMessageHandler(ipAddr,port,message));
  
 			}
 		}

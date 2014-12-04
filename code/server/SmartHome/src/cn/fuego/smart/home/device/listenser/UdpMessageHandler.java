@@ -1,12 +1,7 @@
 
 package cn.fuego.smart.home.device.listenser;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.DatagramSocket;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.net.DatagramPacket;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +10,8 @@ import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
-import cn.fuego.smart.home.device.read.UdpDataReadThread;
+import cn.fuego.smart.home.device.communicator.Communicator;
+import cn.fuego.smart.home.device.communicator.CommunicatorFactory;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 
@@ -32,14 +28,16 @@ public class UdpMessageHandler implements Runnable
 {
 	private Log log = LogFactory.getLog(UdpMessageHandler.class);	
   
-	private String message; 
+	private String receiveData; 
 	private String ipAddr;
+	private int remotePort;
  	
-	public UdpMessageHandler(String ipAddr,String message)
+	public UdpMessageHandler(String ipAddr,int remotePort,String receiveData)
 	{
  
 		this.ipAddr = ipAddr;
-		this.message = message;
+		this.receiveData = receiveData;
+		this.remotePort = remotePort;
 	}
 	
 	/* (non-Javadoc)
@@ -56,20 +54,20 @@ public class UdpMessageHandler implements Runnable
 	{
 	    log.info("the device is " + ipAddr);
  
-	    log.info("the string message is " + message);
-	    log.info("the bytes is " + DataTypeConvert.toHexStringList(message));
+	    log.info("the string message is " + receiveData);
+	    log.info("the bytes is " + DataTypeConvert.toHexStringList(receiveData));
 
-		parseData(message);
+		parseData(receiveData);
 
 
 	}
 
-	private void parseData(String nowMessage)
+	private void parseData(String receiveData)
 	{
 		  
-		if(ApplicationProtocol.isValid(nowMessage))
+		if(ApplicationProtocol.isValid(receiveData))
 		{
-			String decodeMessage = ApplicationProtocol.decode(nowMessage);
+			String decodeMessage = ApplicationProtocol.decode(receiveData);
 		 
 			ReceiveMessage message = new ReceiveMessage(decodeMessage,ipAddr);
 			try
@@ -86,7 +84,7 @@ public class UdpMessageHandler implements Runnable
 		}
 		else
 		{
-			log.error("the message is invalid." + nowMessage);
+			log.error("the message is invalid." + receiveData);
 		}
 	}
 	
@@ -128,16 +126,19 @@ public class UdpMessageHandler implements Runnable
 			StringBuffer buf = new StringBuffer();
  
 			buf.append(DataTypeConvert.intToByteStr(message.getConcentratorID()));
+			buf.append(DataTypeConvert.intToByteStr(message.getPacketNum(),1));
 			buf.append(DataTypeConvert.intToByteStr(RecieveCommandConst.PACKET_RECV_MSG,1));
 			buf.append(DataTypeConvert.intToByteStr(0,1));
 
-			//String encodeStr = ApplicationProtocol.encode(buf.toString());
+			Communicator communicator = CommunicatorFactory.getInstance().getCommunicator(this.ipAddr, this.remotePort);
+			communicator.open();
+			communicator.sendData(buf.toString());
+			communicator.close();
 			 
-			//todo send message
  		}
 		catch (Exception e)
 		{
-			log.error("write data error",e);
+			log.error("send data error",e);
 		}
 
 	}

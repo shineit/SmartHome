@@ -13,8 +13,8 @@ public class PushMessageJson
 {
 	private String title;
 	private String description;
-	private int objType;
-	private Object obj;
+	private Object customContentString;
+
 	public String getTitle()
 	{
 		return title;
@@ -31,23 +31,15 @@ public class PushMessageJson
 	{
 		this.description = description;
 	}
-	public int getObjType()
+	public Object getCustomContentString()
 	{
-		return objType;
+		return customContentString;
 	}
-	public void setObjType(int objType)
+	public void setCustomContentString(Object customContentString)
 	{
-		this.objType = objType;
+		this.customContentString = customContentString;
 	}
-	public Object getObj()
-	{
-		return obj;
-	}
-	public void setObj(Object obj)
-	{
-		this.obj = obj;
-	}
-	
+ 
 	
 
 }
