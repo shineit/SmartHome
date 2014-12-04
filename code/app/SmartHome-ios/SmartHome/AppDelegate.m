@@ -18,6 +18,7 @@
 #import "FESettingVC.h"
 #import <HockeySDK/HockeySDK.h>
 #import "CDUser.h"
+#import "BPush.h"
 //#import "FEServiceListVC.h"
 
 @implementation AppDelegate
@@ -42,15 +43,33 @@
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] testIdentifier];
     
+    [BPush setupChannel:launchOptions];
+    [BPush setAccessToken:@"ZmQBTt64mQEaVAQLMQfbjT1s"];
+    [BPush setDelegate:self];
+    
     return YES;
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
+    [BPush registerDeviceToken:deviceToken];
+    [BPush bindChannel];
+    
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     FEUserDefaultsSetObjectForKey(devToken, FEDeviceToken);
     FEUserDefaultsSync;
+}
+
+- (void) onMethod:(NSString*)method response:(NSDictionary*)data {
+    if ([BPushRequestMethod_Bind isEqualToString:method]) {
+        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
+        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+    }
 }
 
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
@@ -131,6 +150,8 @@
     FECommonTabBarController *tabbar = [FECommonTabBarController new];
     [tabbar setViewControllers:@[nvnews,nvsafe,controlnc,camnc,nvsetting]];
     [AppDelegate sharedDelegate].window.rootViewController = tabbar;
+    
+    [self registerPushNotification];
 }
 
 - (void)saveContext
@@ -226,6 +247,19 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - registerPushNotification
+//注册PUSH通知
+- (void)registerPushNotification {
+    UIApplication *application = [UIApplication sharedApplication];
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [application registerForRemoteNotifications];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }else {
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)];
+    }
 }
 
 +(AppDelegate *)sharedDelegate{

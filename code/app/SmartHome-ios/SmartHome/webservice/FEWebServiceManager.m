@@ -26,7 +26,7 @@
 #import "FEMarkDeletRequest.h"
 
 
-#define _BASE_URL @"http://192.168.1.107:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://120.24.217.173:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
