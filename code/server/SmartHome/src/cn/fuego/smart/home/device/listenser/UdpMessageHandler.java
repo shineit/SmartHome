@@ -55,7 +55,10 @@ public class UdpMessageHandler implements Runnable
 	private void handle()
 	{
 	    log.info("the device is " + ipAddr);
-	    log.info("the message is " + message);
+ 
+	    log.info("the string message is " + message);
+	    log.info("the bytes is " + DataTypeConvert.toHexStringList(message));
+
 		parseData(message);
 
 
@@ -63,6 +66,7 @@ public class UdpMessageHandler implements Runnable
 
 	private void parseData(String nowMessage)
 	{
+		  
 		if(ApplicationProtocol.isValid(nowMessage))
 		{
 			String decodeMessage = ApplicationProtocol.decode(nowMessage);
@@ -123,11 +127,11 @@ public class UdpMessageHandler implements Runnable
 		{
 			StringBuffer buf = new StringBuffer();
  
-			buf.append(DataTypeConvert.intToByteStr(message.getConcentrator().getConcentratorID()));
+			buf.append(DataTypeConvert.intToByteStr(message.getConcentratorID()));
 			buf.append(DataTypeConvert.intToByteStr(RecieveCommandConst.PACKET_RECV_MSG,1));
 			buf.append(DataTypeConvert.intToByteStr(0,1));
 
-			String encodeStr = ApplicationProtocol.encode(buf.toString());
+			//String encodeStr = ApplicationProtocol.encode(buf.toString());
 			 
 			//todo send message
  		}

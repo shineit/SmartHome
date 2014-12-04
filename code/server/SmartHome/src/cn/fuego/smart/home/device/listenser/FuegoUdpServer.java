@@ -22,6 +22,7 @@ import java.util.concurrent.Executors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 
 /** 
@@ -79,7 +80,9 @@ public class FuegoUdpServer extends Thread
  				
  				
  				String ipAddr =  packet.getAddress().getHostAddress();
- 				String message = new String(buf, 0, packet.getLength());  
+ 				String message = DataTypeConvert.bytesToStr(buf);
+ 				message = message.substring(0, packet.getLength());
+ 				
  				log.info("recieve data from remote " +ipAddr);
  				this.deviceCache.put(ipAddr, System.currentTimeMillis());
  				

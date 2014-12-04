@@ -9,6 +9,7 @@
 package cn.fuego.common.util.format;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,32 @@ public class DataTypeConvert
 {
 	private static final FuegoLog log = FuegoLog.getLog(DataTypeConvert.class);
 
+	
+	public static String bytesToStr(byte[] bytes)
+	{
+		String isoString = null;
+		try
+		{
+			isoString = new String(bytes, "ISO-8859-1");
+		} catch (UnsupportedEncodingException e)
+		{
+			// TODO Auto-generated catch block
+			log.error("convert error",e);
+		}
+		return isoString;
+	}
+	public static byte[] strToBytes(String str)
+	{
+		byte[] bytes = null;
+		try
+		{
+			bytes = str.getBytes("ISO-8859-1");
+		} catch (UnsupportedEncodingException e)
+		{
+			log.error("convert error",e);
+		}
+		return bytes;
+	}
 	public static String intToByteStr(int value)
 	{
 		 return  intToByteStr(value,4);
@@ -90,11 +117,13 @@ public class DataTypeConvert
 	public static List<String> toHexStringList(String str)
 	{
 		List<String> hexList = new ArrayList<String>();
+		byte[] bytes = strToBytes(str);
 		if(null != str)
 		{
-			for(int i=0;i<str.length();i++)
+			for(int i=0;i<bytes.length;i++)
 			{
-				hexList.add(Integer.toHexString(str.charAt(i)));
+				int temp = bytes[i] & 0xFF;
+				hexList.add(Integer.toHexString(temp));
 			}
 		}
 		return hexList;

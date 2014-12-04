@@ -77,7 +77,7 @@ public class UserManageRestImpl implements UserManageRest
 		    deviceInfo.getDeviceInfo().setDevToken(req.getDevToken());
 		    
 		    deviceInfo.getPushInfo().setAppID(req.getPush_appID());
-		    deviceInfo.getPushInfo().getChannelID();
+		    deviceInfo.getPushInfo().setChannelID(req.getPush_channelID());
 		    deviceInfo.getPushInfo().setUser_id(req.getPush_userID());
 		    deviceInfo.setUser(user);
 		    

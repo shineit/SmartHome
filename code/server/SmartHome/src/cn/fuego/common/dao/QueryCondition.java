@@ -24,7 +24,7 @@ public class QueryCondition
 {
 	private ConditionTypeEnum conditionType;
 	private String attrName;
-	private String firstValue;
+	private Object firstValue;
 	private String secondValue;
 	private List<String> listValue;
  
@@ -35,7 +35,7 @@ public class QueryCondition
 		this.attrName = attrName;
  	}
 	
-	public QueryCondition(ConditionTypeEnum conditionType, String attrName, String firstValue)
+	public QueryCondition(ConditionTypeEnum conditionType, String attrName, Object firstValue)
 	{
 		super();
 		this.conditionType = conditionType;
@@ -81,11 +81,11 @@ public class QueryCondition
 	}
 
  
-	public String getFirstValue()
+	public Object getFirstValue()
 	{
 		return firstValue;
 	}
-	public void setFirstValue(String firstValue)
+	public void setFirstValue(Object firstValue)
 	{
 		this.firstValue = firstValue;
 	}

@@ -35,14 +35,23 @@ public class ReflectionUtil
 	}
  
  
-	public static Object convertToFieldObject(Class clazz,String fieldName,String value)  
+	public static Object convertToFieldObject(Class clazz,String fieldName,Object value)  
 	{
 		Object object = null;
 		
 		try
 		{
 			Class fieldClass = clazz.getDeclaredField(fieldName).getType();
-			object = DataTypeConvert.convertStrToObject(value, fieldClass);
+			if(!value.getClass().equals(fieldClass))
+			{
+				String strValue = value.toString();
+				object = DataTypeConvert.convertStrToObject(strValue, fieldClass);	
+			}
+			else
+			{
+				object = value;
+			}
+			
 
 		}
 		catch(Exception e)

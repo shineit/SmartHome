@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.device.send.DeviceManagerImpl;
@@ -37,8 +38,9 @@ public class ReceiveMessage
 	public static final int CONCENTRATOR_ID_START = 0;
 	public static final int CONCENTRATOR_ID_END = 3;
 	
-	public static final int CMD_CODE_INDEX = 4;
-	public static final int PACKET_NUM_INDEX = 5;
+	public static final int PACKET_NUM_INDEX = 4;
+	public static final int CMD_CODE_INDEX = 5;
+
 	public static final int DATA_NUM_INDEX = 6;
 	
 	public static final int DATA_START_INDEX = 7;
@@ -56,7 +58,7 @@ public class ReceiveMessage
 	
 	public ReceiveMessage(String allMessage,String ipAddr)
 	{
-		this.dataBytes = allMessage.getBytes();
+		this.dataBytes = DataTypeConvert.strToBytes(allMessage);
 		this.ipAddr = ipAddr;
 		this.parseMessage();
 		
@@ -64,9 +66,9 @@ public class ReceiveMessage
 	public void parseMessage()
 	{
 		this.concentratorID = this.getIntValue(CONCENTRATOR_ID_START, CONCENTRATOR_ID_END);
-		 
-		this.cmdCode = getIntValue(CMD_CODE_INDEX);
 		this.packetNum = getIntValue(PACKET_NUM_INDEX);
+
+		this.cmdCode = getIntValue(CMD_CODE_INDEX);
 	    this.dataNum = getIntValue(DATA_NUM_INDEX);
 	}
 	
@@ -88,7 +90,7 @@ public class ReceiveMessage
 	public List<Alarm> getSensorAlarm()
 	{
 		List<Alarm> alarmList = new ArrayList<Alarm>();
-		for(int i=DATA_START_INDEX;i<this.dataNum;i+=6)
+		for(int i=DATA_START_INDEX;i<DATA_START_INDEX+this.dataNum*6;i+=6)
 		{
 	 
 			Alarm alarm = new Alarm();
@@ -108,11 +110,16 @@ public class ReceiveMessage
 				int sensorID = getIntValue(i,i+3);
 				int channelID = getIntValue(i+4,i+4);;
 				HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
+				if(null == sensor)
+				{
+					log.error("can not get sensor by concentrator is "+this.concentratorID + ",sensor id is" + sensorID + ",channel is is " + channelID);
+				}
 				alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
 				alarm.setObjID(sensor.getId());
 			}
 				
  
+			alarm.setConcenratorID(this.getConcentratorID());
 			alarm.setAlarmType(getIntValue(i+5,i+5));
 			alarm.setAlarmTime(DateUtil.getCurrentDateTime());
 		 
@@ -211,6 +218,11 @@ public class ReceiveMessage
 		return sensor;
 	}
 	
+	private int getUnsignedInt(byte by)
+	{
+		return by&0xff;  
+	}
+	
 	
 	private int getIntValue(int index)
 	{
@@ -218,7 +230,7 @@ public class ReceiveMessage
 		int intValue = 0;
 		for (int i = index; i >= index; i--)
 		{
-			intValue += dataBytes[i - 1] * byteValue;
+			intValue += getUnsignedInt(dataBytes[i]) * byteValue;
 			byteValue *= 256;
 		}
 		return intValue;
@@ -229,7 +241,7 @@ public class ReceiveMessage
 		int intValue = 0;
 		for (int i = endIndex; i >= startIndex; i--)
 		{
-			intValue += dataBytes[i - 1] * byteValue;
+			intValue += getUnsignedInt(dataBytes[i]) * byteValue;
 			byteValue *= 256;
 		}
 		return intValue;
@@ -248,7 +260,7 @@ public class ReceiveMessage
 		{
 			temp[i] = this.dataBytes[i];
 		}
-		return new String(temp);
+		return DataTypeConvert.bytesToStr(temp);
 	}
 	
 

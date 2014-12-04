@@ -8,19 +8,18 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.dao.datasource.AbstractDataSource;
-import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
-import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.HomeSensor;
-import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.service.SensorManageService;
 
  /** 
@@ -77,8 +76,14 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	@Override
 	public HomeSensor getHomeSensor(int concentratorID, int sensorID, int channelID)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		
+	    List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID)); 
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"sensorID",sensorID)); 
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"channelID",channelID)); 
+		
+		
+		return super.getDao().getUniRecord(conditionList);
 	}
 
 
