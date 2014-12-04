@@ -13,6 +13,9 @@
 @property (nonatomic, strong, readonly) NSNumber *role;
 @property (nonatomic, strong, readonly) NSNumber *userID;
 @property (nonatomic, strong, readonly) NSNumber *userName;
-
+@property (nonatomic, strong, readonly) NSString *devToken;
+@property (nonatomic, strong, readonly) NSString *push_appID;
+@property (nonatomic, strong, readonly) NSString *push_userID;
+@property (nonatomic, strong, readonly) NSString *push_channelID;
 
 @end

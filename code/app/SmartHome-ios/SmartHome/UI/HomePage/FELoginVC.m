@@ -12,6 +12,7 @@
 #import "FEWebServiceManager.h"
 #import "FESiginRequest.h"
 #import "FESiginResponse.h"
+#import "BPush.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
 
@@ -104,7 +105,14 @@
         [self displayHUD:FEString(@"LOADING")];
         __weak typeof(self) weakself = self;
         
-        FESiginRequest *sdata = [[FESiginRequest alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0" devToken:@"123567"];
+        NSDictionary *bpushres = FEUserDefaultsObjectForKey(FEBPushResKey);
+        NSString *appid = [bpushres valueForKey:BPushRequestAppIdKey];
+        NSString *userid = [bpushres valueForKey:BPushRequestUserIdKey];
+        NSString *channelid = [bpushres valueForKey:BPushRequestChannelIdKey];
+//        int returnCode = [[bpushres valueForKey:BPushRequestErrorCodeKey] intValue];
+//        NSString *requestid = [bpushres valueForKey:BPushRequestRequestIdKey];
+        
+        FESiginRequest *sdata = [[FESiginRequest alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0" devToken:FEUserDefaultsObjectForKey(FEDeviceToken) push_id:appid push_userid:userid push_channelID:channelid];
         
         [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FESiginResponse *user){
             NSLog(@"call back");

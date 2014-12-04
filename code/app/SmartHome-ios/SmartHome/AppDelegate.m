@@ -44,8 +44,8 @@
     [[BITHockeyManager sharedHockeyManager] testIdentifier];
     
     [BPush setupChannel:launchOptions];
-    [BPush setAccessToken:@"ZmQBTt64mQEaVAQLMQfbjT1s"];
     [BPush setDelegate:self];
+    [self registerPushNotification];
     
     return YES;
 }
@@ -62,13 +62,13 @@
 }
 
 - (void) onMethod:(NSString*)method response:(NSDictionary*)data {
+    
     if ([BPushRequestMethod_Bind isEqualToString:method]) {
-        NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+        int returnCode = [[data valueForKey:BPushRequestErrorCodeKey] intValue];
+        if (returnCode == BPushErrorCode_Success) {
+            FEUserDefaultsSetObjectForKey(data, FEBPushResKey);
+        }
+        
     }
 }
 
@@ -151,7 +151,6 @@
     [tabbar setViewControllers:@[nvnews,nvsafe,controlnc,camnc,nvsetting]];
     [AppDelegate sharedDelegate].window.rootViewController = tabbar;
     
-    [self registerPushNotification];
 }
 
 - (void)saveContext

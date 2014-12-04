@@ -54,6 +54,8 @@ return shared##className; \
 //never grade
 #define FERateNever                            @"rateNever"
 
+#define FEBPushResKey                           @"bpushkey"
+
 //itunes url
 #define FEItunesUrlString(_ID)                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",_ID]
 
