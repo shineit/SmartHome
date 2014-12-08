@@ -17,7 +17,8 @@ public class NewsJson
 	private String author;
 	private String content;
 	private long date;
- 
+	
+
 	public int getNewsID()
 	{
 		return newsID;

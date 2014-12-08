@@ -12,7 +12,7 @@ import cn.fuego.smart.home.service.MemoryCache;
  */
 public class BaseJsonReq
 {
-	private String token = MemoryCache.getToken();
+	protected String token = MemoryCache.getToken();
 
 	public String getToken()
 	{

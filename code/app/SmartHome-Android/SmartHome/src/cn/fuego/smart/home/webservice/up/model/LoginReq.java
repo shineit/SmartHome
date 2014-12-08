@@ -13,53 +13,16 @@ public class LoginReq
 {
 	private String userName;
 	private String password;
-	private String clientType;
+	private int clientType;
 	private String clientVersion;
 	private String devToken;
 	
 	private  String push_appID;
 	private  String push_userID;
 	private  String push_channelID;
-	public String getUserName()
-	{
-		return userName;
-	}
-	public void setUserName(String userName)
-	{
-		this.userName = userName;
-	}
-	public String getPassword()
-	{
-		return password;
-	}
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-	public String getClientType()
-	{
-		return clientType;
-	}
-	public void setClientType(String clientType)
-	{
-		this.clientType = clientType;
-	}
-	public String getClientVersion()
-	{
-		return clientVersion;
-	}
-	public void setClientVersion(String clientVersion)
-	{
-		this.clientVersion = clientVersion;
-	}
-	public String getDevToken()
-	{
-		return devToken;
-	}
-	public void setDevToken(String devToken)
-	{
-		this.devToken = devToken;
-	}
+	
+	
+	
 	public String getPush_appID()
 	{
 		return push_appID;
@@ -84,6 +47,47 @@ public class LoginReq
 	{
 		this.push_channelID = push_channelID;
 	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+ 
+	public int getClientType()
+	{
+		return clientType;
+	}
+	public void setClientType(int clientType)
+	{
+		this.clientType = clientType;
+	}
+	public String getClientVersion()
+	{
+		return clientVersion;
+	}
+	public void setClientVersion(String clientVersion)
+	{
+		this.clientVersion = clientVersion;
+	}
+	public String getDevToken()
+	{
+		return devToken;
+	}
+	public void setDevToken(String devToken)
+	{
+		this.devToken = devToken;
+	}
 	@Override
 	public String toString()
 	{
@@ -93,7 +97,7 @@ public class LoginReq
 				+ push_appID + ", push_userID=" + push_userID
 				+ ", push_channelID=" + push_channelID + "]";
 	}
-
+ 
 	
 
 }

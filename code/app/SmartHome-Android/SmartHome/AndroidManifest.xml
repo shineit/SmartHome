@@ -3,21 +3,33 @@
     package="cn.fuego.smart.home"
     android:versionCode="1"
     android:versionName="1.0" >
-
+    <permission
+        android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- Push service 运行需要的权限  包括上述两条 -->
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+        <!-- Required  一些系统要求的权限，如访问网络等-->
+    <uses-permission android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> 
+        <!-- Optional for location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+     
+
     
     <uses-sdk
         android:minSdkVersion="14"
@@ -25,10 +37,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/app_logo"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar" 
-        android:name="com.baidu.frontia.FrontiaApplication"
+   
         >
         <activity
             android:name="cn.fuego.smart.home.ui.MainActivity"
@@ -79,7 +91,7 @@
         <activity
             android:name="cn.fuego.smart.home.ui.setting.user.ModifyPwdActivity"
             android:label="@string/title_activity_modify_pwd"
-             android:launchMode="singleTask"
+            
               >
         </activity>
         <activity
@@ -91,66 +103,86 @@
         <activity
             android:name="cn.fuego.smart.home.ui.home.AlarmManageActivity"
             android:label="@string/title_activity_alarm_manage"
-            
+            android:launchMode="singleTask"
               >
         </activity>
-        <!-- push富媒体，不使用富媒体推送不需要 -->
+        <!-- Required SDK核心功能-->
         <activity
-            android:name="com.baidu.android.pushservice.richmedia.MediaViewActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="MediaViewActivity" >
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="cn.fuego.smart.home" />
+            </intent-filter>
         </activity>
-        <activity
-            android:name="com.baidu.android.pushservice.richmedia.MediaListActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="MediaListActivity"
-            android:launchMode="singleTask" >
-        </activity>
-        <!-- push富媒体结束 -->
-        
-        <!-- push应用定义消息receiver声明 -->
-        <receiver android:name="cn.fuego.smart.home.ui.bdsend.MyPushMessageReceiver">
-            <intent-filter>
-                <!-- 接收push消息 -->
-                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
-                <!-- 接收bind,unbind,fetch,delete等反馈消息 -->
-                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
-            </intent-filter>
-        </receiver>
-        
-        <!-- push必须的receviver和service声明 -->
-        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
-            android:process=":bdservice_v1">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
-                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
-            android:process=":bdservice_v1">
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.METHOD" />
-                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package" />
-            </intent-filter>                   
-        </receiver>
+        <!-- Required  SDK核心功能-->
         <service
-            android:name="com.baidu.android.pushservice.PushService"
-            android:exported="true"
-            android:process=":bdservice_v1"  >
+            android:name="cn.jpush.android.service.DownloadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+    
+        
+        <!-- Required SDK 核心功能-->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+                
             </intent-filter>
         </service>
-        <!-- push结束 -->        
-        <!-- 在百度开发者中心查询应用的API Key -->
-        <meta-data android:name="api_key" android:value="ZmQBTt64mQEaVAQLMQfbjT1s" />
+        
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true" >
+             <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
+                <category android:name="cn.fuego.smart.home" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+             <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+   
+        </receiver>
+        
+        <!-- Required SDK核心功能-->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+        
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+            android:name="cn.fuego.smart.home.ui.jpush.MyReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />  
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="cn.fuego.smart.home" />
+            </intent-filter>
+        </receiver>
+ 
+        
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="97c0f1c1744eacef02d529c1" /> <!--  </>值来自开发者平台取得的AppKey-->
     </application>
 
 </manifest>

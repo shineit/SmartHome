@@ -22,6 +22,11 @@ public class SystemConfigInfo
 		}  
 		return path;
 	}
+	
+	public static String getConfigItem(String itemName)
+	{
+		return  PropertyReader.getInstance().getPropertyByName(itemName);
+	}
 
 	public static String getProductName()
 	{
@@ -37,10 +42,30 @@ public class SystemConfigInfo
 		return  getSystemRootPath() + PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.TEMPLATE_PATH);
 		
 	}
+	public static String getMessageUserID()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_USER_ID);
+
+	}
+
+	public static String getMessageAccount()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_ACCOUNT);
+
+	}
+	
+	public static String getMessagePassword()
+	{
+		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.MESSAGE_PASSWORD);
+
+	}
 	public static String getDevicePort()
 	{
 		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.DEVICE_PORT);
 	}
-
+	public static String getServerPort()
+	{
+		return PropertyReader.getInstance().getPropertyByName("SERVER_PORT");
+	}
  
 }

@@ -14,13 +14,14 @@ import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
  */
 public class SetSensorReq extends BaseJsonReq
 {
-	private String command;
+	private int command;
 	private HomeSensorJson sensor;
-	public String getCommand()
+ 
+	public int getCommand()
 	{
 		return command;
 	}
-	public void setCommand(String command)
+	public void setCommand(int command)
 	{
 		this.command = command;
 	}

@@ -1,33 +1,33 @@
 /**   
-* @Title: ClientTypeEnum.java 
+* @Title: PushMessagTypeEnum.java 
 * @Package cn.fuego.smart.home.constant 
 * @Description: TODO
 * @author Tang Jun   
-* @date 2014-10-24 下午10:40:08 
+* @date 2014-12-4 上午12:03:00 
 * @version V1.0   
 */ 
 package cn.fuego.smart.home.constant;
 
  /** 
- * @ClassName: ClientTypeEnum 
+ * @ClassName: PushMessagTypeEnum 
  * @Description: TODO
  * @author Tang Jun
- * @date 2014-10-24 下午10:40:08 
+ * @date 2014-12-4 上午12:03:00 
  *  
  */
-public enum ClientTypeEnum 
+public enum PushMessagTypeEnum
 {
-	WEB_CLIENT(0,"WEB"),
-	ANDRIOD_CLIENT(3,"ANDRIOD"),
-	IOS_CLIENT(4,"IOS");
+	ALRAM_MSG(0,"告警"),
+	NEWS_MSG(1,"公共");
+ 
+ 
 	private int intValue;
 	private String strValue;
-	
 	/**
 	 * @param intValue
 	 * @param strValue
 	 */
-	private ClientTypeEnum(int intValue, String strValue)
+	private PushMessagTypeEnum(int intValue, String strValue)
 	{
 		this.intValue = intValue;
 		this.strValue = strValue;
@@ -40,9 +40,9 @@ public enum ClientTypeEnum
 	{
 		return strValue;
 	}
-	public static ClientTypeEnum getEnumByInt(int intValue)
+	public static PushMessagTypeEnum getEnumByInt(int intValue)
 	{
-		for (ClientTypeEnum c : ClientTypeEnum.values())
+		for (PushMessagTypeEnum c : PushMessagTypeEnum.values())
 		{
 			if (intValue == c.intValue)
 			{
@@ -51,7 +51,4 @@ public enum ClientTypeEnum
 		}
 		return null;
 	}	
-
- 
-	
 }

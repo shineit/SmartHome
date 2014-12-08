@@ -66,7 +66,7 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		{
 		case 1: this.finish();
 				break;
-		case 2: alarmRemove();
+		case 2: //alarmRemove();
 		 		break;
 
 		default:break;
@@ -75,11 +75,11 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 	}
 
 
-	private void alarmRemove()
+/*	private void alarmRemove()
 	{
 		Intent intent = new Intent(this,MainTabbarActivity.class);
  		startActivity(intent);
  		
 		
-	}
+	}*/
 }

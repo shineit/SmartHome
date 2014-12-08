@@ -24,10 +24,10 @@ public class HomeSensorJson
 	private float errorValue;   //火警值
 	private int groupID;         //区域ID（用于标识联动控制器）
 	private String ctrGroupID;      //联动控制器ID ;隔开
-	private String description;  //描述
+	private String descriptions;  //描述
 	private String mark;         //自定义标签
-	
- 
+
+
 	public int getId()
 	{
 		return id;
@@ -150,14 +150,14 @@ public class HomeSensorJson
 		this.ctrGroupID = ctrGroupID;
 	}
 
-	public String getDescription()
+	public String getDescriptions()
 	{
-		return description;
+		return descriptions;
 	}
 
-	public void setDescription(String description)
+	public void setDescriptions(String description)
 	{
-		this.description = description;
+		this.descriptions = description;
 	}
 
 	public String getMark()
@@ -179,7 +179,7 @@ public class HomeSensorJson
 				+ sensorType + ", sensorTypeName=" + sensorTypeName
 				+ ", status=" + status + ", warnValue=" + warnValue
 				+ ", errorValue=" + errorValue + ", groupID=" + groupID
-				+ ", ctrGroupID=" + ctrGroupID + ", description=" + description
+				+ ", ctrGroupID=" + ctrGroupID + ", descriptions=" + descriptions
 				+ ", mark=" + mark + "]";
 	}
  

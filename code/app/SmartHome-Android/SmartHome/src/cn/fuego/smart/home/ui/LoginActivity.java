@@ -1,7 +1,6 @@
 package cn.fuego.smart.home.ui;
 
-import com.baidu.android.pushservice.PushConstants;
-import com.baidu.android.pushservice.PushManager;
+import java.util.Set;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +23,12 @@ import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.bdsend.Utils;
+import cn.fuego.smart.home.ui.jpush.JPushUtil;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 public class LoginActivity extends BaseActivtiy
 {
@@ -47,7 +49,7 @@ public class LoginActivity extends BaseActivtiy
 		textPwd =(EditText) findViewById(R.id.txt_password);
 		loginBtn = (Button)findViewById(R.id.login_btn);
 		loginBtn.setOnClickListener(loginClick);
-
+       
 		
 	}
 	private OnClickListener loginClick = new OnClickListener() {
@@ -72,18 +74,42 @@ public class LoginActivity extends BaseActivtiy
 		LoginReq req = new LoginReq();
 		req.setPassword(password);
 		req.setUserName(userName);
-		req.setClientType(ClientTypeEnum.ANDRIOD_CLIENT.getStrValue());
+		req.setClientType(ClientTypeEnum.ANDRIOD_CLIENT.getIntValue());
 		req.setClientVersion(MemoryCache.getVersion());
 		req.setDevToken( getDeviceID());
 		
-		req.setPush_appID(MemoryCache.getPushInfo().getBaidu_push_appID());
-		req.setPush_userID(MemoryCache.getPushInfo().getBaidu_push_userID());
-		req.setPush_channelID(MemoryCache.getPushInfo().getBaidu_push_channelID());
-		
+		req.setPush_userID(req.getUserName());
+		JPushInterface.setAliasAndTags(getApplicationContext(), req.getUserName(), null, mAliasCallback);
+        
+	    
 		WebServiceContext.getInstance().getUserManageRest(this).login(req);
  
 	}
+	private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
 
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+ 
+            switch (code) {
+            case 0:
+                log.info("Set tag and alias success");
+                log.info("the user is " + MemoryCache.getLoginInfo().getUser());
+                break;
+                
+            case 6002:
+                 log.error("Failed to set alias and tags due to timeout. Try again after 60s.");
+                 log.error("the user is " + MemoryCache.getLoginInfo().getUser());
+                break;
+            
+            default:
+      
+                log.error("Failed with errorCode" + code);
+                log.error("the user is " + MemoryCache.getLoginInfo().getUser());
+            }
+           
+        }
+	    
+	};
 	@Override
 	public void handle(MispHttpMessage message)
 	{
@@ -100,8 +126,7 @@ public class LoginActivity extends BaseActivtiy
 			intent.setClass(LoginActivity.this, MainTabbarActivity.class);
 			startActivity(intent);
 			MemoryCache.setToken(rsp.getToken());
-           
-	              
+			      
 			LoginActivity.this.finish();
 
 		}

@@ -1,39 +1,31 @@
 package cn.fuego.smart.home.ui;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.ui.bdsend.Utils;
+import cn.fuego.smart.home.ui.jpush.MyReceiver;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
+import cn.jpush.android.api.InstrumentedActivity;
+import cn.jpush.android.api.JPushInterface;
 
-import com.baidu.android.pushservice.PushConstants;
-import com.baidu.android.pushservice.PushManager;
-
-public class MainActivity extends Activity
+public class MainActivity extends InstrumentedActivity 
 {
 	private FuegoLog log = FuegoLog.getLog(AuthInterceptor.class);
-    //private int loginFlag=0;
-	public void onCreate(Bundle savedInstanceState) 
-	{
+	
+	public static boolean isForeground = false;
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.main_welcome);
-        // Push: 以apikey的方式登录，一般放在主Activity的onCreate中。
-        // 这里把apikey存放于manifest文件中，只是一种存放方式，
-        // 您可以用自定义常量等其它方式实现，来替换参数中的Utils.getMetaValue(PushDemoActivity.this,
-        // "api_key")
-        PushManager.startWork(getApplicationContext(),PushConstants.LOGIN_TYPE_API_KEY,
-                Utils.getMetaValue(MainActivity.this, "api_key"));
-        // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
-        // PushManager.enableLbs(getApplicationContext());
-
-	new CountDownTimer(2000, 1000)
+		//setContentView(R.layout.main);
+		setContentView(R.layout.main_welcome);
+		//initView();   
+		registerMessageReceiver();  // used for receive msg
+		new CountDownTimer(2000, 1000)
 		{
 
 			@Override
@@ -71,6 +63,52 @@ public class MainActivity extends Activity
 				finish();
 			}
 		}.start();
+		
 	}
+	
+
+	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
+	private void init(){
+		 JPushInterface.init(getApplicationContext());
+	}
+
+
+	@Override
+	protected void onResume() {
+		isForeground = true;
+		super.onResume();
+	}
+
+
+	@Override
+	protected void onPause() {
+		isForeground = false;
+		super.onPause();
+	}
+
+
+	@Override
+	protected void onDestroy() {
+		unregisterReceiver(mMessageReceiver);
+		super.onDestroy();
+	}
+	
+
+	//for receive customer msg from jpush server
+	private MyReceiver mMessageReceiver;
+	public static final String MESSAGE_RECEIVED_ACTION = "cn.fuego.MESSAGE_RECEIVED_ACTION";
+	public static final String KEY_TITLE = "title";
+	public static final String KEY_MESSAGE = "message";
+	public static final String KEY_EXTRAS = "extras";
+	
+	public void registerMessageReceiver() {
+		mMessageReceiver = new MyReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+		filter.addAction(MESSAGE_RECEIVED_ACTION);
+		registerReceiver(mMessageReceiver, filter);
+	}
+
+
 		
 }

@@ -1,10 +1,10 @@
 package cn.fuego.smart.home.webservice.up.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
-import cn.fuego.smart.home.webservice.up.model.base.SetResultJson;
 
 
 /**
@@ -17,7 +17,7 @@ import cn.fuego.smart.home.webservice.up.model.base.SetResultJson;
  */
 public class GetSensorListRsp extends BaseJsonRsp
 {
-	private List<HomeSensorJson> sensorList;
+	private List<HomeSensorJson> sensorList = new ArrayList<HomeSensorJson>();
 
 	public List<HomeSensorJson> getSensorList()
 	{

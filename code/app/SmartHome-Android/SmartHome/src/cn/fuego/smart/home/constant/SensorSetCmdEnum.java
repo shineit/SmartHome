@@ -21,13 +21,26 @@ public enum SensorSetCmdEnum
 	STOP(1),
 	START(2),
 	CLEAR(3);
-	private int statusInt;
-	private SensorSetCmdEnum(int statusInt)
+	private int intValue;
+	private SensorSetCmdEnum(int intValue)
 	{
-		this.statusInt = statusInt;
+		this.intValue = intValue;
 	}
-	public int getStatusInt()
+ 
+	public int getIntValue()
 	{
-		return statusInt;
+		return intValue;
+	}
+
+	public static SensorSetCmdEnum getEnumByInt(int intValue)
+	{
+		for (SensorSetCmdEnum c : SensorSetCmdEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
 	}
 }
