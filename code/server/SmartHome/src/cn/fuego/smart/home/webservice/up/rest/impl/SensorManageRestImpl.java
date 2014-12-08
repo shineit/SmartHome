@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.Alarm;
@@ -22,8 +23,12 @@ import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.BatchSetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.BatchSetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
+import cn.fuego.smart.home.webservice.up.model.GetSensorByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetSensorByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
@@ -134,6 +139,61 @@ public class SensorManageRestImpl implements SensorManageRest
 	public BatchSetSensorRsp disable(BatchSetSensorReq req)
 	{
 		BatchSetSensorRsp rsp = new BatchSetSensorRsp();
+		return rsp;
+	}
+
+	@Override
+	public GetSensorByIDRsp getSensor(GetSensorByIDReq req)
+	{
+		GetSensorByIDRsp rsp = new GetSensorByIDRsp();
+		
+		try
+		{
+			HomeSensor sensor = this.sensorService.get(String.valueOf(req.getSensorID()));
+		    HomeSensorJson json = ModelConvert.homeSensorToJson(sensor);
+		    rsp.setSensor(json);
+		}
+		catch(MISPException e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
+
+ 		
+		return rsp;
+	}
+
+	@Override
+	public GetAlarmByIDRsp getAlarm(GetAlarmByIDReq req)
+	{
+		
+		GetAlarmByIDRsp rsp = new GetAlarmByIDRsp();
+		
+		try
+		{
+		    Alarm alarm = ServiceContext.getInstance().getAlarmManageService().get(String.valueOf(req.getAlarmID()));
+		    AlarmJson json = ModelConvert.AlarmToJson(alarm);
+		    rsp.setAlarm(json);
+		}
+		catch(MISPException e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
+
+ 		
 		return rsp;
 	}
 

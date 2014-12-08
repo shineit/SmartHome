@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class BaseJsonReq
 {
-	private String token;
+	protected String token;
 
 	public String getToken()
 	{

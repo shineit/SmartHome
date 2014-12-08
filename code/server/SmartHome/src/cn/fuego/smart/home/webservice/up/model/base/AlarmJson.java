@@ -1,9 +1,5 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import java.util.Date;
-
-import cn.fuego.common.util.format.DateUtil;
-import cn.fuego.smart.home.domain.Alarm;
 
 /**
  * 
@@ -25,7 +21,8 @@ public class AlarmJson
 	private String clearUser;  //清除人 手动清除需要填写
 	private int clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private long clearTime;	//告警清除的时间
-
+	
+ 
 	public int getId()
 	{
 		return id;

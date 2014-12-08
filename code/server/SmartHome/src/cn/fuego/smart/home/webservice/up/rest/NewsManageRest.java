@@ -5,6 +5,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import cn.fuego.smart.home.webservice.up.model.GetNewsByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetNewsByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 
@@ -25,4 +27,9 @@ public interface NewsManageRest
 	@Path("/list")
 	public GetNewsListRsp getNewsList(GetNewsListReq req);
 
+	@POST	
+	@Path("/id")
+	public GetNewsByIDRsp getNews(GetNewsByIDReq req);
+	
+ 
 }

@@ -1,7 +1,5 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import cn.fuego.common.util.format.DateUtil;
-import cn.fuego.smart.home.domain.News;
 
 
 /**
@@ -20,14 +18,7 @@ public class NewsJson
 	private String content;
 	private long date;
 	
-	public void loadWithNews(News news)
-	{
-		this.newsID = news.getNewsID();
-		this.title = news.getTitle();
-		this.author  = news.getAuthor();
-		this.content = news.getContent();
-		this.date = DateUtil.getDateTime(news.getDate());
-	}
+
 	public int getNewsID()
 	{
 		return newsID;

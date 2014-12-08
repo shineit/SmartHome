@@ -13,9 +13,11 @@ import java.util.Date;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
+import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 
  /** 
@@ -105,6 +107,18 @@ public class ModelConvert
 		homeSensor.setDescription(json.getDescriptions());
 		homeSensor.setMark(json.getMark());
 		return homeSensor;
+ 
+	}
+	
+	public static NewsJson  newsToJson(News news)
+	{
+		NewsJson json = new NewsJson();
+		json.setNewsID(news.getNewsID());
+		json.setTitle(news.getTitle());
+		json.setAuthor(news.getAuthor());
+		json.setContent(news.getContent());
+		json.setDate(DateUtil.getDateTime(news.getDate()));
+		return json;
  
 	}
 }
