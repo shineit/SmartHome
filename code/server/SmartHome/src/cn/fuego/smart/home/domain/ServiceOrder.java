@@ -18,40 +18,29 @@ public class ServiceOrder implements PersistenceObject
 	public static final String PRI_KEY = "orderID";
 	private String orderID;         //申请单号，
     private String orderName;       //申请单名称
-    private int orderType;		//申请单类型(维修，安装，咨询)
+    private Integer orderType;		//申请单类型(维修，安装，咨询)
     private String content;			//申请单内容
     private String creator;			//申请人
     private Date createTime;		//申请时间
     private String contactName;		//联系人名称
     private String phoneNum;		//联系电话
     private String contactAddr;		//联系地址
-    private int orderStatus;		//申请单状态，0-未处理，1-已处理
+    private Integer orderStatus;		//申请单状态，0-未处理，1-已处理
     private String handleResult;   //处理结果
     private String handler;			//处理人
     private Date handleTime;		//处理时间
-
-    
     public static String getOrderIDAttr()
     {
     	return "orderID";
     }
-    
-    
-	 
 	public String getOrderID()
 	{
 		return orderID;
 	}
-
-
-
 	public void setOrderID(String orderID)
 	{
 		this.orderID = orderID;
 	}
-
-
-
 	public String getOrderName()
 	{
 		return orderName;
@@ -60,27 +49,14 @@ public class ServiceOrder implements PersistenceObject
 	{
 		this.orderName = orderName;
 	}
-
-	/**
-	 * @return the orderType
-	 */
-	public int getOrderType()
+	public Integer getOrderType()
 	{
 		return orderType;
 	}
-
-
-
-	/**
-	 * @param orderType the orderType to set
-	 */
-	public void setOrderType(int orderType)
+	public void setOrderType(Integer orderType)
 	{
 		this.orderType = orderType;
 	}
-
-
-
 	public String getContent()
 	{
 		return content;
@@ -129,14 +105,21 @@ public class ServiceOrder implements PersistenceObject
 	{
 		this.contactAddr = contactAddr;
 	}
- 
-	public int getOrderStatus()
+	public Integer getOrderStatus()
 	{
 		return orderStatus;
 	}
-	public void setOrderStatus(int orderStatus)
+	public void setOrderStatus(Integer orderStatus)
 	{
 		this.orderStatus = orderStatus;
+	}
+	public String getHandleResult()
+	{
+		return handleResult;
+	}
+	public void setHandleResult(String handleResult)
+	{
+		this.handleResult = handleResult;
 	}
 	public String getHandler()
 	{
@@ -146,20 +129,6 @@ public class ServiceOrder implements PersistenceObject
 	{
 		this.handler = handler;
 	}
-	
-	
-	public String getHandleResult()
-	{
-		return handleResult;
-	}
-
-
-	public void setHandleResult(String handleResult)
-	{
-		this.handleResult = handleResult;
-	}
-
-
 	public Date getHandleTime()
 	{
 		return handleTime;
@@ -169,4 +138,5 @@ public class ServiceOrder implements PersistenceObject
 		this.handleTime = handleTime;
 	}
 
+ 
 }

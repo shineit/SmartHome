@@ -49,8 +49,16 @@ public class UdpDataReadThread extends Thread
     		byte[] buf = new byte[512];
     		DatagramPacket packet = new DatagramPacket(buf, buf.length);  
     		socket.receive(packet);
-    		messageBuffer.add(new String(packet.getData(),0,packet.getLength()));
-    		messageBuffer.notify();
+    		String message = DataTypeConvert.bytesToStr(buf);
+			message = message.substring(0, packet.getLength());
+		    log.info("the string message is " + message);
+		    log.info("the bytes is " + DataTypeConvert.toHexStringList(message));
+			synchronized(messageBuffer)
+			{
+				messageBuffer.add(message);
+	    		messageBuffer.notify();
+			}
+    		
 			
 		}
 		catch (IOException e)

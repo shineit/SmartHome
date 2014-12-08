@@ -9,7 +9,9 @@
 package cn.fuego.smart.home.device;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -94,36 +96,54 @@ public class ReceiveMessage
 		{
 	 
 			Alarm alarm = new Alarm();
+			 
+			alarm.setConcenratorID(this.getConcentratorID());
+			alarm.setAlarmType(getIntValue(i+5,i+5));
+			alarm.setAlarmTime(DateUtil.getCurrentDateTime());
+			
 			if( dataBytes[i] == 256 && dataBytes[i+1] == 256)
 			{
 				int machineID = getIntValue(i+2,i+2);
 				int loopID = getIntValue(i+3,i+3);
 				int codeID = getIntValue(i+4,i+4);
 				FireSensor sensor = ServiceContext.getInstance().getSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
-				alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
-				alarm.setObjID(sensor.getId());
-		
 				
+		
+				if(null != sensor)
+				{
+					
+					alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
+					alarm.setObjID(sensor.getId());
+					alarmList.add(alarm);
+				}
+				else
+				{
+					log.error("can not find the sensor by the alarm so discard it");
+				}
+
 			}
 			else
 			{
 				int sensorID = getIntValue(i,i+3);
 				int channelID = getIntValue(i+4,i+4);;
 				HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
-				if(null == sensor)
+				if(null != sensor)
 				{
-					log.error("can not get sensor by concentrator is "+this.concentratorID + ",sensor id is" + sensorID + ",channel is is " + channelID);
+					alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
+					alarm.setObjID(sensor.getId());
+					alarmList.add(alarm);
 				}
-				alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
-				alarm.setObjID(sensor.getId());
+				else
+				{
+					log.error("can not find the sensor by the alarm so discard it");
+					log.error("can not get sensor by concentrator is "+this.concentratorID + ",sensor id is" + sensorID + ",channel is is " + channelID);
+ 
+				}
+				
 			}
 				
- 
-			alarm.setConcenratorID(this.getConcentratorID());
-			alarm.setAlarmType(getIntValue(i+5,i+5));
-			alarm.setAlarmTime(DateUtil.getCurrentDateTime());
+
 		 
-			alarmList.add(alarm);
 		}
 		return alarmList;
 	}
@@ -161,7 +181,7 @@ public class ReceiveMessage
 	 */
 	public List<HomeSensor> getHomeSensorList()
 	{
-		List<HomeSensor> sensorList = new ArrayList<HomeSensor>();
+		Set<HomeSensor> sensorList = new HashSet<HomeSensor>();
 		int index = this.DATA_START_INDEX;
 		//获取终端总数
 		int cnt = this.getIntValue(index,index+1);
@@ -172,20 +192,21 @@ public class ReceiveMessage
 		}
 		//获取本次包起始ID
 		int endNum = this.getIntValue(index+2,index+3);
-		for(int i=0;i<cnt;i++)
+		for(int i=0;i<cnt;i ++)
 		{
-			int sensorID = this.getIntValue(index+4+i*4,index+4+i*4+3);
-			int channelNum = this.getIntValue(index+4+i*4+4);
+			int sensorID = this.getIntValue(index+4+i*6,index+4+i*6+3);
+			int channelNum = this.getIntValue(index+4+i*6+4,index+4+i*6+5);
 			for(int j=0;j<channelNum;j++)
 			{
 				HomeSensor sensor = new HomeSensor();
-				sensor.setId(sensorID);
+				sensor.setConcentratorID(this.concentratorID);
+				sensor.setSensorID(sensorID);
 				sensor.setChannelID(j);
 				sensorList.add(sensor);
 			}
 		}
 		
-		return sensorList;
+		return new ArrayList<HomeSensor>(sensorList);
 	}
 	
 	public HomeSensor getHomeSensor()
@@ -261,6 +282,16 @@ public class ReceiveMessage
 			temp[i] = this.dataBytes[i];
 		}
 		return DataTypeConvert.bytesToStr(temp);
+	}
+	
+	public boolean isDataLengthEnough(int index)
+	{
+		if(this.dataBytes.length<=index)
+		{
+			log.warn("the data length is not enough.the index is " + index +  ",the data length is " + this.dataBytes.length);
+			return false;
+		}
+		return true;
 	}
 	
 

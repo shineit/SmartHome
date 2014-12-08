@@ -14,6 +14,7 @@ import cn.fuego.smart.home.webservice.up.model.BatchSetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.BatchSetSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
+import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
@@ -39,7 +40,7 @@ public interface SensorManageRest
 
 	@POST
 	@Path("/list")
-	public GetSensorListRsp getSensorList();
+	public GetSensorListRsp getSensorList(GetSensorListReq req);
 	
 	@POST
 	@Path("/set")

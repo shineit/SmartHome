@@ -1,45 +1,42 @@
+/**   
+* @Title: PushMessage.java 
+* @Package cn.fuego.smart.home.webservice.down.model 
+* @Description: TODO
+* @author Tang Jun   
+* @date 2014-12-8 上午10:21:24 
+* @version V1.0   
+*/ 
 package cn.fuego.smart.home.webservice.down.model;
 
-
-/**
- * 
-* @ClassName: SendAlarmReq 
-* @Description: TODO
-* @author Tang Jun
-* @date 2014-10-20 上午10:54:09 
-*
+ /** 
+ * @ClassName: PushMessage 
+ * @Description: TODO
+ * @author Tang Jun
+ * @date 2014-12-8 上午10:21:24 
+ *  
  */
 public class PushMessageJson
 {
-	private String title;
-	private String description;
-	private Object customContentString;
 
-	public String getTitle()
+	private int objType;
+	private Object obj;
+	 
+	public int getObjType()
 	{
-		return title;
+		return objType;
 	}
-	public void setTitle(String title)
+	public void setObjType(int objType)
 	{
-		this.title = title;
+		this.objType = objType;
 	}
-	public String getDescription()
+	public Object getObj()
 	{
-		return description;
+		return obj;
 	}
-	public void setDescription(String description)
+	public void setObj(Object obj)
 	{
-		this.description = description;
+		this.obj = obj;
 	}
-	public Object getCustomContentString()
-	{
-		return customContentString;
-	}
-	public void setCustomContentString(Object customContentString)
-	{
-		this.customContentString = customContentString;
-	}
- 
+	 
 	
-
 }

@@ -24,97 +24,164 @@ public class Alarm implements PersistenceObject
 	private int objID;        //对象ID
 	
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
-	private float dataValue;	//告警值,模拟量类型 才有
+	private Float dataValue = (float)0;	//告警值,模拟量类型 才有
 	private Date alarmTime;	//告警产生的时间
 	private String clearUser;  //清除人 手动清除需要填写
-	private int clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
+	private Integer clearStatus = AlarmClearEnum.NONE_CLEAR.getIntValue();   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private Date clearTime;	//告警清除的时间
 	private String statusColor;//状态颜色，对应清除状态
 	
 	public static final String PRI_KEY = "id";
 	
-	
-	public int getConcenratorID()
-	{
-		return concenratorID;
-	}
-	public void setConcenratorID(int concenratorID)
-	{
-		this.concenratorID = concenratorID;
-	}
+ 
+ 
 	public int getId()
 	{
 		return id;
 	}
+
+
+
 	public void setId(int id)
 	{
 		this.id = id;
 	}
+
+
+
+	public int getConcenratorID()
+	{
+		return concenratorID;
+	}
+
+
+
+	public void setConcenratorID(int concenratorID)
+	{
+		this.concenratorID = concenratorID;
+	}
+
+
+
 	public int getObjType()
 	{
 		return objType;
 	}
+
+
+
 	public void setObjType(int objType)
 	{
 		this.objType = objType;
 	}
+
+
+
 	public int getObjID()
 	{
 		return objID;
 	}
+
+
+
 	public void setObjID(int objID)
 	{
 		this.objID = objID;
 	}
+
+
+
 	public int getAlarmType()
 	{
 		return alarmType;
 	}
+
+
+
 	public void setAlarmType(int alarmType)
 	{
 		this.alarmType = alarmType;
 	}
-	public float getDataValue()
+
+
+
+	public Float getDataValue()
 	{
 		return dataValue;
 	}
-	public void setDataValue(float dataValue)
+
+
+
+	public void setDataValue(Float dataValue)
 	{
 		this.dataValue = dataValue;
 	}
+
+
+
 	public Date getAlarmTime()
 	{
 		return alarmTime;
 	}
+
+
+
 	public void setAlarmTime(Date alarmTime)
 	{
 		this.alarmTime = alarmTime;
 	}
+
+
+
 	public String getClearUser()
 	{
 		return clearUser;
 	}
+
+
+
 	public void setClearUser(String clearUser)
 	{
 		this.clearUser = clearUser;
 	}
-	public int getClearStatus()
+
+
+
+	public Integer getClearStatus()
 	{
 		return clearStatus;
 	}
-	public void setClearStatus(int clearStatus)
+
+
+
+	public void setClearStatus(Integer clearStatus)
 	{
 		this.clearStatus = clearStatus;
 	}
+
+
+
 	public Date getClearTime()
 	{
 		return clearTime;
 	}
+
+
+
 	public void setClearTime(Date clearTime)
 	{
 		this.clearTime = clearTime;
 	}
- 
+
+
+
+	public void setStatusColor(String statusColor)
+	{
+		this.statusColor = statusColor;
+	}
+
+
+
 	public String getStatusColor()
 	{
 	  

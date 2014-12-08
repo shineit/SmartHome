@@ -20,6 +20,7 @@ import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.meta.ReflectionUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 
 /**
@@ -94,6 +95,13 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 		validator(obj);
 		this.getDao().create(obj);
 	}
+	@Override
+	public void create(int userID,E obj)
+	{
+		validator(obj);
+		this.getDao().create(obj);
+ 
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -105,7 +113,12 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 		 
 		this.getDao().create(objList);
 	}
-
+	@Override
+	public void create(int userID,List<E> objList)
+	{
+		 
+		this.getDao().create(objList);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -118,7 +131,13 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         this.getDao().update(obj);
 
 	}
+	@Override
+	public void modify(int userID,E obj)
+	{
+        validator(obj);
+        this.getDao().update(obj);
 
+	}
 	 public void Modify(List<String> idList,String fieldName,String fieldValue)
      {
          if (ValidatorUtil.isEmpty(idList))
@@ -158,7 +177,19 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 
         this.getDao().delete(condition);
 	}
+	@Override
+	public void delete(int userID,String id)
+	{
+        if (ValidatorUtil.isEmpty(id))
+        {
+            log.warn("the id is empty");
+            return;
+        }
+ 
+        QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, GetPrimaryName(), id);
 
+        this.getDao().delete(condition);
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -177,7 +208,18 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 
         this.getDao().delete(condition);
 	}
+	@Override
+	public void delete(int userID,List<String> idList)
+	{
+        if (ValidatorUtil.isEmpty(idList))
+        {
+            log.warn("the id is empty");
+            return;
+        }
+        QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, GetPrimaryName(), idList);
 
+        this.getDao().delete(condition);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

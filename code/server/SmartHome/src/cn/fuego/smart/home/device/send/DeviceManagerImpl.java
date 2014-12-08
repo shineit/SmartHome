@@ -153,6 +153,21 @@ public class DeviceManagerImpl implements DeviceManager
 
 		
 	}
+	public HomeSensor getSesnor(int sensorID,int channelID)
+	{
+        String data = ""; 	
+		
+		data += DataTypeConvert.intToByteStr(sensorID,4);
+		data += DataTypeConvert.intToByteStr(channelID,1);
+		String sendMessage = makeSendData(SendCommandConst.GET_SENSOR_CONFIG,data);
+		String readMessage = getData(sendMessage);
+		
+		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getAddr());
+		
+		return recvMessage.getHomeSensor();
+
+	}
+
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#enableSensor(java.util.List)
@@ -196,11 +211,18 @@ public class DeviceManagerImpl implements DeviceManager
 	
 	private String makeSendData(int cmdCode,String data)
 	{
+		int dataLength = 0;
+		if(null != data)
+		{
+			dataLength = data.length();
+		}
 		Random random1 = new Random(128);
 		String sendMessage; 
 		sendMessage = DataTypeConvert.intToByteStr(this.concentrator.getConcentratorID());
 		sendMessage += DataTypeConvert.intToByteStr(random1.nextInt(), 1);
 		sendMessage +=  DataTypeConvert.intToByteStr(cmdCode, 1); 
+		sendMessage += DataTypeConvert.intToByteStr(dataLength,1);
+		sendMessage += data;
 	 
 		return ApplicationProtocol.encode(sendMessage);
 		

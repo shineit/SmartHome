@@ -23,7 +23,7 @@ public class News implements PersistenceObject
 	private String author; //发布人
 	private String content; //分布内容
 	private Date date= DateUtil.getCurrentDate();     //发布时间
-	private int status; //发布状态，0-未发布，1-已发布
+	private Integer status; //发布状态，0-未发布，1-已发布
 	public int getNewsID()
 	{
 		return newsID;
@@ -64,21 +64,15 @@ public class News implements PersistenceObject
 	{
 		this.date = date;
 	}
-	/**
-	 * @return the status
-	 */
-	public int getStatus()
+	public Integer getStatus()
 	{
 		return status;
 	}
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(int status)
+	public void setStatus(Integer status)
 	{
 		this.status = status;
 	}
-
+	 
 	
 	
 }

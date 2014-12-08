@@ -85,7 +85,7 @@ public class UdpCommunicatorImpl implements Communicator
 		log.info("the send byte is :"+DataTypeConvert.toHexStringList(data));
 		try
 		{
-			packet=new DatagramPacket(data.getBytes(),data.length(),InetAddress.getByName(ip),port);
+			packet=new DatagramPacket(DataTypeConvert.strToBytes(data),data.length(),InetAddress.getByName(ip),port);
 			socket.send(packet);
  
 		} catch (IOException e)
@@ -118,7 +118,7 @@ public class UdpCommunicatorImpl implements Communicator
 	@Override
 	public String readData(String end)
 	{
-		String message = null;
+		String message = "";
 		UdpDataReadThread readThread = null;
 
 		try

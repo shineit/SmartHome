@@ -21,13 +21,13 @@ public class HomeSensor implements PersistenceObject
 	private int concentratorID;  //集中器ID
 	private int sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
  	private int channelID;       //终端设备的通道ID
-	private int sensorKind;      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
-	private int sensorType;      //传感器类型
+	private Integer sensorKind;      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
+	private Integer sensorType;      //传感器类型
 	private String sensorTypeName;  //传感器类型名称
-	private int status;          //告警使能状态，0-禁止，1-使能，SensorStatusEnum
-	private float warnValue;    //预警值
-	private float errorValue;   //火警值
-	private int groupID;         //区域ID（用于标识联动控制器）
+	private Integer status;          //告警使能状态，0-禁止，1-使能，SensorStatusEnum
+	private Float warnValue;    //预警值
+	private Float errorValue;   //火警值
+	private Integer groupID;         //区域ID（用于标识联动控制器）
 	private String ctrGroupID;      //联动控制器ID ;隔开
 	private String description;  //描述
 	private String mark;         //自定义标签
@@ -35,6 +35,34 @@ public class HomeSensor implements PersistenceObject
 	
 	
 	
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + channelID;
+		result = prime * result + concentratorID;
+		result = prime * result + sensorID;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HomeSensor other = (HomeSensor) obj;
+		if (channelID != other.channelID)
+			return false;
+		if (concentratorID != other.concentratorID)
+			return false;
+		if (sensorID != other.sensorID)
+			return false;
+		return true;
+	}
 	public int getId()
 	{
 		return id;
@@ -75,7 +103,6 @@ public class HomeSensor implements PersistenceObject
 		
  		
 	}
-
 	public int getSensorID()
 	{
 		return sensorID;
@@ -84,7 +111,6 @@ public class HomeSensor implements PersistenceObject
 	{
 		this.sensorID = sensorID;
 	}
- 
 	public int getChannelID()
 	{
 		return channelID;
@@ -93,23 +119,22 @@ public class HomeSensor implements PersistenceObject
 	{
 		this.channelID = channelID;
 	}
-	public int getSensorKind()
+	public Integer getSensorKind()
 	{
 		return sensorKind;
 	}
-	public void setSensorKind(int sensorKind)
+	public void setSensorKind(Integer sensorKind)
 	{
 		this.sensorKind = sensorKind;
 	}
-	public int getSensorType()
+	public Integer getSensorType()
 	{
 		return sensorType;
 	}
-	public void setSensorType(int sensorType)
+	public void setSensorType(Integer sensorType)
 	{
 		this.sensorType = sensorType;
 	}
-
 	public String getSensorTypeName()
 	{
 		return sensorTypeName;
@@ -118,40 +143,38 @@ public class HomeSensor implements PersistenceObject
 	{
 		this.sensorTypeName = sensorTypeName;
 	}
-	public int getStatus()
+	public Integer getStatus()
 	{
 		return status;
 	}
-	public void setStatus(int status)
+	public void setStatus(Integer status)
 	{
 		this.status = status;
 	}
- 
-	public float getWarnValue()
+	public Float getWarnValue()
 	{
 		return warnValue;
 	}
-	public void setWarnValue(float warnValue)
+	public void setWarnValue(Float warnValue)
 	{
 		this.warnValue = warnValue;
 	}
-	public float getErrorValue()
+	public Float getErrorValue()
 	{
 		return errorValue;
 	}
-	public void setErrorValue(float errorValue)
+	public void setErrorValue(Float errorValue)
 	{
 		this.errorValue = errorValue;
 	}
-	public int getGroupID()
+	public Integer getGroupID()
 	{
 		return groupID;
 	}
-	public void setGroupID(int groupID)
+	public void setGroupID(Integer groupID)
 	{
 		this.groupID = groupID;
 	}
- 
 	public String getCtrGroupID()
 	{
 		return ctrGroupID;
@@ -176,5 +199,6 @@ public class HomeSensor implements PersistenceObject
 	{
 		this.mark = mark;
 	}
-	
+ 
+ 
 }

@@ -26,9 +26,13 @@ import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.device.send.DeviceManager;
+import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
+import cn.fuego.smart.home.service.ServiceContext;
 
  /** 
  * @ClassName: ServiceOrderManageServiceImpl 
@@ -64,6 +68,10 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	    	log.info("the concentrator is new " + concentrator);
 	    	super.create(concentrator);
 	    }
+ 
+	    ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
+	    
+	    
 	}
 	@Override
 	public void offline(Concentrator concentrator)

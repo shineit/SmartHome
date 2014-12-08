@@ -40,6 +40,17 @@ public enum ClientTypeEnum
 	{
 		return strValue;
 	}
+	public static ClientTypeEnum getEnumByInt(int intValue)
+	{
+		for (ClientTypeEnum c : ClientTypeEnum.values())
+		{
+			if (intValue == c.intValue)
+			{
+				return c;
+			}
+		}
+		return null;
+	}	
 
  
 	

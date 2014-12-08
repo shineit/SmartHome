@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.service.cache;
 
+import cn.fuego.smart.home.constant.ClientTypeEnum;
+
  /** 
  * @ClassName: BaiduPushInfo 
  * @Description: TODO
@@ -15,53 +17,46 @@ package cn.fuego.smart.home.service.cache;
  * @date 2014-12-3 下午10:44:21 
  *  
  */
-public class BaiduPushInfo
+public class FuegoPushInfo
 {
-	private int deviceType = 3;
+	private ClientTypeEnum deviceType;
 	private String appID;
-	private String channelID;
-	private String user_id;
-
-	public int getDeviceType()
+	private String deviceID;
+	private String userID;
+ 
+	public ClientTypeEnum getDeviceType()
 	{
 		return deviceType;
 	}
-
-	public void setDeviceType(int deviceType)
+	public void setDeviceType(ClientTypeEnum deviceType)
 	{
 		this.deviceType = deviceType;
 	}
-
 	public String getAppID()
 	{
 		return appID;
 	}
-
 	public void setAppID(String appID)
 	{
 		this.appID = appID;
 	}
-
-	public String getChannelID()
+	public String getDeviceID()
 	{
-		return channelID;
+		return deviceID;
+	}
+	public void setDeviceID(String deviceID)
+	{
+		this.deviceID = deviceID;
+	}
+	public String getUserID()
+	{
+		return userID;
+	}
+	public void setUserID(String userID)
+	{
+		this.userID = userID;
 	}
 
-	public void setChannelID(String channelID)
-	{
-		this.channelID = channelID;
-	}
-
-	public String getUser_id()
-	{
-		return user_id;
-	}
-
-	public void setUser_id(String user_id)
-	{
-		this.user_id = user_id;
-	}
-	
 	
 
 }

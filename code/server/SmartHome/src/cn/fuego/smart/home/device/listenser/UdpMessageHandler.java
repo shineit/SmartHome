@@ -70,6 +70,7 @@ public class UdpMessageHandler implements Runnable
 			String decodeMessage = ApplicationProtocol.decode(receiveData);
 		 
 			ReceiveMessage message = new ReceiveMessage(decodeMessage,ipAddr);
+			returnData(message);
 			try
 			{
 				dispatchCmd(message);
@@ -79,7 +80,7 @@ public class UdpMessageHandler implements Runnable
 				log.error("message handle error",e);
 				log.error("the message is " + message);
 			}
-			returnData(message);
+			
 			 
 		}
 		else

@@ -12,8 +12,10 @@ import java.util.Date;
 
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 
  /** 
@@ -63,5 +65,46 @@ public class ModelConvert
 		order.setHandleTime(new Date(json.getHandleTime()));
 		
 		return order;
+	}
+	
+	
+	public static HomeSensorJson homeSensorToJson(HomeSensor sensor)
+	{
+		HomeSensorJson json = new HomeSensorJson();
+		json.setId(sensor.getId());
+		json.setConcentratorID(sensor.getConcentratorID());
+		json.setSensorID(sensor.getSensorID());
+		json.setChannelID(sensor.getChannelID());
+		json.setSensorKind(sensor.getChannelID());
+		json.setSensorType(sensor.getSensorType());
+		json.setSensorTypeName(sensor.getSensorTypeName());
+		json.setStatus(sensor.getStatus());
+		json.setWarnValue(sensor.getWarnValue());
+		json.setErrorValue(sensor.getErrorValue());
+		json.setGroupID(sensor.getGroupID());
+		json.setDescriptions(sensor.getDescription());
+		json.setMark(sensor.getMark());
+		return json;
+ 
+	}
+	
+	public static HomeSensor jsonToHomeSensor(HomeSensorJson json)
+	{
+		HomeSensor homeSensor = new HomeSensor();
+		homeSensor.setId(json.getId());
+		homeSensor.setConcentratorID(json.getConcentratorID());
+		homeSensor.setSensorID(json.getSensorID());
+		homeSensor.setChannelID(json.getChannelID());
+		homeSensor.setSensorKind(json.getChannelID());
+		homeSensor.setSensorType(json.getSensorType());
+		homeSensor.setSensorTypeName(json.getSensorTypeName());
+		homeSensor.setStatus(json.getStatus());
+		homeSensor.setWarnValue(json.getWarnValue());
+		homeSensor.setErrorValue(json.getErrorValue());
+		homeSensor.setGroupID(json.getGroupID());
+		homeSensor.setDescription(json.getDescriptions());
+		homeSensor.setMark(json.getMark());
+		return homeSensor;
+ 
 	}
 }

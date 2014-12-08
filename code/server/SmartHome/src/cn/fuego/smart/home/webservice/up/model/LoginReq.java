@@ -13,9 +13,10 @@ public class LoginReq
 {
 	private String userName;
 	private String password;
-	private String clientType;
+	private int clientType;
 	private String clientVersion;
 	private String devToken;
+	
 	private  String push_appID;
 	private  String push_userID;
 	private  String push_channelID;
@@ -62,11 +63,12 @@ public class LoginReq
 	{
 		this.password = password;
 	}
-	public String getClientType()
+ 
+	public int getClientType()
 	{
 		return clientType;
 	}
-	public void setClientType(String clientType)
+	public void setClientType(int clientType)
 	{
 		this.clientType = clientType;
 	}

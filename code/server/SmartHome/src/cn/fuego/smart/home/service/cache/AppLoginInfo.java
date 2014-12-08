@@ -23,7 +23,7 @@ public class AppLoginInfo
 
 	private SystemUser user;
 	private AppDeviceInfo deviceInfo = new AppDeviceInfo();
-	private BaiduPushInfo pushInfo =  new BaiduPushInfo();
+	private FuegoPushInfo pushInfo =  new FuegoPushInfo();
 	public String getToken()
 	{
 		return token;
@@ -48,11 +48,11 @@ public class AppLoginInfo
 	{
 		this.deviceInfo = deviceInfo;
 	}
-	public BaiduPushInfo getPushInfo()
+	public FuegoPushInfo getPushInfo()
 	{
 		return pushInfo;
 	}
-	public void setPushInfo(BaiduPushInfo pushInfo)
+	public void setPushInfo(FuegoPushInfo pushInfo)
 	{
 		this.pushInfo = pushInfo;
 	}

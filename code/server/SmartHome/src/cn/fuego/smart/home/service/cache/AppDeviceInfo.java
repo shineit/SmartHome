@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.smart.home.service.cache;
 
-import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.smart.home.constant.ClientTypeEnum;
 
  /** 
  * @ClassName: AppDeviceInfo 
@@ -20,15 +20,15 @@ import cn.fuego.misp.domain.SystemUser;
 public class AppDeviceInfo
 {
 	
-	private String clientType;
+	private ClientTypeEnum clientType;
 	private String clientVersion;
 	private String devToken;
 	private String deviceVersion;
-	public String getClientType()
+	public ClientTypeEnum getClientType()
 	{
 		return clientType;
 	}
-	public void setClientType(String clientType)
+	public void setClientType(ClientTypeEnum clientType)
 	{
 		this.clientType = clientType;
 	}
@@ -56,7 +56,8 @@ public class AppDeviceInfo
 	{
 		this.deviceVersion = deviceVersion;
 	}
-	
+	 
+	 
  
 
 }

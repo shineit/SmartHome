@@ -61,18 +61,19 @@ public class DataTypeConvert
 	
 	public static String intToByteStr(int value,int bit)
 	{
-		 byte[] src = new byte[4];  
 		 if(bit > 4)
 		 {
 			 bit = 4;
 		 }
+		 byte[] src = new byte[bit];  
+		
 		 for(int i=0;i<bit;i++)
 		 {     
-			    src[i] =  (byte) (value>>(i*8) & 0xFF);   
+			    src[bit-1-i] =  (byte) (value>>(i*8) & 0xFF);   
 		 }
   
 		 
-		 return new String(src);
+		 return DataTypeConvert.bytesToStr(src);
 	}
 	
 	public static String floatToByteStr(float value)
@@ -81,9 +82,9 @@ public class DataTypeConvert
 	      
 	    byte[] b = new byte[4];    
 	    for (int i = 0; i < 4; i++) {    
-	        b[i] = (byte) (fbit >> (24 - i * 8));    
+	        b[3-i] = (byte) (fbit >> (24 - i * 8));    
 	    } 
-	    return new String(b);
+	    return DataTypeConvert.bytesToStr(b);
 		 
 	}
 	public static List objectToList(Object str)

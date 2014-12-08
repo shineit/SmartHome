@@ -19,6 +19,7 @@ import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -72,13 +73,14 @@ public class UserManageRestImpl implements UserManageRest
 		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
 		    
 		    AppLoginInfo deviceInfo = new AppLoginInfo();
-		    deviceInfo.getDeviceInfo().setClientType(req.getClientType());
+		    deviceInfo.getDeviceInfo().setClientType(ClientTypeEnum.getEnumByInt(req.getClientType()));
 		    deviceInfo.getDeviceInfo().setClientVersion(req.getClientVersion());
 		    deviceInfo.getDeviceInfo().setDevToken(req.getDevToken());
-		    
+		   
+		    deviceInfo.getPushInfo().setDeviceType(deviceInfo.getDeviceInfo().getClientType());
 		    deviceInfo.getPushInfo().setAppID(req.getPush_appID());
-		    deviceInfo.getPushInfo().setChannelID(req.getPush_channelID());
-		    deviceInfo.getPushInfo().setUser_id(req.getPush_userID());
+		    deviceInfo.getPushInfo().setDeviceID(req.getPush_channelID());
+		    deviceInfo.getPushInfo().setUserID(req.getPush_userID());
 		    deviceInfo.setUser(user);
 		    
 		    AppLoginCache.loginUser.put(rsp.getToken(), deviceInfo);

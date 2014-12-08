@@ -1,20 +1,17 @@
-package cn.fuego.smart.home.webservice.down.service;
+package cn.fuego.smart.home.webservice.down.service.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.JsonConvert;
-import cn.fuego.smart.home.service.cache.BaiduPushInfo;
-import cn.fuego.smart.home.service.impl.UserManageServiceImpl;
+import cn.fuego.smart.home.service.cache.FuegoPushInfo;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 
 import com.baidu.yun.channel.auth.ChannelKeyPair;
 import com.baidu.yun.channel.client.BaiduChannelClient;
 import com.baidu.yun.channel.exception.ChannelClientException;
 import com.baidu.yun.channel.exception.ChannelServerException;
-import com.baidu.yun.channel.model.PushBroadcastMessageRequest;
-import com.baidu.yun.channel.model.PushBroadcastMessageResponse;
 import com.baidu.yun.channel.model.PushUnicastMessageRequest;
 import com.baidu.yun.channel.model.PushUnicastMessageResponse;
 import com.baidu.yun.core.log.YunLogEvent;
@@ -22,14 +19,14 @@ import com.baidu.yun.core.log.YunLogHandler;
 
 public class BaiduPushTool
 {
-	private static Log log = LogFactory.getLog(UserManageServiceImpl.class);
+	private static Log log = LogFactory.getLog(BaiduPushTool.class);
 
 	private static String apiKey = SystemConfigInfo.getConfigItem("apiKey");
 	private static String secretKey = SystemConfigInfo.getConfigItem("secretKey");
 
 	
 	 
-	public static void pushNotification(BaiduPushInfo pushInfo, PushMessageJson message)
+	public static void pushNotification(FuegoPushInfo pushInfo, PushMessageJson message)
 	{
 		/*
 		 * @brief 推送广播消息(消息类型为透传，由开发方应用自己来解析消息内容) message_type = 0 (默认为0)
@@ -57,10 +54,10 @@ public class BaiduPushTool
 
 			// 4. 创建请求类对象
 			PushUnicastMessageRequest request = new PushUnicastMessageRequest();
-			request.setDeviceType(pushInfo.getDeviceType()); // device_type =>// 1: web 2: pc// 3:android //// 4:ios 5:wp
+			request.setDeviceType(pushInfo.getDeviceType().getIntValue()); // device_type =>// 1: web 2: pc// 3:android //// 4:ios 5:wp
 
-			request.setChannelId(Long.valueOf(pushInfo.getChannelID()));
-			request.setUserId(pushInfo.getUser_id());
+			request.setChannelId(Long.valueOf(pushInfo.getDeviceID()));
+			request.setUserId(pushInfo.getUserID());
 			request.setMessage(JsonConvert.ObjectToJson(message));
 			request.setMessageType(1);
 
@@ -81,7 +78,7 @@ public class BaiduPushTool
  
 		}
 	}
-	public static void pushMessage(BaiduPushInfo pushInfo, String message)
+	public static void pushMessage(FuegoPushInfo pushInfo, String message)
 	{
 
 		/*
@@ -110,10 +107,10 @@ public class BaiduPushTool
 
 			// 4. 创建请求类对象
 			PushUnicastMessageRequest request = new PushUnicastMessageRequest();
-			request.setDeviceType(pushInfo.getDeviceType()); // device_type =>// 1: web 2: pc// 3:android //// 4:ios 5:wp
+			request.setDeviceType(pushInfo.getDeviceType().getIntValue()); // device_type =>// 1: web 2: pc// 3:android //// 4:ios 5:wp
 
-			request.setChannelId(Long.valueOf(pushInfo.getChannelID()));
-			request.setUserId(pushInfo.getUser_id());
+			request.setChannelId(Long.valueOf(pushInfo.getDeviceID()));
+			request.setUserId(pushInfo.getUserID());
 			request.setMessage(message);
 
 			// 5. 调用pushMessage接口

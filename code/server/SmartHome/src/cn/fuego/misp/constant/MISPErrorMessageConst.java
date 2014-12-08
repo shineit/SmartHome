@@ -43,6 +43,8 @@ public class MISPErrorMessageConst
 	public static final int TARGET_NOT_EXISTED = 11; // 操作对象已经不存在
 	public static final int ADMIN_NOT_DELETED = 12; //超级管理员不能被删除
 	public static final int OPERATE_PROHIBITED = 13; //无权操作
+	
+	public static final int ERROR_QUREY_FAILED = 14;
 	public static String getMessageByErrorCode(int errorCode)
 	{
 		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));

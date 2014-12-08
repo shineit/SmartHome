@@ -27,24 +27,7 @@ public class HomeSensorJson
 	private String ctrGroupID;      //联动控制器ID ;隔开
 	private String descriptions;  //描述
 	private String mark;         //自定义标签
-	
-	public void loadWithSensor(HomeSensor sensor)
-	{
-		this.id = sensor.getId();
-		this.concentratorID = sensor.getConcentratorID();
-		this.sensorID = sensor.getSensorID();
- 		this.channelID = sensor.getChannelID();
-		this.sensorKind = sensor.getSensorKind();
-		this.sensorType = sensor.getSensorType();
-		this.sensorTypeName = sensor.getSensorTypeName();
-		this.status = sensor.getStatus();
-		this.warnValue = sensor.getWarnValue();
-		this.errorValue = sensor.getErrorValue();
-		this.groupID = sensor.getGroupID();
-		this.ctrGroupID = sensor.getCtrGroupID();
-		this.descriptions = sensor.getDescription();
-		this.mark = sensor.getMark();
-	}
+
 
 	public int getId()
 	{
@@ -173,7 +156,7 @@ public class HomeSensorJson
 		return descriptions;
 	}
 
-	public void setDescription(String description)
+	public void setDescriptions(String description)
 	{
 		this.descriptions = description;
 	}

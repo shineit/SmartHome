@@ -19,11 +19,10 @@ import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AppLoginCache;
-import cn.fuego.smart.home.service.cache.BaiduPushInfo;
-import cn.fuego.smart.home.webservice.down.model.MessageInfoJson;
+import cn.fuego.smart.home.service.cache.FuegoPushInfo;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
-import cn.fuego.smart.home.webservice.down.service.BaiduPushTool;
 import cn.fuego.smart.home.webservice.down.service.PushService;
+import cn.fuego.smart.home.webservice.down.service.PushToolFactory;
 
  /** 
  * @ClassName: AlarmPushServiceImpl 
@@ -52,27 +51,25 @@ public class PushServiceImpl implements PushService
 			 {
 				 for(UserConcentrator userCon : userConList)
 				 {
-					 BaiduPushInfo pushInfo = AppLoginCache.getPushInfo(userCon.getUserID());
+					 FuegoPushInfo pushInfo = AppLoginCache.getPushInfo(userCon.getUserID());
 					 
 					 if(null != pushInfo)
 					 {
 						 PushMessageJson json = new PushMessageJson();
 						 
-						 json.setTitle("告警");
-						 json.setDescription("火警");
-						 MessageInfoJson message = new MessageInfoJson();
-						 message.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
-						 message.setObj(alarm.getId());
-						 json.setCustomContentString(message);
-
-						 BaiduPushTool.pushNotification(pushInfo, json);
+						 String title = "告警";
+						 String content = "火警";
+					 
+ 						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
+						 json.setObj(alarm.getId());
+		 
+ 						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
 					 }
 					 else
 					 {
 						 log.info("no need to push,the user have not been logined, user id is " + userCon.getUserID());
 					 }
-					
-	
+				 
 				 }
 			 }
 			 else

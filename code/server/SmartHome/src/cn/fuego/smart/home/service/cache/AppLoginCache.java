@@ -47,7 +47,7 @@ public class AppLoginCache
 		return false;
 	}
 	
-	public static BaiduPushInfo getPushInfo(int userID)
+	public static FuegoPushInfo getPushInfo(int userID)
 	{
 		for (Map.Entry<String,AppLoginInfo> entry : loginUser.entrySet())
 		{

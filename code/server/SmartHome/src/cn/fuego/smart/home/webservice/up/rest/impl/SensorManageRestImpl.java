@@ -13,6 +13,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.SensorManageService;
@@ -22,6 +24,7 @@ import cn.fuego.smart.home.webservice.up.model.BatchSetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.BatchSetSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
+import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
@@ -57,7 +60,7 @@ public class SensorManageRestImpl implements SensorManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.service.SensorManageService#getSensorList(cn.fuego.smart.home.webservice.from.client.model.GetSensorListReq)
 	 */
 	@Override
-	public GetSensorListRsp getSensorList()
+	public GetSensorListRsp getSensorList(GetSensorListReq req)
 	{
 		// TODO Auto-generated method stub
 		GetSensorListRsp rsp = new GetSensorListRsp();
@@ -68,9 +71,8 @@ public class SensorManageRestImpl implements SensorManageRest
 	 		
 			for(HomeSensor sensor :sensorList)
 			{	
-				HomeSensorJson json = new HomeSensorJson();
-			
-				json.loadWithSensor(sensor);
+				HomeSensorJson json = ModelConvert.homeSensorToJson(sensor);
+ 
 				rsp.getSensorList().add(json);
 			}
 			
@@ -78,6 +80,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(Exception e)
 		{
 			log.error("get sensor list error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -92,6 +95,9 @@ public class SensorManageRestImpl implements SensorManageRest
 	public SetSensorRsp setSensor(SetSensorReq req)
 	{
 		SetSensorRsp rsp = new SetSensorRsp();
+		
+		HomeSensor sensor = ModelConvert.jsonToHomeSensor(req.getSensor());
+ 		sensorService.setSensor(SensorSetCmdEnum.getEnumByInt(req.getCommand()), sensor);
 		return rsp;
 	}
 
