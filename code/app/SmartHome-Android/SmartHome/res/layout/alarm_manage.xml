@@ -158,7 +158,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/alarm_manage_desp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -189,7 +189,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/EditText02"
+                android:id="@+id/alarm_manage_warn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -216,7 +216,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/EditText01"
+                android:id="@+id/alarm_manage_error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"

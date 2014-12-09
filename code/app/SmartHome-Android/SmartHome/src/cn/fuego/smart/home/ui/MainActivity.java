@@ -48,7 +48,11 @@ public class MainActivity extends InstrumentedActivity
 		        else
 		        {
 		        	intent.setClass(MainActivity.this, MainTabbarActivity.class);
-		        	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		        	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+		        	if(CommonConst.getFlag()==1)
+		        	{
+		        		CommonConst.setFlag(0);
+		        	}
 		        }
 				
 				startActivity(intent);

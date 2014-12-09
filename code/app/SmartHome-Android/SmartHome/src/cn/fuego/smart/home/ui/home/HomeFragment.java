@@ -27,6 +27,7 @@ import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.CommonConst;
 import cn.fuego.smart.home.ui.base.BaseFragment;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -63,7 +64,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
     private SimpleAdapter adapterNews ;
     private List<Map<String, Object>> alarmItems = new ArrayList<Map<String, Object>>();
     private SimpleAdapter adapterAlarm ;
-    private int flag=0;//判断进入页面方式，0-表示首次进入，1-其他切换进入
+
     private int listID=0;// 用于判断当前listview
 
 
@@ -83,10 +84,10 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	    newsViewList.setAdapter(adapterNews);
 	    newsViewList.setOnItemClickListener(this);
 	    //默认初始界面为告警信息
-        if(flag==0)
+        if(CommonConst.getFlag()==0)
         {
         	updateAlarms();
-        	flag=1;
+        	CommonConst.setFlag(1);
         }
         
 	    // 切换radiobutton监听
@@ -179,26 +180,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 		}).getNewsList(req);
 	}
 
-	@Override
-	public void handle(MispHttpMessage message)
-	{
-		alarmItems.clear();
-		 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)message.getMessage().obj;
-		 for(AlarmJson json : rsp.getAlarmList()){
-			 Map<String, Object> listItem = new HashMap<String, Object>();
-				//String[] alarmIcon =getResources().getStringArray(R.array.alarm_icons);
-				TypedArray alarmIcon=getResources().obtainTypedArray(R.array.alarm_icons);
-				listItem.put(alarmItemAttrs[0], alarmIcon.getResourceId(json.getAlarmType(), 0));
-				listItem.put(alarmItemAttrs[1], AlarmTypeEnum.getEnumByInt(json.getAlarmType()).getStrValue());
-				listItem.put(alarmItemAttrs[2], null);
-				listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
-				listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
-				alarmItems.add(listItem);
-		 }
-		//alarmViewList.setAdapter(adapterAlarm);
-		adapterAlarm.notifyDataSetChanged();
-		
-	}
+
 
 	@Override
 	public void onItemClick(AdapterView<?>parent,View view, int position, long id)
@@ -230,6 +212,13 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 		{
 			Toast.makeText(this.getActivity(), "newsList positon is"+position, Toast.LENGTH_SHORT).show();
 		}
+		
+	}
+
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		// TODO Auto-generated method stub
 		
 	}
 }

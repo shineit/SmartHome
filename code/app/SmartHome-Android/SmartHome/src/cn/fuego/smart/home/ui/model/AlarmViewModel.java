@@ -27,6 +27,10 @@ public class AlarmViewModel
 	private String objID="objID";
 	private String obj="obj";
 	private String alarmValue="alarmValue";
+	//消除告警页面显示具体内容
+	private String description="desp";
+	private String warnValue="warnValue";
+	private String errorValue="errorValue";
 	public String getIcon()
 	{
 		return icon;
@@ -98,6 +102,30 @@ public class AlarmViewModel
 	public void setAlarmValue(String alarmValue)
 	{
 		this.alarmValue = alarmValue;
+	}
+	public String getDescription()
+	{
+		return description;
+	}
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+	public String getWarnValue()
+	{
+		return warnValue;
+	}
+	public void setWarnValue(String warnValue)
+	{
+		this.warnValue = warnValue;
+	}
+	public String getErrorValue()
+	{
+		return errorValue;
+	}
+	public void setErrorValue(String errorValue)
+	{
+		this.errorValue = errorValue;
 	}
 	
 	
