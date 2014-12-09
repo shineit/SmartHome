@@ -32,7 +32,7 @@
 
     
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="10"
         android:targetSdkVersion="18" />
 
     <application

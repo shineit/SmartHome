@@ -19,6 +19,7 @@
 #import <HockeySDK/HockeySDK.h>
 #import "CDUser.h"
 #import "BPush.h"
+#import "APService.h"
 //#import "FEServiceListVC.h"
 
 @implementation AppDelegate
@@ -43,17 +44,18 @@
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] testIdentifier];
     
-    [BPush setupChannel:launchOptions];
-    [BPush setDelegate:self];
-    [self registerPushNotification];
+//    [BPush setupChannel:launchOptions];
+//    [BPush setDelegate:self];
+    // Required
+    
+    [self registerPushNotificationOptions:launchOptions];
     
     return YES;
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
-    [BPush registerDeviceToken:deviceToken];
-    [BPush bindChannel];
+    [APService registerDeviceToken:deviceToken];
     
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -250,15 +252,41 @@
 
 #pragma mark - registerPushNotification
 //注册PUSH通知
-- (void)registerPushNotification {
-    UIApplication *application = [UIApplication sharedApplication];
-    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        [application registerForRemoteNotifications];
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }else {
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)];
+- (void)registerPushNotificationOptions:(NSDictionary *)launchOptions{
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //categories
+        [APService
+         registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                             UIUserNotificationTypeSound |
+                                             UIUserNotificationTypeAlert)
+         categories:nil];
+    } else {
+        //categories nil
+        [APService
+         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)
+#else
+         //categories nil
+         categories:nil];
+        [APService
+         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                             UIRemoteNotificationTypeSound |
+                                             UIRemoteNotificationTypeAlert)
+#endif
+         // Required
+         categories:nil];
     }
+    [APService setupWithOption:launchOptions];
+    
+//    UIApplication *application = [UIApplication sharedApplication];
+//    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+//        [application registerForRemoteNotifications];
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//    }else {
+//        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)];
+//    }
 }
 
 +(AppDelegate *)sharedDelegate{
