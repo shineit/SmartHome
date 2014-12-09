@@ -112,7 +112,9 @@ public class JPushToolImpl implements PushToolInterface
 				.setAudience(Audience.all())
 		        .setNotification(Notification.newBuilder()
 		        		.setAlert(title)
-		        		.addPlatformNotification(AndroidNotification.newBuilder().setTitle(title).build())
+		        		.addPlatformNotification(AndroidNotification.newBuilder()
+		        				.addExtra("obj", obj)
+		        				.addExtra("objType", objType).build())
 		        		.addPlatformNotification(IosNotification.newBuilder()
 		        				.incrBadge(1)
 		        				.addExtra("obj", obj)
@@ -130,7 +132,9 @@ public class JPushToolImpl implements PushToolInterface
 		        .setAudience(Audience.alias(alias))
 		        .setNotification(Notification.newBuilder()
 		        		.setAlert(title)
-		        		.addPlatformNotification(AndroidNotification.newBuilder().setTitle(title).build())
+		        		.addPlatformNotification(AndroidNotification.newBuilder()
+		        				.addExtra("obj", obj)
+		        				.addExtra("objType", objType).build())
 		        		.addPlatformNotification(IosNotification.newBuilder()
 		        				.incrBadge(1)
 		        				.addExtra("obj", obj)
@@ -149,7 +153,5 @@ public class JPushToolImpl implements PushToolInterface
 		// TODO Auto-generated method stub
 		
 	}
-
-
 
 }
