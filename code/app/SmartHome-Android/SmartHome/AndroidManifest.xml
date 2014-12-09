@@ -8,7 +8,7 @@
         android:protectionLevel="signature" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-        <!-- Required  一些系统要求的权限，如访问网络等-->
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
     <uses-permission android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,169 +20,162 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> 
-        <!-- Optional for location -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Optional for location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-     
 
-    
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" 
-   
-        >
+        android:theme="@android:style/Theme.NoTitleBar" >
         <activity
-            android:name="cn.fuego.smart.home.ui.MainActivity"
-            
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> 
+            </intent-filter>
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.LoginActivity"
+            android:name=".ui.LoginActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask"
-             >
-
+            android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.MainTabbarActivity"
-            
+            android:name=".ui.MainTabbarActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.setting.service.ServiceActivity"
-            android:label="@string/title_activity_service"
-            
-              >
+            android:name=".ui.setting.service.ServiceActivity"
+            android:label="@string/title_activity_service" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.setting.service.ServiceApplyActivity"
-            android:label="@string/title_activity_service_apply"
-            
-              >
+            android:name=".ui.setting.service.ServiceApplyActivity"
+            android:label="@string/title_activity_service_apply" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.setting.user.UserManageActivity"
-            android:label="@string/title_activity_user_manage" 
-            
-             >
+            android:name=".ui.setting.user.UserManageActivity"
+            android:label="@string/title_activity_user_manage" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.setting.user.UserInfoActivity"
-            android:label="@string/title_activity_user_info" 
-            >
+            android:name=".ui.setting.user.UserInfoActivity"
+            android:label="@string/title_activity_user_info" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.setting.user.ModifyPwdActivity"
-            android:label="@string/title_activity_modify_pwd"
-            
-              >
+            android:name=".ui.setting.user.ModifyPwdActivity"
+            android:label="@string/title_activity_modify_pwd" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.base.ExitApplication"
-            android:label="@string/title_activity_logout" 
-            
-             >
+            android:name=".ui.base.ExitApplication"
+            android:label="@string/title_activity_logout" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.home.AlarmManageActivity"
+            android:name=".ui.home.AlarmManageActivity"
             android:label="@string/title_activity_alarm_manage"
-            android:launchMode="singleTask"
-              >
+            android:launchMode="singleTask" >
         </activity>
-        <!-- Required SDK核心功能-->
+        <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="cn.fuego.smart.home" />
             </intent-filter>
         </activity>
-        <!-- Required  SDK核心功能-->
+        <!-- Required  SDK核心功能 -->
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
             android:exported="false" >
         </service>
-    
-        
-        <!-- Required SDK 核心功能-->
+
+        <!-- Required SDK 核心功能 -->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
                 <action android:name="cn.jpush.android.intent.PushService" />
                 <action android:name="cn.jpush.android.intent.PUSH_TIME" />
-                
             </intent-filter>
         </service>
-        
-        <!-- Required SDK核心功能-->
+
+        <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true" >
-             <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
+            <intent-filter android:priority="1000" >
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+ <!-- Required  显示通知栏 -->
                 <category android:name="cn.fuego.smart.home" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-             <!-- Optional -->
+            <!-- Optional -->
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
                 <data android:scheme="package" />
             </intent-filter>
-   
         </receiver>
-        
-        <!-- Required SDK核心功能-->
+
+        <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
-        
-        <!-- User defined.  For test only  用户自定义的广播接收器-->
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
-            android:name="cn.fuego.smart.home.ui.jpush.MyReceiver"
-            android:enabled="true">
+            android:name=".ui.jpush.MyReceiver"
+            android:enabled="true" >
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
-                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />  
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
-                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+ <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+ <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+ <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+ <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+ <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+ <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <category android:name="cn.fuego.smart.home" />
             </intent-filter>
         </receiver>
- 
-        
+
         <!-- Required  . Enable it you can get statistics data with channel -->
-        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="97c0f1c1744eacef02d529c1" /> <!--  </>值来自开发者平台取得的AppKey-->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="97c0f1c1744eacef02d529c1" />
+ <!-- </>值来自开发者平台取得的AppKey -->
+        <activity
+            android:name="cn.fuego.smart.home.ui.home.NewsViewActivity"
+            android:label="@string/title_activity_news_view" >
+        </activity>
     </application>
 
 </manifest>

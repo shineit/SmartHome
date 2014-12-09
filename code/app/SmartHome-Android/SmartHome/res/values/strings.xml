@@ -38,5 +38,6 @@
     <string name="error_network">Failed to init due to network exception.</string>
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
+    <string name="title_activity_news_view">NewsViewActivity</string>
 
 </resources>

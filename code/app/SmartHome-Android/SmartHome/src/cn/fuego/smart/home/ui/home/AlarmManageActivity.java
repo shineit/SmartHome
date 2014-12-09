@@ -8,7 +8,6 @@ import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.ui.CommonConst;
 import cn.fuego.smart.home.ui.MainTabbarActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
@@ -102,7 +101,7 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		      
 			Intent intent = new Intent(AlarmManageActivity.this,MainTabbarActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-			CommonConst.setFlag(0);
+			MemoryCache.setFlag(0);
 			startActivity(intent);
 			
 	 		this.finish();

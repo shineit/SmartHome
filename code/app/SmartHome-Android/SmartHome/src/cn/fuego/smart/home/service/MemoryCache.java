@@ -12,6 +12,8 @@ public class MemoryCache
 	private static AppDeviceInfo pushInfo= new AppDeviceInfo() ;
 	
 	private static LoginInfo loginInfo = new LoginInfo();
+	
+	private static int flag=0;//判断进入页面方式，0-表示首次进入，1-其他切换进入
     public static Boolean isLogin()
     {
     	Boolean result= false;
@@ -74,6 +76,16 @@ public class MemoryCache
 	public static void setLoginInfo(LoginInfo loginInfo)
 	{
 		MemoryCache.loginInfo = loginInfo;
+	}
+
+	public static int getFlag()
+	{
+		return flag;
+	}
+
+	public static void setFlag(int flag)
+	{
+		MemoryCache.flag = flag;
 	}
  
 	

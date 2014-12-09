@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/item_news_time"
-        android:layout_width="75dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -28,5 +28,25 @@
         android:clickable="true"
         android:text="五一放假安保工作通知"
         android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/item_news_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/item_news_title"
+        android:layout_alignBottom="@+id/item_news_title"
+        android:layout_toRightOf="@+id/item_news_title"
+        android:text="TextView"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/item_news_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/item_news_title"
+        android:layout_alignBottom="@+id/item_news_title"
+        android:layout_toLeftOf="@+id/item_news_time"
+        android:text="TextView"
+        android:visibility="gone" />
 
 </RelativeLayout>
