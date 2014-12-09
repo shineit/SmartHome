@@ -21,5 +21,6 @@ import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 public interface PushToolInterface
 {
 	void pushNotification(FuegoPushInfo pushInfo, String title,String content,PushMessageJson msgObj);
+	void pushAll(String title,String content,PushMessageJson msgObj);
 	void pushMessage(FuegoPushInfo pushInfo,PushMessageJson msgObj);
 }

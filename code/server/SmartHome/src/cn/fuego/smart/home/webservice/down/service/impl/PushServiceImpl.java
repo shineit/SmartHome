@@ -14,13 +14,14 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
-import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.fuego.smart.home.webservice.down.service.PushService;
 import cn.fuego.smart.home.webservice.down.service.PushToolFactory;
@@ -58,11 +59,12 @@ public class PushServiceImpl implements PushService
 					 {
 						 PushMessageJson json = new PushMessageJson();
 						 
-						 String title = "告警";
-						 String content = "火警123";
+						 String title = PushMessagTypeEnum.ALRAM_MSG.getStrValue();
+						 String content = AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
 					 
  						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
-		                 json.setObj(alarm.getId());
+						 json.setObj(alarm.getId());
+		 
  						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
 					 }
 					 else
@@ -79,6 +81,27 @@ public class PushServiceImpl implements PushService
 			 
 		 }
 		
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.down.service.PushService#pushNews(java.util.List)
+	 */
+	@Override
+	public void pushNews(List<News> newsList)
+	{
+		 
+		 for(News e : newsList)
+		 {
+ 			 
+			 PushMessageJson json = new PushMessageJson();
+			 
+			 String title = PushMessagTypeEnum.NEWS_MSG.getStrValue();
+			 String content = "";
+			 json.setObjType(PushMessagTypeEnum.NEWS_MSG.getIntValue());
+			 json.setObj(e.getNewsID());
+			 PushToolFactory.getInstance().getPushTool().pushAll(title, content, json);
+		 
+		 }
 	}
 
 }

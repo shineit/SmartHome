@@ -41,11 +41,6 @@ public class UserManageAction extends DWZTableAction<SystemUser>
        return this.filter.getConidtionList();	
     }
  
-	public String addUser()
-	{
-    	this.execute();
-		return "addUser";
-	}
 	public MispCommonService<SystemUser> getService()
 	{
 		return userService;

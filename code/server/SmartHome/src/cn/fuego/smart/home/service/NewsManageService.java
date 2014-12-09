@@ -27,9 +27,7 @@ public interface NewsManageService extends MispCommonService<News>
 {
 
  
-	void saveNewsInfo(News news);
-
-	void deleteNewsList(List<String> newsIDList);
+ 
 
 	List<News> getIndexNews(String userName);
 	

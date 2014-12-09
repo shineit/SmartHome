@@ -53,23 +53,9 @@ public class JPushToolImpl implements PushToolInterface
 		log.info("now push message by jpush,pushInfo is " + pushInfo);
 		String alias = pushInfo.getUserID();
  
-		int objType = msgObj.getObjType();
-		String obj = JsonConvert.ObjectToJson(msgObj.getObj());
+
 		 
-		PushPayload payLoad = PushPayload.newBuilder()
-				.setPlatform(Platform.android_ios())
-		        .setAudience(Audience.alias(alias))
-		        .setNotification(Notification.newBuilder()
-		        		.setAlert(content)
-		        		.addPlatformNotification(AndroidNotification.newBuilder()
-		        				.addExtra("obj", obj)
-		        				.addExtra("objType", objType).build())
-		        		.addPlatformNotification(IosNotification.newBuilder()
-		        				.incrBadge(1)
-		        				.addExtra("obj", obj)
-		        				.addExtra("objType", objType).build())
-		        		.build())
-		        .build();
+		PushPayload payLoad = buildForAlias(title, alias, msgObj);
 		
         JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
         try {
@@ -88,6 +74,71 @@ public class JPushToolImpl implements PushToolInterface
         }
 		
 	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.down.service.PushToolInterface#pushAll(java.lang.String, java.lang.String, cn.fuego.smart.home.webservice.down.model.PushMessageJson)
+	 */
+	@Override
+	public void pushAll(String title, String content, PushMessageJson msgObj)
+	{
+		log.info("now push message. the tile is " + title);
+ 
+		 
+		PushPayload payLoad = buildForAll(title,msgObj);
+		
+        JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
+        try {
+            PushResult result = jpushClient.sendPush(payLoad);
+            log.info("Got result - " + result);
+            
+        } catch (APIConnectionException e) {
+        	log.error("Connection error. Should retry later. ", e);
+            
+        } catch (APIRequestException e) {
+        	log.error("Error response from JPush server. Should review and fix it. ", e);
+        	log.info("HTTP Status: " + e.getStatus());
+        	log.info("Error Code: " + e.getErrorCode());
+        	log.info("Error Message: " + e.getErrorMessage());
+        	log.info("Msg ID: " + e.getMsgId());
+        }
+		
+		
+	}
+	private PushPayload buildForAll(String title,PushMessageJson msgObj)
+	{
+		int objType = msgObj.getObjType();
+		String obj = JsonConvert.ObjectToJson(msgObj.getObj());
+		PushPayload payLoad = PushPayload.newBuilder()
+				.setPlatform(Platform.android_ios())
+				.setAudience(Audience.all())
+		        .setNotification(Notification.newBuilder()
+		        		.setAlert(title)
+		        		.addPlatformNotification(AndroidNotification.newBuilder().setTitle(title).build())
+		        		.addPlatformNotification(IosNotification.newBuilder()
+		        				.incrBadge(1)
+		        				.addExtra("obj", obj)
+		        				.addExtra("objType", objType).build())
+		        		.build())
+		        .build();
+		return payLoad;
+	}
+	private PushPayload buildForAlias(String alias,String title,PushMessageJson msgObj)
+	{
+		int objType = msgObj.getObjType();
+		String obj = JsonConvert.ObjectToJson(msgObj.getObj());
+		PushPayload payLoad = PushPayload.newBuilder()
+				.setPlatform(Platform.android_ios())
+		        .setAudience(Audience.alias(alias))
+		        .setNotification(Notification.newBuilder()
+		        		.setAlert(title)
+		        		.addPlatformNotification(AndroidNotification.newBuilder().setTitle(title).build())
+		        		.addPlatformNotification(IosNotification.newBuilder()
+		        				.incrBadge(1)
+		        				.addExtra("obj", obj)
+		        				.addExtra("objType", objType).build())
+		        		.build())
+		        .build();
+		return payLoad;
+	}
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.down.service.PushToolInterface#pushMessage(cn.fuego.smart.home.service.cache.FuegoPushInfo, java.lang.Object)
@@ -98,5 +149,7 @@ public class JPushToolImpl implements PushToolInterface
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

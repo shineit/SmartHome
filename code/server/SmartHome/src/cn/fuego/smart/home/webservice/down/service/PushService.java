@@ -11,6 +11,7 @@ package cn.fuego.smart.home.webservice.down.service;
 import java.util.List;
 
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.News;
 
  /** 
  * @ClassName: AlarmPushService 
@@ -22,5 +23,6 @@ import cn.fuego.smart.home.domain.Alarm;
 public interface PushService
 {
 	void pushAlarm(List<Alarm> alarmList);
+	void pushNews(List<News> newsList);
 
 }

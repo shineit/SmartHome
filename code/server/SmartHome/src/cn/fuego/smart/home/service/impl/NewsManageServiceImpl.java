@@ -26,6 +26,8 @@ import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.NewsManageService;
 import cn.fuego.smart.home.web.model.NewsFilterModel;
+import cn.fuego.smart.home.webservice.down.service.PushToolFactory;
+import cn.fuego.smart.home.webservice.down.service.WebServiceContext;
 
  /** 
  * @ClassName: NewsManageServiceImpl 
@@ -37,21 +39,23 @@ import cn.fuego.smart.home.web.model.NewsFilterModel;
 public class NewsManageServiceImpl extends MispCommonServiceImpl<News> implements NewsManageService
 {
 
-	 
 
 	@Override
-	public void saveNewsInfo(News news)
+	public void validator(News obj)
 	{
-		news.setDate(DateUtil.getCurrentDateTime());
-		DaoContext.getInstance().getNewsDao().update(news);
-		
+		// TODO Auto-generated method stub
+		super.validator(obj);
 	}
 
 	@Override
-	public void deleteNewsList(List<String> newsIDList)
+	public void create(int userID, News obj)
 	{
-		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "newsID", newsIDList);	
-		DaoContext.getInstance().getNewsDao().delete(condition);
+		// TODO Auto-generated method stub
+		super.create(userID, obj);
+		List<News> objList = new ArrayList<News>();
+		objList.add(obj);
+		WebServiceContext.getInstance().getPushService().pushNews(objList);
+		
 		
 	}
 

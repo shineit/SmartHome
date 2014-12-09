@@ -61,7 +61,7 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	{
 		try
 		{
-			this.getService().create(this.getObj());
+			this.getService().create(this.getLoginUser().getUserID(),this.getObj());
 			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 			
 		} 
@@ -83,7 +83,7 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	{
 		try
         {
-			this.getService().delete(this.getSelectedID());
+			this.getService().delete(this.getLoginUser().getUserID(),this.getSelectedID());
         }
 		catch(MISPException e)
 		{
@@ -103,7 +103,7 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	{
 		try
         {
-			this.getService().delete(Arrays.asList(this.getSelectedIDList()));
+			this.getService().delete(this.getLoginUser().getUserID(),Arrays.asList(this.getSelectedIDList()));
         }
 		catch(MISPException e)
 		{
@@ -124,7 +124,7 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	{
 		try
         {
-			this.getService().modify(this.getObj());
+			this.getService().modify(this.getLoginUser().getUserID(),this.getObj());
 			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 
         }
