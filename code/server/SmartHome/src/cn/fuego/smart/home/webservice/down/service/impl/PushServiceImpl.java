@@ -20,6 +20,7 @@ import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
+import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.fuego.smart.home.webservice.down.service.PushService;
 import cn.fuego.smart.home.webservice.down.service.PushToolFactory;
@@ -58,11 +59,10 @@ public class PushServiceImpl implements PushService
 						 PushMessageJson json = new PushMessageJson();
 						 
 						 String title = "告警";
-						 String content = "火警";
+						 String content = "火警123";
 					 
  						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
-						 json.setObj(alarm.getId());
-		 
+		                 json.setObj(alarm.getId());
  						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
 					 }
 					 else

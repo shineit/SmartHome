@@ -58,4 +58,11 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		return Alarm.PRI_KEY;
 	}
 
+	@Override
+	public void clearAlarm(String id)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.Alarm;
@@ -23,6 +24,8 @@ import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.BatchSetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.BatchSetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDReq;
+import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -189,6 +192,35 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
+
+ 		
+		return rsp;
+	}
+
+	@Override
+	public ClearAlarmByIDRsp clearAlarm(ClearAlarmByIDReq req)
+	{
+		ClearAlarmByIDRsp rsp = new ClearAlarmByIDRsp();
+		
+		try
+		{
+		    Alarm alarm = ServiceContext.getInstance().getAlarmManageService().get(String.valueOf(req.getAlarmID()));
+		    alarm.setClearStatus(AlarmClearEnum.MANUAL_CLEAR.getIntValue());
+		    ServiceContext.getInstance().getAlarmManageService().modify(alarm);
+		    //AlarmJson json = ModelConvert.AlarmToJson(alarm);
+		    //rsp.setResult(result);
+		}
+		catch(MISPException e)
+		{
+			log.error("clear alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("clear alarm error",e);
 			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
