@@ -13,7 +13,7 @@ public class MemoryCache
 	
 	private static LoginInfo loginInfo = new LoginInfo();
 	
-	private static int flag=0;//ÅĞ¶Ï½øÈëÒ³Ãæ·½Ê½£¬0-±íÊ¾Ê×´Î½øÈë£¬1-ÆäËûÇĞ»»½øÈë
+	private static int flag=0;//åˆ¤æ–­è¿›å…¥é¡µé¢æ–¹å¼ï¼Œ0-è¡¨ç¤ºé¦–æ¬¡è¿›å…¥ï¼Œ1-å…¶ä»–åˆ‡æ¢è¿›å…¥
     public static Boolean isLogin()
     {
     	Boolean result= false;

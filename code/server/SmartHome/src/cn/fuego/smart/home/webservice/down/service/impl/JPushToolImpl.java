@@ -55,7 +55,7 @@ public class JPushToolImpl implements PushToolInterface
  
 
 		 
-		PushPayload payLoad = buildForAlias(title, alias, msgObj);
+		PushPayload payLoad = buildForAlias(alias, title, msgObj);
 		
         JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
         try {
