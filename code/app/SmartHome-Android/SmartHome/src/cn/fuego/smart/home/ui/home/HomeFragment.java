@@ -65,7 +65,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
     private List<Map<String, Object>> alarmItems = new ArrayList<Map<String, Object>>();
     private SimpleAdapter adapterAlarm ;
 
-    private int listID=0;// 用于判断当前listview
+    //private int listID=0;// 用于判断当前listview
 
 
 	@Override
@@ -112,7 +112,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 		int radioButtonId = group.getCheckedRadioButtonId();
 		if (radioButtonId == R.id.nav_alarm)
 		{   
-			listID=0;
+			//listID=0;
 			updateAlarms();
 			alarmViewList.setVisibility(View.VISIBLE);
 			newsViewList.setVisibility(View.INVISIBLE);
@@ -120,7 +120,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 		}
 		if (radioButtonId == R.id.nav_news)
 		{
-			listID=1;
+			//listID=1;
 			updateNews();
 			alarmViewList.setVisibility(View.INVISIBLE);
 			newsViewList.setVisibility(View.VISIBLE);
@@ -198,10 +198,10 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 
 
 	@Override
-	public void onItemClick(AdapterView<?>parent,View view, int position, long id)
+	public void onItemClick(AdapterView<?> parent,View view, int position, long id)
 	{
 		//Toast toast ;
-		if(listID==0)
+		if(parent==alarmViewList)
 		{ 
 			
 			HashMap<String, Object> selectAlarm = (HashMap<String, Object>) alarmItems.get(position); 
@@ -219,7 +219,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 
 			
 		}
-		if(listID==1)
+		if(parent==newsViewList)
 		{
 			HashMap<String, Object> selectNews = (HashMap<String, Object>) newsItems.get(position); 
 			if(selectNews!=null)

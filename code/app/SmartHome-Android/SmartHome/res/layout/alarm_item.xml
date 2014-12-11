@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/newslist"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="50dp"
     android:background="@color/white"
     android:orientation="horizontal" >
 
@@ -30,7 +30,8 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
         android:text="火警"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/alarm_view_objID"
@@ -80,7 +81,7 @@
             android:text="未处理"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/themecolor"
-            android:textSize="10sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/item_alarm_time"
@@ -91,7 +92,7 @@
             android:text="2014/3/2 12:30"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/black"
-            android:textSize="10sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -14,9 +14,8 @@ public class UserMarkJson
 {
     private int userID;
     private String mark;
- 
     
- 
+
  
 	public int getUserID()
 	{

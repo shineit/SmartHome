@@ -4,7 +4,19 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 
 public class ClearAlarmByIDReq extends BaseJsonReq
 {
+	private int userID;
 	private String alarmID;
+
+	
+	public int getUserID()
+	{
+		return userID;
+	}
+
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
+	}
 
 	public String getAlarmID()
 	{
@@ -19,7 +31,8 @@ public class ClearAlarmByIDReq extends BaseJsonReq
 	@Override
 	public String toString()
 	{
-		return "ClearAlarmByIDReq [alarmID=" + alarmID + ", token=" + token + "]";
+		return "ClearAlarmByIDReq [userID=" + userID + ", alarmID=" + alarmID
+				+ ", token=" + token + "]";
 	}
 	
 }

@@ -70,7 +70,11 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		int tag = (Integer) v.getTag();
 		switch(tag)
 		{
-		case 1: this.finish();
+		case 1: Intent intent = new Intent(AlarmManageActivity.this,MainTabbarActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+				MemoryCache.setFlag(0);
+				startActivity(intent);
+				this.finish();
 				break;
 		case 2: alarmRemove();
 		 		break;

@@ -10,8 +10,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import cn.fuego.smart.home.webservice.up.model.BatchSetSensorReq;
-import cn.fuego.smart.home.webservice.up.model.BatchSetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorReq;
+import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
@@ -58,11 +58,11 @@ public interface SensorManageRest
 	
 	@POST
 	@Path("/batch/enable")
-	public BatchSetSensorRsp enable(BatchSetSensorReq req);
+	public BatchOperateSensorRsp enable(BatchOperateSensorReq req);
 	
 	@POST
 	@Path("/batch/disable")
-	public BatchSetSensorRsp disable(BatchSetSensorReq req);
+	public BatchOperateSensorRsp disable(BatchOperateSensorReq req);
 	
 	@POST
 	@Path("/alarm")

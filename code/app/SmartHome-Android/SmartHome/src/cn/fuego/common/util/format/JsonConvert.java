@@ -8,6 +8,11 @@
 */ 
 package cn.fuego.common.util.format;
 
+import java.io.IOException;
+
+import org.apache.http.entity.StringEntity;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import cn.fuego.common.log.FuegoLog;
