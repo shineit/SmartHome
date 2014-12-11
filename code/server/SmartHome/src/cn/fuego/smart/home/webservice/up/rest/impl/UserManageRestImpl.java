@@ -13,7 +13,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.util.format.DateCreateUtil;
+import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
@@ -69,7 +69,7 @@ public class UserManageRestImpl implements UserManageRest
 		{
 			SystemUser user = MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
 
-			rsp.setToken(DateCreateUtil.getUUID());
+			rsp.setToken(DataCreateUtil.getUUID());
 		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
 		    
 		    AppLoginInfo deviceInfo = new AppLoginInfo();

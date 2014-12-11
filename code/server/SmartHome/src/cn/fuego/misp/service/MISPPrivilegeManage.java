@@ -32,8 +32,8 @@ public interface MISPPrivilegeManage
 	 * @return
 	 */
 	public Set<String> getMenuIDListByRole(String roleID);
- 	
 	
+ 
 	/**
 	 * 
 	 * @param userID

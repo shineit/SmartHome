@@ -17,7 +17,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
  * @date 2014-11-4 下午9:33:23 
  *  
  */
-public class BatchSetSensorRsp extends BaseJsonRsp
+public class BatchOperateSensorRsp extends BaseJsonRsp
 {
 
 }

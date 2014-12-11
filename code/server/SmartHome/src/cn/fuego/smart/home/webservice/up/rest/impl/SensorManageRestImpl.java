@@ -22,8 +22,8 @@ import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.SensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
-import cn.fuego.smart.home.webservice.up.model.BatchSetSensorReq;
-import cn.fuego.smart.home.webservice.up.model.BatchSetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorReq;
+import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
@@ -116,7 +116,7 @@ public class SensorManageRestImpl implements SensorManageRest
 	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req)
 	{
 		GetHistoryAlarmListRsp rsp = new GetHistoryAlarmListRsp();
-		List<Alarm> alarmList = ServiceContext.getInstance().getAlarmManageService().getDataSource().getAllPageData();
+		List<Alarm> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID());
 		for(Alarm alarm : alarmList)
 		{
 			AlarmJson alarmJson = ModelConvert.AlarmToJson(alarm);
@@ -129,9 +129,9 @@ public class SensorManageRestImpl implements SensorManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest#enable(cn.fuego.smart.home.webservice.from.client.model.BatchSetSensorReq)
 	 */
 	@Override
-	public BatchSetSensorRsp enable(BatchSetSensorReq req)
+	public BatchOperateSensorRsp enable(BatchOperateSensorReq req)
 	{
-		BatchSetSensorRsp rsp = new BatchSetSensorRsp();
+		BatchOperateSensorRsp rsp = new BatchOperateSensorRsp();
 		return rsp;
 	}
 
@@ -139,9 +139,25 @@ public class SensorManageRestImpl implements SensorManageRest
 	 * @see cn.fuego.smart.home.webservice.from.client.rest.SensorManageRest#disable(cn.fuego.smart.home.webservice.from.client.model.BatchSetSensorReq)
 	 */
 	@Override
-	public BatchSetSensorRsp disable(BatchSetSensorReq req)
+	public BatchOperateSensorRsp disable(BatchOperateSensorReq req)
 	{
-		BatchSetSensorRsp rsp = new BatchSetSensorRsp();
+		BatchOperateSensorRsp rsp = new BatchOperateSensorRsp();
+		try
+		{
+			this.sensorService.disable(req.getSensorList());
+ 
+		}
+		catch(MISPException e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
 		return rsp;
 	}
 
@@ -152,7 +168,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		
 		try
 		{
-			HomeSensor sensor = this.sensorService.get(String.valueOf(req.getSensorID()));
+			HomeSensor sensor = this.sensorService.get(req.getSensorID());
 		    HomeSensorJson json = ModelConvert.homeSensorToJson(sensor);
 		    rsp.setSensor(json);
 		}
@@ -207,11 +223,9 @@ public class SensorManageRestImpl implements SensorManageRest
 		
 		try
 		{
-		    Alarm alarm = ServiceContext.getInstance().getAlarmManageService().get(String.valueOf(req.getAlarmID()));
-		    alarm.setClearStatus(AlarmClearEnum.MANUAL_CLEAR.getIntValue());
-		    ServiceContext.getInstance().getAlarmManageService().modify(alarm);
-		    //AlarmJson json = ModelConvert.AlarmToJson(alarm);
-		    //rsp.setResult(result);
+ 
+		    ServiceContext.getInstance().getAlarmManageService().manualClear(req.getUserID(), Integer.valueOf(req.getAlarmID()));
+ 
 		}
 		catch(MISPException e)
 		{

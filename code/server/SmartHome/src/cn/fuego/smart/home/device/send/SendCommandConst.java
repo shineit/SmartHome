@@ -28,6 +28,9 @@ public class SendCommandConst
 	
 	public static final int MODE_CHANGE =  9; //模式转换 命令
 	
+	public static final int ENABLE_VALUE = 0x5a;
+	public static final int DISABLE_VALUE = 0x00;
+
 	
 
 

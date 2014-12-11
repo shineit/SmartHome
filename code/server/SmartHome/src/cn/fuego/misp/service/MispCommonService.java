@@ -40,6 +40,7 @@ public interface MispCommonService<E>
     void delete(int userID,List<String> idList);
     
     E get(String id);
+    E get(int id);
     List<E> get(List<String> idList);
     List get(Class clazz ,QueryCondition  condition);
 

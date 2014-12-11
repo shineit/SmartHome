@@ -29,6 +29,26 @@ public class DataTypeConvert
 	private static final FuegoLog log = FuegoLog.getLog(DataTypeConvert.class);
 
 	
+	public static List<String> intToStr(List<Integer> idList)
+	{
+		List<String> strList = new ArrayList<String>();
+		for(Integer e : idList)
+		{
+			strList.add(String.valueOf(e));
+		}
+		return strList;
+	}
+	
+	public static List<Integer> strToInt(List<String> idList)
+	{
+		List<Integer> strList = new ArrayList<Integer>();
+		for(String e : idList)
+		{
+			strList.add(Integer.valueOf(e));
+		}
+		return strList;
+	}
+	
 	public static String bytesToStr(byte[] bytes)
 	{
 		String isoString = null;

@@ -21,7 +21,8 @@ public class UserConcentrator implements PersistenceObject
 {
 	
 	public static String attr_concentratorID = "concentratorID";
-	
+	public static String attr_userID = "userID";
+
 	/**
 	 * 
 	 */

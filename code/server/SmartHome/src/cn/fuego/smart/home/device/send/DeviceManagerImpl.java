@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
 import cn.fuego.smart.home.device.communicator.Communicator;
@@ -119,7 +120,15 @@ public class DeviceManagerImpl implements DeviceManager
 		data += DataTypeConvert.intToByteStr(sensor.getSensorID(),4);
 		data += DataTypeConvert.intToByteStr(sensor.getChannelID(),1);
 
-		data +=  DataTypeConvert.intToByteStr(sensor.getStatus(),1);
+		if(sensor.getStatus() == SensorStatusEnum.ENABLE.getIntValue())
+		{
+			data +=  DataTypeConvert.intToByteStr(SendCommandConst.ENABLE_VALUE,1);
+		}
+		else
+		{
+			data +=  DataTypeConvert.intToByteStr(SendCommandConst.DISABLE_VALUE,1);
+		}
+
 		
 		data += DataTypeConvert.intToByteStr(sensor.getSensorType(),2);
 	 

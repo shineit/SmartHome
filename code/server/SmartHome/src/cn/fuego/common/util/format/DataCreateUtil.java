@@ -17,7 +17,7 @@ import java.util.UUID;
  * @date 2014-11-1 下午6:02:09 
  *  
  */
-public class DateCreateUtil
+public class DataCreateUtil
 {
 	public static String getUUID()
 	{

@@ -237,6 +237,13 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         return this.getDao().getUniRecord(condition);
 	}
 
+	 
+	public E get(int id)
+	{
+ 
+        QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, GetPrimaryName(), id);
+        return this.getDao().getUniRecord(condition);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -253,7 +260,17 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, GetPrimaryName(), idList);
         return this.getDao().getAll(condition);
 	}
-	
+	 
+	public List<E> getByID(List<Integer> idList)
+	{
+        if (ValidatorUtil.isEmpty(idList))
+        {
+            log.warn("the id is empty");
+            return null;
+        }
+        QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, GetPrimaryName(), idList);
+        return this.getDao().getAll(condition);
+	}
  
 	public  List<E> get(QueryCondition condition)
 	{

@@ -81,7 +81,7 @@ public class IndexAction extends DWZTableAction<Alarm>
 	@Override
 	public String deleteList()
 	{
-		alarmService.deleteAlarmList(Arrays.asList(this.getSelectedIDList()));
+		alarmService.delete(Arrays.asList(this.getSelectedIDList()));
 		return  MISP_DONE_PAGE;
 	}
 

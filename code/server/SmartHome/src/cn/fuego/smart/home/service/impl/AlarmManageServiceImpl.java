@@ -8,16 +8,17 @@
 */ 
 package cn.fuego.smart.home.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.common.contanst.ConditionTypeEnum;
-import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.dao.datasource.AbstractDataSource;
-import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
+import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
-import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.AlarmManageService;
+import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.down.service.WebServiceContext;
 
 /** 
@@ -31,13 +32,18 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 {
 
 	 
-
-	@Override
-	public void deleteAlarmList(List<String> alarmIDList)
+ 
+	public List<Alarm> getAlarmOfUser(int userID)
 	{
-		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, Alarm.PRI_KEY, alarmIDList);	
-		DaoContext.getInstance().getAlarmDao().delete(condition);
-		
+ 		List<Integer> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
+ 		List<HomeSensor> sensorList = ServiceContext.getInstance().getSensorManageService().get(DataTypeConvert.intToStr(concentorIDList));
+ 		List<String> sensorIDList = new ArrayList<String>();
+ 		for(HomeSensor e : sensorList)
+ 		{
+ 			sensorIDList.add(String.valueOf(e.getSensorID()));
+ 		}
+ 		return this.get(sensorIDList);
+ 		
 	}
 
 	@Override
@@ -57,12 +63,24 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		// TODO Auto-generated method stub
 		return Alarm.PRI_KEY;
 	}
-
 	@Override
-	public void clearAlarm(String id)
+	public void autoClear(int id)
 	{
-		// TODO Auto-generated method stub
+		Alarm alarm = this.get(String.valueOf(id));
+		alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
+		alarm.setClearUser(AlarmClearEnum.AUTO_CLEAR.getStrValue());
+		alarm.setClearTime(DateUtil.getCurrentDate());
+	}
+	
+	@Override
+	public void manualClear(int userID, int id)
+	{
+		Alarm alarm = this.get(String.valueOf(id));
+		alarm.setClearStatus(AlarmClearEnum.MANUAL_CLEAR.getIntValue());
+		alarm.setClearTime(DateUtil.getCurrentDate());
+		alarm.setClearUser(String.valueOf(userID));
 		
 	}
 
+ 
 }

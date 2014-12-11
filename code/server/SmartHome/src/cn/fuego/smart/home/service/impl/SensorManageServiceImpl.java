@@ -9,7 +9,9 @@
 package cn.fuego.smart.home.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,6 +20,7 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
+import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
@@ -128,6 +131,78 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		
 		
 		return super.getDao().getUniRecord(conditionList);
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.service.SensorManageService#disable(java.util.List)
+	 */
+	@Override
+	public void disable(List<String> idList)
+	{
+	
+		List<HomeSensor> sensorList = this.get(idList);
+		
+		Map<Integer,List<HomeSensor>> sensorMap = new HashMap<Integer,List<HomeSensor>>();
+		
+		for(HomeSensor sensor : sensorList)
+		{
+			sensor.setStatus(SensorStatusEnum.DISABLE.getIntValue());
+			List<HomeSensor> temp = sensorMap.get(sensor.getConcentratorID());
+			if(null == temp)
+			{
+				temp = new ArrayList<HomeSensor>();
+				temp.add(sensor);
+				sensorMap.put(sensor.getConcentratorID(), temp);
+			}
+			else
+			{
+				temp.add(sensor);
+			}
+		}
+		
+		for (Integer key : sensorMap.keySet())
+		{
+			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
+			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
+			 device.disableSensor(sensorMap.get(key));	
+		}
+ 
+		
+		
+
+		
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.service.SensorManageService#enable(java.util.List)
+	 */
+	@Override
+	public void enable(List<String> idList)
+	{
+		List<HomeSensor> sensorList = this.get(idList);
+		
+		Map<Integer,List<HomeSensor>> sensorMap = new HashMap<Integer,List<HomeSensor>>();
+		
+		for(HomeSensor sensor : sensorList)
+		{
+			sensor.setStatus(SensorStatusEnum.ENABLE.getIntValue());
+			List<HomeSensor> temp = sensorMap.get(sensor.getConcentratorID());
+			if(null == temp)
+			{
+				temp = new ArrayList<HomeSensor>();
+				temp.add(sensor);
+				sensorMap.put(sensor.getConcentratorID(), temp);
+			}
+			else
+			{
+				temp.add(sensor);
+			}
+		}
+		
+		for (Integer key : sensorMap.keySet())
+		{
+			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
+			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
+			 device.enableSensor(sensorMap.get(key));	
+		}
 	}
 
 

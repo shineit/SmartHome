@@ -19,7 +19,9 @@ import org.apache.commons.logging.LogFactory;
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
+import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.send.DeviceManagerImpl;
+import cn.fuego.smart.home.device.send.SendCommandConst;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.FireSensor;
@@ -217,7 +219,15 @@ public class ReceiveMessage
 		int index = DATA_START_INDEX;
 		sensor.setSensorID(getIntValue(index,index+3));
 		sensor.setChannelID(getIntValue(index+4,index+4));
-		sensor.setStatus(getIntValue(index+5,index+5));
+		
+		if(getIntValue(index+5,index+5) == SendCommandConst.ENABLE_VALUE)
+		{
+			sensor.setStatus(SensorStatusEnum.ENABLE.getIntValue());
+		}
+		else
+		{
+			sensor.setStatus(SensorStatusEnum.DISABLE.getIntValue());
+		}
 		sensor.setSensorType(getIntValue(index+6,index+7));
 		sensor.setWarnValue(getFloatValue(index+8,index+11));
 		sensor.setErrorValue(getFloatValue(index+12,index+15));

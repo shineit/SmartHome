@@ -20,19 +20,20 @@ import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
  * @date 2014-11-4 下午9:32:13 
  *  
  */
-public class BatchSetSensorReq extends BaseJsonReq
+public class BatchOperateSensorReq extends BaseJsonReq
 {
-	private List<HomeSensorJson> sensorList;
+	private List<String> sensorList;
 
-	public List<HomeSensorJson> getSensorList()
+	public List<String> getSensorList()
 	{
 		return sensorList;
 	}
 
-	public void setSensorList(List<HomeSensorJson> sensorList)
+	public void setSensorList(List<String> sensorList)
 	{
 		this.sensorList = sensorList;
 	}
-	
+
+ 
 
 }
