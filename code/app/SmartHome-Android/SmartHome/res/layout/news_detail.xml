@@ -76,6 +76,7 @@
             android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
+            android:gravity="center_vertical|top"
             android:textColor="@color/black" />
 
     </LinearLayout>

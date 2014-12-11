@@ -11,6 +11,7 @@ import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
+import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
@@ -100,8 +101,11 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 		{
 
 			Intent intent = new Intent(ModifyPwdActivity.this,LoginActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+			MemoryCache.setFlag(0);
 			startActivity(intent);
-			finish();
+			this.finish();
+			//ExitApplication.getInstance().exit(this);
 		}
 
 		showMessage(message);

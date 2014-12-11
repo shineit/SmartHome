@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backcolor"
-    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="告警信息"
+                android:text="云安"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
@@ -74,11 +75,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="事件编号"
+                        android:text="集 中  器"
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/alarm_manage_id"
+                        android:id="@+id/safe_concnet_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -104,7 +105,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/alarm_manage_objID"
+                        android:id="@+id/safe_sensor_objID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -130,13 +131,13 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/alarm_manage_objType"
+                        android:id="@+id/safe_sensor_objType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/TextView04"
-                        android:text="烟雾报警器"
+                        android:text="告警类"
                         android:textColor="@color/black" />
                 </RelativeLayout>
             </LinearLayout>
@@ -155,32 +156,29 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
+                    <EditText
+                        android:id="@+id/safe_desp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView01"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:height="20dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="15sp" />
+
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/TextView01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
+                        android:layout_centerVertical="true"
                         android:text="描   述:"
                         android:textColor="@color/black" />
-
-                    <EditText
-                        android:id="@+id/alarm_manage_desp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="33dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_toRightOf="@+id/textView3"
-                        android:background="@drawable/edittext_sel"
-                        android:ems="10"
-                        android:gravity="center_vertical|top"
-                        android:height="20dp"
-                        android:paddingLeft="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -189,17 +187,8 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
-                    <TextView
-                        android:id="@+id/TextView06"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:text="预警值:"
-                        android:textColor="@color/black" />
-
                     <EditText
-                        android:id="@+id/alarm_manage_warn"
+                        android:id="@+id/safe_warnValue"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
@@ -211,10 +200,16 @@
                         android:ems="10"
                         android:height="20dp"
                         android:paddingLeft="10dp"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:id="@+id/TextView06"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="预   警:"
+                        android:textColor="@color/black" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -223,17 +218,8 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
-                    <TextView
-                        android:id="@+id/TextView05"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:text="火警值:"
-                        android:textColor="@color/black" />
-
                     <EditText
-                        android:id="@+id/alarm_manage_error"
+                        android:id="@+id/safe_errorValue"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
@@ -243,18 +229,19 @@
                         android:layout_toRightOf="@+id/TextView05"
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
+                        android:height="20dp"
                         android:paddingLeft="10dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/TextView05"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="火   警:"
                         android:textColor="@color/black" />
-
                 </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="10dp" >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -262,29 +249,77 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
+                    <EditText
+                        android:id="@+id/safe_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView03"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:height="20dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="15sp" />
+
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/TextView03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="标   签:"
+                        android:textColor="@color/black" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <EditText
+                        android:id="@+id/safe_union"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
                         android:layout_alignParentTop="true"
-                        android:text="告警类型："
-                        android:textColor="@color/focuscolor" />
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/safe_add_btn"
+                        android:layout_toRightOf="@+id/textView3"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:height="20dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/alarm_manage_type"
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="联   防:"
+                        android:textColor="@color/black" />
+
+                    <Button
+                        android:id="@+id/safe_add_btn"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginLeft="22dp"
-                        android:layout_toRightOf="@+id/textView4"
-                        android:text="火警"
-                        android:textColor="@color/focuscolor" />
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/login_button"
+                        android:text="添 加"
+                        android:textColor="@color/white" />
+
                 </RelativeLayout>
             </LinearLayout>
 
             <Button
-                android:id="@+id/alarm_remove_btn"
+                android:id="@+id/safe_config_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -293,10 +328,10 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/nav"
                 android:focusableInTouchMode="true"
-                android:text="消除告警"
+                android:text="配    置"
                 android:textColor="@color/white" />
-
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

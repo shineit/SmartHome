@@ -21,12 +21,12 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="服务申请"
+                android:text="云控"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/apply_back"
+                android:id="@+id/control_manage_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -38,15 +38,13 @@
                 android:drawablePadding="5dp"
                 android:text="返回"
                 android:textColor="@color/white" />
-
         </RelativeLayout>
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:background="@null" >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,191 +54,158 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:paddingTop="10dp" >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/item_time"
+                        android:id="@+id/TextView02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:text="类型"
+                        android:text="集中器编号"
                         android:textColor="@color/black" />
 
-                    <RadioGroup
-                        android:id="@+id/apply_type_group"
+                    <TextView
+                        android:id="@+id/concnet_id"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_toRightOf="@+id/item_time"
-                        android:orientation="horizontal" >
-
-                        <RadioButton
-                            android:id="@+id/apply_repair"
-                            android:layout_width="86dp"
-                            android:layout_height="32dp"
-                            android:checked="true"
-                            android:text="维修"
-                            android:textColor="@color/black" />
-
-                        <RadioButton
-                            android:id="@+id/apply_consult"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:text="咨询"
-                            android:textColor="@color/black" />
-                    </RadioGroup>
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/TextView02"
+                        android:text="1234"
+                        android:textColor="@color/black" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" >
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/service_title"
+                        android:id="@+id/alarm_view_objID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:text="名称"
+                        android:text="设备编号"
                         android:textColor="@color/black" />
 
-                    <EditText
-                        android:id="@+id/apply_name"
+                    <TextView
+                        android:id="@+id/control_objID"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_toRightOf="@+id/service_title"
-                        android:background="@drawable/edittext_sel"
-                        android:ems="10"
-                        android:height="20dp"
-                        android:paddingLeft="10dp"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" >
-
-                        <requestFocus />
-                    </EditText>
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/alarm_view_objID"
+                        android:text="1234"
+                        android:textColor="@color/black" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" >
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/item_status"
+                        android:id="@+id/TextView04"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:text="内容"
+                        android:text="设备类型"
                         android:textColor="@color/black" />
 
-                    <EditText
-                        android:id="@+id/apply_content"
+                    <TextView
+                        android:id="@+id/alarm_manage_objType"
                         android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_toRightOf="@+id/item_status"
-                        android:background="@drawable/edittext_sel"
-                        android:ems="10"
-                        android:gravity="center_vertical|top"
-                        android:paddingLeft="10dp"
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/TextView04"
+                        android:text="控制类"
                         android:textColor="@color/black" />
-
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:paddingBottom="20dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp" >
+                android:padding="10dp" >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" >
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/TextView11"
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:text="联  系  人"
+                        android:text="描   述:"
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/contact_person"
+                        android:id="@+id/alarm_manage_desp"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:layout_toRightOf="@+id/TextView11"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/textView3"
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:height="20dp"
                         android:paddingLeft="10dp"
-                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" >
+                        android:textSize="15sp" />
 
-                        <requestFocus />
-                    </EditText>
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" >
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/TextView10"
+                        android:id="@+id/TextView06"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:text="联系电话"
+                        android:text="标   签:"
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/contact_phone"
+                        android:id="@+id/control_label"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:layout_toRightOf="@+id/TextView10"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView06"
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:height="20dp"
@@ -254,26 +219,27 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" >
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/TextView09"
+                        android:id="@+id/TextView05"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:text="联系地址"
+                        android:text="区   号:"
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/contact_addr"
+                        android:id="@+id/alarm_manage_error"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:layout_toRightOf="@+id/TextView09"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView05"
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:height="20dp"
@@ -285,39 +251,18 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/backcolor"
-                android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" >
-
-                <Button
-                    android:id="@+id/apply_cancel_btn"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/un_focuse_btn"
-                    android:enabled="true"
-                    android:focusableInTouchMode="true"
-                    android:text="取    消"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/apply_sure_btn"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/login_button"
-                    android:enabled="true"
-                    android:focusableInTouchMode="true"
-                    android:text="提    交"
-                    android:textColor="@color/white" />
-
-            </RelativeLayout>
+            <Button
+                android:id="@+id/control_config_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/nav"
+                android:focusableInTouchMode="true"
+                android:text="配    置"
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </ScrollView>

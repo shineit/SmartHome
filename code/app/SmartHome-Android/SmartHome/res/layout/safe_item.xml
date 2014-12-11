@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/white" >
+
+    <CheckBox
+        android:id="@+id/safe_item_chk"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="26dp"
+        android:background="@drawable/checkbox"
+        android:button="@null"
+        android:checked="true"
+        android:focusable="false"
+        android:gravity="center_vertical" />
+
+    <ImageView
+        android:id="@+id/safe_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/smoke" />
+
+    <TextView
+        android:id="@+id/safe_item_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="28dp"
+        android:layout_toRightOf="@+id/safe_item_icon"
+        android:text="烟雾报警器1"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

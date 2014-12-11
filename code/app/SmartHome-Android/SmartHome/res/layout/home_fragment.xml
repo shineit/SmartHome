@@ -62,7 +62,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="报警信息"
+                android:text="告警信息"
                 android:textColor="@drawable/nav_text_color" />
 
         </RadioGroup>

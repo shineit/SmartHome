@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.fuego.smart.home"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.1" >
+
     <permission
         android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
@@ -30,7 +31,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="10"
         android:targetSdkVersion="18" />
 
     <application
@@ -88,8 +89,8 @@
         </activity>
         <activity
             android:name=".ui.home.NewsViewActivity"
-            android:label="@string/title_activity_news_view" 
-            android:launchMode="singleTask">
+            android:label="@string/title_activity_news_view"
+            android:launchMode="singleTask" >
         </activity>
         <!-- Required SDK核心功能 -->
         <activity
@@ -129,7 +130,7 @@
             android:enabled="true" >
             <intent-filter android:priority="1000" >
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
- <!-- Required  显示通知栏 -->
+                <!-- Required  显示通知栏 -->
                 <category android:name="cn.fuego.smart.home" />
             </intent-filter>
             <intent-filter>
@@ -140,6 +141,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -153,18 +155,18 @@
             android:enabled="true" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
- <!-- Required  用户注册SDK的intent -->
+                <!-- Required  用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
- <!-- Required  用户接收SDK消息的intent -->
+                <!-- Required  用户接收SDK消息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
- <!-- Required  用户接收SDK通知栏信息的intent -->
+                <!-- Required  用户接收SDK通知栏信息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
- <!-- Required  用户打开自定义通知栏的intent -->
+                <!-- Required  用户打开自定义通知栏的intent -->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
- <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
- <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <category android:name="cn.fuego.smart.home" />
             </intent-filter>
         </receiver>
@@ -176,8 +178,19 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="97c0f1c1744eacef02d529c1" />
- <!-- </>值来自开发者平台取得的AppKey -->
-
+        <!-- </>值来自开发者平台取得的AppKey -->
+        <activity
+            android:name=".ui.control.SpinnerBaseActivity"
+            android:label="@string/title_activity_spinner_base" >
+        </activity>
+        <activity
+            android:name=".ui.control.ControlConfigActivity"
+            android:label="@string/title_activity_control_config" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.safe.SafeConfigActivity"
+            android:label="@string/title_activity_safe_config" >
+        </activity>
     </application>
 
 </manifest>

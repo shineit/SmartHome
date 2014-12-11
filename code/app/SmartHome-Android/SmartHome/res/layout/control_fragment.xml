@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llView1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backcolor"
@@ -26,28 +27,104 @@
                 android:textColor="@color/white"
                 android:textSize="20dp" />
         </RelativeLayout>
-
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:layout_height="fill_parent" >
 
-        <Button
-            android:id="@+id/person_info_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/door"
-            android:drawablePadding="20dp"
-            android:drawableRight="@drawable/down"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="门控制器" />
-    </LinearLayout>
+            android:paddingTop="30dp" >
+
+            <CheckBox
+                android:id="@+id/control_door_btn"
+                style="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableLeft="@drawable/door"
+                android:drawablePadding="20dp"
+                android:drawableRight="@drawable/dropdown_sel"
+                android:padding="10dp"
+                android:text="门控制器"
+                android:textColor="@color/black" />
+
+            <ListView
+                android:id="@+id/doorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:divider="@color/backcolor"
+                android:dividerHeight="1dp"
+                android:paddingLeft="40dp"
+                android:visibility="gone" >
+            </ListView>
+
+            <CheckBox
+                android:id="@+id/control_curtain_btn"
+                style="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableLeft="@drawable/curtain"
+                android:drawablePadding="20dp"
+                android:drawableRight="@drawable/dropdown_sel"
+                android:padding="10dp"
+                android:text="窗帘控制器"
+                android:textColor="@color/black" />
+
+            <ListView
+                android:id="@+id/curtainList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:divider="@color/backcolor"
+                android:dividerHeight="1dp"
+                android:paddingLeft="40dp"
+                android:visibility="gone" >
+            </ListView>
+
+            <CheckBox
+                android:id="@+id/control_fire_btn"
+                style="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableLeft="@drawable/fire"
+                android:drawablePadding="20dp"
+                android:drawableRight="@drawable/dropdown_sel"
+                android:padding="10dp"
+                android:text="灭火控制器"
+                android:textColor="@color/black" />
+
+            <ListView
+                android:id="@+id/fireList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:divider="@color/backcolor"
+                android:dividerHeight="1dp"
+                android:paddingLeft="40dp"
+                android:visibility="gone" >
+            </ListView>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

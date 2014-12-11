@@ -39,5 +39,8 @@
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
     <string name="title_activity_news_view">NewsViewActivity</string>
+    <string name="title_activity_spinner_base">SpinnerBaseActivity</string>
+    <string name="title_activity_control_config">ControlConfigActivity</string>
+    <string name="title_activity_safe_config">SafeConfigActivity</string>
 
 </resources>

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -41,7 +40,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
     private GetDetail getDetail = new GetDetail();
-	private ProgressDialog proDialog;
+	//private ProgressDialog proDialog;
 
     //private AlarmViewModel alarmModel= new AlarmViewModel();
     private NewsViewModel newsModel = new NewsViewModel();
