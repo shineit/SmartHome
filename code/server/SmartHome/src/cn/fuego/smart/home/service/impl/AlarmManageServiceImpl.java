@@ -11,10 +11,15 @@ package cn.fuego.smart.home.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
+import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.AlarmManageService;
@@ -37,12 +42,30 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 	{
  		List<Integer> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
  		List<HomeSensor> sensorList = ServiceContext.getInstance().getSensorManageService().get(DataTypeConvert.intToStr(concentorIDList));
- 		List<String> sensorIDList = new ArrayList<String>();
+ 		List<Integer> sensorIDList = new ArrayList<Integer>();
  		for(HomeSensor e : sensorList)
  		{
- 			sensorIDList.add(String.valueOf(e.getSensorID()));
+ 			sensorIDList.add(e.getId());
  		}
- 		return this.get(sensorIDList);
+ 		List<Alarm> alarmList = new ArrayList<Alarm>();
+ 		if(!ValidatorUtil.isEmpty(sensorList))
+ 		{
+ 			List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objType",AlarmObjTypeEnmu.HOME_SENSOR.getIntValue()));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN,"objID",sensorIDList));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+ 	 		alarmList = this.getDao().getAll(condtionList);
+ 		}
+ 		if(!ValidatorUtil.isEmpty(concentorIDList))
+ 		{
+ 			List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objType",AlarmObjTypeEnmu.CONCENTRATOR_ALARM.getIntValue()));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN,"objID",concentorIDList));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+ 			alarmList.addAll(this.getDao().getAll(condtionList));
+ 		}
+ 		
+ 		return alarmList;
  		
 	}
 
@@ -70,6 +93,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
 		alarm.setClearUser(AlarmClearEnum.AUTO_CLEAR.getStrValue());
 		alarm.setClearTime(DateUtil.getCurrentDate());
+		this.modify(alarm);
 	}
 	
 	@Override
@@ -79,6 +103,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		alarm.setClearStatus(AlarmClearEnum.MANUAL_CLEAR.getIntValue());
 		alarm.setClearTime(DateUtil.getCurrentDate());
 		alarm.setClearUser(String.valueOf(userID));
+		this.modify(alarm);
 		
 	}
 

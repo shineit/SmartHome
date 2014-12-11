@@ -191,7 +191,7 @@ public final class HibernateUtil
 					break;	
 				case IN:
 					List<Object> listObject = new ArrayList<Object>();
-					for(String e : condition.getListValue())
+					for(Object e : condition.getListValue())
 					{
 						listObject.add(ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), e));
 					}

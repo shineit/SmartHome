@@ -42,4 +42,19 @@ public class JsonConvert
 		}
 		return json;
 	}
+	
+	public static Object jsonToObject(String json,Class clazz)
+	{
+		ObjectMapper mapper = new ObjectMapper();
+		 
+		Object	rspObj = null;
+		try
+		{
+			rspObj = mapper.readValue(json,clazz);
+		} catch (Exception e)
+		{
+			log.error("json to object failed",e);
+		}
+		return rspObj;
+	}
 }

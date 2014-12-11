@@ -52,6 +52,18 @@ public enum AlarmTypeEnum
 		}
 		return null;
 	}	
+	public static AlarmTypeEnum getEnumByStr(String strValue)
+	{
+		for (AlarmTypeEnum c : AlarmTypeEnum.values())
+		{
+			if (strValue.equals(c.strValue) )
+			{
+				return c;
+			}
+		}
+		return null;
+	} 
+
 		
 	
 
