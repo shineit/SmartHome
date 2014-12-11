@@ -32,8 +32,9 @@
     
     self.backgroundView = [UIView new];
     self.backgroundView.backgroundColor = [UIColor whiteColor];
-    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     _numberLabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 20, 80, 20)];
+    _numberLabel.font = [UIFont appFontWithSize:12];
     _numberLabel.textAlignment = NSTextAlignmentCenter;
 //    _numberLabel.text = @"001";
     [self.contentView addSubview:_numberLabel];
@@ -43,8 +44,8 @@
 //    _typeLabel.text = @"安装服务";
     [self.contentView addSubview:_typeLabel];
     
-    _statusLabel = [[FELabel alloc] initWithFrame:CGRectMake(225, 20, 90, 20)];
-    _statusLabel.textAlignment = NSTextAlignmentCenter;
+    _statusLabel = [[FELabel alloc] initWithFrame:CGRectMake(self.bounds.size.width - (90 + 10), 20, 90, 20)];
+    _statusLabel.textAlignment = NSTextAlignmentRight;
     _statusLabel.textColor = [UIColor orangeColor];
 //    _statusLabel.text = @"待处理";
     [self.contentView addSubview:_statusLabel];
@@ -54,7 +55,7 @@
 -(void)configWithOrder:(FEOrder *)order{
     self.numberLabel.text = order.orderID;
     _statusLabel.text = order.orderStatus.boolValue?FEString(@"ORDER_DEAL"):FEString(@"ORDER_WAIT");
-    _typeLabel.text = _typeArray[order.orderType.integerValue];
+    _typeLabel.text = order.orderName; // _typeArray[order.orderType.integerValue];
 }
 
 - (void)awakeFromNib

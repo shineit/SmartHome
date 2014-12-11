@@ -96,7 +96,7 @@
         cell = [[FETreeViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([FETreeViewCell class])];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell configurelevel:level withTitle:((FEControlObject *)item).name];
+    [cell configurelevel:level withControlObj:item];
     return cell;
     
     return cell;
@@ -143,17 +143,20 @@
     
     FEControlObject *doorcontrol = [FEControlObject dataObjectWithName:@"门控制器"
                                                   children:[NSArray arrayWithObjects:control1, control2, nil]];
+    doorcontrol.imageName = @"doorControl";
     
     FEControlObject *notebook1 = [FEControlObject dataObjectWithName:@"窗帘控制器1" children:nil];
     FEControlObject *notebook2 = [FEControlObject dataObjectWithName:@"窗帘控制器2" children:nil];
     
     FEControlObject *computer1 = [FEControlObject dataObjectWithName:@"窗帘控制器"
                                                       children:[NSArray arrayWithObjects:notebook1, notebook2, nil]];
+    computer1.imageName = @"windowControl";
     FEControlObject *computer2 = [FEControlObject dataObjectWithName:@"灭火控制器1" children:nil];
     FEControlObject *computer3 = [FEControlObject dataObjectWithName:@"灭火控制器2" children:nil];
     
     FEControlObject *computer = [FEControlObject dataObjectWithName:@"灭火控制器"
                                                      children:[NSArray arrayWithObjects:computer2, computer3, nil]];
+    computer.imageName = @"fireControl";
     
     self.data = [NSArray arrayWithObjects:doorcontrol, computer1,computer, nil];
     

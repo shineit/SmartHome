@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class FEControlObject;
 
 @interface FETreeViewCell : UITableViewCell
 
--(void)configurelevel:(NSInteger)level withTitle:(NSString *)title;
+-(void)configurelevel:(NSInteger)level withControlObj:(FEControlObject *)obj;
 
 @end

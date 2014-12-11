@@ -8,6 +8,7 @@
 
 #import "FECloudSafeTableCell.h"
 #import "FESensor.h"
+#import "AppDelegate.h"
 
 @interface FECloudSafeTableCell (){
     
@@ -30,7 +31,14 @@
 
 -(void)setup{
     _deviceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
+    [_deviceSwitch addTarget:self action:@selector(switchDidChange:) forControlEvents:UIControlEventValueChanged];
     self.accessoryView = _deviceSwitch;
+}
+
+-(void)switchDidChange:(UISwitch *)sw{
+    if ([self.delegate respondsToSelector:@selector(switchStatusDidChange:switcher:)]) {
+        [self.delegate switchStatusDidChange:self switcher:sw];
+    }
 }
 
 - (void)awakeFromNib
@@ -44,8 +52,10 @@
 
 
 -(void)configWithSensor:(FESensor *)sensor{
+    _sensor = sensor;
     self.textLabel.text = sensor.sensorTypeName;
     self.deviceOpen = sensor.status.boolValue;
+    self.imageView.image = [UIImage imageNamed:@"sensorSmoke"];
 }
 
 -(BOOL)isDeviceOpen{

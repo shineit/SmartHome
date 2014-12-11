@@ -72,7 +72,7 @@
     HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[FEString(@"HOME_NEWS"), FEString(@"HOME_WARRING")]];
 //    segmentedControl.sectionSelectedImages = @[[[UIImage imageFromColor:[UIColor whiteColor]] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 2, 44)],[[UIImage imageFromColor:[UIColor whiteColor]] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 2, 44)]];
     segmentedControl.selectedTextColor = [UIColor orangeColor];
-    segmentedControl.backgroundColor = FEColor(229, 229, 229, 1);//[UIColor lightGrayColor];
+    segmentedControl.backgroundColor = [UIColor whiteColor];//FEColor(229, 229, 229, 1);//[UIColor lightGrayColor];
     segmentedControl.selectionIndicatorColor = [UIColor orangeColor];
     segmentedControl.frame = CGRectMake(0, 0, 320, 44);
     segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
