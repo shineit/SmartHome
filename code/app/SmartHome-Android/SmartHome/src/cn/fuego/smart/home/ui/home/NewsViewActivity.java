@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.MainTabbarActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
@@ -51,7 +53,13 @@ public class NewsViewActivity extends BaseActivtiy implements View.OnClickListen
 		int tag = (Integer) v.getTag();
 		switch(tag)
 		{
-		case 1: this.finish();
+		case 1: 
+			Intent intent = new Intent(NewsViewActivity.this,MainTabbarActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+			MemoryCache.setFlag(2);
+			startActivity(intent);
+
+			this.finish();
 				break;
 
 		default:break;

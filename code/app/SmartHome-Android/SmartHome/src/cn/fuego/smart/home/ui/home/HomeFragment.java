@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -23,11 +24,10 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
-import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseFragment;
-import cn.fuego.smart.home.ui.model.AlarmViewModel;
+import cn.fuego.smart.home.ui.base.GetDetail;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
@@ -40,9 +40,10 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 public class HomeFragment extends BaseFragment implements OnCheckedChangeListener,OnItemClickListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
+    private GetDetail getDetail = new GetDetail();
+	private ProgressDialog proDialog;
 
-	
-    private AlarmViewModel alarmModel= new AlarmViewModel();
+    //private AlarmViewModel alarmModel= new AlarmViewModel();
     private NewsViewModel newsModel = new NewsViewModel();
 	private static final int[] alarmViewAttrs = new int[]
 	{ R.id.item_alarm_icon, R.id.item_alarm_title,
@@ -83,16 +84,23 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	    alarmViewList.setOnItemClickListener(this);
 	    newsViewList.setAdapter(adapterNews);
 	    newsViewList.setOnItemClickListener(this);
+	    // 切换radiobutton监听
+		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.nav_group);
+		group.setOnCheckedChangeListener(this);
 	    //默认初始界面为告警信息
         if(MemoryCache.getFlag()==0)
         {
         	updateAlarms();
         	MemoryCache.setFlag(1);
         }
+        //首页优先显示新闻公告
+        if(MemoryCache.getFlag()==2)
+        {
+        	MemoryCache.setFlag(1);
+        	group.check(R.id.nav_news);
+        }
         
-	    // 切换radiobutton监听
-		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.nav_group);
-		group.setOnCheckedChangeListener(this);
+
 		return rootView;
 	}
 
@@ -126,6 +134,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	{
 		GetHistoryAlarmListReq req = new GetHistoryAlarmListReq();
 		req.setUserID(1);
+
 		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage msg) {
@@ -142,23 +151,27 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 						listItem.put(alarmItemAttrs[2], null);
 						listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
 						listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
-						listItem.put(alarmItemAttrs[5], json.getId());//告警信息ID，用于索引，在页面不显示
+						//告警信息ID，用于索引，在页面不显示
+						listItem.put(alarmItemAttrs[5], json.getId());
 						listItem.put(alarmItemAttrs[6], json.getObjID());
-						listItem.put(alarmItemAttrs[7], AlarmObjTypeEnmu.getEnumByInt(json.getObjType()).getStrValue());
-						listItem.put(alarmItemAttrs[8], json.getDataValue());
+						//listItem.put(alarmItemAttrs[7], SensorKindEunm.getEnumByInt(json.getObjType()).getStrValue());
+						//listItem.put(alarmItemAttrs[8], json.getDataValue());
 						alarmItems.add(listItem);
 				 }
 				//alarmViewList.setAdapter(adapterAlarm);
 				 
 				adapterAlarm.notifyDataSetChanged();
+
 			}
 		}).getAlarmList(req);
+		
 	}
  
 	private void updateNews()
 	{
 		GetNewsListReq req = new GetNewsListReq();
 		req.setToken(MemoryCache.getToken());
+
 		WebServiceContext.getInstance().getNewsManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage msg) {
@@ -177,8 +190,10 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 					
 				}
 				adapterNews.notifyDataSetChanged();
+
 			}
 		}).getNewsList(req);
+		
 	}
 
 
@@ -193,17 +208,13 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 			HashMap<String, Object> selectAlarm = (HashMap<String, Object>) alarmItems.get(position); 
 			if(selectAlarm!=null)
 			{
-				Intent intent = new Intent(this.getActivity(),AlarmManageActivity.class);
-				//int selected_alarm_id=(Integer) selectAlarm.get(alarmItemAttrs[5]);
-				//int selected_obj_id =(Integer) selectAlarm.get(alarmItemAttrs[6]);
-				intent.putExtra(alarmModel.getTitle(),selectAlarm.get(alarmItemAttrs[1]).toString());
-				intent.putExtra(alarmModel.getEventID(),selectAlarm.get(alarmItemAttrs[5]).toString());
-				//intent.putExtra(alarmModel.getObjID(), selected_alarm_id);
-				intent.putExtra(alarmModel.getObjID(), selectAlarm.get(alarmItemAttrs[6]).toString());
-				intent.putExtra(alarmModel.getObj(),selectAlarm.get(alarmItemAttrs[7]).toString());
+			    AlarmJson alarm = new AlarmJson();//传递需要以下三个参数
+			    alarm.setId(Integer.valueOf(selectAlarm.get(alarmItemAttrs[5]).toString()));//告警事件ID
+			    alarm.setAlarmType(AlarmTypeEnum.getEnumByStr(selectAlarm.get(alarmItemAttrs[1]).toString()).getIntValue());//告警类型
+			    alarm.setObjID(Integer.valueOf(selectAlarm.get(alarmItemAttrs[6]).toString()));//传感器ID
 
-				//Toast.makeText(this.getActivity(), selectAlarm.get(keyString[5]).toString(), Toast.LENGTH_SHORT).show();
-				this.startActivity(intent); 
+			    getDetail.showHomeSensor(this.getActivity(), alarm);
+
 			}
 			
 

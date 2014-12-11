@@ -6,9 +6,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class ExitApplication  extends Application
 {

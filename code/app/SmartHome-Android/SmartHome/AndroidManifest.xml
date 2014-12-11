@@ -86,6 +86,11 @@
             android:label="@string/title_activity_alarm_manage"
             android:launchMode="singleTask" >
         </activity>
+        <activity
+            android:name=".ui.home.NewsViewActivity"
+            android:label="@string/title_activity_news_view" 
+            android:launchMode="singleTask">
+        </activity>
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
@@ -172,10 +177,7 @@
             android:name="JPUSH_APPKEY"
             android:value="97c0f1c1744eacef02d529c1" />
  <!-- </>值来自开发者平台取得的AppKey -->
-        <activity
-            android:name="cn.fuego.smart.home.ui.home.NewsViewActivity"
-            android:label="@string/title_activity_news_view" >
-        </activity>
+
     </application>
 
 </manifest>
