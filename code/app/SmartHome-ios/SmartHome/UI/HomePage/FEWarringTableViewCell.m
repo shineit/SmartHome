@@ -37,7 +37,7 @@
 
 -(void)setup{
     _typeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 13, 20, 20)];
-    _typeImageView.image = [UIImage imageFromColor:[UIColor redColor]];
+//    _typeImageView.image = [UIImage imageFromColor:[UIColor redColor]];
     [self.contentView addSubview:_typeImageView];
     
     _typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 13, 70, 20)];
@@ -52,6 +52,8 @@
     
     _statLabel = [[UILabel alloc] initWithFrame:CGRectMake(230, 5, 80, 20)];
     _statLabel.backgroundColor = [UIColor clearColor];
+    _statLabel.font = [UIFont appFontWithSize:14];
+    _statLabel.textColor = FEThemeColor;
     _statLabel.textAlignment = NSTextAlignmentRight;
     _statLabel.text = @"未处理";
     [self.contentView addSubview:_statLabel];
@@ -66,6 +68,7 @@
 }
 
 -(void)configWithAlarm:(FEAlarm *)alarm{
+    _typeImageView.image = [UIImage imageNamed:@"warringType"];
     _typeLabel.text = [FEEnumString alarmType:alarm.alarmType];
     _deviceLabel.text = [FEEnumString deviceType:alarm.objType];
     _statLabel.text = [FEEnumString alarmHandledType:alarm.clearStatus];

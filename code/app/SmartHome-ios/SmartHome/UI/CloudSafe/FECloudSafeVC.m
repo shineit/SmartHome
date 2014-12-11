@@ -21,7 +21,7 @@
 #import "FESensor.h"
 #import "CDUser.h"
 
-@interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource,FEControlViewDelegate>
+@interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource,FEControlViewDelegate,FECloudSafeTableCellDelegate>
 
 @property (nonatomic, strong) UITableView *deviceTable;
 @property (nonatomic, strong) NSMutableArray *deviceList;
@@ -60,8 +60,8 @@
 
 -(void)initUI{
 //    [self loadRightCustomButtonItemWithTitle:FEString(@"SEARCH") image:nil];
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    [self.view addSubview:_searchBar];
+//    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+//    [self.view addSubview:_searchBar];
     
     
     FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y + _searchBar.bounds.size.height, self.view.frame.size.width, 40)];
@@ -104,6 +104,7 @@
     FECloudSafeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[FECloudSafeTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.delegate = self;
         
     }
     
@@ -142,6 +143,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - FECloudSafeTableCellDelegate
+-(void)switchStatusDidChange:(FECloudSafeTableCell *)cell switcher:(UISwitch *)sw1{
+    [self changeSensorStatus:cell.sensor enable:sw1.on];
+}
+
 #pragma mark - FEContrilViewDelegate
 -(void)controlViewDidSelectAllOpen:(FEControlView *)cview{
     [self displayHUD:FEString(@"LOADING...")];
@@ -165,6 +171,29 @@
             NSLog(@"ALL close!");
         }
     }];
+}
+
+-(void)changeSensorStatus:(FESensor *)sensor enable:(BOOL)enable{
+    [self displayHUD:FEString(@"LOADING...")];
+    if (enable) {
+        FESensorBatchEnableRequest *edata = [[FESensorBatchEnableRequest alloc] initWithSensorList:@[sensor]];
+        __weak typeof(self) weakself = self;
+        [[FEWebServiceManager sharedInstance] SensorBatchEnable:edata response:^(NSError *error, FEBaseResponse *response) {
+            [weakself hideHUD:YES];
+            if (!error && !response.result.errorCode.integerValue == 0) {
+                NSLog(@"opened!");
+            }
+        }];
+    }else{
+        FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:@[sensor]];
+        __weak typeof(self) weakself = self;
+        [[FEWebServiceManager sharedInstance] SensorBatchDisable:sdata response:^(NSError *error, FEBaseResponse *response) {
+            [weakself hideHUD:YES];
+            if (!error && response.result.errorCode.integerValue == 0) {
+                NSLog(@"close!");
+            }
+        }];
+    }
 }
 
 

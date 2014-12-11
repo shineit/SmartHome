@@ -7,6 +7,7 @@
 //
 
 #import "FETreeViewCell.h"
+#import "FEControlObject.h"
 
 
 @interface FETreeViewCell ()
@@ -34,7 +35,7 @@
     self.titleLabel = title;
     [self.contentView addSubview:title];
     
-    _indicatorView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+    _indicatorView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 8)];
     _indicatorView.image = [UIImage imageFromColor:[UIColor redColor]];
     _indicatorView.hidden = YES;
     self.accessoryView = _indicatorView;
@@ -43,12 +44,14 @@
 //    self.indentationLevel
 }
 
--(void)configurelevel:(NSInteger)level withTitle:(NSString *)title{
+-(void)configurelevel:(NSInteger)level withControlObj:(FEControlObject *)obj{
     
-    self.titleLabel.text = title;
+    self.titleLabel.text = obj.name;
     
     if (level == 0) {
+        self.imageView.image = [UIImage imageNamed:obj.imageName];
         self.indicatorView.hidden = NO;
+        self.indicatorView.image = [UIImage imageNamed:@"controlIndicator"];
         self.backgroundColor = FEColor(229, 229, 229, 1);//[UIColor whiteColor];
     } else if (level == 1) {
         self.indicatorView.hidden = YES;
@@ -58,7 +61,7 @@
         self.backgroundColor = [UIColor brownColor];
     }
     
-    CGFloat left = 11 + 20 * level;
+    CGFloat left = 45 + 20 * level;
     
     CGRect titleFrame = self.titleLabel.frame;
     titleFrame.origin.x = left;

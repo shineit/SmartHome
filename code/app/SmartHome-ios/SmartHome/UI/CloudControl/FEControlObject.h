@@ -11,6 +11,7 @@
 @interface FEControlObject : NSObject
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *imageName;
 @property (nonatomic, strong) NSArray *children;
 
 - (id)initWithName:(NSString *)name children:(NSArray *)array;
