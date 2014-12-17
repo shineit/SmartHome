@@ -15,15 +15,18 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.service.SystemUser;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
+import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
@@ -111,20 +114,25 @@ public class LoginActivity extends BaseActivtiy
 	@Override
 	public void handle(MispHttpMessage message)
 	{
-		if (this.isMessageSuccess(message))
+		if (message.isSuccess())
 		{
 			LoginRsp rsp = (LoginRsp) message.getMessage().obj;
 
 			// 存放个人信息cookie
-			SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, Context.MODE_PRIVATE);
+/*			SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, Context.MODE_PRIVATE);
 			userInfo.edit().putString(SharedPreferenceConst.NAME, userName).commit();
-			userInfo.edit().putString(SharedPreferenceConst.PASSWORD, password).commit();
-
-			Intent intent = new Intent();
+			userInfo.edit().putString(SharedPreferenceConst.PASSWORD, password).commit();*/
+			SystemUser user = new  SystemUser();
+			user.setRole(rsp.getUser().getRole());
+			user.setUserID(rsp.getUser().getUserID());
+			user.setUserName(rsp.getUser().getUserName());
+			
+            MemoryCache.getLoginInfo().setUser(user);
+            MemoryCache.setToken(rsp.getToken());
+            
+ 			Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, MainTabbarActivity.class);
 			startActivity(intent);
-			MemoryCache.setToken(rsp.getToken());
-			      
 			LoginActivity.this.finish();
 
 		}

@@ -1,28 +1,43 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 
 public class GetAlarmByIDRsp extends BaseJsonRsp
 {
-	private AlarmJson alarm;
+	
+	private HomeAlarmJson homeAlarm;
+	private FireAlarmJson fireAlarm;
 
-	public AlarmJson getAlarm()
+
+
+	public HomeAlarmJson getHomeAlarm()
 	{
-		return alarm;
+		return homeAlarm;
 	}
 
-	public void setAlarm(AlarmJson alarm)
+	public void setHomeAlarm(HomeAlarmJson homeAlarm)
 	{
-		this.alarm = alarm;
+		this.homeAlarm = homeAlarm;
+	}
+
+	public FireAlarmJson getFireAlarm()
+	{
+		return fireAlarm;
+	}
+
+	public void setFireAlarm(FireAlarmJson fireAlarm)
+	{
+		this.fireAlarm = fireAlarm;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "GetAlarmByIDRsp [alarm=" + alarm + ", result=" + result + "]";
+		return "GetAlarmByIDRsp [homeAlarm=" + homeAlarm + ", fireAlarm="
+				+ fireAlarm + ", result=" + result + "]";
 	}
 
- 
 	
 }

@@ -57,7 +57,7 @@ public class ServiceActivity extends BaseActivtiy implements View.OnClickListene
 	{
 		GetServiceOrderListReq req = new GetServiceOrderListReq();
 		req.setToken(MemoryCache.getToken());
-		//req.setUserID(userID);
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		WebServiceContext.getInstance().getOrderManageRest(this).getOrderList(req);
 		
 	}

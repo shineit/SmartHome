@@ -35,6 +35,7 @@
         android:layout_height="fill_parent" >
 
         <LinearLayout
+            android:id="@+id/control_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -57,18 +58,6 @@
                 android:padding="10dp"
                 android:text="门控制器"
                 android:textColor="@color/black" />
-
-            <ListView
-                android:id="@+id/doorList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:divider="@color/backcolor"
-                android:dividerHeight="1dp"
-                android:paddingLeft="40dp"
-                android:visibility="gone" >
-            </ListView>
 
             <CheckBox
                 android:id="@+id/control_curtain_btn"
@@ -123,6 +112,7 @@
                 android:paddingLeft="40dp"
                 android:visibility="gone" >
             </ListView>
+
         </LinearLayout>
 
     </ScrollView>

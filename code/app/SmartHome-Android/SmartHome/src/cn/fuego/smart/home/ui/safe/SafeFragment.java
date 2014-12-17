@@ -14,17 +14,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.ui.base.BaseActivtiy;
-import cn.fuego.smart.home.ui.control.ControlConfigActivity;
+import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.LoginActivity;
+import cn.fuego.smart.home.ui.MainTabbarActivity;
+import cn.fuego.smart.home.ui.base.BaseFragment;
+import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
+import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
+import cn.fuego.smart.home.webservice.up.model.LoginRsp;
+import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
+import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
-public class SafeFragment extends Fragment implements OnItemClickListener 
+public class SafeFragment extends BaseFragment  implements  OnChildClickListener 
 {
 	private ListView livingViewList ;
+	private ListView parentList;
     private SimpleAdapter adapterLiving;
+    private GroupListAdapter sensorAdapter;
     private CheckBox living_ckx;
 	private static final String[] safeItemAttrs = new String[] 
 			{ "icon", "label"};
@@ -33,20 +46,52 @@ public class SafeFragment extends Fragment implements OnItemClickListener
 	{
 		R.id.safe_item_icon,R.id.safe_item_label
 	};
+
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) 
+	{
 		View rootView = inflater.inflate(R.layout.safe_fragment, null);
+	
+		this.sensorAdapter = new GroupListAdapter(this.getActivity());
+		ExpandableListView safeListView = (ExpandableListView) rootView.findViewById(R.id.safe_main_parent);
 		
-		livingViewList = (ListView) rootView.findViewById(R.id.living_roomList);
-		adapterLiving = new SimpleAdapter(this.getActivity(),getLivingData(),R.layout.safe_item,safeItemAttrs, safeViewAttrs);
-		livingViewList.setAdapter(adapterLiving);
-		livingViewList.setOnItemClickListener(this);
-		
-		BaseActivtiy.setListViewHeightBasedOnChildren(livingViewList); 
+		getSensorData();	
+		safeListView.setAdapter(this.sensorAdapter);
+		safeListView.setOnChildClickListener(this);
 		
 		return rootView;
+	}
+    
+	private List<Map<String, Object>> getSensorData()
+	{
+		
+		// 获取数据源
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		GetSensorListReq req = new GetSensorListReq();
+		req.setToken(MemoryCache.getToken());
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage msg)
+			{
+				if (msg.isSuccess())
+				{
+					GetSensorListRsp rsp =(GetSensorListRsp) msg.getMessage().obj;
+					sensorAdapter.setDatasource(rsp.getSensorList());
+				}
+				else
+				{
+					super.sendMessage(msg);
+				}
+ 
+				
+			}
+		}).getSensorList(req);
+		
+		
+		
+		return list;
 	}
 	private List<Map<String, Object>> getLivingData()
 	{
@@ -67,32 +112,33 @@ public class SafeFragment extends Fragment implements OnItemClickListener
 		list.add(map3);
 		return list;
 	}
+
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+	public void handle(MispHttpMessage message)
 	{
-		if(parent==livingViewList)
-		{
-			HashMap<String, Object> selectLiving = (HashMap<String, Object>) getLivingData().get(position); 
-			if(selectLiving!=null)
-			{
-
-				
-				Toast.makeText(this.getActivity(),"selectLiving"+position,Toast.LENGTH_SHORT).show();
-				showSafe(selectLiving);
-
-			}
-		}
+		// TODO Auto-generated method stub
 		
 	}
-	private void showSafe(HashMap<String, Object> selectItem)
-	
+
+	@Override
+	public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id)
 	{
-		Intent i = new Intent();
-		i.setClass(this.getActivity(), SafeConfigActivity.class);
-		//i.putExtra("id", selectItem.get("id").toString());
-		i.putExtra("label", selectItem.get("label").toString());
-		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-        this.startActivity(i);
+		
+		HomeSensorJson selectItem=(HomeSensorJson) sensorAdapter.getChild(groupPosition, childPosition);;
+		
+		if(selectItem!=null)
+		{
+			Intent i = new Intent();
+			i.setClass(this.getActivity(), SafeConfigActivity.class);
+			//i.putExtra("id", selectItem.get("id").toString());
+			i.putExtra("label", selectItem.getMark());
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+	        this.startActivity(i);
+			
+		}
+		Toast.makeText(this.getActivity(), "click group"+groupPosition+"child"+childPosition, Toast.LENGTH_SHORT).show();
+		return false;
+		
 		
 	}
 	

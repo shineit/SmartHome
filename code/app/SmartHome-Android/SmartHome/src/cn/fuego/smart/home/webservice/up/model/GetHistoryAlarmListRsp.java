@@ -3,8 +3,8 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 
 
 /**
@@ -17,14 +17,14 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
  */
 public class GetHistoryAlarmListRsp extends BaseJsonRsp
 {
-	private List<AlarmJson> alarmList = new ArrayList<AlarmJson>();
+	private List<HomeAlarmJson> alarmList = new ArrayList<HomeAlarmJson>();
 
-	public List<AlarmJson> getAlarmList()
+	public List<HomeAlarmJson> getAlarmList()
 	{
 		return alarmList;
 	}
 
-	public void setAlarmList(List<AlarmJson> alarmList)
+	public void setAlarmList(List<HomeAlarmJson> alarmList)
 	{
 		this.alarmList = alarmList;
 	}

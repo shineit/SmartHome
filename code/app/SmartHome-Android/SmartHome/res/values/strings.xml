@@ -27,8 +27,8 @@
     <string name="title_activity_alarm_manage">AlarmManageActivity</string>
     
 
-    <string name="hello">Hello World, JPush!</string>
-    <string name="tag_hint">Tag can be number, alphabet, underscore, Chinese. Use , to split many tags.</string>
+   
+    <string name="tag_hint">Tag can be numbe alphabet, underscore, Chinese. Use , to split many tags.</string>
     <string name="alias_hint">Alias can be number, alphabet, underscore, Chinese.</string>
     <string name="style_hint">style should be number</string>
     <string name="error_style_empty">style cannot be empty</string>
@@ -40,7 +40,7 @@
     <string name="setting_su">Succeed to set</string>
     <string name="title_activity_news_view">NewsViewActivity</string>
     <string name="title_activity_spinner_base">SpinnerBaseActivity</string>
-    <string name="title_activity_control_config">ControlConfigActivity</string>
-    <string name="title_activity_safe_config">SafeConfigActivity</string>
+    
+    
 
 </resources>

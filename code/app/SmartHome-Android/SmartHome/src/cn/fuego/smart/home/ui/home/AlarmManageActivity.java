@@ -31,27 +31,24 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		//Bundle alarmView=intent.getExtras()
 		//String value = intent.getStringExtra("alarm_id"); 
 		//alarmID = intent.getIntExtra("alarm_id", 0);
-		TextView txt_eventID = (TextView) findViewById(R.id.alarm_manage_id);
-		txt_eventID.setText(intent.getStringExtra(alarmModel.getEventID()));
-		alarmID=intent.getStringExtra(alarmModel.getEventID());
-		TextView txt_objID = (TextView) findViewById(R.id.alarm_manage_objID);
-		txt_objID.setText(intent.getStringExtra(alarmModel.getObjID()));
+
+		alarmID = intent.getStringExtra(alarmModel.getAlarmID());
 		
-		TextView txt_objType = (TextView) findViewById(R.id.alarm_manage_objType);
-		txt_objType.setText(intent.getStringExtra(alarmModel.getObj()));
+		TextView txt_alarmtime = (TextView) findViewById(R.id.alarm_manage_time);
+		txt_alarmtime.setText(intent.getStringExtra(alarmModel.getTime()));	
+		
+		TextView txt_concentDesp  = (TextView) findViewById(R.id.alarm_manage_concent);
+		txt_concentDesp.setText(intent.getStringExtra(alarmModel.getContent()));
+		
+		TextView txt_terminDesp = (TextView) findViewById(R.id.alarm_manage_termin);
+		txt_terminDesp.setText(intent.getStringExtra(alarmModel.getTerminDesp()));
+		
+		TextView txt_terminType = (TextView) findViewById(R.id.alarm_manage_terminType);
+		txt_terminType.setText(intent.getStringExtra(alarmModel.getTerminType()));
 		
 		TextView txt_alarmType = (TextView) findViewById(R.id.alarm_manage_type);
 		txt_alarmType.setText(intent.getStringExtra(alarmModel.getTitle()));
 		
-		TextView txt_alarmDesp = (TextView) findViewById(R.id.alarm_manage_desp);
-		txt_alarmDesp.setText(intent.getStringExtra(alarmModel.getDescription()));
-		
-		TextView txt_alarmWarn = (TextView) findViewById(R.id.alarm_manage_warn);
-		txt_alarmWarn.setText(intent.getStringExtra(alarmModel.getWarnValue()));
-		
-		TextView txt_alarmError = (TextView) findViewById(R.id.alarm_manage_error);
-		txt_alarmError.setText(intent.getStringExtra(alarmModel.getErrorValue()));		
-
 		Button back_btn=(Button)findViewById(R.id.safe_manage_back);
 		back_btn.setOnClickListener(this);
 		back_btn.setTag(1);
@@ -100,7 +97,7 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 	{
 		
 
-		if (this.isMessageSuccess(message))
+		if (message.isSuccess())
 		{
 		      
 			Intent intent = new Intent(AlarmManageActivity.this,MainTabbarActivity.class);

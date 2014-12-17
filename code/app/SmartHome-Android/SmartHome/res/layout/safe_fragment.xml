@@ -54,7 +54,6 @@
                     android:layout_height="35dp"
                     android:layout_marginRight="50dp"
                     android:layout_weight="0.27"
-                    android:checked="true"
                     android:text="全部打开"
                     android:textColor="@color/black" />
 
@@ -69,33 +68,16 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <ExpandableListView
+        android:id="@+id/safe_main_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:childDivider="@color/backcolor"
+        android:childIndicator="@null"
+        android:divider="@color/backcolor"
+        android:dividerHeight="1dp"
+        android:groupIndicator="@null" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/item_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="50dp"
-                android:text="卧室"
-                android:textColor="@color/black" />
-
-            <ListView
-                android:id="@+id/living_roomList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ListView>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </ExpandableListView>
 
 </LinearLayout>

@@ -22,53 +22,10 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 
 	private Context contextDialog ;
 
-	 
-	public boolean isNetSuccess(MispHttpMessage message)
-	{
-		if(ErrorMessageConst.SUCCESS != message.getMessage().what)
-		{
-			return false;
-		}
-		return true;
-	}
-	public boolean isMessageSuccess(MispHttpMessage message)
-	{
-		if(ErrorMessageConst.SUCCESS != message.getMessage().what)
-		{
-			return false;
-		}
-		if(ErrorMessageConst.SUCCESS != getErrorCode(message))
-		{
-			return false;
-		}
-		return true;
-		 
-	}
-	public int getErrorCode(MispHttpMessage message)
-	{
-		BaseJsonRsp rsp = (BaseJsonRsp) message.getMessage().obj;
-		if(null != rsp)
-		{
-			if(null != rsp.getResult())
-			{
- 				return rsp.getResult().getErrorCode();
-			}
-		}
-		return ErrorMessageConst.NET_FAIL;
-	}
  
-	public void showMessage(String message)
-	{
-		super.showMessage(message);
-	}
-	public void showMessage(int errorCode)
-	{
-		super.showMessage(errorCode);
-	}
 	public void showMessage(MispHttpMessage message)
 	{
-		super.showMessage(getErrorCode(message));
-		
+		super.showMessage(message.getErrorCode());	
 	}
 	public void exitDialog(Context context) { 
 		contextDialog = context;

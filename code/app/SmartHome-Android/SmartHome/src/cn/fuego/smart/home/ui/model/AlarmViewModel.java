@@ -18,19 +18,26 @@ package cn.fuego.smart.home.ui.model;
  */
 public class AlarmViewModel
 {
+	private String alarmID="alarmID";
 	private String icon="icon";
-	private String title="title";
-	private String content="content";
+	private String title="title"; //对应告警类型
+	private String content="concentDesp";
 	private String status="status";
 	private String time="time";
-	private String eventID="eventID";
-	private String objID="objID";
-	private String obj="obj";
-	private String alarmValue="alarmValue";
+
 	//消除告警页面显示具体内容
-	private String description="desp";
-	private String warnValue="warnValue";
-	private String errorValue="errorValue";
+    private String terminDesp="terminDesp";
+    private String terminType="terminType";
+    
+    
+	public String getAlarmID()
+	{
+		return alarmID;
+	}
+	public void setAlarmID(String alarmID)
+	{
+		this.alarmID = alarmID;
+	}
 	public String getIcon()
 	{
 		return icon;
@@ -71,62 +78,23 @@ public class AlarmViewModel
 	{
 		this.time = time;
 	}
-	public String getEventID()
+	public String getTerminDesp()
 	{
-		return eventID;
+		return terminDesp;
 	}
-	public void setEventID(String eventID)
+	public void setTerminDesp(String terminDesp)
 	{
-		this.eventID = eventID;
+		this.terminDesp = terminDesp;
 	}
-	public String getObjID()
+	public String getTerminType()
 	{
-		return objID;
+		return terminType;
 	}
-	public void setObjID(String objID)
+	public void setTerminType(String terminType)
 	{
-		this.objID = objID;
+		this.terminType = terminType;
 	}
-	public String getObj()
-	{
-		return obj;
-	}
-	public void setObj(String obj)
-	{
-		this.obj = obj;
-	}
-	public String getAlarmValue()
-	{
-		return alarmValue;
-	}
-	public void setAlarmValue(String alarmValue)
-	{
-		this.alarmValue = alarmValue;
-	}
-	public String getDescription()
-	{
-		return description;
-	}
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-	public String getWarnValue()
-	{
-		return warnValue;
-	}
-	public void setWarnValue(String warnValue)
-	{
-		this.warnValue = warnValue;
-	}
-	public String getErrorValue()
-	{
-		return errorValue;
-	}
-	public void setErrorValue(String errorValue)
-	{
-		this.errorValue = errorValue;
-	}
+
 	
 	
 }

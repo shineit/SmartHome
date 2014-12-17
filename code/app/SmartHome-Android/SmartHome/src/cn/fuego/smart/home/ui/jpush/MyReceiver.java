@@ -128,7 +128,7 @@ public class MyReceiver extends BroadcastReceiver {
         		break;
         	case ALRAM_MSG: 
 
-        		getDetail.showAlarm(context, pushMsg);
+        		getDetail.showHomeAlarm(context, pushMsg);
 
         		break;
         		

@@ -71,8 +71,9 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 				ModifyPwdReq req = new ModifyPwdReq();
 				req.setOldPwd(this.MD5(this.getTrimText(txt_oldPwd)));
 				req.setPwdNew(this.MD5(this.getTrimText(txt_newPwd1)));
-				SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
-				req.setUserName(userInfo.getString(SharedPreferenceConst.NAME, ""));
+				//SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
+				//req.setUserName(userInfo.getString(SharedPreferenceConst.NAME, ""));
+				req.setUserName(MemoryCache.getLoginInfo().getUser().getUserName());
 				WebServiceContext.getInstance().getUserManageRest(this).modifyPassword(req);
 				
 			}

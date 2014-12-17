@@ -107,6 +107,7 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	{
 		SetServiceOrderReq req = new SetServiceOrderReq();
 		req.setToken(MemoryCache.getToken());
+		
 		ServiceOrderJson serviceOrder = new ServiceOrderJson();
 		serviceOrder.setOrderType(this.getApplyType());
 		serviceOrder.setOrderName(this.getTextName().getText().toString().trim());
@@ -117,9 +118,10 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 		serviceOrder.setContactAddr(this.getTextAddr().getText().toString().trim());
 		
 		//serviceOrder.setCreator("admin");//需要从本地读出
-		SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
-		serviceOrder.setCreator(userInfo.getString(SharedPreferenceConst.NAME, ""));
+		//SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
+		//serviceOrder.setCreator(userInfo.getString(SharedPreferenceConst.NAME, ""));
 		//URLEncoder.encode(serviceOrder.getOrderName(), "utf-8");
+		serviceOrder.setCreator(MemoryCache.getLoginInfo().getUser().getUserName());
 		req.setServiceOrder(serviceOrder);
 		WebServiceContext.getInstance().getOrderManageRest(this).setServiceOrder(req);
 		

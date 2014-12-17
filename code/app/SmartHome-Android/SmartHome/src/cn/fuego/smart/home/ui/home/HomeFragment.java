@@ -27,12 +27,13 @@ import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseFragment;
 import cn.fuego.smart.home.ui.base.GetDetail;
+import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
-import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
@@ -45,12 +46,11 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
     //private AlarmViewModel alarmModel= new AlarmViewModel();
     private NewsViewModel newsModel = new NewsViewModel();
 	private static final int[] alarmViewAttrs = new int[]
-	{ R.id.item_alarm_icon, R.id.item_alarm_title,
-			R.id.item_alarm_content, R.id.item_alarm_status,
-			R.id.item_alarm_time,R.id.alarm_view_id ,R.id.alarm_view_objID,R.id.alarm_manage_objType,R.id.alarm_view_value};
+	{ R.id.item_alarm_icon, R.id.item_alarm_title,R.id.item_alarm_content, R.id.item_alarm_status,
+	  R.id.item_alarm_time,R.id.alarm_item_terminDesp,R.id.alarm_item_terminType,R.id.alarm_view_id};
 	
 	private static final String[] alarmItemAttrs = new String[] 
-			{ "icon", "title", "content", "status", "time","eventID","objID","obj","alarmValue"};
+	{ "icon", "title", "concentDesp", "status", "time","terminDesp","terminType","alarmID"};
 	
 	private static final int[] newsViewAttrs= new int[]
 	{
@@ -83,6 +83,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	    alarmViewList.setOnItemClickListener(this);
 	    newsViewList.setAdapter(adapterNews);
 	    newsViewList.setOnItemClickListener(this);
+	 
 	    // 切换radiobutton监听
 		RadioGroup group = (RadioGroup) rootView.findViewById(R.id.nav_group);
 		group.setOnCheckedChangeListener(this);
@@ -132,28 +133,27 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	private void updateAlarms()
 	{
 		GetHistoryAlarmListReq req = new GetHistoryAlarmListReq();
-		req.setUserID(1);
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 
 		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage msg) {
-				// TODO Auto-generated method stub
 			 
 				 alarmItems.clear();
 				 GetHistoryAlarmListRsp rsp = (GetHistoryAlarmListRsp)msg.getMessage().obj;
-				 for(AlarmJson json : rsp.getAlarmList()){
+				 for(HomeAlarmJson json : rsp.getAlarmList()){
 					 Map<String, Object> listItem = new HashMap<String, Object>();
 						//String[] alarmIcon =getResources().getStringArray(R.array.alarm_icons);
 						TypedArray alarmIcon=getResources().obtainTypedArray(R.array.alarm_icons);
-						listItem.put(alarmItemAttrs[0], alarmIcon.getResourceId(json.getAlarmType(), 0));
-						listItem.put(alarmItemAttrs[1], AlarmTypeEnum.getEnumByInt(json.getAlarmType()).getStrValue());
-						listItem.put(alarmItemAttrs[2], null);
+						listItem.put(alarmItemAttrs[0], alarmIcon.getResourceId(json.getAlarmType(), 0));//告警图标
+						listItem.put(alarmItemAttrs[1], AlarmTypeEnum.getEnumByInt(json.getAlarmType()).getStrValue());//告警类型
+						listItem.put(alarmItemAttrs[2], json.getConcentDesp());//集中器描述
 						listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
 						listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
 						//告警信息ID，用于索引，在页面不显示
-						listItem.put(alarmItemAttrs[5], json.getId());
-						listItem.put(alarmItemAttrs[6], json.getObjID());
-						//listItem.put(alarmItemAttrs[7], SensorKindEunm.getEnumByInt(json.getObjType()).getStrValue());
+						listItem.put(alarmItemAttrs[5], json.getSensorDesp());
+						listItem.put(alarmItemAttrs[6], json.getSensorTypeName());
+						listItem.put(alarmItemAttrs[7], json.getId());//告警编号
 						//listItem.put(alarmItemAttrs[8], json.getDataValue());
 						alarmItems.add(listItem);
 				 }
@@ -170,7 +170,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	{
 		GetNewsListReq req = new GetNewsListReq();
 		req.setToken(MemoryCache.getToken());
-
+		
 		WebServiceContext.getInstance().getNewsManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage msg) {
@@ -207,12 +207,23 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 			HashMap<String, Object> selectAlarm = (HashMap<String, Object>) alarmItems.get(position); 
 			if(selectAlarm!=null)
 			{
-			    AlarmJson alarm = new AlarmJson();//传递需要以下三个参数
+/*			    AlarmJson alarm = new AlarmJson();//传递需要以下三个参数
 			    alarm.setId(Integer.valueOf(selectAlarm.get(alarmItemAttrs[5]).toString()));//告警事件ID
 			    alarm.setAlarmType(AlarmTypeEnum.getEnumByStr(selectAlarm.get(alarmItemAttrs[1]).toString()).getIntValue());//告警类型
 			    alarm.setObjID(Integer.valueOf(selectAlarm.get(alarmItemAttrs[6]).toString()));//传感器ID
-
-			    getDetail.showHomeSensor(this.getActivity(), alarm);
+*/
+				AlarmViewModel alarmModel = new AlarmViewModel();
+			    Intent i = new Intent();
+				
+				i.putExtra(alarmModel.getAlarmID(), selectAlarm.get(alarmItemAttrs[7]).toString());
+				i.putExtra(alarmModel.getTime(), selectAlarm.get(alarmItemAttrs[4]).toString());
+				i.putExtra(alarmModel.getContent(), selectAlarm.get(alarmItemAttrs[2]).toString());
+				i.putExtra(alarmModel.getTerminDesp(), selectAlarm.get(alarmItemAttrs[5]).toString());
+				i.putExtra(alarmModel.getTerminType(), selectAlarm.get(alarmItemAttrs[6]).toString());
+				i.putExtra(alarmModel.getTitle(),selectAlarm.get(alarmItemAttrs[1]).toString());
+		        i.setClass(this.getActivity(),AlarmManageActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                this.startActivity(i);
 
 			}
 			

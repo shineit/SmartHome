@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="集 中  器"
+                        android:text="集中器编号:"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="设备编号"
+                        android:text="传感器编号:"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="设备类型"
+                        android:text="传感器类型:"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -200,6 +200,7 @@
                         android:ems="10"
                         android:height="20dp"
                         android:paddingLeft="10dp"
+                        android:singleLine="true"
                         android:textSize="15sp" />
 
                     <TextView
@@ -231,6 +232,7 @@
                         android:ems="10"
                         android:height="20dp"
                         android:paddingLeft="10dp"
+                        android:singleLine="true"
                         android:textSize="15sp" />
 
                     <TextView
@@ -249,29 +251,37 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
-                    <EditText
-                        android:id="@+id/safe_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_toRightOf="@+id/TextView03"
-                        android:background="@drawable/edittext_sel"
-                        android:ems="10"
-                        android:height="20dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="15sp" />
-
                     <TextView
-                        android:id="@+id/TextView03"
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:text="标   签:"
                         android:textColor="@color/black" />
+
+                    <Spinner
+                        android:id="@+id/safe_mark_spinner"
+                        style="?android:attr/spinnerDropDownItemStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toLeftOf="@+id/safe_add_btn"
+                        android:layout_toRightOf="@+id/textView3" />
+
+                    <Button
+                        android:id="@+id/safe_add_btn"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="22dp"
+                        android:background="@drawable/login_button"
+                        android:text="自定义"
+                        android:textColor="@color/white" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -280,41 +290,14 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp" >
 
-                    <EditText
-                        android:id="@+id/safe_union"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toLeftOf="@+id/safe_add_btn"
-                        android:layout_toRightOf="@+id/textView3"
-                        android:background="@drawable/edittext_sel"
-                        android:ems="10"
-                        android:height="20dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="15sp" />
-
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/TextView03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="联   防:"
+                        android:text="控制器:"
                         android:textColor="@color/black" />
-
-                    <Button
-                        android:id="@+id/safe_add_btn"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/login_button"
-                        android:text="添 加"
-                        android:textColor="@color/white" />
-
                 </RelativeLayout>
             </LinearLayout>
 
