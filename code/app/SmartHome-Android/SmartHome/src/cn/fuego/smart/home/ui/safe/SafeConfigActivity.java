@@ -37,7 +37,8 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener
 			
 		}
 		ArrayAdapter<String> markAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item , markData);
-		markAdapter.setDropDownViewResource(R.layout.dropdown_item);//自定义样式
+		//markAdapter.setDropDownViewResource(R.layout.dropdown_item);//自定义样式/
+		markAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		markSpinner.setAdapter(markAdapter);
 		
 		Button back_btn=(Button)findViewById(R.id.safe_manage_back);

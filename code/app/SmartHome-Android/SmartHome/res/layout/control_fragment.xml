@@ -59,6 +59,18 @@
                 android:text="门控制器"
                 android:textColor="@color/black" />
 
+            <ListView
+                android:id="@+id/doorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:divider="@color/backcolor"
+                android:dividerHeight="1dp"
+                android:paddingLeft="40dp"
+                android:visibility="gone" >
+            </ListView>
+
             <CheckBox
                 android:id="@+id/control_curtain_btn"
                 style="@null"

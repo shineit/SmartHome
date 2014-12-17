@@ -185,11 +185,11 @@
         </activity>
         <activity
             android:name=".ui.control.ControlConfigActivity"
-            android:label="@string/title_activity_control_config" >
+            >
         </activity>
         <activity
             android:name="cn.fuego.smart.home.ui.safe.SafeConfigActivity"
-            android:label="@string/title_activity_safe_config" >
+            >
         </activity>
     </application>
 
