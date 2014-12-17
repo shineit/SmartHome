@@ -15,7 +15,7 @@
 		 <property name="locationNS" column="LOCATION_NS"></property>
 		 <property name="locationWE" column="LOCATION_WE"></property>
 		 <property name="name" column="NAME"></property>
-		 <property name="description" column="DESPCRIPTION"></property>	
+		 <property name="description" column="DESCRIPTION"></property>	
 		 <property name="addr" column="ADDR"></property>
 		 <property name="mark" column="MARK"></property>		 		 	 
 

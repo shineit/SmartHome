@@ -14,10 +14,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.service.MISPException;
-import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.SensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -37,6 +38,7 @@ import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.rest.SensorManageRest;
 
@@ -116,10 +118,10 @@ public class SensorManageRestImpl implements SensorManageRest
 	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req)
 	{
 		GetHistoryAlarmListRsp rsp = new GetHistoryAlarmListRsp();
-		List<Alarm> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID());
-		for(Alarm alarm : alarmList)
+		List<HomeAlarmView> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID());
+		for(HomeAlarmView alarmview : alarmList)
 		{
-			AlarmJson alarmJson = ModelConvert.AlarmToJson(alarm);
+			HomeAlarmJson alarmJson = ModelConvert.HomeAlarmToJson(alarmview);
 			rsp.getAlarmList().add(alarmJson);
 		}
 		return rsp;
@@ -193,12 +195,13 @@ public class SensorManageRestImpl implements SensorManageRest
 	{
 		
 		GetAlarmByIDRsp rsp = new GetAlarmByIDRsp();
-		
 		try
 		{
-		    Alarm alarm = ServiceContext.getInstance().getAlarmManageService().get(String.valueOf(req.getAlarmID()));
-		    AlarmJson json = ModelConvert.AlarmToJson(alarm);
-		    rsp.setAlarm(json);
+	
+		    HomeAlarmView homeAlarm = ServiceContext.getInstance().getAlarmManageService().getHomeAlarmByID(String.valueOf(req.getAlarmID()));
+		    HomeAlarmJson json = ModelConvert.HomeAlarmToJson(homeAlarm);
+		    rsp.setHomeAlarm(json);
+
 		}
 		catch(MISPException e)
 		{

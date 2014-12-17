@@ -10,10 +10,9 @@ package cn.fuego.smart.home.service;
 
 import java.util.List;
 
-import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.HomeAlarmView;
 
 /** 
  * @ClassName: AlarmManageService 
@@ -24,9 +23,11 @@ import cn.fuego.smart.home.domain.Alarm;
  */
 public interface AlarmManageService extends MispCommonService<Alarm>
 {
-	List<Alarm>  getAlarmOfUser(int userID);
+	List<HomeAlarmView>  getAlarmOfUser(int userID);
  	void manualClear(int userID,int id);
     void autoClear(int id);
+	HomeAlarmView getHomeAlarmByID(String alarmID);
+	
  
 	
 }

@@ -14,7 +14,7 @@ public class Concentrator implements PersistenceObject
 {
 	private int concentratorID;     //集中器编号
 	private String ipAddr;			//集中器IP地址
-	private Integer status;				//集中器状态，0 离线 1在线
+	private Integer status=0;			//集中器状态，0 离线 1在线
 	private Float locationNS;		//集中器纬度
 	private Float locationWE;		//集中器经度
 	private String name;			//集中器名称(预留字段)
@@ -41,27 +41,27 @@ public class Concentrator implements PersistenceObject
 	{
 		this.ipAddr = ipAddr;
 	}
-	public int getStatus()
+	public Integer getStatus()
 	{
 		return status;
 	}
-	public void setStatus(int status)
+	public void setStatus(Integer status)
 	{
 		this.status = status;
 	}
-	public float getLocationNS()
+	public Float getLocationNS()
 	{
 		return locationNS;
 	}
-	public void setLocationNS(float locationNS)
+	public void setLocationNS(Float locationNS)
 	{
 		this.locationNS = locationNS;
 	}
-	public float getLocationWE()
+	public Float getLocationWE()
 	{
 		return locationWE;
 	}
-	public void setLocationWE(float locationWE)
+	public void setLocationWE(Float locationWE)
 	{
 		this.locationWE = locationWE;
 	}

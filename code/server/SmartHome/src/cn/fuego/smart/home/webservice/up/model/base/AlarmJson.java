@@ -1,6 +1,7 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
 
+
 /**
  * 
 * @ClassName: AlarmJson 
@@ -12,6 +13,7 @@ package cn.fuego.smart.home.webservice.up.model.base;
 public class AlarmJson
 {
 	private int id;  			//告警ID，自增长
+	private int concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
 	private int objID;        //对象ID
 	
@@ -21,8 +23,6 @@ public class AlarmJson
 	private String clearUser;  //清除人 手动清除需要填写
 	private int clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private long clearTime;	//告警清除的时间
-	
- 
 	public int getId()
 	{
 		return id;
@@ -30,6 +30,14 @@ public class AlarmJson
 	public void setId(int id)
 	{
 		this.id = id;
+	}
+	public int getConcentratorID()
+	{
+		return concentratorID;
+	}
+	public void setConcentratorID(int concentratorID)
+	{
+		this.concentratorID = concentratorID;
 	}
 	public int getObjType()
 	{
@@ -63,7 +71,6 @@ public class AlarmJson
 	{
 		this.dataValue = dataValue;
 	}
- 
 	public long getAlarmTime()
 	{
 		return alarmTime;
@@ -71,14 +78,6 @@ public class AlarmJson
 	public void setAlarmTime(long alarmTime)
 	{
 		this.alarmTime = alarmTime;
-	}
-	public long getClearTime()
-	{
-		return clearTime;
-	}
-	public void setClearTime(long clearTime)
-	{
-		this.clearTime = clearTime;
 	}
 	public String getClearUser()
 	{
@@ -96,19 +95,26 @@ public class AlarmJson
 	{
 		this.clearStatus = clearStatus;
 	}
- 
+	public long getClearTime()
+	{
+		return clearTime;
+	}
+	public void setClearTime(long clearTime)
+	{
+		this.clearTime = clearTime;
+	}
 	@Override
 	public String toString()
 	{
-		return "AlarmJson [id=" + id + ", objType=" + objType + ", objID="
-				+ objID + ", alarmType=" + alarmType + ", dataValue="
-				+ dataValue + ", alarmTime=" + alarmTime + ", clearUser="
-				+ clearUser + ", clearStatus=" + clearStatus + ", clearTime="
-				+ clearTime + "]";
+		return "AlarmJson [id=" + id + ", concentratorID=" + concentratorID
+				+ ", objType=" + objType + ", objID=" + objID + ", alarmType="
+				+ alarmType + ", dataValue=" + dataValue + ", alarmTime="
+				+ alarmTime + ", clearUser=" + clearUser + ", clearStatus="
+				+ clearStatus + ", clearTime=" + clearTime + "]";
 	}
+
 	
  
-	
 	
  
 }

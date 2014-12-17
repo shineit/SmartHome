@@ -68,7 +68,6 @@ public interface SensorManageRest
 	@Path("/alarm")
 	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req);
 	
-	
 	@POST
 	@Path("/alarm/id")
 	public GetAlarmByIDRsp getAlarm(GetAlarmByIDReq req);

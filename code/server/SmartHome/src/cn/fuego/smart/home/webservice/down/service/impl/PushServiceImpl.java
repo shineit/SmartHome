@@ -46,7 +46,7 @@ public class PushServiceImpl implements PushService
 		 for(Alarm alarm : alarmList)
 		 {
 			 
-			 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcenratorID()));
+			 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
 			 
 			 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
 			 if(!ValidatorUtil.isEmpty(userConList))

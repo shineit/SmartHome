@@ -34,7 +34,5 @@ public class ClearAlarmByIDReq extends BaseJsonReq
 		return "ClearAlarmByIDReq [userID=" + userID + ", alarmID=" + alarmID
 				+ ", token=" + token + "]";
 	}
-
- 
 	
 }

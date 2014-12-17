@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="FireSensor" table="fire_sensor">
+
+	    <id name="id" column="ID" >
+	       <generator class="identity"/> 
+		</id>
+		 <property name="concentratorID" column="CONCENTRATOR_ID"></property>
+		 
+		 <property name="machineID" column="MACHINE_ID"></property>
+		 <property name="loopID" column="LOOP_ID"></property>
+		 <property name="codeID" column="CODE_ID"></property>
+
+	</class>
+ 
+</hibernate-mapping>

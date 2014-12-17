@@ -6,25 +6,23 @@
 	
 <hibernate-mapping
 	package="cn.fuego.smart.home.domain">
-	<class name="Alarm" table="alarm">
+	<class name="FireAlarmView" table="fire_alarm_view">
 
 	    <id name="id" column="ID" >
 	       <generator class="identity"/> 
 		</id>
-		
 		 <property name="concentratorID" column="CONCENTRATOR_ID"></property>
 		 <property name="objType" column="OBJ_TYPE"></property>
- 
-		 <property name="objID" column="OBJ_ID"></property>
+ 		 <property name="objID" column="OBJ_ID"></property>
 		 <property name="alarmType" column="ALARM_TYPE"></property>
-		 <property name="dataValue" column="DATA_VALUE"></property>
-		 <property name="alarmTime" column="ALARM_TIME"></property>
-		 <property name="clearUser" column="CLEAR_USER"></property>
-		 
 		 <property name="clearStatus" column="CLEAR_STATUS"></property>
-		 <property name="clearTime" column="CLEAR_TIME"></property>
+         
+		 <property name="concentDesp" column="CONCENT_DESP"></property>
 		 
-		 
+		 <property name="machineID" column="MACHINE_ID"></property>
+		 <property name="loopID" column="LOOP_ID"></property>
+		 <property name="codeID" column="CODE_ID"></property>
+	 
 	</class>
  
 </hibernate-mapping>

@@ -12,10 +12,14 @@ import java.util.Date;
 
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.FireAlarmView;
+import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
@@ -45,6 +49,40 @@ public class ModelConvert
 		return json;
 		
 	}
+	public static HomeAlarmJson  HomeAlarmToJson(HomeAlarmView homeAlarm)
+	{
+		HomeAlarmJson json = new HomeAlarmJson();
+		json.setId(homeAlarm.getId());
+		json.setConcentratorID(homeAlarm.getConcentratorID());
+		json.setObjType(homeAlarm.getObjType());
+		json.setObjID(homeAlarm.getObjID());
+		json.setAlarmType(homeAlarm.getAlarmType());
+		json.setAlarmTime(DateUtil.getDateTime(homeAlarm.getAlarmTime()));
+		json.setClearStatus(homeAlarm.getClearStatus());
+		json.setConcentDesp(homeAlarm.getConcentDesp());
+		json.setSensorDesp(homeAlarm.getSensorDesp());
+		json.setSensorType(homeAlarm.getSensorType());
+		json.setSensorTypeName(homeAlarm.getSensorTypeName());
+		return json;
+		
+	}
+	public static FireAlarmJson  FireAlarmToJson(FireAlarmView fireAlarm)
+	{
+		FireAlarmJson json = new FireAlarmJson();
+		json.setId(fireAlarm.getId());
+		json.setConcentratorID(fireAlarm.getConcentratorID());
+		json.setObjType(fireAlarm.getObjType());
+		json.setObjID(fireAlarm.getObjID());
+		json.setAlarmType(fireAlarm.getAlarmType());
+		json.setAlarmTime(DateUtil.getDateTime(fireAlarm.getAlarmTime()));
+		json.setClearStatus(fireAlarm.getClearStatus());
+		json.setConcentDesp(fireAlarm.getConcentDesp());
+		json.setMachineID(fireAlarm.getMachineID());
+		json.setLoopID(fireAlarm.getLoopID());
+		json.setCodeID(fireAlarm.getCodeID());
+		return json;
+		
+	}	
 	public static ServiceOrder jsonToServiceOrder(ServiceOrderJson json)
 	{
 		if(null == json)

@@ -16,10 +16,12 @@ import cn.fuego.smart.home.constant.AlarmClearEnum;
 *
  */
 public class Alarm implements PersistenceObject
-{
+{	
+	public static final String PRI_KEY = "id";
+	
 	private int id;  			//告警ID，自增长
 	
-	private int concenratorID;
+	private int concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
 	private int objID;        //对象ID
 	
@@ -30,8 +32,7 @@ public class Alarm implements PersistenceObject
 	private Integer clearStatus = AlarmClearEnum.NONE_CLEAR.getIntValue();   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private Date clearTime;	//告警清除的时间
 	private String statusColor;//状态颜色，对应清除状态
-	
-	public static final String PRI_KEY = "id";
+
 	
  
  
@@ -49,16 +50,18 @@ public class Alarm implements PersistenceObject
 
 
 
-	public int getConcenratorID()
+
+
+	public int getConcentratorID()
 	{
-		return concenratorID;
+		return concentratorID;
 	}
 
 
 
-	public void setConcenratorID(int concenratorID)
+	public void setConcentratorID(int concentratorID)
 	{
-		this.concenratorID = concenratorID;
+		this.concentratorID = concentratorID;
 	}
 
 

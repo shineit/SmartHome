@@ -6,6 +6,7 @@ public class GetAlarmByIDReq extends BaseJsonReq
 {
 	private String alarmID;
 
+    
 	public String getAlarmID()
 	{
 		return alarmID;
@@ -21,5 +22,6 @@ public class GetAlarmByIDReq extends BaseJsonReq
 	{
 		return "GetAlarmByIDReq [alarmID=" + alarmID + ", token=" + token + "]";
 	}
+
 	
 }

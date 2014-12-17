@@ -99,7 +99,7 @@ public class ReceiveMessage
 	 
 			Alarm alarm = new Alarm();
 			 
-			alarm.setConcenratorID(this.getConcentratorID());
+			alarm.setConcentratorID(this.getConcentratorID());
 			alarm.setAlarmType(getIntValue(i+5,i+5));
 			alarm.setAlarmTime(DateUtil.getCurrentDateTime());
 			
