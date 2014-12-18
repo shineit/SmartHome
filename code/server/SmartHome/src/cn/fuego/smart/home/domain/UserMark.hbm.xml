@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="UserMark" table="user_mark">
+
+	    <id name="markID" column="MARK_ID" >
+	     <generator class="identity"/> 
+		</id>
+		<property name="userID" column="USER_ID"></property>
+	    <property name="mark" column="MARK"></property>
+		 
+	</class>
+</hibernate-mapping>

@@ -16,19 +16,7 @@ public class UserMarkJson
     private int userID;
     private String mark;
     
-    public void load(UserMark userMark)
-    {
-    	this.userID = userMark.getUserID();
-    	this.mark = userMark.getMark();
-    }
-    
-    public UserMark getUserMark()
-    {
-    	UserMark userMark = new UserMark();
-    	userMark.setUserID(userID);
-    	userMark.setMark(mark);
-    	return userMark;
-    }
+
  
 	public int getUserID()
 	{

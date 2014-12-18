@@ -19,6 +19,7 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class UserMark implements PersistenceObject
 {
+	private int markID;//自增长
 	private int userID;
 	private String mark;
 	
@@ -48,13 +49,24 @@ public class UserMark implements PersistenceObject
 	{
 		this.mark = mark;
 	}
+
+	public int getMarkID()
+	{
+		return markID;
+	}
+
+	public void setMarkID(int markID)
+	{
+		this.markID = markID;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "UserMark [userID=" + userID + ", mark=" + mark + "]";
+		return "UserMark [markID=" + markID + ", userID=" + userID + ", mark="
+				+ mark + "]";
 	}
- 
-	
-	
+    
+		
 
 }

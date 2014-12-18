@@ -21,10 +21,14 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.service.cache.AppLoginInfo;
+import cn.fuego.smart.home.webservice.ModelConvert;
+import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
+import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
@@ -34,6 +38,7 @@ import cn.fuego.smart.home.webservice.up.model.ModifyPwdRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
+import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.up.rest.UserManageRest;
@@ -125,9 +130,9 @@ public class UserManageRestImpl implements UserManageRest
 		
 		for(UserMark mark : userMarkList)
 		{
-			UserMarkJson json = new UserMarkJson();
-			json.load(mark);
+			UserMarkJson json = ModelConvert.markToJson(mark);
 			rsp.getMarkList().add(json);
+			
 		}
 		
 		
@@ -144,7 +149,7 @@ public class UserManageRestImpl implements UserManageRest
 		try
 		{
 			UserMarkJson userMarkJson = req.getUserMark();
-			ServiceContext.getInstance().getUserManageService().createUserMark(userMarkJson.getUserMark());
+			ServiceContext.getInstance().getUserManageService().createUserMark(ModelConvert.jsonToMark(userMarkJson));
 		}
 		catch(MISPException e)
 		{
@@ -166,7 +171,7 @@ public class UserManageRestImpl implements UserManageRest
 		try
 		{
 			UserMarkJson userMarkJson = req.getUserMark();
-			ServiceContext.getInstance().getUserManageService().deleteUserMark(userMarkJson.getUserMark());
+			ServiceContext.getInstance().getUserManageService().deleteUserMark(ModelConvert.jsonToMark(userMarkJson));
 		}
 		catch(MISPException e)
 		{

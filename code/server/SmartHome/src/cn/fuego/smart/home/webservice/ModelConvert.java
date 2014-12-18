@@ -17,12 +17,14 @@ import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
+import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
+import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 
  /** 
  * @ClassName: ModelConvert 
@@ -115,13 +117,14 @@ public class ModelConvert
 		json.setConcentratorID(sensor.getConcentratorID());
 		json.setSensorID(sensor.getSensorID());
 		json.setChannelID(sensor.getChannelID());
-		json.setSensorKind(sensor.getChannelID());
+		json.setSensorKind(sensor.getSensorKind());
 		json.setSensorType(sensor.getSensorType());
 		json.setSensorTypeName(sensor.getSensorTypeName());
 		json.setStatus(sensor.getStatus());
 		json.setWarnValue(sensor.getWarnValue());
 		json.setErrorValue(sensor.getErrorValue());
 		json.setGroupID(sensor.getGroupID());
+		json.setCtrGroupID(sensor.getCtrGroupID());
 		json.setDescriptions(sensor.getDescription());
 		json.setMark(sensor.getMark());
 		return json;
@@ -135,13 +138,14 @@ public class ModelConvert
 		homeSensor.setConcentratorID(json.getConcentratorID());
 		homeSensor.setSensorID(json.getSensorID());
 		homeSensor.setChannelID(json.getChannelID());
-		homeSensor.setSensorKind(json.getChannelID());
+		homeSensor.setSensorKind(json.getSensorKind());
 		homeSensor.setSensorType(json.getSensorType());
 		homeSensor.setSensorTypeName(json.getSensorTypeName());
 		homeSensor.setStatus(json.getStatus());
 		homeSensor.setWarnValue(json.getWarnValue());
 		homeSensor.setErrorValue(json.getErrorValue());
 		homeSensor.setGroupID(json.getGroupID());
+		homeSensor.setCtrGroupID(json.getCtrGroupID());
 		homeSensor.setDescription(json.getDescriptions());
 		homeSensor.setMark(json.getMark());
 		return homeSensor;
@@ -159,4 +163,21 @@ public class ModelConvert
 		return json;
  
 	}
+	public static UserMarkJson  markToJson(UserMark mark)
+	{
+		UserMarkJson json = new UserMarkJson();
+        json.setMark(mark.getMark());
+        json.setUserID(mark.getUserID());
+     
+		return json;
+ 
+	}	
+    
+    public static UserMark jsonToMark(UserMarkJson markJson)
+    {
+    	UserMark userMark = new UserMark();
+    	userMark.setUserID(markJson.getUserID());
+    	userMark.setMark(markJson.getMark());
+    	return userMark;
+    }
 }
