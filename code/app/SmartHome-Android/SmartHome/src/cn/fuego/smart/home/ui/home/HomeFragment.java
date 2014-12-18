@@ -133,6 +133,7 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	private void updateAlarms()
 	{
 		GetHistoryAlarmListReq req = new GetHistoryAlarmListReq();
+		req.setToken(MemoryCache.getToken());
 		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 
 		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
@@ -170,7 +171,6 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 	{
 		GetNewsListReq req = new GetNewsListReq();
 		req.setToken(MemoryCache.getToken());
-		
 		WebServiceContext.getInstance().getNewsManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage msg) {

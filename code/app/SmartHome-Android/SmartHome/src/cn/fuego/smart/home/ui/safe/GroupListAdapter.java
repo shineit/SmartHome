@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.fuego.smart.home.R;
@@ -110,7 +109,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 	    safeChildIcon.setImageResource(R.drawable.smoke);
 	    TextView safeChildLabel = (TextView) layout.findViewById(R.id.safe_item_label);
 	    safeChildLabel.setText(sensor.getSensorTypeName());
-	    CheckBox safeChildChk= (CheckBox) layout.findViewById(R.id.safe_item_chk);
+	    //CheckBox safeChildChk= (CheckBox) layout.findViewById(R.id.safe_item_chk);
 		return layout;
 		
 	}
@@ -129,7 +128,6 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 	{
 		return groupList.size();
 	}
-
 	public long getGroupId(int groupPosition)
 	{
 		return groupPosition;
@@ -181,6 +179,16 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 	{
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public void setGroupList(List<String> groupList)
+	{
+		this.groupList = groupList;
+	}
+
+	public List<String> getGroupList()
+	{
+		return groupList;
 	}
 
 }

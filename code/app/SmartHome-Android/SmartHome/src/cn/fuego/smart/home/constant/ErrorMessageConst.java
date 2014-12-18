@@ -9,7 +9,6 @@
 package cn.fuego.smart.home.constant;
 
 import cn.fuego.misp.constant.MISPErrorMessageConst;
-import cn.fuego.misp.dao.file.MispMessageReader;
 
  /** 
  * @ClassName: ErrorMessageConst 
