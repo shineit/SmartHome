@@ -42,5 +42,7 @@
 	<false/>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>
