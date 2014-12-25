@@ -1,6 +1,5 @@
 package cn.fuego.smart.home.ui.safe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -14,12 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
@@ -27,12 +23,8 @@ import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.SafeViewModel;
 import cn.fuego.smart.home.ui.model.SpinnerDataModel;
-import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
-import cn.fuego.smart.home.webservice.up.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
-import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
-import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class SafeConfigActivity extends BaseActivtiy implements OnClickListener, OnItemSelectedListener
@@ -159,16 +151,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
     	return index;
     	
     }
-	private void  getMarkData()
-    {
-    	
-		markList= SensorDataCache.getInstance().getMarkList();
-		log.info("markList is "+markList);
-		markSpinner.setSelection(getSelPosition(defaultLabel));
-		markAdapter.notifyDataSetChanged();
-    
-    	
-    }
+
 	@Override
 	public void onClick(View v)
 	{
@@ -193,7 +176,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		req.setToken(MemoryCache.getToken());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
-		//homesensor.setConcentratorID(Integer.valueOf(this.getTxt_concentID().getText().toString()));
+		//后台通过id 索引
 		homesensor.setId(Integer.valueOf(this.getTxt_sensorID().getText().toString()));
 		homesensor.setDescriptions(this.getTxt_desp().getText().toString().trim());
 		//后台不作处理
@@ -220,11 +203,11 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		{
 
 			Intent intent = new Intent();
-			//intent.setClass(this.getApplicationContext(),  SafeFragment.this.getClass());
-			//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
-          // startActivity(intent); 
-			//intent.se
-            this.finish();
+            //以下设置flag 有作用
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			SafeConfigActivity.this.setResult(10,intent);
+			this.finish();
+            
 		}
 
 		else

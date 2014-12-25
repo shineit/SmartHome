@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.SensorDataCache;
@@ -14,9 +18,9 @@ import cn.fuego.smart.home.ui.base.BaseFragment;
 import cn.fuego.smart.home.ui.model.SafeViewModel;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 
-public class SafeFragment extends BaseFragment  implements  OnChildClickListener 
+public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 {
-
+	private FuegoLog log = FuegoLog.getLog(getClass());
     private GroupListAdapter sensorAdapter;
     private SafeViewModel safeViewModel = new SafeViewModel();
     
@@ -28,6 +32,7 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 	
 		this.sensorAdapter = new GroupListAdapter(this.getActivity());
 		ExpandableListView safeListView = (ExpandableListView) rootView.findViewById(R.id.safe_main_parent);
+
 		
 		getSensorData();	
 		safeListView.setAdapter(this.sensorAdapter);
@@ -67,16 +72,39 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 			i.putExtra(safeViewModel.getMark(), selectItem.getMark());
 		    i.putExtra(safeViewModel.getCtrGroupID(), String.valueOf(selectItem.getCtrGroupID()));
 			i.putExtra(safeViewModel.getId(), selectItem.getId());//作为修改数据的索引
-			//i.putStringArrayListExtra("markList", (ArrayList<String>) SensorDataCache.getInstance().getCtrSensorList());
-
-			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-	        this.startActivity(i);
+			//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+			startActivityForResult(i, 1);
 			
 		}
-		//Toast.makeText(this.getActivity(), "click group"+groupPosition+"child"+childPosition, Toast.LENGTH_SHORT).show();
+		
 		return false;
 		
 		
 	}
+    //返回时重新刷新页面
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+
+		if(requestCode==1)
+		{
+			
+			if(10==resultCode)
+			{
+				getSensorData();
+
+			}
+			else
+			{
+				log.info("onActivityResult failed ,the resultCode is "+resultCode);
+			}
+		}
+
+	}
+
+
+
+	
 	
 }
