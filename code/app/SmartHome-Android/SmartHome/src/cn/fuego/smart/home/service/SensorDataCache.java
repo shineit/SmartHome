@@ -10,7 +10,10 @@ import cn.fuego.smart.home.constant.SensorKindEunm;
 import cn.fuego.smart.home.ui.model.SpinnerDataModel;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
+import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
+import cn.fuego.smart.home.webservice.up.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
+import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class SensorDataCache extends MispHttpHandler
@@ -22,10 +25,11 @@ public class SensorDataCache extends MispHttpHandler
 	private static SensorDataCache instance;
 	
 	private HttpListener listener;
-	
+	private List<String> markList= new ArrayList<String>();
 	private SensorDataCache()
 	{
 		//load();
+		loadMarkList();
 	}
 	synchronized public static SensorDataCache getInstance()
 	{
@@ -83,6 +87,7 @@ public class SensorDataCache extends MispHttpHandler
 			errorCode = message.getErrorCode();
 			GetSensorListRsp rsp =(GetSensorListRsp) message.getMessage().obj;
 			ctrSensorList.clear();
+			ctrSpinnerList.clear();
 			measureSensorList.clear();
 			for(HomeSensorJson json : rsp.getSensorList())
 			{
@@ -115,7 +120,41 @@ public class SensorDataCache extends MispHttpHandler
 		return errorCode;
 	}
 
+	public List<String> loadMarkList()
+	{
+		
 	
+    	GetUserMarkListReq req  = new GetUserMarkListReq();
+    	req.setToken(MemoryCache.getToken());
+    	req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+    	WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
+    		@Override
+    		public void handle(MispHttpMessage msg)
+    		{
+				if (msg.isSuccess())
+				{
+					GetUserMarkListRsp rsp = (GetUserMarkListRsp) msg.getMessage().obj;
+					List<UserMarkJson> userMarkList = rsp.getMarkList();
+					for(int i=0;i<userMarkList.size();i++)
+					{
+						markList.add(userMarkList.get(i).getMark());
+						
+					}
+
+				}
+				else
+				{
+					super.sendMessage(msg);
+				}
+    		}
+    	}).getUserMarkList(req);
+		return markList;
+		
+	}
+	public List<String> getMarkList()
+	{
+		return markList;
+	}
 	
  
 	

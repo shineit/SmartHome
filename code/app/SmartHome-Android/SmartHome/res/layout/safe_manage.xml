@@ -279,7 +279,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="22dp"
                         android:background="@drawable/login_button"
-                        android:text="自定义"
+                        android:text="新增"
                         android:textColor="@color/white" />
 
                 </RelativeLayout>
