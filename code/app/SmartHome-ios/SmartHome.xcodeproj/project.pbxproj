@@ -22,16 +22,9 @@
 		1454A5761A04FA8E00A9AE35 /* FEServiceOrderSetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454A5751A04FA8E00A9AE35 /* FEServiceOrderSetRequest.m */; };
 		145B21911A357C04000AE204 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145B21901A357C04000AE204 /* libPushSDK.a */; };
 		145B21931A3582B8000AE204 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145B21921A3582B7000AE204 /* PushConfig.plist */; };
-		1460811A1A302AB90057EA9A /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146081191A302AB90057EA9A /* libBPush.a */; };
 		1460811C1A302AF00057EA9A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811B1A302AF00057EA9A /* CoreTelephony.framework */; };
 		1460811E1A302AFF0057EA9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */; };
 		146081201A302B0A0057EA9A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811F1A302B0A0057EA9A /* libz.dylib */; };
-		1460812F1A302BAB0057EA9A /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 146081231A302BAB0057EA9A /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		146081301A302BAB0057EA9A /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 146081261A302BAB0057EA9A /* BPushClass.m */; };
-		146081311A302BAB0057EA9A /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 146081281A302BAB0057EA9A /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		146081321A302BAB0057EA9A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1460812A1A302BAB0057EA9A /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		146081331A302BAB0057EA9A /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 1460812C1A302BAB0057EA9A /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		146081341A302BAB0057EA9A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1460812E1A302BAB0057EA9A /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		146081361A304C9F0057EA9A /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 146081351A304C9F0057EA9A /* BPushConfig.plist */; };
 		146617271A049975009C85B8 /* FENewsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 146617261A049975009C85B8 /* FENewsRequest.m */; };
 		146D34DE19FB6CE1000F14F5 /* FECloudSafeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146D34DD19FB6CE1000F14F5 /* FECloudSafeTableCell.m */; };
@@ -151,24 +144,9 @@
 		145B218F1A357C04000AE204 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		145B21901A357C04000AE204 /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		145B21921A3582B7000AE204 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		146081181A302AB90057EA9A /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
-		146081191A302AB90057EA9A /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		1460811B1A302AF00057EA9A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1460811F1A302B0A0057EA9A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		146081221A302BAB0057EA9A /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
-		146081231A302BAB0057EA9A /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		146081241A302BAB0057EA9A /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
-		146081251A302BAB0057EA9A /* BPushClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushClass.h; sourceTree = "<group>"; };
-		146081261A302BAB0057EA9A /* BPushClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushClass.m; sourceTree = "<group>"; };
-		146081271A302BAB0057EA9A /* GzipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipCompressor.h; sourceTree = "<group>"; };
-		146081281A302BAB0057EA9A /* GzipCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipCompressor.m; sourceTree = "<group>"; };
-		146081291A302BAB0057EA9A /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		1460812A1A302BAB0057EA9A /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		1460812B1A302BAB0057EA9A /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
-		1460812C1A302BAB0057EA9A /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
-		1460812D1A302BAB0057EA9A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		1460812E1A302BAB0057EA9A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		146081351A304C9F0057EA9A /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
 		146617251A049975009C85B8 /* FENewsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FENewsRequest.h; sourceTree = "<group>"; };
 		146617261A049975009C85B8 /* FENewsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FENewsRequest.m; sourceTree = "<group>"; };
@@ -353,7 +331,6 @@
 				14C6DE4C19F549EE006384B2 /* CoreData.framework in Frameworks */,
 				14C6DE4A19F549EE006384B2 /* UIKit.framework in Frameworks */,
 				14C6DE4619F549EE006384B2 /* Foundation.framework in Frameworks */,
-				1460811A1A302AB90057EA9A /* libBPush.a in Frameworks */,
 				6742205139CD33BB3C0E147A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,39 +393,8 @@
 			isa = PBXGroup;
 			children = (
 				145B218E1A357C04000AE204 /* lib */,
-				146081171A302AB90057EA9A /* LibBPush */,
 			);
 			path = ThirdLib;
-			sourceTree = "<group>";
-		};
-		146081171A302AB90057EA9A /* LibBPush */ = {
-			isa = PBXGroup;
-			children = (
-				146081211A302BAB0057EA9A /* opensource */,
-				146081181A302AB90057EA9A /* BPush.h */,
-				146081191A302AB90057EA9A /* libBPush.a */,
-			);
-			path = LibBPush;
-			sourceTree = "<group>";
-		};
-		146081211A302BAB0057EA9A /* opensource */ = {
-			isa = PBXGroup;
-			children = (
-				146081221A302BAB0057EA9A /* Base64.h */,
-				146081231A302BAB0057EA9A /* Base64.m */,
-				146081241A302BAB0057EA9A /* Base64Defines.h */,
-				146081251A302BAB0057EA9A /* BPushClass.h */,
-				146081261A302BAB0057EA9A /* BPushClass.m */,
-				146081271A302BAB0057EA9A /* GzipCompressor.h */,
-				146081281A302BAB0057EA9A /* GzipCompressor.m */,
-				146081291A302BAB0057EA9A /* JSONKit.h */,
-				1460812A1A302BAB0057EA9A /* JSONKit.m */,
-				1460812B1A302BAB0057EA9A /* OpenUDID.h */,
-				1460812C1A302BAB0057EA9A /* OpenUDID.m */,
-				1460812D1A302BAB0057EA9A /* Reachability.h */,
-				1460812E1A302BAB0057EA9A /* Reachability.m */,
-			);
-			path = opensource;
 			sourceTree = "<group>";
 		};
 		1499E6B21A0BAB43002F5DDB /* BaseRequest */ = {
@@ -976,7 +922,6 @@
 				14BDCB201A0A6C1800060AE5 /* FEModifyPasswordRequest.m in Sources */,
 				144469381A0B6B79007C8EC9 /* FESensorBatchEnableRequest.m in Sources */,
 				14B447BD19F6A5FD0078EAB4 /* FEControlObject.m in Sources */,
-				146081321A302BAB0057EA9A /* JSONKit.m in Sources */,
 				1499E6CE1A0BAD0E002F5DDB /* FEPage.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
@@ -1011,7 +956,6 @@
 				146D34EE19FDE3FE000F14F5 /* UIColor+Theme.m in Sources */,
 				1499E6ED1A0BAD1A002F5DDB /* FEOrderSetResponse.m in Sources */,
 				14C6DEFB19F5EDE4006384B2 /* FENewsTableViewCell.m in Sources */,
-				146081341A302BAB0057EA9A /* Reachability.m in Sources */,
 				14C2FADD1A049C0100DFEE34 /* NSObject+Dictionary.m in Sources */,
 				14D7B7AB1A0653640072D31C /* FECheckButtonGroup.m in Sources */,
 				1499E6EA1A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m in Sources */,
@@ -1021,7 +965,6 @@
 				146617271A049975009C85B8 /* FENewsRequest.m in Sources */,
 				145320CE1A10F8A400C4E209 /* FEEnumString.m in Sources */,
 				14C6DEE919F54F9C006384B2 /* FECollectionViewCell.m in Sources */,
-				1460812F1A302BAB0057EA9A /* Base64.m in Sources */,
 				1475A0E01A03D05800EE8353 /* CDUser.m in Sources */,
 				14C6DE8119F54AD3006384B2 /* SmartHome.xcdatamodeld in Sources */,
 				14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */,
@@ -1037,14 +980,11 @@
 				14C6DEEA19F54F9C006384B2 /* FECurrentWarringVC.m in Sources */,
 				14B4B71D19FE729E00FF6BC0 /* FESettingItemCell.m in Sources */,
 				14B447A919F5FE190078EAB4 /* FELabel.m in Sources */,
-				146081331A302BAB0057EA9A /* OpenUDID.m in Sources */,
 				14D7B7A51A05FC6E0072D31C /* UIImage+Resize.m in Sources */,
 				143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */,
-				146081311A302BAB0057EA9A /* GzipCompressor.m in Sources */,
 				144022B91A08945B0079253A /* NSDate+Formatter.m in Sources */,
 				14D7B7001A09B163008BE443 /* FELogoutRequest.m in Sources */,
 				1499E6FD1A10B025002F5DDB /* FENewsDetailVC.m in Sources */,
-				146081301A302BAB0057EA9A /* BPushClass.m in Sources */,
 				14B447B319F67DFC0078EAB4 /* FEServiceTableViewCell.m in Sources */,
 				14B447AD19F603E30078EAB4 /* FEDeviceInfoInputView.m in Sources */,
 				1499E6F11A0BAD1A002F5DDB /* FESigoutResponse.m in Sources */,
@@ -1162,8 +1102,6 @@
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SmartHome/ThirdLib/Baidu-Push-SDK-iOS-L1-1/LibBPush",
-					"$(PROJECT_DIR)/SmartHome/ThirdLib/LibBPush",
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1184,8 +1122,6 @@
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SmartHome/ThirdLib/Baidu-Push-SDK-iOS-L1-1/LibBPush",
-					"$(PROJECT_DIR)/SmartHome/ThirdLib/LibBPush",
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

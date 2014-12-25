@@ -18,7 +18,6 @@
 #import "FESettingVC.h"
 #import <HockeySDK/HockeySDK.h>
 #import "CDUser.h"
-#import "BPush.h"
 #import "APService.h"
 //#import "FEServiceListVC.h"
 
@@ -38,11 +37,12 @@
     
     [self loadview];
     [self.window makeKeyAndVisible];
+//    application set
     
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"4987eac73d40ca84e1d3b29111eef247"];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-    [[BITHockeyManager sharedHockeyManager] testIdentifier];
+//    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"4987eac73d40ca84e1d3b29111eef247"];
+//    [[BITHockeyManager sharedHockeyManager] startManager];
+//    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+//    [[BITHockeyManager sharedHockeyManager] testIdentifier];
     
 //    [BPush setupChannel:launchOptions];
 //    [BPush setDelegate:self];
@@ -61,17 +61,6 @@
     NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     FEUserDefaultsSetObjectForKey(devToken, FEDeviceToken);
     FEUserDefaultsSync;
-}
-
-- (void) onMethod:(NSString*)method response:(NSDictionary*)data {
-    
-    if ([BPushRequestMethod_Bind isEqualToString:method]) {
-        int returnCode = [[data valueForKey:BPushRequestErrorCodeKey] intValue];
-        if (returnCode == BPushErrorCode_Success) {
-            FEUserDefaultsSetObjectForKey(data, FEBPushResKey);
-        }
-        
-    }
 }
 
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{

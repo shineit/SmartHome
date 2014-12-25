@@ -74,7 +74,7 @@
     segmentedControl.selectedTextColor = [UIColor orangeColor];
     segmentedControl.backgroundColor = [UIColor whiteColor];//FEColor(229, 229, 229, 1);//[UIColor lightGrayColor];
     segmentedControl.selectionIndicatorColor = [UIColor orangeColor];
-    segmentedControl.frame = CGRectMake(0, 0, 320, 44);
+    segmentedControl.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
     segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segmentedControl.selectionIndicatorHeight = 3;
@@ -113,7 +113,6 @@
 //request news
 -(void)requestNews{
     _isNewsResquested = YES;
-    [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr.dictionary]];
@@ -121,7 +120,6 @@
     __weak typeof(self) weakself = self;
     
     [[FEWebServiceManager sharedInstance] news:news response:^(NSError *error, FENewsResponse *news) {
-        [weakself hideHUD:YES];
         if (!error && news.result.errorCode.integerValue == 0){
             [weakself.newsList removeAllObjects];
             [weakself.newsList addObjectsFromArray:news.newsList];
@@ -134,14 +132,12 @@
 //request alarm list
 -(void)requestHistoryWarring{
     _isWarringRequested = YES;
-    [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     FEHistoryAlarmRequest *hdata = [[FEHistoryAlarmRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:@[attr]];
     
      __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] historyAlarmList:hdata reponse:^(NSError *error, FEHistoryAlarmResponse *response) {
-        [self hideHUD:YES];
         if (!error && response.result.errorCode.integerValue == 0){
             [weakself.warringList removeAllObjects];
             [weakself.warringList addObjectsFromArray:response.alarmList];
