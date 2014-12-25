@@ -138,7 +138,7 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         this.getDao().update(obj);
 
 	}
-	 public void Modify(List<String> idList,String fieldName,String fieldValue)
+	 public void Modify(List<String> idList,String fieldName,Object fieldValue)
      {
          if (ValidatorUtil.isEmpty(idList))
          {

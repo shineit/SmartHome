@@ -159,6 +159,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			}
 		}
 		
+		this.Modify(idList, "status", SensorStatusEnum.DISABLE.getIntValue());
 		for (Integer key : sensorMap.keySet())
 		{
 			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
@@ -196,7 +197,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 				temp.add(sensor);
 			}
 		}
-		
+		this.Modify(idList, "status", SensorStatusEnum.ENABLE.getIntValue());
 		for (Integer key : sensorMap.keySet())
 		{
 			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
