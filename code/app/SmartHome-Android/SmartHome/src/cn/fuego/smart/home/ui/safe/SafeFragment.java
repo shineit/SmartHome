@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseFragment;
 import cn.fuego.smart.home.ui.model.SafeViewModel;
@@ -58,7 +56,7 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 	public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id)
 	{
 		
-		HomeSensorJson selectItem=(HomeSensorJson) sensorAdapter.getChild(groupPosition, childPosition);;
+		HomeSensorJson selectItem=(HomeSensorJson) sensorAdapter.getChild(groupPosition, childPosition);
 		
 		if(selectItem!=null)
 		{
@@ -73,7 +71,7 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 		    i.putExtra(safeViewModel.getCtrGroupID(), String.valueOf(selectItem.getCtrGroupID()));
 			i.putExtra(safeViewModel.getId(), selectItem.getId());//作为修改数据的索引
 			//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-			startActivityForResult(i, 1);
+			startActivityForResult(i, IntentCodeConst.REQUEST_CODE);
 			
 		}
 		
@@ -87,10 +85,10 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 
-		if(requestCode==1)
+		if(requestCode==IntentCodeConst.REQUEST_CODE)
 		{
 			
-			if(10==resultCode)
+			if(resultCode==IntentCodeConst.RESULT_CODE)
 			{
 				getSensorData();
 

@@ -24,6 +24,7 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
@@ -227,7 +228,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 			Intent intent = new Intent();
             //以下设置flag 有作用
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			SafeConfigActivity.this.setResult(10,intent);
+			SafeConfigActivity.this.setResult(IntentCodeConst.RESULT_CODE,intent);
 			this.finish();
             
 		}

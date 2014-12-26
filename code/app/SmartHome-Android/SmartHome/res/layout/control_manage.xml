@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/head_height"
         android:background="@color/themecolor"
         android:orientation="vertical" >
 
@@ -23,21 +23,23 @@
                 android:layout_centerVertical="true"
                 android:text="云控"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/head_font_size_sm" />
 
             <Button
                 android:id="@+id/control_manage_back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:drawableLeft="@drawable/back"
                 android:drawablePadding="5dp"
                 android:text="返回"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -74,18 +76,21 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="集中器编号"
-                        android:textColor="@color/black" />
+                        android:text="集中器编号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/concnet_id"
+                        android:id="@+id/control_manage_concentID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/TextView02"
                         android:text="1234"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -100,18 +105,21 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="设备编号"
-                        android:textColor="@color/black" />
+                        android:text="控制器编号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/control_objID"
+                        android:id="@+id/control_manage_ctrID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/alarm_view_objID"
                         android:text="1234"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -126,18 +134,21 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="设备类型"
-                        android:textColor="@color/black" />
+                        android:text="控制器类型:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/alarm_manage_objType"
+                        android:id="@+id/control_manage_ctrType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/TextView04"
                         android:text="控制类"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
             </LinearLayout>
 
@@ -161,13 +172,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="描   述:"
-                        android:textColor="@color/black" />
+                        android:text="描述:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <EditText
-                        android:id="@+id/alarm_manage_desp"
+                        android:id="@+id/control_manage_desp"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="70dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="30dp"
@@ -175,10 +187,12 @@
                         android:layout_toRightOf="@+id/textView3"
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
+                        android:gravity="center_vertical|top"
                         android:height="20dp"
-                        android:paddingLeft="10dp"
+                        android:hint="输入不得超过50字数"
+                        android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/content_font_size_sm" />
 
                 </RelativeLayout>
 
@@ -194,25 +208,32 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="标   签:"
-                        android:textColor="@color/black" />
+                        android:text="标签:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
-                    <EditText
-                        android:id="@+id/control_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                    <Spinner
+                        android:id="@+id/control_mark_spinner"
+                        style="?android:attr/spinnerDropDownItemStyle"
+                        android:layout_width="155dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="27dp"
+                        android:layout_toRightOf="@+id/TextView06"
+                        android:gravity="center_vertical" />
+
+                    <Button
+                        android:id="@+id/control_mark_btn"
+                        android:layout_width="18dp"
+                        android:layout_height="32dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginLeft="30dp"
                         android:layout_marginRight="20dp"
-                        android:layout_toRightOf="@+id/TextView06"
-                        android:background="@drawable/edittext_sel"
-                        android:ems="10"
-                        android:height="20dp"
-                        android:paddingLeft="10dp"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/control_mark_spinner"
+                        android:background="@drawable/login_button"
+                        android:text="管理标签"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -228,11 +249,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="区   号:"
-                        android:textColor="@color/black" />
+                        android:text="区号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <EditText
-                        android:id="@+id/alarm_manage_error"
+                        android:id="@+id/control_manage_groupID"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
@@ -254,15 +276,13 @@
             <Button
                 android:id="@+id/control_config_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/nav"
                 android:focusableInTouchMode="true"
                 android:text="配    置"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
 
         </LinearLayout>
     </ScrollView>
