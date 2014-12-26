@@ -2,29 +2,41 @@ package cn.fuego.smart.home.ui.safe;
 
 import java.util.List;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
+import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.SafeViewModel;
 import cn.fuego.smart.home.ui.model.SpinnerDataModel;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
+import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
+import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
+import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class SafeConfigActivity extends BaseActivtiy implements OnClickListener, OnItemSelectedListener
@@ -42,6 +54,11 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	private TextView txt_concentID,txt_sensorID,txt_sensorType;
 	private EditText txt_desp,txt_warn,txt_error;
 	private String selCtrID,selMark;
+	
+	private PopupWindow popupWindow=null; 
+	private View view,popParent;  
+	private String newMark;
+	private ProgressDialog addPDialog,configPDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -57,12 +74,16 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		back_btn.setTag(1);
 		
 		Button config_btn =  (Button) findViewById(R.id.safe_config_btn);
+		config_btn.requestFocus();
+		config_btn.requestFocusFromTouch();
 		config_btn.setOnClickListener(this);
 		config_btn.setTag(2);
 		
 		Button add_btn = (Button) findViewById(R.id.safe_add_btn);
 		add_btn.setOnClickListener(this);
 		add_btn.setTag(3);
+		
+		popParent= findViewById(R.id.safe_manage_head);
 	}
 	
 	private void initData(Intent intent)
@@ -163,7 +184,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 				break;
 		case 2:configSafe();
 			break;
-		case 3:
+		case 3:showPopWindow(popParent);
 			break;
 		default:break;
 		}
@@ -172,6 +193,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 
 	private void configSafe()
 	{
+		configPDialog =ProgressDialog.show(SafeConfigActivity.this, "请稍等", "正在提交数据……");
 		SetSensorReq req = new SetSensorReq();
 		req.setToken(MemoryCache.getToken());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
@@ -201,7 +223,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		//SetSensorRsp rsp = (SetSensorRsp) message.getMessage().obj;
 		if(message.isSuccess())
 		{
-
+			configPDialog.dismiss();
 			Intent intent = new Intent();
             //以下设置flag 有作用
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -243,21 +265,115 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		// TODO Auto-generated method stub
 		
 	}
+    private void showPopWindow(View parent)
+    {
+      		  
+		if (popupWindow == null)
+		{
+			LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-	public TextView getTxt_concentID()
-	{
-		return txt_concentID;
-	}
+			view = layoutInflater.inflate(R.layout.pop_window_add_mark, null);
+
+			// 创建一个PopuWidow对象
+			// popupWindow = new PopupWindow(view, 300, 350);
+			popupWindow = new PopupWindow(view, getWindowManager()
+					.getDefaultDisplay().getWidth(), getWindowManager()
+					.getDefaultDisplay().getHeight());
+		}
+
+		// 使其聚集
+		popupWindow.setFocusable(true);
+		// 设置允许在外点击消失
+		popupWindow.setOutsideTouchable(true);
+
+		// 实例化一个ColorDrawable颜色为半透明
+		ColorDrawable dw = new ColorDrawable(0xb0000000);
+		popupWindow.setBackgroundDrawable(dw);
+
+		
+		final EditText txt_mark = (EditText) view.findViewById(R.id.pop_window_mark);
+		
+		Button sureBtn = (Button) view.findViewById(R.id.pop_window_sure_btn);
+		sureBtn.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				addPDialog =ProgressDialog.show(SafeConfigActivity.this, "请稍等", "正在提交数据……");
+
+				newMark = txt_mark.getText().toString().trim();
+				if (newMark != null && newMark.length() > 0)
+				{
+					SetUserMarkReq req = new SetUserMarkReq();
+					req.setToken(MemoryCache.getToken());
+					UserMarkJson userMark = new UserMarkJson();
+					userMark.setMark(newMark);
+					userMark.setUserID(MemoryCache.getLoginInfo().getUser()
+							.getUserID());
+					req.setUserMark(userMark);
+					WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler()
+							{
+								@Override
+								public void handle(MispHttpMessage message)
+								{
+									// SetUserMarkRsp rsp = (SetUserMarkRsp)
+									// message.getMessage().obj;
+									if (message.isSuccess())
+									{
+										log.info("标签新增成功");
+
+										SensorDataCache.getInstance().getMarkList().add(newMark);
+										//markList.add(newMark);
+										markAdapter.notifyDataSetChanged();
+
+										addPDialog.dismiss();
+										popupWindow.dismiss();
+
+									} else
+									{
+										super.sendMessage(message);
+									}
+								}
+							}).addUserMark(req);
+
+				} else
+				{
+					log.info("新增标签输入为空");
+					Toast.makeText(SafeConfigActivity.this, "请输入用户标签！",
+							Toast.LENGTH_LONG);
+				}
+			}
+		});
+		Button cancelBtn = (Button) view.findViewById(R.id.pop_window_cancel);
+		cancelBtn.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				popupWindow.dismiss();
+
+			}
+		});
+
+		WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		// 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半
+		int xPos = windowManager.getDefaultDisplay().getWidth() / 2
+				- popupWindow.getWidth() / 2;
+
+		popupWindow.showAsDropDown(parent, xPos, 0);
+
+    } 
+
+
 
 	public TextView getTxt_sensorID()
 	{
 		return txt_sensorID;
 	}
 
-	public TextView getTxt_sensorType()
-	{
-		return txt_sensorType;
-	}
+
 
 	public EditText getTxt_desp()
 	{

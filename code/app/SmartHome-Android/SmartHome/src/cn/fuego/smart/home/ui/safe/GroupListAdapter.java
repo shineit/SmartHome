@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +55,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 	private List<List<HomeSensorJson>> itemList = new ArrayList<List<HomeSensorJson>>();
 	
 	private List<HomeSensorJson> dataSource;
+	private ProgressDialog chkPDialog;
 
 	public GroupListAdapter(Context context)
 	{
@@ -161,6 +163,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 	}
 	private void disableSensor(HomeSensorJson sensor)
 	{
+		chkPDialog= ProgressDialog.show(mContext, "请稍等", "数据提交中……");
 		BatchOperateSensorReq req = new BatchOperateSensorReq();
 		req.setToken(MemoryCache.getToken());
 		
@@ -176,6 +179,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 					{
 						//Toast.makeText(MainTabbarActivity.this, "传感器禁止成功", Toast.LENGTH_LONG);
 						log.info("传感器禁止成功");
+						chkPDialog.dismiss();
 					}
 					else
 					{
@@ -188,9 +192,9 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 
 	private void enableSensor(HomeSensorJson sensor)
 	{
+		chkPDialog= ProgressDialog.show(mContext, "请稍等", "数据提交中……");
 		BatchOperateSensorReq req = new BatchOperateSensorReq();
-		req.setToken(MemoryCache.getToken());
-		
+		req.setToken(MemoryCache.getToken());	
 		List<String> snesorList =  new ArrayList<String>();
 		snesorList.add(String.valueOf(sensor.getId()));		
 		req.setSensorList(snesorList);
@@ -203,6 +207,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 					{
 						//Toast.makeText(MainTabbarActivity.this, "传感器禁止成功", Toast.LENGTH_LONG);
 						log.info("传感器使能成功");
+						chkPDialog.dismiss();
 					}
 					else
 					{

@@ -5,7 +5,6 @@ import java.util.Set;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
@@ -15,18 +14,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
-import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SystemUser;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
-import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
@@ -49,6 +45,8 @@ public class LoginActivity extends BaseActivtiy
 		textName = (EditText) findViewById(R.id.txt_username);
 		textPwd =(EditText) findViewById(R.id.txt_password);
 		loginBtn = (Button)findViewById(R.id.login_btn);
+		loginBtn.requestFocus();
+		loginBtn.requestFocusFromTouch();
 		loginBtn.setOnClickListener(loginClick);
        
 		
