@@ -11,6 +11,6 @@
 
 @interface FEDeviceWarringSettingVC : FECommonViewController
 
--(id)initWithSensor:(FESensor *)sensor;
+-(id)initWithSensor:(FESensor *)sensor markList:(NSArray *)marks;
 
 @end

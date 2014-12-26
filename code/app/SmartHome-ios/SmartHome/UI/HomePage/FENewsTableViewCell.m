@@ -25,7 +25,7 @@
     _titleLabel.backgroundColor = [UIColor clearColor];
     [self.contentView addSubview:_titleLabel];
     
-    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 15, 100, 20)];
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width - 100, 15, 100, 20)];
     _timeLabel.backgroundColor = [UIColor clearColor];
     _timeLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_timeLabel];

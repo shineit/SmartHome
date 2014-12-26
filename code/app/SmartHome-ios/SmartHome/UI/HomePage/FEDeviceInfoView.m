@@ -56,7 +56,6 @@
     [self addSubview:dtype];
     
     _deviceType = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset + 2 * vheight + 2 * yspace, vwidth, vheight)];
-//    _deviceType.text = @"烟雾报警器";
     [self addSubview:_deviceType];
     
 }

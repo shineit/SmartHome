@@ -20,12 +20,28 @@
 #import "FECoreDataHandler.h"
 #import "FESensor.h"
 #import "CDUser.h"
+#import "FEUserMarkResponse.h"
+#import "FEMarkRequest.h"
+
+#define __SENSOR_MARK   @"mark"
+#define __SENSOR_LIST   @"sensors"
+
+//DISCRETE_SENSOR(0,"告警类"),
+//CONTIUOUS_SENSOR(1,"模拟类"),
+//CTRL_SENSOR(2,"控制类");
+
+typedef enum : NSUInteger {
+    DISCRETE_SENSOR = 0,
+    CONTIUOUS_SENSOR,
+    CTRL_SENSOR,
+} SENSOR_TYPE;
 
 @interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource,FEControlViewDelegate,FECloudSafeTableCellDelegate>
 
 @property (nonatomic, strong) UITableView *deviceTable;
 @property (nonatomic, strong) NSMutableArray *deviceList;
 @property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSArray *marklist;
 
 @end
 
@@ -44,7 +60,7 @@
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_safe_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_safe"]];
         }
         
-        _deviceList = [NSMutableArray new];//[NSMutableArray arrayWithArray:@[@[@"烟雾报警器1",@"烟雾报警器2"],@[@"温度报警器1",@"温度报警器2",@"温度报警器3"]]];
+        _deviceList = [NSMutableArray new];
     }
     return self;
 }
@@ -54,6 +70,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    [self requestMarks];
     [self requestSensor];
     
 }
@@ -82,18 +99,35 @@
 }
 
 -(void)requestSensor{
-    [self displayHUD:FEString(@"LOADING...")];
+//    [self displayHUD:FEString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
     FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
-        [weakself hideHUD:YES];
+//        [weakself hideHUD:YES];
         if (!error && response.result.errorCode.integerValue == 0) {
             [weakself.deviceList removeAllObjects];
-            if (response.sensorList.count) {
-                [weakself.deviceList addObject:response.sensorList];
+            NSArray *sensorList = [response.sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.sensorKind == %d || SELF.sensorKind == %d",CONTIUOUS_SENSOR,DISCRETE_SENSOR]];
+            if (sensorList.count) {
+                NSArray *allmarks = [sensorList valueForKey:@"mark"];
+                NSSet *set = [NSSet setWithArray:allmarks];
+                NSArray *marks = set.allObjects;
+                for (NSString *mark in marks) {
+                    [weakself.deviceList addObject:@{__SENSOR_MARK:mark,__SENSOR_LIST:[sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.mark == %@",mark]]}];
+                }
             }
             [weakself.deviceTable reloadData];
+        }
+    }];
+}
+
+-(void)requestMarks{
+    __weak typeof(self) weakself = self;
+    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+    FEMarkRequest *rdata = [[FEMarkRequest alloc] initWithUserid:FELoginUser.userid page:page];
+    [[FEWebServiceManager sharedInstance] markList:rdata response:^(NSError *error, FEUserMarkResponse *response) {
+        if (!error && response.result.errorCode.integerValue == 0) {
+            weakself.marklist = response.markList;
         }
     }];
 }
@@ -108,14 +142,14 @@
         
     }
     
-    FESensor *sensor = _deviceList[indexPath.section][indexPath.row];
+    FESensor *sensor = _deviceList[indexPath.section][__SENSOR_LIST][indexPath.row];
     [cell configWithSensor:sensor];
     return cell;
     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [(NSArray *)_deviceList[section] count];
+    return [(NSArray *)_deviceList[section][__SENSOR_LIST] count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -123,7 +157,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"卧室";
+    return self.deviceList[section][__SENSOR_MARK];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -136,7 +170,7 @@
 //}
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FEDeviceWarringSettingVC *dvc = [[FEDeviceWarringSettingVC alloc] initWithSensor:_deviceList[indexPath.section][indexPath.row]];
+    FEDeviceWarringSettingVC *dvc = [[FEDeviceWarringSettingVC alloc] initWithSensor:_deviceList[indexPath.section][__SENSOR_LIST][indexPath.row] markList:self.marklist];
     dvc.hidesBottomBarWhenPushed = YES;
 //    dvc.title = _deviceList[indexPath.section][indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
@@ -151,7 +185,11 @@
 #pragma mark - FEContrilViewDelegate
 -(void)controlViewDidSelectAllOpen:(FEControlView *)cview{
     [self displayHUD:FEString(@"LOADING...")];
-    FESensorBatchEnableRequest *edata = [[FESensorBatchEnableRequest alloc] initWithSensorList:self.deviceList];
+    NSMutableArray *allsensors = [NSMutableArray array];
+    for (NSDictionary *item in self.deviceList) {
+        [allsensors addObjectsFromArray:item[__SENSOR_LIST]];
+    }
+    FESensorBatchEnableRequest *edata = [[FESensorBatchEnableRequest alloc] initWithSensorList:allsensors];
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] SensorBatchEnable:edata response:^(NSError *error, FEBaseResponse *response) {
         [weakself hideHUD:YES];
@@ -163,7 +201,11 @@
 
 -(void)controlViewDidSelectAllClose:(FEControlView *)cview{
     [self displayHUD:FEString(@"LOADING...")];
-    FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:self.deviceList];
+    NSMutableArray *allsensors = [NSMutableArray array];
+    for (NSDictionary *item in self.deviceList) {
+        [allsensors addObjectsFromArray:item[__SENSOR_LIST]];
+    }
+    FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:allsensors];
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] SensorBatchDisable:sdata response:^(NSError *error, FEBaseResponse *response) {
         [weakself hideHUD:YES];

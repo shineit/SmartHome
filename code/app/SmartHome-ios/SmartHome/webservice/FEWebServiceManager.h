@@ -31,6 +31,7 @@
 @class FESensorSetRequest;
 @class FESensorSetResponse;
 @class FEMarkDeletRequest;
+@class FEUserMarkResponse;
 
 
 @interface FEWebServiceManager : AFHTTPRequestOperationManager
@@ -55,7 +56,7 @@
 
 -(AFHTTPRequestOperation *)markSet:(FEMarkSetRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
--(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+-(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *error, FEUserMarkResponse *response))block;
 //mark delet
 -(AFHTTPRequestOperation *)markDelete:(FEMarkDeletRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 

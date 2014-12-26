@@ -16,10 +16,12 @@
 #import "AppDelegate.h"
 #import "CDUser.h"
 #import "FECoreDataHandler.h"
+#import "FEPopPickerView.h"
 
-@interface FEDeviceWarringSettingVC ()
+@interface FEDeviceWarringSettingVC ()<FEPopPickerViewDataSource,FEPopPickerViewDelegate>
 
 @property (nonatomic, strong) FESensor *sensor;
+@property (nonatomic, strong) NSArray *markList;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
@@ -35,10 +37,11 @@
     return self;
 }
 
--(id)initWithSensor:(FESensor *)sensor{
+-(id)initWithSensor:(FESensor *)sensor markList:(NSArray *)marks{
     self = [super init];
     if (self) {
         _sensor = sensor;
+        _markList = marks;
         self.title = sensor.sensorTypeName;
     }
     return self;
@@ -61,6 +64,7 @@
     FEDeviceInfoView *dview = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 140)];
     dview.deviceNumber.text = [NSString stringWithFormat:@"%@",self.sensor.id];
     dview.controlPoint.text = [NSString stringWithFormat:@"%@",self.sensor.concentratorID];
+    dview.deviceType.text = self.sensor.sensorTypeName;
     [scrollview addSubview:dview];
     
     UIView *contentview = [[UIView alloc] initWithFrame:CGRectMake(0, dview.bounds.size.height, self.view.bounds.size.width, 260)];
@@ -105,13 +109,26 @@
     llabel.text = FEString(@"SENSOR_LABEL");
     [contentview addSubview:llabel];
     
-    FETextField *ltextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 60, height)];
-    ltextFeild.text = self.sensor.mark;
-    [contentview addSubview:ltextFeild];
+    FEPopPickerView *popview = [[FEPopPickerView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 60, height)];
+    popview.dataSource = self;
+    popview.delegate = self;
+    NSInteger index = -1;
+    for (FEUserMark *mark in self.markList) {
+        if ([mark.mark isEqualToString:self.sensor.mark]) {
+            index = [self.markList indexOfObject:mark];
+            break;
+        }
+    }
+    [popview setSelected:index];
+    [contentview addSubview:popview];
+    
+//    FETextField *ltextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 60, height)];
+//    ltextFeild.text = self.sensor.mark;
+//    [contentview addSubview:ltextFeild];
     
     FEButton *add = [FEButton buttonWithType:UIButtonTypeCustom];
     add.frame = CGRectMake(x + lwidth + xspace + twidth - 50, y + 3 * (height + yspace), 50, height);
-    [add addTarget:self action:@selector(addUserMark:) forControlEvents:UIControlEventTouchUpInside];
+//    [add addTarget:self action:@selector(addUserMark:) forControlEvents:UIControlEventTouchUpInside];
     [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [add setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
     [add setTitle:FEString(@"SENSOR_ADD") forState:UIControlStateNormal];
@@ -126,18 +143,17 @@
     
     FEButton *configbutton = [FEButton buttonWithType:UIButtonTypeCustom];
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-    configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
-    [configbutton setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
+    configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, self.view.bounds.size.width - 20 * 2, 30);
     [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
     [scrollview addSubview:configbutton];
     
-    FEButton *monitor = [FEButton buttonWithType:UIButtonTypeCustom];
-    monitor.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-    monitor.frame = CGRectMake(self.view.bounds.size.width - 20 - 100, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
-    [monitor setTitle:FEString(@"SONSER_MONITOR") forState:UIControlStateNormal];
-    [scrollview addSubview:monitor];
+//    FEButton *monitor = [FEButton buttonWithType:UIButtonTypeCustom];
+//    monitor.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+//    monitor.frame = CGRectMake(self.view.bounds.size.width - 20 - 100, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
+//    [monitor setTitle:FEString(@"SONSER_MONITOR") forState:UIControlStateNormal];
+//    [scrollview addSubview:monitor];
     
-    scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, monitor.frame.origin.y + monitor.bounds.size.height + 20);
+    scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, configbutton.frame.origin.y + configbutton.bounds.size.height + 20);
     scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
 }
@@ -153,6 +169,15 @@
             NSLog(@"add mark success!");
         }
     }];
+}
+
+#pragma mark - FEPopPickerViewDataSource
+-(NSInteger)popPickerItemNumber{
+    return self.markList.count;
+}
+
+-(NSString *)popPickerTitleAtIndex:(NSInteger)index{
+    return ((FEUserMark *)self.markList[index]).mark;
 }
 
 #pragma override

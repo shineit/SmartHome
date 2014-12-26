@@ -24,6 +24,7 @@
 #import "FESensorSetRequest.h"
 #import "FESensorSetResponse.h"
 #import "FEMarkDeletRequest.h"
+#import "FEUserMarkResponse.h"
 
 
 #define _BASE_URL @"http://120.24.217.173:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
@@ -138,10 +139,10 @@
 }
 
 //get mark list
--(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *errrot, FEBaseResponse *response))block{
+-(AFHTTPRequestOperation *)markList:(FEMarkRequest *)mdata response:(void (^)(NSError *errrot, FEUserMarkResponse *response))block{
     return [self POST:mdata.method parameters:mdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        [self showerrorResponse:operation];
-        block(NULL,[FEBaseResponse new]);
+        block(NULL,[[FEUserMarkResponse alloc] initWithResponse:responseObject]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self showerror:error];
         block(error,NULL);
