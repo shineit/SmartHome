@@ -47,7 +47,14 @@
     _selected = -1;
     _buttonHeight = 40;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = [UIColor colorWithRed:219.0f / 255.0f green:219.0f / 255.0f blue:219.0f / 255.0f alpha:1.0f];
+    self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+    self.layer.shadowRadius = kPopViewCornerRadius + 5;
+    self.layer.shadowOpacity = 0.1f;
+    self.layer.shadowOffset = CGSizeMake(0 - (kPopViewCornerRadius + 5)/2, 0 - (kPopViewCornerRadius + 5)/2);
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
+    
     UITapGestureRecognizer *rec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGes:)];
     [self addGestureRecognizer:rec];
     CAShapeLayer *layer = [self createIndicatorWithColor:[UIColor blackColor] andPosition:CGPointMake(self.bounds.size.width - 20, self.bounds.size.height / 2.0)];
@@ -56,7 +63,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(2, (self.bounds.size.height - 20) / 2.0f, self.bounds.size.width - 2 - 40, 20)];
     [self addSubview:label];
     self.titleLabel = label;
-    label.text = @"测试！";
+//    label.text = @"测试！";
     
 }
 
@@ -287,6 +294,9 @@
 -(void)setSelected:(NSInteger)selected{
     _indexPath = [NSIndexPath indexPathForRow:selected inSection:0];
     _selected = selected;
+    if (selected != -1) {
+        self.titleLabel.text = [self.dataSource popPickerTitleAtIndex:selected];
+    }
 }
 
 - (CAShapeLayer *)createIndicatorWithColor:(UIColor *)color andPosition:(CGPoint)point {

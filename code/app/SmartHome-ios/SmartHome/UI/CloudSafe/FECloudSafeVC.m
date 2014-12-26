@@ -22,26 +22,25 @@
 #import "CDUser.h"
 #import "FEUserMarkResponse.h"
 #import "FEMarkRequest.h"
-
-#define __SENSOR_MARK   @"mark"
-#define __SENSOR_LIST   @"sensors"
+#import "FEDevicesCache.h"
 
 //DISCRETE_SENSOR(0,"告警类"),
 //CONTIUOUS_SENSOR(1,"模拟类"),
 //CTRL_SENSOR(2,"控制类");
 
-typedef enum : NSUInteger {
-    DISCRETE_SENSOR = 0,
-    CONTIUOUS_SENSOR,
-    CTRL_SENSOR,
-} SENSOR_TYPE;
+//typedef enum : NSUInteger {
+//    DISCRETE_SENSOR = 0,
+//    CONTIUOUS_SENSOR,
+//    CTRL_SENSOR,
+//} SENSOR_TYPE;
 
-@interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource,FEControlViewDelegate,FECloudSafeTableCellDelegate>
+@interface FECloudSafeVC ()<UITableViewDelegate,UITableViewDataSource,FEControlViewDelegate,FECloudSafeTableCellDelegate,FEDeviceWarringSettingVCDelegate>
 
 @property (nonatomic, strong) UITableView *deviceTable;
-@property (nonatomic, strong) NSMutableArray *deviceList;
+@property (nonatomic, strong) NSArray *deviceList;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSArray *marklist;
+@property (nonatomic, strong) NSArray *alldevices;
 
 @end
 
@@ -69,9 +68,14 @@ typedef enum : NSUInteger {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (![FEDevicesCache sharedInstance].getAlldevices) {
+        [self requestSensor];
+    }else{
+        self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];;
+    }
+    
     [self initUI];
     [self requestMarks];
-    [self requestSensor];
     
 }
 
@@ -81,10 +85,10 @@ typedef enum : NSUInteger {
 //    [self.view addSubview:_searchBar];
     
     
-    FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y + _searchBar.bounds.size.height, self.view.frame.size.width, 40)];
-    cview.delegate = self;
-    [self.view addSubview:cview];
-    _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, cview.frame.origin.y + cview.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - cview.frame.size.height) style:UITableViewStylePlain];
+//    FEControlView *cview = [[FEControlView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y + _searchBar.bounds.size.height, self.view.frame.size.width, 40)];
+//    cview.delegate = self;
+//    [self.view addSubview:cview];
+    _deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     _deviceTable.dataSource = self;
     _deviceTable.delegate = self;
     _deviceTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -106,19 +110,28 @@ typedef enum : NSUInteger {
     [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
 //        [weakself hideHUD:YES];
         if (!error && response.result.errorCode.integerValue == 0) {
-            [weakself.deviceList removeAllObjects];
-            NSArray *sensorList = [response.sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.sensorKind == %d || SELF.sensorKind == %d",CONTIUOUS_SENSOR,DISCRETE_SENSOR]];
-            if (sensorList.count) {
-                NSArray *allmarks = [sensorList valueForKey:@"mark"];
-                NSSet *set = [NSSet setWithArray:allmarks];
-                NSArray *marks = set.allObjects;
-                for (NSString *mark in marks) {
-                    [weakself.deviceList addObject:@{__SENSOR_MARK:mark,__SENSOR_LIST:[sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.mark == %@",mark]]}];
-                }
-            }
+//            self.alldevices = response.sensorList;
+            [[FEDevicesCache sharedInstance] putDevices:response.sensorList];
+            self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];
+            
             [weakself.deviceTable reloadData];
         }
     }];
+}
+
+-(NSArray *)filterSensor:(NSArray *)allsensor{
+    NSMutableArray *sensors = [NSMutableArray array];
+    NSArray *sensorList = [allsensor filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.sensorKind == %d || SELF.sensorKind == %d",CONTIUOUS_SENSOR,DISCRETE_SENSOR]];
+    if (sensorList.count) {
+        NSArray *allmarks = [sensorList valueForKey:@"mark"];
+        NSSet *set = [NSSet setWithArray:allmarks];
+        NSArray *marks = set.allObjects;
+        
+        for (NSString *mark in marks) {
+            [sensors addObject:@{__SENSOR_MARK:mark,__SENSOR_LIST:[sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.mark == %@",mark]]}];
+        }
+    }
+    return sensors;
 }
 
 -(void)requestMarks{
@@ -171,6 +184,7 @@ typedef enum : NSUInteger {
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FEDeviceWarringSettingVC *dvc = [[FEDeviceWarringSettingVC alloc] initWithSensor:_deviceList[indexPath.section][__SENSOR_LIST][indexPath.row] markList:self.marklist];
+    dvc.delegate = self;
     dvc.hidesBottomBarWhenPushed = YES;
 //    dvc.title = _deviceList[indexPath.section][indexPath.row];
     [self.navigationController pushViewController:dvc animated:YES];
@@ -236,6 +250,12 @@ typedef enum : NSUInteger {
             }
         }];
     }
+}
+
+#pragma mark - FEDeviceWarringSettingVCDelegate
+-(void)sensorDidConfig{
+    self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];
+    [self.deviceTable reloadData];
 }
 
 

@@ -12,11 +12,21 @@
 #import "FEControlPointCell.h"
 #import "FETreeViewCell.h"
 #import "FEDeviceControllVC.h"
+#import "FEPage.h"
+#import "FESensorListRequest.h"
+#import "FESensorListResponse.h"
+#import "FESensor.h"
+#import "FEWebServiceManager.h"
+#import "AppDelegate.h"
+#import "FECoreDataHandler.h"
+#import "CDUser.h"
+#import "FEDevicesCache.h"
 
 @interface FECloudControlVC ()<RATreeViewDataSource,RATreeViewDelegate>
 
 @property (nonatomic, strong) RATreeView *controlTree;
 @property (strong, nonatomic) NSArray *data;
+@property (strong, nonatomic) NSArray *controlSensors;
 
 @end
 
@@ -34,8 +44,6 @@
         }else{
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_control_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_control"]];
         }
-        
-        [self loadData];
     }
     return self;
 }
@@ -44,6 +52,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (![[FEDevicesCache sharedInstance] getAlldevices]) {
+        [self requestSensor];
+    }else{
+        self.controlSensors = [[FEDevicesCache sharedInstance] getFilterControlDevice];
+    }
+//    [self loadData];
     [self initUI];
 }
 
@@ -58,6 +72,19 @@
     
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor clearColor];
+}
+
+-(void)requestSensor{
+    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
+        if (!error && response.result.errorCode.integerValue == 0) {
+
+            [[FEDevicesCache sharedInstance] putDevices:response.sensorList];
+            weakself.controlSensors = [[FEDevicesCache sharedInstance] getFilterControlDevice];
+        }
+    }];
 }
 
 #pragma mark TreeView Delegate methods
@@ -97,7 +124,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [cell configurelevel:level withControlObj:item];
-    return cell;
     
     return cell;
 }
@@ -105,62 +131,66 @@
 - (NSInteger)treeView:(RATreeView *)treeView numberOfChildrenOfItem:(id)item
 {
     if (item == nil) {
-        return [self.data count];
+        return [self.controlSensors count];
     }
     
-    FEControlObject *data = item;
-    return [data.children count];
+    NSArray *data = item[__SENSOR_LIST];
+    return data.count;
 }
 
 - (id)treeView:(RATreeView *)treeView child:(NSInteger)index ofItem:(id)item
 {
-    FEControlObject *data = item;
+//    FEControlObject *data = item;
     if (item == nil) {
-        return [self.data objectAtIndex:index];
+        return [self.controlSensors objectAtIndex:index];
     }
     
-    return data.children[index];
+    return item[__SENSOR_LIST][index];
 }
 
 #pragma mark - RATreeViewDelegate
 -(void)treeView:(RATreeView *)treeView didSelectRowForItem:(id)item{
-    FEControlObject *data = item;
-    FEControlObject *parent = [treeView parentForItem:item];
-    if (parent == nil || data.children.count != 0) {
-        return;
-    }else{
-        FEDeviceControllVC *dvc = [FEDeviceControllVC new];
-        dvc.hidesBottomBarWhenPushed = YES;
-        dvc.title = data.name;
-        [self.navigationController pushViewController:dvc animated:YES];
-    }
+//    FEControlObject *data = item;
+//    FEControlObject *parent = [treeView parentForItem:item];
+//    if (parent == nil || data.children.count != 0) {
+//        return;
+//    }else{
+//        FEDeviceControllVC *dvc = [FEDeviceControllVC new];
+//        dvc.hidesBottomBarWhenPushed = YES;
+//        dvc.title = data.name;
+//        [self.navigationController pushViewController:dvc animated:YES];
+//    }
 }
 
-- (void)loadData
-{
-    FEControlObject *control1 = [FEControlObject dataObjectWithName:@"门控制器1:厨房" children:nil];
-    FEControlObject *control2 = [FEControlObject dataObjectWithName:@"门控制器2:卧室" children:nil];
-    
-    FEControlObject *doorcontrol = [FEControlObject dataObjectWithName:@"门控制器"
-                                                  children:[NSArray arrayWithObjects:control1, control2, nil]];
-    doorcontrol.imageName = @"doorControl";
-    
-    FEControlObject *notebook1 = [FEControlObject dataObjectWithName:@"窗帘控制器1" children:nil];
-    FEControlObject *notebook2 = [FEControlObject dataObjectWithName:@"窗帘控制器2" children:nil];
-    
-    FEControlObject *computer1 = [FEControlObject dataObjectWithName:@"窗帘控制器"
-                                                      children:[NSArray arrayWithObjects:notebook1, notebook2, nil]];
-    computer1.imageName = @"windowControl";
-    FEControlObject *computer2 = [FEControlObject dataObjectWithName:@"灭火控制器1" children:nil];
-    FEControlObject *computer3 = [FEControlObject dataObjectWithName:@"灭火控制器2" children:nil];
-    
-    FEControlObject *computer = [FEControlObject dataObjectWithName:@"灭火控制器"
-                                                     children:[NSArray arrayWithObjects:computer2, computer3, nil]];
-    computer.imageName = @"fireControl";
-    
-    self.data = [NSArray arrayWithObjects:doorcontrol, computer1,computer, nil];
-    
-}
+//- (void)loadData
+//{
+////    for (NSDictionary *item in self.controlSensors) {
+////        FEControlObject *control1 = [FEControlObject dataObjectWithName:@"门控制器1:厨房" children:nil];
+////    }
+//    
+//    FEControlObject *control1 = [FEControlObject dataObjectWithName:@"门控制器1:厨房" children:nil];
+//    FEControlObject *control2 = [FEControlObject dataObjectWithName:@"门控制器2:卧室" children:nil];
+//    
+//    FEControlObject *doorcontrol = [FEControlObject dataObjectWithName:@"门控制器"
+//                                                  children:[NSArray arrayWithObjects:control1, control2, nil]];
+//    doorcontrol.imageName = @"doorControl";
+//    
+//    FEControlObject *notebook1 = [FEControlObject dataObjectWithName:@"窗帘控制器1" children:nil];
+//    FEControlObject *notebook2 = [FEControlObject dataObjectWithName:@"窗帘控制器2" children:nil];
+//    
+//    FEControlObject *computer1 = [FEControlObject dataObjectWithName:@"窗帘控制器"
+//                                                      children:[NSArray arrayWithObjects:notebook1, notebook2, nil]];
+//    computer1.imageName = @"windowControl";
+//    FEControlObject *computer2 = [FEControlObject dataObjectWithName:@"灭火控制器1" children:nil];
+//    FEControlObject *computer3 = [FEControlObject dataObjectWithName:@"灭火控制器2" children:nil];
+//    
+//    FEControlObject *computer = [FEControlObject dataObjectWithName:@"灭火控制器"
+//                                                     children:[NSArray arrayWithObjects:computer2, computer3, nil]];
+//    computer.imageName = @"fireControl";
+//    
+//    self.data = [NSArray arrayWithObjects:doorcontrol, computer1,computer, nil];
+//    
+//}
 
 - (void)didReceiveMemoryWarning
 {

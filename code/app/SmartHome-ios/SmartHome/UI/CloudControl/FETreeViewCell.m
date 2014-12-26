@@ -8,12 +8,18 @@
 
 #import "FETreeViewCell.h"
 #import "FEControlObject.h"
+#import "FESensor.h"
 
 
 @interface FETreeViewCell ()
 
 @property (nonatomic, strong) FELabel *titleLabel;
 @property (nonatomic, strong) UIImageView *indicatorView;
+@property (nonatomic, strong) UIView *controllContentView;
+@property (nonatomic, strong) FELabel *numberLabel;
+//@property (nonatomic, strong) FELabel *numberLabelText;
+@property (nonatomic, strong) FELabel *regionLabel;
+//@property (nonatomic, strong) FELabel *regionLabelText;
 
 @end
 
@@ -40,20 +46,39 @@
     _indicatorView.hidden = YES;
     self.accessoryView = _indicatorView;
     
+    self.controllContentView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+    UILabel *label = [[FELabel alloc] initWithFrame:CGRectMake(5, 5, 60, 20)];
+    label.text = FEString(@"编号:");
+    [self.controllContentView addSubview:label];
     
+    self.numberLabel = [[FELabel alloc] initWithFrame:CGRectMake(label.frame.origin.x + label.bounds.size.width + 5, 5, 80, 20)];
+    [self.controllContentView addSubview:self.numberLabel];
+    
+    self.regionLabel = [[FELabel alloc] initWithFrame:CGRectMake(self.controllContentView.bounds.size.width - 80 - 10, 5, 80, 20)];
+    [self.controllContentView addSubview:self.regionLabel];
+    
+    label = [[FELabel alloc] initWithFrame:CGRectMake(self.regionLabel.frame.origin.x - 60 - 5, 5, 60, 20)];
+//    label.text = FEString(<#_S#>)
+    [self.controllContentView addSubview:label];
+    [self.contentView addSubview:self.controllContentView];
 //    self.indentationLevel
 }
 
--(void)configurelevel:(NSInteger)level withControlObj:(FEControlObject *)obj{
+-(void)configurelevel:(NSInteger)level withControlObj:(id)obj{
     
-    self.titleLabel.text = obj.name;
+//    self.titleLabel.text = obj.name;
     
     if (level == 0) {
-        self.imageView.image = [UIImage imageNamed:obj.imageName];
+        [self.controllContentView setHidden:YES];
+        self.titleLabel.text = obj[@"mark"];
+        self.imageView.image = [UIImage imageNamed:@"doorControl"];
         self.indicatorView.hidden = NO;
         self.indicatorView.image = [UIImage imageNamed:@"controlIndicator"];
         self.backgroundColor = FEColor(229, 229, 229, 1);//[UIColor whiteColor];
     } else if (level == 1) {
+        [self.controllContentView setHidden:NO];
+        self.numberLabel.text = [NSString stringWithFormat:@"%@",((FESensor *)obj).sensorID];
+        self.regionLabel.text = ((FESensor *)obj).mark;
         self.indicatorView.hidden = YES;
         self.backgroundColor = [UIColor whiteColor];
     } else if (level >= 2) {

@@ -9,6 +9,7 @@
 #import "FEDeviceControllVC.h"
 #import "FEDeviceInfoView.h"
 
+
 @interface FEDeviceControllVC ()
 
 @property (nonatomic, strong) UITextField *descripTextField;
@@ -32,6 +33,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self initUI];
 }
 
@@ -91,6 +93,7 @@
     [self.view addSubview:config];
     
 }
+
 
 -(void)config:(UIButton *)button{
     NSLog(@"configuretion");

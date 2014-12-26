@@ -36,6 +36,7 @@
 		1475A0E91A048C5000EE8353 /* FEServiceOrederRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0E81A048C5000EE8353 /* FEServiceOrederRequest.m */; };
 		149894201A4C081300903B22 /* FEUserMarkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498941F1A4C081300903B22 /* FEUserMarkResponse.m */; };
 		1498945B1A4D84EE00903B22 /* FEPopPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945A1A4D84EE00903B22 /* FEPopPickerView.m */; };
+		1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945D1A4DAF8800903B22 /* FEDevicesCache.m */; };
 		1499E6CA1A0BAD0E002F5DDB /* FEAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6B91A0BAD0E002F5DDB /* FEAlarm.m */; };
 		1499E6CB1A0BAD0E002F5DDB /* FEAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6BB1A0BAD0E002F5DDB /* FEAttribute.m */; };
 		1499E6CC1A0BAD0E002F5DDB /* FENews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6BD1A0BAD0E002F5DDB /* FENews.m */; };
@@ -171,6 +172,8 @@
 		1498941F1A4C081300903B22 /* FEUserMarkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMarkResponse.m; sourceTree = "<group>"; };
 		149894591A4D84ED00903B22 /* FEPopPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEPopPickerView.h; sourceTree = "<group>"; };
 		1498945A1A4D84EE00903B22 /* FEPopPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEPopPickerView.m; sourceTree = "<group>"; };
+		1498945C1A4DAF8800903B22 /* FEDevicesCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDevicesCache.h; sourceTree = "<group>"; };
+		1498945D1A4DAF8800903B22 /* FEDevicesCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEDevicesCache.m; sourceTree = "<group>"; };
 		1499E6B81A0BAD0E002F5DDB /* FEAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEAlarm.h; sourceTree = "<group>"; };
 		1499E6B91A0BAD0E002F5DDB /* FEAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEAlarm.m; sourceTree = "<group>"; };
 		1499E6BA1A0BAD0E002F5DDB /* FEAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEAttribute.h; sourceTree = "<group>"; };
@@ -753,6 +756,8 @@
 				14B447C219F7890A0078EAB4 /* FEControlView.m */,
 				146D34DC19FB6CE1000F14F5 /* FECloudSafeTableCell.h */,
 				146D34DD19FB6CE1000F14F5 /* FECloudSafeTableCell.m */,
+				1498945C1A4DAF8800903B22 /* FEDevicesCache.h */,
+				1498945D1A4DAF8800903B22 /* FEDevicesCache.m */,
 			);
 			path = CloudSafe;
 			sourceTree = "<group>";
@@ -995,6 +1000,7 @@
 				14D7B7A51A05FC6E0072D31C /* UIImage+Resize.m in Sources */,
 				143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */,
 				144022B91A08945B0079253A /* NSDate+Formatter.m in Sources */,
+				1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */,
 				14D7B7001A09B163008BE443 /* FELogoutRequest.m in Sources */,
 				1499E6FD1A10B025002F5DDB /* FENewsDetailVC.m in Sources */,
 				14B447B319F67DFC0078EAB4 /* FEServiceTableViewCell.m in Sources */,

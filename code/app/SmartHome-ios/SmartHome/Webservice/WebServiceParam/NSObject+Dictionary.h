@@ -12,5 +12,4 @@
 
 @property (nonatomic, strong, readonly) NSDictionary *dictionary;
 -(NSArray *)getAllProperty;
-
 @end

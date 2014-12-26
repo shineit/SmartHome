@@ -6,8 +6,13 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FERelyUserRequest.h"
+#import "FERequestBaseData.h"
+@class FESensor;
+@interface FESensorSetRequest : FERequestBaseData
 
-@interface FESensorSetRequest : FERelyUserRequest
+@property (nonatomic, strong, readonly) NSNumber *command;
+@property (nonatomic, strong, readonly) FESensor *sensor;
+
+-(id)initWithCommond:(NSNumber *)cmd sensor:(FESensor *)sensor;
 
 @end

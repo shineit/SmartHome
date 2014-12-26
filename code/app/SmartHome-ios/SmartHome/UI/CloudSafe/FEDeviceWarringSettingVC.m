@@ -11,6 +11,8 @@
 #import "FESensor.h"
 #import "FEWebServiceManager.h"
 #import "FEMarkSetRequest.h"
+#import "FESensorSetRequest.h"
+#import "FESensorSetResponse.h"
 #import "FEBaseResponse.h"
 #import "FEUserMark.h"
 #import "AppDelegate.h"
@@ -23,6 +25,8 @@
 @property (nonatomic, strong) FESensor *sensor;
 @property (nonatomic, strong) NSArray *markList;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) FEUserMark *seletedMark;
+
 
 @end
 
@@ -77,7 +81,7 @@
     CGFloat xspace = 10; //space of item x
     CGFloat yspace = 20; //space of item y
     CGFloat lwidth = 60; //label width
-    CGFloat twidth = 200; //textFeild width
+    CGFloat twidth = self.view.bounds.size.width - (x + lwidth + xspace + 30); //textFeild width
     CGFloat height = 30;  //item (label or textFeild height)
     
     
@@ -116,6 +120,7 @@
     for (FEUserMark *mark in self.markList) {
         if ([mark.mark isEqualToString:self.sensor.mark]) {
             index = [self.markList indexOfObject:mark];
+            self.seletedMark = mark;
             break;
         }
     }
@@ -145,6 +150,7 @@
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
     configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, self.view.bounds.size.width - 20 * 2, 30);
     [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
+    [configbutton addTarget:self action:@selector(config:) forControlEvents:UIControlEventTouchUpInside];
     [scrollview addSubview:configbutton];
     
 //    FEButton *monitor = [FEButton buttonWithType:UIButtonTypeCustom];
@@ -171,6 +177,25 @@
     }];
 }
 
+-(void)config:(id)sender{
+    [self displayHUD:FEString(@"LOADING...")];
+    __weak typeof(self) weakself = self;
+    FESensor *sensor = [self.sensor copy];
+    [sensor setValue:self.seletedMark.mark forKey:@"mark"];
+    FESensorSetRequest *rdata = [[FESensorSetRequest alloc] initWithCommond:@(0) sensor:sensor];
+    [[FEWebServiceManager sharedInstance] sensorSet:rdata response:^(NSError *error, FESensorSetResponse *response) {
+        if (!error && response.result.errorCode.integerValue == 0) {
+            [weakself.sensor setValue:weakself.seletedMark.mark forKey:@"mark"];
+            if ([weakself.delegate respondsToSelector:@selector(sensorDidConfig)]) {
+                [weakself.delegate sensorDidConfig];
+            }
+            [weakself.navigationController popViewControllerAnimated:YES];
+            
+        }
+        [weakself hideHUD:YES];
+    }];
+}
+
 #pragma mark - FEPopPickerViewDataSource
 -(NSInteger)popPickerItemNumber{
     return self.markList.count;
@@ -178,6 +203,11 @@
 
 -(NSString *)popPickerTitleAtIndex:(NSInteger)index{
     return ((FEUserMark *)self.markList[index]).mark;
+}
+
+#pragma mark - FEPopPickerViewDelegate
+-(void)popPickerDidSelectedIndex:(NSInteger)index{
+    self.seletedMark = self.markList[index];
 }
 
 #pragma override

@@ -25,6 +25,8 @@
         id item = [self valueForKey:name];
         if ([item isKindOfClass:[NSString class]] || [item isKindOfClass:[NSNumber class]] || [item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]]) {
             dic[name] = item;
+        }else{
+            dic[name] = [item dictionary];
         }
         
     }
@@ -47,6 +49,22 @@
     }
     free(properties);
     return rv;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        // Copy NSObject subclasses
+        NSArray *property = [copy getAllProperty];
+        for (NSString *name in property) {
+            [copy setValue:[[self valueForKey:name] copyWithZone:zone] forKey:name];
+        }
+    }
+    
+    return copy;
 }
 
 @end

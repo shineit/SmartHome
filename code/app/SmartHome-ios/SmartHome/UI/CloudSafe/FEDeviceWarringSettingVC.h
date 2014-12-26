@@ -9,7 +9,16 @@
 #import "FECommonViewController.h"
 @class FESensor;
 
+@protocol FEDeviceWarringSettingVCDelegate <NSObject>
+
+@optional
+//should refresh
+-(void)sensorDidConfig;
+
+@end
+
 @interface FEDeviceWarringSettingVC : FECommonViewController
+@property (nonatomic, weak) id<FEDeviceWarringSettingVCDelegate> delegate;
 
 -(id)initWithSensor:(FESensor *)sensor markList:(NSArray *)marks;
 
