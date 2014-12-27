@@ -120,3 +120,10 @@
 "RATE_LARER" = "Remind next";
 "RATE_GOTORATE" = "Rate now";
 "RATE_NEVER" = "Remide never";
+
+//controll point
+"CONTROLL_DESCRIPTION" = "Description:";
+"CONTROLL_LABEL" = "Label:";
+"CONTROLL_LABEL_MANAGE" = "Label manage";
+"CONTROLL_REGION" = "Region:";
+"CONTROLL_CONFIGURE" = "Config";

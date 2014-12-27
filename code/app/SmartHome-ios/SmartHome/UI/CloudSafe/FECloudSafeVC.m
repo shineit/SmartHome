@@ -68,14 +68,23 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (![FEDevicesCache sharedInstance].getAlldevices) {
-        [self requestSensor];
-    }else{
-        self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];;
-    }
+//    if (![FEDevicesCache sharedInstance].getAlldevices) {
+//        [self requestSensor];
+//    }else{
+//        self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];;
+//    }
+    __weak typeof(self) weakself = self;
+    [[FEDevicesCache sharedInstance] getFilterSensors:^(NSArray *items) {
+        weakself.deviceList =  items;
+        [weakself.deviceTable reloadData];
+        
+    }];
+    [[FEDevicesCache sharedInstance] getAllMarks:^(NSArray *items) {
+        weakself.marklist = items;
+    }];
     
     [self initUI];
-    [self requestMarks];
+//    [self requestMarks];
     
 }
 
@@ -102,48 +111,49 @@
     NSLog(@"search!");
 }
 
--(void)requestSensor{
-//    [self displayHUD:FEString(@"LOADING...")];
-    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
-    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
-    __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
-//        [weakself hideHUD:YES];
-        if (!error && response.result.errorCode.integerValue == 0) {
-//            self.alldevices = response.sensorList;
-            [[FEDevicesCache sharedInstance] putDevices:response.sensorList];
-            self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];
-            
-            [weakself.deviceTable reloadData];
-        }
-    }];
-}
-
--(NSArray *)filterSensor:(NSArray *)allsensor{
-    NSMutableArray *sensors = [NSMutableArray array];
-    NSArray *sensorList = [allsensor filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.sensorKind == %d || SELF.sensorKind == %d",CONTIUOUS_SENSOR,DISCRETE_SENSOR]];
-    if (sensorList.count) {
-        NSArray *allmarks = [sensorList valueForKey:@"mark"];
-        NSSet *set = [NSSet setWithArray:allmarks];
-        NSArray *marks = set.allObjects;
-        
-        for (NSString *mark in marks) {
-            [sensors addObject:@{__SENSOR_MARK:mark,__SENSOR_LIST:[sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.mark == %@",mark]]}];
-        }
-    }
-    return sensors;
-}
-
--(void)requestMarks{
-    __weak typeof(self) weakself = self;
-    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
-    FEMarkRequest *rdata = [[FEMarkRequest alloc] initWithUserid:FELoginUser.userid page:page];
-    [[FEWebServiceManager sharedInstance] markList:rdata response:^(NSError *error, FEUserMarkResponse *response) {
-        if (!error && response.result.errorCode.integerValue == 0) {
-            weakself.marklist = response.markList;
-        }
-    }];
-}
+//-(void)requestSensor{
+////    [self displayHUD:FEString(@"LOADING...")];
+//    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+//    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
+//    __weak typeof(self) weakself = self;
+//    [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
+////        [weakself hideHUD:YES];
+//        if (!error && response.result.errorCode.integerValue == 0) {
+////            self.alldevices = response.sensorList;
+//            [[FEDevicesCache sharedInstance] putDevices:response.sensorList];
+//            self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];
+//            
+//            [weakself.deviceTable reloadData];
+//        }
+//    }];
+//}
+//
+//-(NSArray *)filterSensor:(NSArray *)allsensor{
+//    NSMutableArray *sensors = [NSMutableArray array];
+//    NSArray *sensorList = [allsensor filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.sensorKind == %d || SELF.sensorKind == %d",CONTIUOUS_SENSOR,DISCRETE_SENSOR]];
+//    if (sensorList.count) {
+//        NSArray *allmarks = [sensorList valueForKey:@"mark"];
+//        NSSet *set = [NSSet setWithArray:allmarks];
+//        NSArray *marks = set.allObjects;
+//        
+//        for (NSString *mark in marks) {
+//            [sensors addObject:@{__SENSOR_MARK:mark,__SENSOR_LIST:[sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.mark == %@",mark]]}];
+//        }
+//    }
+//    return sensors;
+//}
+//
+//-(void)requestMarks{
+//    __weak typeof(self) weakself = self;
+//    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+//    FEMarkRequest *rdata = [[FEMarkRequest alloc] initWithUserid:FELoginUser.userid page:page];
+//    [[FEWebServiceManager sharedInstance] markList:rdata response:^(NSError *error, FEUserMarkResponse *response) {
+//        if (!error && response.result.errorCode.integerValue == 0) {
+////            weakself.marklist = response.markList;
+//            [[FEDevicesCache sharedInstance] putMarks:response.markList];
+//        }
+//    }];
+//}
 
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -254,8 +264,11 @@
 
 #pragma mark - FEDeviceWarringSettingVCDelegate
 -(void)sensorDidConfig{
-    self.deviceList = [[FEDevicesCache sharedInstance] getFilterSensors];
-    [self.deviceTable reloadData];
+    __weak typeof(self) weakself = self;
+    [[FEDevicesCache sharedInstance] getFilterSensors:^(NSArray *items) {
+        weakself.deviceList = items;
+        [weakself.deviceTable reloadData];
+    }];
 }
 
 

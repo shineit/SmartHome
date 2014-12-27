@@ -21,10 +21,10 @@ typedef enum : NSUInteger {
 @interface FEDevicesCache : NSObject
 
 +(FEDevicesCache *)sharedInstance;
--(void)putDevices:(NSArray *)devices;
--(NSArray *)getAlldevices;
 
--(NSArray *)getFilterSensors;
--(NSArray *)getFilterControlDevice;
+-(void)getAlldevices:(void (^)(NSArray *items))block;
+-(void)getAllMarks:(void (^)(NSArray *items))block;
+-(void)getFilterSensors:(void (^)(NSArray *items))block;
+-(void)getFilterControlDevice:(void (^)(NSArray *items))block;
 
 @end

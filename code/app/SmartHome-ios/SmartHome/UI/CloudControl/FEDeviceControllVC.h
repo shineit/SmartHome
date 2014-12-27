@@ -8,6 +8,13 @@
 
 #import "FECommonViewController.h"
 
+@class FESensor;
+
 @interface FEDeviceControllVC : FECommonViewController
+
+@property (nonatomic, strong, readonly) FESensor *sensor;
+@property (nonatomic, strong) NSArray *marks;
+
+-(id)initWithSensor:(FESensor *)sensor;
 
 @end

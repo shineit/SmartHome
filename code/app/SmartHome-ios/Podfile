@@ -7,5 +7,4 @@ inhibit_all_warnings!
 pod 'AFNetworking'
 pod 'ZBUtilities'
 pod 'RATreeView'
-pod 'HockeySDK'
 pod 'HMSegmentedControl'

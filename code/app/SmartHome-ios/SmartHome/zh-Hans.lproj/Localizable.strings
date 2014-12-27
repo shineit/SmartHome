@@ -122,3 +122,10 @@
 "RATE_GOTORATE" = "去评分";
 "RATE_NEVER" = "不再提醒";
 
+//controll point
+"CONTROLL_DESCRIPTION" = "描 述:";
+"CONTROLL_LABEL" = "标 签:";
+"CONTROLL_LABEL_MANAGE" = "管理标签";
+"CONTROLL_REGION" = "区 号:";
+"CONTROLL_CONFIGURE" = "配  置";
+

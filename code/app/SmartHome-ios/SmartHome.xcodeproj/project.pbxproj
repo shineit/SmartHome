@@ -25,7 +25,6 @@
 		1460811C1A302AF00057EA9A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811B1A302AF00057EA9A /* CoreTelephony.framework */; };
 		1460811E1A302AFF0057EA9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */; };
 		146081201A302B0A0057EA9A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811F1A302B0A0057EA9A /* libz.dylib */; };
-		146081361A304C9F0057EA9A /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 146081351A304C9F0057EA9A /* BPushConfig.plist */; };
 		146617271A049975009C85B8 /* FENewsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 146617261A049975009C85B8 /* FENewsRequest.m */; };
 		146D34DE19FB6CE1000F14F5 /* FECloudSafeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146D34DD19FB6CE1000F14F5 /* FECloudSafeTableCell.m */; };
 		146D34E119FBD46D000F14F5 /* FETextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 146D34E019FBD46D000F14F5 /* FETextField.m */; };
@@ -150,7 +149,6 @@
 		1460811B1A302AF00057EA9A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1460811F1A302B0A0057EA9A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		146081351A304C9F0057EA9A /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
 		146617251A049975009C85B8 /* FENewsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FENewsRequest.h; sourceTree = "<group>"; };
 		146617261A049975009C85B8 /* FENewsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FENewsRequest.m; sourceTree = "<group>"; };
 		146D34DC19FB6CE1000F14F5 /* FECloudSafeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECloudSafeTableCell.h; sourceTree = "<group>"; };
@@ -634,7 +632,6 @@
 				14C6DE5319F549EE006384B2 /* main.m */,
 				14C6DE5519F549EE006384B2 /* SmartHome-Prefix.pch */,
 				146D34F419FDEA12000F14F5 /* Localizable.strings */,
-				146081351A304C9F0057EA9A /* BPushConfig.plist */,
 				145B21921A3582B7000AE204 /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
@@ -869,7 +866,6 @@
 				14C6DE5219F549EE006384B2 /* InfoPlist.strings in Resources */,
 				146D34F219FDEA12000F14F5 /* Localizable.strings in Resources */,
 				14C6DE5D19F549EE006384B2 /* Images.xcassets in Resources */,
-				146081361A304C9F0057EA9A /* BPushConfig.plist in Resources */,
 				14B52AC11A45B9670005F0D7 /* LaunchScreen.xib in Resources */,
 				145B21931A3582B8000AE204 /* PushConfig.plist in Resources */,
 			);

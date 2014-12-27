@@ -23,10 +23,12 @@
         }
         
         id item = [self valueForKey:name];
-        if ([item isKindOfClass:[NSString class]] || [item isKindOfClass:[NSNumber class]] || [item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]]) {
-            dic[name] = item;
-        }else{
-            dic[name] = [item dictionary];
+        if (item) {
+            if ([item isKindOfClass:[NSString class]] || [item isKindOfClass:[NSNumber class]] || [item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]]) {
+                dic[name] = item;
+            }else{
+                dic[name] = [item dictionary];
+            }
         }
         
     }

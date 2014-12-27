@@ -30,9 +30,9 @@
     CGFloat yspace = 20;
     CGFloat twidth = 100;
     CGFloat theight = 20;
-    CGFloat vwidth = 150;
     CGFloat vheight = 20;
     CGFloat xvoffset = xoffset + twidth + xspace;
+    CGFloat vwidth = self.bounds.size.width - xvoffset - 10;//150;
     
     
     FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset, twidth, theight)];

@@ -27,6 +27,7 @@
 @property (nonatomic, strong) RATreeView *controlTree;
 @property (strong, nonatomic) NSArray *data;
 @property (strong, nonatomic) NSArray *controlSensors;
+@property (strong, nonatomic) NSArray *markList;
 
 @end
 
@@ -52,12 +53,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (![[FEDevicesCache sharedInstance] getAlldevices]) {
-        [self requestSensor];
-    }else{
-        self.controlSensors = [[FEDevicesCache sharedInstance] getFilterControlDevice];
-    }
-//    [self loadData];
+//    if (![[FEDevicesCache sharedInstance] getAlldevices]) {
+//        [self requestSensor];
+//    }else{
+//        self.controlSensors = [[FEDevicesCache sharedInstance] getFilterControlDevice];
+//    }
+    __weak typeof(self) weakself = self;
+    [[FEDevicesCache sharedInstance] getFilterControlDevice:^(NSArray *items) {
+        weakself.controlSensors = items;
+        [weakself.controlTree reloadData];
+    }];
+    
+    [[FEDevicesCache sharedInstance] getAllMarks:^(NSArray *items) {
+        weakself.markList = items;
+    }];
+    
     [self initUI];
 }
 
@@ -74,18 +84,19 @@
     view.backgroundColor = [UIColor clearColor];
 }
 
--(void)requestSensor{
-    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
-    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
-    __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
-        if (!error && response.result.errorCode.integerValue == 0) {
-
-            [[FEDevicesCache sharedInstance] putDevices:response.sensorList];
-            weakself.controlSensors = [[FEDevicesCache sharedInstance] getFilterControlDevice];
-        }
-    }];
-}
+//-(void)requestSensor:(void (^)(NSArray *marks))block{
+//    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+//    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
+//    __weak typeof(self) weakself = self;
+//    [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
+//        if (!error && response.result.errorCode.integerValue == 0) {
+//
+//            [[FEDevicesCache sharedInstance] putDevices:response.sensorList];
+//            weakself.controlSensors = [[FEDevicesCache sharedInstance] getFilterControlDevice];
+//            [weakself.controlTree reloadData];
+//        }
+//    }];
+//}
 
 #pragma mark TreeView Delegate methods
 
@@ -132,10 +143,12 @@
 {
     if (item == nil) {
         return [self.controlSensors count];
+    }else if ([item isKindOfClass:[NSDictionary class]]){
+        NSArray *data = item[__SENSOR_LIST];
+        return data.count;
+    }else{
+        return 0;
     }
-    
-    NSArray *data = item[__SENSOR_LIST];
-    return data.count;
 }
 
 - (id)treeView:(RATreeView *)treeView child:(NSInteger)index ofItem:(id)item
@@ -143,54 +156,27 @@
 //    FEControlObject *data = item;
     if (item == nil) {
         return [self.controlSensors objectAtIndex:index];
+    }else if([item isKindOfClass:[NSDictionary class]]){
+        return item[__SENSOR_LIST][index];
+    }else{
+        return nil;
     }
-    
-    return item[__SENSOR_LIST][index];
 }
 
 #pragma mark - RATreeViewDelegate
 -(void)treeView:(RATreeView *)treeView didSelectRowForItem:(id)item{
-//    FEControlObject *data = item;
-//    FEControlObject *parent = [treeView parentForItem:item];
-//    if (parent == nil || data.children.count != 0) {
-//        return;
-//    }else{
-//        FEDeviceControllVC *dvc = [FEDeviceControllVC new];
-//        dvc.hidesBottomBarWhenPushed = YES;
+    
+    if ([item isKindOfClass:[NSDictionary class]]) {
+        return;
+    }else if([item isKindOfClass:[FESensor class]]){
+        FEDeviceControllVC *dvc = [[FEDeviceControllVC alloc] initWithSensor:item];
+        dvc.marks = self.markList;
+        dvc.hidesBottomBarWhenPushed = YES;
 //        dvc.title = data.name;
-//        [self.navigationController pushViewController:dvc animated:YES];
-//    }
+        [self.navigationController pushViewController:dvc animated:YES];
+    }
 }
 
-//- (void)loadData
-//{
-////    for (NSDictionary *item in self.controlSensors) {
-////        FEControlObject *control1 = [FEControlObject dataObjectWithName:@"门控制器1:厨房" children:nil];
-////    }
-//    
-//    FEControlObject *control1 = [FEControlObject dataObjectWithName:@"门控制器1:厨房" children:nil];
-//    FEControlObject *control2 = [FEControlObject dataObjectWithName:@"门控制器2:卧室" children:nil];
-//    
-//    FEControlObject *doorcontrol = [FEControlObject dataObjectWithName:@"门控制器"
-//                                                  children:[NSArray arrayWithObjects:control1, control2, nil]];
-//    doorcontrol.imageName = @"doorControl";
-//    
-//    FEControlObject *notebook1 = [FEControlObject dataObjectWithName:@"窗帘控制器1" children:nil];
-//    FEControlObject *notebook2 = [FEControlObject dataObjectWithName:@"窗帘控制器2" children:nil];
-//    
-//    FEControlObject *computer1 = [FEControlObject dataObjectWithName:@"窗帘控制器"
-//                                                      children:[NSArray arrayWithObjects:notebook1, notebook2, nil]];
-//    computer1.imageName = @"windowControl";
-//    FEControlObject *computer2 = [FEControlObject dataObjectWithName:@"灭火控制器1" children:nil];
-//    FEControlObject *computer3 = [FEControlObject dataObjectWithName:@"灭火控制器2" children:nil];
-//    
-//    FEControlObject *computer = [FEControlObject dataObjectWithName:@"灭火控制器"
-//                                                     children:[NSArray arrayWithObjects:computer2, computer3, nil]];
-//    computer.imageName = @"fireControl";
-//    
-//    self.data = [NSArray arrayWithObjects:doorcontrol, computer1,computer, nil];
-//    
-//}
 
 - (void)didReceiveMemoryWarning
 {
