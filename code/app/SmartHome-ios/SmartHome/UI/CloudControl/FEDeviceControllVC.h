@@ -10,10 +10,18 @@
 
 @class FESensor;
 
+@protocol FEDeviceControllVCDelegate <NSObject>
+
+@optional
+-(void)sensorDidConfig;
+
+@end
+
 @interface FEDeviceControllVC : FECommonViewController
 
 @property (nonatomic, strong, readonly) FESensor *sensor;
 @property (nonatomic, strong) NSArray *marks;
+@property (nonatomic, strong) id<FEDeviceControllVCDelegate> delegate;
 
 -(id)initWithSensor:(FESensor *)sensor;
 

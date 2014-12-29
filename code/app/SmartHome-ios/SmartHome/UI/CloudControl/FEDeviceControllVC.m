@@ -11,6 +11,9 @@
 #import "FESensor.h"
 #import "FEPopPickerView.h"
 #import "FEUserMark.h"
+#import "FESensorSetRequest.h"
+#import "FESensorSetResponse.h"
+#import "FEWebServiceManager.h"
 
 
 @interface FEDeviceControllVC ()<FEPopPickerViewDataSource,FEPopPickerViewDelegate>
@@ -19,6 +22,7 @@
 @property (nonatomic, strong) FEPopPickerView *labelPickerView;
 @property (nonatomic, strong) UITextField *regionNumberTextField;
 @property (nonatomic, strong) FEUserMark *selectedMark;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -50,16 +54,22 @@
 }
 
 -(void)initUI{
+    
+    UIScrollView *scrollview = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollview.userInteractionEnabled = YES;
+    [self.view addSubview:scrollview];
+    self.scrollView = scrollview;
+    
     FEDeviceInfoView *infoview = [[FEDeviceInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     infoview.controlPoint.text = self.sensor.concentratorID.stringValue;
     infoview.deviceNumber.text = self.sensor.sensorID.stringValue;
     infoview.deviceType.text = self.sensor.sensorTypeName;
-    [self.view addSubview:infoview];
+    [self.scrollView addSubview:infoview];
     
     
     UIView *contentview = [[UIView alloc] initWithFrame:CGRectMake(0, infoview.bounds.size.height, self.view.bounds.size.width, 200)];
     contentview.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:contentview];
+    [self.scrollView addSubview:contentview];
     
     CGFloat x = 10; //label 起始X
     CGFloat y = 20; //label 起始Y
@@ -120,8 +130,10 @@
     config.frame = CGRectMake((self.view.bounds.size.width - 220) / 2.0f, contentview.bounds.size.height + contentview.frame.origin.y + 20, 220, 40);
     [config setTitle:FEString(@"CONTROLL_CONFIGURE") forState:UIControlStateNormal];
     [config addTarget:self action:@selector(config:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:config];
+    [self.scrollView addSubview:config];
     
+    scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, config.frame.origin.y + config.bounds.size.height + 20);
+    scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 }
 
 #pragma mark - FEPopPickerViewDataSource
@@ -135,7 +147,39 @@
 
 
 -(void)config:(UIButton *)button{
-    NSLog(@"configuretion");
+    
+    [self displayHUD:FEString(@"LOADING...")];
+    __weak typeof(self) weakself = self;
+    FESensor *sensor = [self.sensor copy];
+    [sensor setValue:self.selectedMark.mark forKey:@"mark"];
+    [sensor setValue:self.descripTextField.text forKey:@"descriptions"];
+    FESensorSetRequest *rdata = [[FESensorSetRequest alloc] initWithCommond:@(0) sensor:sensor];
+    [[FEWebServiceManager sharedInstance] sensorSet:rdata response:^(NSError *error, FESensorSetResponse *response) {
+        if (!error && response.result.errorCode.integerValue == 0) {
+            [weakself.sensor setValue:weakself.selectedMark.mark forKey:@"mark"];
+            [weakself.sensor setValue:self.descripTextField.text forKey:@"descriptions"];
+            if ([weakself.delegate respondsToSelector:@selector(sensorDidConfig)]) {
+                [weakself.delegate sensorDidConfig];
+            }
+            [weakself.navigationController popViewControllerAnimated:YES];
+            
+        }
+        [weakself hideHUD:YES];
+    }];
+//    NSLog(@"configuretion");
+}
+
+#pragma override
+-(void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration{
+    self.scrollView.frame = self.view.bounds;
+}
+
+-(void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [UIView animateWithDuration:duration animations:^(void){
+        CGRect frame = self.view.bounds;
+        frame.size.height -= newRect.size.height;
+        self.scrollView.frame = frame;
+    }];
 }
 
 - (void)didReceiveMemoryWarning

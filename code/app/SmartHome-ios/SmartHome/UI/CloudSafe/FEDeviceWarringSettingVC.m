@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSArray *markList;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) FEUserMark *seletedMark;
+@property (nonatomic, strong) UITextField *descTextField;
 
 
 @end
@@ -91,6 +92,7 @@
     
     FETextField *dtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y, twidth, height)];
     dtextFeild.text = self.sensor.descriptions;
+    self.descTextField = dtextFeild;
     [contentview addSubview:dtextFeild];
     
     FELabel *elabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + height + yspace, lwidth, height)];
@@ -148,7 +150,7 @@
     
     FEButton *configbutton = [FEButton buttonWithType:UIButtonTypeCustom];
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-    configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, self.view.bounds.size.width - 20 * 2, 30);
+    configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, self.view.bounds.size.width - 20 * 2, 40);
     [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
     [configbutton addTarget:self action:@selector(config:) forControlEvents:UIControlEventTouchUpInside];
     [scrollview addSubview:configbutton];
@@ -182,10 +184,12 @@
     __weak typeof(self) weakself = self;
     FESensor *sensor = [self.sensor copy];
     [sensor setValue:self.seletedMark.mark forKey:@"mark"];
+    [sensor setValue:self.descTextField.text forKey:@"descriptions"];
     FESensorSetRequest *rdata = [[FESensorSetRequest alloc] initWithCommond:@(0) sensor:sensor];
     [[FEWebServiceManager sharedInstance] sensorSet:rdata response:^(NSError *error, FESensorSetResponse *response) {
         if (!error && response.result.errorCode.integerValue == 0) {
             [weakself.sensor setValue:weakself.seletedMark.mark forKey:@"mark"];
+            [weakself.sensor setValue:self.descTextField.text forKey:@"descriptions"];
             if ([weakself.delegate respondsToSelector:@selector(sensorDidConfig)]) {
                 [weakself.delegate sensorDidConfig];
             }

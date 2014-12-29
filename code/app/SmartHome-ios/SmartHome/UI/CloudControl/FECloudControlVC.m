@@ -22,7 +22,7 @@
 #import "CDUser.h"
 #import "FEDevicesCache.h"
 
-@interface FECloudControlVC ()<RATreeViewDataSource,RATreeViewDelegate>
+@interface FECloudControlVC ()<RATreeViewDataSource,RATreeViewDelegate,FEDeviceControllVCDelegate>
 
 @property (nonatomic, strong) RATreeView *controlTree;
 @property (strong, nonatomic) NSArray *data;
@@ -170,6 +170,7 @@
         return;
     }else if([item isKindOfClass:[FESensor class]]){
         FEDeviceControllVC *dvc = [[FEDeviceControllVC alloc] initWithSensor:item];
+        dvc.delegate = self;
         dvc.marks = self.markList;
         dvc.hidesBottomBarWhenPushed = YES;
 //        dvc.title = data.name;
@@ -177,6 +178,14 @@
     }
 }
 
+#pragma mark - FEDeviceControllVCDelegate
+-(void)sensorDidConfig{
+    __weak typeof(self) weakself = self;
+    [[FEDevicesCache sharedInstance] getFilterControlDevice:^(NSArray *items) {
+        weakself.controlSensors = items;
+        [weakself.controlTree reloadData];
+    }];
+}
 
 - (void)didReceiveMemoryWarning
 {

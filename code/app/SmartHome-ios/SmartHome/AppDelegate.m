@@ -16,7 +16,6 @@
 #import "FECloudCameraVC.h"
 #import "FECloudControlVC.h"
 #import "FESettingVC.h"
-#import <HockeySDK/HockeySDK.h>
 #import "CDUser.h"
 #import "APService.h"
 //#import "FEServiceListVC.h"
@@ -37,16 +36,6 @@
     
     [self loadview];
     [self.window makeKeyAndVisible];
-//    application set
-    
-//    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"4987eac73d40ca84e1d3b29111eef247"];
-//    [[BITHockeyManager sharedHockeyManager] startManager];
-//    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-//    [[BITHockeyManager sharedHockeyManager] testIdentifier];
-    
-//    [BPush setupChannel:launchOptions];
-//    [BPush setDelegate:self];
-    // Required
     
     [self registerPushNotificationOptions:launchOptions];
     
