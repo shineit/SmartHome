@@ -24,6 +24,7 @@ import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.ControlViewModel;
+import cn.fuego.smart.home.ui.setting.user.MarkManageActivity;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -60,6 +61,10 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		//设置首个聚焦
 		config_btn.requestFocus();
 		config_btn.requestFocusFromTouch();
+		
+		Button mark_btn = (Button) findViewById(R.id.control_mark_btn);
+		mark_btn.setOnClickListener(this);
+		mark_btn.setTag(3);
 	}
 
 	private void initData(Intent intent)
@@ -142,10 +147,15 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		case 2: 
 			configCtr();
 				break;
+		case 3: 
+			markManage();
+				break;
 		default:break;
 		}
 		
 	}
+
+
 
 	private void configCtr()
 	{
@@ -185,6 +195,15 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		{
 			super.sendMessage(message);
 		}
+		
+	}
+	//管理标签
+	private void markManage()
+	{
+		Intent intent = new Intent();
+		intent.setClass(ControlConfigActivity.this, MarkManageActivity.class);
+		intent.putExtra("curMark", selMark);
+		startActivity(intent);
 		
 	}
 	public TextView getTxt_id()

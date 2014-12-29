@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/safe_manage_head"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/head_height"
         android:background="@color/themecolor"
         android:orientation="vertical" >
 
@@ -25,7 +25,7 @@
                 android:layout_centerVertical="true"
                 android:text="云安"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/head_font_size_sm" />
 
             <Button
                 android:id="@+id/safe_manage_back"
@@ -34,12 +34,14 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:drawableLeft="@drawable/back"
                 android:drawablePadding="5dp"
                 android:text="返回"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -77,7 +79,8 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:text="集中器编号:"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <TextView
                         android:id="@+id/safe_concnet_id"
@@ -87,7 +90,9 @@
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/TextView02"
                         android:text="1234"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -103,7 +108,8 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:text="传感器编号:"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <TextView
                         android:id="@+id/safe_sensor_objID"
@@ -113,7 +119,9 @@
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/alarm_view_objID"
                         android:text="1234"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -123,15 +131,6 @@
                     android:layout_marginTop="10dp" >
 
                     <TextView
-                        android:id="@+id/TextView04"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:text="传感器类型:"
-                        android:textColor="@color/black" />
-
-                    <TextView
                         android:id="@+id/safe_sensor_objType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,7 +138,19 @@
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/TextView04"
                         android:text="告警类"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/TextView04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="传感器类型:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
             </LinearLayout>
 
@@ -178,8 +189,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="描   述:"
-                        android:textColor="@color/black" />
+                        android:text="描 述:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -210,8 +223,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="预   警:"
-                        android:textColor="@color/black" />
+                        android:text="预 警:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -242,8 +257,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="火   警:"
-                        android:textColor="@color/black" />
+                        android:text="火 警:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -258,8 +275,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="标   签:"
-                        android:textColor="@color/black" />
+                        android:text="标 签:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <Spinner
                         android:id="@+id/safe_mark_spinner"
@@ -268,19 +286,20 @@
                         android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginLeft="30dp"
-                        android:layout_toLeftOf="@+id/safe_add_btn"
+                        android:layout_marginLeft="27dp"
+                        android:layout_toLeftOf="@+id/safe_mark_btn"
                         android:layout_toRightOf="@+id/textView3" />
 
                     <Button
-                        android:id="@+id/safe_add_btn"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
+                        android:id="@+id/safe_mark_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="32dp"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="22dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="2dp"
                         android:background="@drawable/login_button"
-                        android:text="新增"
+                        android:text="管理标签"
                         android:textColor="@color/white" />
 
                 </RelativeLayout>
@@ -298,15 +317,17 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:text="控制器:"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                     <Spinner
                         android:id="@+id/safe_ctr_spinner"
                         style="?android:attr/spinnerDropDownItemStyle"
                         android:layout_width="fill_parent"
                         android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginLeft="27dp"
+                        android:layout_marginLeft="15dp"
                         android:layout_marginRight="20dp"
                         android:layout_toRightOf="@+id/TextView03" />
 

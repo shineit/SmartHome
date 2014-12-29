@@ -10,4 +10,8 @@
 	
 	<color name="backcolor">#E7E6E3</color>  <!-- 背景墙纸颜色 -->
 	<color name="focuscolor">#F5750A</color> <!-- 警告字体颜色 -->
+	
+	<color name="presscolor">#ff6600</color><!-- button按下颜色 -->  
+	<color name="disablecolor">#FF8400</color><!-- button禁用颜色 -->
+
 	</resources>

@@ -183,13 +183,13 @@
             android:name=".ui.control.SpinnerBaseActivity"
             android:label="@string/title_activity_spinner_base" >
         </activity>
-        <activity
-            android:name=".ui.control.ControlConfigActivity"
-            >
+        <activity android:name=".ui.control.ControlConfigActivity" >
+        </activity>
+        <activity android:name=".ui.safe.SafeConfigActivity" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.safe.SafeConfigActivity"
-            >
+            android:name="cn.fuego.smart.home.ui.setting.user.MarkManageActivity"
+            android:label="@string/title_activity_mark_manage" >
         </activity>
     </application>
 

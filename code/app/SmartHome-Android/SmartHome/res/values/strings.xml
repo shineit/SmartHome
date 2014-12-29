@@ -25,9 +25,6 @@
     <string name="title_activity_modify_pwd">ModifyPwdActivity</string>
     <string name="title_activity_logout">LogoutActivity</string>
     <string name="title_activity_alarm_manage">AlarmManageActivity</string>
-    
-
-   
     <string name="tag_hint">Tag can be numbe alphabet, underscore, Chinese. Use , to split many tags.</string>
     <string name="alias_hint">Alias can be number, alphabet, underscore, Chinese.</string>
     <string name="style_hint">style should be number</string>
@@ -40,7 +37,6 @@
     <string name="setting_su">Succeed to set</string>
     <string name="title_activity_news_view">NewsViewActivity</string>
     <string name="title_activity_spinner_base">SpinnerBaseActivity</string>
-    
-    
+    <string name="title_activity_mark_manage">MarkManageActivity</string>
 
 </resources>

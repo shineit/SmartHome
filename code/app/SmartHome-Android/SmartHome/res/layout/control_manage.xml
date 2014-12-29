@@ -215,7 +215,7 @@
                     <Spinner
                         android:id="@+id/control_mark_spinner"
                         style="?android:attr/spinnerDropDownItemStyle"
-                        android:layout_width="155dp"
+                        android:layout_width="150dp"
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="27dp"
