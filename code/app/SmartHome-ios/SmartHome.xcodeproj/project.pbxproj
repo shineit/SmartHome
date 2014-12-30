@@ -61,6 +61,10 @@
 		149A018C1A08CC52008F239F /* FESensorListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A018B1A08CC52008F239F /* FESensorListRequest.m */; };
 		149A018F1A08CC76008F239F /* FESensorSetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A018E1A08CC76008F239F /* FESensorSetRequest.m */; };
 		149A01921A08CDD3008F239F /* FERelyUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A01911A08CDD3008F239F /* FERelyUserRequest.m */; };
+		14B03B2C1A5191C8000826C9 /* FEUserMarkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B2B1A5191C8000826C9 /* FEUserMarkManagerVC.m */; };
+		14B03B2F1A519C68000826C9 /* FETableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B2E1A519C68000826C9 /* FETableView.m */; };
+		14B03B331A51A111000826C9 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B321A51A111000826C9 /* CustomIOS7AlertView.m */; };
+		14B03B361A51A224000826C9 /* FEMarkAddPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B351A51A224000826C9 /* FEMarkAddPopView.m */; };
 		14B447A319F5FB8E0078EAB4 /* FEWarringDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */; };
 		14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A519F5FCFE0078EAB4 /* FEDeviceInfoView.m */; };
 		14B447A919F5FE190078EAB4 /* FELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A819F5FE190078EAB4 /* FELabel.m */; };
@@ -222,6 +226,14 @@
 		149A018E1A08CC76008F239F /* FESensorSetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FESensorSetRequest.m; sourceTree = "<group>"; };
 		149A01901A08CDD3008F239F /* FERelyUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FERelyUserRequest.h; sourceTree = "<group>"; };
 		149A01911A08CDD3008F239F /* FERelyUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FERelyUserRequest.m; sourceTree = "<group>"; };
+		14B03B2A1A5191C8000826C9 /* FEUserMarkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUserMarkManagerVC.h; sourceTree = "<group>"; };
+		14B03B2B1A5191C8000826C9 /* FEUserMarkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMarkManagerVC.m; sourceTree = "<group>"; };
+		14B03B2D1A519C68000826C9 /* FETableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FETableView.h; path = SmartHome/Common/FETableView.h; sourceTree = SOURCE_ROOT; };
+		14B03B2E1A519C68000826C9 /* FETableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FETableView.m; path = SmartHome/Common/FETableView.m; sourceTree = SOURCE_ROOT; };
+		14B03B311A51A111000826C9 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
+		14B03B321A51A111000826C9 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		14B03B341A51A224000826C9 /* FEMarkAddPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEMarkAddPopView.h; sourceTree = "<group>"; };
+		14B03B351A51A224000826C9 /* FEMarkAddPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMarkAddPopView.m; sourceTree = "<group>"; };
 		14B447A119F5FB8E0078EAB4 /* FEWarringDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEWarringDetailVC.h; sourceTree = "<group>"; };
 		14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEWarringDetailVC.m; sourceTree = "<group>"; };
 		14B447A419F5FCFE0078EAB4 /* FEDeviceInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDeviceInfoView.h; sourceTree = "<group>"; };
@@ -399,6 +411,7 @@
 		146080BB1A3029CC0057EA9A /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				14B03B301A51A105000826C9 /* AlertView */,
 				145B218E1A357C04000AE204 /* lib */,
 			);
 			path = ThirdLib;
@@ -573,6 +586,15 @@
 			name = Sensor;
 			sourceTree = "<group>";
 		};
+		14B03B301A51A105000826C9 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				14B03B311A51A111000826C9 /* CustomIOS7AlertView.h */,
+				14B03B321A51A111000826C9 /* CustomIOS7AlertView.m */,
+			);
+			name = AlertView;
+			sourceTree = "<group>";
+		};
 		14C6DE3919F549EE006384B2 = {
 			isa = PBXGroup;
 			children = (
@@ -707,6 +729,8 @@
 				14D7B7A71A064A9B0072D31C /* FECheckButton.m */,
 				14D7B7A91A0653640072D31C /* FECheckButtonGroup.h */,
 				14D7B7AA1A0653640072D31C /* FECheckButtonGroup.m */,
+				14B03B2D1A519C68000826C9 /* FETableView.h */,
+				14B03B2E1A519C68000826C9 /* FETableView.m */,
 			);
 			name = Common;
 			path = common;
@@ -755,6 +779,10 @@
 				146D34DD19FB6CE1000F14F5 /* FECloudSafeTableCell.m */,
 				1498945C1A4DAF8800903B22 /* FEDevicesCache.h */,
 				1498945D1A4DAF8800903B22 /* FEDevicesCache.m */,
+				14B03B2A1A5191C8000826C9 /* FEUserMarkManagerVC.h */,
+				14B03B2B1A5191C8000826C9 /* FEUserMarkManagerVC.m */,
+				14B03B341A51A224000826C9 /* FEMarkAddPopView.h */,
+				14B03B351A51A224000826C9 /* FEMarkAddPopView.m */,
 			);
 			path = CloudSafe;
 			sourceTree = "<group>";
@@ -941,6 +969,7 @@
 				14C6DEBC19F54AE2006384B2 /* FECommonTabBarController.m in Sources */,
 				1454A5761A04FA8E00A9AE35 /* FEServiceOrderSetRequest.m in Sources */,
 				14C6DEE819F54F9C006384B2 /* FEWarringInfoVC.m in Sources */,
+				14B03B2F1A519C68000826C9 /* FETableView.m in Sources */,
 				14C6DEF519F5512A006384B2 /* FECloudControlVC.m in Sources */,
 				143CED1519F7B7DE00FEDE61 /* NSString+MD5.m in Sources */,
 				14D7B7AE1A0661250072D31C /* FEMarkSetRequest.m in Sources */,
@@ -962,6 +991,7 @@
 				14C6DEF119F54F9C006384B2 /* FEServiceListVC.m in Sources */,
 				1499E6CC1A0BAD0E002F5DDB /* FENews.m in Sources */,
 				141E43111A010F9D008A58C1 /* FESiginRequest.m in Sources */,
+				14B03B2C1A5191C8000826C9 /* FEUserMarkManagerVC.m in Sources */,
 				1499E6D11A0BAD0E002F5DDB /* FEUser.m in Sources */,
 				1499E6EC1A0BAD1A002F5DDB /* FEOrderListResponse.m in Sources */,
 				14C6DEE719F54F9C006384B2 /* FEDeviceWarringSettingVC.m in Sources */,
@@ -972,6 +1002,7 @@
 				14D7B7AB1A0653640072D31C /* FECheckButtonGroup.m in Sources */,
 				1499E6EA1A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m in Sources */,
 				149A01921A08CDD3008F239F /* FERelyUserRequest.m in Sources */,
+				14B03B331A51A111000826C9 /* CustomIOS7AlertView.m in Sources */,
 				1499E6E91A0BAD1A002F5DDB /* FEDictionaryObject.m in Sources */,
 				1499E6CF1A0BAD0E002F5DDB /* FEResult.m in Sources */,
 				146617271A049975009C85B8 /* FENewsRequest.m in Sources */,
@@ -994,6 +1025,7 @@
 				14B4B71D19FE729E00FF6BC0 /* FESettingItemCell.m in Sources */,
 				14B447A919F5FE190078EAB4 /* FELabel.m in Sources */,
 				14D7B7A51A05FC6E0072D31C /* UIImage+Resize.m in Sources */,
+				14B03B361A51A224000826C9 /* FEMarkAddPopView.m in Sources */,
 				143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */,
 				144022B91A08945B0079253A /* NSDate+Formatter.m in Sources */,
 				1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */,

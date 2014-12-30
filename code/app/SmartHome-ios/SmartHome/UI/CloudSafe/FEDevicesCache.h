@@ -18,9 +18,14 @@ typedef enum : NSUInteger {
 #define __SENSOR_MARK   @"mark"
 #define __SENSOR_LIST   @"sensors"
 
+@class FEUserMark;
+
 @interface FEDevicesCache : NSObject
 
 +(FEDevicesCache *)sharedInstance;
+
+-(void)addMark:(FEUserMark *)mark;
+-(void)removeMark:(FEUserMark *)mark;
 
 -(void)getAlldevices:(void (^)(NSArray *items))block;
 -(void)getAllMarks:(void (^)(NSArray *items))block;

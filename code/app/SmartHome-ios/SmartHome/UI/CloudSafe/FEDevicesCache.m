@@ -36,6 +36,22 @@
     return instance;
 }
 
+-(void)addMark:(FEUserMark *)mark{
+    if (self.allmarks) {
+        NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:self.allmarks];
+        [temp addObject:mark];
+        self.allmarks = temp;
+    }else{
+        self.allmarks = @[mark];
+    }
+}
+
+-(void)removeMark:(FEUserMark *)mark{
+    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:self.allmarks];
+    [temp removeObject:mark];
+    self.allmarks = temp;
+}
+
 
 -(void)getAllMarks:(void (^)(NSArray *items))block{
     if (self.allmarks) {

@@ -65,6 +65,7 @@
     
     //request news
     [self requestNews];
+    [self requestHistoryWarring];
 }
 
 -(void)initUI{
@@ -81,6 +82,7 @@
     segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:segmentedControl];
+    segmentedControl.selectedSegmentIndex = 1;
     
     //新闻table
     UITableView *news = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
@@ -108,6 +110,8 @@
     view1.backgroundColor = [UIColor clearColor];
     [warring setTableFooterView:view];
     
+    self.newstable.hidden = YES;
+    self.warringtable.hidden = NO;
 }
 
 //request news

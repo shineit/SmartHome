@@ -85,6 +85,11 @@
     
     [self initUI];
 //    [self requestMarks];
+    [[NSNotificationCenter defaultCenter] addObserverForName:FEMarkDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [[FEDevicesCache sharedInstance] getAllMarks:^(NSArray *items) {
+            weakself.marklist = items;
+        }];
+    }];
     
 }
 
@@ -276,6 +281,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FEMarkDidChangeNotification object:nil];
 }
 
 /*

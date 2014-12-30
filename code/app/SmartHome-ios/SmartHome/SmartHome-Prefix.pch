@@ -23,6 +23,7 @@
     #import "FECommonTabBarController.h"
     #import "FELabel.h"
     #import "FEButton.h"
+    #import "FETableView.h"
     #import "FETextField.h"
     #import "FECoreDataHandler.h"
     #import <ZBUtilities/UIViewController+HUD.h>

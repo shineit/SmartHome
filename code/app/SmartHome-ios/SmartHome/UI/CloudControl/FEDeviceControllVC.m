@@ -14,6 +14,7 @@
 #import "FESensorSetRequest.h"
 #import "FESensorSetResponse.h"
 #import "FEWebServiceManager.h"
+#import "FEUserMarkManagerVC.h"
 
 
 @interface FEDeviceControllVC ()<FEPopPickerViewDataSource,FEPopPickerViewDelegate>
@@ -113,6 +114,7 @@
     
     FEButton *add = [FEButton buttonWithType:UIButtonTypeCustom];
     add.frame = CGRectMake(x + lwidth + xspace + twidth - 90, llabel.frame.origin.y, 90, height);
+    [add addTarget:self action:@selector(manageMark:) forControlEvents:UIControlEventTouchUpInside];
     [add setTitle:FEString(@"CONTROLL_LABEL_MANAGE") forState:UIControlStateNormal];
     [contentview addSubview:add];
     
@@ -143,6 +145,11 @@
 
 -(NSInteger)popPickerItemNumber{
     return self.marks.count;
+}
+
+-(void)manageMark:(UIButton *)button{
+    FEUserMarkManagerVC *manager = [FEUserMarkManagerVC new];
+    [self.navigationController pushViewController:manager animated:YES];
 }
 
 

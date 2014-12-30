@@ -19,6 +19,8 @@
 #import "CDUser.h"
 #import "FECoreDataHandler.h"
 #import "FEPopPickerView.h"
+#import "FEUserMarkManagerVC.h"
+#import "FEDevicesCache.h"
 
 @interface FEDeviceWarringSettingVC ()<FEPopPickerViewDataSource,FEPopPickerViewDelegate>
 
@@ -57,6 +59,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    __weak typeof(self) weakself = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:FEMarkDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [[FEDevicesCache sharedInstance] getAllMarks:^(NSArray *items) {
+            weakself.markList = items;
+        }];
+    }];
 }
 
 -(void)initUI{
@@ -115,7 +123,7 @@
     llabel.text = FEString(@"SENSOR_LABEL");
     [contentview addSubview:llabel];
     
-    FEPopPickerView *popview = [[FEPopPickerView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 60, height)];
+    FEPopPickerView *popview = [[FEPopPickerView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 3 * (height + yspace), twidth - 90, height)];
     popview.dataSource = self;
     popview.delegate = self;
     NSInteger index = -1;
@@ -134,11 +142,11 @@
 //    [contentview addSubview:ltextFeild];
     
     FEButton *add = [FEButton buttonWithType:UIButtonTypeCustom];
-    add.frame = CGRectMake(x + lwidth + xspace + twidth - 50, y + 3 * (height + yspace), 50, height);
-//    [add addTarget:self action:@selector(addUserMark:) forControlEvents:UIControlEventTouchUpInside];
-    [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [add setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
-    [add setTitle:FEString(@"SENSOR_ADD") forState:UIControlStateNormal];
+    add.frame = CGRectMake(x + lwidth + xspace + twidth - 80, y + 3 * (height + yspace), 80, height);
+    [add addTarget:self action:@selector(manageUserMark:) forControlEvents:UIControlEventTouchUpInside];
+//    [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [add setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
+    [add setTitle:FEString(@"SENSOR_MANAGE_MARK") forState:UIControlStateNormal];
     [contentview addSubview:add];
     
     FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 4 * (height + yspace), lwidth, height)];
@@ -155,28 +163,16 @@
     [configbutton addTarget:self action:@selector(config:) forControlEvents:UIControlEventTouchUpInside];
     [scrollview addSubview:configbutton];
     
-//    FEButton *monitor = [FEButton buttonWithType:UIButtonTypeCustom];
-//    monitor.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-//    monitor.frame = CGRectMake(self.view.bounds.size.width - 20 - 100, contentview.frame.origin.y + contentview.bounds.size.height + 20, 100, 30);
-//    [monitor setTitle:FEString(@"SONSER_MONITOR") forState:UIControlStateNormal];
-//    [scrollview addSubview:monitor];
-    
     scrollview.contentSize = CGSizeMake(scrollview.bounds.size.width, configbutton.frame.origin.y + configbutton.bounds.size.height + 20);
     scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
 }
 
--(void)addUserMark:(UIButton *)button{
-    [self displayHUD:FEString(@"LOADING...")];
+-(void)manageUserMark:(UIButton *)button{
+    FEUserMarkManagerVC *manager = [FEUserMarkManagerVC new];
+    [self.navigationController pushViewController:manager animated:YES];
+//    [self displayHUD:FEString(@"LOADING...")];
     
-    FEUserMark *mark = [[FEUserMark alloc] initWithUserID:FELoginUser.userid mark:@"Test"];
-    FEMarkSetRequest *markRequest = [[FEMarkSetRequest alloc] initWithMark:mark];
-    [[FEWebServiceManager sharedInstance] markSet:markRequest response:^(NSError *error, FEBaseResponse *response) {
-        [self hideHUD:YES];
-        if (!error && response.result.errorCode.integerValue == 0) {
-            NSLog(@"add mark success!");
-        }
-    }];
 }
 
 -(void)config:(id)sender{
@@ -231,6 +227,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FEMarkDidChangeNotification object:nil];
 }
 
 /*

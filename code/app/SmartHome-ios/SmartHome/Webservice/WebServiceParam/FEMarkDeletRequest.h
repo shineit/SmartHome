@@ -7,9 +7,11 @@
 //
 
 #import "FERequestBaseData.h"
-
+@class FEUserMark;
 @interface FEMarkDeletRequest : FERequestBaseData
 
 @property (nonatomic, strong, readonly) NSDictionary *userMark;
+
+-(id)initWithMark:(FEUserMark *)mark;
 
 @end

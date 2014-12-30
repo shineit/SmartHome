@@ -112,6 +112,7 @@
 "SENSOR_FIRE_VALUE"  = "火 警";
 "SENSOR_LABEL"  = "标 签";
 "SENSOR_ADD" = "增 加";
+"SENSOR_MANAGE_MARK" = "管理标签";
 "SENSOR_CONTROL" = "联 防";
 "SENSOR_CONFIG" = "配 置";
 "SONSER_MONITOR" = "监 控";
@@ -129,3 +130,6 @@
 "CONTROLL_REGION" = "区 号:";
 "CONTROLL_CONFIGURE" = "配  置";
 
+
+//mark manage view controller
+"MARK_TITLE" = "管理标签";

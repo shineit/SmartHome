@@ -111,6 +111,7 @@
 "SENSOR_FIRE_VALUE" = "Fire value";
 "SENSOR_LABEL" = "Mark";
 "SENSOR_ADD" = "Add";
+"SENSOR_MANAGE_MARK" = "Manage mark";
 "SENSOR_CONTROL" = "Control";
 "SENSOR_CONFIG" = "Config";
 "SONSER_MONITOR" = "Monitor";
@@ -127,3 +128,6 @@
 "CONTROLL_LABEL_MANAGE" = "Label manage";
 "CONTROLL_REGION" = "Region:";
 "CONTROLL_CONFIGURE" = "Config";
+
+//mark manage view controller
+"MARK_TITLE" = "Manage mark";

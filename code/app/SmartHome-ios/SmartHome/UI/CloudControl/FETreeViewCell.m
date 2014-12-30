@@ -70,6 +70,8 @@
     
     if (level == 0) {
         [self.controllContentView setHidden:YES];
+        self.titleLabel.hidden = NO;
+        self.imageView.hidden = NO;
         self.titleLabel.text = obj[@"mark"];
         self.imageView.image = [UIImage imageNamed:@"doorControl"];
         self.indicatorView.hidden = NO;
@@ -77,6 +79,8 @@
         self.backgroundColor = FEColor(229, 229, 229, 1);//[UIColor whiteColor];
     } else if (level == 1) {
         [self.controllContentView setHidden:NO];
+        self.imageView.hidden = YES;
+        self.titleLabel.hidden = YES;
         self.numberLabel.text = [NSString stringWithFormat:@"%@",((FESensor *)obj).sensorID];
         self.regionLabel.text = ((FESensor *)obj).mark;
         self.indicatorView.hidden = YES;

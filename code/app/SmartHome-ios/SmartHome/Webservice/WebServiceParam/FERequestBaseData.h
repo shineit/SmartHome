@@ -12,7 +12,7 @@
 #define __METHOD_SIGIN              @"user/login" //登陆
 #define __METHOD_MARK_LIST          @"user/mark/list"
 #define __METHOD_MARK_ADD           @"user/mark/add"
-#define __METHOD_MARK_DELET         @"user/mark/delet"
+#define __METHOD_MARK_DELET         @"user/mark/delete"
 #define __METHOD_SIGOUT             @"user/logout"
 #define __METHOD_MODIFY_PASSWORD    @"user/password/modify"
 

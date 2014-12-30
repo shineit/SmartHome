@@ -71,5 +71,7 @@ return shared##className; \
 
 #define FELoginUser                             [FECoreData fetchUser]
 
+#define FEMarkDidChangeNotification             @"markchange"
+
 
 #endif
