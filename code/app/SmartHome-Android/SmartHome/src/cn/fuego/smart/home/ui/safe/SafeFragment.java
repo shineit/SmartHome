@@ -101,6 +101,13 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 
 	}
 
+	@Override
+	public void initRes()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 	

@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/head_height"
         android:background="@color/themecolor"
         android:orientation="vertical" >
 
@@ -23,21 +23,21 @@
                 android:layout_centerVertical="true"
                 android:text="服务申请"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/head_font_size_sm" />
 
             <Button
                 android:id="@+id/apply_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:drawableLeft="@drawable/back"
                 android:drawablePadding="5dp"
                 android:text="返回"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -134,7 +134,7 @@
                         android:paddingLeft="10dp"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" >
+                        android:textSize="@dimen/content_font_size" >
 
                         <requestFocus />
                     </EditText>
@@ -168,12 +168,15 @@
                         android:ems="10"
                         android:gravity="center_vertical|top"
                         android:paddingLeft="10dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                 </RelativeLayout>
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/service_apply_contactview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
@@ -181,7 +184,8 @@
                 android:orientation="vertical"
                 android:paddingBottom="20dp"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp" >
+                android:paddingRight="15dp"
+                android:visibility="gone" >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -212,7 +216,7 @@
                         android:paddingLeft="10dp"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" >
+                        android:textSize="@dimen/content_font_size" >
 
                         <requestFocus />
                     </EditText>
@@ -247,7 +251,7 @@
                         android:paddingLeft="10dp"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/content_font_size" />
 
                 </RelativeLayout>
 
@@ -280,9 +284,92 @@
                         android:paddingLeft="10dp"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/content_font_size" />
 
                 </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/service_apply_resultview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp" >
+
+                    <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="5dp"
+                        android:text="回复 人:"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/service_apply_handler"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView02"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:height="20dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp" >
+
+                    <TextView
+                        android:id="@+id/TextView01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="解决措施:"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/service_apply_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView01"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:gravity="center_vertical|top"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                </RelativeLayout>
+
             </LinearLayout>
 
             <RelativeLayout
@@ -296,26 +383,28 @@
 
                 <Button
                     android:id="@+id/apply_cancel_btn"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/un_focuse_btn"
                     android:enabled="true"
                     android:focusableInTouchMode="true"
-                    android:text="取    消"
-                    android:textColor="@color/white" />
+                    android:text="删  除"
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/apply_sure_btn"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/login_button"
                     android:enabled="true"
                     android:focusableInTouchMode="true"
-                    android:text="提    交"
-                    android:textColor="@color/white" />
+                    android:text="提  交"
+                    android:textColor="@color/white"
+                    android:visibility="visible" />
 
             </RelativeLayout>
 

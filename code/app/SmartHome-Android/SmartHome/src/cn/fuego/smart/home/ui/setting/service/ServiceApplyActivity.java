@@ -1,19 +1,19 @@
 package cn.fuego.smart.home.ui.setting.service;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.list.ListViewResInfo;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
-import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
@@ -25,8 +25,13 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickListener,OnCheckedChangeListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
-	private EditText textName,textContent,textPerson,textPhone,textAddr;
+	private EditText textName,textContent,textPerson,textPhone,textAddr,
+						textHandler,textResult;
 	private int applyType=0;
+	private Button sure_btn,cancel_btn;
+	private View contactsView,resultView;
+	private RadioGroup group;
+	private RadioButton repairBtn,consultBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -37,23 +42,84 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 		Button back_btn=(Button)findViewById(R.id.apply_back);
 		back_btn.setOnClickListener(this);
 		back_btn.setTag(1);
-		Button sure_btn=(Button) findViewById(R.id.apply_sure_btn);
+		sure_btn=(Button) findViewById(R.id.apply_sure_btn);
 		sure_btn.setOnClickListener(this);
 		sure_btn.setTag(2);
-		Button cancel_btn=(Button) findViewById(R.id.apply_cancel_btn);
+		cancel_btn=(Button) findViewById(R.id.apply_cancel_btn);
 		cancel_btn.setOnClickListener(this);
 		cancel_btn.setTag(3);
 		
-		RadioGroup group = (RadioGroup) this.findViewById(R.id.apply_type_group);
+		group = (RadioGroup) this.findViewById(R.id.apply_type_group);
 		group.setOnCheckedChangeListener(this); 
+		repairBtn = (RadioButton) findViewById(R.id.apply_repair);
+		consultBtn = (RadioButton) findViewById(R.id.apply_consult);
+		
+		contactsView= this.findViewById(R.id.service_apply_contactview);
+		resultView= this.findViewById(R.id.service_apply_resultview);
 		
 		textName =(EditText) findViewById(R.id.apply_name);
-		textName.requestFocus();            
-		textName.requestFocusFromTouch();
 		textContent =(EditText) findViewById(R.id.apply_content);
+		
 		textPerson = (EditText) findViewById(R.id.contact_person);
 		textPhone = (EditText) findViewById(R.id.contact_phone);
 		textAddr = (EditText) findViewById(R.id.contact_addr);
+		
+		textHandler=(EditText) findViewById(R.id.service_apply_handler);
+		textResult=(EditText) findViewById(R.id.service_apply_result);
+		
+		initView(this.getIntent());
+		
+		
+		
+	}
+
+	private void initView(Intent intent)
+	{
+		ServiceOrderJson serviceOrder = (ServiceOrderJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		if(serviceOrder==null)
+		{
+			contactsView.setVisibility(View.VISIBLE);
+			resultView.setVisibility(View.GONE);
+			sure_btn.setVisibility(View.VISIBLE);
+			cancel_btn.setVisibility(View.GONE);
+			sure_btn.requestFocus();            
+			sure_btn.requestFocusFromTouch();
+			
+		}
+		else
+		{
+			group.setClickable(false);
+			textName.setEnabled(false);
+			textContent.setEnabled(false);
+			contactsView.setVisibility(View.GONE);
+			resultView.setVisibility(View.VISIBLE);
+			sure_btn.setVisibility(View.GONE);
+			cancel_btn.setVisibility(View.VISIBLE);
+			cancel_btn.requestFocus();            
+			cancel_btn.requestFocusFromTouch();
+			
+			initData(serviceOrder);
+
+			
+		}
+		
+	}
+
+
+	private void initData(ServiceOrderJson serviceOrder)
+	{
+		if(ServiceOrderTypeEnum.getEnumByInt(serviceOrder.getOrderType())==ServiceOrderTypeEnum.REPAIR)
+		{
+			repairBtn.setChecked(true);
+		}
+		else
+		{
+			consultBtn.setChecked(true);
+		}
+		textName.setText(serviceOrder.getOrderName());
+		textContent.setText(serviceOrder.getContent());
+		textHandler.setText(serviceOrder.getHandler());
+		textResult.setText(serviceOrder.getHandleResult());
 		
 	}
 
@@ -116,11 +182,7 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	
 		serviceOrder.setPhoneNum(this.getTextPhone().getText().toString().trim());
 		serviceOrder.setContactAddr(this.getTextAddr().getText().toString().trim());
-		
-		//serviceOrder.setCreator("admin");//需要从本地读出
-		//SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
-		//serviceOrder.setCreator(userInfo.getString(SharedPreferenceConst.NAME, ""));
-		//URLEncoder.encode(serviceOrder.getOrderName(), "utf-8");
+
 		serviceOrder.setCreator(MemoryCache.getLoginInfo().getUser().getUserName());
 		req.setServiceOrder(serviceOrder);
 		WebServiceContext.getInstance().getOrderManageRest(this).setServiceOrder(req);

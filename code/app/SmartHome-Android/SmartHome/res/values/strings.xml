@@ -38,5 +38,6 @@
     <string name="title_activity_news_view">NewsViewActivity</string>
     <string name="title_activity_spinner_base">SpinnerBaseActivity</string>
     <string name="title_activity_mark_manage">MarkManageActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 
 </resources>

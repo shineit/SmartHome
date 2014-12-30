@@ -14,7 +14,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -127,7 +126,8 @@ public class MarkAdapter extends BaseAdapter
         	Toast.makeText(mContext, target+"为当前标签，不可删除！", Toast.LENGTH_LONG).show();
         	
         }
-
+        else
+        {
     		AlertDialog.Builder builder = new Builder(mContext);
     		builder.setMessage("确定要删除该标签:"+target+"?");
     		builder.setTitle("提示");
@@ -154,9 +154,9 @@ public class MarkAdapter extends BaseAdapter
     					}
     				});
     		builder.create().show();
-
-        	
         }
+  	
+    }
 
 	private void delMark(String targetMark)
 	{

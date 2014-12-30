@@ -1,8 +1,8 @@
 package cn.fuego.misp.service.http;
 
-import cn.fuego.smart.home.constant.ErrorMessageConst;
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 import android.os.Message;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 
 public class MispHttpMessage 
 {
@@ -20,11 +20,11 @@ public class MispHttpMessage
 	
 	public boolean isSuccess()
 	{
-		if(ErrorMessageConst.SUCCESS != message.what)
+		if(MISPErrorMessageConst.SUCCESS != message.what)
 		{
 			return false;
 		}
-		if(ErrorMessageConst.SUCCESS != getErrorCode())
+		if(MISPErrorMessageConst.SUCCESS != getErrorCode())
 		{
 			return false;
 		}
@@ -34,7 +34,7 @@ public class MispHttpMessage
 	
 	public boolean isNetSuccess()
 	{
-		if(ErrorMessageConst.SUCCESS != message.what)
+		if(MISPErrorMessageConst.SUCCESS != message.what)
 		{
 			return false;
 		}
@@ -51,7 +51,7 @@ public class MispHttpMessage
  				return rsp.getResult().getErrorCode();
 			}
 		}
-		return ErrorMessageConst.NET_FAIL;
+		return MISPErrorMessageConst.NET_FAIL;
 	}
 	
 

@@ -52,6 +52,8 @@ public class WebServiceContext
 		httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
 		//读取超时
 		httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+		
+		log.info("连接超时");
 		return httpClient;
 
 	}

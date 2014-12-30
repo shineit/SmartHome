@@ -188,8 +188,12 @@
         <activity android:name=".ui.safe.SafeConfigActivity" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.setting.user.MarkManageActivity"
+            android:name=".ui.setting.user.MarkManageActivity"
             android:label="@string/title_activity_mark_manage" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.HomeActivity"
+            android:label="@string/title_activity_home" >
         </activity>
     </application>
 

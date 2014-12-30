@@ -25,11 +25,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.jboss.resteasy.specimpl.UriBuilderImpl;
 import org.jboss.resteasy.util.IsHttpMethod;
 
-import android.os.Handler;
-import android.os.Message;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
-import cn.fuego.misp.service.MISPException;
 
 /**
  * @ClassName: MispClientInvoker
@@ -93,7 +90,9 @@ public class MispHttpClientInvoker extends Thread
 			
 			
 			String content = EntityUtils.toString(response.getEntity(), CODE_WITH_UTF_8);
-			log.info("the response message is "+content);
+			
+			log.info("the response is " + content);
+			
 			ObjectMapper mapper = new ObjectMapper();
 			
 			rspObj = mapper.readValue(content,method.getReturnType());
@@ -115,7 +114,31 @@ public class MispHttpClientInvoker extends Thread
 	{
 		this.argObjects = args;
 		return this;
-
+//		
+//		Object rspObj = null;
+//		try
+//		{
+//			
+//		   HttpUriRequest httpMethod = getHttpMethod(args[0]);
+//			
+//			
+//			
+// 			HttpResponse response = httpClient.execute(httpMethod); // 发起GET请求
+//			
+//			
+//			String content = EntityUtils.toString(response.getEntity(), CODE_WITH_UTF_8);
+//			
+//			ObjectMapper mapper = new ObjectMapper();
+//			
+//			rspObj = mapper.readValue(content,method.getReturnType());
+//			 
+//		} catch (Exception e)
+//		{
+//			throw new MISPException("call http failed",e);
+//		}
+//
+//		
+//		return rspObj;
 	}
 	
 	private HttpUriRequest  getHttpMethod(Object args)

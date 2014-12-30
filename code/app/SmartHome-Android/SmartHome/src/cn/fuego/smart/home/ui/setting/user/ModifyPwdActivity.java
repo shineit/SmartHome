@@ -1,7 +1,6 @@
 package cn.fuego.smart.home.ui.setting.user;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +9,6 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
-import cn.fuego.smart.home.constant.SharedPreferenceConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
@@ -71,8 +69,6 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 				ModifyPwdReq req = new ModifyPwdReq();
 				req.setOldPwd(this.MD5(this.getTrimText(txt_oldPwd)));
 				req.setPwdNew(this.MD5(this.getTrimText(txt_newPwd1)));
-				//SharedPreferences userInfo = getSharedPreferences(SharedPreferenceConst.UESR_INFO, 0);
-				//req.setUserName(userInfo.getString(SharedPreferenceConst.NAME, ""));
 				req.setUserName(MemoryCache.getLoginInfo().getUser().getUserName());
 				WebServiceContext.getInstance().getUserManageRest(this).modifyPassword(req);
 				

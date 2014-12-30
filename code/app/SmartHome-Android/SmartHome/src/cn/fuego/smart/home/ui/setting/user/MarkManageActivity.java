@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
@@ -105,9 +104,7 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 
 			// 创建一个PopuWidow对象
 			 popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-/*			popupWindow = new PopupWindow(view, getWindowManager()
-					.getDefaultDisplay().getWidth(), getWindowManager()
-					.getDefaultDisplay().getHeight());*/
+
 		}
 
 		// 使其聚集
@@ -195,12 +192,9 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 			}
 		});
         
+		@SuppressWarnings("unused")
 		WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-		// 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半
-		//int xPos = windowManager.getDefaultDisplay().getWidth() / 2
-		//		- popupWindow.getWidth() / 2;
 
-		//popupWindow.showAsDropDown(parent, xPos, 0);
 		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);//在屏幕居中，无偏移
 		
 		popupWindow.setOnDismissListener(new OnDismissListener()

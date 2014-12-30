@@ -252,4 +252,11 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void initRes()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

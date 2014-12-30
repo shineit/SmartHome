@@ -36,6 +36,13 @@ public class MISPException extends RuntimeException
 
 		this.errorCode = errorCode;
 	}
+	
+	public MISPException(int errorCode,Throwable cause)
+	{
+		super(String.valueOf(errorCode),cause);
+
+		this.errorCode = errorCode;
+	}
 
 	public MISPException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
 	{

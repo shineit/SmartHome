@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageView2"
             android:layout_below="@+id/username"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/password"
             android:autoText="false"
             android:background="@null"
@@ -68,7 +68,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_username"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="18dp"
             android:gravity="left"
             android:text="用户名："
@@ -81,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/imageView2"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="32dp"
             android:layout_toRightOf="@+id/username"
             android:autoText="false"
             android:background="@null"
@@ -90,7 +89,10 @@
             android:gravity="fill_horizontal"
             android:selectAllOnFocus="false"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+
+            <requestFocus />
+        </EditText>
 
     </RelativeLayout>
 

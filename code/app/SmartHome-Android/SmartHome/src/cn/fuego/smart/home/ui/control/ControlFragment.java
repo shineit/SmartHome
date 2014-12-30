@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ListView;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
@@ -90,11 +89,11 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 		}
 	}
 
-  
-
-
-
-
-
-
+	@Override
+	public void initRes()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+ 
 }
