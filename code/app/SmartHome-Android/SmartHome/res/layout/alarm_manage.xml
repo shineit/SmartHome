@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/head_height"
         android:background="@color/themecolor"
         android:orientation="vertical" >
 
@@ -25,21 +25,23 @@
                 android:layout_centerVertical="true"
                 android:text="告警信息"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/head_font_size_sm" />
 
             <Button
-                android:id="@+id/safe_manage_back"
+                android:id="@+id/alarm_manage_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:drawableLeft="@drawable/back"
                 android:drawablePadding="5dp"
                 android:text="返回"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -88,6 +90,7 @@
                         android:background="@drawable/edittext_sel"
                         android:editable="false"
                         android:ems="10"
+                        android:enabled="false"
                         android:gravity="center_vertical|top"
                         android:height="20dp"
                         android:paddingLeft="10dp"
@@ -126,6 +129,7 @@
                         android:background="@drawable/edittext_sel"
                         android:editable="false"
                         android:ems="10"
+                        android:enabled="false"
                         android:gravity="center_vertical|top"
                         android:height="20dp"
                         android:paddingLeft="10dp"
@@ -164,6 +168,7 @@
                         android:gravity="center_vertical|top"
                         android:height="20dp"
                         android:paddingLeft="10dp"
+                        android:selectAllOnFocus="false"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -199,8 +204,10 @@
                         android:gravity="center_vertical|top"
                         android:height="20dp"
                         android:paddingLeft="10dp"
+                        android:selectAllOnFocus="true"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
+
                 </RelativeLayout>
 
             </LinearLayout>

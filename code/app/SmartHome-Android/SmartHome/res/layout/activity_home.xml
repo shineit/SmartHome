@@ -1,7 +1,255 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_height"
+        android:background="@color/themecolor"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="首页"
+                android:textColor="@color/white"
+                android:textSize="@dimen/head_font_size_sm" />
+
+            <Button
+                android:id="@+id/home_about_us_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="关于我们"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="云安防"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|left"
+                android:layout_marginLeft="20dp"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="2" >
+
+                <Button
+                    android:id="@+id/home_menu_safe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_safe"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="云安" />
+
+                <Button
+                    android:id="@+id/home_menu_control"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_control"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="云控" />
+
+                <Button
+                    android:id="@+id/home_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_camera"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="云视" />
+
+                <Button
+                    android:id="@+id/home_menu_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_alarm"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="告警信息" />
+
+                <Button
+                    android:id="@+id/home_menu_plane"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_plane"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="平面图查看" />
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="设备管理"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="2" >
+
+                <Button
+                    android:id="@+id/home_menu_concent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_concent"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="集中器设置" />
+
+                <Button
+                    android:id="@+id/home_menu_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_area"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="我的片区" />
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="个人中心"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/black" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="2" >
+
+                <Button
+                    android:id="@+id/home_menu_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_account"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="账户设置" />
+
+                <Button
+                    android:id="@+id/home_menu_apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_apply"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="申请管理" />
+
+                <Button
+                    android:id="@+id/home_menu_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/menu_border"
+                    android:drawableTop="@drawable/menu_news"
+                    android:gravity="center_vertical|center_horizontal|bottom"
+                    android:paddingBottom="10dp"
+                    android:text="新闻公告" />
+
+            </GridLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -7,6 +7,7 @@
     <permission
         android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- Required  一些系统要求的权限，如访问网络等 -->
@@ -31,7 +32,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <application
@@ -83,12 +84,12 @@
             android:label="@string/title_activity_logout" >
         </activity>
         <activity
-            android:name=".ui.home.AlarmManageActivity"
+            android:name=".ui.info.AlarmManageActivity"
             android:label="@string/title_activity_alarm_manage"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".ui.home.NewsViewActivity"
+            android:name=".ui.info.NewsViewActivity"
             android:label="@string/title_activity_news_view"
             android:launchMode="singleTask" >
         </activity>
@@ -192,8 +193,16 @@
             android:label="@string/title_activity_mark_manage" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.HomeActivity"
+            android:name=".ui.HomeActivity"
             android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".ui.info.NewsActivity"
+            android:label="@string/title_activity_news" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.info.AlarmActivity"
+            android:label="@string/title_activity_alarm" >
         </activity>
     </application>
 

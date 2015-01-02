@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
+
 
 
 /**
@@ -10,7 +12,7 @@ package cn.fuego.smart.home.webservice.up.model.base;
 * @date 2014-10-20 上午10:57:57 
 *
  */
-public class NewsJson
+public class NewsJson implements Serializable
 {
 	private int   newsID;
 	private String title;

@@ -129,7 +129,7 @@ public class LoginActivity extends BaseActivtiy
             MemoryCache.setToken(rsp.getToken());
             
  			Intent intent = new Intent();
-			intent.setClass(LoginActivity.this, MainTabbarActivity.class);
+			intent.setClass(LoginActivity.this, HomeActivity.class);
 			startActivity(intent);
 			LoginActivity.this.finish();
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.SimpleAdapter;
@@ -27,6 +28,8 @@ import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseFragment;
 import cn.fuego.smart.home.ui.base.GetDetail;
+import cn.fuego.smart.home.ui.info.AlarmManageActivity;
+import cn.fuego.smart.home.ui.info.NewsViewActivity;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -47,16 +50,16 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
     private NewsViewModel newsModel = new NewsViewModel();
 	private static final int[] alarmViewAttrs = new int[]
 	{ R.id.item_alarm_icon, R.id.item_alarm_title,R.id.item_alarm_content, R.id.item_alarm_status,
-	  R.id.item_alarm_time,R.id.alarm_item_terminDesp,R.id.alarm_item_terminType,R.id.alarm_view_id};
+	  R.id.item_alarm_time};
 	
 	private static final String[] alarmItemAttrs = new String[] 
-	{ "icon", "title", "concentDesp", "status", "time","terminDesp","terminType","alarmID"};
+	{ "icon", "title", "concentDesp", "status", "time"};
 	
 	private static final int[] newsViewAttrs= new int[]
 	{
-		R.id.item_news_title,R.id.item_news_time,R.id.item_news_content,R.id.item_news_author
+		R.id.item_news_title,R.id.item_news_time
 	};
-	private static final String[] newsItemAttrs = new String[]{"title","time","content","author"};
+	private static final String[] newsItemAttrs = new String[]{"title","time"};
 
     private ListView alarmViewList ;
     private ListView newsViewList ;
@@ -99,7 +102,6 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
         	MemoryCache.setFlag(1);
         	group.check(R.id.nav_news);
         }
-        
 
 		return rootView;
 	}
@@ -152,10 +154,10 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 						listItem.put(alarmItemAttrs[3], AlarmClearEnum.getEnumByInt(json.getClearStatus()).getStrValue());
 						listItem.put(alarmItemAttrs[4], DateUtil.getStrTime(json.getAlarmTime()));
 						//告警信息ID，用于索引，在页面不显示
-						listItem.put(alarmItemAttrs[5], json.getSensorDesp());
+/*						listItem.put(alarmItemAttrs[5], json.getSensorDesp());
 						listItem.put(alarmItemAttrs[6], json.getSensorTypeName());
 						listItem.put(alarmItemAttrs[7], json.getId());//告警编号
-						//listItem.put(alarmItemAttrs[8], json.getDataValue());
+*/						//listItem.put(alarmItemAttrs[8], json.getDataValue());
 						alarmItems.add(listItem);
 				 }
 				//alarmViewList.setAdapter(adapterAlarm);
@@ -183,8 +185,6 @@ public class HomeFragment extends BaseFragment implements OnCheckedChangeListene
 					Map<String, Object> listItem = new HashMap<String, Object>();
 					listItem.put(newsItemAttrs[0], json.getTitle());
 					listItem.put(newsItemAttrs[1], DateUtil.getStrTime(json.getDate()));
-					listItem.put(newsItemAttrs[2], json.getContent());
-					listItem.put(newsItemAttrs[3], json.getAuthor());
 					newsItems.add(listItem);
 					
 				}
