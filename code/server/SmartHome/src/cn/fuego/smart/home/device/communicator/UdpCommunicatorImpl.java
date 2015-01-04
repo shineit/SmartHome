@@ -81,6 +81,7 @@ public class UdpCommunicatorImpl implements Communicator
 	@Override
 	public void sendData(String data)
 	{
+	    log.info("send data to the ip is " + this.ip + "the port is " + this.port);
 		log.info("the send string is "+data);
 		log.info("the send byte is :"+DataTypeConvert.toHexStringList(data));
 		try

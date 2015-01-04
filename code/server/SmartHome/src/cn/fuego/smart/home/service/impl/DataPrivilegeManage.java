@@ -25,7 +25,7 @@ import cn.fuego.smart.home.domain.UserConcentrator;
  */
 public class DataPrivilegeManage 
 {
-	public static List<Integer> getUserOfConcentor(int concentorID)
+	public static List<Integer> getUserOfConcentor(long concentorID)
 	{
 		List<Integer> userIDList = new ArrayList<Integer>();
 		
@@ -37,9 +37,9 @@ public class DataPrivilegeManage
 		}
 		return userIDList;
 	}
-	public static List<Integer> getConcentorOfUser(int userID)
+	public static List<Long> getConcentorOfUser(int userID)
 	{
-		List<Integer> dataIDList = new ArrayList<Integer>();
+		List<Long> dataIDList = new ArrayList<Long>();
 		
 		QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_userID,userID);
 

@@ -12,6 +12,7 @@ import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
 import cn.fuego.smart.home.device.communicator.Communicator;
 import cn.fuego.smart.home.device.communicator.CommunicatorFactory;
+import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 
@@ -52,7 +53,7 @@ public class UdpMessageHandler implements Runnable
 	
 	private void handle()
 	{
-	    log.info("the device is " + ipAddr);
+	    log.info("the device ip is " + ipAddr + " the port is " + this.remotePort);
  
 	    log.info("the string message is " + receiveData);
 	    log.info("the bytes is " + DataTypeConvert.toHexStringList(receiveData));
@@ -69,8 +70,8 @@ public class UdpMessageHandler implements Runnable
 		{
 			String decodeMessage = ApplicationProtocol.decode(receiveData);
 		 
-			ReceiveMessage message = new ReceiveMessage(decodeMessage,ipAddr);
-			returnData(message);
+			ReceiveMessage message = new ReceiveMessage(decodeMessage,ipAddr,this.remotePort);
+			DeviceManagerFactory.getInstance().getDeviceManger(message.getConcentrator()).sendReturnData(message.getPacketNum());
 			try
 			{
 				dispatchCmd(message);
@@ -91,14 +92,17 @@ public class UdpMessageHandler implements Runnable
 	
 	private void dispatchCmd(ReceiveMessage message)
 	{
+		Concentrator concentrator = message.getConcentrator();
+		concentrator.setStatus(ConcentratorStatusEnum.ONLINE.getIntValue());
+		DeviceOnlineCache.getInstance().refresh(concentrator);
 		switch(message.getCmdCode())
 		{
 		case RecieveCommandConst.ONLINE_MSG :
 			
-			
-			Concentrator concentrator = message.getConcentrator();
-			concentrator.setStatus(ConcentratorStatusEnum.ONLINE.getIntValue());
-			ServiceContext.getInstance().getConcentratorManageService().online(concentrator);
+			log.info("the message is online");
+
+			DeviceOnlineCache.getInstance().online(concentrator);
+
 			
 			break;
 		case RecieveCommandConst.ALARM_MSG:
@@ -108,6 +112,7 @@ public class UdpMessageHandler implements Runnable
 			}
 			else
 			{
+				log.info("the message is alarm");
 				ServiceContext.getInstance().getAlarmManageService().create(message.getSensorAlarm());
 			}
 			
@@ -120,29 +125,7 @@ public class UdpMessageHandler implements Runnable
 		}
 	}
 	
-	private void returnData(ReceiveMessage message)
-	{
- 		try
-		{
-			StringBuffer buf = new StringBuffer();
  
-			buf.append(DataTypeConvert.intToByteStr(message.getConcentratorID()));
-			buf.append(DataTypeConvert.intToByteStr(message.getPacketNum(),1));
-			buf.append(DataTypeConvert.intToByteStr(RecieveCommandConst.PACKET_RECV_MSG,1));
-			buf.append(DataTypeConvert.intToByteStr(0,1));
-
-			Communicator communicator = CommunicatorFactory.getInstance().getCommunicator(this.ipAddr, this.remotePort);
-			communicator.open();
-			communicator.sendData(buf.toString());
-			communicator.close();
-			 
- 		}
-		catch (Exception e)
-		{
-			log.error("send data error",e);
-		}
-
-	}
 
  
 

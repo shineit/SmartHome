@@ -20,6 +20,6 @@ public class RecieveCommandConst
 	public static final int ALARM_MSG = 0xA1;
 	public static final int SENSOR_DATA_MSG = 0xA2;
 	public static final int HISTORY_MSG = 0xA3;
-	public static final int PACKET_RECV_MSG = 0xA4;
+	public static final int PACKET_RECV_MSG = 0x0A;
 	public static final int ONLINE_MSG = 0xA5;
 }

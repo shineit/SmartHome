@@ -51,7 +51,7 @@ public interface DeviceManager
 	
 	public void setSensor(HomeSensor sensor);
 	
-	public HomeSensor getSesnor(int sensorID,int channelID);
+	public HomeSensor getSesnor(long sensorID,int channelID);
 	
 	public void enableSensor(List<HomeSensor> sensorList);
 	
@@ -60,6 +60,14 @@ public interface DeviceManager
 	public void startSensor(List<HomeSensor> sensorList);
 	
 	public void stopSensor(List<HomeSensor> sensorList);
+	
+	
+	/**
+	 * 发送回复消息
+	 * @param packetNum
+	 */
+	public void sendReturnData(int packetNum);
+
 	
 	/**
 	 * 获取模拟量终端采集数据

@@ -52,7 +52,8 @@ public class ReceiveMessage
  	private byte[] dataBytes;
 
  	private String ipAddr;
-	private int concentratorID;
+	private long concentratorID;
+	private int port;
 	private int cmdCode;
 	private int packetNum;	
 	private int dataNum;
@@ -60,20 +61,21 @@ public class ReceiveMessage
 	public static int CTL_GROUP_DEFAULT = 0xff;
 	public static int CTL_DESP_DEFAULT = 0x00;
 	
-	public ReceiveMessage(String allMessage,String ipAddr)
+	public ReceiveMessage(String allMessage,String ipAddr,int port)
 	{
 		this.dataBytes = DataTypeConvert.strToBytes(allMessage);
 		this.ipAddr = ipAddr;
+		this.port = port;
 		this.parseMessage();
 		
 	}
 	public void parseMessage()
 	{
-		this.concentratorID = this.getIntValue(CONCENTRATOR_ID_START, CONCENTRATOR_ID_END);
-		this.packetNum = getIntValue(PACKET_NUM_INDEX);
+		this.concentratorID = this.getLongValue(CONCENTRATOR_ID_START, CONCENTRATOR_ID_END);
+		this.packetNum = (int) getIntValue(PACKET_NUM_INDEX);
 
-		this.cmdCode = getIntValue(CMD_CODE_INDEX);
-	    this.dataNum = getIntValue(DATA_NUM_INDEX);
+		this.cmdCode = (int) getIntValue(CMD_CODE_INDEX);
+	    this.dataNum = (int) getIntValue(DATA_NUM_INDEX);
 	}
 	
 	
@@ -84,9 +86,15 @@ public class ReceiveMessage
 	 
 		concentrator.setConcentratorID(this.concentratorID);
 		concentrator.setIpAddr(ipAddr);
+		concentrator.setPort(port);
+		
+		if(this.isDataLengthEnough(DATA_START_INDEX+7))
+		{
+			concentrator.setLocationWE(this.getFloatValue(DATA_START_INDEX, DATA_START_INDEX+3));
+			concentrator.setLocationNS(this.getFloatValue(DATA_START_INDEX+4, DATA_START_INDEX+7));
+		}
  
-		concentrator.setLocationWE(this.getFloatValue(DATA_START_INDEX, DATA_START_INDEX+3));
-		concentrator.setLocationNS(this.getFloatValue(DATA_START_INDEX+4, DATA_START_INDEX+7));
+;
 		
 		return concentrator;
 	}
@@ -126,21 +134,23 @@ public class ReceiveMessage
 			}
 			else
 			{
-				int sensorID = getIntValue(i,i+3);
+				long sensorID = this.getLongValue(i,i+3);
 				int channelID = getIntValue(i+4,i+4);;
-				HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
-				if(null != sensor)
-				{
-					alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
-					alarm.setObjID(sensor.getId());
-					alarmList.add(alarm);
-				}
-				else
-				{
-					log.error("can not find the sensor by the alarm so discard it");
-					log.error("can not get sensor by concentrator is "+this.concentratorID + ",sensor id is" + sensorID + ",channel is is " + channelID);
- 
-				}
+				 HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
+					if(null != sensor)
+					{
+						alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
+						alarm.setObjID(sensor.getId());
+						alarmList.add(alarm);
+					}
+					else
+					{
+						log.error("can not find the sensor by the alarm so discard it");
+						log.error("can not get sensor by concentrator is "+this.concentratorID + ",sensor id is" + sensorID + ",channel is is " + channelID);
+	 
+					}
+			 
+
 				
 			}
 				
@@ -156,7 +166,7 @@ public class ReceiveMessage
 		int cnt = this.getIntValue(index,index+1);
  
 		int endNum = this.getIntValue(index+2,index+3);
-		if(0 == endNum)
+		if(1 == endNum)
 		{
 			return true;
 		}
@@ -169,7 +179,7 @@ public class ReceiveMessage
 		int cnt = this.getIntValue(index,index+1);
  
 		int endNum = this.getIntValue(index+2,index+3);
-		if(cnt <= endNum + 8)
+		if(cnt <= endNum + 7)
 		{
 			return true;
 		}
@@ -184,17 +194,16 @@ public class ReceiveMessage
 	public List<HomeSensor> getHomeSensorList()
 	{
 		Set<HomeSensor> sensorList = new HashSet<HomeSensor>();
-		int index = this.DATA_START_INDEX;
+		int index = DATA_START_INDEX;
 		//获取终端总数
 		int cnt = this.getIntValue(index,index+1);
-		if(cnt > 8)
+		if(cnt > 7)
 		{
-			log.info("");
-			cnt = 8;
+			log.info("the cnt bigger than 8");
+			cnt = 7;
 		}
 		//获取本次包起始ID
-		int endNum = this.getIntValue(index+2,index+3);
-		for(int i=0;i<cnt;i ++)
+ 		for(int i=0;i<cnt;i ++)
 		{
 			int sensorID = this.getIntValue(index+4+i*6,index+4+i*6+3);
 			int channelNum = this.getIntValue(index+4+i*6+4,index+4+i*6+5);
@@ -203,7 +212,7 @@ public class ReceiveMessage
 				HomeSensor sensor = new HomeSensor();
 				sensor.setConcentratorID(this.concentratorID);
 				sensor.setSensorID(sensorID);
-				sensor.setChannelID(j);
+				sensor.setChannelID(j+1);
 				sensorList.add(sensor);
 			}
 		}
@@ -254,7 +263,28 @@ public class ReceiveMessage
 		return by&0xff;  
 	}
 	
-	
+	private long getLongValue(int index)
+	{
+		int byteValue = 1;
+		long intValue = 0;
+		for (int i = index; i >= index; i--)
+		{
+			intValue += getUnsignedInt(dataBytes[i]) * byteValue;
+			byteValue *= 256;
+		}
+		return intValue;
+	}
+	private long getLongValue(int startIndex,int endIndex)
+	{
+		long byteValue = 1;
+		long intValue = 0;
+		for (int i = endIndex; i >= startIndex; i--)
+		{
+			intValue += getUnsignedInt(dataBytes[i]) * byteValue;
+			byteValue *= 256;
+		}
+		return intValue;
+	}
 	private int getIntValue(int index)
 	{
 		int byteValue = 1;
@@ -306,14 +336,10 @@ public class ReceiveMessage
 	
 
 
- 
-	public int getConcentratorID()
+  
+	public long getConcentratorID()
 	{
 		return concentratorID;
-	}
-	public void setConcentratorID(int concentratorID)
-	{
-		this.concentratorID = concentratorID;
 	}
 	public int getCmdCode()
 	{

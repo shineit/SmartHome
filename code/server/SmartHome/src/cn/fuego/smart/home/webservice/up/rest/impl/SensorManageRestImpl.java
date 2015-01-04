@@ -14,8 +14,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
+import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.SensorManageService;
@@ -35,6 +37,7 @@ import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.rest.SensorManageRest;

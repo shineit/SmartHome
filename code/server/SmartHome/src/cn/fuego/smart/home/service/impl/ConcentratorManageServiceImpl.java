@@ -56,6 +56,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		Concentrator old = super.get(String.valueOf(concentrator.getConcentratorID()));
 	    if(null != old)
 	    {
+	    	log.info("the concentor is existed in database");
 	    	old.setAddr(concentrator.getAddr());
 	    	old.setConcentratorID(concentrator.getConcentratorID());
 	    	old.setStatus(concentrator.getStatus());

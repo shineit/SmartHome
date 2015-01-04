@@ -13,8 +13,8 @@ package cn.fuego.smart.home.webservice.up.model.base;
 public class HomeSensorJson
 {
 	private int id;              //唯一ID，终端设备的出场ID，具有唯一性
-	private int concentratorID;  //集中器ID
-	private int sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
+	private long concentratorID;  //集中器ID
+	private long sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
 	private int channelID;       //终端设备的通道ID
 	private int sensorKind;      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
 	private int sensorType;      //传感器类型
@@ -37,28 +37,28 @@ public class HomeSensorJson
 	{
 		this.id = id;
 	}
+ 
+ 
 
-	public int getConcentratorID()
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
 
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
 	}
 
-	public int getSensorID()
+	public long getSensorID()
 	{
 		return sensorID;
 	}
 
-	public void setSensorID(int sensorID)
+	public void setSensorID(long sensorID)
 	{
 		this.sensorID = sensorID;
 	}
-
- 
 
 	public int getChannelID()
 	{

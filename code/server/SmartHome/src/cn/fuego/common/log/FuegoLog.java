@@ -2,6 +2,7 @@ package cn.fuego.common.log;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 
 public class FuegoLog implements Log
@@ -19,29 +20,35 @@ public class FuegoLog implements Log
 		FuegoLog instance = new FuegoLog(clazz);
 		return instance;
 	}
+	
+	private String getLoactionInfo()
+	{
+		LogLocation logLocation = new LogLocation(new Throwable(), FuegoLog.class.getName());
+		return  "["+logLocation.getClassName()+"." + logLocation.getMethodName()+ "(" + logLocation.getFileName() +":" + logLocation.getLineNumber() +")"+ "] ";
+	}
 
 	public void info(Object message)
 	{
-		log.info(message);
+        log.info(getLoactionInfo()+message);
 	}
 
 	public void info(Object message,Throwable e)
 	{
-		log.info(message, e);
+		log.info(getLoactionInfo()+message, e);
 	}
 	
 	public void warn(Object message)
 	{
-		log.warn(message);
+		log.warn(getLoactionInfo()+message);
 	}
 	
 	public void warn(Object message,Throwable e)
 	{
-		log.warn(message, e);
+		log.warn(getLoactionInfo()+message, e);
 	}
 	public void error(Object message)
 	{
-		log.error(message);
+		log.error(getLoactionInfo()+message);
 	}
 
 	public void error(Object message,Throwable e)

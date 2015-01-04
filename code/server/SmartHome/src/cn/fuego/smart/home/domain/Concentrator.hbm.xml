@@ -11,6 +11,8 @@
 	    <id name="concentratorID" column="CONCENTRATOR_ID" >
 		</id>
 		 <property name="ipAddr" column="IP_ADDR" not-null="true"></property>
+		 <property name="port" column="PORT" not-null="true"></property>
+		 
 		 <property name="status" column="STATUS" not-null="true"></property>
 		 <property name="locationNS" column="LOCATION_NS"></property>
 		 <property name="locationWE" column="LOCATION_WE"></property>

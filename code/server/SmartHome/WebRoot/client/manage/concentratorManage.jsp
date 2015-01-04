@@ -103,6 +103,8 @@ function submitFormC(url){
 					</c:forEach>
 	            </td>
 	            <td>
+	            <a  title="集中器信息修改" target="dialog" href="device/ConcentratorManage!syncSensor.action?selectedID=${e.concentratorID}&operateType=modify" class="btnEdit" mask="true">同步</a>
+	            
 	            <a title="集中器信息修改" target="dialog" href="device/ConcentratorManage!show.action?selectedID=${e.concentratorID}&operateType=modify" class="btnEdit" mask="true">修改</a>
 	            <a title="添加管理用户" target="dialog" href="device/ConcentratorManage!showPermission.action?selectedID=${e.concentratorID}" rel="peDialog"
 	            class="btnAdd" mask="true" style="margin-left:10px;">添加</a>

@@ -42,7 +42,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	private Log log = LogFactory.getLog(SensorManageServiceImpl.class);
 
  
-	public void syncSensorList(int concentorID)
+	public void syncSensorList(long concentorID)
 	{
 		log.info("update sensor list from concentrator, delete old sensor first. the concentor id " + concentorID);
 
@@ -50,17 +50,25 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
 		List<HomeSensor> sensorList = device.getSensorList();
 		
-		List<HomeSensor> sensorInfoList = new ArrayList<HomeSensor>();
+ 
 		for(HomeSensor sensor : sensorList)
 		{
-			HomeSensor e = device.getSesnor(sensor.getSensorID(), sensor.getChannelID());
-			sensorInfoList.add(e);
+			try
+			{
+				HomeSensor e = device.getSesnor(sensor.getSensorID(), sensor.getChannelID());
+				sensor = e;
+			}
+			catch(Exception e)
+			{
+				log.error("get home sensor config failed,the sensor id is " + sensor.getSensorID() + " ,the channel id is "+sensor.getChannelID());
+			}
+			
 		}
 		
 		QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID",concentorID);
 		this.getDao().delete(condition);
 		
-		super.create(sensorInfoList);
+		super.create(sensorList);
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#setSensor(cn.fuego.smart.home.constant.SensorSetCmdEnum, cn.fuego.smart.home.domain.Sensor)
@@ -98,7 +106,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	 * @see cn.fuego.smart.home.service.SensorManageService#getFireSensor(int, int, int, int)
 	 */
 	@Override
-	public FireSensor getFireSensor(int concentratorID, int machineID,
+	public FireSensor getFireSensor(long concentratorID, int machineID,
 			int loopID, int codeID)
 	{
 		// TODO Auto-generated method stub
@@ -121,7 +129,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	 * @see cn.fuego.smart.home.service.SensorManageService#getHomeSensor(int, int, int)
 	 */
 	@Override
-	public HomeSensor getHomeSensor(int concentratorID, int sensorID, int channelID)
+	public HomeSensor getHomeSensor(long concentratorID, long sensorID, int channelID)
 	{
 		
 	    List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
@@ -132,6 +140,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		
 		return super.getDao().getUniRecord(conditionList);
 	}
+ 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#disable(java.util.List)
 	 */
@@ -141,7 +150,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	
 		List<HomeSensor> sensorList = this.get(idList);
 		
-		Map<Integer,List<HomeSensor>> sensorMap = new HashMap<Integer,List<HomeSensor>>();
+		Map<Long,List<HomeSensor>> sensorMap = new HashMap<Long,List<HomeSensor>>();
 		
 		for(HomeSensor sensor : sensorList)
 		{
@@ -160,7 +169,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		}
 		
 		this.Modify(idList, "status", SensorStatusEnum.DISABLE.getIntValue());
-		for (Integer key : sensorMap.keySet())
+		for (Long key : sensorMap.keySet())
 		{
 			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
 			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
@@ -180,7 +189,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	{
 		List<HomeSensor> sensorList = this.get(idList);
 		
-		Map<Integer,List<HomeSensor>> sensorMap = new HashMap<Integer,List<HomeSensor>>();
+		Map<Long,List<HomeSensor>> sensorMap = new HashMap<Long,List<HomeSensor>>();
 		
 		for(HomeSensor sensor : sensorList)
 		{
@@ -198,7 +207,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			}
 		}
 		this.Modify(idList, "status", SensorStatusEnum.ENABLE.getIntValue());
-		for (Integer key : sensorMap.keySet())
+		for (Long key : sensorMap.keySet())
 		{
 			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
 			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);

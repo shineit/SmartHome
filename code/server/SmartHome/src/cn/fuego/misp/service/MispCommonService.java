@@ -41,6 +41,7 @@ public interface MispCommonService<E>
     
     E get(String id);
     E get(int id);
+    E get(long id);
     List<E> get(List<String> idList);
     List get(Class clazz ,QueryCondition  condition);
 

@@ -74,6 +74,28 @@ public class DataTypeConvert
 		}
 		return bytes;
 	}
+	
+	public static String intToByteStr(long value)
+	{
+		 return  intToByteStr(value,4);
+	}
+	public static String intToByteStr(long value,int bit)
+	{
+		 if(bit > 4)
+		 {
+			 bit = 4;
+		 }
+		 byte[] src = new byte[bit];  
+		
+		 for(int i=0;i<bit;i++)
+		 {     
+			    src[bit-1-i] =  (byte) (value>>(i*8) & 0xFF);   
+		 }
+  
+		 
+		 return DataTypeConvert.bytesToStr(src);
+	}
+	
 	public static String intToByteStr(int value)
 	{
 		 return  intToByteStr(value,4);
@@ -155,6 +177,10 @@ public class DataTypeConvert
 		if(fieldClass == int.class || fieldClass == Integer.class)
 		{
  			object = Integer.valueOf(value);
+		}
+		if(fieldClass == long.class || fieldClass == Long.class)
+		{
+ 			object = Long.valueOf(value);
 		}
 		else if(fieldClass == float.class || fieldClass == Float.class)
 		{

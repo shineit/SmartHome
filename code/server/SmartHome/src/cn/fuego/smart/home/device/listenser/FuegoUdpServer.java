@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.device.ApplicationProtocol;
+import cn.fuego.smart.home.domain.Concentrator;
 
 /** 
  * @ClassName: Server 
@@ -38,7 +39,7 @@ public class FuegoUdpServer extends Thread
 	private Log log = LogFactory.getLog(FuegoUdpServer.class);
 
 	private static final int MILLIS_NUM_OF_SEC = 1000;
-	private static final int DEFUALT_PERIOD = 30;
+	private static final int DEFUALT_PERIOD = 60;
 
 
 	private DatagramSocket  serverSocket;
@@ -49,14 +50,12 @@ public class FuegoUdpServer extends Thread
   	private Queue<String>  messageBuffer = new LinkedList<String>();
   	
   	private Timer timer = new Timer();
-  	
-	private Map<String,Long> deviceCache = new HashMap<String,Long>();
-
+ 
  
 	public void init(int listenPort)
 	{
 		this.listenPort = listenPort;
-		DeviceOnlineTask collectorTask  = new DeviceOnlineTask(deviceCache);
+		DeviceOnlineTask collectorTask  = new DeviceOnlineTask();
 
 		timer.schedule(collectorTask,0,DEFUALT_PERIOD*MILLIS_NUM_OF_SEC);
 	}
@@ -85,7 +84,7 @@ public class FuegoUdpServer extends Thread
  				message = message.substring(0, packet.getLength());
  				
  				log.info("recieve data from remote " +ipAddr);
- 				this.deviceCache.put(ipAddr, System.currentTimeMillis());
+ 				//this.deviceCache.put(ipAddr, System.currentTimeMillis());
  				
  				
   				threadPool.execute(new UdpMessageHandler(ipAddr,port,message));

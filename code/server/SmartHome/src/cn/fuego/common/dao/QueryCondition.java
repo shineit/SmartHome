@@ -35,6 +35,14 @@ public class QueryCondition
 		this.conditionType = conditionType;
 		this.attrName = attrName;
  	}
+	
+	public QueryCondition(ConditionTypeEnum conditionType, String attrName, long firstValue)
+	{
+		super();
+		this.conditionType = conditionType;
+		this.attrName = attrName;
+		this.firstValue = firstValue;
+	}
 	public QueryCondition(ConditionTypeEnum conditionType, String attrName, int firstValue)
 	{
 		super();

@@ -36,7 +36,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
  
 	public List<HomeAlarmView> getAlarmOfUser(int userID)
 	{
- 		List<Integer> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
+ 		List<Long> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
  
  		List<HomeAlarmView> alarmList = new ArrayList<HomeAlarmView>();
  	 

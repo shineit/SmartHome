@@ -244,6 +244,12 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, GetPrimaryName(), id);
         return this.getDao().getUniRecord(condition);
 	}
+	public E get(long id)
+	{
+ 
+        QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL, GetPrimaryName(), id);
+        return this.getDao().getUniRecord(condition);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -12,8 +12,9 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class Concentrator implements PersistenceObject
 {
-	private int concentratorID;     //集中器编号
+	private long concentratorID;     //集中器编号
 	private String ipAddr;			//集中器IP地址
+	private int port;
 	private Integer status=0;			//集中器状态，0 离线 1在线
 	private Float locationNS;		//集中器纬度
 	private Float locationWE;		//集中器经度
@@ -25,11 +26,20 @@ public class Concentrator implements PersistenceObject
 	public static final String PRI_KEY = "concentratorID";
 
 	
-	public int getConcentratorID()
+	public int getPort()
+	{
+		return port;
+	}
+	public void setPort(int port)
+	{
+		this.port = port;
+	}
+ 
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
 	}
@@ -97,12 +107,14 @@ public class Concentrator implements PersistenceObject
 	{
 		this.name = name;
 	}
+ 
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + concentratorID;
+		result = prime * result
+				+ (int) (concentratorID ^ (concentratorID >>> 32));
 		return result;
 	}
 	@Override
@@ -118,6 +130,15 @@ public class Concentrator implements PersistenceObject
 		if (concentratorID != other.concentratorID)
 			return false;
 		return true;
+	}
+	@Override
+	public String toString()
+	{
+		return "Concentrator [concentratorID=" + concentratorID + ", ipAddr="
+				+ ipAddr + ", port=" + port + ", status=" + status
+				+ ", locationNS=" + locationNS + ", locationWE=" + locationWE
+				+ ", name=" + name + ", description=" + description + ", addr="
+				+ addr + ", mark=" + mark + "]";
 	}
 	
 	

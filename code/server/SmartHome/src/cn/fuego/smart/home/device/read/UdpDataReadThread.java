@@ -51,7 +51,9 @@ public class UdpDataReadThread extends Thread
     		socket.receive(packet);
     		String message = DataTypeConvert.bytesToStr(buf);
 			message = message.substring(0, packet.getLength());
-		    log.info("the string message is " + message);
+				
+			String ipAddr =  packet.getAddress().getHostAddress();
+ 			log.info("receive data from " + ipAddr );
 		    log.info("the bytes is " + DataTypeConvert.toHexStringList(message));
 			synchronized(messageBuffer)
 			{

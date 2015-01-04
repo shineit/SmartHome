@@ -17,11 +17,15 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.misp.service.MISPException;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
 import cn.fuego.smart.home.device.communicator.Communicator;
 import cn.fuego.smart.home.device.communicator.CommunicatorFactory;
+import cn.fuego.smart.home.device.listenser.DeviceOnlineCache;
+import cn.fuego.smart.home.device.listenser.RecieveCommandConst;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeSensor;
 
@@ -98,14 +102,29 @@ public class DeviceManagerImpl implements DeviceManager
 	@Override
 	public List<HomeSensor> getSensorList()
 	{
+		log.info("get home sensor list");
 
 		 
 		String sendMessage = makeSendData(SendCommandConst.GET_SENOR_LIST,null);
 		String readMessage = getData(sendMessage);
 		
-		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getAddr());
+		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getIpAddr(),this.concentrator.getPort());
 		
-		List<HomeSensor> sensorList =recvMessage.getHomeSensorList();
+		while(!recvMessage.isStart())
+		{
+			log.warn("the message is not start, so discard it");
+			recvMessage = new ReceiveMessage(getData(sendMessage), this.concentrator.getIpAddr(),this.concentrator.getPort());
+		}
+		List<HomeSensor> sensorList = new ArrayList<HomeSensor>();
+	    while(!recvMessage.isEnd())
+	    {
+	    	log.info("the message is not end, read again");
+	    	sensorList.addAll(recvMessage.getHomeSensorList());
+			recvMessage = new ReceiveMessage(getData(sendMessage), this.concentrator.getIpAddr(),this.concentrator.getPort());
+	    }
+    	sensorList.addAll(recvMessage.getHomeSensorList());
+
+	    
 		return sensorList;
 	}
 
@@ -162,8 +181,9 @@ public class DeviceManagerImpl implements DeviceManager
 
 		
 	}
-	public HomeSensor getSesnor(int sensorID,int channelID)
+	public HomeSensor getSesnor(long sensorID,int channelID)
 	{
+		log.info("get home sensor config,the sensor id is " + sensorID+ "the channel id is " + channelID);
         String data = ""; 	
 		
 		data += DataTypeConvert.intToByteStr(sensorID,4);
@@ -171,7 +191,7 @@ public class DeviceManagerImpl implements DeviceManager
 		String sendMessage = makeSendData(SendCommandConst.GET_SENSOR_CONFIG,data);
 		String readMessage = getData(sendMessage);
 		
-		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getAddr());
+		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getIpAddr(),this.concentrator.getPort());
 		
 		return recvMessage.getHomeSensor();
 
@@ -239,13 +259,62 @@ public class DeviceManagerImpl implements DeviceManager
 	private String getData(String sendMessage)
 	{
 		String readMessage = null;
-		Communicator communicator = CommunicatorFactory.getInstance().getCommunicator(this.concentrator.getIpAddr(), port);
-		communicator.open();
-		communicator.sendData(sendMessage);
-		readMessage = communicator.readData(ApplicationProtocol.PACKET_END);
-		communicator.close();
+		
+		
+
+		synchronized (this)
+		{
+			if(!DeviceOnlineCache.getInstance().isOnline(concentrator))
+			{
+				//throw new MISPException(ErrorMessageConst.DEVICE_IS_OFFLINE);
+			}
+			Concentrator cacheDevice = DeviceOnlineCache.getInstance().getConcentrator(concentrator.getConcentratorID());
+			if(null == cacheDevice)
+			{
+				//throw new MISPException(ErrorMessageConst.DEVICE_IS_OFFLINE);
+			}
+			this.concentrator.setIpAddr(cacheDevice.getIpAddr());
+			this.concentrator.setPort(cacheDevice.getPort());
+
+			Communicator communicator = CommunicatorFactory.getInstance().getCommunicator(this.concentrator.getIpAddr(), concentrator.getPort());
+			communicator.open();
+			communicator.sendData(sendMessage);
+			readMessage = communicator.readData(ApplicationProtocol.PACKET_END);
+			communicator.close();
+		}
+
 		
 		return ApplicationProtocol.decode(readMessage);
+	}
+	
+	public void sendReturnData(int packetNum)
+	{
+		synchronized (this)
+		{
+			try
+			{
+				StringBuffer buf = new StringBuffer();
+	 
+				buf.append(DataTypeConvert.intToByteStr(this.concentrator.getConcentratorID()));
+				buf.append(DataTypeConvert.intToByteStr(packetNum,1));
+				buf.append(DataTypeConvert.intToByteStr(RecieveCommandConst.PACKET_RECV_MSG,1));
+				buf.append(DataTypeConvert.intToByteStr(0,1));
+				
+
+				
+				Communicator communicator = CommunicatorFactory.getInstance().getCommunicator(this.concentrator.getIpAddr(), concentrator.getPort());
+				communicator.open();
+				communicator.sendData(ApplicationProtocol.encode(buf.toString()));
+				communicator.close();
+				 
+	 		}
+			catch (Exception e)
+			{
+				log.error("send data error",e);
+			}
+		}
+ 
+
 	}
 
 }

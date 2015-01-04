@@ -8,7 +8,6 @@
 */ 
 package cn.fuego.smart.home.device.listenser;
 
-import java.util.Map;
 import java.util.TimerTask;
 
 import org.apache.commons.logging.Log;
@@ -25,11 +24,8 @@ public class DeviceOnlineTask  extends TimerTask
 {
 	private Log log = LogFactory.getLog(FuegoUdpServer.class);
 
-	private Map<String,Long> deviceCache;
-	
-	public DeviceOnlineTask(Map<String,Long> deviceCache )
+	public DeviceOnlineTask()
 	{
-		this.deviceCache = deviceCache;
 	}
 	/* (non-Javadoc)
 	 * @see java.util.TimerTask#run()
@@ -38,15 +34,11 @@ public class DeviceOnlineTask  extends TimerTask
 	public void run()
 	{
 		log.info("checking device is online or not");
-		for (Map.Entry<String, Long> entry : deviceCache.entrySet()) 
-		{
-			long nowTime = System.currentTimeMillis();
-			if(nowTime -30000 > entry.getValue())
-			{
-				log.warn("the device is off line " + entry.getKey());
-			}
- 		}
+		DeviceOnlineCache.getInstance().checkOnline();
 		
 	}
+	
+	
+	
 
 }

@@ -153,7 +153,7 @@ public class MessageHandler implements Runnable
 		{
 			String decodeMessage = ApplicationProtocol.decode(nowMessage);
 		 
-			ReceiveMessage message = new ReceiveMessage(decodeMessage,this.socket.getRemoteSocketAddress().toString());
+			ReceiveMessage message = new ReceiveMessage(decodeMessage,this.socket.getRemoteSocketAddress().toString(),this.socket.getPort());
 			try
 			{
 				dispatchCmd(message);

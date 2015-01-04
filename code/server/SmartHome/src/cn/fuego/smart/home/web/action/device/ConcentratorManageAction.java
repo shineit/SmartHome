@@ -75,6 +75,28 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
     	return MISP_DONE_PAGE;
     	
     }
+    
+    public String syncSensor()
+    {
+    	try
+		{
+    		ServiceContext.getInstance().getSensorManageService().syncSensorList(Long.valueOf(this.getSelectedID()));
+        	
+		}catch(MISPException e)
+		{
+			log.error("create user failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch (Exception e)
+		{
+			log.error("create user failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+		return MISP_DONE_PAGE;
+    }
+    
 	public String showPermission()
 	{
 		try

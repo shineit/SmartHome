@@ -21,7 +21,7 @@ public class Alarm implements PersistenceObject
 	
 	private int id;  			//告警ID，自增长
 	
-	private int concentratorID;
+	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
 	private int objID;        //对象ID
 	
@@ -52,14 +52,18 @@ public class Alarm implements PersistenceObject
 
 
 
-	public int getConcentratorID()
+ 
+
+
+
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
 
 
 
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
 	}
