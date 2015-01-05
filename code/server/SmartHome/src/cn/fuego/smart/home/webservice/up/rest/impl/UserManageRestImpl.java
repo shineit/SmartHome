@@ -92,13 +92,11 @@ public class UserManageRestImpl implements UserManageRest
 		    
 		    for(SystemMenu menu : menuList)
 		    {	
-		    	MenuJson menuJson = new MenuJson();
-		    	menuJson.loadWithMenu(menu);
+		    	MenuJson menuJson = ModelConvert.menuToJson(menu);
 		    	rsp.getMenuList().add(menuJson);
 		    }
-		    
-		    UserJson userJson = new UserJson();
-		    userJson.loadWithUser(user);
+
+		    UserJson userJson = ModelConvert.userToJson(user);
 		    rsp.setUser(userJson);
 			
 		}

@@ -2,7 +2,6 @@ package cn.fuego.smart.home.webservice.up.model.base;
 
 import java.util.List;
 
-
 /**
  * 
 * @ClassName: BaseJsonReq 

@@ -10,8 +10,6 @@ package cn.fuego.smart.home.webservice.up.model.base;
 
 import java.util.List;
 
-import cn.fuego.misp.domain.SystemUser;
-
  /** 
  * @ClassName: UserJson 
  * @Description: TODO
@@ -26,12 +24,7 @@ public class UserJson
 	private int role;
 	private List<AttributeJson> listAttr;
 	
-	public void loadWithUser(SystemUser user)
-	{
-		this.userID = user.getUserID();
-		this.role = user.getRole();
-		this.userName = user.getUserName();
-	}
+ 
 	public int getUserID()
 	{
 		return userID;

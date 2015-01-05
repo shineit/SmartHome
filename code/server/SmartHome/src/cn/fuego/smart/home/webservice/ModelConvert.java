@@ -11,6 +11,8 @@ package cn.fuego.smart.home.webservice;
 import java.util.Date;
 
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.misp.domain.SystemMenu;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
@@ -22,8 +24,10 @@ import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
+import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
+import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 
  /** 
@@ -108,7 +112,7 @@ public class ModelConvert
 		
 		return order;
 	}
-	public static ServiceOrderJson ServiceOrderJson(ServiceOrder order)
+	public static ServiceOrderJson ServiceOrderToJson(ServiceOrder order)
 	{
 		ServiceOrderJson json= new ServiceOrderJson();
 		json.setOrderID(order.getOrderID());
@@ -198,4 +202,37 @@ public class ModelConvert
     	userMark.setMark(markJson.getMark());
     	return userMark;
     }
+    
+	public static MenuJson menuToJson(SystemMenu menu)
+	{
+		MenuJson json = new MenuJson();
+		json.setId(menu.getId());
+		json.setName(menu.getName());
+		return json;
+	}
+	public static SystemMenu jsonToMenu(MenuJson menuJson)
+	{
+		SystemMenu menu = new SystemMenu();
+		menu.setId(menuJson.getId());
+		menu.setName(menuJson.getName());
+		return menu;
+	}
+	
+	public static UserJson userToJson(SystemUser user)
+	{
+		UserJson json = new UserJson();
+		json.setUserID(user.getUserID());
+		json.setUserName(user.getUserName());
+		json.setRole(user.getRole());
+		return json;
+	}
+	public static SystemUser jsonToUser(UserJson userJson)
+	{
+		SystemUser user = new SystemUser();
+		user.setUserID(userJson.getUserID());
+		user.setUserName(userJson.getUserName());
+		user.setRole(userJson.getRole());
+		return user;
+	}	
+	
 }

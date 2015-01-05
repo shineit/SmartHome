@@ -27,6 +27,4 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	
 	public static final int DEVICE_IS_OFFLINE= 10002 ; // 操作设备失败 
 
-	
-
 }

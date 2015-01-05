@@ -71,13 +71,13 @@ function submitFormC(url){
 		<thead>
 			<tr>
 				<!-- <th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th> -->			
-				<th width="15%" align="center">编号</th>
+				<th width="10%" align="center">编号</th>
 				<th width="15%" align="center">IP地址</th>
 				<th width="15%" align="center">名称</th>
-				<th width="30%" align="center">集中器描述</th>
+				<th width="25%" align="center">集中器描述</th>
 				<th width="10%" align="center">状态</th>
 				<th width="10%" align="center">操作</th>
-
+				<th width="10%" align="center">刷新</th>
 			</tr>
 		</thead>
 	<s:form  id="concentForm"  method="POST"  name="concentForm" >			
@@ -102,14 +102,16 @@ function submitFormC(url){
 						   </c:choose>
 					</c:forEach>
 	            </td>
-	            <td>
-	            <a  title="集中器信息修改" target="dialog" href="device/ConcentratorManage!syncSensor.action?selectedID=${e.concentratorID}&operateType=modify" class="btnEdit" mask="true">同步</a>
+	            <td style="text-align: center;">
+	         
 	            
 	            <a title="集中器信息修改" target="dialog" href="device/ConcentratorManage!show.action?selectedID=${e.concentratorID}&operateType=modify" class="btnEdit" mask="true">修改</a>
 	            <a title="添加管理用户" target="dialog" href="device/ConcentratorManage!showPermission.action?selectedID=${e.concentratorID}" rel="peDialog"
 	            class="btnAdd" mask="true" style="margin-left:10px;">添加</a>
 	            </td> 
-
+				<td style="padding-top:2px;">
+				<a title="刷新" target="dialog" href="device/ConcentratorManage!syncSensor.action?selectedID=${e.concentratorID}&operateType=modify" class="mispButton loop icon" style="padding-top:3px !important;height:12px;line-height: 6px;"><span style="text-align:center;">同步</span></a>
+				</td>
 			</tr>
 		</c:forEach>
 			

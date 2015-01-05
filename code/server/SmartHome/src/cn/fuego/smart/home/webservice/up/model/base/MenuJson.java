@@ -8,7 +8,6 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import cn.fuego.misp.domain.SystemMenu;
 
  /** 
  * @ClassName: MenuJson 
@@ -22,11 +21,7 @@ public class MenuJson
 	private int id;
 	private String name;
 	
-	public void loadWithMenu(SystemMenu menu)
-	{
-		this.id = menu.getId();
-		this.name = menu.getName();
-	}
+ 
 	public int getId()
 	{
 		return id;

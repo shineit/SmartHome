@@ -1,9 +1,7 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import java.util.Date;
+import java.io.Serializable;
 
-import cn.fuego.common.util.format.DateUtil;
-import cn.fuego.smart.home.domain.ServiceOrder;
 
 
 /**
@@ -14,7 +12,7 @@ import cn.fuego.smart.home.domain.ServiceOrder;
 * @date 2014-10-20 上午10:58:11 
 *
  */
-public class ServiceOrderJson
+public class ServiceOrderJson implements Serializable
 {
 	
 	private String orderID;         //申请单号，
@@ -32,29 +30,7 @@ public class ServiceOrderJson
     private long handleTime;		//处理时间
  
     
-    
-	/**
-	 * @param e
-	 */
-	public void loadWithOrder(ServiceOrder order)
-	{
-		this.orderID = order.getOrderID();
-		this.orderName = order.getOrderName();
-		this.orderType = order.getOrderType();
-		this.content = order.getContent();
-		this.creator = order.getCreator();
-		this.createTime =  DateUtil.getDateTime(order.getCreateTime());
-		this.contactName = order.getContactName();
-		this.phoneNum = order.getPhoneNum();
-		this.contactAddr = order.getContactAddr();
-		this.orderStatus = order.getOrderStatus();
-		this.handler = order.getHandler();
-		this.handleResult = order.getHandleResult();
-		this.handleTime = DateUtil.getDateTime(order.getHandleTime());
-		
-	}
-	
-	
+  
  
 	public String getOrderID()
 	{

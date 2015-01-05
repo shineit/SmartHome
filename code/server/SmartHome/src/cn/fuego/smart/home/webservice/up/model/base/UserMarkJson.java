@@ -1,6 +1,5 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import cn.fuego.smart.home.domain.UserMark;
 
 
 /**
