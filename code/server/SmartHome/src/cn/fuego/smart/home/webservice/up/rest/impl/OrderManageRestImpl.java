@@ -15,11 +15,14 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.ServiceOrderManageService;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.webservice.ModelConvert;
+import cn.fuego.smart.home.webservice.up.model.GetOrderByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetOrderByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderReq;
@@ -85,6 +88,33 @@ public class OrderManageRestImpl implements OrderManageRest
 
 		}
 
+		return rsp;
+	}
+
+	@Override
+	public GetOrderByIDRsp getOrder(GetOrderByIDReq req)
+	{
+		GetOrderByIDRsp rsp = new GetOrderByIDRsp();
+		
+		try
+		{
+			ServiceOrder order = orderService.get(req.getOrderID());
+			ServiceOrderJson orderJson = ModelConvert.ServiceOrderJson(order);
+		    rsp.setOrder(orderJson);
+		}
+		catch(MISPException e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
+
+ 		
 		return rsp;
 	}
 

@@ -108,7 +108,25 @@ public class ModelConvert
 		
 		return order;
 	}
-	
+	public static ServiceOrderJson ServiceOrderJson(ServiceOrder order)
+	{
+		ServiceOrderJson json= new ServiceOrderJson();
+		json.setOrderID(order.getOrderID());
+		json.setOrderName(order.getOrderName());
+		json.setOrderType(order.getOrderType());
+		json.setContent(order.getContent());
+		json.setCreator(order.getCreator());
+		json.setCreateTime(DateUtil.getDateTime(order.getCreateTime()));
+		json.setContactName(order.getContactName());
+		json.setPhoneNum(order.getPhoneNum());
+		json.setContactAddr(order.getContactAddr());
+		json.setOrderStatus(order.getOrderStatus());
+		json.setHandler(order.getHandler());
+		json.setHandleResult(order.getHandleResult());
+		json.setHandleTime(DateUtil.getDateTime(order.getHandleTime()));
+		
+		return json;
+	}
 	
 	public static HomeSensorJson homeSensorToJson(HomeSensor sensor)
 	{

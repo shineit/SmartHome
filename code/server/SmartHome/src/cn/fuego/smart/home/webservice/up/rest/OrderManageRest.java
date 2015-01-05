@@ -5,6 +5,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import cn.fuego.smart.home.webservice.up.model.GetOrderByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetOrderByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderReq;
@@ -32,5 +34,8 @@ public interface OrderManageRest
 	@Path("/set")
 	public SetServiceOrderRsp setServiceOrder(SetServiceOrderReq req);
 
-
+	@POST	
+	@Path("/id")
+	public GetOrderByIDRsp getOrder(GetOrderByIDReq req);
+	
 }
