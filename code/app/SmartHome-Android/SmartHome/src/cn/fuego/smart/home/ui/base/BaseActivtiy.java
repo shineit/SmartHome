@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,15 +16,19 @@ import android.widget.ListView;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 
 public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListener
 {
 
 	private Context contextDialog ;
 
- 
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		//重载，禁止所有activity竖屏
+		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
 	public void showMessage(MispHttpMessage message)
 	{
 		super.showMessage(message.getErrorCode());	

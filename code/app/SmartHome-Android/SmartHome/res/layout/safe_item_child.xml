@@ -6,13 +6,13 @@
 
     <CheckBox
         android:id="@+id/safe_item_chk"
-        android:layout_width="60dp"
-        android:layout_height="35dp"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="26dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/checkbox"
         android:button="@null"
         android:checked="true"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="50dp"
         android:src="@drawable/smoke" />
 
     <TextView
@@ -36,6 +36,7 @@
         android:layout_marginLeft="28dp"
         android:layout_toRightOf="@+id/safe_item_icon"
         android:text="烟雾报警器1"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/content_font_size" />
 
 </RelativeLayout>

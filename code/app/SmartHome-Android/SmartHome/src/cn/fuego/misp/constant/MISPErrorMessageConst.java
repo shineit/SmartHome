@@ -19,7 +19,7 @@ import cn.fuego.misp.dao.file.MispMessageReader;
  */
 public class MISPErrorMessageConst
 {
-	public static final int SUCCESS = 0;  //成功
+	public static final int SUCCESS = 0;  //操作成功
  
 	public static final int ERROR_MSG_WRONG = 1; //消息错误
 	

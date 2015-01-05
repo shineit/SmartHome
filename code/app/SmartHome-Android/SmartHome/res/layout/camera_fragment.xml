@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backcolor"
+    android:dividerPadding="10dp"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/head_height"
             android:layout_weight="1" >
 
             <TextView
@@ -28,137 +29,57 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <GridLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.21"
-        android:orientation="vertical" >
+        android:layout_gravity="center_horizontal"
+        android:columnCount="2"
+        android:padding="20dp" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/button1"
+            android:layout_gravity="left"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/disablecolor"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/camera"
+            android:gravity="center_vertical|bottom"
+            android:padding="15dp"
+            android:text="车库：1号摄像头"
+            android:textColor="@color/black" />
 
-            <ImageButton
-                android:id="@+id/ImageButton04"
-                android:layout_width="125dp"
-                android:layout_height="135dp"
-                android:layout_alignParentRight="false"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:paddingBottom="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
-                android:src="@drawable/camera" />
+        <Button
+            android:id="@+id/Button01"
+            android:background="@color/disablecolor"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/camera"
+            android:gravity="center_vertical|bottom"
+            android:padding="15dp"
+            android:text="车库：1号摄像头"
+            android:textColor="@color/black" />
 
-            <ImageButton
-                android:id="@+id/ImageButton03"
-                android:layout_width="125dp"
-                android:layout_height="135dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/ImageButton04"
-                android:layout_marginRight="25dp"
-                android:background="@color/white"
-                android:paddingBottom="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
-                android:src="@drawable/camera" />
+        <Button
+            android:id="@+id/Button02"
+            android:layout_gravity="left"
+            android:background="@color/disablecolor"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/camera"
+            android:gravity="center_vertical|bottom"
+            android:padding="15dp"
+            android:text="车库：1号摄像头"
+            android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/alarm_obj_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ImageButton04"
-                android:layout_alignLeft="@+id/ImageButton04"
-                android:layout_alignRight="@+id/ImageButton04"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="客厅：1号摄像头"
-                android:textColor="@color/black"
-                android:textStyle="normal"
-                android:typeface="sans" />
-
-            <TextView
-                android:id="@+id/TextView04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ImageButton03"
-                android:layout_alignLeft="@+id/ImageButton03"
-                android:layout_alignRight="@+id/ImageButton03"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="客厅：2号摄像头"
-                android:textColor="@color/black"
-                android:textStyle="normal"
-                android:typeface="sans" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <ImageButton
-                android:id="@+id/ImageButton02"
-                android:layout_width="125dp"
-                android:layout_height="135dp"
-                android:layout_alignParentRight="false"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:paddingBottom="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
-                android:src="@drawable/camera" />
-
-            <ImageButton
-                android:id="@+id/ImageButton01"
-                android:layout_width="125dp"
-                android:layout_height="135dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/ImageButton02"
-                android:layout_marginRight="25dp"
-                android:background="@color/white"
-                android:paddingBottom="50dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
-                android:src="@drawable/camera" />
-
-            <TextView
-                android:id="@+id/item_news_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ImageButton02"
-                android:layout_alignLeft="@+id/ImageButton02"
-                android:layout_alignRight="@+id/ImageButton02"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="车库：1号摄像头"
-                android:textColor="@color/black"
-                android:textStyle="normal"
-                android:typeface="sans" />
-
-            <TextView
-                android:id="@+id/alarm_event_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ImageButton01"
-                android:layout_alignLeft="@+id/ImageButton01"
-                android:layout_alignRight="@+id/ImageButton01"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="车库：2号摄像头"
-                android:textColor="@color/black"
-                android:textStyle="normal"
-                android:typeface="sans" />
-        </RelativeLayout>
-    </LinearLayout>
+        <Button
+            android:id="@+id/Button03"
+            android:layout_gravity="left"
+            android:background="@color/disablecolor"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/camera"
+            android:gravity="center_vertical|bottom"
+            android:padding="15dp"
+            android:text="车库：1号摄像头"
+            android:textColor="@color/black" />
+    </GridLayout>
 
 </LinearLayout>

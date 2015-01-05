@@ -88,7 +88,9 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 		}
 		else
 		{
-			group.setClickable(false);
+			//group.setClickable(false);
+			repairBtn.setClickable(false);
+			consultBtn.setClickable(false);
 			textName.setEnabled(false);
 			textContent.setEnabled(false);
 			contactsView.setVisibility(View.GONE);

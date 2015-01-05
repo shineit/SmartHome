@@ -66,13 +66,14 @@ public class ReflectionUtil
 		return object;
 	}
 	
-    public static void setObjetField(Object obj, String fieldName, String value)
+    public static void setObjetField(Object obj, String fieldName, Object value)
     {
     	try
     	{
-        	Class type = obj.getClass().getField(fieldName).getType();
-        	String methodName  =fieldName.replaceFirst(fieldName.substring(0, 1),fieldName.substring(0, 1).toUpperCase())  ; 
-        	Method setter =  obj.getClass().getMethod(methodName, type);
+    		
+        	Class type = obj.getClass().getDeclaredField(fieldName).getType();
+        	String methodName  = "set" + fieldName.replaceFirst(fieldName.substring(0, 1),fieldName.substring(0, 1).toUpperCase())  ; 
+        	Method setter =  obj.getClass().getDeclaredMethod(methodName, type);
         	Object valueObject = convertToFieldObject(obj.getClass(),fieldName,value);
         	setter.invoke(obj, valueObject);
          

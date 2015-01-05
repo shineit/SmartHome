@@ -65,37 +65,37 @@
 
         <TableRow
             android:id="@+id/order_thead"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:padding="10dp" >
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp" >
 
             <TextView
-                android:id="@+id/item_time"
-                android:layout_width="80dp"
+                android:id="@+id/txt_011"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_weight="0.5"
+                android:paddingLeft="20dp"
                 android:text="单号"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
 
             <TextView
-                android:id="@+id/alarm_manage_type"
-                android:layout_width="150dp"
+                android:id="@+id/txt_00"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="5dp"
+                android:layout_weight="0.5"
                 android:text="名称"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="5dp"
                 android:text="状态"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
 
         </TableRow>
 

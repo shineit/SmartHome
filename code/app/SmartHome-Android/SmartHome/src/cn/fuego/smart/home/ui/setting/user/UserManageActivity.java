@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 
 public class UserManageActivity extends BaseActivtiy implements View.OnClickListener
 {
-
+	private TextView user_name;
+	private EditText user_email,user_phone,user_add;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -19,12 +23,20 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		setContentView(R.layout.user_info);
 		//统一activity管理，用于退出APP
 		ExitApplication.getInstance().addActivity(this);
+		user_name = (TextView) findViewById(R.id.user_info_username);
+		user_email = (EditText) findViewById(R.id.user_info_email);
+		user_phone = (EditText) findViewById(R.id.user_info_phone);
+		user_add = (EditText) findViewById(R.id.user_info_address);
+		
+		initData();
 		
 		Button back_btn=(Button)findViewById(R.id.user_info_back);
 		back_btn.setOnClickListener(this);
 		back_btn.setTag(1);
 		
 		Button user_info_btn = (Button) findViewById(R.id.modify_userinfo_sure);
+		user_info_btn.requestFocus();
+		user_info_btn.requestFocusFromTouch();
 		user_info_btn.setOnClickListener(this);
 		user_info_btn.setTag(2);
 		
@@ -35,6 +47,13 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		Button logout_btn =  (Button) findViewById(R.id.logout_btn);
 		logout_btn.setOnClickListener(this);
 		logout_btn.setTag(4);		
+	}
+
+	private void initData()
+	{
+
+		user_name.setText(MemoryCache.getLoginInfo().getUser().getUserName().toString());
+		
 	}
 
 	@Override

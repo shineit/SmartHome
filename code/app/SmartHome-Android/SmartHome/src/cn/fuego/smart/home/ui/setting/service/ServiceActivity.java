@@ -29,8 +29,6 @@ public class ServiceActivity extends MispListActivity<ServiceOrderJson> implemen
 		this.listViewRes.setListItemView(R.layout.service_item);
 		this.listViewRes.setClickActivityClass(ServiceApplyActivity.class);
 
-		//LayoutInflater inflater= LayoutInflater.from(ServiceActivity.this);
-		//View parentView = inflater.inflate(R.layout.service, null);
 
 	}
  

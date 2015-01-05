@@ -1,6 +1,7 @@
 package cn.fuego.smart.home.ui;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
@@ -10,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.camera.CameraFragment;
@@ -50,9 +50,10 @@ public class MainTabbarActivity extends FragmentActivity implements OnClickListe
         super.onCreate(savedInstanceState);  
         setContentView(R.layout.activity_main_tabbar);  
         ExitApplication.getInstance().addActivity(this);
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent i= this.getIntent();
         num=i.getIntExtra("num", 0);
+        
         initView();  
         
     }  
