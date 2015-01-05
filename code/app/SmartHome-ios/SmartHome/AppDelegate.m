@@ -18,6 +18,7 @@
 #import "FESettingVC.h"
 #import "CDUser.h"
 #import "APService.h"
+#import "FEHomePageVC.h"
 //#import "FEServiceListVC.h"
 
 @implementation AppDelegate
@@ -105,7 +106,10 @@
 
 //加载主页
 -(void)loadMain{
-    
+    FEHomePageVC *homeVC = [[FEHomePageVC alloc] init];
+    FECommonNavgationController *homen = [[FECommonNavgationController alloc] initWithRootViewController:homeVC];
+    [AppDelegate sharedDelegate].window.rootViewController = homen;
+    return;
     //news page
     FENewsVC *news = [FENewsVC new];
     FECommonNavgationController *nvnews = [[FECommonNavgationController alloc] initWithRootViewController:news];
