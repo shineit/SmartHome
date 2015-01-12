@@ -73,5 +73,8 @@ return shared##className; \
 
 #define FEMarkDidChangeNotification             @"markchange"
 
+#define YSAppKey        @"9a39449992d048439b4cef7d62a3c997"
+#define YSAppSecret     @"2e49fa81764d370c2693a5f1ed0d8048"
+
 
 #endif

@@ -68,6 +68,17 @@
 		14B03B751A5928C9000826C9 /* FEHomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B741A5928C9000826C9 /* FEHomePageVC.m */; };
 		14B03B781A592977000826C9 /* FEHomeItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B771A592977000826C9 /* FEHomeItemCell.m */; };
 		14B03B7B1A593838000826C9 /* FEHomeItemCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B7A1A593838000826C9 /* FEHomeItemCollectionReusableView.m */; };
+		14B162C81A63EDDB006CF154 /* libiconv.2.4.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162C71A63EDDB006CF154 /* libiconv.2.4.0.dylib */; };
+		14B162CA1A63EE04006CF154 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162C91A63EE04006CF154 /* libstdc++.dylib */; };
+		14B162CD1A63EE38006CF154 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CB1A63EE38006CF154 /* OpenAL.framework */; };
+		14B162CE1A63EE39006CF154 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CC1A63EE38006CF154 /* OpenGLES.framework */; };
+		14B162D01A63EE44006CF154 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CF1A63EE44006CF154 /* MobileCoreServices.framework */; };
+		14B162D21A63EE5C006CF154 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162D11A63EE5C006CF154 /* AVFoundation.framework */; };
+		14B162D41A63EE6E006CF154 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162D31A63EE6E006CF154 /* AudioToolbox.framework */; };
+		14B162D61A63EE7B006CF154 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162D51A63EE7B006CF154 /* CoreMotion.framework */; };
+		14B1637F1A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */; };
+		14B163801A63FBDE006CF154 /* libEzvizRealPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */; };
+		14B163861A640F36006CF154 /* AFHTTPClient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B163851A640F36006CF154 /* AFHTTPClient+Json.m */; };
 		14B447A319F5FB8E0078EAB4 /* FEWarringDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */; };
 		14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A519F5FCFE0078EAB4 /* FEDeviceInfoView.m */; };
 		14B447A919F5FE190078EAB4 /* FELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A819F5FE190078EAB4 /* FELabel.m */; };
@@ -243,6 +254,23 @@
 		14B03B771A592977000826C9 /* FEHomeItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEHomeItemCell.m; sourceTree = "<group>"; };
 		14B03B791A593838000826C9 /* FEHomeItemCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEHomeItemCollectionReusableView.h; sourceTree = "<group>"; };
 		14B03B7A1A593838000826C9 /* FEHomeItemCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEHomeItemCollectionReusableView.m; sourceTree = "<group>"; };
+		14B162C71A63EDDB006CF154 /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
+		14B162C91A63EE04006CF154 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		14B162CB1A63EE38006CF154 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		14B162CC1A63EE38006CF154 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		14B162CF1A63EE44006CF154 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		14B162D11A63EE5C006CF154 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		14B162D31A63EE6E006CF154 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		14B162D51A63EE7B006CF154 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EzvizOpenSDKBundle.bundle; sourceTree = "<group>"; };
+		14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEzvizRealPlay.a; sourceTree = "<group>"; };
+		14B1637A1A63FBDE006CF154 /* NSData+AES128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES128.h"; sourceTree = "<group>"; };
+		14B1637B1A63FBDE006CF154 /* YSConstStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSConstStrings.h; sourceTree = "<group>"; };
+		14B1637C1A63FBDE006CF154 /* YSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHTTPClient.h; sourceTree = "<group>"; };
+		14B1637D1A63FBDE006CF154 /* YSMobilePages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMobilePages.h; sourceTree = "<group>"; };
+		14B1637E1A63FBDE006CF154 /* YSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPlayerController.h; sourceTree = "<group>"; };
+		14B163841A640F36006CF154 /* AFHTTPClient+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+Json.h"; sourceTree = "<group>"; };
+		14B163851A640F36006CF154 /* AFHTTPClient+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+Json.m"; sourceTree = "<group>"; };
 		14B447A119F5FB8E0078EAB4 /* FEWarringDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEWarringDetailVC.h; sourceTree = "<group>"; };
 		14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEWarringDetailVC.m; sourceTree = "<group>"; };
 		14B447A419F5FCFE0078EAB4 /* FEDeviceInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDeviceInfoView.h; sourceTree = "<group>"; };
@@ -351,8 +379,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				146081201A302B0A0057EA9A /* libz.dylib in Frameworks */,
 				1460811E1A302AFF0057EA9A /* SystemConfiguration.framework in Frameworks */,
+				14B162D61A63EE7B006CF154 /* CoreMotion.framework in Frameworks */,
+				14B162D41A63EE6E006CF154 /* AudioToolbox.framework in Frameworks */,
+				14B162D21A63EE5C006CF154 /* AVFoundation.framework in Frameworks */,
+				14B162D01A63EE44006CF154 /* MobileCoreServices.framework in Frameworks */,
+				14B162CD1A63EE38006CF154 /* OpenAL.framework in Frameworks */,
+				14B162CE1A63EE39006CF154 /* OpenGLES.framework in Frameworks */,
+				14B162CA1A63EE04006CF154 /* libstdc++.dylib in Frameworks */,
+				14B163801A63FBDE006CF154 /* libEzvizRealPlay.a in Frameworks */,
+				146081201A302B0A0057EA9A /* libz.dylib in Frameworks */,
+				14B162C81A63EDDB006CF154 /* libiconv.2.4.0.dylib in Frameworks */,
 				1460811C1A302AF00057EA9A /* CoreTelephony.framework in Frameworks */,
 				14C6DE4819F549EE006384B2 /* CoreGraphics.framework in Frameworks */,
 				145B21911A357C04000AE204 /* libPushSDK.a in Frameworks */,
@@ -383,6 +420,8 @@
 				1499E6B41A0BAB94002F5DDB /* UserOrderRequest */,
 				1499E6B31A0BAB66002F5DDB /* UserRequest */,
 				1499E6B21A0BAB43002F5DDB /* BaseRequest */,
+				14B163841A640F36006CF154 /* AFHTTPClient+Json.h */,
+				14B163851A640F36006CF154 /* AFHTTPClient+Json.m */,
 			);
 			name = WebServiceParam;
 			path = SmartHome/Webservice/WebServiceParam;
@@ -420,6 +459,7 @@
 		146080BB1A3029CC0057EA9A /* ThirdLib */ = {
 			isa = PBXGroup;
 			children = (
+				14B163771A63FBDE006CF154 /* YSPlay */,
 				14B03B301A51A105000826C9 /* AlertView */,
 				145B218E1A357C04000AE204 /* lib */,
 			);
@@ -604,6 +644,20 @@
 			name = AlertView;
 			sourceTree = "<group>";
 		};
+		14B163771A63FBDE006CF154 /* YSPlay */ = {
+			isa = PBXGroup;
+			children = (
+				14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */,
+				14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */,
+				14B1637A1A63FBDE006CF154 /* NSData+AES128.h */,
+				14B1637B1A63FBDE006CF154 /* YSConstStrings.h */,
+				14B1637C1A63FBDE006CF154 /* YSHTTPClient.h */,
+				14B1637D1A63FBDE006CF154 /* YSMobilePages.h */,
+				14B1637E1A63FBDE006CF154 /* YSPlayerController.h */,
+			);
+			path = YSPlay;
+			sourceTree = "<group>";
+		};
 		14C6DE3919F549EE006384B2 = {
 			isa = PBXGroup;
 			children = (
@@ -625,6 +679,14 @@
 		14C6DE4419F549EE006384B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14B162D51A63EE7B006CF154 /* CoreMotion.framework */,
+				14B162D31A63EE6E006CF154 /* AudioToolbox.framework */,
+				14B162D11A63EE5C006CF154 /* AVFoundation.framework */,
+				14B162CF1A63EE44006CF154 /* MobileCoreServices.framework */,
+				14B162CB1A63EE38006CF154 /* OpenAL.framework */,
+				14B162CC1A63EE38006CF154 /* OpenGLES.framework */,
+				14B162C91A63EE04006CF154 /* libstdc++.dylib */,
+				14B162C71A63EDDB006CF154 /* libiconv.2.4.0.dylib */,
 				1460811F1A302B0A0057EA9A /* libz.dylib */,
 				1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */,
 				1460811B1A302AF00057EA9A /* CoreTelephony.framework */,
@@ -909,6 +971,7 @@
 				14C6DE5219F549EE006384B2 /* InfoPlist.strings in Resources */,
 				146D34F219FDEA12000F14F5 /* Localizable.strings in Resources */,
 				14C6DE5D19F549EE006384B2 /* Images.xcassets in Resources */,
+				14B1637F1A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle in Resources */,
 				14B52AC11A45B9670005F0D7 /* LaunchScreen.xib in Resources */,
 				145B21931A3582B8000AE204 /* PushConfig.plist in Resources */,
 			);
@@ -975,6 +1038,7 @@
 				14D7B7A21A05D9CE0072D31C /* FEButton.m in Sources */,
 				14B447C319F7890A0078EAB4 /* FEControlView.m in Sources */,
 				14BDCB201A0A6C1800060AE5 /* FEModifyPasswordRequest.m in Sources */,
+				14B163861A640F36006CF154 /* AFHTTPClient+Json.m in Sources */,
 				144469381A0B6B79007C8EC9 /* FESensorBatchEnableRequest.m in Sources */,
 				14B447BD19F6A5FD0078EAB4 /* FEControlObject.m in Sources */,
 				1499E6CE1A0BAD0E002F5DDB /* FEPage.m in Sources */,
@@ -1158,6 +1222,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
@@ -1167,6 +1232,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/lib",
+					"$(PROJECT_DIR)/SmartHome/ThirdLib/SDK",
+					/Users/Seven/Desktop/SDK,
+					"$(PROJECT_DIR)/SmartHome/ThirdLib/YSPlay",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d9a307ac-92f5-4d72-8d09-b7a38c4cd84e";
@@ -1178,6 +1246,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D638E7E77F61ADBACDEA2F6C /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
@@ -1187,6 +1256,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/lib",
+					"$(PROJECT_DIR)/SmartHome/ThirdLib/SDK",
+					/Users/Seven/Desktop/SDK,
+					"$(PROJECT_DIR)/SmartHome/ThirdLib/YSPlay",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d9a307ac-92f5-4d72-8d09-b7a38c4cd84e";

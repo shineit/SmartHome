@@ -25,7 +25,8 @@
 #import "FESensorSetResponse.h"
 #import "FEMarkDeletRequest.h"
 #import "FEUserMarkResponse.h"
-
+#import <AFNetworking/AFJSONRequestOperation.h>
+#import "AFHTTPClient+Json.h"
 
 #define _BASE_URL @"http://120.24.217.173:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
@@ -44,13 +45,18 @@
 -(instancetype)initWithBaseURL:(NSURL *)url{
     self = [super initWithBaseURL:url];
     if (self) {
-        self.requestSerializer = [AFJSONRequestSerializer serializer];
+        self.parameterEncoding = AFJSONParameterEncoding;
+        [self unregisterHTTPOperationClass:[AFHTTPRequestOperation class]];
+        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+        
+//        self.requestSerializer = [AFJSONRequestSerializer serializer];
     }
     return self;
 }
 
 //sigin
 -(AFHTTPRequestOperation *)siginWithParam:(FESiginRequest *)sdata response:(void (^)(NSError *error, FESiginResponse *))block{
+    
     return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSInteger code = [((NSDictionary *)responseObject)[@"result"][@"errorCode"] integerValue];
         FESiginResponse *sresponse = [[FESiginResponse alloc] initWithResponse:responseObject];
@@ -60,7 +66,6 @@
         [self showerror:error];
         block(error,nil);
     }];
-    
 }
 
 //sigout
@@ -73,7 +78,6 @@
         [self showerror:error];
         block(error,nil);
     }];
-    
 }
 
 //modify password
@@ -103,7 +107,8 @@
 
 //order list
 -(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEOrderListResponse *response))block{
-    return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return nil;
+    [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FEOrderListResponse *olist = [[FEOrderListResponse alloc] initWithResponse:responseObject];
         [self showerrorResponse:olist];
         block(NULL,olist);
@@ -233,9 +238,5 @@
         [alert show];
     }
 }
-
-
-
-
 
 @end

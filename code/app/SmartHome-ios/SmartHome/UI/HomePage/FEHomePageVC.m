@@ -17,6 +17,7 @@
 @interface FEHomePageVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *datasource;
+@property (nonatomic, strong) NSArray *headerArray;
 
 @end
 
@@ -28,10 +29,11 @@
     self.title = FEString(@"HOME");
     self.datasource =
   @[
-  @[@{PNG_KEY:@"home_safe",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_controll",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_camera",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_warring",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_plan",ITEM_TITLE:FEString(@"HOME_SAFE")}],
-  @[@{PNG_KEY:@"home_concentrator",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_region",ITEM_TITLE:FEString(@"HOME_SAFE")}],
-  @[@{PNG_KEY:@"home_profile",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_service",ITEM_TITLE:FEString(@"HOME_SAFE")},@{PNG_KEY:@"home_news",ITEM_TITLE:FEString(@"HOME_SAFE")}]
+  @[@{PNG_KEY:@"home_safe",ITEM_TITLE:FEString(@"云安")},@{PNG_KEY:@"home_controll",ITEM_TITLE:FEString(@"云控")},@{PNG_KEY:@"home_camera",ITEM_TITLE:FEString(@"云视")},@{PNG_KEY:@"home_warring",ITEM_TITLE:FEString(@"告警信息")},@{PNG_KEY:@"home_plan",ITEM_TITLE:FEString(@"平面图查看")}],
+  @[@{PNG_KEY:@"home_concentrator",ITEM_TITLE:FEString(@"集中器设置")},@{PNG_KEY:@"home_region",ITEM_TITLE:FEString(@"我的片区")}],
+  @[@{PNG_KEY:@"home_profile",ITEM_TITLE:FEString(@"账户设置")},@{PNG_KEY:@"home_service",ITEM_TITLE:FEString(@"申请管理")},@{PNG_KEY:@"home_news",ITEM_TITLE:FEString(@"新闻公告")}]
   ];
+    self.headerArray = @[FEString(@"与安防"),FEString(@"设备管理"),FEString(@"个人中心")];
     [self initUI];
 }
 
@@ -94,7 +96,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(self.view.bounds.size.width, 60);
+    return CGSizeMake(self.view.bounds.size.width, 40);
 }
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -102,11 +104,7 @@
     
     if ( kind == UICollectionElementKindSectionHeader ) {
         FEHomeItemCollectionReusableView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind : UICollectionElementKindSectionHeader withReuseIdentifier :@"header" forIndexPath : indexPath ] ;
-//        NSString * title = [ [ NSString alloc ] initWithFormat : @ "Recipe Group #%i" , indexPath.section + 1 ] ;
-//        headerView.title.text = title;
-//        UIImage * headerImage = [ UIImage imageNamed : @ "header_banner.png" ] ;
-//        headerView.backgroundImage.image = headerImage;
-        
+        headerView.titleLebal.text = self.headerArray[indexPath.section];
         reusableview = headerView;
     }
     return reusableview;

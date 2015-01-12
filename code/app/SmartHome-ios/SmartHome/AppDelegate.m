@@ -19,7 +19,8 @@
 #import "CDUser.h"
 #import "APService.h"
 #import "FEHomePageVC.h"
-//#import "FEServiceListVC.h"
+#import "YSPlayerController.h"
+#import "YSHTTPClient.h"
 
 @implementation AppDelegate
 
@@ -39,6 +40,17 @@
     [self.window makeKeyAndVisible];
     
     [self registerPushNotificationOptions:launchOptions];
+    
+    NSMutableDictionary *dictServers = [NSMutableDictionary dictionary];
+    
+    // SDK 正式地址, 需要开发者申请好appkey方可访问
+    [dictServers setObject:@"https://auth.ys7.com" forKey:kApiServer];
+    [dictServers setObject:@"https://open.ys7.com" forKey:kAuthServer];
+    
+    [YSPlayerController loadSDKWithPlatfromServers:dictServers];
+    
+    // 请使用开发者开发平台申请的appkey
+    [[YSHTTPClient sharedInstance] setClientAppKey:YSAppKey secret:YSAppSecret];
     
     return YES;
 }
@@ -106,10 +118,10 @@
 
 //加载主页
 -(void)loadMain{
-    FEHomePageVC *homeVC = [[FEHomePageVC alloc] init];
-    FECommonNavgationController *homen = [[FECommonNavgationController alloc] initWithRootViewController:homeVC];
-    [AppDelegate sharedDelegate].window.rootViewController = homen;
-    return;
+//    FEHomePageVC *homeVC = [[FEHomePageVC alloc] init];
+//    FECommonNavgationController *homen = [[FECommonNavgationController alloc] initWithRootViewController:homeVC];
+//    [AppDelegate sharedDelegate].window.rootViewController = homen;
+//    return;
     //news page
     FENewsVC *news = [FENewsVC new];
     FECommonNavgationController *nvnews = [[FECommonNavgationController alloc] initWithRootViewController:news];

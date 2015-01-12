@@ -14,8 +14,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(10, (self.bounds.size.height - 20) / 2.0f, 200, 20)];
-        title.text = @"label";
+//        title.text = @"label";
+        title.font = [UIFont appFontWithSize:16];
         [self addSubview:title];
+        _titleLebal = title;
     }
     return self;
 }

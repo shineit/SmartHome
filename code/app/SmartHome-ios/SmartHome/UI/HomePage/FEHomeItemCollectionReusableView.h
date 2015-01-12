@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FEHomeItemCollectionReusableView : UICollectionReusableView
-
+@property (nonatomic, strong) FELabel *titleLebal;
 @end
