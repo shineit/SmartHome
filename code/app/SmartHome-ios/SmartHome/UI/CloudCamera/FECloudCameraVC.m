@@ -8,11 +8,19 @@
 
 #import "FECloudCameraVC.h"
 #import "FECollectionViewCameraCell.h"
+#import "YSMobilePages.h"
+#import "YSPlayerController.h"
+#import "YSHTTPClient.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "YSCamera.h"
 
-@interface FECloudCameraVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *cameras;
+@property (nonatomic, strong) YSMobilePages *page;
+@property (nonatomic, strong) YSPlayerController *ysPlayer;
+@property (nonatomic, strong) NSString *token;
 
 @end
 
@@ -32,7 +40,7 @@
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_camera_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_camera"]];
         }
         
-        self.cameras = [[NSMutableArray alloc] initWithObjects:@"camera1",@"camera2",@"camera3",@"camera4", nil];
+//        self.cameras = [[NSMutableArray alloc] initWithObjects:@"camera1",@"camera2",@"camera3",@"camera4", nil];
     }
     return self;
 }
@@ -42,6 +50,42 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    [self login];
+    _ysPlayer = [[YSPlayerController alloc] initWithDelegate:self];
+}
+
+
+- (void)login {
+    NSString *apiKey = YSAppKey; // 已申请的 apikey.
+    __weak typeof (self) weakself = self;
+    _page = [[YSMobilePages alloc] init];
+    [_page login:self.navigationController withAppKey:apiKey complition:^(NSString *accessToken) {
+        if (accessToken) {
+            NSLog(@"Client access token is: %@", accessToken);
+            [[YSHTTPClient sharedInstance] setClientAccessToken:accessToken];
+            weakself.token = accessToken;
+            [weakself.navigationController popViewControllerAnimated:YES];
+            [weakself requestCameras];
+        } }];
+}
+
+-(void)requestCameras{
+    __weak typeof (self) weakself = self;
+    [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:30 complition:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            NSDictionary *dictionary = (NSDictionary *)responseObject;
+            NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
+            if (resultCode.intValue == 200) {
+                NSMutableArray *carray = [NSMutableArray new];
+                for (NSDictionary *item in responseObject[@"cameraList"]) {
+                    [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
+                }
+                weakself.cameras = carray;
+                [weakself.collectionView reloadData];
+            }
+            
+        }
+    }];
 }
 
 -(void)initUI{
@@ -66,9 +110,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString * identifier = @"cell";
     FECollectionViewCameraCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
+    YSCamera *item = self.cameras[indexPath.row];
     cell.backgroundColor = [UIColor whiteColor];
-    cell.textLabel.text = self.cameras[indexPath.row];
+    cell.textLabel.text = item.cameraName;
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:item.picUrl]];
     return cell;
 }
 
@@ -93,10 +138,22 @@
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+//    RealPlayViewController *realPlayController = [[RealPlayViewController alloc] init];
+//    realPlayController.cameraInfo = cell.cameraInfo;
+//    [self.navigationController pushViewController:realPlayController animated:YES];
+//    [realPlayController release];
+    YSCamera *camera = self.cameras[indexPath.row];
+    [self.ysPlayer startRealPlayWithCamera:camera.cameraId accessToken:self.token inView:self.view];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)playerOperationMessage:(YSPlayerMessageType)msgType withValue:(id)value{
+    
 }
 
 /*

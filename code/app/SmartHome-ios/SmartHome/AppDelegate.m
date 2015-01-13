@@ -21,6 +21,7 @@
 #import "FEHomePageVC.h"
 #import "YSPlayerController.h"
 #import "YSHTTPClient.h"
+#import "YSMobilePages.h"
 
 @implementation AppDelegate
 
@@ -44,8 +45,8 @@
     NSMutableDictionary *dictServers = [NSMutableDictionary dictionary];
     
     // SDK 正式地址, 需要开发者申请好appkey方可访问
-    [dictServers setObject:@"https://auth.ys7.com" forKey:kApiServer];
-    [dictServers setObject:@"https://open.ys7.com" forKey:kAuthServer];
+    [dictServers setObject:@"https://auth.ys7.com" forKey:kAuthServer];
+    [dictServers setObject:@"https://open.ys7.com" forKey:kApiServer];
     
     [YSPlayerController loadSDKWithPlatfromServers:dictServers];
     
@@ -54,6 +55,7 @@
     
     return YES;
 }
+
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     

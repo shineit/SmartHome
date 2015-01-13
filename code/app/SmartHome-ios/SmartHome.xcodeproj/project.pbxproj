@@ -79,6 +79,7 @@
 		14B1637F1A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */; };
 		14B163801A63FBDE006CF154 /* libEzvizRealPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */; };
 		14B163861A640F36006CF154 /* AFHTTPClient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B163851A640F36006CF154 /* AFHTTPClient+Json.m */; };
+		14B1638A1A64B0CC006CF154 /* YSCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B163891A64B0CC006CF154 /* YSCamera.m */; };
 		14B447A319F5FB8E0078EAB4 /* FEWarringDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */; };
 		14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A519F5FCFE0078EAB4 /* FEDeviceInfoView.m */; };
 		14B447A919F5FE190078EAB4 /* FELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A819F5FE190078EAB4 /* FELabel.m */; };
@@ -271,6 +272,8 @@
 		14B1637E1A63FBDE006CF154 /* YSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPlayerController.h; sourceTree = "<group>"; };
 		14B163841A640F36006CF154 /* AFHTTPClient+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+Json.h"; sourceTree = "<group>"; };
 		14B163851A640F36006CF154 /* AFHTTPClient+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+Json.m"; sourceTree = "<group>"; };
+		14B163881A64B0CC006CF154 /* YSCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCamera.h; sourceTree = "<group>"; };
+		14B163891A64B0CC006CF154 /* YSCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCamera.m; sourceTree = "<group>"; };
 		14B447A119F5FB8E0078EAB4 /* FEWarringDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEWarringDetailVC.h; sourceTree = "<group>"; };
 		14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEWarringDetailVC.m; sourceTree = "<group>"; };
 		14B447A419F5FCFE0078EAB4 /* FEDeviceInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDeviceInfoView.h; sourceTree = "<group>"; };
@@ -647,6 +650,7 @@
 		14B163771A63FBDE006CF154 /* YSPlay */ = {
 			isa = PBXGroup;
 			children = (
+				14B163871A64B074006CF154 /* model */,
 				14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */,
 				14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */,
 				14B1637A1A63FBDE006CF154 /* NSData+AES128.h */,
@@ -656,6 +660,15 @@
 				14B1637E1A63FBDE006CF154 /* YSPlayerController.h */,
 			);
 			path = YSPlay;
+			sourceTree = "<group>";
+		};
+		14B163871A64B074006CF154 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				14B163881A64B0CC006CF154 /* YSCamera.h */,
+				14B163891A64B0CC006CF154 /* YSCamera.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		14C6DE3919F549EE006384B2 = {
@@ -1070,6 +1083,7 @@
 				1408A79D1A39285900D02D52 /* UIFont+AppFont.m in Sources */,
 				14C6DEF119F54F9C006384B2 /* FEServiceListVC.m in Sources */,
 				1499E6CC1A0BAD0E002F5DDB /* FENews.m in Sources */,
+				14B1638A1A64B0CC006CF154 /* YSCamera.m in Sources */,
 				141E43111A010F9D008A58C1 /* FESiginRequest.m in Sources */,
 				14B03B2C1A5191C8000826C9 /* FEUserMarkManagerVC.m in Sources */,
 				1499E6D11A0BAD0E002F5DDB /* FEUser.m in Sources */,
