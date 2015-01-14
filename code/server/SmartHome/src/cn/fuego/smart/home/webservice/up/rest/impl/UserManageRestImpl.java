@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.format.DataCreateUtil;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
@@ -21,27 +22,34 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
-import cn.fuego.smart.home.domain.News;
+import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.service.cache.AppLoginInfo;
 import cn.fuego.smart.home.webservice.ModelConvert;
-import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
-import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
+import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdReq;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdRsp;
+import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
+import cn.fuego.smart.home.webservice.up.model.SetCustomerRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
+import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
-import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.up.rest.UserManageRest;
+
+import com.hikvision.PublicController;
+import com.hikvision.TokenResultModel;
 
  /** 
  * @ClassName: UserManageServiceImpl 
@@ -124,7 +132,7 @@ public class UserManageRestImpl implements UserManageRest
 	public GetUserMarkListRsp getUserMarkList(GetUserMarkListReq req)
 	{
 		GetUserMarkListRsp rsp = new GetUserMarkListRsp();
-		List<UserMark> userMarkList  = ServiceContext.getInstance().getUserManageService().getUseMark(req.getUserID());
+		List<UserMark> userMarkList  = ServiceContext.getInstance().getUserManageService().getUserMark(req.getUserID());
 		
 		for(UserMark mark : userMarkList)
 		{
@@ -195,6 +203,105 @@ public class UserManageRestImpl implements UserManageRest
 		try
 		{
  			MISPServiceContext.getInstance().getUserService().modifyPassword(req.getUserName(),req.getOldPwd(),req.getPwdNew());
+		}
+		catch(MISPException e)
+		{
+			log.error("create mark failed",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+			log.error("create mark failed",e);
+		}
+ 
+		return rsp;
+	}
+
+	@Override
+	public GetCaTokenByIDRsp getCaToken(GetCaTokenByIDReq req)
+	{
+		GetCaTokenByIDRsp rsp= new GetCaTokenByIDRsp();
+		try
+		{
+			PublicController cameraCtr= new PublicController();
+			TokenResultModel result=cameraCtr.getAccessToken(String.valueOf(req.getUserID()), req.getPhone());
+			if(null != result)
+			{
+				if("200".equals(result.getCode()))
+				{
+					rsp.getResult().setErrorCode(MISPErrorMessageConst.SUCCESS);
+					if(null != result.getData())
+					{
+						rsp.getCaToken().setAccessToken(result.getData().getAccessToken());
+						log.info("sap token is :"+result.getData().getAccessToken());
+					}
+					else
+					{
+						rsp.getResult().setErrorCode(ErrorMessageConst.CAMERA_LINK_ERROR);
+					}
+ 
+				}
+				else if("10011".equals(result.getCode()))
+				{
+					rsp.getResult().setErrorCode(ErrorMessageConst.CAMERA_ACCOUNT_NOT_BUNDLE);//私有云账号未绑定
+				}
+				else
+				{
+					rsp.getResult().setErrorCode(ErrorMessageConst.CAMERA_LINK_ERROR);//连接异常
+				}
+			}
+ 		}
+		catch(MISPException e)
+		{
+			log.error("create mark failed",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+			log.error("create mark failed",e);
+		}
+ 
+		return rsp;
+
+	}
+
+	@Override
+	public GetCustomerByIDRsp getCustomer(GetCustomerByIDReq req)
+	{
+		GetCustomerByIDRsp rsp = new GetCustomerByIDRsp();
+		
+		try
+		{
+			Customer customer= ServiceContext.getInstance().getUserManageService().getCustomer(req.getUserID());
+			CustomerJson customerJson = ModelConvert.customerToJson(customer);
+		    rsp.setCustomer(customerJson);
+		}
+		catch(MISPException e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
+
+ 		
+		return rsp;
+	}
+
+	@Override
+	public SetCustomerRsp modifyCustomer(SetCustomerReq req)
+	{
+		SetCustomerRsp rsp = new SetCustomerRsp();
+		try
+		{
+			CustomerJson customerJson = req.getCustomer();
+			ServiceContext.getInstance().getUserManageService().modifyCustomer(ModelConvert.jsonToCustomer(customerJson));
 		}
 		catch(MISPException e)
 		{

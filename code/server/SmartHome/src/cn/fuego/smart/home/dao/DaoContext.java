@@ -5,6 +5,7 @@ import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
@@ -33,7 +34,7 @@ public class DaoContext
     
 	private Dao<Alarm> alarmDao =null;
 	private Dao<UserConcentrator> userConcentratorDao = null;
-
+	private Dao<Customer> customerDao=null;
 	private DaoContext()
 	{
 
@@ -100,6 +101,8 @@ public class DaoContext
 		}
 		return alarmDao;
 	}
+
+	
 	public Dao<UserConcentrator> getUserConcentratorDao()
 	{
 		if (null == userConcentratorDao)
@@ -108,6 +111,12 @@ public class DaoContext
 		}
 		return userConcentratorDao;
 	}	
-	
-  	 
+	public Dao<Customer>  getCustomerDao()
+	{
+		if (null == customerDao)
+		{
+			customerDao = new AbstractDao<Customer>(Customer.class);
+		}
+		return customerDao;
+	}		  	 
 }

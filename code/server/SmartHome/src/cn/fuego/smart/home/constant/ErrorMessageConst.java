@@ -9,7 +9,6 @@
 package cn.fuego.smart.home.constant;
 
 import cn.fuego.misp.constant.MISPErrorMessageConst;
-import cn.fuego.misp.dao.file.MispMessageReader;
 
  /** 
  * @ClassName: ErrorMessageConst 
@@ -26,5 +25,8 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	public static final int PERMISSION_EXISTED= 10001 ; // 该用户对集中器权限已经存在
 	
 	public static final int DEVICE_IS_OFFLINE= 10002 ; // 操作设备失败 
+	
+	public static final int CAMERA_LINK_ERROR=10003;//摄像头连接异常
+	public static final int CAMERA_ACCOUNT_NOT_BUNDLE=10004; // 私有云账户未绑定
 
 }

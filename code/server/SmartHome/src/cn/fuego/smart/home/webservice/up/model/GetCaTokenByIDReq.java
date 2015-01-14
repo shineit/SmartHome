@@ -1,7 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
-import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 
 
 /**
@@ -12,32 +11,38 @@ import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 * @date 2014-10-20 上午10:59:10 
 *
  */
-public class GetUserMarkListReq extends BaseJsonReq
+public class GetCaTokenByIDReq extends BaseJsonReq
 {
-	private PageJson page;
+
 	private int userID;
-	public PageJson getPage()
-	{
-		return page;
-	}
-	public void setPage(PageJson page)
-	{
-		this.page = page;
-	}
+	private String phone;
 	public int getUserID()
 	{
 		return userID;
 	}
+
 	public void setUserID(int userID)
 	{
 		this.userID = userID;
 	}
+
+	public String getPhone()
+	{
+		return phone;
+	}
+
+	public void setPhone(String phone)
+	{
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "GetUserMarkListReq [page=" + page + ", userID=" + userID + "]";
+		return "GetCustomerByIDReq [userID=" + userID + ", phone=" + phone
+				+ ", token=" + token + "]";
 	}
-	
+
 	
  
 }

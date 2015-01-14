@@ -89,7 +89,17 @@ function submitForm(url){
 		<c:forEach var="e" items="${table.currentPageData}"> 
 			
 			<tr target="sid_user" rel="${e.userID}">
-				<td><input name="selectedIDList" value="${e.userID}" type="checkbox" style="margin-top:5px;"></td>
+				<td>
+				<c:choose>
+					<c:when test="${e.role==99}">
+					
+					</c:when>
+					<c:otherwise>
+						<input name="selectedIDList" value="${e.userID}" type="checkbox" style="margin-top:5px;"/>
+					</c:otherwise>
+				</c:choose>
+				
+				</td>
 				<td>${e.userID}</td>
 				<td>${e.userName}</td>
 				<td>

@@ -1,7 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
-import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 
 
 /**
@@ -14,18 +13,6 @@ import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
  */
 public class SetUserMarkRsp extends BaseJsonRsp
 {
-	private UserMarkJson userMark;
-
-	public UserMarkJson getUserMark()
-	{
-		return userMark;
-	}
-
-	public void setUserMark(UserMarkJson userMark)
-	{
-		this.userMark = userMark;
-	}
-
  
 	
 }

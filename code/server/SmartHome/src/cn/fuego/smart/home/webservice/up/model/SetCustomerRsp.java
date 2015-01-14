@@ -11,7 +11,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 * @date 2014-10-20 上午10:59:57 
 *
  */
-public class SetServiceOrderRsp extends BaseJsonRsp
+public class SetCustomerRsp extends BaseJsonRsp
 {
 	
 }

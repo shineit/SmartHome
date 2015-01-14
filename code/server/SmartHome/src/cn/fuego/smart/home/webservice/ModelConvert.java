@@ -14,6 +14,7 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
@@ -21,6 +22,7 @@ import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
@@ -234,5 +236,26 @@ public class ModelConvert
 		user.setRole(userJson.getRole());
 		return user;
 	}	
-	
+	public static CustomerJson customerToJson(Customer customer)
+	{
+		CustomerJson json = new CustomerJson();
+		json.setUserID(customer.getUserID());
+		json.setCustomerName(customer.getCustomerName());
+		json.setPhone(customer.getPhone());
+		json.setEmail(customer.getEmail());
+		json.setAddr(customer.getAddr());
+		json.setStatus(customer.getStatus());
+		return json;
+	}
+	public static Customer jsonToCustomer(CustomerJson customerJson)
+	{
+		Customer customer = new Customer();	
+		customer.setUserID(customerJson.getUserID());
+		customer.setCustomerName(customerJson.getCustomerName());
+		customer.setPhone(customerJson.getPhone());
+		customer.setEmail(customerJson.getEmail());
+		customer.setAddr(customerJson.getAddr());
+		customer.setStatus(customerJson.getStatus());
+		return customer;
+	}	
 }

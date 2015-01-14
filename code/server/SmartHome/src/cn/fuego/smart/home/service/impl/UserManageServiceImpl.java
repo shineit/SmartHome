@@ -28,6 +28,8 @@ import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.UserStatusEnum;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.UserManageService;
 
@@ -81,7 +83,7 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 	 * @see cn.fuego.smart.home.service.UserManageService#getUseMark()
 	 */
 	@Override
-	public List<UserMark> getUseMark(int userID)
+	public List<UserMark> getUserMark(int userID)
 	{
 		 List<UserMark> list  = (List<UserMark>) DaoContext.getInstance().getUserMarkDao().getAll();
 		 return list;
@@ -110,6 +112,24 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 	{
 		DaoContext.getInstance().getUserMarkDao().create(userMark);
 		
+	}
+	@Override
+	public void modifyCustomer(Customer customer)
+	{
+		Customer oldCustomer= getCustomer(customer.getUserID());
+		oldCustomer.setCustomerName(customer.getCustomerName());
+		oldCustomer.setPhone(customer.getPhone());
+		oldCustomer.setEmail(customer.getEmail());
+		oldCustomer.setAddr(customer.getAddr());
+		oldCustomer.setStatus(customer.getStatus());
+		DaoContext.getInstance().getCustomerDao().update(customer);
+	}
+	@Override
+	public Customer getCustomer(int userID)
+	{
+		Customer customer = DaoContext.getInstance().getCustomerDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"userID",userID));
+		
+		return customer;
 	}
 
 }
