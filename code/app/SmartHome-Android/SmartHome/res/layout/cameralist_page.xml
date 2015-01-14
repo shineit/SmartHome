@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical" >
+
+    <!-- 标题栏 -->
+
+    <RelativeLayout
+        android:id="@+id/cameralist_page_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_height"
+        android:background="@color/themecolor" >
+
+        <TextView
+            android:id="@+id/title_0001"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="云视"
+            android:textColor="@color/white"
+            android:textSize="@dimen/head_font_size_sm" />
+
+        <Button
+            android:id="@+id/cameralist_page_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/back"
+            android:drawablePadding="5dp"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="@dimen/content_font_size" />
+
+        <Button
+            android:id="@+id/cameralist_page_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:text="添加"
+            android:textColor="@color/white"
+            android:textSize="@dimen/content_font_size" />
+
+    </RelativeLayout>
+
+    <cn.fuego.smart.home.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/camera_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/camera_list_gc_ly"
+        android:layout_below="@id/cameralist_page_title"
+        android:layout_marginBottom="3dp"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/transparent"
+        android:drawingCacheQuality="high"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:listSelector="@null"
+        android:overScrollFooter="@null"
+        android:scrollingCache="true" />
+
+    <LinearLayout
+        android:id="@+id/no_camera_tip_ly"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/cameralist_page_title"
+        android:layout_centerInParent="true"
+        android:onClick="onClick"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/my_no_video" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/my_shoping" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/get_camera_fail_tip_ly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/getlist_fail_becauseof_network"
+            android:textSize="@dimen/title_text_size" />
+
+        <Button
+            android:id="@+id/camera_list_refresh_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/refresh_selector"
+            android:onClick="onClick"
+            android:text="@string/refresh"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/camera_list_gc_ly"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/play_button_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/camera_list_gc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/video_square"
+            android:textColor="@color/common_text"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+
+</RelativeLayout>

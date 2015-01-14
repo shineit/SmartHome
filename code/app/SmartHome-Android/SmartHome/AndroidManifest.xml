@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -31,11 +30,41 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
+    <!-- 云视所需摄像头权限配置 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <!-- zxing -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <permission
+        android:name="com.videogo.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.videogo.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <application
+        android:name=".EzvizApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -50,6 +79,108 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- camera start -->
+        <activity
+            android:name=".ui.LoginSelectActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.videogo.main.EzvizWebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.videogo.androidpn.NotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="NotificationService" >
+            <intent-filter android:priority="1000" >
+                <action android:name="com.videogo.androidpn.NotificationService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.videogo.androidpn.GCMService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="GCMService" >
+            <intent-filter>
+                <action android:name="com.videogo.androidpn.GCMService" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:exported="false"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.videogo" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com..GCMIntentService" />
+
+        <activity
+            android:name=".ui.camera.cameralist.CameraListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.realplay.RealPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.realplay.SimpleRealPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.remoteplayback.RemotePlayBackActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.message.MessageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ui.camera.androidpn.NotifierActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".scan.main.CaptureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.devicelist.AutoWifiNetConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.devicelist.AutoWifiConnectingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.devicelist.ResetIntroduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.devicelist.LineConnectgIntroduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.discovery.VideoSquareActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver
+            android:name=".ui.EzvizBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.vedeogo.action.OAUTH_SUCCESS_ACTION" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.videogo.androidpn.NOTIFICATION_RECEIVED_ACTION" />
+            </intent-filter>
+        </receiver>
+        <!-- camera end -->
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/app_name"
@@ -201,8 +332,12 @@
             android:label="@string/title_activity_news" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.info.AlarmActivity"
+            android:name=".ui.info.AlarmActivity"
             android:label="@string/title_activity_alarm" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.camera.TokenVerifyActivity"
+            android:label="@string/title_activity_token_verify" >
         </activity>
     </application>
 

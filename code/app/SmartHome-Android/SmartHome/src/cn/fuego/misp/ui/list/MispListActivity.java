@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,8 @@ MispListViewInteface,OnItemClickListener
 		this.initRes();
 		
 		setContentView(this.activityRes.getAvtivityView());
+		//½ûÖ¹ºáÆÁ
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		adapter = new MispListAdapter<E>(this, this,this.listViewRes,this.dataList);
 		ListView productView = (ListView) findViewById(this.listViewRes.getListView());
 		productView.setAdapter(adapter);

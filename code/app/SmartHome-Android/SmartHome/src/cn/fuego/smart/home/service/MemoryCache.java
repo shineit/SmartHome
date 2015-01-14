@@ -14,6 +14,7 @@ public class MemoryCache
 	private static LoginInfo loginInfo = new LoginInfo();
 	
 	private static int flag=0;//判断进入页面方式，0-表示首次进入，1-其他切换进入
+	private static String cachePhone=null;//缓存电话号码，用于云视验证
     public static Boolean isLogin()
     {
     	Boolean result= false;
@@ -86,6 +87,16 @@ public class MemoryCache
 	public static void setFlag(int flag)
 	{
 		MemoryCache.flag = flag;
+	}
+
+	public static String getCachePhone()
+	{
+		return cachePhone;
+	}
+
+	public static void setCachePhone(String cachePhone)
+	{
+		MemoryCache.cachePhone = cachePhone;
 	}
  
 	

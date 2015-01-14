@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/themecolor"
+    android:background="@color/backcolor"
     android:orientation="vertical" >
 
     <ImageView
@@ -18,17 +18,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="智能云防系统"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/active_color" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="270dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:src="@drawable/login_input" />
@@ -67,8 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/txt_username"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="18dp"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_marginLeft="20dp"
             android:gravity="left"
             android:text="用户名："
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -96,46 +99,19 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/txt_loginerror"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dip"
-        android:layout_marginRight="20dip"
-        android:gravity="left"
-        android:text="输入的账号和密码不正确"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#ff0000"
-        android:visibility="invisible" />
-
     <RelativeLayout
-        android:layout_width="266dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" >
-
-        <Button
-            android:id="@+id/update_btn"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/login_button"
-            android:text="更    新"
-            android:textColor="@color/white" />
+        android:padding="20dp" >
 
         <Button
             android:id="@+id/login_btn"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/login_button"
-            android:focusableInTouchMode="true"
-            android:text="登    录"
-            android:textColor="@color/white" />
-
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/common_btn"
+            android:text="登  录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/content_font_size" />
 
     </RelativeLayout>
 

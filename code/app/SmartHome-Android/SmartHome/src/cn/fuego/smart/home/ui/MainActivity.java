@@ -12,11 +12,18 @@ import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 
+import com.videogo.openapi.EzvizAPI;
+
 public class MainActivity extends InstrumentedActivity 
 {
 	private FuegoLog log = FuegoLog.getLog(AuthInterceptor.class);
 	
 	public static boolean isForeground = false;
+    public static String APP_KEY = "9a39449992d048439b4cef7d62a3c997";
+    public static String SECRET_KEY = "2e49fa81764d370c2693a5f1ed0d8048";
+
+    public static String API_URL = "https://open.ys7.com";
+    public static String WEB_URL = "https://auth.ys7.com";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -48,4 +48,47 @@
 		<item name="android:hint">@string/tag_hint</item>
 		<item name="android:textSize">14sp</item>
 	</style>
+	<!--萤石云style  -->
+	    <style name="TitleBar_Light">
+        <item name="textColor">@color/common_text</item>
+        <item name="background">@drawable/common_title</item>
+        <item name="backButton">@drawable/common_title_back_selector</item>
+    </style>
+
+    <style name="TitleBar_Light_Web" parent="TitleBar_Light">
+        <item name="backButton">@drawable/common_title_cancel_selector</item>
+    </style>
+
+    <style name="TitleBar_Dark">
+        <item name="textColor">@android:color/white</item>
+        <item name="background">@color/dark_bg_70p</item>
+        <item name="backButton">@drawable/message_back_selector</item>
+    </style>
+    
+    <style name="CommonGridView" parent="@android:style/Widget.GridView">
+        <item name="android:cacheColorHint">#0000</item>
+        <item name="android:fadingEdgeLength">0dp</item>
+        <item name="android:listSelector">#0000</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:headerDividersEnabled">false</item>
+        <item name="android:footerDividersEnabled">false</item>
+    </style>
+
+    <style name="CommonListView" parent="@android:style/Widget.ListView">
+        <item name="android:cacheColorHint">#0000</item>
+        <item name="android:fadingEdgeLength">0dp</item>
+        <item name="android:listSelector">#0000</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:headerDividersEnabled">false</item>
+        <item name="android:footerDividersEnabled">false</item>
+    </style>
+
+    <style name="popwindowUpAnim">
+        <item name="android:windowEnterAnimation">@anim/fade_up</item>
+        <item name="android:windowExitAnimation">@anim/fade_down</item>
+    </style>
 </resources>

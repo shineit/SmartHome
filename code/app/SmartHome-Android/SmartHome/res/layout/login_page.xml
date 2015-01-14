@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/shipin7_logo_lyt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/login_logo"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" >
+    </ImageView>
+
+    <LinearLayout
+        android:id="@+id/handle_lyt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="35dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/web_login_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_btn_selector"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/web_login_button_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/login_text_size"
+            android:onClick="onClick" />
+        
+        <Button
+            android:id="@+id/platform_login_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_btn_selector"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/platform_login_button_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/login_text_size"
+            android:onClick="onClick" />
+        
+        <Button
+            android:id="@+id/goto_cameralist_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_btn_selector"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/goto_cameralist_page_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/login_text_size"
+            android:onClick="onClick" />        
+    </LinearLayout>
+</LinearLayout>
