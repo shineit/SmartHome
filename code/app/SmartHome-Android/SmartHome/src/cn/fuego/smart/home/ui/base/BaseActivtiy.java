@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -116,7 +117,28 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
         // listView.getDividerHeight()获取子项间分隔符占用的高度   
         // params.height最后得到整个ListView完整显示需要的高度   
         listView.setLayoutParams(params);   
-    } 
+    }
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//Android按返回键退出程序但不销毁，程序后台运行
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
 
+		if (keyCode == KeyEvent.KEYCODE_BACK) 
+		{
+			moveTaskToBack(false);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	} 
+     
+    
+    
 
 }

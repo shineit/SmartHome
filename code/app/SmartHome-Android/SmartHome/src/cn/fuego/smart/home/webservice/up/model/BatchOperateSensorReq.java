@@ -11,7 +11,6 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
-import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 
  /** 
  * @ClassName: BatchSetSensorReq 

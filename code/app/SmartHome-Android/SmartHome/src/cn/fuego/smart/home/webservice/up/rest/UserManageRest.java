@@ -6,12 +6,18 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListRsp;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdReq;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdRsp;
+import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
+import cn.fuego.smart.home.webservice.up.model.SetCustomerRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
 
@@ -54,4 +60,16 @@ public interface UserManageRest
 	@POST
 	@Path("/mark/delete")
 	SetUserMarkRsp deleteUserMark(SetUserMarkReq req);
+	
+	@POST
+	@Path("/customer/get")
+	GetCustomerByIDRsp getCustomer(GetCustomerByIDReq req);
+
+	@POST
+	@Path("/customer/modify")
+	SetCustomerRsp modifyCustomer(SetCustomerReq req);
+	
+	@POST
+	@Path("/caToken/get")
+	GetCaTokenByIDRsp getCaToken(GetCaTokenByIDReq req);
 }

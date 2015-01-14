@@ -52,11 +52,12 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 		curMark=intent.getStringExtra("curMark");
 		log.info("传递curMark:"+curMark);
 		
-		ListView markListView = (ListView) findViewById(R.id.user_mark_manage_list);
+		ListView markListView = (ListView) findViewById(R.id.user_mark_manage_list);	
 	    markList = SensorDataCache.getInstance().getMarkList();
 	    log.info("marklist is:"+markList);
 	    markAdapter = new MarkAdapter(MarkManageActivity.this,markList,curMark);
 		markListView.setAdapter(markAdapter);
+		setListViewHeightBasedOnChildren(markListView);
 		
 		Button back_btn= (Button) findViewById(R.id.user_mark_manage_back);
 		back_btn.setTag(1);
