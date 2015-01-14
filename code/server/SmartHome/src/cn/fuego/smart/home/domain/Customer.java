@@ -22,7 +22,7 @@ public class Customer
 	private String phone;			//用户手机号码
 	private String addr;			//用户住址
 	private String email;			//用户邮箱
-	private int status;				//用户状态，CREATED(0,"已创建"),APPLIED(1,"已申请"),REGISTERED(2,"已注册"),	CANCELED(3,"已注销"); 
+	private int status;				//用户状态，预留，以后可以作绑定关系拓展 
 	public int getUserID()
 	{
 		return userID;

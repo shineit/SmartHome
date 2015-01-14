@@ -5,7 +5,6 @@ import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import cn.fuego.common.dao.datasource.AbstractDataSource;
-import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.action.basic.MISPAction;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;

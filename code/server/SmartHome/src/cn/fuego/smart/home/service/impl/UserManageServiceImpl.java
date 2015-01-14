@@ -53,11 +53,30 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 		return user;
 	}
     @Override
-    public void create(SystemUser user)
+    public void create(int userID,SystemUser user)
     {
     	user.setPassword(SystemConfigInfo.getDefaultPassword());
     	user.setStatus(UserStatusEnum.REGISTERED.getIntValue());//默认已注册
+    	
     	super.create(user);
+    	if(UserTypeEnum.TERMINAL.getTypeValue()==user.getRole())
+    	{
+        	Customer oldCustomer= DaoContext.getInstance().getCustomerDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL, "userID", user.getUserID()));
+        	if(oldCustomer==null)
+        	{
+        		Customer newCustomer = new Customer();
+        		newCustomer.setUserID(user.getUserID());
+        		newCustomer.setCustomerName(user.getUserName());
+        		DaoContext.getInstance().getCustomerDao().create(newCustomer);
+        	}
+        	else
+        	{
+        		throw new MISPException(MISPErrorMessageConst.USER_EXISTED);
+        	}
+        	
+    	}
+
+    	
     }
  
 
