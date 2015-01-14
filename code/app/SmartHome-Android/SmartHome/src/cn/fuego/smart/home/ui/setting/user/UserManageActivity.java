@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.ui.setting.user;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +12,15 @@ import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
+import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
+import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class UserManageActivity extends BaseActivtiy implements View.OnClickListener
 {
 	private TextView user_name;
-	private EditText user_email,user_phone,user_add;
+	private EditText user_email,user_phone,user_addr;
+	private ProgressDialog proDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -23,12 +28,35 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		setContentView(R.layout.user_info);
 		//统一activity管理，用于退出APP
 		ExitApplication.getInstance().addActivity(this);
+		
+		initData();
+	
+	}
+
+	private void initData()
+	{
 		user_name = (TextView) findViewById(R.id.user_info_username);
 		user_email = (EditText) findViewById(R.id.user_info_email);
 		user_phone = (EditText) findViewById(R.id.user_info_phone);
-		user_add = (EditText) findViewById(R.id.user_info_address);
+		user_addr = (EditText) findViewById(R.id.user_info_address);
 		
-		initData();
+		String view_name = MemoryCache.getLoginInfo().getUser().getUserName();
+		String view_email = MemoryCache.getLoginInfo().getCustomer().getEmail();
+		String view_phone = MemoryCache.getLoginInfo().getCustomer().getPhone();
+		String view_addr = MemoryCache.getLoginInfo().getCustomer().getAddr();
+		user_name.setText(view_name);
+		if(view_email!=null)
+		{
+			user_email.setText(view_email);
+		}
+		if(view_phone!=null)
+		{
+			user_phone.setText(view_phone);
+		}
+		if(view_addr!=null)
+		{
+			user_addr.setText(view_addr);
+		}
 		
 		Button back_btn=(Button)findViewById(R.id.user_info_back);
 		back_btn.setOnClickListener(this);
@@ -46,13 +74,8 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		
 		Button logout_btn =  (Button) findViewById(R.id.logout_btn);
 		logout_btn.setOnClickListener(this);
-		logout_btn.setTag(4);		
-	}
-
-	private void initData()
-	{
-
-		user_name.setText(MemoryCache.getLoginInfo().getUser().getUserName().toString());
+		logout_btn.setTag(4);	
+		
 		
 	}
 
@@ -65,7 +88,7 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		{
 		case 1: this.finish();  
 				break;//个人中心返回
-		case 2: //To do
+		case 2: modfiyInfo();
 		 		break;//个人信息保存修改
 		case 3: intent = new Intent(this,ModifyPwdActivity.class);
  				startActivity(intent);
@@ -77,10 +100,40 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		
 	}
 
+	private void modfiyInfo()
+	{
+		SetCustomerReq req = new SetCustomerReq();
+		req.setToken(MemoryCache.getToken());
+		CustomerJson json = new CustomerJson();
+		json.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+		json.setCustomerName(MemoryCache.getLoginInfo().getUser().getUserName());
+		json.setEmail(user_email.getText().toString());
+		json.setPhone(user_phone.getText().toString());
+		json.setAddr(user_addr.getText().toString());		
+		req.setCustomer(json);
+		proDialog =ProgressDialog.show(UserManageActivity.this, "请稍等", "正在保存数据……");
+		WebServiceContext.getInstance().getUserManageRest(this).modifyCustomer(req);
+		
+	}
+
 	@Override
 	public void handle(MispHttpMessage message)
 	{
-		// TODO Auto-generated method stub
+		
+		if (message.isSuccess())
+		{
+			MemoryCache.getLoginInfo().getCustomer().setPhone(user_phone.getText().toString());
+			MemoryCache.getLoginInfo().getCustomer().setEmail(user_email.getText().toString());
+			MemoryCache.getLoginInfo().getCustomer().setAddr(user_addr.getText().toString());
+			proDialog.dismiss();
+		}
+		else
+		{
+			proDialog.dismiss();
+			this.showMessage(message);
+		}
 		
 	}
+
+	
 }

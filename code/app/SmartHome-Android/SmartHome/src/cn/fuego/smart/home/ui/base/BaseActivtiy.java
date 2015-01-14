@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -124,20 +123,7 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 		// TODO Auto-generated method stub
 		
 	}
-	
-	//Android按返回键退出程序但不销毁，程序后台运行
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
 
-		if (keyCode == KeyEvent.KEYCODE_BACK) 
-		{
-			moveTaskToBack(false);
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	} 
-     
     
     
 

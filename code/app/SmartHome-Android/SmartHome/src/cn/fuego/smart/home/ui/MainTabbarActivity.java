@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -114,5 +115,16 @@ public class MainTabbarActivity extends FragmentActivity implements OnClickListe
 		this.startActivity(i);
 
 	}
+	//Android按返回键退出程序但不销毁，程序后台运行
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
 
+		if (keyCode == KeyEvent.KEYCODE_BACK) 
+		{
+			moveTaskToBack(false);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	} 
 }

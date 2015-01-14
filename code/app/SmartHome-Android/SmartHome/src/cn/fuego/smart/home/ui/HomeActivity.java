@@ -2,28 +2,38 @@ package cn.fuego.smart.home.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.Customer;
+import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.info.AlarmActivity;
 import cn.fuego.smart.home.ui.info.NewsActivity;
 import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
 import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
+import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
-
+	private FuegoLog log = FuegoLog.getLog(getClass());
+	private Boolean isLoad=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		ExitApplication.getInstance().addActivity(this);
+		
+		loadCustomerInfo();
 		
 		Button safe_btn= (Button) findViewById(R.id.home_menu_safe);
 		safe_btn.setTag(1);
@@ -60,12 +70,30 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		
 	}
 
-
+	//用户信息加载
 	@Override
 	public void handle(MispHttpMessage message)
 	{
 		
+		if (message.isSuccess())
+		{
+			GetCustomerByIDRsp rsp = (GetCustomerByIDRsp) message.getMessage().obj;
+			log.info("GetCustomerByIDRsp is "+rsp);
+			Customer customer= new Customer();
+			customer.setCustomerName(rsp.getCustomer().getCustomerName());
+			customer.setPhone(rsp.getCustomer().getPhone());
+			customer.setEmail(rsp.getCustomer().getEmail());
+			customer.setAddr(rsp.getCustomer().getAddr());
+			
+			MemoryCache.getLoginInfo().setCustomer(customer);
+			
+		}
+		else
+		{
+			this.showMessage(message);
+		}
 		
+		isLoad=true;
 	}
 
 	@Override
@@ -88,7 +116,16 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 				break;
 		case 7: showDisable();
 				break;
-		case 8: jumpActivity(UserManageActivity.class);
+		case 8: 
+			if(isLoad)
+			{
+				jumpActivity(UserManageActivity.class);
+			}
+			else
+			{
+				loadCustomerInfo();
+			}
+			
 				break;
 		case 9: jumpActivity(ServiceActivity.class);
 				break;
@@ -128,4 +165,27 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		this.finish();
 		
 	}
+	private void loadCustomerInfo()
+	{
+		GetCustomerByIDReq req =new GetCustomerByIDReq();
+		req.setToken(MemoryCache.getToken());
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+		WebServiceContext.getInstance().getUserManageRest(this).getCustomer(req);
+	}
+	
+	
+	//Android按返回键退出程序但不销毁，程序后台运行
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) 
+		{
+			moveTaskToBack(false);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	} 
+     
+	
 }

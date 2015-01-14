@@ -37,7 +37,7 @@ MispListViewInteface,OnItemClickListener
 		this.initRes();
 		
 		setContentView(this.activityRes.getAvtivityView());
-		//Ω˚÷π∫·∆¡
+		//Á¶ÅÊ≠¢Ê®™Â±è
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		adapter = new MispListAdapter<E>(this, this,this.listViewRes,this.dataList);
 		ListView productView = (ListView) findViewById(this.listViewRes.getListView());
