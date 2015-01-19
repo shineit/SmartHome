@@ -44,6 +44,9 @@
 	<mapping resource="cn/fuego/smart/home/domain/Concentrator.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/UserMark.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Customer.hbm.xml" />
+	<mapping
+		resource="cn/fuego/smart/home/domain/ClientVersion.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/SensorType.hbm.xml" />
 
 
 

@@ -12,7 +12,7 @@ package cn.fuego.smart.home.webservice.up.model.base;
  */
 public class HomeSensorJson
 {
-	private int id;              //唯一ID，终端设备的出场ID，具有唯一性
+	private long id;              //唯一ID，终端设备的出场ID，具有唯一性
 	private long concentratorID;  //集中器ID
 	private long sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
 	private int channelID;       //终端设备的通道ID
@@ -28,17 +28,16 @@ public class HomeSensorJson
 	private String mark;         //自定义标签
 
 
-	public int getId()
+
+	public long getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(long id)
 	{
 		this.id = id;
 	}
- 
- 
 
 	public long getConcentratorID()
 	{

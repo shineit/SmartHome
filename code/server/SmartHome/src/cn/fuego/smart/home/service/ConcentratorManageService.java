@@ -13,6 +13,8 @@ import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.domain.SensorType;
 import cn.fuego.smart.home.domain.UserConcentrator;
 
  /** 
@@ -39,6 +41,12 @@ public interface ConcentratorManageService extends MispCommonService<Concentrato
 	String getOperatePemission(int userID, String concentratorID);
 	
 	AbstractDataSource<UserConcentrator> getPermissionDataSource(int accountType, List<QueryCondition> conditionList);
+
+	AbstractDataSource<HomeSensor> getHomeSensorDataSource(List<QueryCondition> conditionList);
 	
+	HomeSensor getHomeSensorByID(String sensorID);
+	AbstractDataSource<SensorType> getSensorTypeDatasource(List<QueryCondition> conditionList);
+	
+	void modifySensor(HomeSensor homeSensor);
 
 }

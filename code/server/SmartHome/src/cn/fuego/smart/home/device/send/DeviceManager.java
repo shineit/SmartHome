@@ -51,7 +51,7 @@ public interface DeviceManager
 	
 	public void setSensor(HomeSensor sensor);
 	
-	public HomeSensor getSesnor(long sensorID,int channelID);
+	public void getSensor(HomeSensor sensor);
 	
 	public void enableSensor(List<HomeSensor> sensorList);
 	

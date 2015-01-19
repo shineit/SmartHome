@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="ClientVersion" table="client_version">
+
+	    <id name="versionID" column="VERSION_ID" >
+	       <generator class="identity"/> 
+		</id>
+		 <property name="companyID" column="COMPANY_ID"></property>
+		 <property name="appName" column="APP_NAME"></property>
+		 <property name="apkName" column="APK_NAME"></property>
+		 <property name="versionName" column="VERSION_NAME"></property>
+		 <property name="versionCode" column="VERSION_CODE"></property>
+		 <property name="clientType" column="CLIENT_TYPE"></property>
+		 <property name="apkURL" column="APK_URL"></property>
+		 <property name="qrCode" column="QR_CODE"></property>
+		 <property name="versionStatus" column="VERSION_STATUS"></property>
+	</class>
+ 
+</hibernate-mapping>

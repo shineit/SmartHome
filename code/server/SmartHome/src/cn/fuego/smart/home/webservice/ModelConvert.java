@@ -14,6 +14,7 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.ClientVersion;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
@@ -22,6 +23,7 @@ import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.ClientVersionJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
@@ -257,5 +259,20 @@ public class ModelConvert
 		customer.setAddr(customerJson.getAddr());
 		customer.setStatus(customerJson.getStatus());
 		return customer;
+	}
+	public static ClientVersionJson versionToJson(ClientVersion clientVersion)
+	{
+		ClientVersionJson json = new ClientVersionJson();
+		json.setVersionID(clientVersion.getVersionID());
+		json.setVersionName(clientVersion.getVersionName());
+		json.setVersionCode(clientVersion.getVersionCode());
+		json.setVersionStatus(clientVersion.getVersionStatus());
+		json.setApkName(clientVersion.getApkName());
+		json.setApkURL(clientVersion.getApkURL());
+		json.setAppName(clientVersion.getAppName());
+		json.setClientType(clientVersion.getClientType());
+		json.setCompanyID(clientVersion.getCompanyID());
+		json.setQrCode(clientVersion.getQrCode());	
+		return json;
 	}	
 }

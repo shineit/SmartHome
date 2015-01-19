@@ -12,7 +12,6 @@ import java.util.List;
 
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
-import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.HomeSensor;
 

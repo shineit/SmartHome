@@ -23,7 +23,7 @@ public class Alarm implements PersistenceObject
 	
 	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
-	private int objID;        //对象ID
+	private long objID;        //对象ID
 	
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private Float dataValue = (float)0;	//告警值,模拟量类型 才有
@@ -33,9 +33,7 @@ public class Alarm implements PersistenceObject
 	private Date clearTime;	//告警清除的时间
 	private String statusColor;//状态颜色，对应清除状态
 
-	
- 
- 
+
 	public int getId()
 	{
 		return id;
@@ -47,12 +45,6 @@ public class Alarm implements PersistenceObject
 	{
 		this.id = id;
 	}
-
-
-
-
-
- 
 
 
 
@@ -84,14 +76,14 @@ public class Alarm implements PersistenceObject
 
 
 
-	public int getObjID()
+	public long getObjID()
 	{
 		return objID;
 	}
 
 
 
-	public void setObjID(int objID)
+	public void setObjID(long objID)
 	{
 		this.objID = objID;
 	}

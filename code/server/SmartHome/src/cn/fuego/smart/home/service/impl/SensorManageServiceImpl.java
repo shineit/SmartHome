@@ -55,8 +55,8 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		{
 			try
 			{
-				HomeSensor e = device.getSesnor(sensor.getSensorID(), sensor.getChannelID());
-				sensor = e;
+				device.getSensor(sensor);
+			
 			}
 			catch(Exception e)
 			{

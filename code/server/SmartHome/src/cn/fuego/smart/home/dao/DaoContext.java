@@ -2,12 +2,12 @@ package cn.fuego.smart.home.dao;
 
 import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.impl.AbstractDao;
-import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.News;
+import cn.fuego.smart.home.domain.SensorType;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.domain.UserMark;
@@ -35,6 +35,7 @@ public class DaoContext
 	private Dao<Alarm> alarmDao =null;
 	private Dao<UserConcentrator> userConcentratorDao = null;
 	private Dao<Customer> customerDao=null;
+	private Dao<SensorType> sensorTypeDao = null;
 	private DaoContext()
 	{
 
@@ -48,7 +49,10 @@ public class DaoContext
 		}
 		return instance;
 	}
-	
+	public Dao getDao(Class clazz)
+	{
+		return new AbstractDao(clazz);
+	}
 	public Dao<News> getNewsDao()
 	{
 		if (null == newsDao)
@@ -118,5 +122,13 @@ public class DaoContext
 			customerDao = new AbstractDao<Customer>(Customer.class);
 		}
 		return customerDao;
-	}		  	 
+	}
+	public Dao<SensorType>  getSensorTypeDao()
+	{
+		if (null == sensorTypeDao)
+		{
+			sensorTypeDao = new AbstractDao<SensorType>(SensorType.class);
+		}
+		return sensorTypeDao;
+	}
 }

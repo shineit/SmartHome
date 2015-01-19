@@ -181,19 +181,33 @@ public class DeviceManagerImpl implements DeviceManager
 
 		
 	}
-	public HomeSensor getSesnor(long sensorID,int channelID)
+	public void getSensor(HomeSensor sensor)
 	{
-		log.info("get home sensor config,the sensor id is " + sensorID+ "the channel id is " + channelID);
+		log.info("get home sensor config,the sensor is" + sensor);
         String data = ""; 	
 		
-		data += DataTypeConvert.intToByteStr(sensorID,4);
-		data += DataTypeConvert.intToByteStr(channelID,1);
+		data += DataTypeConvert.intToByteStr(sensor.getSensorID(),4);
+		data += DataTypeConvert.intToByteStr(sensor.getChannelID(),1);
 		String sendMessage = makeSendData(SendCommandConst.GET_SENSOR_CONFIG,data);
 		String readMessage = getData(sendMessage);
 		
 		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getIpAddr(),this.concentrator.getPort());
-		
-		return recvMessage.getHomeSensor();
+		HomeSensor deviceSensor  = recvMessage.getHomeSensor();
+		if(null != deviceSensor)
+		{
+			sensor.setCtrGroupID(deviceSensor.getCtrGroupID());
+			sensor.setDescription(deviceSensor.getDescription());
+			sensor.setGroupID(deviceSensor.getGroupID());
+			sensor.setErrorValue(deviceSensor.getErrorValue());
+			sensor.setWarnValue(deviceSensor.getWarnValue());
+	 
+			sensor.setSensorType(deviceSensor.getSensorType());
+			sensor.setSensorTypeName(deviceSensor.getSensorTypeName());
+			sensor.setStatus(deviceSensor.getStatus());
+			sensor.setMark(deviceSensor.getMark());
+
+		}
+	 
 
 	}
 

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.SensorKindEunm;
+import cn.fuego.smart.home.constant.SensorStatusEnum;
 
 
 /**
@@ -17,17 +20,17 @@ import cn.fuego.common.domain.PersistenceObject;
 public class HomeSensor implements PersistenceObject
 {
 	public static final String PRI_KEY = "id";
-	private int id;              //唯一ID 终端设备的出场ID，具有唯一性
+	private long id;              //唯一ID 终端设备的出场ID，具有唯一性
 	private long concentratorID;  //集中器ID
 	private long sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
  	private int channelID;       //终端设备的通道ID
-	private Integer sensorKind;      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
-	private Integer sensorType;      //传感器类型
+	private Integer sensorKind=SensorKindEunm.DISCRETE_SENSOR.getIntValue();      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
+	private Integer sensorType=0;      //传感器类型
 	private String sensorTypeName;  //传感器类型名称
-	private Integer status;          //告警使能状态，0-禁止，1-使能，SensorStatusEnum
-	private Float warnValue;    //预警值
-	private Float errorValue;   //火警值
-	private Integer groupID;         //区域ID（用于标识联动控制器）
+	private Integer status=SensorStatusEnum.DISABLE.getIntValue();          //告警使能状态，0-禁止，1-使能，SensorStatusEnum
+	private Float warnValue=(float) 0;    //预警值
+	private Float errorValue=(float) 0;   //火警值
+	private Integer groupID=0;         //区域ID（用于标识联动控制器）
 	private String ctrGroupID;      //联动控制器ID ;隔开
 	private String description;  //描述
 	private String mark;         //自定义标签
@@ -66,15 +69,16 @@ public class HomeSensor implements PersistenceObject
 			return false;
 		return true;
 	}
-	public int getId()
+
+ 
+	public long getId()
 	{
 		return id;
 	}
-	public void setId(int id)
+	public void setId(long id)
 	{
 		this.id = id;
 	}
- 
 	public long getConcentratorID()
 	{
 		return concentratorID;
@@ -86,12 +90,16 @@ public class HomeSensor implements PersistenceObject
 	public List<Integer> getCtrGroupIDList()
 	{
 		List<Integer> groupIDList = new ArrayList<Integer>();
-		String[] strAry = ctrGroupID.split(";");
-		for(int i=0;i<strAry.length;i++)
+		if(!ValidatorUtil.isEmpty(ctrGroupID))
 		{
-			groupIDList.add(Integer.valueOf(strAry[i]));
+			String[] strAry = ctrGroupID.split(";");
+			for(int i=0;i<strAry.length;i++)
+			{
+				groupIDList.add(Integer.valueOf(strAry[i]));
+			}
+			
 		}
-		
+
 		return groupIDList;
 		
 	}

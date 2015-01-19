@@ -45,5 +45,16 @@ public enum SensorKindEunm
 		}
 		return null;
 	}	
+	public static SensorKindEunm getEnumByStr(String strValue)
+	{
+		for (SensorKindEunm c : SensorKindEunm.values())
+		{
+			if (strValue.equals(c.strValue) )
+			{
+				return c;
+			}
+		}
+		return null;
+	} 
 	
 }

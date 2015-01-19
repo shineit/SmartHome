@@ -7,6 +7,7 @@ import cn.fuego.misp.domain.Privilege;
 import cn.fuego.misp.domain.SystemIDType;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.smart.home.domain.ClientVersion;
 
 
 /**
@@ -32,7 +33,7 @@ public class MISPDaoContext
 	
 	private Dao<Privilege> privilegeDao = null;
 
-
+	private Dao<ClientVersion> clientVersionDao = null;
 	private MISPDaoContext()
 	{
 
@@ -94,6 +95,14 @@ public class MISPDaoContext
 		return privilegeDao;
 	}
 	
+	public synchronized Dao<ClientVersion> getClientVersionDao() 
+	{
+		if (null == clientVersionDao)
+		{
+			clientVersionDao = new AbstractDao<ClientVersion>(ClientVersion.class);
+		}
+		return clientVersionDao;
+	}	
  
 	 
 }

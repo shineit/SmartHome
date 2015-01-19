@@ -54,7 +54,7 @@ public class UserManageAction extends DWZTableAction<SystemUser>
 	{
 		this.filter = filter;
 	}
-    // 权限配置查看添加用户专用，误删   
+    // 权限配置查看添加用户专用，勿删   
 	public String addUser()
 	{
     	this.execute();

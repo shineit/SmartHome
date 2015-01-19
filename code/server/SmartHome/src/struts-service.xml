@@ -37,6 +37,9 @@
  			
 		    <result type="dispatcher" name="addInfo">/client/manage/concentratorPermission.jsp</result>
 			<result type="dispatcher" name="modifyPermission">/client/manage/permissionModify.jsp</result>
+			<result type="dispatcher" name="showSensor">/client/manage/sensorList.jsp</result>
+			<result type="dispatcher" name="configSensor">/client/manage/sensorConfig.jsp</result>
+			<result type="dispatcher" name="showType">/client/manage/sensorTypeList.jsp</result>
 		</action>
 		
    		<action name="CustomerDistribution" class="cn.fuego.smart.home.web.action.device.CustomerDistributionAction">

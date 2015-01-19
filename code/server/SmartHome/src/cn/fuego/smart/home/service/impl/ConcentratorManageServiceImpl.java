@@ -26,7 +26,11 @@ import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.device.send.DeviceManager;
+import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.domain.SensorType;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -247,6 +251,73 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	{
 		// TODO Auto-generated method stub
 		return Concentrator.PRI_KEY;
+	}
+	/**
+	 * 获取传感器数据
+	 */
+	@Override
+	public AbstractDataSource<HomeSensor> getHomeSensorDataSource(List<QueryCondition> conditionList)
+	{
+		AbstractDataSource<HomeSensor> datasource =null;
+
+		datasource = new DataBaseSourceImpl<HomeSensor>(HomeSensor.class,conditionList);
+
+		return datasource;
+	}
+	@Override
+	public HomeSensor getHomeSensorByID(String sensorID)
+	{
+		QueryCondition condition= new QueryCondition(ConditionTypeEnum.EQUAL, "id",sensorID);
+		HomeSensor sensor = DaoContext.getInstance().getSensorDao().getUniRecord(condition);
+		return sensor;
+	}
+	@Override
+	public AbstractDataSource<SensorType> getSensorTypeDatasource(List<QueryCondition> conditionList)
+	{
+		AbstractDataSource<SensorType> datasource =null;
+
+		datasource = new DataBaseSourceImpl<SensorType>(SensorType.class,conditionList);
+
+		return datasource;
+	}
+	@Override
+	public void modifySensor(HomeSensor homeSensor)
+	{
+		QueryCondition condition= new QueryCondition(ConditionTypeEnum.EQUAL, "id",homeSensor.getId());
+		HomeSensor old= DaoContext.getInstance().getSensorDao().getUniRecord(condition);
+		if(old!=null)
+		{
+			old.setSensorType(homeSensor.getSensorType());
+			old.setSensorTypeName(homeSensor.getSensorTypeName());
+			old.setWarnValue(homeSensor.getWarnValue());
+			old.setErrorValue(homeSensor.getErrorValue());
+			Concentrator concentrator = this.get(old.getConcentratorID());
+			if(null != concentrator)
+			{
+				try
+				{
+					DeviceManagerFactory.getInstance().getDeviceManger(concentrator).setSensor(old);
+				}
+				catch (Exception e)
+				{
+					log.error("config sensor on device failed,the sensor is " + old.toString(),e);
+					throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
+				}
+			}
+			else
+			{
+				log.error("config sensor failed,the contrator is not exsited " + old.toString());
+				throw new  MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
+			}
+			DaoContext.getInstance().getSensorDao().update(old);
+		}
+		else
+		{
+			throw new MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
+		}
+		
+		
+		
 	}
 
 
