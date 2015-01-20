@@ -7,6 +7,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispProxyFactory;
+import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 
 public class WebServiceContext
@@ -14,9 +15,11 @@ public class WebServiceContext
 	private FuegoLog log = FuegoLog.getLog(AuthInterceptor.class);
 
 	private static WebServiceContext instance;
-	//public static String hostURL = "http://192.168.0.101:8080/SmartHome/rest";
-	public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
-	
+	public static String hostURL = MemoryCache.getRestUrl();
+	//public static String hostURL = "http://192.168.0.102:8080/SmartHome/rest";
+	//public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
+	//public static String hostURL = "http://115.231.168.14:8080/SmartHome/rest";//嘉兴服务器地址
+	//public static String hostURL = "http://192.168.1.104:8080/SmartHome/rest";
 	private WebServiceContext()
 	{
 
@@ -30,6 +33,13 @@ public class WebServiceContext
 		}
 		return instance;
 	}
+	public MispSystemManageRest getSystemManageRest(HttpListener handler)
+	{
+ 
+		MispSystemManageRest rest = MispProxyFactory.create( hostURL,MispSystemManageRest.class, getHttpClient(),handler);
+
+		return rest;
+	}	
 	public SensorManageRest getSensorManageRest(HttpListener handler)
 	{
 		
@@ -70,5 +80,10 @@ public class WebServiceContext
 		OrderManageRest rest = MispProxyFactory.create( hostURL,OrderManageRest.class, getHttpClient(),handler);
 		return rest;
 	}	
-
+	public  ConcentManageRest getConcentManageRest(HttpListener handler)
+	{
+		ConcentManageRest rest = MispProxyFactory.create( hostURL,ConcentManageRest.class, getHttpClient(),handler);
+		return rest;
+	}
+    
 }

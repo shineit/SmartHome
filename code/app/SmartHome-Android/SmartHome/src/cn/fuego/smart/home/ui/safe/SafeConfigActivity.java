@@ -44,7 +44,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	
 	private TextView txt_concentID,txt_sensorID,txt_sensorType;
 	private EditText txt_desp,txt_warn,txt_error;
-	private String selCtrID,selMark;
+	private String selMark,selCtrSensorID,selCtrChannelID;
 
 	private ProgressDialog configPDialog;
 	@Override
@@ -92,8 +92,10 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	
 		defaultLabel = intent.getStringExtra(safeViewModel.getMark());
 		//int defaultCtrID = intent.getIntExtra(safeViewModel.getCtrGroupID(), 0);
-		String defaultCtrID = intent.getStringExtra(safeViewModel.getCtrGroupID());
-		log.info("The defaultCtrID is"+defaultCtrID);
+		//String defaultCtrID = intent.getStringExtra(safeViewModel.getCtrGroupID());
+		//log.info("The defaultCtrID is"+defaultCtrID);
+		String defCtrSensorID = intent.getStringExtra(safeViewModel.getCtrSensorID());
+		String defCtrChannelID = intent.getStringExtra(safeViewModel.getCtrChannelID());
 		markSpinner =  (Spinner) findViewById(R.id.safe_mark_spinner);
 		ctrSpinner = (Spinner) findViewById(R.id.safe_ctr_spinner);
         //获取标签栏选项数据
@@ -121,7 +123,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		ctrAdapter = new ArrayAdapter<SpinnerDataModel>(this,android.R.layout.simple_spinner_item , ctrList);
 		ctrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		ctrSpinner.setAdapter(ctrAdapter);
-		ctrSpinner.setSelection(getCtrPosition(defaultCtrID));
+		ctrSpinner.setSelection(getCtrPosition(defCtrSensorID,defCtrChannelID));
 		ctrAdapter.notifyDataSetChanged();
 		ctrSpinner.setOnItemSelectedListener(this);
 	}
@@ -130,7 +132,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
     private int getSelPosition(String label)
 	{
     	int index=0;
-    	
+
 		for(int i=0; i<markList.size();i++)
 		{
 			if(label.equals(markList.get(i)))
@@ -143,13 +145,13 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		}
 		return index;
 	}
-    private int getCtrPosition(String ctrID)
+    private int getCtrPosition(String defCtrSensorID,String defCtrChannelID)
     {
 		int index=0;
 		log.info("The ctrList is"+ctrList);
 		for(int i=0;i<ctrList.size();i++)
 		{
-			if(ctrID.equals(ctrList.get(i).getValue()))
+			if(defCtrSensorID.equals(ctrList.get(i).getCtrSensorID())&&defCtrChannelID.equals(ctrList.get(i).getCtrChannelID()))
 			{
 				index=i;
 				return index;
@@ -194,7 +196,9 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		
 		//spinner 标签选中项
 		homesensor.setMark(selMark);
-		homesensor.setCtrGroupID(selCtrID);
+		//homesensor.setCtrGroupID(selCtrID);
+		homesensor.setCtrSensorID(Long.valueOf(selCtrSensorID));
+		homesensor.setCtrChannelID(Integer.valueOf(selCtrChannelID));
 		req.setSensor(homesensor);
 		
 		WebServiceContext.getInstance().getSensorManageRest(this).setSensor(req);
@@ -239,8 +243,11 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		{
 			//Toast.makeText(SafeConfigActivity.this, "control"+ctrSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG);
 			log.info("control"+ctrSpinner.getSelectedItem().toString());
-			selCtrID =ctrAdapter.getItem(ctrSpinner.getSelectedItemPosition()).getValue();
-			log.info("controlID"+selCtrID);
+			//selCtrID =ctrAdapter.getItem(ctrSpinner.getSelectedItemPosition()).getValue();
+			selCtrSensorID=ctrAdapter.getItem(ctrSpinner.getSelectedItemPosition()).getCtrSensorID();
+			selCtrChannelID= ctrAdapter.getItem(ctrSpinner.getSelectedItemPosition()).getCtrChannelID();
+			//log.info("controlID"+selCtrID);
+			log.info("selCtrSensorID is:"+selCtrSensorID+"; selCtrChannelID is"+selCtrChannelID);
 			
 		}
 		

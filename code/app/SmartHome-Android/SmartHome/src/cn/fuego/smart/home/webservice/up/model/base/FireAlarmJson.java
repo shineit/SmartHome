@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
+
 
 
 
@@ -10,12 +12,12 @@ package cn.fuego.smart.home.webservice.up.model.base;
 * @date 2014-12-15 下午6:26:29 
 *  
 */ 
-public class FireAlarmJson
+public class FireAlarmJson implements Serializable
 {
 	private int id;  			//告警ID，自增长
-	private int concentratorID;
+	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
-	private int objID;        //对应snesorID
+	private long objID;        //对应snesorID
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private long alarmTime;	//告警产生的时间
 	private Integer clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
@@ -37,11 +39,12 @@ public class FireAlarmJson
 	{
 		this.id = id;
 	}
-	public int getConcentratorID()
+
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
 	}
@@ -53,11 +56,12 @@ public class FireAlarmJson
 	{
 		this.objType = objType;
 	}
-	public int getObjID()
+
+	public long getObjID()
 	{
 		return objID;
 	}
-	public void setObjID(int objID)
+	public void setObjID(long objID)
 	{
 		this.objID = objID;
 	}
@@ -117,6 +121,31 @@ public class FireAlarmJson
 	public void setCodeID(int codeID)
 	{
 		this.codeID = codeID;
+	}
+
+	public float getDataValue()
+	{
+		return dataValue;
+	}
+	public void setDataValue(float dataValue)
+	{
+		this.dataValue = dataValue;
+	}
+	public String getClearUser()
+	{
+		return clearUser;
+	}
+	public void setClearUser(String clearUser)
+	{
+		this.clearUser = clearUser;
+	}
+	public long getClearTime()
+	{
+		return clearTime;
+	}
+	public void setClearTime(long clearTime)
+	{
+		this.clearTime = clearTime;
 	}
 	@Override
 	public String toString()

@@ -13,16 +13,8 @@ import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
  */
 public class SetConcentratorReq extends BaseJsonReq
 {
-	private String command;
 	private ConcentratorJson concentrator;
-	public String getCommand()
-	{
-		return command;
-	}
-	public void setCommand(String command)
-	{
-		this.command = command;
-	}
+
 	public ConcentratorJson getConcentrator()
 	{
 		return concentrator;
@@ -34,11 +26,9 @@ public class SetConcentratorReq extends BaseJsonReq
 	@Override
 	public String toString()
 	{
-		return "SetConcentratorReq [command=" + command + ", concentrator="
-				+ concentrator + "]";
+		return "SetConcentratorReq [concentrator=" + concentrator + ", token="
+				+ token + "]";
 	}
-
-
 
 
 }

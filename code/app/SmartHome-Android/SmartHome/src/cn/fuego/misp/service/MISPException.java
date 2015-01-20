@@ -23,7 +23,7 @@ public class MISPException extends RuntimeException
 	/**
 	 * 
 	 */
-	private int errorCode = MISPErrorMessageConst.SUCCESS;
+	private int errorCode = MISPErrorMessageConst.OPERATE_FAILED;
 
 	public MISPException()
 	{

@@ -77,7 +77,7 @@ public class GroupListAdapter extends BaseExpandableListAdapter
 			{
 				sensorList = new ArrayList<HomeSensorJson>();
 				sensorList.add(json);
-				sensorMap.put(json.getMark(), sensorList);
+				sensorMap.put(json.getMark(), sensorList);			
 			}
 			else
 			{

@@ -8,24 +8,21 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.Customer;
-import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.info.AlarmActivity;
 import cn.fuego.smart.home.ui.info.NewsActivity;
+import cn.fuego.smart.home.ui.setting.concent.ConcentConfigActivity;
+import cn.fuego.smart.home.ui.setting.concent.ConcentListActivity;
 import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
 import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
-import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
-import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
-	private Boolean isLoad=false;
+	//private Boolean isLoad=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,104 +30,83 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		setContentView(R.layout.activity_home);
 		ExitApplication.getInstance().addActivity(this);
 		
-		loadCustomerInfo();
-		
-		Button safe_btn= (Button) findViewById(R.id.home_menu_safe);
-		safe_btn.setTag(1);
-		safe_btn.setOnClickListener(this);
-		Button ctr_btn= (Button) findViewById(R.id.home_menu_control);
-		ctr_btn.setTag(2);
-		ctr_btn.setOnClickListener(this);	
-		Button camera_btn= (Button) findViewById(R.id.home_menu_camera);
-		camera_btn.setTag(3);
-		camera_btn.setOnClickListener(this);		
-		Button alarm_btn= (Button) findViewById(R.id.home_menu_alarm);
-		alarm_btn.setTag(4);
-		alarm_btn.setOnClickListener(this);		
-		Button plane_btn= (Button) findViewById(R.id.home_menu_plane);
-		plane_btn.setTag(5);
-		plane_btn.setOnClickListener(this);
-		
-		Button concent_btn= (Button) findViewById(R.id.home_menu_concent);
-		concent_btn.setTag(6);
-		concent_btn.setOnClickListener(this);		
-		Button area_btn= (Button) findViewById(R.id.home_menu_area);
-		area_btn.setTag(7);
-		area_btn.setOnClickListener(this);
-		
-		Button account_btn= (Button) findViewById(R.id.home_menu_account);
-		account_btn.setTag(8);
-		account_btn.setOnClickListener(this);
-		Button apply_btn= (Button) findViewById(R.id.home_menu_apply);
-		apply_btn.setTag(9);
-		apply_btn.setOnClickListener(this);
-		Button news_btn= (Button) findViewById(R.id.home_menu_news);
-		news_btn.setTag(10);
-		news_btn.setOnClickListener(this);
+		initView();
+
 		
 	}
 
-	//用户信息加载
-	@Override
-	public void handle(MispHttpMessage message)
+
+
+	private void initView()
 	{
+		Button safe_btn= (Button) findViewById(R.id.home_menu_safe);
+		safe_btn.setOnClickListener(this);
+		Button ctr_btn= (Button) findViewById(R.id.home_menu_control);
+		ctr_btn.setOnClickListener(this);	
+		Button camera_btn= (Button) findViewById(R.id.home_menu_camera);
+		camera_btn.setOnClickListener(this);		
+		Button alarm_btn= (Button) findViewById(R.id.home_menu_alarm);
+		alarm_btn.setOnClickListener(this);		
+		Button plane_btn= (Button) findViewById(R.id.home_menu_plane);
+		plane_btn.setOnClickListener(this);
 		
-		if (message.isSuccess())
-		{
-			GetCustomerByIDRsp rsp = (GetCustomerByIDRsp) message.getMessage().obj;
-			log.info("GetCustomerByIDRsp is "+rsp);
-			Customer customer= new Customer();
-			customer.setCustomerName(rsp.getCustomer().getCustomerName());
-			customer.setPhone(rsp.getCustomer().getPhone());
-			customer.setEmail(rsp.getCustomer().getEmail());
-			customer.setAddr(rsp.getCustomer().getAddr());
-			
-			MemoryCache.getLoginInfo().setCustomer(customer);
-			
-		}
-		else
-		{
-			this.showMessage(message);
-		}
+		Button concent_btn= (Button) findViewById(R.id.home_menu_concent);
+		concent_btn.setOnClickListener(this);		
+		Button area_btn= (Button) findViewById(R.id.home_menu_area);
+		area_btn.setOnClickListener(this);
 		
-		isLoad=true;
+		Button account_btn= (Button) findViewById(R.id.home_menu_account);
+		account_btn.setOnClickListener(this);
+		Button apply_btn= (Button) findViewById(R.id.home_menu_apply);
+		apply_btn.setOnClickListener(this);
+		Button news_btn= (Button) findViewById(R.id.home_menu_news);
+		news_btn.setOnClickListener(this);
+		
+		Button about_btn= (Button) findViewById(R.id.home_about_us_btn);
+		about_btn.setOnClickListener(this);
+		
 	}
+
+
 
 	@Override
 	public void onClick(View v)
 	{
-		int tag = (Integer) v.getTag();
-		switch(tag)
+		switch(v.getId())
 		{
-		case 1: jumpTab(1);
-				break;
-		case 2: jumpTab(2);
-				break;
-		case 3: jumpTab(3);
-				break;
-		case 4:	jumpActivity(AlarmActivity.class);
-				break;
-		case 5: showDisable();
-				break;
-		case 6: showDisable();
-				break;
-		case 7: showDisable();
-				break;
-		case 8: 
-			if(isLoad)
-			{
-				jumpActivity(UserManageActivity.class);
-			}
-			else
-			{
-				loadCustomerInfo();
-			}
-			
-				break;
-		case 9: jumpActivity(ServiceActivity.class);
-				break;
-		case 10:jumpActivity(NewsActivity.class);
-				break;
+		case R.id.home_menu_safe: 
+			jumpTab(1);
+			break;
+		case R.id.home_menu_control: 
+			jumpTab(2);
+			break;
+		case R.id.home_menu_camera: 
+			jumpTab(3);
+			break;
+		case R.id.home_menu_alarm:	
+			jumpActivity(AlarmActivity.class);
+			break;
+		case R.id.home_menu_plane: 
+			showDisable();
+			break;
+		case R.id.home_menu_concent:
+			jumpActivity(ConcentListActivity.class);
+			break;
+		case R.id.home_menu_area: 
+			showDisable();
+			break;
+		case R.id.home_menu_account: 
+			jumpActivity(UserManageActivity.class);
+			break;
+		case R.id.home_menu_apply: 
+			jumpActivity(ServiceActivity.class);	
+			break;
+		case R.id.home_menu_news:
+			jumpActivity(NewsActivity.class);
+			break;
+		case R.id.home_about_us_btn:
+			jumpActivity(AboutUsActivity.class);
+			break;
 		default:break;
 		}
 		
@@ -164,13 +140,6 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
         this.startActivity(i);
 		this.finish();
 		
-	}
-	private void loadCustomerInfo()
-	{
-		GetCustomerByIDReq req =new GetCustomerByIDReq();
-		req.setToken(MemoryCache.getToken());
-		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
-		WebServiceContext.getInstance().getUserManageRest(this).getCustomer(req);
 	}
 	
 	

@@ -1,5 +1,7 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
+
 
 /**
  * 
@@ -9,9 +11,10 @@ package cn.fuego.smart.home.webservice.up.model.base;
 * @date 2014-10-20 上午10:57:50 
 *
  */
-public class ConcentratorJson
+public class ConcentratorJson implements Serializable
 {
-	private int concentratorID;
+	private long concentratorID;
+	private String name;
 	private String ipAddr;
 	private int status;
 	private float locationNS;
@@ -19,13 +22,23 @@ public class ConcentratorJson
 	private String description;
 	private String addr;
 	private String mark;
-	public int getConcentratorID()
+
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
 	}
 	public String getIpAddr()
 	{
@@ -86,11 +99,12 @@ public class ConcentratorJson
 	@Override
 	public String toString()
 	{
-		return "ConcentratorJson [concentratorID=" + concentratorID
-				+ ", ipAddr=" + ipAddr + ", status=" + status + ", locationNS="
-				+ locationNS + ", locationWE=" + locationWE + ", description="
-				+ description + ", addr=" + addr + ", mark=" + mark + "]";
+		return "ConcentratorJson [concentratorID=" + concentratorID + ", name="
+				+ name + ", ipAddr=" + ipAddr + ", status=" + status
+				+ ", locationNS=" + locationNS + ", locationWE=" + locationWE
+				+ ", description=" + description + ", addr=" + addr + ", mark="
+				+ mark + "]";
 	}
- 
+
 
 }

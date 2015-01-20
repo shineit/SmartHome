@@ -19,12 +19,14 @@ public class SpinnerDataModel
 {
 
 
-	private String value = "";
+	private String ctrSensorID="";
+	private String ctrChannelID="";
 	private String text = "";
 
 	public SpinnerDataModel() 
 	{
-		value = "";
+		ctrSensorID = "";
+		ctrChannelID ="";
 		text = "";
 	}
 
@@ -35,24 +37,40 @@ public class SpinnerDataModel
 		return text;
 	}
 
-	public String getValue() 
-	{
-		return value;
-	}
-
 	public String getText() 
 	{
 		return text;
-	}
-
-	public void setValue(String value)
-	{
-		this.value = value;
 	}
 
 	public void setText(String text)
 	{
 		this.text = text;
 	}
+
+
+	public String getCtrSensorID()
+	{
+		return ctrSensorID;
+	}
+
+
+	public void setCtrSensorID(String ctrSensorID)
+	{
+		this.ctrSensorID = ctrSensorID;
+	}
+
+
+	public String getCtrChannelID()
+	{
+		return ctrChannelID;
+	}
+
+
+	public void setCtrChannelID(String ctrChannelID)
+	{
+		this.ctrChannelID = ctrChannelID;
+	}
+
+
 	
 }

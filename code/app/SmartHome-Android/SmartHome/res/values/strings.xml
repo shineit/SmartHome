@@ -42,5 +42,8 @@
     <string name="title_activity_news">NewsActivity</string>
     <string name="title_activity_alarm">AlarmActivity</string>
     <string name="title_activity_token_verify">TokenVerifyActivity</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="title_activity_concent_config">ConcentConfigActivity</string>
+    <string name="title_activity_concent_list">ConcentListActivity</string>
 
 </resources>

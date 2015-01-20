@@ -26,6 +26,9 @@ public class SafeViewModel
 	private String descriptions="descriptions";  //描述
 	private String mark="mark";         //自定义标签
 	private String ctrGroupID="ctrGroupID"; //控制器ID
+	
+	private String ctrSensorID="ctrSensorID";
+	private String ctrChannelID ="ctrChannelID";
 	public String getId()
 	{
 		return id;
@@ -62,5 +65,14 @@ public class SafeViewModel
 	{
 		return ctrGroupID;
 	}
+	public String getCtrSensorID()
+	{
+		return ctrSensorID;
+	}
+	public String getCtrChannelID()
+	{
+		return ctrChannelID;
+	}
+	
 	
 }

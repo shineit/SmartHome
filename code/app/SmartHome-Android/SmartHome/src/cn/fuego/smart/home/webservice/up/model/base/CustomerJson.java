@@ -64,6 +64,13 @@ public class CustomerJson implements Serializable
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+	@Override
+	public String toString()
+	{
+		return "CustomerJson [userID=" + userID + ", customerName="
+				+ customerName + ", phone=" + phone + ", addr=" + addr
+				+ ", email=" + email + ", status=" + status + "]";
 	}	
     
 

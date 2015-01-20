@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
 
 
 /**
@@ -10,9 +11,9 @@ package cn.fuego.smart.home.webservice.up.model.base;
 * @date 2014-10-20 上午10:58:07 
 *
  */
-public class HomeSensorJson
+public class HomeSensorJson implements Serializable
 {
-	private int id;              //唯一ID，终端设备的出场ID，具有唯一性
+	private long id;              //
 	private long concentratorID;  //集中器ID
 	private long sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
 	private int channelID;       //终端设备的通道ID
@@ -27,18 +28,18 @@ public class HomeSensorJson
 	private String descriptions;  //描述
 	private String mark;         //自定义标签
 
+	private Long ctrSensorID;
+	private Integer ctrChannelID;
 
-	public int getId()
+	public long getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(long id)
 	{
 		this.id = id;
 	}
- 
- 
 
 	public long getConcentratorID()
 	{
@@ -170,6 +171,26 @@ public class HomeSensorJson
 		this.mark = mark;
 	}
 
+	public Long getCtrSensorID()
+	{
+		return ctrSensorID;
+	}
+
+	public void setCtrSensorID(Long ctrSensorID)
+	{
+		this.ctrSensorID = ctrSensorID;
+	}
+
+	public Integer getCtrChannelID()
+	{
+		return ctrChannelID;
+	}
+
+	public void setCtrChannelID(Integer ctrChannelID)
+	{
+		this.ctrChannelID = ctrChannelID;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -179,11 +200,10 @@ public class HomeSensorJson
 				+ sensorType + ", sensorTypeName=" + sensorTypeName
 				+ ", status=" + status + ", warnValue=" + warnValue
 				+ ", errorValue=" + errorValue + ", groupID=" + groupID
-				+ ", ctrGroupID=" + ctrGroupID + ", descriptions=" + descriptions
-				+ ", mark=" + mark + "]";
+				+ ", ctrGroupID=" + ctrGroupID + ", descriptions="
+				+ descriptions + ", mark=" + mark + ", ctrSensorID="
+				+ ctrSensorID + ", ctrChannelID=" + ctrChannelID + "]";
 	}
- 
- 
 
 
 }

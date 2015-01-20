@@ -13,9 +13,9 @@ package cn.fuego.smart.home.webservice.up.model.base;
 public class AlarmJson
 {
 	private int id;  			//告警ID，自增长
-	private int concentratorID;
+	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
-	private int objID;        //对象ID
+	private long objID;        //对象ID
 	
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private float dataValue;	//告警值,模拟量类型 才有
@@ -31,11 +31,11 @@ public class AlarmJson
 	{
 		this.id = id;
 	}
-	public int getConcentratorID()
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
 	}
@@ -47,11 +47,12 @@ public class AlarmJson
 	{
 		this.objType = objType;
 	}
-	public int getObjID()
+
+	public long getObjID()
 	{
 		return objID;
 	}
-	public void setObjID(int objID)
+	public void setObjID(long objID)
 	{
 		this.objID = objID;
 	}

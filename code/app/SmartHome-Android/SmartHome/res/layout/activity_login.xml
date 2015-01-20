@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backcolor"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp" >
 
     <ImageView
         android:id="@+id/item_icon"
@@ -21,88 +23,91 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/active_color" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+        android:layout_height="120dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_input"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/login_input" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp" >
 
-        <EditText
-            android:id="@+id/txt_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/imageView2"
-            android:layout_below="@+id/username"
-            android:layout_marginTop="30dp"
-            android:layout_toRightOf="@+id/password"
-            android:autoText="false"
-            android:background="@null"
-            android:capitalize="none"
-            android:ems="10"
-            android:gravity="fill_horizontal"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="用户名:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
 
-        <TextView
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/txt_password"
-            android:layout_alignBottom="@+id/txt_password"
-            android:layout_alignLeft="@+id/username"
-            android:gravity="start"
-            android:text="密    码："
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/txt_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:autoText="false"
+                android:background="@null"
+                android:capitalize="none"
+                android:ems="10"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium" >
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/txt_username"
-            android:layout_alignLeft="@+id/imageView2"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
-            android:text="用户名："
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/black" />
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/txt_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/imageView2"
-            android:layout_marginTop="32dp"
-            android:layout_toRightOf="@+id/username"
-            android:autoText="false"
-            android:background="@null"
-            android:capitalize="none"
-            android:ems="10"
-            android:gravity="fill_horizontal"
-            android:selectAllOnFocus="false"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp" >
 
-            <requestFocus />
-        </EditText>
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="密    码:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:autoText="false"
+                android:background="@null"
+                android:capitalize="none"
+                android:ems="10"
+                android:gravity="left|center"
+                android:inputType="textPassword"
+                android:paddingLeft="15dp"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp" >
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp" >
 
         <Button
             android:id="@+id/login_btn"
@@ -112,7 +117,6 @@
             android:text="登  录"
             android:textColor="@color/white"
             android:textSize="@dimen/content_font_size" />
-
     </RelativeLayout>
 
 </LinearLayout>

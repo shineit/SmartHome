@@ -68,8 +68,11 @@ public class SafeFragment extends BaseFragment  implements  OnChildClickListener
 			i.putExtra(safeViewModel.getWarnValue(), selectItem.getWarnValue());
 			i.putExtra(safeViewModel.getErrorValue(), selectItem.getErrorValue());
 			i.putExtra(safeViewModel.getMark(), selectItem.getMark());
-		    i.putExtra(safeViewModel.getCtrGroupID(), String.valueOf(selectItem.getCtrGroupID()));
+		    //i.putExtra(safeViewModel.getCtrGroupID(), String.valueOf(selectItem.getCtrGroupID()));
 			i.putExtra(safeViewModel.getId(), selectItem.getId());//作为修改数据的索引
+			
+			i.putExtra(safeViewModel.getCtrSensorID(), String.valueOf(selectItem.getCtrSensorID()));
+			i.putExtra(safeViewModel.getCtrChannelID(), String.valueOf(selectItem.getCtrChannelID()));
 			//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
 			startActivityForResult(i, IntentCodeConst.REQUEST_CODE);
 			

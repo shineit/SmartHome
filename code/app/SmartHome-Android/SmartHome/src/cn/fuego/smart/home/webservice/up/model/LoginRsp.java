@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 import cn.fuego.smart.home.webservice.up.model.base.ButtonJson;
+import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 
@@ -24,6 +25,7 @@ public class LoginRsp extends BaseJsonRsp
 	private String token;
 	private List<MenuJson> menuList = new ArrayList<MenuJson>();
 	private List<ButtonJson> buttonList = new ArrayList<ButtonJson>();
+	private CustomerJson customer;
 	public UserJson getUser()
 	{
 		return user;
@@ -55,6 +57,14 @@ public class LoginRsp extends BaseJsonRsp
 	public void setButtonList(List<ButtonJson> buttonList)
 	{
 		this.buttonList = buttonList;
+	}
+	public CustomerJson getCustomer()
+	{
+		return customer;
+	}
+	public void setCustomer(CustomerJson customer)
+	{
+		this.customer = customer;
 	}
 	
 

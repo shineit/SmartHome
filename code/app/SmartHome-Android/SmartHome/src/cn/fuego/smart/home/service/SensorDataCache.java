@@ -96,7 +96,9 @@ public class SensorDataCache extends MispHttpHandler
 				case CTRL_SENSOR:
 					ctrSensorList.add(json);
 					SpinnerDataModel spinnerData= new SpinnerDataModel();
-					spinnerData.setValue(String.valueOf(json.getId()));
+					//spinnerData.setValue(String.valueOf(json.getId()));
+					spinnerData.setCtrSensorID(String.valueOf(json.getSensorID()));
+					spinnerData.setCtrChannelID(String.valueOf(json.getChannelID()));
 					spinnerData.setText(json.getSensorTypeName()+"位于"+json.getMark());
 					ctrSpinnerList.add(spinnerData);
 					break;
@@ -140,6 +142,7 @@ public class SensorDataCache extends MispHttpHandler
 						markList.add(userMarkList.get(i).getMark());
 						
 					}
+					markList.add("未分组");
 
 				}
 				else
