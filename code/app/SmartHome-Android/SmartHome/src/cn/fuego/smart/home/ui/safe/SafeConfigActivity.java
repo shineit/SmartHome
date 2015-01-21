@@ -76,10 +76,12 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	private void initData(Intent intent)
 	{
 		txt_concentID = (TextView) findViewById(R.id.safe_concnet_id);
-		txt_concentID.setText(String.valueOf(intent.getIntExtra(safeViewModel.getConcentratorID(), 0)));	
+		//txt_concentID.setText(String.valueOf(intent.getIntExtra(safeViewModel.getConcentratorID(), 0)));
+		txt_concentID.setText(intent.getStringExtra(safeViewModel.getConcentratorID()));
 		//txt_concentID.setText(intent.getStringExtra(safeViewModel.getConcentratorID()));	
 		txt_sensorID = (TextView) findViewById(R.id.safe_sensor_objID);
-		txt_sensorID.setText(String.valueOf(intent.getIntExtra(safeViewModel.getId(), 0)));
+		//txt_sensorID.setText(String.valueOf(intent.getIntExtra(safeViewModel.getId(), 0)));
+		txt_sensorID.setText(intent.getStringExtra(safeViewModel.getId()));
 		txt_sensorType = (TextView) findViewById(R.id.safe_sensor_objType);
 		txt_sensorType.setText(intent.getStringExtra(safeViewModel.getSensorTypeName()));
 		
@@ -188,7 +190,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
 		//后台通过id 索引
-		homesensor.setId(Integer.valueOf(this.getTxt_sensorID().getText().toString()));
+		homesensor.setId(Long.valueOf(this.getTxt_sensorID().getText().toString()));
 		homesensor.setDescriptions(this.getTxt_desp().getText().toString().trim());
 		//后台不作处理
 		homesensor.setWarnValue(Float.parseFloat(this.getTxt_warn().getText().toString().trim()));
