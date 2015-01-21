@@ -17,8 +17,6 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
-import cn.fuego.misp.service.MISPException;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
@@ -157,19 +155,11 @@ public class DeviceManagerImpl implements DeviceManager
 
 		data += DataTypeConvert.intToByteStr(sensor.getGroupID(),1);
 
-		for(int i=0;i<5;i++)
-		{
-		   if(i<sensor.getCtrGroupIDList().size())
-		   {
-			   data += DataTypeConvert.intToByteStr(sensor.getCtrGroupIDList().get(i),1);
-		   }
-		   else
-		   {
-			   data += DataTypeConvert.intToByteStr(0x00,1);
-			   
-		   }
-		}
-		
+	    data += DataTypeConvert.intToByteStr(sensor.getCtrSensorID(),4);
+		data += DataTypeConvert.intToByteStr(sensor.getCtrChannelID(),2);
+		 
+ 
+		 
 		data += sensor.getDescription();
 		
 		

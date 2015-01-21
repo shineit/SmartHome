@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
@@ -16,24 +17,25 @@ import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
  */
 public class GetConcentratorListRsp extends BaseJsonRsp
 {
-	private List<ConcentratorJson> sensorList;
+	private List<ConcentratorJson> concentList=new ArrayList<ConcentratorJson>();
 
-	public List<ConcentratorJson> getSensorList()
+	public List<ConcentratorJson> getConcentList()
 	{
-		return sensorList;
+		return concentList;
 	}
 
-	public void setSensorList(List<ConcentratorJson> sensorList)
+	public void setConcentList(List<ConcentratorJson> concentList)
 	{
-		this.sensorList = sensorList;
+		this.concentList = concentList;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "GetConcentratorListRsp [sensorList=" + sensorList + "]";
+		return "GetConcentratorListRsp [concentList=" + concentList
+				+ ", result=" + result + "]";
 	}
-	
-	
+
+
 
 }

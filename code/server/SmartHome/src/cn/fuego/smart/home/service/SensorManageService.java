@@ -34,6 +34,8 @@ public interface SensorManageService extends MispCommonService<HomeSensor>
 	
 	void disable(List<String> sensorList);
 	void enable(List<String> sensorList);
+	//根据集中器ID查找所属传感器列表
+	List<HomeSensor> getSensorListByID(List<Long> concentIDList);
 
  
 }

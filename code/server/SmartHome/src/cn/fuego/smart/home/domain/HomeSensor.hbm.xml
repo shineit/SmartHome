@@ -24,7 +24,11 @@
 		 <property name="groupID" column="GROUP_ID"></property>	
 		 <property name="ctrGroupID" column="CTL_GROUP_ID"></property>	
 		 <property name="description" column="DESCRIPTION"></property>	
-		 <property name="mark" column="MARK"></property>		 		 		 	 	 	 
+		 <property name="mark" column="MARK"></property>	
+		 
+		 <property name="ctrSensorID" column="CTR_SENSOR_ID"></property>	
+		 <property name="ctrChannelID" column="CTR_CHANNEL_ID"></property>	
+	 		 	 	 	 
  
 	</class>
 </hibernate-mapping>

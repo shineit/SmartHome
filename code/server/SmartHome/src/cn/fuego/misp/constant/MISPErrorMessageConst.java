@@ -43,6 +43,8 @@ public class MISPErrorMessageConst
 	public static final int OPERATE_PROHIBITED = 13; //无权操作
 	
 	public static final int ERROR_QUREY_FAILED = 14;
+
+	public static final int ERROR_UPDATE_VERSION_FAILED = 15;//更新版本失败
 	public static String getMessageByErrorCode(int errorCode)
 	{
 		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));

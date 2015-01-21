@@ -22,9 +22,9 @@ public class FireAlarmView implements PersistenceObject
 	private static final long serialVersionUID = 1L;
 	
 	private int id;  			//告警ID，自增长
-	private int concentratorID;
+	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
-	private int objID;        //对应snesorID
+	private long objID;        //对应snesorID
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private Date alarmTime;	//告警产生的时间
 	private Integer clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
@@ -44,11 +44,11 @@ public class FireAlarmView implements PersistenceObject
 		this.id = id;
 	}
 
-	public int getConcentratorID()
+	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
-	public void setConcentratorID(int concentratorID)
+	public void setConcentratorID(long concentratorID)
 	{
 		this.concentratorID = concentratorID;
 	}
@@ -60,11 +60,12 @@ public class FireAlarmView implements PersistenceObject
 	{
 		this.objType = objType;
 	}
-	public int getObjID()
+
+	public long getObjID()
 	{
 		return objID;
 	}
-	public void setObjID(int objID)
+	public void setObjID(long objID)
 	{
 		this.objID = objID;
 	}

@@ -26,20 +26,36 @@ public class HomeSensor implements PersistenceObject
  	private int channelID;       //终端设备的通道ID
 	private Integer sensorKind=SensorKindEunm.DISCRETE_SENSOR.getIntValue();      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
 	private Integer sensorType=0;      //传感器类型
-	private String sensorTypeName;  //传感器类型名称
+	private String sensorTypeName="未命名";  //传感器类型名称
 	private Integer status=SensorStatusEnum.DISABLE.getIntValue();          //告警使能状态，0-禁止，1-使能，SensorStatusEnum
 	private Float warnValue=(float) 0;    //预警值
 	private Float errorValue=(float) 0;   //火警值
 	private Integer groupID=0;         //区域ID（用于标识联动控制器）
 	private String ctrGroupID;      //联动控制器ID ;隔开
 	private String description;  //描述
-	private String mark;         //自定义标签
+	private String mark="未分组";         //自定义标签
 	
-	
-	
+	private Long ctrSensorID = 0xfffffffL;//联动控制终端ID
+	private Integer ctrChannelID = 0xffff;//联动控制终端通道ID
+
  
- 
- 
+	public Long getCtrSensorID()
+	{
+		return ctrSensorID;
+	}
+	public void setCtrSensorID(Long ctrSensorID)
+	{
+		this.ctrSensorID = ctrSensorID;
+	}
+
+	public Integer getCtrChannelID()
+	{
+		return ctrChannelID;
+	}
+	public void setCtrChannelID(Integer ctrChannelID)
+	{
+		this.ctrChannelID = ctrChannelID;
+	}
 	@Override
 	public int hashCode()
 	{

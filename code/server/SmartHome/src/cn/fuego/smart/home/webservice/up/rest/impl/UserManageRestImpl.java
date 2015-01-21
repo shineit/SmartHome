@@ -81,7 +81,12 @@ public class UserManageRestImpl implements UserManageRest
 		try
 		{
 			SystemUser user = MISPServiceContext.getInstance().getUserService().Login(req.getUserName(), req.getPassword());
-
+			Customer customer=new Customer();
+			if(user!=null)
+			{
+				customer = ServiceContext.getInstance().getUserManageService().getCustomer(user.getUserID());
+			}
+			
 			rsp.setToken(DataCreateUtil.getUUID());
 		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
 		    
@@ -106,6 +111,12 @@ public class UserManageRestImpl implements UserManageRest
 
 		    UserJson userJson = ModelConvert.userToJson(user);
 		    rsp.setUser(userJson);
+		    if(customer!=null)
+		    {
+			    CustomerJson customerJson=ModelConvert.customerToJson(customer);
+			    rsp.setCustomer(customerJson);
+		    }
+
 			
 		}
 		catch(MISPException e)

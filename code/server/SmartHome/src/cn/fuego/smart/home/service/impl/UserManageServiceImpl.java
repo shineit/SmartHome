@@ -16,10 +16,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.dao.datasource.AbstractDataSource;
-import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.SystemConfigInfo;
-import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
@@ -28,7 +25,6 @@ import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.UserStatusEnum;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
-import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.UserManageService;
@@ -104,7 +100,8 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 	@Override
 	public List<UserMark> getUserMark(int userID)
 	{
-		 List<UserMark> list  = (List<UserMark>) DaoContext.getInstance().getUserMarkDao().getAll();
+		 List<UserMark> list  = new ArrayList<UserMark>();
+		 list= DaoContext.getInstance().getUserMarkDao().getAll(new QueryCondition(ConditionTypeEnum.EQUAL, "userID", userID));
 		 return list;
 	}
 

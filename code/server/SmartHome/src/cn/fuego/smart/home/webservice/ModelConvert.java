@@ -15,6 +15,7 @@ import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.ClientVersion;
+import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
@@ -24,6 +25,7 @@ import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.ClientVersionJson;
+import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
@@ -153,6 +155,10 @@ public class ModelConvert
 		json.setCtrGroupID(sensor.getCtrGroupID());
 		json.setDescriptions(sensor.getDescription());
 		json.setMark(sensor.getMark());
+		
+		//新增字段，用于解决联动问题
+		json.setCtrSensorID(sensor.getCtrSensorID());
+		json.setCtrChannelID(sensor.getCtrChannelID());
 		return json;
  
 	}
@@ -174,6 +180,9 @@ public class ModelConvert
 		homeSensor.setCtrGroupID(json.getCtrGroupID());
 		homeSensor.setDescription(json.getDescriptions());
 		homeSensor.setMark(json.getMark());
+		//新增字段，用于设置传感器联动控制器
+		homeSensor.setCtrSensorID(json.getCtrSensorID());
+		homeSensor.setCtrChannelID(json.getCtrChannelID());
 		return homeSensor;
  
 	}
@@ -274,5 +283,29 @@ public class ModelConvert
 		json.setCompanyID(clientVersion.getCompanyID());
 		json.setQrCode(clientVersion.getQrCode());	
 		return json;
-	}	
+	}
+	public static ConcentratorJson concentratorToJson(Concentrator concentrator)
+	{
+		ConcentratorJson json = new ConcentratorJson();
+		json.setConcentratorID(concentrator.getConcentratorID());
+		json.setStatus(concentrator.getStatus());
+		json.setName(concentrator.getName());
+		json.setDescription(concentrator.getDescription());
+		json.setAddr(concentrator.getAddr());
+		json.setIpAddr(concentrator.getIpAddr());
+		json.setLocationNS(concentrator.getLocationNS());
+		json.setLocationWE(concentrator.getLocationWE());
+		
+		return json;
+	}
+	public static Concentrator jsonToConcentrator(ConcentratorJson concentratorJson)
+	{
+		Concentrator concent = new Concentrator();
+		//与APP页面信息保持一致，否则数据可能会被赋空
+		concent.setConcentratorID(concentratorJson.getConcentratorID());
+		concent.setName(concentratorJson.getName());
+		concent.setDescription(concentratorJson.getDescription());
+		return concent;
+	}
+	
 }

@@ -59,8 +59,7 @@ public class ReceiveMessage
 	private int packetNum;	
 	private int dataNum;
 	
-	public static int CTL_GROUP_DEFAULT = 0xff;
-	public static int CTL_DESP_DEFAULT = 0x00;
+
 	
 	public ReceiveMessage(String allMessage,String ipAddr,int port)
 	{
@@ -263,13 +262,14 @@ public class ReceiveMessage
 		sensor.setGroupID(getIntValue(index+16,index+16));
 		
 		List<Integer> idList = new ArrayList<Integer>();
-		for(int i=index + 17; i<=index+22;i++)
+		
+		if(dataBytes.length>=(index+22))
 		{
-			int id = getIntValue(i,i);
-			if(i != CTL_GROUP_DEFAULT)
-			{
-				idList.add(id);
-			}
+
+			long ctrSensorID = this.getLongValue(index+17,index+20);
+			int ctrChannelID = this.getIntValue(index+21,index+22);
+			sensor.setCtrSensorID(ctrSensorID);
+			sensor.setCtrChannelID(ctrChannelID);
 		}
  
 		sensor.setCtrGroupIDWithIDList(idList);

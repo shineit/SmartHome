@@ -32,6 +32,10 @@ public class ApplicationProtocol
 	
 	
 	public static final int HOLD_CONN_TIME = 10*1000; //unit is second 
+	
+	public static int CTL_GROUP_DEFAULT = 0xff;
+	public static int CTL_DESP_DEFAULT = 0x00;
+	
 	public static boolean isValid(String data)
 	{
 		

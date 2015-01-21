@@ -26,7 +26,6 @@ import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
-import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeSensor;
@@ -115,6 +114,8 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		concent.setLocationNS(oldConcent.getLocationNS());
 		concent.setLocationWE(oldConcent.getLocationWE());
 		concent.setMark(oldConcent.getMark());
+		concent.setIpAddr(oldConcent.getIpAddr());
+		concent.setPort(oldConcent.getPort());
 		DaoContext.getInstance().getConcentratorDao().update(concent);
 	}
 
@@ -318,6 +319,24 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		
 		
 		
+	}
+	/**
+	 * 获取该用户ID下的所有集中器信息
+	 */
+	@Override
+	public List<UserConcentrator> getUserConcentListByID(int userID)
+	{
+		List<UserConcentrator> list= new ArrayList<UserConcentrator>();
+		list= DaoContext.getInstance().getUserConcentratorDao().getAll(new QueryCondition(ConditionTypeEnum.EQUAL,"userID",userID));
+
+		return list;
+	}
+	@Override
+	public List<Concentrator> getConcentListByID(List<Long> concentIDList)
+	{
+		List<Concentrator> list= new ArrayList<Concentrator>();
+		list= DaoContext.getInstance().getConcentratorDao().getAll(new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentIDList));
+		return list;
 	}
 
 

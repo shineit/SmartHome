@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -18,6 +19,8 @@ import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.domain.UserConcentrator;
+import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.SensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
@@ -52,6 +55,7 @@ public class SensorManageRestImpl implements SensorManageRest
 	private Log log = LogFactory.getLog(SensorManageRestImpl.class);
 
 	private SensorManageService sensorService = ServiceContext.getInstance().getSensorManageService();
+	private ConcentratorManageService concentService = ServiceContext.getInstance().getConcentratorManageService();
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.from.client.service.SensorManageService#getWild()
@@ -74,8 +78,16 @@ public class SensorManageRestImpl implements SensorManageRest
 		
 		try
 		{
-			List<HomeSensor> sensorList = sensorService.getDataSource().getAllPageData();
-	 		
+			List<Long> concentIDList = new ArrayList<Long>();
+			List<UserConcentrator> userConcentList= concentService.getUserConcentListByID(req.getUserID());
+			for(UserConcentrator uc:userConcentList)
+			{
+				concentIDList.add(uc.getConcentratorID());
+				
+			}
+
+			//List<HomeSensor> sensorList = sensorService.getDataSource().getAllPageData();
+			List<HomeSensor> sensorList = sensorService.getSensorListByID(concentIDList);
 			for(HomeSensor sensor :sensorList)
 			{	
 				HomeSensorJson json = ModelConvert.homeSensorToJson(sensor);

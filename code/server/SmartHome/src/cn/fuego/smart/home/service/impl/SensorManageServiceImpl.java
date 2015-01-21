@@ -21,6 +21,7 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
+import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
@@ -213,6 +214,13 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
 			 device.enableSensor(sensorMap.get(key));	
 		}
+	}
+	@Override
+	public List<HomeSensor> getSensorListByID(List<Long> concentIDList)
+	{
+		List<HomeSensor> list= new ArrayList<HomeSensor>();
+		list= DaoContext.getInstance().getSensorDao().getAll(new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentIDList));
+		return list;
 	}
 
 
