@@ -47,6 +47,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	private String selMark,selCtrSensorID,selCtrChannelID;
 
 	private ProgressDialog configPDialog;
+	private Bundle bundle = new Bundle();
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -202,9 +203,10 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		homesensor.setCtrSensorID(Long.valueOf(selCtrSensorID));
 		homesensor.setCtrChannelID(Integer.valueOf(selCtrChannelID));
 		req.setSensor(homesensor);
+		//回传参数做单个缓存用
+		bundle.putSerializable("newSensor", homesensor);
 		
-		WebServiceContext.getInstance().getSensorManageRest(this).setSensor(req);
-		
+		WebServiceContext.getInstance().getSensorManageRest(this).setSensor(req);		
 		
 	}
     
@@ -220,6 +222,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 			Intent intent = new Intent();
             //以下设置flag 有作用
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.putExtras(bundle);
 			SafeConfigActivity.this.setResult(IntentCodeConst.RESULT_CODE,intent);
 			this.finish();
             

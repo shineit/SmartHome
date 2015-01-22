@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -8,13 +9,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.info.AlarmActivity;
 import cn.fuego.smart.home.ui.info.NewsActivity;
-import cn.fuego.smart.home.ui.setting.concent.ConcentConfigActivity;
 import cn.fuego.smart.home.ui.setting.concent.ConcentListActivity;
 import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
 import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
@@ -22,7 +24,9 @@ import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
 public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
-	//private Boolean isLoad=false;
+	private Boolean isLoadSensor=false;
+	private ProgressDialog proDialog;
+	private int tabIndex;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -75,13 +79,16 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		switch(v.getId())
 		{
 		case R.id.home_menu_safe: 
-			jumpTab(1);
+			//jumpTab(1);
+			loadSensorData(1);
 			break;
 		case R.id.home_menu_control: 
-			jumpTab(2);
+			//jumpTab(2);
+			loadSensorData(2);
 			break;
 		case R.id.home_menu_camera: 
-			jumpTab(3);
+			//jumpTab(3);
+			loadSensorData(3);
 			break;
 		case R.id.home_menu_alarm:	
 			jumpActivity(AlarmActivity.class);
@@ -129,7 +136,20 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		
 	}
 
-
+	private void loadSensorData(int index)
+	{
+		tabIndex=index;
+		if(!isLoadSensor)
+		{
+			isLoadSensor=true;
+			proDialog =ProgressDialog.show(HomeActivity.this, "请稍等", "正在加载数据……");
+			SensorDataCache.getInstance().load(this);
+		}
+		else
+		{
+			jumpTab(tabIndex);
+		}
+	}
 
 	private void jumpTab(int index)
 	{
@@ -138,11 +158,28 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		i.putExtra("num", index);
 		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
         this.startActivity(i);
-		this.finish();
-		
+		//this.finish();
 	}
 	
 	
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		if (message.isSuccess())
+		{
+			proDialog.dismiss();
+			jumpTab(tabIndex);
+			
+		}
+		else
+		{
+			proDialog.dismiss();
+			Toast.makeText(HomeActivity.this, "集中器尚未配置", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+
+
 	//Android按返回键退出程序但不销毁，程序后台运行
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)

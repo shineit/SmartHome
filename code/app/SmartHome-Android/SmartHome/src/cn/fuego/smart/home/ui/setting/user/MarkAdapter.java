@@ -22,6 +22,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
@@ -39,7 +40,7 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
  */
 public class MarkAdapter extends BaseAdapter
 {
-
+	private FuegoLog log = FuegoLog.getLog(MarkAdapter.class);
 	private Context mContext;
 	private itemViewHolder holder;
 	private List<String> mList;
@@ -90,7 +91,7 @@ public class MarkAdapter extends BaseAdapter
 					.findViewById(R.id.list_mark_item_deletebtn);
 			convertView.setTag(holder);
 		}
-
+        //log.info("mList:"+mList.toString());
 		final String markItem = mList.get(position);
 		if (markItem != null)
 		{
@@ -109,6 +110,10 @@ public class MarkAdapter extends BaseAdapter
 			});
 
 		}
+         if(markItem.equals("未分组"))
+         {
+        	 convertView.setVisibility(View.GONE);
+         }
 		return convertView;
 	}
 	//移除item

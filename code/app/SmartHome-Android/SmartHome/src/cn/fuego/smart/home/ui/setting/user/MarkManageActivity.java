@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +42,8 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 	private MarkAdapter markAdapter;
 	private List<String> markList;
 	private EditText txt_mark;
+	private Window window;
+	private ListView markListView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -48,13 +51,15 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 		
 		setContentView(R.layout.user_mark_manage);
 		ExitApplication.getInstance().addActivity(this);
+		window=MarkManageActivity.this.getWindow();
+		
 		Intent intent = this.getIntent();
 		curMark=intent.getStringExtra("curMark");
-		log.info("传递curMark:"+curMark);
+		//log.info("传递curMark:"+curMark);
 		
-		ListView markListView = (ListView) findViewById(R.id.user_mark_manage_list);	
+		markListView = (ListView) findViewById(R.id.user_mark_manage_list);	
 	    markList = SensorDataCache.getInstance().getMarkList();
-	    log.info("marklist is:"+markList);
+	    //log.info("marklist is:"+markList);
 	    markAdapter = new MarkAdapter(MarkManageActivity.this,markList,curMark);
 		markListView.setAdapter(markAdapter);
 		setListViewHeightBasedOnChildren(markListView);
@@ -97,7 +102,7 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 	}
     private void showPopWindow(View parent)
     {
-    	parentView.setAlpha((float) 0.5);	  
+
 		if (popupWindow == null)
 		{		
 			LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
@@ -105,18 +110,22 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 
 			// 创建一个PopuWidow对象
 			 popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			// 使其聚集
+			popupWindow.setFocusable(true);
+			// 设置允许在外点击消失
+			popupWindow.setOutsideTouchable(true);
 
+			// 实例化一个ColorDrawable颜色为半透明
+			ColorDrawable dw = new ColorDrawable(0x90000000);
+			popupWindow.setBackgroundDrawable(dw);
+			 
 		}
 
-		// 使其聚集
-		popupWindow.setFocusable(true);
-		// 设置允许在外点击消失
-		popupWindow.setOutsideTouchable(true);
 
-		// 实例化一个ColorDrawable颜色为半透明
-		ColorDrawable dw = new ColorDrawable(0x90000000);
-		popupWindow.setBackgroundDrawable(dw);
-
+        //设置背景变暗
+        WindowManager.LayoutParams lp=window.getAttributes();
+        lp.alpha = 0.4f;
+        window.setAttributes(lp); 
 		
 		txt_mark = (EditText) view.findViewById(R.id.pop_window_mark);
 		
@@ -152,18 +161,19 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 										// message.getMessage().obj;
 										if (message.isSuccess())
 										{
-											log.info("标签新增成功");
-
+											//log.info("标签新增成功");
 											SensorDataCache.getInstance().getMarkList().add(newMark);
 											//markList.add(newMark);
 											markAdapter.notifyDataSetChanged();
-
+											setListViewHeightBasedOnChildren(markListView);
 											addPDialog.dismiss();
 											popupWindow.dismiss();
 
 										} else
 										{
-											super.sendMessage(message);
+											addPDialog.dismiss();
+											popupWindow.dismiss();
+											Toast.makeText(MarkManageActivity.this, newMark+"标签创建失败！",Toast.LENGTH_LONG).show();
 										}
 									}
 								}).addUserMark(req);
@@ -204,9 +214,10 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 			@Override
 			public void onDismiss()
 			{
-				parentView.setAlpha((float) 1);
-				
-				
+				WindowManager.LayoutParams lp=window.getAttributes();
+			    lp.alpha = 1f;
+			    window.setAttributes(lp);
+			    popupWindow=null;
 			}
 		});
 

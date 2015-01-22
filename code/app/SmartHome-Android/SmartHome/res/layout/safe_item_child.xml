@@ -26,15 +26,19 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="50dp"
-        android:src="@drawable/smoke" />
+        android:src="@drawable/smoke"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/safe_item_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="28dp"
-        android:layout_toRightOf="@+id/safe_item_icon"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/safe_item_chk"
+        android:gravity="left"
         android:text="烟雾报警器1"
         android:textColor="@color/black"
         android:textSize="@dimen/content_font_size" />

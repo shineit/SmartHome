@@ -12,8 +12,6 @@ import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 
-import com.videogo.openapi.EzvizAPI;
-
 public class MainActivity extends InstrumentedActivity 
 {
 	private FuegoLog log = FuegoLog.getLog(AuthInterceptor.class);

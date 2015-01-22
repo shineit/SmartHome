@@ -38,7 +38,8 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 	private void getSensorData()
 	{
 		
-		SensorDataCache.getInstance().load(this);
+		//SensorDataCache.getInstance().load(this);
+		controlAdapter.setDatasource(SensorDataCache.getInstance().getCtrSensorList());
 	}
 
 	@Override
@@ -58,8 +59,8 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 		{
 			Intent i = new Intent();
 			i.setClass(this.getActivity(), ControlConfigActivity.class);
-			i.putExtra(ctrViewModel.getId(), selectItem.getId());
-			i.putExtra(ctrViewModel.getConcentratorID(), selectItem.getConcentratorID());
+			i.putExtra(ctrViewModel.getId(), String.valueOf(selectItem.getId()));
+			i.putExtra(ctrViewModel.getConcentratorID(), String.valueOf(selectItem.getConcentratorID()));
 			i.putExtra(ctrViewModel.getSensorTypeName(), selectItem.getSensorTypeName());
 			i.putExtra(ctrViewModel.getDescriptions(), selectItem.getDescriptions());
 			i.putExtra(ctrViewModel.getMark(), selectItem.getMark());

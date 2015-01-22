@@ -28,58 +28,43 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <cn.fuego.misp.ui.expandable.StickyLayout
+        android:id="@+id/sticky_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="gone" >
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical" >
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/sticky_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/safe_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sticky_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:paddingTop="5dp" >
+            android:orientation="vertical" >
 
-            <RadioGroup
-                android:id="@+id/safe_switch_group"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:orientation="horizontal" >
+            <cn.fuego.misp.ui.expandable.PinnedHeaderExpandableListView
+                android:id="@+id/safe_main_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="@null"
+                android:childDivider="@drawable/child_bg"
+                android:childIndicatorLeft="0dp"
+                android:divider="@color/grey"
+                android:dividerHeight="1dp"
+                android:groupIndicator="@null"
+                android:scrollbarAlwaysDrawHorizontalTrack="false" />
 
-                <RadioButton
-                    android:id="@+id/safe_all_on"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginRight="50dp"
-                    android:layout_weight="0.27"
-                    android:text="全部打开"
-                    android:textColor="@color/black" />
+        </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/safe_all_off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="全部关闭"
-                    android:textColor="@color/black" />
-            </RadioGroup>
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <ExpandableListView
-        android:id="@+id/safe_main_parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:childDivider="@color/backcolor"
-        android:childIndicator="@null"
-        android:divider="@color/backcolor"
-        android:dividerHeight="1dp"
-        android:groupIndicator="@null" >
-
-    </ExpandableListView>
+</cn.fuego.misp.ui.expandable.StickyLayout>
 
 </LinearLayout>
