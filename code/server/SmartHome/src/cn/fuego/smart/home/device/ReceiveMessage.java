@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.device;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -328,9 +329,33 @@ public class ReceiveMessage
 		return intValue;
 	}
 	
+	private byte[] getDataBytes(int startIndex,int endIndex)
+	{
+		if(endIndex>startIndex)
+		{
+			byte[] bytes = new byte[endIndex-startIndex+1];
+			
+			for(int i=0;i<=endIndex-startIndex;i++)
+			{
+				bytes[i] = dataBytes[i+startIndex];
+			}
+			return bytes;
+
+		}
+		else
+		{
+			return new byte[0];
+		}
+	}
+	
 	private float getFloatValue(int startIndex,int endIndex)
 	{
-		return (float)getIntValue(startIndex,endIndex);
+		float f2 = 0f;
+
+		int i = this.getIntValue(startIndex,endIndex);
+		f2 = Float.intBitsToFloat(i);
+		return f2;
+
 	}
 	
 	private String getStrValue(int startIndex,int endIndex)

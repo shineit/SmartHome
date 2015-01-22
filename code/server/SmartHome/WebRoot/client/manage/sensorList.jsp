@@ -5,14 +5,17 @@
 
 
 <div class="pageHeader">
-	<form id="pagerForm" method="post" action="device/ConcentratorManage!showSensor.action?selectedID=${concentratorID}" onsubmit="return navTabSearch(this);" >
+	<form id="pagerForm" method="post" action="device/HomeSensorManage?selectedID=${concentratorID}" onsubmit="return navTabSearch(this);" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />	
 	<div class="searchBar">
 		
 		<table class="searchContent">
 			<tr>
-<td>
+			<td>
+					集中器编号：<input type="text" name="hsFilter.concentratorID" value="${hsFilter.concentratorID}" />
+				</td>	
+                 <td>
 					传感器编号：<input type="text" name="hsFilter.sensorID" value="${hsFilter.sensorID}" />
 				</td>				
 				<td>
@@ -66,12 +69,14 @@
 				<th width="20%" align="center">传感器类型</th>
 				<th width="10%" align="center">预警值</th>
 				<th width="10%" align="center">告警值</th>
+				<th width="10%" align="center">描述</th>
+				
 				<th width="10%" align="center">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 
-		<c:forEach var="e" items="${homeSensorTable.currentPageData}"> 
+		<c:forEach var="e" items="${table.currentPageData}"> 
 			<tr target="sid_user" rel="1">
 				<td>${e.concentratorID}</td>
 				<td>${e.sensorID}</td>
@@ -91,9 +96,14 @@
 				<td>${e.sensorTypeName}</td>
 				<td>${e.warnValue}</td>
 				<td>${e.errorValue}</td>
+				<td>${e.description}</td>
+				
 				<td>
-					<a class="btnEdit"  rel="slDialog" target="dialog" mask="true" href="device/ConcentratorManage!configSensor.action?selectedID=${e.id}" title="配置传感器信息">编辑</a>
+					<a class="btnEdit"  rel="slDialog" target="dialog" mask="true" href="device/HomeSensorManage!show.action?selectedID=${e.id}&operateType=modify"" title="配置传感器信息">编辑</a>
+					<a title="刷新" target="ajaxTodo" href="device/HomeSensorManage!syncSensor.action?selectedID=${e.id}&operateType=modify" class="mispButton loop icon" style="padding-top:3px !important;height:12px;line-height: 6px;">
+				    <span style="text-align:center;">同步</span></a>
 				</td>
+		 
 			</tr>
 		</c:forEach>
 
@@ -103,7 +113,7 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${homeSensorTable.page}" scope="request"/>
+	        <c:set var="page" value="${table.page}" scope="request"/>
 			
 			<select class="combox"  onchange="navTabPageBreak({numPerPage:this.value})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	

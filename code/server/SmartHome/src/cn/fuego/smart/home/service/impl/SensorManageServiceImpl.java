@@ -16,9 +16,14 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import sun.management.Sensor;
+
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.dao.DaoContext;
@@ -42,6 +47,44 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 
 	private Log log = LogFactory.getLog(SensorManageServiceImpl.class);
 
+	@Override
+	public void modify(int userID,HomeSensor homeSensor)
+	{
+ 		HomeSensor old=  this.get(homeSensor.getId());
+		if(old!=null)
+		{
+			old.setSensorType(homeSensor.getSensorType());
+			old.setSensorTypeName(homeSensor.getSensorTypeName());
+			old.setWarnValue(homeSensor.getWarnValue());
+			old.setErrorValue(homeSensor.getErrorValue());
+			Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(old.getConcentratorID());
+			if(null != concentrator)
+			{
+				try
+				{
+					DeviceManagerFactory.getInstance().getDeviceManger(concentrator).setSensor(old);
+				}
+				catch (Exception e)
+				{
+					log.error("config sensor on device failed,the sensor is " + old.toString(),e);
+					throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
+				}
+			}
+			else
+			{
+				log.error("config sensor failed,the contrator is not exsited " + old.toString());
+				throw new  MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
+			}
+			DaoContext.getInstance().getSensorDao().update(old);
+		}
+		else
+		{
+			throw new MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
+		}
+		
+		
+		
+	}
  
 	public void syncSensorList(long concentorID)
 	{
@@ -70,6 +113,28 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		this.getDao().delete(condition);
 		
 		super.create(sensorList);
+	}
+	
+	public void syncSensor(long id)
+	{
+		log.info("update sensor list from concentrator, delete old sensor first. the sensor id " + id);
+
+		HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().get(id);
+		Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(sensor.getConcentratorID());
+		DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
+ 		
+  
+		try
+		{
+			device.getSensor(sensor);
+			
+		}
+		catch(Exception e)
+		{
+			log.error("get home sensor config failed,the sensor id is " + sensor.getSensorID() + " ,the channel id is "+sensor.getChannelID(),e);
+			throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
+		}
+	  super.modify(sensor);
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#setSensor(cn.fuego.smart.home.constant.SensorSetCmdEnum, cn.fuego.smart.home.domain.Sensor)

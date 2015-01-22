@@ -50,6 +50,11 @@
 			<result type="dispatcher">/client/manage/planManage.jsp</result>
  		    
 		</action>		
+	    <action name="HomeSensorManage" class="cn.fuego.smart.home.web.action.device.HomeSensorManageAction">
+			<result type="dispatcher">/client/manage/sensorList.jsp</result>
+            <result type="dispatcher" name="modify">/client/manage/sensorConfig.jsp</result>
+			<result type="dispatcher" name="showType">/client/manage/sensorTypeList.jsp</result>
+		</action>
  	</package> 
 </struts>
 

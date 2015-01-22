@@ -19,10 +19,20 @@ import cn.fuego.smart.home.constant.SensorKindEunm;
  */
 public class HomeSensorFilterModel
 {
+	private String concentratorID;
 	private String sensorID;
 	private String sensorKind;
 	private SensorKindEunm[] sensorKindList = SensorKindEunm.values();
 
+	
+	public String getConcentratorID()
+	{
+		return concentratorID;
+	}
+	public void setConcentratorID(String concentratorID)
+	{
+		this.concentratorID = concentratorID;
+	}
 	public String getSensorID()
 	{
 		return sensorID;

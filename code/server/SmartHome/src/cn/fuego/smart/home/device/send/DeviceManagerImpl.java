@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
@@ -159,8 +160,18 @@ public class DeviceManagerImpl implements DeviceManager
 		data += DataTypeConvert.intToByteStr(sensor.getCtrChannelID(),2);
 		 
  
-		 
-		data += sensor.getDescription();
+		String temp = sensor.getDescription();
+		int i = 0;
+		if(null != temp)
+		{
+			i=temp.length();
+		}
+ 
+		for(;i<26;i++)
+		{
+			temp += " ";
+		}
+		data += temp;
 		
 		
 		

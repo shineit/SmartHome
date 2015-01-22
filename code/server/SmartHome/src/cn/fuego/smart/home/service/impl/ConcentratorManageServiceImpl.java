@@ -79,6 +79,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	{
 		Concentrator old = super.get(String.valueOf(concentrator.getConcentratorID()));
 		old.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
+		this.modify(old);
 		
 	}
 	@Override
@@ -253,25 +254,8 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		// TODO Auto-generated method stub
 		return Concentrator.PRI_KEY;
 	}
-	/**
-	 * 获取传感器数据
-	 */
-	@Override
-	public AbstractDataSource<HomeSensor> getHomeSensorDataSource(List<QueryCondition> conditionList)
-	{
-		AbstractDataSource<HomeSensor> datasource =null;
-
-		datasource = new DataBaseSourceImpl<HomeSensor>(HomeSensor.class,conditionList);
-
-		return datasource;
-	}
-	@Override
-	public HomeSensor getHomeSensorByID(String sensorID)
-	{
-		QueryCondition condition= new QueryCondition(ConditionTypeEnum.EQUAL, "id",sensorID);
-		HomeSensor sensor = DaoContext.getInstance().getSensorDao().getUniRecord(condition);
-		return sensor;
-	}
+ 
+ 
 	@Override
 	public AbstractDataSource<SensorType> getSensorTypeDatasource(List<QueryCondition> conditionList)
 	{
@@ -281,45 +265,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 
 		return datasource;
 	}
-	@Override
-	public void modifySensor(HomeSensor homeSensor)
-	{
-		QueryCondition condition= new QueryCondition(ConditionTypeEnum.EQUAL, "id",homeSensor.getId());
-		HomeSensor old= DaoContext.getInstance().getSensorDao().getUniRecord(condition);
-		if(old!=null)
-		{
-			old.setSensorType(homeSensor.getSensorType());
-			old.setSensorTypeName(homeSensor.getSensorTypeName());
-			old.setWarnValue(homeSensor.getWarnValue());
-			old.setErrorValue(homeSensor.getErrorValue());
-			Concentrator concentrator = this.get(old.getConcentratorID());
-			if(null != concentrator)
-			{
-				try
-				{
-					//DeviceManagerFactory.getInstance().getDeviceManger(concentrator).setSensor(old);//下发设备，修改配置参数，调试时注释
-				}
-				catch (Exception e)
-				{
-					log.error("config sensor on device failed,the sensor is " + old.toString(),e);
-					throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
-				}
-			}
-			else
-			{
-				log.error("config sensor failed,the contrator is not exsited " + old.toString());
-				throw new  MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
-			}
-			DaoContext.getInstance().getSensorDao().update(old);
-		}
-		else
-		{
-			throw new MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
-		}
-		
-		
-		
-	}
+
 	/**
 	 * 获取该用户ID下的所有集中器信息
 	 */

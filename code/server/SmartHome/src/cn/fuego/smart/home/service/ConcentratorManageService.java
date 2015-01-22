@@ -42,12 +42,9 @@ public interface ConcentratorManageService extends MispCommonService<Concentrato
 	
 	AbstractDataSource<UserConcentrator> getPermissionDataSource(int accountType, List<QueryCondition> conditionList);
 
-	AbstractDataSource<HomeSensor> getHomeSensorDataSource(List<QueryCondition> conditionList);
+ 	
+ 	AbstractDataSource<SensorType> getSensorTypeDatasource(List<QueryCondition> conditionList);
 	
-	HomeSensor getHomeSensorByID(String sensorID);
-	AbstractDataSource<SensorType> getSensorTypeDatasource(List<QueryCondition> conditionList);
-	
-	void modifySensor(HomeSensor homeSensor);
 	//获取用户id管辖下的所有集中器列表
 	List<UserConcentrator> getUserConcentListByID(int userID);
 	List<Concentrator> getConcentListByID(List<Long> concentIDList);

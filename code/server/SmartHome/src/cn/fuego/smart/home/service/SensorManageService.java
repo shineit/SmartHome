@@ -27,6 +27,7 @@ public interface SensorManageService extends MispCommonService<HomeSensor>
  	
  
 	void syncSensorList(long concentorID);
+	void syncSensor(long id);
 	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor);
 	
 	FireSensor getFireSensor(long concentratorID,int machineID,int loopID,int codeID);
