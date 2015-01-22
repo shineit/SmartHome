@@ -16,7 +16,6 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.constant.SensorKindEunm;
-import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.SensorType;
@@ -25,6 +24,7 @@ import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.ConcentFilterModel;
 import cn.fuego.smart.home.web.model.HomeSensorFilterModel;
+import cn.fuego.smart.home.web.model.SensorTypeFilterModel;
 
 public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 {
@@ -49,7 +49,8 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	private HomeSensor homeSensor;
 	//传感器类型列表
 	private TableDataModel<SensorType> sensorTypeTable = new TableDataModel<SensorType>();
-	private String sensorTypeName;
+	private SensorTypeFilterModel stFilter= new SensorTypeFilterModel();
+	private List<String> sysList = new ArrayList<String>();
     @Override
     public List<QueryCondition> getFilterCondition()
     {
@@ -298,12 +299,25 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 		try
 		{
 			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-			if (!ValidatorUtil.isEmpty(this.getSensorTypeName()))
+			if (!ValidatorUtil.isEmpty(stFilter.getTypeName()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeName", this.getSensorTypeName()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeName", stFilter.getTypeName()));
+			}
+			if (!ValidatorUtil.isEmpty(stFilter.getTypeSys()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeSys", stFilter.getTypeSys()));
 			}
 			sensorTypeTable.setPage(this.getPage());
 			sensorTypeTable.setDataSource(concentService.getSensorTypeDatasource(conditionList));
+			List<SensorType> sensorTypeList=sensorTypeTable.getDataSource().getAllPageData();
+			for(SensorType type:sensorTypeList)
+			{
+				if(!this.getSysList().contains(type.getTypeSys()))
+				{
+					this.getSysList().add(type.getTypeSys());
+				}
+				
+			}
 		}catch (MISPException e)
 		{
 			
@@ -324,6 +338,7 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
     	return "showType";
     	
     }
+   
 	public ConcentFilterModel getFilter()
 	{
 		return filter;
@@ -394,13 +409,14 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	{
 		this.sensorTypeTable = sensorTypeTable;
 	}
-	public String getSensorTypeName()
+
+	public SensorTypeFilterModel getStFilter()
 	{
-		return sensorTypeName;
+		return stFilter;
 	}
-	public void setSensorTypeName(String sensorTypeName)
+	public void setStFilter(SensorTypeFilterModel stFilter)
 	{
-		this.sensorTypeName = sensorTypeName;
+		this.stFilter = stFilter;
 	}
 	public List<SensorType> getSensorTypeList()
 	{
@@ -409,6 +425,15 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	public void setSensorTypeList(List<SensorType> sensorTypeList)
 	{
 		this.sensorTypeList = sensorTypeList;
+	}
+	
+	public List<String> getSysList()
+	{
+		return sysList;
+	}
+	public void setSysList(List<String> sysList)
+	{
+		this.sysList = sysList;
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()

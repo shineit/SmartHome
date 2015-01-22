@@ -297,7 +297,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 			{
 				try
 				{
-					DeviceManagerFactory.getInstance().getDeviceManger(concentrator).setSensor(old);
+					//DeviceManagerFactory.getInstance().getDeviceManger(concentrator).setSensor(old);//下发设备，修改配置参数，调试时注释
 				}
 				catch (Exception e)
 				{

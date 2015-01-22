@@ -13,8 +13,30 @@
 		<table class="searchContent">
 			<tr>
 				<td>
-					类型名称：<input type="text" name="sensorTypeName" value="${sensorTypeName}" />
-				</td>				
+					类型名称：<input type="text" name="stFilter.typeName" value="${stFilter.typeName}" />
+				</td>
+				<td>
+					所属系统：
+					<select  name="stFilter.typeSys" >
+						 <option value="">所有系统</option>
+
+					 <c:forEach var="sl" items="${sysList}">
+						  		 <c:choose>		       
+							   		 <c:when test="${sl== stFilter.typeSys}">  
+	                            		       <option value="${sl}" selected='selected'> ${sl}</option>
+	                            		 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   			    <option value="${sl}" > ${sl}</option>
+							   		   </c:otherwise>
+							   
+						   		 </c:choose>
+						  </c:forEach>								
+				 											
+
+					</select>
+				</td>
+											
 			    <td>
 					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
@@ -35,10 +57,12 @@
 		<thead>
 				
 			<tr>
-				<th width="20%" align="center">类型编号</th>
+				<th width="10%" align="center">类型编号</th>
 				<th width="30%" align="center">类型名称</th>
-				<th width="20%" align="center">预警值</th>
-				<th width="20%" align="center">告警值</th>
+				<th width="10%" align="center">预警值</th>
+				<th width="10%" align="center">告警值</th>
+				<th width="10%" align="center">部件代码</th>
+				<th width="20%" align="center">所属系统</th>
 				<th width="10%" align="center">操作</th>
 			</tr>
 		</thead>
@@ -50,6 +74,8 @@
 				<td>${e.typeName}</td>
 				<td>${e.defWarnValue}</td>
 				<td>${e.defErrorValue}</td>
+				<td>${e.typeCode}</td>
+				<td>${e.typeSys}</td>
 				<td>
 					<a class="btnSelect"  href="javascript:$.bringBack({sensorType:'${e.typeID}',sensorTypeName:'${e.typeName}',warnValue:'${e.defWarnValue}',errorValue:'${e.defErrorValue}'})" title="添加传感器类型">选择</a>
 				</td>

@@ -17,11 +17,14 @@ package cn.fuego.smart.home.domain;
  */
 public class SensorType
 {
-	private int typeID;  			//传感器类型ID，自增长
+	private int typeID;  	   //传感器类型ID，自增长
+
 	private String typeName;    //类型名称
-	private Float defWarnValue;    //默认预警值
-	private Float defErrorValue;   //默认火警值
+	private Float defWarnValue=(float) 0;    //默认预警值
+	private Float defErrorValue=(float) 0;   //默认火警值
 	
+	private int typeCode;//部件类型代码，与实物对应
+	private String typeSys;//传感器
 	public int getTypeID()
 	{
 		return typeID;
@@ -54,12 +57,29 @@ public class SensorType
 	{
 		this.defErrorValue = defErrorValue;
 	}
+	public int getTypeCode()
+	{
+		return typeCode;
+	}
+	public void setTypeCode(int typeCode)
+	{
+		this.typeCode = typeCode;
+	}
+	public String getTypeSys()
+	{
+		return typeSys;
+	}
+	public void setTypeSys(String typeSys)
+	{
+		this.typeSys = typeSys;
+	}
 	@Override
 	public String toString()
 	{
 		return "SensorType [typeID=" + typeID + ", typeName=" + typeName
 				+ ", defWarnValue=" + defWarnValue + ", defErrorValue="
-				+ defErrorValue + "]";
+				+ defErrorValue + ", typeCode=" + typeCode + ", typeSys="
+				+ typeSys + "]";
 	}
 
 	

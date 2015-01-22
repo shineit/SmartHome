@@ -13,7 +13,10 @@
 		</id>
 		 <property name="typeName" column="TYPE_NAME"></property>
 		 <property name="defWarnValue" column="DEF_WARN_VALUE"></property>	
-		 <property name="defErrorValue" column="DEF_ERROR_VALUE"></property>	 
+		 <property name="defErrorValue" column="DEF_ERROR_VALUE"></property>
+		 <property name="typeCode" column="TYPE_CODE"></property>	
+		 <property name="typeSys" column="TYPE_SYS"></property>		
+
 	</class>
  
 </hibernate-mapping>

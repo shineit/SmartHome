@@ -85,6 +85,9 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		old.setErrorValue(sensor.getErrorValue());
 		old.setMark(sensor.getMark());
 		old.setDescription(sensor.getDescription());
+		//新增联动控制器ID
+		old.setCtrSensorID(sensor.getCtrSensorID());
+		old.setCtrChannelID(sensor.getCtrChannelID());
 		switch(setCmd)
 		{
 		case MODIFY:
