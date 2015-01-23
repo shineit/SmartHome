@@ -122,11 +122,8 @@ public class DataTypeConvert
 	{ 
 		int fbit = Float.floatToIntBits(value);  
 	      
-	    byte[] b = new byte[4];    
-	    for (int i = 0; i < 4; i++) {    
-	        b[3-i] = (byte) (fbit >> (24 - i * 8));    
-	    } 
-	    return DataTypeConvert.bytesToStr(b);
+	   
+	    return DataTypeConvert.intToByteStr(fbit);
 		 
 	}
 	public static List objectToList(Object str)

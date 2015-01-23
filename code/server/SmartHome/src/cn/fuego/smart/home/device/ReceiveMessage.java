@@ -354,6 +354,11 @@ public class ReceiveMessage
 
 		int i = this.getIntValue(startIndex,endIndex);
 		f2 = Float.intBitsToFloat(i);
+		if(Float.isNaN(f2))
+		{
+			f2=0.0f;
+		}
+		
 		return f2;
 
 	}
