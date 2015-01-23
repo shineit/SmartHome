@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
-        android:text="Large Text"
+        android:text="未配置传感器"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/themecolor" />
 

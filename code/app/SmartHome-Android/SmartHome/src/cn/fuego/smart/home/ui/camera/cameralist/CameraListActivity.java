@@ -133,7 +133,9 @@ public class CameraListActivity extends Activity implements View.OnClickListener
             	popLogoutDialog();
             	break;
             case R.id.cameralist_page_add_btn:
-            	EzvizAPI.getInstance().gotoAddDevicePage();
+            	//EzvizAPI.getInstance().gotoAddDevicePage();
+            	Intent i = new Intent(CameraListActivity.this, CaptureActivity.class);
+                startActivity(i);
             	break; 	
             default:
                 break;

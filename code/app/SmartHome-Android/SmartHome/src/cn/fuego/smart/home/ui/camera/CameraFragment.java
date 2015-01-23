@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,7 +58,8 @@ public class CameraFragment extends BaseFragment implements OnClickListener
         initData();
         Button test_btn= (Button) rootView.findViewById(R.id.camera_fragment_login_btn);		
 		test_btn.setOnClickListener(this);
-
+		this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+	
 		return rootView;
 	}
 
@@ -90,12 +92,12 @@ public class CameraFragment extends BaseFragment implements OnClickListener
 		else if(message.getErrorCode()==ErrorMessageConst.CAMERA_LINK_ERROR||message.getErrorCode()==ErrorMessageConst.CAMERA_ACCOUNT_NOT_BUNDLE)
 		{
 			proDialog.dismiss();
-			VerifySmsCodeUtil.openSmsVerifyDialog(Constant.SMS_VERIFY_LOGIN, mContext);
+			VerifySmsCodeUtil.openSmsVerifyDialog(Constant.SMS_VERIFY_LOGIN, mContext,curPhone);
 			
 		}
 		else
 		{
-			super.sendMessage(message);
+			this.showMessage(message);
 			proDialog.dismiss();
 		}
 		
@@ -141,9 +143,13 @@ public class CameraFragment extends BaseFragment implements OnClickListener
 	{
 		final EditText txt_phone= new EditText(mContext);
 		txt_phone.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+		if(!ValidatorUtil.isEmpty(MemoryCache.getLoginInfo().getCustomer().getPhone()))
+		{
+			txt_phone.setText(MemoryCache.getLoginInfo().getCustomer().getPhone());
+		}	
 		//txt_phone.setText(cachePhone);
 		AlertDialog.Builder dialog= new AlertDialog.Builder(mContext);
-		dialog.setTitle("请输入正确的手机号码");
+		dialog.setTitle("您将使用以下手机号码进行安全绑定");
 		dialog.setView(txt_phone);
 		txt_phone.requestFocus();
 		txt_phone.requestFocusFromTouch();

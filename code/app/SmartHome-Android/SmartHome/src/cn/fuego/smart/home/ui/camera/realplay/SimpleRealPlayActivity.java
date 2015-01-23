@@ -594,11 +594,11 @@ public class SimpleRealPlayActivity extends Activity implements OnClickListener,
                 msg = getString(R.string.camera_not_online);
                 break;
             case ErrorCode.ERROR_WEB_CODE_ERROR:
-                VerifySmsCodeUtil.openSmsVerifyDialog(Constant.SMS_VERIFY_LOGIN, this);
+                VerifySmsCodeUtil.openSmsVerifyDialog(Constant.SMS_VERIFY_LOGIN, this,null);
                 msg = Utils.getErrorTip(this, R.string.check_feature_code_fail, errorCode);
                 break;
             case ErrorCode.ERROR_WEB_HARDWARE_SIGNATURE_OP_ERROR:
-                VerifySmsCodeUtil.openSmsVerifyDialog(Constant.SMS_VERIFY_HARDWARE, this);
+                VerifySmsCodeUtil.openSmsVerifyDialog(Constant.SMS_VERIFY_HARDWARE, this,null);
                 msg = Utils.getErrorTip(this, R.string.check_feature_code_fail, errorCode);
                 break;             
             default:

@@ -3,6 +3,7 @@ package cn.fuego.smart.home.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
@@ -114,8 +115,10 @@ public class SensorDataCache extends MispHttpHandler
 				}
 
 			}
-			listener.handle(message);
+			
 		}
+		listener.handle(message);
+
 	}
 	public int getErrorCode()
 	{
@@ -158,8 +161,16 @@ public class SensorDataCache extends MispHttpHandler
 	{
 		return markList;
 	}
-	
- 
-	
+
+
+	public boolean noData()
+	{
+		Boolean result = false;
+		if (ValidatorUtil.isEmpty(this.getCtrSensorList())&& ValidatorUtil.isEmpty(this.getCtrSensorList()))
+		{
+			result = true;
+		}
+		return result;
+	}
 
 }

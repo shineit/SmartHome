@@ -13,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
+import cn.fuego.smart.home.ui.HomeActivity;
 
 public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListener
 {
@@ -124,7 +127,15 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 		
 	}
 
-    
-    
+    public void showToast(Context mContext,String Msg)
+    {
+    	Toast.makeText(mContext, Msg, Toast.LENGTH_SHORT).show();
+    }
+    public void showToast(Context mContext,MispHttpMessage message)
+    {
+
+	    Toast.makeText(mContext, MISPErrorMessageConst.getMessageByErrorCode(message.getErrorCode()), Toast.LENGTH_SHORT).show();
+    }
+
 
 }

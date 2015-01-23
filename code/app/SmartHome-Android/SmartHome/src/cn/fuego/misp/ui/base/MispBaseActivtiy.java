@@ -1,11 +1,9 @@
 package cn.fuego.misp.ui.base;
 
+import android.app.Activity;
+import android.widget.Toast;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.MispHttpMessage;
-import android.app.Activity;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.Toast;
 
 public class MispBaseActivtiy extends Activity 
 {

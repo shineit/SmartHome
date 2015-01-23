@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.SensorDataCache;
@@ -139,7 +140,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	private void loadSensorData(int index)
 	{
 		tabIndex=index;
-		if(!isLoadSensor)
+		if(!isLoadSensor||SensorDataCache.getInstance().noData())
 		{
 			isLoadSensor=true;
 			proDialog =ProgressDialog.show(HomeActivity.this, "请稍等", "正在加载数据……");
@@ -174,7 +175,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		else
 		{
 			proDialog.dismiss();
-			Toast.makeText(HomeActivity.this, "集中器尚未配置", Toast.LENGTH_SHORT).show();
+			showToast(HomeActivity.this, message);
 		}
 	}
 

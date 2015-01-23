@@ -126,6 +126,7 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 			MemoryCache.getLoginInfo().getCustomer().setEmail(user_email.getText().toString());
 			MemoryCache.getLoginInfo().getCustomer().setAddr(user_addr.getText().toString());
 			proDialog.dismiss();
+			showToast(this,"用户信息保存成功！");
 		}
 		else
 		{

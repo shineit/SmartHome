@@ -42,24 +42,25 @@ import com.videogo.util.Utils;
  * @author chenxingyf1
  * @data 2014-12-12
  */
-public class VerifySmsCodeUtil {
-    public static void openSmsVerifyDialog(final int type, final Context context) 
+public class VerifySmsCodeUtil 
+{
+    
+	public static void openSmsVerifyDialog(final int type, final Context context,String curPhone) 
     {
         LayoutInflater mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //ViewGroup smsVerifyView = (ViewGroup) mLayoutInflater.inflate(R.layout.sms_verify_dialog, null, true);
         ViewGroup smsVerifyView = (ViewGroup) mLayoutInflater.inflate(R.layout.token_verify, null, true);
-/*        final EditText signEt = (EditText) smsVerifyView.findViewById(R.id.sign_et);
-        final EditText phoneEt = (EditText) smsVerifyView.findViewById(R.id.phone_et);
-        final EditText smsCodeEt = (EditText) smsVerifyView.findViewById(R.id.sms_code_et);
-        final EditText userIdEt = (EditText) smsVerifyView.findViewById(R.id.userid_et);
-        final Button getSmsBtn = (Button) smsVerifyView.findViewById(R.id.get_sms_code_btn);*/
+
         //以下为自定义样式
         final EditText phoneEt =(EditText) smsVerifyView.findViewById(R.id.token_verify_phone);
-        phoneEt.requestFocus();
-        phoneEt.requestFocusFromTouch();
+        if(curPhone!=null)
+        {
+        	 phoneEt.setText(curPhone);
+        }
+
+        final String userId= String.valueOf(MemoryCache.getLoginInfo().getUser().getUserID());
         final EditText smsCodeEt = (EditText) smsVerifyView.findViewById(R.id.token_verify_sms_code);
-        final EditText userIdEt =  (EditText) smsVerifyView.findViewById(R.id.token_verify_account);
-        userIdEt.setText(String.valueOf(MemoryCache.getLoginInfo().getUser().getUserID()));
+        final EditText userNameEt =  (EditText) smsVerifyView.findViewById(R.id.token_verify_account);
+        userNameEt.setText(MemoryCache.getLoginInfo().getUser().getUserName());
         final Button getSmsBtn = (Button) smsVerifyView.findViewById(R.id.token_verify_code_btn);
         getSmsBtn.setOnClickListener(new OnClickListener() {
 
@@ -68,7 +69,9 @@ public class VerifySmsCodeUtil {
                 //String getSmsCodeSign = signEt.getText().toString();
             	String getSmsCodeSign=null;
                 String phone = phoneEt.getText().toString();
-                String userId = userIdEt.getText().toString();
+                
+               
+                //String userId = userIdEt.getText().toString();
                 //String userId="654321";//测试用
                 if(TextUtils.isEmpty(getSmsCodeSign) && !TextUtils.isEmpty(phone)) {
                     getSmsCodeSign = SignUtil.getGetSmsCodeSign(phone,userId);
@@ -86,7 +89,7 @@ public class VerifySmsCodeUtil {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new VerifySmsCodeTask(type, context, userIdEt.getText().toString(),phoneEt.getText().toString(),smsCodeEt.getText().toString()).execute();
+                new VerifySmsCodeTask(type, context, userId,phoneEt.getText().toString(),smsCodeEt.getText().toString()).execute();
             }
             
         })   
@@ -200,9 +203,12 @@ public class VerifySmsCodeUtil {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             mWaitDialog.dismiss();
-
+            
             if (mErrorCode != 0)
-                onError(mErrorCode);
+            onError(mErrorCode);
+            else
+            MemoryCache.setCachePhone(mPhone);
+            
         }
 
         protected void onError(int errorCode) {

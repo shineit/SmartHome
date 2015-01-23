@@ -588,7 +588,7 @@ public class AutoWifiConnectingActivity extends Activity implements OnClickListe
                 animWaiting.start();
                 btnRetry.setVisibility(View.GONE);
                 btnLineConnect.setVisibility(View.GONE);
-                if (mCameraInfo == null) {
+                if (mCameraInfo!= null) {//自行修改
                     new GetCamersInfoTask(STATUS_ADDING_CAMERA).execute();
                 } else {
                     //Goto 添加设备中间页
