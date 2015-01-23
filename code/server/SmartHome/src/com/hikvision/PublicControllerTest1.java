@@ -137,12 +137,37 @@ public class PublicControllerTest1 {
 		//paramsMap.put("userId", "zhou950627");
 		//paramsMap.put("phone", "18621767863");
 		//自己的
-		paramsMap.put("userId", "654321");
+		paramsMap.put("userId", "1");
 		paramsMap.put("phone", "18620783584");
 		Map<String, Object> map = paramsInit("token/accessToken/get", paramsMap);
 		doPost(map);
 	}
+    @Test
+    public void getCameraInfo()
+    {
+		Map<String, Object> paramsMap = new HashMap<String, Object>();
 
+		//log.info("acToken is:"+acToken);
+		paramsMap.put("accessToken", "at.8egudqiu7xzdf8w70h1cz0lc7oj7twsj-1hoakuqku1-1o1nddg-acxwo17ed");
+		paramsMap.put("deviceSerial", "482096770");
+		Map<String, Object> map = paramsInit("camera/getCameraInfo", paramsMap);
+		//CameraResultModel result =doPost2(map);
+		//log.info("getCameraInfo result is:"+result);
+		doPost(map);
+    }
+    @Test
+    public void setCameraInfo()
+    {
+		Map<String, Object> paramsMap = new HashMap<String, Object>();
+
+		//log.info("acToken is:"+acToken);
+		paramsMap.put("accessToken", "at.d45i2geedh9hssef56q0nqgwck4yuslf-6lzza89av7-0aa5tqt-0upqpatim");
+		paramsMap.put("deviceSerial", "482096770");
+		Map<String, Object> map = paramsInit("camera/getCameraInfo", paramsMap);
+		//CameraResultModel result =doPost2(map);
+		//log.info("getCameraInfo result is:"+result);
+		doPost(map);
+    }
 	public static void main(String[] args) {
 	}
 }

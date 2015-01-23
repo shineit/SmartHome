@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
@@ -86,14 +87,29 @@ public class SensorManageRestImpl implements SensorManageRest
 				
 			}
 
-			//List<HomeSensor> sensorList = sensorService.getDataSource().getAllPageData();
-			List<HomeSensor> sensorList = sensorService.getSensorListByID(concentIDList);
-			for(HomeSensor sensor :sensorList)
-			{	
-				HomeSensorJson json = ModelConvert.homeSensorToJson(sensor);
- 
-				rsp.getSensorList().add(json);
+			if(!ValidatorUtil.isEmpty(concentIDList))
+			{
+				List<HomeSensor> sensorList = sensorService.getSensorListByID(concentIDList);
+				if(!ValidatorUtil.isEmpty(sensorList))
+				{
+					for(HomeSensor sensor :sensorList)
+					{	
+						HomeSensorJson json = ModelConvert.homeSensorToJson(sensor);
+		 
+						rsp.getSensorList().add(json);
+					}
+				}
+				else
+				{
+					rsp.getResult().setErrorCode(ErrorMessageConst.SENSOR_NOT_EXISTED);
+				}
+
 			}
+			else
+			{
+				rsp.getResult().setErrorCode(ErrorMessageConst.CONCENTRATOR_NOT_EXISTED);
+			}
+
 			
 		}
 		catch(Exception e)
