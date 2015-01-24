@@ -5,7 +5,7 @@
 
 
 <div class="pageHeader">
-	<form id="pagerForm" method="post" action="device/ConcentratorManage!showSensorTypeList.action" onsubmit="return dwzSearch(this, 'dialog');">
+	<form id="pagerForm" method="post" action="device/SensorTypeManage" onsubmit="return dwzSearch(this, 'dialog');">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />	
 	<div class="searchBar">
@@ -20,7 +20,7 @@
 					<select  name="stFilter.typeSys" >
 						 <option value="">所有系统</option>
 
-					 <c:forEach var="sl" items="${sysList}">
+					 <c:forEach var="sl" items="${stFilter.sysList}">
 						  		 <c:choose>		       
 							   		 <c:when test="${sl== stFilter.typeSys}">  
 	                            		       <option value="${sl}" selected='selected'> ${sl}</option>
@@ -52,7 +52,7 @@
 	</form>
 </div>
 <div class="pageContent">
-<s:form    method="POST"  name="" action="device/ConcentratorManage!showSensorTypeList.action" >
+<s:form    method="POST"  name="" action="device/SensorTypeManage" >
 	<table class="table" layoutH="90" targetType="dialog" width="100%">
 		<thead>
 				
@@ -68,7 +68,7 @@
 		</thead>
 		<tbody>
 
-		<c:forEach var="e" items="${sensorTypeTable.currentPageData}"> 
+		<c:forEach var="e" items="${table.currentPageData}"> 
 			<tr target="sid_user" rel="1">
 				<td>${e.typeID}</td>
 				<td>${e.typeName}</td>
@@ -88,7 +88,7 @@
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-	        <c:set var="page" value="${sensorTypeTable.page}" scope="request"/>
+	        <c:set var="page" value="${table.page}" scope="request"/>
 			
 			<select class="combox"  onchange="dwzPageBreak({targetType:'dialog',rel:'',data:{numPerPage:this.value}})">
 				<c:forEach var="e" items="${page.pageSizeList}"> 	

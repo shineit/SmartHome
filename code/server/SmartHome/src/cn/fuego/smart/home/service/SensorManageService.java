@@ -28,13 +28,13 @@ public interface SensorManageService extends MispCommonService<HomeSensor>
  
 	void syncSensorList(long concentorID);
 	void syncSensor(long id);
-	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor);
+	void setSensor(SensorSetCmdEnum setCmd,HomeSensor sensor,int userID);
 	
 	FireSensor getFireSensor(long concentratorID,int machineID,int loopID,int codeID);
 	HomeSensor getHomeSensor(long concentratorID,long sensorID,int channelID);
 	
-	void disable(List<String> sensorList);
-	void enable(List<String> sensorList);
+	void disable(List<String> sensorList,int userID);
+	void enable(List<String> sensorList,int userID);
 	//根据集中器ID查找所属传感器列表
 	List<HomeSensor> getSensorListByID(List<Long> concentIDList);
 

@@ -22,6 +22,18 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 public class BatchOperateSensorReq extends BaseJsonReq
 {
 	private List<String> sensorList;
+    private int userID;
+
+
+	public int getUserID()
+	{
+		return userID;
+	}
+
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
+	}
 
 	public List<String> getSensorList()
 	{
@@ -33,6 +45,11 @@ public class BatchOperateSensorReq extends BaseJsonReq
 		this.sensorList = sensorList;
 	}
 
- 
+	@Override
+	public String toString()
+	{
+		return "BatchOperateSensorReq [sensorList=" + sensorList + ", userID="
+				+ userID + ", token=" + token + "]";
+	}
 
 }

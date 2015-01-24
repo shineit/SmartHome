@@ -38,11 +38,7 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	private TableDataModel<UserConcentrator> permissionTable = new TableDataModel<UserConcentrator>();
 	private UserConcentrator userPermission;
 	private String concentratorID;
-	
-  	//传感器类型列表
-	private TableDataModel<SensorType> sensorTypeTable = new TableDataModel<SensorType>();
-	private SensorTypeFilterModel stFilter= new SensorTypeFilterModel();
-	private List<String> sysList = new ArrayList<String>();
+
     @Override
     public List<QueryCondition> getFilterCondition()
     {
@@ -183,51 +179,6 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	}
  
   
-
-    public String showSensorTypeList()
-    {
-		try
-		{
-			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-			if (!ValidatorUtil.isEmpty(stFilter.getTypeName()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeName", stFilter.getTypeName()));
-			}
-			if (!ValidatorUtil.isEmpty(stFilter.getTypeSys()))
-			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeSys", stFilter.getTypeSys()));
-			}
-			sensorTypeTable.setPage(this.getPage());
-			sensorTypeTable.setDataSource(concentService.getSensorTypeDatasource(conditionList));
-			List<SensorType> sensorTypeList=sensorTypeTable.getDataSource().getAllPageData();
-			for(SensorType type:sensorTypeList)
-			{
-				if(!this.getSysList().contains(type.getTypeSys()))
-				{
-					this.getSysList().add(type.getTypeSys());
-				}
-				
-			}
-		}catch (MISPException e)
-		{
-			
-			log.error("show SensorTypeList failed",e);
-			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
-			this.getOperateMessage().setErrorCode(e.getErrorCode());
-			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
-			return MISP_DONE_PAGE;
-		} 		
-		catch (Exception e)
-		{
-			log.error("show SensorTypeList failed",e);
-			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
-			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
-			return MISP_DONE_PAGE;
-		}
-
-    	return "showType";
-    	
-    }
 	public ConcentFilterModel getFilter()
 	{
 		return filter;
@@ -262,36 +213,7 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 		this.concentratorID = concentratorID;
 	}
 
- 
-	 
 
-	public TableDataModel<SensorType> getSensorTypeTable()
-	{
-		return sensorTypeTable;
-	}
-	public void setSensorTypeTable(TableDataModel<SensorType> sensorTypeTable)
-	{
-		this.sensorTypeTable = sensorTypeTable;
-	}
-
-	public SensorTypeFilterModel getStFilter()
-	{
-		return stFilter;
-	}
-	public void setStFilter(SensorTypeFilterModel stFilter)
-	{
-		this.stFilter = stFilter;
-	}
- 
-	
-	public List<String> getSysList()
-	{
-		return sysList;
-	}
-	public void setSysList(List<String> sysList)
-	{
-		this.sysList = sysList;
-	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */

@@ -132,7 +132,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		SetSensorRsp rsp = new SetSensorRsp();
 		
 		HomeSensor sensor = ModelConvert.jsonToHomeSensor(req.getSensor());
- 		sensorService.setSensor(SensorSetCmdEnum.getEnumByInt(req.getCommand()), sensor);
+ 		sensorService.setSensor(SensorSetCmdEnum.getEnumByInt(req.getCommand()), sensor, req.getUserID());
 		return rsp;
 	}
 
@@ -161,7 +161,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		BatchOperateSensorRsp rsp = new BatchOperateSensorRsp();
 		try
 		{
-			this.sensorService.enable(req.getSensorList());
+			this.sensorService.enable(req.getSensorList(),req.getUserID());
  
 		}
 		catch(MISPException e)
@@ -186,7 +186,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		BatchOperateSensorRsp rsp = new BatchOperateSensorRsp();
 		try
 		{
-			this.sensorService.disable(req.getSensorList());
+			this.sensorService.disable(req.getSensorList(),req.getUserID());
  
 		}
 		catch(MISPException e)

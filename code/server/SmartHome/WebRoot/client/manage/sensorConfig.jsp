@@ -16,7 +16,7 @@
 				<dt style="width:15%;">传感器类型：</dt>			
 				<dd style="width:80%;">
 					<input  name="obj.sensorTypeName" type="text" size="25" value="${obj.sensorTypeName}" readonly="readonly"/>
-					<a class="btnLook" href="device/ConcentratorManage!showSensorTypeList.action" lookupGroup="obj" rel="" >类型列表</a>	
+					<a class="btnLook" href="device/SensorTypeManage" lookupGroup="obj" rel="" >类型列表</a>	
 					<span class="info">(点击图标查找传感器类型)</span>
 				
 				</dd>

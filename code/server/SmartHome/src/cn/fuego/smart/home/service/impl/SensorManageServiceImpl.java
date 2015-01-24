@@ -140,7 +140,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	 * @see cn.fuego.smart.home.service.SensorManageService#setSensor(cn.fuego.smart.home.constant.SensorSetCmdEnum, cn.fuego.smart.home.domain.Sensor)
 	 */
 	@Override
-	public void setSensor(SensorSetCmdEnum setCmd, HomeSensor sensor)
+	public void setSensor(SensorSetCmdEnum setCmd, HomeSensor sensor,int userID)
 	{
 		HomeSensor old = this.get(String.valueOf(sensor.getId()));
 		
@@ -156,7 +156,8 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		switch(setCmd)
 		{
 		case MODIFY:
-			super.modify(old);
+			//super.modify(old);
+			modify(userID,old);
 			break;
 		case STOP:
 			break;
@@ -214,12 +215,17 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	 * @see cn.fuego.smart.home.service.SensorManageService#disable(java.util.List)
 	 */
 	@Override
-	public void disable(List<String> idList)
+	public void disable(List<String> idList,int userID)
 	{
 	
 		List<HomeSensor> sensorList = this.get(idList);
-		
-		Map<Long,List<HomeSensor>> sensorMap = new HashMap<Long,List<HomeSensor>>();
+		for(HomeSensor sensor : sensorList)
+		{
+			sensor.setStatus(SensorStatusEnum.DISABLE.getIntValue());
+			modify(userID,sensor);
+		}
+		//暂不提供禁止接口
+/*		Map<Long,List<HomeSensor>> sensorMap = new HashMap<Long,List<HomeSensor>>();
 		
 		for(HomeSensor sensor : sensorList)
 		{
@@ -243,22 +249,23 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
 			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
 			 device.disableSensor(sensorMap.get(key));	
-		}
- 
-		
-		
+		}*/
 
-		
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#enable(java.util.List)
 	 */
 	@Override
-	public void enable(List<String> idList)
+	public void enable(List<String> idList,int userID)
 	{
 		List<HomeSensor> sensorList = this.get(idList);
-		
-		Map<Long,List<HomeSensor>> sensorMap = new HashMap<Long,List<HomeSensor>>();
+		for(HomeSensor sensor : sensorList)
+		{
+			sensor.setStatus(SensorStatusEnum.ENABLE.getIntValue());
+			modify(userID,sensor);
+		}
+		//暂不提供使能接口
+/*		Map<Long,List<HomeSensor>> sensorMap = new HashMap<Long,List<HomeSensor>>();
 		
 		for(HomeSensor sensor : sensorList)
 		{
@@ -281,7 +288,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			 Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(key);
 			 DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
 			 device.enableSensor(sensorMap.get(key));	
-		}
+		}*/
 	}
 	@Override
 	public List<HomeSensor> getSensorListByID(List<Long> concentIDList)

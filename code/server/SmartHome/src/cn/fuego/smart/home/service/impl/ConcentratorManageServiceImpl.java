@@ -26,10 +26,7 @@ import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
-import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Concentrator;
-import cn.fuego.smart.home.domain.HomeSensor;
-import cn.fuego.smart.home.domain.SensorType;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -253,17 +250,6 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	{
 		// TODO Auto-generated method stub
 		return Concentrator.PRI_KEY;
-	}
- 
- 
-	@Override
-	public AbstractDataSource<SensorType> getSensorTypeDatasource(List<QueryCondition> conditionList)
-	{
-		AbstractDataSource<SensorType> datasource =null;
-
-		datasource = new DataBaseSourceImpl<SensorType>(SensorType.class,conditionList);
-
-		return datasource;
 	}
 
 	/**

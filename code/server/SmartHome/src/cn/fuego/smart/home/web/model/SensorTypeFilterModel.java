@@ -8,6 +8,14 @@
 */ 
 package cn.fuego.smart.home.web.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
+
 
 /** 
  * @ClassName: SensorTypeFilterModel 
@@ -21,8 +29,23 @@ public class SensorTypeFilterModel
 	private String typeName;
 	private String typeCode;
 	private String typeSys;
-	
-	
+	private List<String> sysList = new ArrayList<String>();
+	public List<QueryCondition> getConidtionList()
+    {
+    	List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		 
+		if (!ValidatorUtil.isEmpty(this.getTypeName()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeName", this.getTypeName()));
+		}
+		if (!ValidatorUtil.isEmpty(this.getTypeSys()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"typeSys", this.getTypeSys()));
+		}	
+		 
+		return conditionList;
+    }
+
 	public String getTypeName()
 	{
 		return typeName;
@@ -46,6 +69,16 @@ public class SensorTypeFilterModel
 	public void setTypeSys(String typeSys)
 	{
 		this.typeSys = typeSys;
+	}
+
+	public List<String> getSysList()
+	{
+		return sysList;
+	}
+
+	public void setSysList(List<String> sysList)
+	{
+		this.sysList = sysList;
 	}
 
 	
