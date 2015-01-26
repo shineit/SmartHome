@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 
@@ -58,8 +59,31 @@ public class DeviceOnlineCache
 	
 	public void refresh(Concentrator concentrator)
 	{
+
 		log.info("refresh the latest time for concentrator " + concentrator.getConcentratorID());
-		this.deviceCache.put(concentrator, System.currentTimeMillis());
+		Concentrator old = getConcentrator(concentrator.getConcentratorID());
+		if(null == old)
+		{
+			log.info("can not get concentor from data cache,now get from database");
+			old = ServiceContext.getInstance().getConcentratorManageService().get(concentrator.getConcentratorID());
+		}
+		if(null != old)
+		{
+			this.deviceCache.put(old, System.currentTimeMillis());	
+			if(ConcentratorStatusEnum.ONLINE.getIntValue() != old.getStatus())
+			{
+				log.info("the status in database is wrong, should update it");
+				old.setStatus(ConcentratorStatusEnum.ONLINE.getIntValue());
+				ServiceContext.getInstance().getConcentratorManageService().modify(old);
+			}
+		}
+		else
+		{
+			log.warn("can not find the concentor,it is not online, the concentor id is "+ concentrator.getConcentratorID());
+			 
+		}
+
+		
 	}
 
 	

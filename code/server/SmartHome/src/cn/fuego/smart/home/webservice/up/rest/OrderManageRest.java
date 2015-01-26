@@ -5,6 +5,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import cn.fuego.smart.home.webservice.up.model.DeleteOrderByIDReq;
+import cn.fuego.smart.home.webservice.up.model.DeleteOrderByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetOrderByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetOrderByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
@@ -37,5 +39,9 @@ public interface OrderManageRest
 	@POST	
 	@Path("/id")
 	public GetOrderByIDRsp getOrder(GetOrderByIDReq req);
+	
+	@POST
+	@Path("/delete/id")
+	public DeleteOrderByIDRsp deleteAlarm(DeleteOrderByIDReq req);
 	
 }

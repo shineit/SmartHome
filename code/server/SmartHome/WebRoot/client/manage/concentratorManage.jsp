@@ -114,7 +114,8 @@ function submitFormC(url){
 	            class="btnAssign" mask="true" style="margin-left:10px;"></a>	            
 	            </td> 
 				<td style="padding-top:2px;">
-				<a title="刷新" target="ajaxTodo" href="device/ConcentratorManage!syncSensor.action?selectedID=${e.concentratorID}&operateType=modify" class="mispButton loop icon" style="padding-top:3px !important;height:12px;line-height: 6px;">
+				<a title="刷新" target="ajaxTodo" href="device/ConcentratorManage!syncSensor.action?selectedID=${e.concentratorID}&operateType=modify" 
+				class="mispButton loop icon" style="padding-top:3px !important;height:12px;line-height: 6px;">
 				<span style="text-align:center;">同步</span></a>
 				</td>
 			</tr>

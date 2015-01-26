@@ -19,6 +19,8 @@ import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.cache.AppDeviceInfo;
+import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.GetConcentratorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetConcentratorListRsp;
@@ -83,7 +85,8 @@ public class ConcentManageRestImpl implements ConcentManageRest
 		try
 		{
 			Concentrator concentrator = ModelConvert.jsonToConcentrator(req.getConcentrator());
-			concentService.modifyConcentInfo(concentrator);//与web端修改保持一致
+			int userID = AppLoginCache.getLoginInfo(req.getToken()).getUser().getUserID();
+			concentService.modify(userID,concentrator);//与web端修改保持一致
 		} catch (Exception e)
 		{
 			log.error("modify Concent error",e);

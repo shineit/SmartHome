@@ -62,16 +62,16 @@
 		<thead>
 				
 			<tr>
-				<th width="15%" align="center">集中器编号</th>
-				<th width="15%" align="center">终端编号</th>
+				<th width="10%" align="center">集中器编号</th>
+				<th width="10%" align="center">终端编号</th>
 				<th width="10%" align="center">通道编号</th>
-				<th width="10%" align="center">传感器种类</th>
+				<th width="5%" align="center">传感器种类</th>
 				<th width="20%" align="center">传感器类型</th>
 				<th width="10%" align="center">预警值</th>
 				<th width="10%" align="center">告警值</th>
 				<th width="10%" align="center">描述</th>
-				
-				<th width="10%" align="center">操作</th>
+				<th width="5%" align="center">编辑</th>
+				<th width="10%" align="center">刷新</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -98,9 +98,13 @@
 				<td>${e.errorValue}</td>
 				<td>${e.description}</td>
 				
-				<td>
-					<a class="btnEdit"  rel="slDialog" target="dialog" mask="true" href="device/HomeSensorManage!show.action?selectedID=${e.id}&operateType=modify"" title="配置传感器信息">编辑</a>
-					<a title="刷新" target="ajaxTodo" href="device/HomeSensorManage!syncSensor.action?selectedID=${e.id}&operateType=modify" class="mispButton loop icon" style="padding-top:3px !important;height:12px;line-height: 6px;">
+				<td >
+					<a class="btnEdit"  rel="slDialog" target="dialog" mask="true" href="device/HomeSensorManage!show.action?selectedID=${e.id}&operateType=modify" 
+					title="配置传感器信息" ></a>
+				</td>
+				<td style="padding-top:2px;">
+					<a title="刷新" target="ajaxTodo" href="device/HomeSensorManage!syncSensor.action?selectedID=${e.id}&operateType=modify" 
+					class="mispButton loop icon" style="padding-top:3px !important;height:12px;line-height: 6px;">
 				    <span style="text-align:center;">同步</span></a>
 				</td>
 		 

@@ -104,7 +104,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	}
 
 	@Override
-	public void modifyConcentInfo(Concentrator concent)
+	public void modify(int userID,Concentrator concent)
 	{
 		Concentrator oldConcent= (Concentrator) DaoContext.getInstance().getConcentratorDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID" ,String.valueOf(concent.getConcentratorID())));
 		concent.setStatus(oldConcent.getStatus());
@@ -117,13 +117,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		DaoContext.getInstance().getConcentratorDao().update(concent);
 	}
 
-	@Override
-	public void deleteConcentList(List<String> concentIDList)
-	{
-		QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentIDList);	
-		DaoContext.getInstance().getConcentratorDao().delete(condition);
-		
-	}
+ 
 
 	@Override
 	public Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList)

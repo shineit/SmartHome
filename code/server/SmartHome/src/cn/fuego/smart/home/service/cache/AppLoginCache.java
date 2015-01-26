@@ -20,9 +20,13 @@ import java.util.Map;
  */
 public class AppLoginCache
 {
-	public static Map<String,AppLoginInfo> loginUser = new HashMap<String,AppLoginInfo>();
+	private static Map<String,AppLoginInfo> loginUser = new HashMap<String,AppLoginInfo>();
 	
 	
+	public static void login(String token, AppLoginInfo appLoginInfo)
+	{
+		loginUser.put(token, appLoginInfo);
+	}
 	
 	public static boolean tokenValid(String token)
 	{
@@ -58,6 +62,11 @@ public class AppLoginCache
 			}
 		}
 		return null;
+	}
+	
+	public static AppLoginInfo getLoginInfo(String token)
+	{
+		return loginUser.get(token);
 	}
 
 }

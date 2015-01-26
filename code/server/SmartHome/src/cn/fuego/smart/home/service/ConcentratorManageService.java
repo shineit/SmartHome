@@ -29,9 +29,7 @@ public interface ConcentratorManageService extends MispCommonService<Concentrato
 	void online(Concentrator concentrator);
 	void offline(Concentrator concentrator);
 
-	void modifyConcentInfo(Concentrator concent);
-	void deleteConcentList(List<String> concentIDList);
-	Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList);
+ 	Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList);
 
 	void addPermission(UserConcentrator userConcentrator);
 	void deletePermissionByID(String userID, String concentratorID);

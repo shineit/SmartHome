@@ -90,18 +90,18 @@ public class UserManageRestImpl implements UserManageRest
 			rsp.setToken(DataCreateUtil.getUUID());
 		    List<SystemMenu> menuList = MISPServiceContext.getInstance().getUserService().getMenuListByUserID(user.getUserID());
 		    
-		    AppLoginInfo deviceInfo = new AppLoginInfo();
-		    deviceInfo.getDeviceInfo().setClientType(ClientTypeEnum.getEnumByInt(req.getClientType()));
-		    deviceInfo.getDeviceInfo().setClientVersion(req.getClientVersion());
-		    deviceInfo.getDeviceInfo().setDevToken(req.getDevToken());
+		    AppLoginInfo loginInfo = new AppLoginInfo();
+		    loginInfo.getDeviceInfo().setClientType(ClientTypeEnum.getEnumByInt(req.getClientType()));
+		    loginInfo.getDeviceInfo().setClientVersion(req.getClientVersion());
+		    loginInfo.getDeviceInfo().setDevToken(req.getDevToken());
 		   
-		    deviceInfo.getPushInfo().setDeviceType(deviceInfo.getDeviceInfo().getClientType());
-		    deviceInfo.getPushInfo().setAppID(req.getPush_appID());
-		    deviceInfo.getPushInfo().setDeviceID(req.getPush_channelID());
-		    deviceInfo.getPushInfo().setUserID(req.getPush_userID());
-		    deviceInfo.setUser(user);
+		    loginInfo.getPushInfo().setDeviceType(loginInfo.getDeviceInfo().getClientType());
+		    loginInfo.getPushInfo().setAppID(req.getPush_appID());
+		    loginInfo.getPushInfo().setDeviceID(req.getPush_channelID());
+		    loginInfo.getPushInfo().setUserID(req.getPush_userID());
+		    loginInfo.setUser(user);
 		    
-		    AppLoginCache.loginUser.put(rsp.getToken(), deviceInfo);
+		    AppLoginCache.login(rsp.getToken(), loginInfo);
 		    
 		    for(SystemMenu menu : menuList)
 		    {	

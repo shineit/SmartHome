@@ -8,12 +8,16 @@
 */ 
 package cn.fuego.smart.home.webservice.up.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.ServiceOrder;
@@ -21,6 +25,8 @@ import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.ServiceOrderManageService;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.webservice.ModelConvert;
+import cn.fuego.smart.home.webservice.up.model.DeleteOrderByIDReq;
+import cn.fuego.smart.home.webservice.up.model.DeleteOrderByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetOrderByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetOrderByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
@@ -50,8 +56,10 @@ public class OrderManageRestImpl implements OrderManageRest
 	public GetServiceOrderListRsp getOrderList(	GetServiceOrderListReq req)
 	{
 		GetServiceOrderListRsp rsp = new GetServiceOrderListRsp();
-		
-		List<ServiceOrder> orderList = orderService.getDataSource().getAllPageData();
+		SystemUser creatorUser= ServiceContext.getInstance().getUserManageService().get(req.getUserID());
+		List<QueryCondition> conditionList= new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "creator",creatorUser.getUserName()));
+		List<ServiceOrder> orderList =  orderService.getDataSource(conditionList).getAllPageData();
 		for(ServiceOrder e : orderList)
 		{
 			ServiceOrderJson orderJson = ModelConvert.ServiceOrderToJson(e);
@@ -110,9 +118,29 @@ public class OrderManageRestImpl implements OrderManageRest
 			log.error("get alarm error",e);
 			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
+	
+		return rsp;
+	}
 
+	@Override
+	public DeleteOrderByIDRsp deleteAlarm(DeleteOrderByIDReq req)
+	{
+		DeleteOrderByIDRsp rsp = new DeleteOrderByIDRsp();
+		try
+		{
+			orderService.delete(req.getOrderID());
+		}
+		catch(MISPException e)
+		{
+			rsp.getResult().setErrorCode(e.getErrorCode());
+			log.error("create order failed",e);
+		}
+		catch(Exception e)
+		{
+			rsp.getResult().setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
+			log.error("create order failed",e);
 
- 		
+		}
 		return rsp;
 	}
 
