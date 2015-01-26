@@ -36,6 +36,8 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 	private void initData()
 	{
 		user_name = (TextView) findViewById(R.id.user_info_username);
+		user_name.requestFocus();
+		user_name.requestFocusFromTouch();
 		user_email = (EditText) findViewById(R.id.user_info_email);
 		user_phone = (EditText) findViewById(R.id.user_info_phone);
 		user_addr = (EditText) findViewById(R.id.user_info_address);
@@ -63,8 +65,6 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		back_btn.setTag(1);
 		
 		Button user_info_btn = (Button) findViewById(R.id.modify_userinfo_sure);
-		user_info_btn.requestFocus();
-		user_info_btn.requestFocusFromTouch();
 		user_info_btn.setOnClickListener(this);
 		user_info_btn.setTag(2);
 		

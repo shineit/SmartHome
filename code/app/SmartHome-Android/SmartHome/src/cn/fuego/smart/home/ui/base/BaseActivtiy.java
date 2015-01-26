@@ -38,6 +38,7 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 	}
 	public void exitDialog(Context context) { 
 		contextDialog = context;
+		SharedPreUtil.initSharedPreference(context);
         AlertDialog.Builder builder = new Builder(contextDialog);   
         builder.setMessage("确定要退出吗?");   
         builder.setTitle("提示");   
@@ -45,8 +46,10 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
             @Override   
             public void onClick(DialogInterface dialog, int which) {   
                 dialog.dismiss();   
-                //android.os.Process.killProcess(android.os.Process.myPid());   
+                //android.os.Process.killProcess(android.os.Process.myPid()); 
+                SharedPreUtil.getInstance().DeleteUser();
                 ExitApplication.getInstance().exit(contextDialog);
+                
             }   
         });   
         builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {   

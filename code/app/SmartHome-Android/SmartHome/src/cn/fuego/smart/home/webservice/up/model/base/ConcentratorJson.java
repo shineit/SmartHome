@@ -13,6 +13,11 @@ import java.io.Serializable;
  */
 public class ConcentratorJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private long concentratorID;
 	private String name;
 	private String ipAddr;

@@ -7,9 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.SensorDataCache;
@@ -133,7 +131,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 
 	private void showDisable()
 	{
-		Toast.makeText(HomeActivity.this, "功能还在开发中……", Toast.LENGTH_LONG).show();
+		showToast(HomeActivity.this, "功能还在开发中");
 		
 	}
 

@@ -164,8 +164,8 @@ public class SafeFragment extends BaseFragment implements OnHeaderUpdateListener
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 
-		HomeSensorJson newSensor = (HomeSensorJson) data.getSerializableExtra("newSensor");
-		log.info("newSensor:"+newSensor);
+		//HomeSensorJson newSensor = (HomeSensorJson) data.getSerializableExtra("newSensor");
+		//log.info("newSensor:"+newSensor);
 		if(requestCode==IntentCodeConst.REQUEST_CODE)
 		{
 			

@@ -14,6 +14,11 @@ import java.io.Serializable;
  */
 public class NewsJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int   newsID;
 	private String title;
 	private String author;

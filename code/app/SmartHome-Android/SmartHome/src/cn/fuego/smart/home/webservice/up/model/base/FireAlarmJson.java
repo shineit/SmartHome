@@ -14,6 +14,11 @@ import java.io.Serializable;
 */ 
 public class FireAlarmJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int id;  			//告警ID，自增长
 	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu

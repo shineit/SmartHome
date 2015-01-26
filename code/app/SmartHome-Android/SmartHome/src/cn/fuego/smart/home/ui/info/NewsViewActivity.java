@@ -8,8 +8,6 @@ import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.ListViewResInfo;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.ui.MainTabbarActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
@@ -19,6 +17,7 @@ public class NewsViewActivity extends BaseActivtiy implements View.OnClickListen
 {
 
 	private TextView txt_title,txt_content,txt_author;
+	private NewsViewModel newsModel = new NewsViewModel();
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -41,9 +40,17 @@ public class NewsViewActivity extends BaseActivtiy implements View.OnClickListen
 	private void initView(Intent intent)
 	{
 		NewsJson news =(NewsJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+
 		if(news==null)
 		{
-			txt_content.setText("该消息无具体内容");
+			//txt_content.setText("该消息无具体内容");
+			String recTitle=intent.getStringExtra(newsModel.getTitle());
+			String recAuthor=intent.getStringExtra(newsModel.getAuthor());
+			String recContent=intent.getStringExtra(newsModel.getContent());
+			txt_title.setText(recTitle);
+			txt_author.setText(recAuthor);
+			txt_content.setText(recContent);
+			
 		}
 		else
 		{

@@ -32,7 +32,7 @@
         android:id="@+id/sticky_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -58,7 +58,7 @@
                 android:cacheColorHint="@null"
                 android:childDivider="@drawable/child_bg"
                 android:childIndicatorLeft="0dp"
-                android:divider="@color/grey"
+                android:divider="@color/disablecolor"
                 android:dividerHeight="1dp"
                 android:groupIndicator="@null"
                 android:scrollbarAlwaysDrawHorizontalTrack="false" />

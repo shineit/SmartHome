@@ -8,13 +8,13 @@ import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.base.SharedPreUtil;
+import cn.fuego.smart.home.ui.base.UserEntity;
 import cn.fuego.smart.home.webservice.up.model.ModifyPwdReq;
-import cn.fuego.smart.home.webservice.up.model.ModifyPwdRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListener
@@ -83,29 +83,26 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 			this.showMessage("输入不能为空！");
 		}
 		
-		
-		
-		
-		
 	}
 
 	@Override
 	public void handle(MispHttpMessage message)
 	{
 
-		ModifyPwdRsp rsp = (ModifyPwdRsp) message.getMessage().obj;
-		if (ErrorMessageConst.SUCCESS == rsp.getResult().getErrorCode())
+		
+		if (message.isSuccess())
 		{
 
 			Intent intent = new Intent(ModifyPwdActivity.this,LoginActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-			MemoryCache.setFlag(0);
+			MemoryCache.setFlag(1);
 			startActivity(intent);
 			this.finish();
 			//ExitApplication.getInstance().exit(this);
 		}
 
-		showMessage(message);
+			showToast(ModifyPwdActivity.this, message);
+
 
 	}
 }

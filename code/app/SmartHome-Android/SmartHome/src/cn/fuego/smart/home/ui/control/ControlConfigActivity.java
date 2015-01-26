@@ -164,6 +164,7 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		configPDialog =ProgressDialog.show(ControlConfigActivity.this, "请稍等", "正在提交数据……");
 		SetSensorReq req = new SetSensorReq();
 		req.setToken(MemoryCache.getToken());
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
 		//后台通过id 索引
@@ -195,7 +196,8 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 
 		else
 		{
-			super.sendMessage(message);
+			configPDialog.dismiss();
+			showToast(ControlConfigActivity.this, message);
 		}
 		
 	}

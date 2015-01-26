@@ -187,9 +187,9 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter
 				public void onClick(View v)
 				{
 					if(chkBtn.isChecked())
-					enableSensor(sensor);
+					enableSensor(sensor,chkBtn);
 					else
-					disableSensor(sensor);	
+					disableSensor(sensor,chkBtn);	
 					
 					
 				}
@@ -204,11 +204,12 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter
             return true;
         }
 
-	private void enableSensor(final HomeSensorJson sensor)
+	private void enableSensor(final HomeSensorJson sensor,final CheckBox chk)
 	{
 		chkPDialog= ProgressDialog.show(context, "请稍等", "数据提交中……");
 		BatchOperateSensorReq req = new BatchOperateSensorReq();
 		req.setToken(MemoryCache.getToken());	
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		List<String> snesorList =  new ArrayList<String>();
 		snesorList.add(String.valueOf(sensor.getId()));		
 		req.setSensorList(snesorList);
@@ -221,22 +222,25 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter
 					{
 						chkPDialog.dismiss();
 						Toast.makeText(context, sensor.getSensorTypeName()+"开启成功", Toast.LENGTH_SHORT).show();
+						chk.setChecked(true);
 					}
 					else
 					{
-						
+						chk.setChecked(false);
 						chkPDialog.dismiss();
+						Toast.makeText(context, sensor.getSensorTypeName()+"开启失败", Toast.LENGTH_SHORT).show();
+						
 					}
 			}
 		}).enable(req);
 		
 	}
-	private void disableSensor(final HomeSensorJson sensor)
+	private void disableSensor(final HomeSensorJson sensor,final CheckBox chk)
 	{
 		chkPDialog= ProgressDialog.show(context, "请稍等", "数据提交中……");
 		BatchOperateSensorReq req = new BatchOperateSensorReq();
 		req.setToken(MemoryCache.getToken());
-		
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		List<String> snesorList =  new ArrayList<String>();
 		snesorList.add(String.valueOf(sensor.getId()));		
 		req.setSensorList(snesorList);
@@ -247,14 +251,16 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter
 					BatchOperateSensorRsp rsp = (BatchOperateSensorRsp) message.getMessage().obj;
 					if(message.isSuccess())
 					{
-	
+						chk.setChecked(false);
 						chkPDialog.dismiss();
 						Toast.makeText(context, sensor.getSensorTypeName()+"禁止成功", Toast.LENGTH_SHORT).show();
+						
 					}
 					else
 					{
-						
+						chk.setChecked(true);
 						chkPDialog.dismiss();
+						Toast.makeText(context, sensor.getSensorTypeName()+"禁止失败", Toast.LENGTH_SHORT).show();
 					}
 			}
 		}).disable(req);

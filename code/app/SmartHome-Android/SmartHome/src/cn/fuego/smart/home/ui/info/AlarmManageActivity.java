@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.ListViewResInfo;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -19,8 +22,10 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 public class AlarmManageActivity extends BaseActivtiy implements View.OnClickListener
 {
 
-	private EditText txt_alarmtime,txt_concentDesp,txt_terminDesp,txt_terminType,txt_alarmType;
+	private EditText txt_alarmtime,txt_concentDesp,txt_terminDesp,txt_terminType;
+	private TextView txt_alarmType;
 	private String alarmID=null;
+	private AlarmViewModel alarmModel = new AlarmViewModel();
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -32,7 +37,7 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		txt_concentDesp  = (EditText) findViewById(R.id.alarm_manage_concent);	
 		txt_terminDesp = (EditText) findViewById(R.id.alarm_manage_termin);	
 		txt_terminType = (EditText) findViewById(R.id.alarm_manage_terminType);	
-		txt_alarmType = (EditText) findViewById(R.id.alarm_manage_type);		
+		txt_alarmType = (TextView) findViewById(R.id.alarm_manage_type);		
 		Intent intent = this.getIntent();
 		initView(intent);
 
@@ -51,12 +56,25 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 	private void initView(Intent intent)
 	{
 		HomeAlarmJson alarm =(HomeAlarmJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
-		alarmID=String.valueOf(alarm.getId());
-		txt_alarmtime.setText(DateUtil.getStrTime(alarm.getAlarmTime()));
-		txt_concentDesp.setText(alarm.getConcentDesp());
-		txt_terminDesp.setText(alarm.getSensorDesp());
-		txt_terminType.setText(alarm.getSensorTypeName());
-		txt_alarmType.setText(alarm.getAlarmType());
+		if(alarm==null)
+		{
+			alarmID= intent.getStringExtra(alarmModel.getAlarmID());
+			txt_alarmtime.setText(intent.getStringExtra(alarmModel.getTime()));
+			txt_concentDesp.setText(intent.getStringExtra(alarmModel.getContent()));
+			txt_terminDesp.setText(intent.getStringExtra(alarmModel.getTerminDesp()));
+			txt_terminType.setText(intent.getStringExtra(alarmModel.getTerminType()));
+			txt_alarmType.setText(intent.getStringExtra(alarmModel.getTitle()));
+		}
+		else
+		{
+			alarmID=String.valueOf(alarm.getId());
+			txt_alarmtime.setText(DateUtil.getStrTime(alarm.getAlarmTime()));
+			txt_concentDesp.setText(alarm.getConcentDesp());
+			txt_terminDesp.setText(alarm.getSensorDesp());
+			txt_terminType.setText(alarm.getSensorTypeName());
+			txt_alarmType.setText(AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue());
+		}
+
 	}
 
 
@@ -99,7 +117,6 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		      
 			Intent intent = new Intent(AlarmManageActivity.this,AlarmActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-			//MemoryCache.setFlag(0);
 			this.startActivity(intent);		
 	 		this.finish();
 

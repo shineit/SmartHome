@@ -16,6 +16,7 @@ public class SetSensorReq extends BaseJsonReq
 {
 	private int command;
 	private HomeSensorJson sensor;
+	private int userID;
  
 	public int getCommand()
 	{
@@ -33,11 +34,21 @@ public class SetSensorReq extends BaseJsonReq
 	{
 		this.sensor = sensor;
 	}
+	public int getUserID()
+	{
+		return userID;
+	}
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
+	}
 	@Override
 	public String toString()
 	{
-		return "SetSensorReq [command=" + command + ", sensor=" + sensor + "]";
+		return "SetSensorReq [command=" + command + ", sensor=" + sensor
+				+ ", userID=" + userID + ", token=" + token + "]";
 	}
+
 	
 	
 }

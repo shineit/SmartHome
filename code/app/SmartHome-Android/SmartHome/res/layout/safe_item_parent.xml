@@ -10,14 +10,17 @@
 
     <TextView
         android:id="@+id/safe_group_tag"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/safe_group_icon"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="10dp"
         android:text="未配置传感器"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/themecolor" />
+        android:textColor="@color/themecolor"
+        android:textSize="20dp" />
 
     <ImageView
         android:id="@+id/safe_group_icon"

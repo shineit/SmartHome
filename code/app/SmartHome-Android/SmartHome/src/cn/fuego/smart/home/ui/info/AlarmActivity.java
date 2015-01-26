@@ -61,13 +61,15 @@ public class AlarmActivity extends MispListActivity<HomeAlarmJson> implements On
 	public View getListItemView(View view, HomeAlarmJson item)
 	{
 		ImageView icon= (ImageView) view.findViewById(R.id.item_alarm_icon);
-		if(AlarmTypeEnum.getEnumByInt(item.getAlarmType())==AlarmTypeEnum.ERROR_ALARM)
+		if(AlarmTypeEnum.getEnumByInt(item.getAlarmType())==AlarmTypeEnum.FIRE_ALARM)
 		{
-			icon.setBackgroundResource(R.drawable.fire);
+			//icon.setBackgroundResource(R.drawable.fire);
+			icon.setImageResource(R.drawable.fire);
 		}
 		else
 		{
-			icon.setBackgroundResource(R.drawable.prealarm);
+			//icon.setBackgroundResource(R.drawable.prealarm);
+			icon.setImageResource(R.drawable.prealarm);
 		}
 		
 		TextView txt_title= (TextView) view.findViewById(R.id.item_alarm_title);

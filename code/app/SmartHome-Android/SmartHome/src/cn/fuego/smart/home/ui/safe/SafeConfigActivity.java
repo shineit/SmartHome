@@ -23,6 +23,7 @@ import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.control.ControlConfigActivity;
 import cn.fuego.smart.home.ui.model.SafeViewModel;
 import cn.fuego.smart.home.ui.model.SpinnerDataModel;
 import cn.fuego.smart.home.ui.setting.user.MarkManageActivity;
@@ -188,6 +189,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		configPDialog =ProgressDialog.show(SafeConfigActivity.this, "请稍等", "正在提交数据……");
 		SetSensorReq req = new SetSensorReq();
 		req.setToken(MemoryCache.getToken());
+		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
 		//后台通过id 索引
@@ -204,7 +206,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		homesensor.setCtrChannelID(Integer.valueOf(selCtrChannelID));
 		req.setSensor(homesensor);
 		//回传参数做单个缓存用
-		bundle.putSerializable("newSensor", homesensor);
+		//bundle.putSerializable("newSensor", homesensor);
 		
 		WebServiceContext.getInstance().getSensorManageRest(this).setSensor(req);		
 		
@@ -222,7 +224,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 			Intent intent = new Intent();
             //以下设置flag 有作用
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.putExtras(bundle);
+			//intent.putExtras(bundle);
 			SafeConfigActivity.this.setResult(IntentCodeConst.RESULT_CODE,intent);
 			this.finish();
             
@@ -230,7 +232,8 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 
 		else
 		{
-			super.sendMessage(message);
+			configPDialog.dismiss();
+			showToast(SafeConfigActivity.this, message);
 		}
 	}
 

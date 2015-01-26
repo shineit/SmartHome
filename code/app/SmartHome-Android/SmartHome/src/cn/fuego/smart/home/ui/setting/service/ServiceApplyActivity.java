@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.ui.setting.service;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +10,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.ListViewResInfo;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
+import cn.fuego.smart.home.webservice.up.model.DeleteOrderByIDReq;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderReq;
 import cn.fuego.smart.home.webservice.up.model.SetServiceOrderRsp;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
@@ -32,6 +35,8 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	private View contactsView,resultView;
 	private RadioGroup group;
 	private RadioButton repairBtn,consultBtn;
+	private String orderID;
+	private ProgressDialog proDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -110,6 +115,7 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 
 	private void initData(ServiceOrderJson serviceOrder)
 	{
+		orderID=serviceOrder.getOrderID();
 		if(ServiceOrderTypeEnum.getEnumByInt(serviceOrder.getOrderType())==ServiceOrderTypeEnum.REPAIR)
 		{
 			repairBtn.setChecked(true);
@@ -143,7 +149,8 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 				log.info("apply failed", e);
 			}
 		 		break;
-		case 3: this.finish();
+		case 3: //this.finish();
+			deleteApply();
 	 		break;
 		default:break;
 		}
@@ -151,6 +158,30 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	}
 
 
+
+	private void deleteApply()
+	{
+		proDialog =ProgressDialog.show(ServiceApplyActivity.this, "请稍等", "正在删除数据……");
+		DeleteOrderByIDReq req = new DeleteOrderByIDReq();
+		req.setToken(MemoryCache.getToken());
+		req.setOrderID(orderID);
+		WebServiceContext.getInstance().getOrderManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+		            jumpActivity();
+				}
+
+				showToast(ServiceApplyActivity.this, message);
+				proDialog.dismiss();
+
+
+			}
+		}).deleteAlarm(req);
+		
+	}
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId)
@@ -173,6 +204,7 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	
 	private void submitApply() throws Exception
 	{
+		proDialog =ProgressDialog.show(ServiceApplyActivity.this, "请稍等", "正在提交数据……");
 		SetServiceOrderReq req = new SetServiceOrderReq();
 		req.setToken(MemoryCache.getToken());
 		
@@ -188,6 +220,34 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 		serviceOrder.setCreator(MemoryCache.getLoginInfo().getUser().getUserName());
 		req.setServiceOrder(serviceOrder);
 		WebServiceContext.getInstance().getOrderManageRest(this).setServiceOrder(req);
+		
+	}
+
+
+	@Override
+	public void handle(MispHttpMessage message)
+	{
+		SetServiceOrderRsp rsp = (SetServiceOrderRsp) message.getMessage().obj;
+		
+		if(message.isSuccess())
+		{
+
+
+            jumpActivity();
+		}
+
+		showToast(ServiceApplyActivity.this, message);
+		proDialog.dismiss();
+
+	}
+
+	private void jumpActivity()
+	{
+		Intent intent = new Intent();
+		intent.setClass(this.getApplicationContext(),  ServiceActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);  
+        startActivity(intent);          
+        this.finish();
 		
 	}
 
@@ -220,25 +280,6 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	public EditText getTextAddr()
 	{
 		return textAddr;
-	}
-
-	@Override
-	public void handle(MispHttpMessage message)
-	{
-		SetServiceOrderRsp rsp = (SetServiceOrderRsp) message.getMessage().obj;
-		
-		if(ErrorMessageConst.SUCCESS==rsp.getResult().getErrorCode())
-		{
-
-			Intent intent = new Intent();
-			intent.setClass(this.getApplicationContext(),  ServiceActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
-            startActivity(intent);
-            
-            this.finish();
-		}
-
-		showMessage(message);
 	}
 	
 }

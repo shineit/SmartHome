@@ -3,6 +3,7 @@ package cn.fuego.smart.home.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpHandler;
@@ -19,6 +20,7 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class SensorDataCache extends MispHttpHandler
 {
+	private FuegoLog log = FuegoLog.getLog(getClass());
 	private List<HomeSensorJson> ctrSensorList = new ArrayList<HomeSensorJson>();
 	private List<HomeSensorJson> measureSensorList = new ArrayList<HomeSensorJson>();
 	private List<SpinnerDataModel> ctrSpinnerList = new ArrayList<SpinnerDataModel>();
@@ -150,7 +152,9 @@ public class SensorDataCache extends MispHttpHandler
 				}
 				else
 				{
-					super.sendMessage(msg);
+					//super.sendMessage(msg);
+					//Toast.makeText(context, text, duration)
+					log.info("load marklist failed:"+msg);
 				}
     		}
     	}).getUserMarkList(req);

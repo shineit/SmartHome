@@ -80,7 +80,7 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 			
 			if(resultCode==IntentCodeConst.RESULT_CODE)
 			{
-				getSensorData();
+				SensorDataCache.getInstance().load(this);
 
 			}
 			else
