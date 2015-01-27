@@ -68,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp" >
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" >
 
                     <TextView
                         android:id="@+id/TextView02"
@@ -116,10 +117,40 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="36dp"
                         android:layout_toRightOf="@+id/alarm_view_objID"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:text="1234"
                         android:textColor="@color/black"
                         android:textSize="@dimen/content_font_size" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="通道    编号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/control_channel_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/TextView03"
+                        android:text="1234"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
                 </RelativeLayout>
 
                 <RelativeLayout

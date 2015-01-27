@@ -23,7 +23,6 @@ import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.control.ControlConfigActivity;
 import cn.fuego.smart.home.ui.model.SafeViewModel;
 import cn.fuego.smart.home.ui.model.SpinnerDataModel;
 import cn.fuego.smart.home.ui.setting.user.MarkManageActivity;
@@ -43,12 +42,12 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	private Spinner markSpinner,ctrSpinner ;
 	private String defaultLabel;
 	
-	private TextView txt_concentID,txt_sensorID,txt_sensorType;
+	private TextView txt_concentID,txt_sensorID,txt_sensorType,txt_terminID;
 	private EditText txt_desp,txt_warn,txt_error;
 	private String selMark,selCtrSensorID,selCtrChannelID;
 	private String targetID;
 	private ProgressDialog configPDialog;
-	private Bundle bundle = new Bundle();
+	//private Bundle bundle = new Bundle();
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -77,11 +76,11 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	
 	private void initData(Intent intent)
 	{
-		targetID=safeViewModel.getId();
-		txt_concentID = (TextView) findViewById(R.id.safe_concnet_id);
-
-		txt_concentID.setText(intent.getStringExtra(safeViewModel.getConcentratorID()));
-
+		targetID=intent.getStringExtra(safeViewModel.getId());
+/*		txt_concentID = (TextView) findViewById(R.id.safe_concnet_id);
+		txt_concentID.setText(intent.getStringExtra(safeViewModel.getConcentratorID()));*/
+		txt_terminID= (TextView) findViewById(R.id.safe_channel_id);
+		txt_terminID.setText(intent.getStringExtra(safeViewModel.getChannelID()));
 		txt_sensorID = (TextView) findViewById(R.id.safe_sensor_objID);
 
 		txt_sensorID.setText(intent.getStringExtra(safeViewModel.getSensorID()));
@@ -96,9 +95,6 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		txt_error.setText(String.valueOf(intent.getIntExtra(safeViewModel.getErrorValue(), 0)));
 	
 		defaultLabel = intent.getStringExtra(safeViewModel.getMark());
-		//int defaultCtrID = intent.getIntExtra(safeViewModel.getCtrGroupID(), 0);
-		//String defaultCtrID = intent.getStringExtra(safeViewModel.getCtrGroupID());
-		//log.info("The defaultCtrID is"+defaultCtrID);
 		String defCtrSensorID = intent.getStringExtra(safeViewModel.getCtrSensorID());
 		String defCtrChannelID = intent.getStringExtra(safeViewModel.getCtrChannelID());
 		markSpinner =  (Spinner) findViewById(R.id.safe_mark_spinner);

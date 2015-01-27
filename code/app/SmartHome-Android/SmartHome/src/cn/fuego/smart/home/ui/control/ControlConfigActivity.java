@@ -70,12 +70,12 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 
 	private void initData(Intent intent)
 	{
-		targetID=ctrViewModel.getId();
-		TextView txt_concentID= (TextView) findViewById(R.id.control_manage_concentID);
-		//txt_concentID.setText(String.valueOf(intent.getIntExtra(ctrViewModel.getConcentratorID(), 0)));
-		txt_concentID.setText(intent.getStringExtra(ctrViewModel.getConcentratorID()));
+		targetID=intent.getStringExtra(ctrViewModel.getId());
+/*		TextView txt_concentID= (TextView) findViewById(R.id.control_manage_concentID);
+		txt_concentID.setText(intent.getStringExtra(ctrViewModel.getConcentratorID()));*/
+		TextView txt_channelID= (TextView) findViewById(R.id.control_channel_id);
+		txt_channelID.setText(intent.getStringExtra(ctrViewModel.getChannelID()));
 		txt_id =(TextView) findViewById(R.id.control_manage_ctrID);
-		//txt_id.setText(String.valueOf(intent.getIntExtra(ctrViewModel.getId(), 0)));
 		txt_id.setText(intent.getStringExtra(ctrViewModel.getSensorID()));
 		TextView txt_type= (TextView) findViewById(R.id.control_manage_ctrType);
 		txt_type.setText(intent.getStringExtra(ctrViewModel.getSensorTypeName()));
@@ -84,8 +84,6 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		txt_desp.setText(intent.getStringExtra(ctrViewModel.getDescriptions()));
 		
 		String defaultLabel = intent.getStringExtra(ctrViewModel.getMark());
-/*		txt_mark= (EditText) findViewById(R.id.control_manage_mark);
-		txt_mark.setText(defaultMark);*/
 		markSpinner =  (Spinner) findViewById(R.id.control_mark_spinner);
 
         //获取标签栏选项数据
@@ -101,7 +99,6 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		markSpinner.setAdapter(markAdapter);
 		markSpinner.setSelection(getSelPosition(defaultLabel));
 		markAdapter.notifyDataSetChanged();
-		//getMarkData();
 		markSpinner.setOnItemSelectedListener(this);
 		txt_groupID = (EditText) findViewById(R.id.control_manage_groupID);
 		txt_groupID.setText(String.valueOf(intent.getIntExtra(ctrViewModel.getGroupID(), 0)));

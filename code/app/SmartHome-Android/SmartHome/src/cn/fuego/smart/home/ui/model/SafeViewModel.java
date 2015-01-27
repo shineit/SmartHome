@@ -20,13 +20,14 @@ public class SafeViewModel
 	private String id="id";              //唯一ID，终端设备的出场ID，具有唯一性
 	private String concentratorID="concentratorID";  //集中器ID
 	private String sensorID="sensorID";         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
+	private String channelID="channelID";  //通道ID
 	private String sensorTypeName="sensorTypeName";  //传感器类型名称
 	private String warnValue="warnValue";    //预警值
 	private String errorValue="errorValue";   //火警值
 	private String descriptions="descriptions";  //描述
 	private String mark="mark";         //自定义标签
 	private String ctrGroupID="ctrGroupID"; //控制器ID
-	
+
 	private String ctrSensorID="ctrSensorID";
 	private String ctrChannelID ="ctrChannelID";
 	public String getId()
@@ -73,6 +74,10 @@ public class SafeViewModel
 	{
 		return ctrChannelID;
 	}
-	
+	public String getChannelID()
+	{
+		return channelID;
+	}
+
 	
 }

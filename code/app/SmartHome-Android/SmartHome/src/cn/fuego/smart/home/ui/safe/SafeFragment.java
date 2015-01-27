@@ -140,6 +140,7 @@ public class SafeFragment extends BaseFragment implements OnHeaderUpdateListener
 			i.setClass(this.getActivity(), SafeConfigActivity.class);
 			i.putExtra(safeViewModel.getConcentratorID(), String.valueOf(selectItem.getConcentratorID()));
 			i.putExtra(safeViewModel.getSensorID(), String.valueOf(selectItem.getSensorID()));//传感器端口号
+			i.putExtra(safeViewModel.getChannelID(), String.valueOf(selectItem.getChannelID()));//通道ID
 			i.putExtra(safeViewModel.getSensorTypeName(), selectItem.getSensorTypeName());
 			i.putExtra(safeViewModel.getDescriptions(), selectItem.getDescriptions());
 			i.putExtra(safeViewModel.getWarnValue(), selectItem.getWarnValue());
