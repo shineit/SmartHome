@@ -61,6 +61,8 @@
 		149A018C1A08CC52008F239F /* FESensorListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A018B1A08CC52008F239F /* FESensorListRequest.m */; };
 		149A018F1A08CC76008F239F /* FESensorSetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A018E1A08CC76008F239F /* FESensorSetRequest.m */; };
 		149A01921A08CDD3008F239F /* FERelyUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A01911A08CDD3008F239F /* FERelyUserRequest.m */; };
+		14A2FA1F1A774CE0007D5017 /* FEEmptyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A2FA1E1A774CE0007D5017 /* FEEmptyVC.m */; };
+		14A2FA221A7756EA007D5017 /* FETableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A2FA211A7756EA007D5017 /* FETableViewController.m */; };
 		14B03B2C1A5191C8000826C9 /* FEUserMarkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B2B1A5191C8000826C9 /* FEUserMarkManagerVC.m */; };
 		14B03B2F1A519C68000826C9 /* FETableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B2E1A519C68000826C9 /* FETableView.m */; };
 		14B03B331A51A111000826C9 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B03B321A51A111000826C9 /* CustomIOS7AlertView.m */; };
@@ -241,6 +243,10 @@
 		149A018E1A08CC76008F239F /* FESensorSetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FESensorSetRequest.m; sourceTree = "<group>"; };
 		149A01901A08CDD3008F239F /* FERelyUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FERelyUserRequest.h; sourceTree = "<group>"; };
 		149A01911A08CDD3008F239F /* FERelyUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FERelyUserRequest.m; sourceTree = "<group>"; };
+		14A2FA1D1A774CE0007D5017 /* FEEmptyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEmptyVC.h; sourceTree = "<group>"; };
+		14A2FA1E1A774CE0007D5017 /* FEEmptyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEmptyVC.m; sourceTree = "<group>"; };
+		14A2FA201A7756EA007D5017 /* FETableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FETableViewController.h; path = SmartHome/Common/FETableViewController.h; sourceTree = SOURCE_ROOT; };
+		14A2FA211A7756EA007D5017 /* FETableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FETableViewController.m; path = SmartHome/Common/FETableViewController.m; sourceTree = SOURCE_ROOT; };
 		14B03B2A1A5191C8000826C9 /* FEUserMarkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUserMarkManagerVC.h; sourceTree = "<group>"; };
 		14B03B2B1A5191C8000826C9 /* FEUserMarkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMarkManagerVC.m; sourceTree = "<group>"; };
 		14B03B2D1A519C68000826C9 /* FETableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FETableView.h; path = SmartHome/Common/FETableView.h; sourceTree = SOURCE_ROOT; };
@@ -815,6 +821,8 @@
 				14D7B7AA1A0653640072D31C /* FECheckButtonGroup.m */,
 				14B03B2D1A519C68000826C9 /* FETableView.h */,
 				14B03B2E1A519C68000826C9 /* FETableView.m */,
+				14A2FA201A7756EA007D5017 /* FETableViewController.h */,
+				14A2FA211A7756EA007D5017 /* FETableViewController.m */,
 			);
 			name = Common;
 			path = common;
@@ -902,6 +910,8 @@
 				14B03B771A592977000826C9 /* FEHomeItemCell.m */,
 				14B03B791A593838000826C9 /* FEHomeItemCollectionReusableView.h */,
 				14B03B7A1A593838000826C9 /* FEHomeItemCollectionReusableView.m */,
+				14A2FA1D1A774CE0007D5017 /* FEEmptyVC.h */,
+				14A2FA1E1A774CE0007D5017 /* FEEmptyVC.m */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -1109,6 +1119,7 @@
 				14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */,
 				1499E6D21A0BAD0E002F5DDB /* FEUserMark.m in Sources */,
 				14C6DEEE19F54F9C006384B2 /* FENewsVC.m in Sources */,
+				14A2FA221A7756EA007D5017 /* FETableViewController.m in Sources */,
 				14FDBDE61A0234D600C130A2 /* FERequestBaseData.m in Sources */,
 				149A018C1A08CC52008F239F /* FESensorListRequest.m in Sources */,
 				14B03B781A592977000826C9 /* FEHomeItemCell.m in Sources */,
@@ -1131,6 +1142,7 @@
 				14B447AD19F603E30078EAB4 /* FEDeviceInfoInputView.m in Sources */,
 				1499E6F11A0BAD1A002F5DDB /* FESigoutResponse.m in Sources */,
 				14C6DEF219F54F9C006384B2 /* FEServiceRequestVC.m in Sources */,
+				14A2FA1F1A774CE0007D5017 /* FEEmptyVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

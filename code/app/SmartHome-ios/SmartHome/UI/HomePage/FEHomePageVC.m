@@ -9,6 +9,11 @@
 #import "FEHomePageVC.h"
 #import "FEHomeItemCell.h"
 #import "FEHomeItemCollectionReusableView.h"
+#import "AppDelegate.h"
+#import "FENewsVC.h"
+#import "FEProfileVC.h"
+#import "FEServiceListVC.h"
+#import "FECurrentWarringVC.h"
 
 #define PNG_KEY @"png"
 #define ITEM_TITLE   @"title"
@@ -27,14 +32,78 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = FEString(@"HOME");
+    
+    
+    
     self.datasource =
   @[
-  @[@{PNG_KEY:@"home_safe",ITEM_TITLE:FEString(@"云安")},@{PNG_KEY:@"home_controll",ITEM_TITLE:FEString(@"云控")},@{PNG_KEY:@"home_camera",ITEM_TITLE:FEString(@"云视")},@{PNG_KEY:@"home_warring",ITEM_TITLE:FEString(@"告警信息")},@{PNG_KEY:@"home_plan",ITEM_TITLE:FEString(@"平面图查看")}],
-  @[@{PNG_KEY:@"home_concentrator",ITEM_TITLE:FEString(@"集中器设置")},@{PNG_KEY:@"home_region",ITEM_TITLE:FEString(@"我的片区")}],
-  @[@{PNG_KEY:@"home_profile",ITEM_TITLE:FEString(@"账户设置")},@{PNG_KEY:@"home_service",ITEM_TITLE:FEString(@"申请管理")},@{PNG_KEY:@"home_news",ITEM_TITLE:FEString(@"新闻公告")}]
+    @[@{PNG_KEY:@"home_safe",ITEM_TITLE:FEString(@"云安"),ITEM_ACTION:[self getIvocationWith:@selector(tosafe)]},
+  @{PNG_KEY:@"home_controll",ITEM_TITLE:FEString(@"云控"),ITEM_ACTION:[self getIvocationWith:@selector(tocontroll)]},
+  @{PNG_KEY:@"home_camera",ITEM_TITLE:FEString(@"云视"),ITEM_ACTION:[self getIvocationWith:@selector(tocamera)]},
+  @{PNG_KEY:@"home_warring",ITEM_TITLE:FEString(@"告警信息"),ITEM_ACTION:[self getIvocationWith:@selector(towarring)]},
+  @{PNG_KEY:@"home_plan",ITEM_TITLE:FEString(@"平面图查看"),ITEM_ACTION:[self getIvocationWith:@selector(toscan)]}],
+  
+  @[@{PNG_KEY:@"home_concentrator",ITEM_TITLE:FEString(@"集中器设置"),ITEM_ACTION:[self getIvocationWith:@selector(toconcentrator)]},
+  @{PNG_KEY:@"home_region",ITEM_TITLE:FEString(@"我的片区"),ITEM_ACTION:[self getIvocationWith:@selector(tomyregion)]}],
+  
+  @[@{PNG_KEY:@"home_profile",ITEM_TITLE:FEString(@"账户设置"),ITEM_ACTION:[self getIvocationWith:@selector(toprofile)]},
+  @{PNG_KEY:@"home_service",ITEM_TITLE:FEString(@"申请管理"),ITEM_ACTION:[self getIvocationWith:@selector(toservice)]},
+  @{PNG_KEY:@"home_news",ITEM_TITLE:FEString(@"新闻公告"),ITEM_ACTION:[self getIvocationWith:@selector(tonews)]}]
   ];
     self.headerArray = @[FEString(@"与安防"),FEString(@"设备管理"),FEString(@"个人中心")];
     [self initUI];
+}
+
+-(void)tosafe{
+    [[AppDelegate sharedDelegate] loadMainSelectAtIndex:1];
+}
+
+-(void)tocontroll{
+    [[AppDelegate sharedDelegate] loadMainSelectAtIndex:2];
+}
+
+-(void)tocamera{
+    [[AppDelegate sharedDelegate] loadMainSelectAtIndex:3];
+}
+
+-(void)towarring{
+    FECurrentWarringVC *cwarring = [FECurrentWarringVC new];
+    [self.navigationController pushViewController:cwarring animated:YES];
+}
+
+-(void)toscan{
+    
+}
+
+-(void)toconcentrator{
+    
+}
+
+-(void)tomyregion{
+    
+}
+
+-(void)toprofile{
+    FEProfileVC *pvc = [FEProfileVC new];
+    [self.navigationController pushViewController:pvc animated:YES];
+}
+
+-(void)toservice{
+    FEServiceListVC *svc = [FEServiceListVC new];
+    [self.navigationController pushViewController:svc animated:YES];
+}
+
+-(void)tonews{
+    FENewsVC *news = [FENewsVC new];
+    [self.navigationController pushViewController:news animated:YES];
+}
+
+-(NSInvocation *)getIvocationWith:(SEL)selector{
+    NSMethodSignature *sig=[self methodSignatureForSelector:selector];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+    [invocation setSelector:selector];
+    [invocation setTarget:self];
+    return invocation;
 }
 
 -(void)initUI{
@@ -67,7 +136,7 @@
     static NSString * identifier = @"cell";
     FEHomeItemCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     cell.itemTitleLabel.text = self.datasource[indexPath.section][indexPath.row][ITEM_TITLE];
     cell.itemImageView.image = [UIImage imageNamed:self.datasource[indexPath.section][indexPath.row][PNG_KEY]];
 //    cell.textLabel.text = self.cameras[indexPath.row];
@@ -92,7 +161,7 @@
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10, 10, 10, 10);
+    return UIEdgeInsetsMake(10, 30, 10, 30);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
@@ -108,6 +177,12 @@
         reusableview = headerView;
     }
     return reusableview;
+}
+
+#pragma mark - UICollectionViewDelegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInvocation *iv = self.datasource[indexPath.section][indexPath.row][ITEM_ACTION];
+    [iv invoke];
 }
 
 /*

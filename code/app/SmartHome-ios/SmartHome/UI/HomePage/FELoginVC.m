@@ -59,7 +59,7 @@
     
     //user name textfield
     FETextField *username = [[FETextField alloc] initWithFrame:CGRectMake(namelabel.frame.origin.x + namelabel.bounds.size.width + 5, namelabel.frame.origin.y, textcontent.bounds.size.width - (namelabel.frame.origin.x + namelabel.bounds.size.width + 5) - 10, 30)];
-    username.text = @"admin";
+    username.text = @"test1";
     username.returnKeyType = UIReturnKeyNext;
     username.keyboardType = UIKeyboardTypeEmailAddress;
     username.borderStyle = UITextBorderStyleNone;
@@ -74,7 +74,7 @@
     [textcontent addSubview:pswlabel];
     
     FETextField *psw = [[FETextField alloc] initWithFrame:CGRectMake(pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5, pswlabel.frame.origin.y, textcontent.bounds.size.width - (pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5) - 10, 30)];
-    psw.text = @"123456";
+    psw.text = @"1234";
     psw.returnKeyType = UIReturnKeyDone;
     psw.borderStyle = UITextBorderStyleNone;
 //    psw.placeholder = FEString(@"INPUT_PASSWORD");
@@ -119,7 +119,7 @@
                     cduser.password = [weakself.password.text MD5];
                     cduser.userid = user.user.userID;
                     [FECoreData saveCoreData];
-                    [[AppDelegate sharedDelegate] loadMain];
+                    [[AppDelegate sharedDelegate] loadFirstPage];
                 });
             }
             

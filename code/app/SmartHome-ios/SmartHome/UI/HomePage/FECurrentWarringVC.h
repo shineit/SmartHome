@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FECommonViewController.h"
+#import "FETableViewController.h"
 
-@interface FECurrentWarringVC : FECommonViewController
+@interface FECurrentWarringVC : FETableViewController
 
 @end

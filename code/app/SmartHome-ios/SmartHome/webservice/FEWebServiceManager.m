@@ -28,7 +28,7 @@
 #import <AFNetworking/AFJSONRequestOperation.h>
 #import "AFHTTPClient+Json.h"
 
-#define _BASE_URL @"http://120.24.217.173:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+#define _BASE_URL @"http://115.231.168.14:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -107,8 +107,7 @@
 
 //order list
 -(AFHTTPRequestOperation *)orederList:(FEServiceOrederRequest *)odata response:(void (^)(NSError *error, FEOrderListResponse *response))block{
-    return nil;
-    [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [self POST:odata.method parameters:odata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FEOrderListResponse *olist = [[FEOrderListResponse alloc] initWithResponse:responseObject];
         [self showerrorResponse:olist];
         block(NULL,olist);

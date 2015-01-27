@@ -18,6 +18,7 @@
 @property (nonatomic, strong, readonly) NSString *push_userID;
 @property (nonatomic, strong, readonly) NSString *push_channelID;
 
+
 -(instancetype)initWtihUserName:(NSString *)name password:(NSString *)password clientType:(NSString *)type clientVersion:(NSString *)version devToken:(NSString *)dToken push_id:(NSString *)pid push_userid:(NSString *)p_uid push_channelID:(NSString *)p_cid;
 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import "FECommonTabBarController.h"
+#import "AppDelegate.h"
 
-@interface FECommonTabBarController ()
+@interface FECommonTabBarController ()<UITabBarControllerDelegate>
 
 @end
 
@@ -29,7 +30,7 @@
     // Do any additional setup after loading the view.
     self.tabBar.backgroundImage = [UIImage imageFromColor:FEColor(233, 234, 237, 1)];
     
-    self.tabBar.selectionIndicatorImage = [[UIImage imageFromColor:FEThemeColor] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 5.0f, 49)];
+    self.tabBar.selectionIndicatorImage = [[UIImage imageFromColor:FEThemeColor] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 4.0f, 49)];
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        [UIFont systemFontOfSize:10], UITextAttributeFont,
                                                        FEColor(51, 51, 51, 1),UITextAttributeTextColor,nil] forState:UIControlStateNormal];

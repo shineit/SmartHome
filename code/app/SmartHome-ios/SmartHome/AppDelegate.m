@@ -22,6 +22,7 @@
 #import "YSPlayerController.h"
 #import "YSHTTPClient.h"
 #import "YSMobilePages.h"
+#import "FEEmptyVC.h"
 
 @implementation AppDelegate
 
@@ -107,48 +108,70 @@
 - (void)loadview{
     CDUser *user = [FECoreData fetchUser];
     if (user) {
-        [self loadMain];
+        [self loadFirstPage];
     }else{
         [self loadSigin];
     }
 }
 
 -(void)loadSigin{
+    self.tabbarController = nil;
+    self.firstPageController = nil;
     FELoginVC *login = [[FELoginVC alloc] init];
     self.window.rootViewController = login;
 }
 
 //加载主页
--(void)loadMain{
-//    FEHomePageVC *homeVC = [[FEHomePageVC alloc] init];
-//    FECommonNavgationController *homen = [[FECommonNavgationController alloc] initWithRootViewController:homeVC];
-//    [AppDelegate sharedDelegate].window.rootViewController = homen;
-//    return;
-    //news page
-    FENewsVC *news = [FENewsVC new];
-    FECommonNavgationController *nvnews = [[FECommonNavgationController alloc] initWithRootViewController:news];
+-(void)loadFirstPage{
+    if (!self.firstPageController) {
+        FEHomePageVC *homeVC = [[FEHomePageVC alloc] init];
+        FECommonNavgationController *homen = [[FECommonNavgationController alloc] initWithRootViewController:homeVC];
+        self.firstPageController = homen;
+    }
+    [AppDelegate sharedDelegate].window.rootViewController = self.firstPageController;
+}
+
+-(void)loadMainSelectAtIndex:(NSInteger)index{
     
-    //云安
-    FECloudSafeVC *csafe = [FECloudSafeVC new];
-    FECommonNavgationController *nvsafe = [[FECommonNavgationController alloc] initWithRootViewController:csafe];
+    if (!self.tabbarController) {
+        //news page
+//        FENewsVC *news = [FENewsVC new];
+//        FECommonNavgationController *nvnews = [[FECommonNavgationController alloc] initWithRootViewController:news];
+        
+        //empty vc
+        FEEmptyVC *evc = [FEEmptyVC new];
+        
+        //云安
+        FECloudSafeVC *csafe = [FECloudSafeVC new];
+        FECommonNavgationController *nvsafe = [[FECommonNavgationController alloc] initWithRootViewController:csafe];
+        
+        //云控
+        FECloudControlVC *control = [FECloudControlVC new];
+        FECommonNavgationController *controlnc = [[FECommonNavgationController alloc] initWithRootViewController:control];
+        
+        //云视
+        FECloudCameraVC *camera = [FECloudCameraVC new];
+        FECommonNavgationController *camnc = [[FECommonNavgationController alloc] initWithRootViewController:camera];
+        
+        
+        //setting
+//        FESettingVC *settingvc = [FESettingVC new];
+//        FECommonNavgationController *nvsetting = [[FECommonNavgationController alloc] initWithRootViewController:settingvc];
+        
+        FECommonTabBarController *tabbar = [FECommonTabBarController new];
+        [tabbar setViewControllers:@[evc,nvsafe,controlnc,camnc]];
+        tabbar.delegate = self;
+        self.tabbarController = tabbar;
+    }
+    [self.tabbarController setSelectedIndex:index];
+    [AppDelegate sharedDelegate].window.rootViewController = self.tabbarController;
     
-    //云控
-    FECloudControlVC *control = [FECloudControlVC new];
-    FECommonNavgationController *controlnc = [[FECommonNavgationController alloc] initWithRootViewController:control];
-    
-    //云视
-    FECloudCameraVC *camera = [FECloudCameraVC new];
-    FECommonNavgationController *camnc = [[FECommonNavgationController alloc] initWithRootViewController:camera];
-    
-    
-    //setting
-    FESettingVC *settingvc = [FESettingVC new];
-    FECommonNavgationController *nvsetting = [[FECommonNavgationController alloc] initWithRootViewController:settingvc];
-    
-    FECommonTabBarController *tabbar = [FECommonTabBarController new];
-    [tabbar setViewControllers:@[nvnews,nvsafe,controlnc,camnc,nvsetting]];
-    [AppDelegate sharedDelegate].window.rootViewController = tabbar;
-    
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    if (tabBarController.selectedIndex == 0) {
+        [self loadFirstPage];
+    }
 }
 
 - (void)saveContext

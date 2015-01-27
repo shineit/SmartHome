@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -16,13 +16,16 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) FECoreDataHandler *coreDataHandler;
+@property (strong, nonatomic) UITabBarController *tabbarController;
+@property (strong, nonatomic) UINavigationController *firstPageController;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
 //load main view
--(void)loadMain;
+-(void)loadMainSelectAtIndex:(NSInteger)index;
 -(void)loadSigin;
+-(void)loadFirstPage;
 
 +(AppDelegate *)sharedDelegate;
 

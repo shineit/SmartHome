@@ -70,22 +70,22 @@
 
 -(void)initUI{
     //新闻和告警切换segment
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[FEString(@"HOME_NEWS"), FEString(@"HOME_WARRING")]];
-//    segmentedControl.sectionSelectedImages = @[[[UIImage imageFromColor:[UIColor whiteColor]] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 2, 44)],[[UIImage imageFromColor:[UIColor whiteColor]] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 2, 44)]];
-    segmentedControl.selectedTextColor = [UIColor orangeColor];
-    segmentedControl.backgroundColor = [UIColor whiteColor];//FEColor(229, 229, 229, 1);//[UIColor lightGrayColor];
-    segmentedControl.selectionIndicatorColor = [UIColor orangeColor];
-    segmentedControl.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
-    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
-    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-    segmentedControl.selectionIndicatorHeight = 3;
-    segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:segmentedControl];
-    segmentedControl.selectedSegmentIndex = 1;
+//    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[FEString(@"HOME_NEWS"), FEString(@"HOME_WARRING")]];
+////    segmentedControl.sectionSelectedImages = @[[[UIImage imageFromColor:[UIColor whiteColor]] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 2, 44)],[[UIImage imageFromColor:[UIColor whiteColor]] imageScaledToSize:CGSizeMake(self.view.bounds.size.width / 2, 44)]];
+//    segmentedControl.selectedTextColor = [UIColor orangeColor];
+//    segmentedControl.backgroundColor = [UIColor whiteColor];//FEColor(229, 229, 229, 1);//[UIColor lightGrayColor];
+//    segmentedControl.selectionIndicatorColor = [UIColor orangeColor];
+//    segmentedControl.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+//    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+//    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+//    segmentedControl.selectionIndicatorHeight = 3;
+//    segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+//    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+//    [self.view addSubview:segmentedControl];
+//    segmentedControl.selectedSegmentIndex = 1;
     
     //新闻table
-    UITableView *news = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
+    UITableView *news = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     news.delegate = self;
     news.dataSource = self;
     news.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -98,20 +98,20 @@
 
     
     //告警table
-    UITableView *warring = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
-    [warring setHidden:YES];
-    warring.delegate = self;
-    warring.dataSource = self;
-    warring.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:warring];
-    self.warringtable = warring;
-    
-    UIView *view1 = [UIView new];
-    view1.backgroundColor = [UIColor clearColor];
-    [warring setTableFooterView:view];
-    
-    self.newstable.hidden = YES;
-    self.warringtable.hidden = NO;
+//    UITableView *warring = [[UITableView alloc] initWithFrame:CGRectMake(0, segmentedControl.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height - segmentedControl.bounds.size.height) style:UITableViewStylePlain];
+//    [warring setHidden:YES];
+//    warring.delegate = self;
+//    warring.dataSource = self;
+//    warring.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+//    [self.view addSubview:warring];
+//    self.warringtable = warring;
+//    
+//    UIView *view1 = [UIView new];
+//    view1.backgroundColor = [UIColor clearColor];
+//    [warring setTableFooterView:view];
+//    
+//    self.newstable.hidden = YES;
+//    self.warringtable.hidden = NO;
 }
 
 //request news

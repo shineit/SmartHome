@@ -21,7 +21,7 @@
         [self addSubview:item];
         self.itemImageView = item;
     
-        FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 15, self.bounds.size.width, 15)];
+        FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 18, self.bounds.size.width, 15)];
         title.textAlignment = NSTextAlignmentCenter;
         title.font = [UIFont appFontWithSize:12];
         self.itemTitleLabel = title;
