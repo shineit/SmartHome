@@ -26,7 +26,7 @@ public class SensorTypeManageServiceImpl  extends MispCommonServiceImpl<SensorTy
 	public String GetPrimaryName()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return SensorType.PRI_KEY;
 	}
 
 

@@ -17,8 +17,8 @@ package cn.fuego.smart.home.domain;
  */
 public class SensorType
 {
+	public static final String PRI_KEY = "typeID";
 	private int typeID;  	   //传感器类型ID，自增长
-
 	private String typeName;    //类型名称
 	private Float defWarnValue=(float) 0;    //默认预警值
 	private Float defErrorValue=(float) 0;   //默认火警值

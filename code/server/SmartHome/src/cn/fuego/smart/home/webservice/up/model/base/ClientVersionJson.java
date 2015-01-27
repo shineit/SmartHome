@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class ClientVersionJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int versionID;
 	private int companyID;
 	private String appName;

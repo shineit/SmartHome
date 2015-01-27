@@ -27,6 +27,8 @@ import cn.fuego.smart.home.device.listenser.DeviceOnlineCache;
 import cn.fuego.smart.home.device.listenser.RecieveCommandConst;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.domain.SensorType;
+import cn.fuego.smart.home.service.ServiceContext;
 
  /** 
  * @ClassName: DeviceManagerImpl 
@@ -171,7 +173,7 @@ public class DeviceManagerImpl implements DeviceManager
 		{
 			temp += " ";
 		}
-		data += temp;
+		data += DataTypeConvert.bytesToStr(DataTypeConvert.strToGbkBytes(temp));
 		
 		
 		
@@ -194,21 +196,30 @@ public class DeviceManagerImpl implements DeviceManager
 		
 		ReceiveMessage recvMessage = new ReceiveMessage(readMessage, this.concentrator.getIpAddr(),this.concentrator.getPort());
 		HomeSensor deviceSensor  = recvMessage.getHomeSensor();
+ 
 		if(null != deviceSensor)
 		{
 			sensor.setCtrGroupID(deviceSensor.getCtrGroupID());
 			sensor.setDescription(deviceSensor.getDescription());
+			sensor.setCtrSensorID(deviceSensor.getCtrSensorID());
+			sensor.setCtrChannelID(deviceSensor.getCtrChannelID());
 			sensor.setGroupID(deviceSensor.getGroupID());
 			sensor.setErrorValue(deviceSensor.getErrorValue());
 			sensor.setWarnValue(deviceSensor.getWarnValue());
 	 
 			sensor.setSensorType(deviceSensor.getSensorType());
-			sensor.setSensorTypeName(deviceSensor.getSensorTypeName());
+			SensorType type = ServiceContext.getInstance().getSensorTypeManageService().get(sensor.getSensorType());
+			if(null != type)
+		    {
+				sensor.setSensorTypeName(type.getTypeName());	
+		    }
+			
 			sensor.setStatus(deviceSensor.getStatus());
-			sensor.setMark(deviceSensor.getMark());
+			//sensor.setMark(deviceSensor.getMark());
+			//sensor.setDescription(deviceSensor.getDescription());
 
 		}
-	 
+ 
 
 	}
 

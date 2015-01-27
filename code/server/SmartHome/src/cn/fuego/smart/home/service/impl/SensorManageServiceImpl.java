@@ -9,14 +9,10 @@
 package cn.fuego.smart.home.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import sun.management.Sensor;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
@@ -57,6 +53,11 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			old.setSensorTypeName(homeSensor.getSensorTypeName());
 			old.setWarnValue(homeSensor.getWarnValue());
 			old.setErrorValue(homeSensor.getErrorValue());
+			//以上web 修改
+			old.setMark(homeSensor.getMark());
+			old.setDescription(homeSensor.getDescription());
+			old.setCtrSensorID(homeSensor.getCtrSensorID());
+			old.setCtrChannelID(homeSensor.getCtrChannelID());
 			Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(old.getConcentratorID());
 			if(null != concentrator)
 			{
@@ -123,6 +124,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(sensor.getConcentratorID());
 		DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
  		
+		log.info("the sensor befro sync " + sensor.getDescription());
   
 		try
 		{
@@ -134,7 +136,8 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			log.error("get home sensor config failed,the sensor id is " + sensor.getSensorID() + " ,the channel id is "+sensor.getChannelID(),e);
 			throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
 		}
-	  super.modify(sensor);
+	    super.modify(sensor);
+ 
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.SensorManageService#setSensor(cn.fuego.smart.home.constant.SensorSetCmdEnum, cn.fuego.smart.home.domain.Sensor)
@@ -142,7 +145,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 	@Override
 	public void setSensor(SensorSetCmdEnum setCmd, HomeSensor sensor,int userID)
 	{
-		HomeSensor old = this.get(String.valueOf(sensor.getId()));
+/*		HomeSensor old = this.get(String.valueOf(sensor.getId()));
 		
 		old.setGroupID(sensor.getGroupID());
 		old.setCtrGroupID(sensor.getCtrGroupID());		
@@ -152,12 +155,12 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		old.setDescription(sensor.getDescription());
 		//新增联动控制器ID
 		old.setCtrSensorID(sensor.getCtrSensorID());
-		old.setCtrChannelID(sensor.getCtrChannelID());
+		old.setCtrChannelID(sensor.getCtrChannelID());*/
 		switch(setCmd)
 		{
 		case MODIFY:
 			//super.modify(old);
-			modify(userID,old);
+			modify(userID,sensor);
 			break;
 		case STOP:
 			break;

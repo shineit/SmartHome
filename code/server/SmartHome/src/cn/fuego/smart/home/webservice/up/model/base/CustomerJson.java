@@ -11,6 +11,11 @@ import java.io.Serializable;
 */ 
 public class CustomerJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int userID; 			//用户id
 	private String customerName;	//用户姓名
 	private String phone;			//用户手机号码

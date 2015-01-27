@@ -13,6 +13,11 @@ import java.io.Serializable;
  */
 public class HomeSensorJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private long id;              //
 	private long concentratorID;  //集中器ID
 	private long sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID

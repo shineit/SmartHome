@@ -8,7 +8,6 @@
 */ 
 package cn.fuego.smart.home.device;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -258,6 +257,8 @@ public class ReceiveMessage
 			sensor.setStatus(SensorStatusEnum.DISABLE.getIntValue());
 		}
 		sensor.setSensorType(getIntValue(index+6,index+7));
+
+		
 		sensor.setWarnValue(getFloatValue(index+8,index+11));
 		sensor.setErrorValue(getFloatValue(index+12,index+15));
 		sensor.setGroupID(getIntValue(index+16,index+16));
@@ -369,9 +370,9 @@ public class ReceiveMessage
 		byte[] temp = new byte[length];
 		for(int i=0;i<length;i++)
 		{
-			temp[i] = this.dataBytes[i];
-		}
-		return DataTypeConvert.bytesToStr(temp);
+			temp[i] = this.dataBytes[startIndex+i];
+ 		}
+ 		return DataTypeConvert.gbkBytesToStr(temp);
 	}
 	
 	public boolean isDataLengthEnough(int index)

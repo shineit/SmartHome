@@ -45,39 +45,46 @@ public class PushServiceImpl implements PushService
 	{
 		 for(Alarm alarm : alarmList)
 		 {
-			 
-			 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
-			 
-			 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
-			 if(!ValidatorUtil.isEmpty(userConList))
+			 if(AlarmTypeEnum.OFFLINE_ALARM.getIntValue()==alarm.getAlarmType()||AlarmTypeEnum.OFFLINE_RECOVER.getIntValue()==alarm.getAlarmType())
 			 {
-				 for(UserConcentrator userCon : userConList)
-				 {
-					 FuegoPushInfo pushInfo = AppLoginCache.getPushInfo(userCon.getUserID());
-					 
-					 if(null != pushInfo)
-					 {
-						 PushMessageJson json = new PushMessageJson();
-						 
-						 String title = PushMessagTypeEnum.ALRAM_MSG.getStrValue();
-						 String content = AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
-					 
- 						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
-						 json.setObj(alarm.getId());
-		 
- 						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
-					 }
-					 else
-					 {
-						 log.info("no need to push,the user have not been logined, user id is " + userCon.getUserID());
-					 }
-				 
-				 }
+				 return;
 			 }
 			 else
 			 {
-				 log.warn("can not get manage user,we will not push anythig for the alarm"  + alarm);
- 			 }
+				 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
+				 
+				 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
+				 if(!ValidatorUtil.isEmpty(userConList))
+				 {
+					 for(UserConcentrator userCon : userConList)
+					 {
+						 FuegoPushInfo pushInfo = AppLoginCache.getPushInfo(userCon.getUserID());
+						 
+						 if(null != pushInfo)
+						 {
+							 PushMessageJson json = new PushMessageJson();
+							 
+							 String title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
+							 String content = AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
+						 
+	 						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
+							 json.setObj(alarm.getId());
+			 
+	 						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
+						 }
+						 else
+						 {
+							 log.info("no need to push,the user have not been logined, user id is " + userCon.getUserID());
+						 }
+					 
+					 }
+				 }
+				 else
+				 {
+					 log.warn("can not get manage user,we will not push anythig for the alarm"  + alarm);
+	 			 }
+			 }
+
 			 
 		 }
 		
@@ -95,7 +102,7 @@ public class PushServiceImpl implements PushService
  			 
 			 PushMessageJson json = new PushMessageJson();
 			 
-			 String title = PushMessagTypeEnum.NEWS_MSG.getStrValue();
+			 String title = PushMessagTypeEnum.NEWS_MSG.getStrValue()+e.getTitle();
 			 String content = "";
 			 json.setObjType(PushMessagTypeEnum.NEWS_MSG.getIntValue());
 			 json.setObj(e.getNewsID());

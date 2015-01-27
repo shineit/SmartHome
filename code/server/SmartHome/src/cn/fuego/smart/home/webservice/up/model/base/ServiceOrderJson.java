@@ -15,6 +15,11 @@ import java.io.Serializable;
 public class ServiceOrderJson implements Serializable
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String orderID;         //申请单号，
     private String orderName;       //申请单名称
     private int orderType;		//申请单类型(维修，安装，咨询)

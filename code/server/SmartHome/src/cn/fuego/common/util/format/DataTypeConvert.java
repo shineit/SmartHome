@@ -48,7 +48,35 @@ public class DataTypeConvert
 		}
 		return strList;
 	}
+
+	public static byte[] strToGbkBytes(String str)
+	{
+		byte[] bytes = null;
+		try
+		{
+			bytes = str.getBytes("gbk");
+		} catch (UnsupportedEncodingException e)
+		{
+			log.error("convert error",e);
+		}
+		return bytes;
+	}
 	
+	public static String gbkBytesToStr(byte[] bytes)
+	{
+		String isoString = null;
+		try
+		{
+			isoString = new String(bytes, "gbk");
+		} catch (UnsupportedEncodingException e)
+		{
+			// TODO Auto-generated catch block
+			log.error("convert error",e);
+		}
+		return isoString;
+	}
+	/**将单字节数组转换为字符串**/
+
 	public static String bytesToStr(byte[] bytes)
 	{
 		String isoString = null;
@@ -62,6 +90,8 @@ public class DataTypeConvert
 		}
 		return isoString;
 	}
+	/**为了方便处理，将java字符串当做单字节处理，用于二进制通信**/
+
 	public static byte[] strToBytes(String str)
 	{
 		byte[] bytes = null;
