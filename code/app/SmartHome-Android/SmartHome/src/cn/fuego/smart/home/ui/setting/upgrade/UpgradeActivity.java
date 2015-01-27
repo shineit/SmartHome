@@ -43,12 +43,11 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
     private int progressCount = 0;                               //下载进度  
     private final int DOWNLOAD_ING = 1;                     //标记正在下载  
     private final int DOWNLOAD_OVER = 2;                    //标记下载完成 
+    private final int DOWNLOAD_CANCEL = 3;                    //标记下载取消
     private final int DOWNLOAD_ERROR = 0;                   //标记下载失败
     private boolean interceptFlag = false;  //是否取消下载 
     private AlertDialog downloadDialog;    //下载弹出框  
-    
-    /* 保存解析的XML信息 */  
-    HashMap<String, String> mHashMap;  
+
     /* 下载保存路径 */  
     private String mSavePath; 
 	public void initRes()
@@ -61,7 +60,7 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		 initRes();
+		 //initRes();
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.update_page);
@@ -200,11 +199,18 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
             	progress_txt.setText("下载进度："+String.valueOf(progressCount)+"%");
                 break;  
             case DOWNLOAD_OVER:    //安装   
-                down();           
+            	closeDialog();
+                startInstall();           
                 break; 
             case DOWNLOAD_ERROR:
-            	showMessage((Integer)MISPErrorMessageConst.ERROR_UPDATE_VERSION_FAILED);
+            	closeDialog();
+
+            	showMessage(MISPErrorMessageConst.ERROR_UPDATE_VERSION_FAILED);
             	break;
+            case DOWNLOAD_CANCEL:
+            	closeDialog();
+
+             	break;
             default:  
                 break;  
             }  
@@ -212,6 +218,15 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
         }  
   
     } ;
+    private void closeDialog()
+    {
+    	if(null != downloadDialog)
+    	{
+    		downloadDialog.cancel();
+    	}
+		
+		downloadDialog = null;
+    }
 	void downFile(final String path)
 	{
 		android.app.AlertDialog.Builder builder = new AlertDialog.Builder(UpgradeActivity.this); 
@@ -234,6 +249,7 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 			}
 		});
 		 downloadDialog = builder.create();  
+		 downloadDialog.setCanceledOnTouchOutside(false);
 	     downloadDialog.show(); 
 
 		new Thread()
@@ -252,9 +268,9 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 				    	 String sdpath = Environment.getExternalStorageDirectory() + "/";
 				    	// mSavePath = sdpath + getResources().getString(R.string.app_name);//创建文件名 
 				    	 mSavePath = sdpath ;
-					        URL url = new URL(path);
-					        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-					        conn.connect();
+					     URL url = new URL(path);
+					     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+					     conn.connect();
 				    	 File file = new File(mSavePath);  
 			             // 判断文件目录是否存在  
 			             if (!file.exists())  
@@ -277,9 +293,16 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 							byte[] buf = new byte[1024];
 							int ch = 0;
 							int count = 0;
-							while (!interceptFlag && ((ch = is.read(buf)) != -1))
+							while (((ch = is.read(buf)) != -1))
 							{
-								
+								if(interceptFlag)
+								{
+									mhandler.sendEmptyMessage(DOWNLOAD_CANCEL);
+									interceptFlag=false;
+									return;
+
+								}
+
 								count += ch;
 								progressCount = (int) (((float)count/length)*100);
 								mhandler.sendEmptyMessage(DOWNLOAD_ING); 
@@ -294,7 +317,6 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 						{
 							fileOutputStream.close();
 						}
-						//down();
 						mhandler.sendEmptyMessage(DOWNLOAD_OVER);
 					     
 				     }
@@ -310,10 +332,6 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 				} catch (Exception e)
 				{
 					log.error("update failed",e);
-					//Message message = new Message();
-					//message.obj = MISPErrorMessageConst.ERROR_UPDATE_VERSION_FAILED;
-					//mhandler.sendMessage(message);
-					//showMessage(MISPErrorMessageConst.ERROR_VERSION_FAILED);
 					mhandler.sendEmptyMessage(DOWNLOAD_ERROR);
 				}  
 			}
@@ -322,22 +340,19 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 
 	}
 
-	void down()
+	void startInstall()
 	{
 		mhandler.post(new Runnable()
 		{
 			public void run()
 			{
-				downloadDialog.cancel();
-				update();
+				install();
 			}
 		});
 
 	}
-	/*
-	 * 安装下载的apk文件
-	 */
-	void update()
+
+	void install()
 	{
 
 		

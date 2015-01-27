@@ -139,14 +139,14 @@ public class SafeFragment extends BaseFragment implements OnHeaderUpdateListener
 			Intent i = new Intent();
 			i.setClass(this.getActivity(), SafeConfigActivity.class);
 			i.putExtra(safeViewModel.getConcentratorID(), String.valueOf(selectItem.getConcentratorID()));
+			i.putExtra(safeViewModel.getSensorID(), String.valueOf(selectItem.getSensorID()));//传感器端口号
 			i.putExtra(safeViewModel.getSensorTypeName(), selectItem.getSensorTypeName());
 			i.putExtra(safeViewModel.getDescriptions(), selectItem.getDescriptions());
 			i.putExtra(safeViewModel.getWarnValue(), selectItem.getWarnValue());
 			i.putExtra(safeViewModel.getErrorValue(), selectItem.getErrorValue());
 			i.putExtra(safeViewModel.getMark(), selectItem.getMark());
 		    //i.putExtra(safeViewModel.getCtrGroupID(), String.valueOf(selectItem.getCtrGroupID()));
-			i.putExtra(safeViewModel.getId(), String.valueOf(selectItem.getId()));//作为修改数据的索引
-			
+			i.putExtra(safeViewModel.getId(), String.valueOf(selectItem.getId()));//作为修改数据的索引			
 			i.putExtra(safeViewModel.getCtrSensorID(), String.valueOf(selectItem.getCtrSensorID()));
 			i.putExtra(safeViewModel.getCtrChannelID(), String.valueOf(selectItem.getCtrChannelID()));
 			//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );

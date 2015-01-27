@@ -52,6 +52,8 @@ public class ConcentConfigActivity extends BaseActivtiy implements OnClickListen
 		config_btn.setOnClickListener(this);
 		txt_id = (TextView) findViewById(R.id.concent_config_id);
 		txt_id.setText(String.valueOf(concent.getConcentratorID()));
+		txt_id.requestFocus();
+		txt_id.requestFocusFromTouch();
 		//用于展示列表
 		CheckBox list_chk = (CheckBox) findViewById(R.id.concnet_config_list_chk);
 		list_chk.setOnCheckedChangeListener(this);

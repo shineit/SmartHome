@@ -88,6 +88,8 @@
                         android:id="@+id/concent_config_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:gravity="left|center"
                         android:paddingRight="20dp"
                         android:text="00001"
@@ -149,15 +151,15 @@
                     <EditText
                         android:id="@+id/concent_config_name"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:hint="例如：住宅集中器"
-                        android:paddingLeft="10dp"
+                        android:padding="10dp"
                         android:singleLine="true"
-                        android:textSize="@dimen/content_font_size" />
+                        android:textSize="@dimen/content_font_size_sm" />
 
                 </LinearLayout>
 
@@ -183,7 +185,7 @@
                     <EditText
                         android:id="@+id/concent_config_desp"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="80dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:background="@drawable/edittext_sel"
@@ -192,7 +194,7 @@
                         android:hint="例如：安装在客厅电视柜二层"
                         android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/content_font_size" />
+                        android:textSize="@dimen/content_font_size_sm" />
 
                 </LinearLayout>
 

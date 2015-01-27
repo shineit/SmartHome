@@ -61,6 +61,7 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 			i.setClass(this.getActivity(), ControlConfigActivity.class);
 			i.putExtra(ctrViewModel.getId(), String.valueOf(selectItem.getId()));
 			i.putExtra(ctrViewModel.getConcentratorID(), String.valueOf(selectItem.getConcentratorID()));
+			i.putExtra(ctrViewModel.getSensorID(), String.valueOf(selectItem.getSensorID()));
 			i.putExtra(ctrViewModel.getSensorTypeName(), selectItem.getSensorTypeName());
 			i.putExtra(ctrViewModel.getDescriptions(), selectItem.getDescriptions());
 			i.putExtra(ctrViewModel.getMark(), selectItem.getMark());

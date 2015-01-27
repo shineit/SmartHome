@@ -41,6 +41,7 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 	private ArrayAdapter<String> markAdapter;
 	private Spinner markSpinner;
 	private String selMark;	
+	private String targetID;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -69,12 +70,13 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 
 	private void initData(Intent intent)
 	{
+		targetID=ctrViewModel.getId();
 		TextView txt_concentID= (TextView) findViewById(R.id.control_manage_concentID);
 		//txt_concentID.setText(String.valueOf(intent.getIntExtra(ctrViewModel.getConcentratorID(), 0)));
 		txt_concentID.setText(intent.getStringExtra(ctrViewModel.getConcentratorID()));
 		txt_id =(TextView) findViewById(R.id.control_manage_ctrID);
 		//txt_id.setText(String.valueOf(intent.getIntExtra(ctrViewModel.getId(), 0)));
-		txt_id.setText(intent.getStringExtra(ctrViewModel.getId()));
+		txt_id.setText(intent.getStringExtra(ctrViewModel.getSensorID()));
 		TextView txt_type= (TextView) findViewById(R.id.control_manage_ctrType);
 		txt_type.setText(intent.getStringExtra(ctrViewModel.getSensorTypeName()));
 		
@@ -168,7 +170,7 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
 		//后台通过id 索引
-		homesensor.setId(Long.valueOf(this.getTxt_id().getText().toString().trim()));
+		homesensor.setId(Long.valueOf(targetID));
 		homesensor.setDescriptions(this.getTxt_desp().getText().toString().trim());
 		//后台不作处理
 		
