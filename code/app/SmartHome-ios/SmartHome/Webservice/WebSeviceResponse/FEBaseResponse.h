@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SSObject.h"
 #import "FEResult.h"
 @class FEResult;
 
-@interface FEBaseResponse : NSObject
+@interface FEBaseResponse : SSObject
 
 @property (nonatomic, strong, readonly) FEResult *result;
 

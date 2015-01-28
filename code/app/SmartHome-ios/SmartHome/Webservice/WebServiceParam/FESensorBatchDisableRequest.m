@@ -14,11 +14,7 @@
 -(id)initWithSensorList:(NSArray *)sensorList{
     self = [super initWithMothed:__METHOD_SENSOR_DISABLE];
     if (self) {
-        NSMutableArray *sensors = [NSMutableArray new];
-        for (FESensor *sensor in sensorList) {
-            [sensors addObject:sensor.dictionary];
-        }
-        _sensorList = sensors;
+        _sensorList = sensorList;
     }
     return self;
 }

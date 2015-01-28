@@ -12,7 +12,7 @@
 
 @interface FEMarkRequest : FERequestBaseData
 @property (nonatomic, strong, readonly) NSNumber *userID;
-@property (nonatomic, strong, readonly) NSDictionary *page;
+@property (nonatomic, strong, readonly) FEPage *page;
 
 -(id)initWithUserid:(NSNumber *)uid page:(FEPage *)page;
 

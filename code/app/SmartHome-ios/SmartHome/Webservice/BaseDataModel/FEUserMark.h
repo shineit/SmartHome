@@ -7,9 +7,9 @@
 //
 
 //#import "FERequestBaseData.h"
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FEUserMark : FEDictionaryObject
+@interface FEUserMark : SSObject
 
 @property (nonatomic, strong, readonly) NSNumber *userID;
 @property (nonatomic, strong, readonly) NSString *mark;

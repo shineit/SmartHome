@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FEUser : FEDictionaryObject
+@interface FEUser : SSObject
 @property (nonatomic, strong, readonly) NSArray *listAttr;
 @property (nonatomic, strong, readonly) NSNumber *role;
 @property (nonatomic, strong, readonly) NSNumber *userID;

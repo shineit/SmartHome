@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface YSCamera : FEDictionaryObject
+@interface YSCamera : SSObject
 
 @property (nonatomic, strong) NSString *cameraId;
 @property (nonatomic, strong) NSString *cameraName;

@@ -15,12 +15,8 @@
 -(id)initWithPage:(FEPage *)page attribute:(NSArray *)attr userID:(NSNumber *)uid{
     self = [super initWithMothed:__METHOD_SEVICE_ORDER];
     if (self) {
-        _page = page.dictionary;
-        NSMutableArray *attrarray = [NSMutableArray array];
-        for (NSObject *item in attr) {
-            [attrarray addObject:item.dictionary];
-        }
-        _filterList = attrarray;
+        _page = page;
+        _filterList = attr;
         _userID = uid;
     }
     return self;

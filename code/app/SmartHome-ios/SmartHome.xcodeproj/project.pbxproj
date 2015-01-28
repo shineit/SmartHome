@@ -33,6 +33,8 @@
 		1475A0E01A03D05800EE8353 /* CDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0DF1A03D05800EE8353 /* CDUser.m */; };
 		1475A0E31A047CDF00EE8353 /* FEMarkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0E21A047CDF00EE8353 /* FEMarkRequest.m */; };
 		1475A0E91A048C5000EE8353 /* FEServiceOrederRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0E81A048C5000EE8353 /* FEServiceOrederRequest.m */; };
+		14950D531A787F36001416A7 /* SSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D521A787F36001416A7 /* SSObject.m */; };
+		14950D561A78819D001416A7 /* NSString+Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D551A78819D001416A7 /* NSString+Attribute.m */; };
 		149894201A4C081300903B22 /* FEUserMarkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498941F1A4C081300903B22 /* FEUserMarkResponse.m */; };
 		1498945B1A4D84EE00903B22 /* FEPopPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945A1A4D84EE00903B22 /* FEPopPickerView.m */; };
 		1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945D1A4DAF8800903B22 /* FEDevicesCache.m */; };
@@ -46,7 +48,6 @@
 		1499E6D11A0BAD0E002F5DDB /* FEUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6C71A0BAD0E002F5DDB /* FEUser.m */; };
 		1499E6D21A0BAD0E002F5DDB /* FEUserMark.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6C91A0BAD0E002F5DDB /* FEUserMark.m */; };
 		1499E6E81A0BAD1A002F5DDB /* FEBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6D51A0BAD1A002F5DDB /* FEBaseResponse.m */; };
-		1499E6E91A0BAD1A002F5DDB /* FEDictionaryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6D71A0BAD1A002F5DDB /* FEDictionaryObject.m */; };
 		1499E6EA1A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6D91A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m */; };
 		1499E6EB1A0BAD1A002F5DDB /* FENewsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6DB1A0BAD1A002F5DDB /* FENewsResponse.m */; };
 		1499E6EC1A0BAD1A002F5DDB /* FEOrderListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6DD1A0BAD1A002F5DDB /* FEOrderListResponse.m */; };
@@ -95,7 +96,6 @@
 		14B4B71D19FE729E00FF6BC0 /* FESettingItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B4B71C19FE729E00FF6BC0 /* FESettingItemCell.m */; };
 		14B52AC11A45B9670005F0D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B52AC01A45B9670005F0D7 /* LaunchScreen.xib */; };
 		14BDCB201A0A6C1800060AE5 /* FEModifyPasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BDCB1F1A0A6C1700060AE5 /* FEModifyPasswordRequest.m */; };
-		14C2FADD1A049C0100DFEE34 /* NSObject+Dictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C2FADC1A049C0100DFEE34 /* NSObject+Dictionary.m */; };
 		14C6DE4619F549EE006384B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6DE4519F549EE006384B2 /* Foundation.framework */; };
 		14C6DE4819F549EE006384B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6DE4719F549EE006384B2 /* CoreGraphics.framework */; };
 		14C6DE4A19F549EE006384B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6DE4919F549EE006384B2 /* UIKit.framework */; };
@@ -187,6 +187,10 @@
 		1475A0E21A047CDF00EE8353 /* FEMarkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMarkRequest.m; sourceTree = "<group>"; };
 		1475A0E71A048C5000EE8353 /* FEServiceOrederRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEServiceOrederRequest.h; sourceTree = "<group>"; };
 		1475A0E81A048C5000EE8353 /* FEServiceOrederRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEServiceOrederRequest.m; sourceTree = "<group>"; };
+		14950D511A787F36001416A7 /* SSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSObject.h; sourceTree = "<group>"; };
+		14950D521A787F36001416A7 /* SSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSObject.m; sourceTree = "<group>"; };
+		14950D541A78819D001416A7 /* NSString+Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Attribute.h"; sourceTree = "<group>"; };
+		14950D551A78819D001416A7 /* NSString+Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Attribute.m"; sourceTree = "<group>"; };
 		1498941E1A4C081300903B22 /* FEUserMarkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUserMarkResponse.h; sourceTree = "<group>"; };
 		1498941F1A4C081300903B22 /* FEUserMarkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMarkResponse.m; sourceTree = "<group>"; };
 		149894591A4D84ED00903B22 /* FEPopPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEPopPickerView.h; sourceTree = "<group>"; };
@@ -213,8 +217,6 @@
 		1499E6C91A0BAD0E002F5DDB /* FEUserMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMark.m; sourceTree = "<group>"; };
 		1499E6D41A0BAD1A002F5DDB /* FEBaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEBaseResponse.h; sourceTree = "<group>"; };
 		1499E6D51A0BAD1A002F5DDB /* FEBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEBaseResponse.m; sourceTree = "<group>"; };
-		1499E6D61A0BAD1A002F5DDB /* FEDictionaryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDictionaryObject.h; sourceTree = "<group>"; };
-		1499E6D71A0BAD1A002F5DDB /* FEDictionaryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEDictionaryObject.m; sourceTree = "<group>"; };
 		1499E6D81A0BAD1A002F5DDB /* FEHistoryAlarmResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEHistoryAlarmResponse.h; sourceTree = "<group>"; };
 		1499E6D91A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEHistoryAlarmResponse.m; sourceTree = "<group>"; };
 		1499E6DA1A0BAD1A002F5DDB /* FENewsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FENewsResponse.h; sourceTree = "<group>"; };
@@ -305,8 +307,6 @@
 		14B52AC01A45B9670005F0D7 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		14BDCB1E1A0A6C1700060AE5 /* FEModifyPasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEModifyPasswordRequest.h; sourceTree = "<group>"; };
 		14BDCB1F1A0A6C1700060AE5 /* FEModifyPasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEModifyPasswordRequest.m; sourceTree = "<group>"; };
-		14C2FADB1A049C0100DFEE34 /* NSObject+Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Dictionary.h"; sourceTree = "<group>"; };
-		14C2FADC1A049C0100DFEE34 /* NSObject+Dictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Dictionary.m"; sourceTree = "<group>"; };
 		14C6DE4219F549EE006384B2 /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C6DE4519F549EE006384B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14C6DE4719F549EE006384B2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -478,8 +478,10 @@
 		1499E6B21A0BAB43002F5DDB /* BaseRequest */ = {
 			isa = PBXGroup;
 			children = (
-				14C2FADB1A049C0100DFEE34 /* NSObject+Dictionary.h */,
-				14C2FADC1A049C0100DFEE34 /* NSObject+Dictionary.m */,
+				14950D511A787F36001416A7 /* SSObject.h */,
+				14950D521A787F36001416A7 /* SSObject.m */,
+				14950D541A78819D001416A7 /* NSString+Attribute.h */,
+				14950D551A78819D001416A7 /* NSString+Attribute.m */,
 				14FDBDE41A0234D600C130A2 /* FERequestBaseData.h */,
 				14FDBDE51A0234D600C130A2 /* FERequestBaseData.m */,
 				149A01901A08CDD3008F239F /* FERelyUserRequest.h */,
@@ -590,8 +592,6 @@
 		1499E6F31A0BAD57002F5DDB /* BaseResponse */ = {
 			isa = PBXGroup;
 			children = (
-				1499E6D61A0BAD1A002F5DDB /* FEDictionaryObject.h */,
-				1499E6D71A0BAD1A002F5DDB /* FEDictionaryObject.m */,
 				1499E6D41A0BAD1A002F5DDB /* FEBaseResponse.h */,
 				1499E6D51A0BAD1A002F5DDB /* FEBaseResponse.m */,
 			);
@@ -1066,11 +1066,13 @@
 				14B447BD19F6A5FD0078EAB4 /* FEControlObject.m in Sources */,
 				1499E6CE1A0BAD0E002F5DDB /* FEPage.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
+				14950D531A787F36001416A7 /* SSObject.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
 				1475A0E31A047CDF00EE8353 /* FEMarkRequest.m in Sources */,
 				14C6DEBC19F54AE2006384B2 /* FECommonTabBarController.m in Sources */,
 				1454A5761A04FA8E00A9AE35 /* FEServiceOrderSetRequest.m in Sources */,
 				14C6DEE819F54F9C006384B2 /* FEWarringInfoVC.m in Sources */,
+				14950D561A78819D001416A7 /* NSString+Attribute.m in Sources */,
 				14B03B2F1A519C68000826C9 /* FETableView.m in Sources */,
 				14C6DEF519F5512A006384B2 /* FECloudControlVC.m in Sources */,
 				143CED1519F7B7DE00FEDE61 /* NSString+MD5.m in Sources */,
@@ -1103,12 +1105,10 @@
 				14B03B7B1A593838000826C9 /* FEHomeItemCollectionReusableView.m in Sources */,
 				1499E6ED1A0BAD1A002F5DDB /* FEOrderSetResponse.m in Sources */,
 				14C6DEFB19F5EDE4006384B2 /* FENewsTableViewCell.m in Sources */,
-				14C2FADD1A049C0100DFEE34 /* NSObject+Dictionary.m in Sources */,
 				14D7B7AB1A0653640072D31C /* FECheckButtonGroup.m in Sources */,
 				1499E6EA1A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m in Sources */,
 				149A01921A08CDD3008F239F /* FERelyUserRequest.m in Sources */,
 				14B03B331A51A111000826C9 /* CustomIOS7AlertView.m in Sources */,
-				1499E6E91A0BAD1A002F5DDB /* FEDictionaryObject.m in Sources */,
 				1499E6CF1A0BAD0E002F5DDB /* FEResult.m in Sources */,
 				146617271A049975009C85B8 /* FENewsRequest.m in Sources */,
 				145320CE1A10F8A400C4E209 /* FEEnumString.m in Sources */,

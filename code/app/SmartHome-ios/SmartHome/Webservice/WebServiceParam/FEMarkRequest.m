@@ -16,7 +16,7 @@
     self = [super initWithMothed:__METHOD_MARK_LIST];
     if (self) {
         _userID = uid;
-        _page = page.dictionary;
+        _page = page;
     }
     return self;
 }

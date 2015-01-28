@@ -12,7 +12,7 @@
 
 @interface FEMarkSetRequest : FERequestBaseData
 
-@property (nonatomic, strong, readonly) NSDictionary *userMark;
+@property (nonatomic, strong, readonly) FEUserMark *userMark;
 
 -(id)initWithMark:(FEUserMark *)umark;
 

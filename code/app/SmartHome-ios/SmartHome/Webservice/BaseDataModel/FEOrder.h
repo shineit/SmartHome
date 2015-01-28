@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FEOrder : FEDictionaryObject
+@interface FEOrder : SSObject
 
 @property (nonatomic, strong, readonly) NSString *orderID;
 @property (nonatomic, strong, readonly) NSString *orderName;

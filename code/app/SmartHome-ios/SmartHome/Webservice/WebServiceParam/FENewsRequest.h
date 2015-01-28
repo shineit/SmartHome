@@ -12,7 +12,7 @@
 
 @interface FENewsRequest : FERequestBaseData
 
-@property (nonatomic, strong, readonly) NSDictionary *page;
+@property (nonatomic, strong, readonly) FEPage *page;
 @property (nonatomic, strong, readonly) NSArray *filterList; //FEAttribute
 
 

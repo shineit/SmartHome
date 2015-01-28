@@ -16,15 +16,8 @@
     self = [super initWithMothed:method];
     if (self) {
         _userID = uid;
-        _page = page.dictionary;
-        if (attrs.count) {
-            NSMutableArray *marray = [NSMutableArray new];
-            for (FEAttribute *attr in attrs) {
-                [marray addObject:attr.dictionary];
-            }
-            _filterList = marray;
-        }
-        
+        _page = page;
+        _filterList = attrs;
     }
     return self;
 }

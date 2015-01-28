@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSObject+Dictionary.h"
+#import "SSObject.h"
 
 #define __METHOD_SIGIN              @"user/login" //登陆
 #define __METHOD_MARK_LIST          @"user/mark/list"
@@ -27,7 +27,7 @@
 #define __METHOD_SENSOR_DISABLE     @"sensor/batch/disable"
 
 
-@interface FERequestBaseData : NSObject
+@interface FERequestBaseData : SSObject
 
 @property (nonatomic, strong, readonly) NSString *method;
 

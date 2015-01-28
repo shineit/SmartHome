@@ -14,7 +14,7 @@
 -(id)initWithMark:(FEUserMark *)mark{
     self = [super initWithMothed:__METHOD_MARK_DELET];
     if (self) {
-        _userMark = mark.dictionary;
+        _userMark = mark;
     }
     return self;
 }

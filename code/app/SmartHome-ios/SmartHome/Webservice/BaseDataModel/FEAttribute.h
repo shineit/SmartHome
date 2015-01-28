@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FEAttribute : FEDictionaryObject
+@interface FEAttribute : SSObject
 
 @property (nonatomic, strong, readonly) NSString *attrName;
 @property (nonatomic, strong, readonly) NSString *attrValue;

@@ -65,7 +65,6 @@
     
     //request news
     [self requestNews];
-    [self requestHistoryWarring];
 }
 
 -(void)initUI{
@@ -119,7 +118,7 @@
     _isNewsResquested = YES;
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
-    FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr.dictionary]];
+    FENewsRequest *news = [[FENewsRequest alloc] initWithPage:page filter:@[attr]];
     
     __weak typeof(self) weakself = self;
     
@@ -133,59 +132,6 @@
     }];
 }
 
-//request alarm list
--(void)requestHistoryWarring{
-    _isWarringRequested = YES;
-    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
-    FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
-    FEHistoryAlarmRequest *hdata = [[FEHistoryAlarmRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:@[attr]];
-    
-     __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] historyAlarmList:hdata reponse:^(NSError *error, FEHistoryAlarmResponse *response) {
-        if (!error && response.result.errorCode.integerValue == 0){
-            [weakself.warringList removeAllObjects];
-            [weakself.warringList addObjectsFromArray:response.alarmList];
-            [weakself.warringtable reloadData];
-        }
-    }];
-    
-}
-
--(void)segmentedControlChangedValue:(HMSegmentedControl *)control{
-    if (control.selectedSegmentIndex == 0) {
-        if (self.newstable.isHidden == NO) {
-            return;
-        }else{
-            if (!_isNewsResquested) {
-                [self requestNews];
-            }
-            [UIView animateWithDuration:0.2
-                                  delay:0
-                                options:UIViewAnimationOptionTransitionFlipFromLeft
-                             animations:^(void){
-                                 self.newstable.hidden = NO;
-                                 self.warringtable.hidden = YES;
-                             }
-                             completion:nil];
-        }
-    }else if(control.selectedSegmentIndex == 1){
-        if (self.warringtable.isHidden == NO) {
-            return;
-        }else{
-            if (!_isWarringRequested) {
-                [self requestHistoryWarring];
-            }
-            [UIView animateWithDuration:0.2
-                                  delay:0
-                                options:UIViewAnimationOptionTransitionFlipFromLeft
-                             animations:^(void){
-                                 self.newstable.hidden = YES;
-                                 self.warringtable.hidden = NO;
-                             }
-                             completion:nil];
-        }
-    }
-}
 
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

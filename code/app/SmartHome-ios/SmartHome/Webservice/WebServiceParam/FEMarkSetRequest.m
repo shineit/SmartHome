@@ -14,7 +14,7 @@
 -(id)initWithMark:(FEUserMark *)umark{
     self = [super initWithMothed:__METHOD_MARK_ADD];
     if (self) {
-        _userMark = umark.dictionary;
+        _userMark = umark;
     }
     return self;
 }

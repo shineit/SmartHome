@@ -13,7 +13,7 @@
 @interface FEServiceOrderSetRequest : FERequestBaseData
 
 @property (nonatomic, strong, readonly) NSString *command;
-@property (nonatomic, strong, readonly) NSDictionary *serviceOrder;
+@property (nonatomic, strong, readonly) FEOrder *serviceOrder;
 
 -(id)initWithCmd:(NSString *)cmd serviceOrder:(FEOrder *)order;
 

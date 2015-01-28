@@ -14,7 +14,7 @@
 -(id)initWithPage:(FEPage *)page filter:(NSArray *)filer{
     self = [super initWithMothed:__METHOD_GET_NEWS];
     if (self) {
-        _page = page.dictionary;
+        _page = page;
         _filterList = filer;
     }
     return self;

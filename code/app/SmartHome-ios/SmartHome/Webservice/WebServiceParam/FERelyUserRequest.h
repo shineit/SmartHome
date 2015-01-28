@@ -12,7 +12,7 @@
 
 @interface FERelyUserRequest : FERequestBaseData
 
-@property (nonatomic, strong, readonly) NSDictionary *page;
+@property (nonatomic, strong, readonly) FEPage *page;
 @property (nonatomic, strong, readonly) NSNumber *userID;
 @property (nonatomic, strong, readonly) NSArray *filterList;
 

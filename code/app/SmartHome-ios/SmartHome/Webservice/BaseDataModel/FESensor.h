@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FESensor : FEDictionaryObject
+@interface FESensor : SSObject
 
 //private int id;              //唯一ID，终端设备的出场ID，具有唯一性
 //private int concentratorID;  //集中器ID

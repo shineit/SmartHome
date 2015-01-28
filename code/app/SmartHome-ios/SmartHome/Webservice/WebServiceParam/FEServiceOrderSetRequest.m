@@ -15,7 +15,7 @@
     self = [super initWithMothed:__METHOD_SEVICE_ORDER_SET];
     if (self) {
         _command = cmd;
-        _serviceOrder = order.dictionary;
+        _serviceOrder = order;
     }
     return self;
 }

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FEAlarm : FEDictionaryObject
+@interface FEAlarm : SSObject
 
 //private int id;  			//告警ID，自增长
 //private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu

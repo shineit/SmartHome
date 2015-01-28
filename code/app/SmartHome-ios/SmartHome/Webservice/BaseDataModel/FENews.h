@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "FEDictionaryObject.h"
+#import "SSObject.h"
 
-@interface FENews : FEDictionaryObject
+@interface FENews : SSObject
 
 @property (nonatomic, strong, readonly) NSString *author;
 @property (nonatomic, strong, readonly) NSString *content;
