@@ -23,7 +23,6 @@ import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.model.SafeViewModel;
 import cn.fuego.smart.home.ui.model.SpinnerDataModel;
 import cn.fuego.smart.home.ui.setting.user.MarkManageActivity;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
@@ -34,7 +33,6 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 	
-	private SafeViewModel safeViewModel = new SafeViewModel();
 	private List<String> markList =  null;
 	private List<SpinnerDataModel> ctrList=null ;
 	private ArrayAdapter<String> markAdapter;
@@ -45,8 +43,8 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	private TextView txt_concentID,txt_sensorID,txt_sensorType,txt_terminID;
 	private EditText txt_desp,txt_warn,txt_error;
 	private String selMark,selCtrSensorID,selCtrChannelID;
-	private String targetID;
 	private ProgressDialog configPDialog;
+	private HomeSensorJson sensor;
 	//private Bundle bundle = new Bundle();
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -56,7 +54,6 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		ExitApplication.getInstance().addActivity(this);
 		Intent intent = this.getIntent();
 		initData(intent);
-
 		
 		Button back_btn = (Button)findViewById(R.id.safe_manage_back);
 		back_btn.setOnClickListener(this);
@@ -76,27 +73,27 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 	
 	private void initData(Intent intent)
 	{
-		targetID=intent.getStringExtra(safeViewModel.getId());
+		sensor = (HomeSensorJson) intent.getSerializableExtra(IntentCodeConst.BUNDLE_HOMESENSOR); 
+		//不可更改项
 /*		txt_concentID = (TextView) findViewById(R.id.safe_concnet_id);
 		txt_concentID.setText(intent.getStringExtra(safeViewModel.getConcentratorID()));*/
 		txt_terminID= (TextView) findViewById(R.id.safe_channel_id);
-		txt_terminID.setText(intent.getStringExtra(safeViewModel.getChannelID()));
+		txt_terminID.setText(String.valueOf(sensor.getChannelID()));
 		txt_sensorID = (TextView) findViewById(R.id.safe_sensor_objID);
-
-		txt_sensorID.setText(intent.getStringExtra(safeViewModel.getSensorID()));
+		txt_sensorID.setText(String.valueOf(sensor.getSensorID()));
 		txt_sensorType = (TextView) findViewById(R.id.safe_sensor_objType);
-		txt_sensorType.setText(intent.getStringExtra(safeViewModel.getSensorTypeName()));
-		
+		txt_sensorType.setText(sensor.getSensorTypeName());
+		//用户更改字段
 		txt_desp = (EditText) findViewById(R.id.safe_desp);
-		txt_desp.setText(intent.getStringExtra(safeViewModel.getDescriptions()));
+		txt_desp.setText(sensor.getDescriptions());
 		txt_warn = (EditText) findViewById(R.id.safe_warnValue);
-		txt_warn.setText(String.valueOf(intent.getIntExtra(safeViewModel.getWarnValue(), 0)));
+		txt_warn.setText(String.valueOf(sensor.getWarnValue()));
 		txt_error = (EditText) findViewById(R.id.safe_errorValue);
-		txt_error.setText(String.valueOf(intent.getIntExtra(safeViewModel.getErrorValue(), 0)));
+		txt_error.setText(String.valueOf(sensor.getErrorValue()));
 	
-		defaultLabel = intent.getStringExtra(safeViewModel.getMark());
-		String defCtrSensorID = intent.getStringExtra(safeViewModel.getCtrSensorID());
-		String defCtrChannelID = intent.getStringExtra(safeViewModel.getCtrChannelID());
+		defaultLabel = sensor.getMark();
+		String defCtrSensorID = String.valueOf(sensor.getCtrSensorID());
+		String defCtrChannelID = String.valueOf(sensor.getCtrChannelID());
 		markSpinner =  (Spinner) findViewById(R.id.safe_mark_spinner);
 		ctrSpinner = (Spinner) findViewById(R.id.safe_ctr_spinner);
         //获取标签栏选项数据
@@ -112,11 +109,8 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		markSpinner.setAdapter(markAdapter);
 		markSpinner.setSelection(getSelPosition(defaultLabel));
 		markAdapter.notifyDataSetChanged();
-		//getMarkData();
 		markSpinner.setOnItemSelectedListener(this);
-		
-		//获取控制器选项数据
-		//ctrList = SensorDataCache.getInstance().getCtrSpinnerList();
+
 		if(ctrList==null)
 		{
 			ctrList= SensorDataCache.getInstance().getCtrSpinnerList();
@@ -189,16 +183,17 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
-		//后台通过id 索引
-		homesensor.setId(Long.valueOf(targetID));
+		//不更改字段
+		homesensor.setId(sensor.getId());
+		homesensor.setSensorTypeName(sensor.getSensorTypeName());
+		homesensor.setSensorType(sensor.getSensorType());
+		//用户更改字段
 		homesensor.setDescriptions(this.getTxt_desp().getText().toString().trim());
-		//后台不作处理
+		//预留更改，目前可以做更改
 		homesensor.setWarnValue(Float.parseFloat(this.getTxt_warn().getText().toString().trim()));
 		homesensor.setErrorValue(Float.parseFloat(this.getTxt_error().getText().toString().trim()));
-		
 		//spinner 标签选中项
 		homesensor.setMark(selMark);
-		//homesensor.setCtrGroupID(selCtrID);
 		homesensor.setCtrSensorID(Long.valueOf(selCtrSensorID));
 		homesensor.setCtrChannelID(Integer.valueOf(selCtrChannelID));
 		req.setSensor(homesensor);
@@ -219,7 +214,6 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		{
 			configPDialog.dismiss();
 			Intent intent = new Intent();
-            //以下设置flag 有作用
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			//intent.putExtras(bundle);
 			SafeConfigActivity.this.setResult(IntentCodeConst.RESULT_CODE,intent);
@@ -231,6 +225,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		{
 			configPDialog.dismiss();
 			showToast(SafeConfigActivity.this, message);
+			log.info("the error message is :"+message.getErrorCode());
 		}
 	}
 

@@ -192,6 +192,7 @@
                         android:ems="10"
                         android:gravity="center_vertical|top"
                         android:hint="例如：安装在客厅电视柜二层"
+                        android:maxLength="13"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/content_font_size_sm" />

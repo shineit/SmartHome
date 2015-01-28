@@ -211,8 +211,9 @@
                         android:background="@drawable/edittext_sel"
                         android:ems="10"
                         android:height="20dp"
+                        android:maxLength="13"
                         android:paddingLeft="10dp"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/content_font_size_sm" />
 
                     <TextView
                         android:id="@+id/TextView01"
@@ -242,6 +243,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_toRightOf="@+id/TextView06"
                         android:background="@drawable/edittext_sel"
+                        android:editable="false"
                         android:ems="10"
                         android:height="20dp"
                         android:paddingLeft="10dp"
@@ -276,6 +278,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_toRightOf="@+id/TextView05"
                         android:background="@drawable/edittext_sel"
+                        android:editable="false"
                         android:ems="10"
                         android:height="20dp"
                         android:paddingLeft="10dp"

@@ -2,28 +2,19 @@ package cn.fuego.smart.home.ui.info;
 
 import java.util.List;
 
-import cn.fuego.common.util.format.DateUtil;
-import cn.fuego.misp.ui.list.MispListActivity;
-import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.R.layout;
-import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
-import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.ui.setting.service.ServiceApplyActivity;
-import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
-import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
-import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
-import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
-import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
-import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.misp.ui.list.MispListActivity;
+import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
+import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
+import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
+import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class NewsActivity extends MispListActivity<NewsJson> implements OnClickListener 
 {

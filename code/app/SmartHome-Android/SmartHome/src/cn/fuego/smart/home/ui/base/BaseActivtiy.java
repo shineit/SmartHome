@@ -110,11 +110,15 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
         int totalHeight = 0;   
         for (int i = 0, len = listAdapter.getCount(); i < len; i++) {   
             // listAdapter.getCount()返回数据项的数目   
-            View listItem = listAdapter.getView(i, null, listView);   
-            // 计算子项View 的宽高   
-            listItem.measure(0, 0);    
-            // 统计所有子项的总高度   
-            totalHeight += listItem.getMeasuredHeight();    
+            View listItem = listAdapter.getView(i, null, listView);  
+            if(listItem.getVisibility()!=View.GONE)
+            {
+                // 计算子项View 的宽高   
+                listItem.measure(0, 0);    
+                // 统计所有子项的总高度   
+                totalHeight += listItem.getMeasuredHeight(); 
+            }
+   
         }   
    
         ViewGroup.LayoutParams params = listView.getLayoutParams();   

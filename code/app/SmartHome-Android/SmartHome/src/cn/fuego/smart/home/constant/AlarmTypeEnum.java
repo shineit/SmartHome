@@ -25,7 +25,6 @@ public enum AlarmTypeEnum
 	RESET_ALARM(12,"复位"),
 	ACTION_ALARM(13,"动作"),
 	ACTION_RESET(14,"动作复位");
-
 	private int intValue;
 	private String strValue;
 	/**

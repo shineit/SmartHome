@@ -108,12 +108,15 @@ public class MarkAdapter extends BaseAdapter
 
 				}
 			});
-
+			if(markItem.equals("未分组"))
+			{
+				//convertView.setVisibility(View.GONE);
+				//removeItem(position);
+				holder.markTitle.setText(markItem);
+				holder.delBtn.setVisibility(View.GONE);
+			}
 		}
-         if(markItem.equals("未分组"))
-         {
-        	 convertView.setVisibility(View.GONE);
-         }
+
 		return convertView;
 	}
 	//移除item

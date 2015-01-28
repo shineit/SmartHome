@@ -15,16 +15,7 @@
     <string name="tabbar_setting">设置</string>
     <string name="actionbar_news">新闻公告</string>
     <string name="actionbar_alarm">告警信息</string>
-    <string name="title_activity_sigin">SiginActivity</string>
-    <string name="title_activity_sin">SinActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_service">ServiceActivity</string>
-    <string name="title_activity_service_apply">ServiceApplyActivity</string>
-    <string name="title_activity_user_manage">UserManageActivity</string>
-    <string name="title_activity_user_info">UserInfoActivity</string>
-    <string name="title_activity_modify_pwd">ModifyPwdActivity</string>
-    <string name="title_activity_logout">LogoutActivity</string>
-    <string name="title_activity_alarm_manage">AlarmManageActivity</string>
+
     <string name="tag_hint">Tag can be numbe alphabet, underscore, Chinese. Use , to split many tags.</string>
     <string name="alias_hint">Alias can be number, alphabet, underscore, Chinese.</string>
     <string name="style_hint">style should be number</string>
@@ -35,15 +26,5 @@
     <string name="error_network">Failed to init due to network exception.</string>
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
-    <string name="title_activity_news_view">NewsViewActivity</string>
-    <string name="title_activity_spinner_base">SpinnerBaseActivity</string>
-    <string name="title_activity_mark_manage">MarkManageActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_news">NewsActivity</string>
-    <string name="title_activity_alarm">AlarmActivity</string>
-    <string name="title_activity_token_verify">TokenVerifyActivity</string>
-    <string name="title_activity_about_us">AboutUsActivity</string>
-    <string name="title_activity_concent_config">ConcentConfigActivity</string>
-    <string name="title_activity_concent_list">ConcentListActivity</string>
 
 </resources>

@@ -23,7 +23,6 @@ import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.model.ControlViewModel;
 import cn.fuego.smart.home.ui.setting.user.MarkManageActivity;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
@@ -33,15 +32,14 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
-    private ControlViewModel ctrViewModel = new ControlViewModel();
     private ProgressDialog configPDialog;
-    private TextView txt_id;
-    private EditText  txt_desp,txt_mark,txt_groupID;
+    private EditText  txt_desp,txt_groupID;
 	private List<String> markList =  null;
 	private ArrayAdapter<String> markAdapter;
 	private Spinner markSpinner;
 	private String selMark;	
-	private String targetID;
+/*	private String targetID,sensorTypeID,sensorTypeName,warnValue,errorValue,ctrSensorID,ctrChannelID;*/
+	private HomeSensorJson sensor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -70,20 +68,22 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 
 	private void initData(Intent intent)
 	{
-		targetID=intent.getStringExtra(ctrViewModel.getId());
+		sensor = (HomeSensorJson) intent.getSerializableExtra(IntentCodeConst.BUNDLE_HOMESENSOR); 
+
 /*		TextView txt_concentID= (TextView) findViewById(R.id.control_manage_concentID);
 		txt_concentID.setText(intent.getStringExtra(ctrViewModel.getConcentratorID()));*/
+		TextView txt_id =(TextView) findViewById(R.id.control_manage_ctrID);
+		txt_id.setText(String.valueOf(sensor.getSensorID()));
 		TextView txt_channelID= (TextView) findViewById(R.id.control_channel_id);
-		txt_channelID.setText(intent.getStringExtra(ctrViewModel.getChannelID()));
-		txt_id =(TextView) findViewById(R.id.control_manage_ctrID);
-		txt_id.setText(intent.getStringExtra(ctrViewModel.getSensorID()));
+		txt_channelID.setText(String.valueOf(sensor.getChannelID()));
+
 		TextView txt_type= (TextView) findViewById(R.id.control_manage_ctrType);
-		txt_type.setText(intent.getStringExtra(ctrViewModel.getSensorTypeName()));
+		txt_type.setText(String.valueOf(sensor.getSensorTypeName()));
 		
 		txt_desp = (EditText) findViewById(R.id.control_manage_desp);
-		txt_desp.setText(intent.getStringExtra(ctrViewModel.getDescriptions()));
+		txt_desp.setText(sensor.getDescriptions());
 		
-		String defaultLabel = intent.getStringExtra(ctrViewModel.getMark());
+		String defaultLabel = sensor.getMark();
 		markSpinner =  (Spinner) findViewById(R.id.control_mark_spinner);
 
         //获取标签栏选项数据
@@ -100,8 +100,9 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		markSpinner.setSelection(getSelPosition(defaultLabel));
 		markAdapter.notifyDataSetChanged();
 		markSpinner.setOnItemSelectedListener(this);
+		//以下预留，暂不做页面显示
 		txt_groupID = (EditText) findViewById(R.id.control_manage_groupID);
-		txt_groupID.setText(String.valueOf(intent.getIntExtra(ctrViewModel.getGroupID(), 0)));
+		txt_groupID.setText(String.valueOf(sensor.getGroupID()));
 
 		
 	}
@@ -167,13 +168,19 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
 		HomeSensorJson homesensor= new HomeSensorJson();
 		//后台通过id 索引
-		homesensor.setId(Long.valueOf(targetID));
-		homesensor.setDescriptions(this.getTxt_desp().getText().toString().trim());
-		//后台不作处理
+		homesensor.setId(sensor.getId());		
+		//与web同处理
+		homesensor.setSensorType(sensor.getSensorType());
+		homesensor.setSensorTypeName(sensor.getSensorTypeName());
+		homesensor.setWarnValue(sensor.getWarnValue());
+		homesensor.setErrorValue(sensor.getErrorValue());
+		homesensor.setCtrSensorID(sensor.getCtrSensorID());
+		homesensor.setCtrChannelID(sensor.getCtrChannelID());
 		
+		homesensor.setDescriptions(txt_desp.getText().toString().trim());
 		//spinner 标签选中项
 		homesensor.setMark(selMark);
-		homesensor.setGroupID(Integer.valueOf(this.getTxt_groupID().getText().toString().trim()));
+		//homesensor.setGroupID(Integer.valueOf(this.getTxt_groupID().getText().toString().trim()));
 		req.setSensor(homesensor);
 		
 		WebServiceContext.getInstance().getSensorManageRest(this).setSensor(req);
@@ -209,28 +216,5 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		startActivity(intent);
 		
 	}
-	public TextView getTxt_id()
-	{
-		return txt_id;
-	}
-
-	public EditText getTxt_desp()
-	{
-		return txt_desp;
-	}
-
-	public EditText getTxt_mark()
-	{
-		return txt_mark;
-	}
-
-	public EditText getTxt_groupID()
-	{
-		return txt_groupID;
-	}
-
-
-
-
 	
 }

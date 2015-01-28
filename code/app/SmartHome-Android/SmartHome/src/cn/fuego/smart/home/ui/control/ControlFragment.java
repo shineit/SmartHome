@@ -13,7 +13,6 @@ import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.base.BaseFragment;
-import cn.fuego.smart.home.ui.model.ControlViewModel;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 
 public class ControlFragment extends BaseFragment implements  OnChildClickListener
@@ -21,7 +20,6 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 
 	private FuegoLog log = FuegoLog.getLog(getClass());
     private ControlListAdapter controlAdapter;
-    private ControlViewModel ctrViewModel = new ControlViewModel();
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) 
 	{
@@ -59,14 +57,10 @@ public class ControlFragment extends BaseFragment implements  OnChildClickListen
 		{
 			Intent i = new Intent();
 			i.setClass(this.getActivity(), ControlConfigActivity.class);
-			i.putExtra(ctrViewModel.getId(), String.valueOf(selectItem.getId()));
-			i.putExtra(ctrViewModel.getConcentratorID(), String.valueOf(selectItem.getConcentratorID()));
-			i.putExtra(ctrViewModel.getSensorID(), String.valueOf(selectItem.getSensorID()));
-			i.putExtra(ctrViewModel.getChannelID(), String.valueOf(selectItem.getChannelID()));
-			i.putExtra(ctrViewModel.getSensorTypeName(), selectItem.getSensorTypeName());
-			i.putExtra(ctrViewModel.getDescriptions(), selectItem.getDescriptions());
-			i.putExtra(ctrViewModel.getMark(), selectItem.getMark());
-			i.putExtra(ctrViewModel.getGroupID(), selectItem.getGroupID());
+			Bundle mBundle= new Bundle();
+		    mBundle.putSerializable(IntentCodeConst.BUNDLE_HOMESENSOR,selectItem);     
+	        i.putExtras(mBundle);
+		
 			startActivityForResult(i, IntentCodeConst.REQUEST_CODE);
 		}
 		return false;

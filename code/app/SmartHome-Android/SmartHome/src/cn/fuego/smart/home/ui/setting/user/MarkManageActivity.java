@@ -118,6 +118,8 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 			// 实例化一个ColorDrawable颜色为半透明
 			ColorDrawable dw = new ColorDrawable(0x90000000);
 			popupWindow.setBackgroundDrawable(dw);
+			popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);         
+			popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 			 
 		}
 

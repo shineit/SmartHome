@@ -19,4 +19,6 @@ public class IntentCodeConst
 {
 	public static final int REQUEST_CODE= 1;
 	public static final int RESULT_CODE= 10;
+	
+	public static final String BUNDLE_HOMESENSOR="homesensor";//序列化传递对象名
 }

@@ -5,8 +5,8 @@ public class MemoryCache
 	private static String token;
 
 	private static String version = "0.1";
-	//private static String serverIp = "115.231.168.14"; //嘉兴服务器地址
-	private static String serverIp = "192.168.1.106"; //本地1
+	private static String serverIp = "115.231.168.14"; //嘉兴服务器地址
+	//private static String serverIp = "192.168.1.106"; //本地1
 	//private static String serverIp = "192.168.0.102"; //本地2
 	private static String serverPort= "8080";
 	private static AppDeviceInfo pushInfo= new AppDeviceInfo() ;

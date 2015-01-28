@@ -87,11 +87,20 @@ public class SensorDataCache extends MispHttpHandler
 	{
 		if (message.isSuccess())
 		{
+			//设置初始或取消联动传感器情况					
+			//联动控制终端ID,Long ctrSensorID = 0xfffffffL;
+			//联动控制终端通道ID,private Integer ctrChannelID = 0xffff;
+			SpinnerDataModel defSD= new SpinnerDataModel();
+			defSD.setCtrSensorID(String.valueOf(0xfffffffL));
+			defSD.setCtrChannelID(String.valueOf(0xffff));
+			defSD.setText("未配置传感器");
+			
 			errorCode = message.getErrorCode();
 			GetSensorListRsp rsp =(GetSensorListRsp) message.getMessage().obj;
 			ctrSensorList.clear();
 			ctrSpinnerList.clear();
 			measureSensorList.clear();
+			ctrSpinnerList.add(defSD);
 			for(HomeSensorJson json : rsp.getSensorList())
 			{
 				switch (SensorKindEunm.getEnumByInt(json.getSensorKind()))
@@ -99,7 +108,6 @@ public class SensorDataCache extends MispHttpHandler
 				case CTRL_SENSOR:
 					ctrSensorList.add(json);
 					SpinnerDataModel spinnerData= new SpinnerDataModel();
-					//spinnerData.setValue(String.valueOf(json.getId()));
 					spinnerData.setCtrSensorID(String.valueOf(json.getSensorID()));
 					spinnerData.setCtrChannelID(String.valueOf(json.getChannelID()));
 					spinnerData.setText(json.getSensorTypeName()+"位于"+json.getMark());
@@ -147,8 +155,8 @@ public class SensorDataCache extends MispHttpHandler
 						markList.add(userMarkList.get(i).getMark());
 						
 					}
+					//默认分组-未分组
 					markList.add("未分组");
-
 				}
 				else
 				{

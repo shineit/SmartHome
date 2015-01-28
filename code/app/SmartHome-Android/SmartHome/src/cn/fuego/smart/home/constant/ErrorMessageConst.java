@@ -28,5 +28,8 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	
 	public static final int CAMERA_LINK_ERROR=10003;//摄像头连接异常
 	public static final int CAMERA_ACCOUNT_NOT_BUNDLE=10004; // 私有云账户未绑定
-
+	
+	public static final int CONCENTRATOR_NOT_EXISTED=10005;  //集中器不存在
+	public static final int SENSOR_NOT_EXISTED = 10006;   //传感器不存在
+ 
 }
