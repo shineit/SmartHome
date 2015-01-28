@@ -65,7 +65,7 @@
 			</dl>
 			<dl style="width:100%;">
 				<dt style="width:15%;">描述：</dt>			
-				<dd style="width:80%;"><textarea name="obj.description" cols="80" rows="4" maxlength="200">${obj.description}</textarea></dd>
+				<dd style="width:80%;"><textarea name="obj.description" cols="80" rows="2" maxlength="13">${obj.description}</textarea></dd>
 			</dl>					
 		</div>		
 

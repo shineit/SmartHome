@@ -130,9 +130,23 @@ public class SensorManageRestImpl implements SensorManageRest
 	public SetSensorRsp setSensor(SetSensorReq req)
 	{
 		SetSensorRsp rsp = new SetSensorRsp();
-		
-		HomeSensor sensor = ModelConvert.jsonToHomeSensor(req.getSensor());
- 		sensorService.setSensor(SensorSetCmdEnum.getEnumByInt(req.getCommand()), sensor, req.getUserID());
+		try
+		{
+			HomeSensor sensor = ModelConvert.jsonToHomeSensor(req.getSensor());
+	 		sensorService.setSensor(SensorSetCmdEnum.getEnumByInt(req.getCommand()), sensor, req.getUserID());
+ 
+		}
+		catch(MISPException e)
+		{
+			log.error("set sensor error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("set sensor error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
 		return rsp;
 	}
 
