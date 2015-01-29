@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.AlarmPageActivity;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.ui.about.AboutUsActivity;
@@ -16,6 +17,7 @@ import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.info.AlarmActivity;
 import cn.fuego.smart.home.ui.info.NewsActivity;
+import cn.fuego.smart.home.ui.info.NewsPageActivity;
 import cn.fuego.smart.home.ui.setting.concent.ConcentListActivity;
 import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
 import cn.fuego.smart.home.ui.setting.user.UserManageActivity;
@@ -90,7 +92,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			loadSensorData(3);
 			break;
 		case R.id.home_menu_alarm:	
-			jumpActivity(AlarmActivity.class);
+			//jumpActivity(AlarmActivity.class);
+			jumpActivity(AlarmPageActivity.class);
 			break;
 		case R.id.home_menu_plane: 
 			showDisable();
@@ -108,7 +111,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			jumpActivity(ServiceActivity.class);	
 			break;
 		case R.id.home_menu_news:
-			jumpActivity(NewsActivity.class);
+			//jumpActivity(NewsActivity.class);
+			jumpActivity(NewsPageActivity.class);
 			break;
 		case R.id.home_about_us_btn:
 			jumpActivity(AboutUsActivity.class);

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="集中器添加"
+                android:text="WIFI配置"
                 android:textColor="@color/white"
                 android:textSize="@dimen/head_font_size_sm" />
 
@@ -59,13 +59,16 @@
             <EditText
                 android:id="@+id/concent_add_ssid"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@+id/TextView01"
                 android:background="@drawable/edittext_sel"
+                android:editable="false"
                 android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:height="20dp"
                 android:maxLength="13"
                 android:paddingLeft="10dp"
@@ -93,7 +96,7 @@
             <EditText
                 android:id="@+id/concent_add_pwd"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@+id/TextView02"
@@ -104,7 +107,7 @@
                 android:paddingLeft="10dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size_sm" />
+                android:textSize="@dimen/content_font_size" />
 
             <TextView
                 android:id="@+id/TextView02"

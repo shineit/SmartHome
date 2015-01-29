@@ -24,7 +24,6 @@ public class MainActivity extends InstrumentedActivity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.main);
 		setContentView(R.layout.main_welcome);
 		//本地缓存;  
 		SharedPreUtil.initSharedPreference(getApplicationContext());
@@ -62,7 +61,7 @@ public class MainActivity extends InstrumentedActivity
 					MainActivity.this.overridePendingTransition(
 							R.anim.alpha_in, R.anim.alpha_out);
 				}
-				finish();
+				//finish();
 			}
 		}.start();
 		

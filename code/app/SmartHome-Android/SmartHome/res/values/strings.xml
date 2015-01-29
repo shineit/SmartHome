@@ -15,7 +15,6 @@
     <string name="tabbar_setting">设置</string>
     <string name="actionbar_news">新闻公告</string>
     <string name="actionbar_alarm">告警信息</string>
-
     <string name="tag_hint">Tag can be numbe alphabet, underscore, Chinese. Use , to split many tags.</string>
     <string name="alias_hint">Alias can be number, alphabet, underscore, Chinese.</string>
     <string name="style_hint">style should be number</string>
@@ -26,5 +25,7 @@
     <string name="error_network">Failed to init due to network exception.</string>
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
+    <string name="title_activity_news_page">NewsPageActivity</string>
+    <string name="title_activity_alarm_page">AlarmPageActivity</string>
 
 </resources>

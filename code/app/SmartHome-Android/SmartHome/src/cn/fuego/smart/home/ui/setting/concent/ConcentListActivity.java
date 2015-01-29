@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.fuego.misp.ui.list.MispListActivity;
-import cn.fuego.smart.home.ConcentAddActivity;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.service.MemoryCache;
