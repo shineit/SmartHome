@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.HomeAlarmView;
@@ -157,7 +158,15 @@ public class SensorManageRestImpl implements SensorManageRest
 	public GetHistoryAlarmListRsp getAlarmList(GetHistoryAlarmListReq req)
 	{
 		GetHistoryAlarmListRsp rsp = new GetHistoryAlarmListRsp();
-		List<HomeAlarmView> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID());
+		PageModel page = new PageModel();
+		
+		if(null != req.getPage())
+		{
+			page.setPageSize(req.getPage().getPageSize());
+			page.setCurrentPage(req.getPage().getCurrentPage());
+		}
+
+		List<HomeAlarmView> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID(),page.getStartNum(),page.getPageSize());
 		for(HomeAlarmView alarmview : alarmList)
 		{
 			HomeAlarmJson alarmJson = ModelConvert.HomeAlarmToJson(alarmview);

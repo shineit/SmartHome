@@ -19,7 +19,6 @@ import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
-import cn.fuego.smart.home.service.cache.AppDeviceInfo;
 import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.GetConcentratorListReq;

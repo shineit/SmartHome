@@ -51,6 +51,7 @@ public class DeviceOnlineCache
 			long nowTime = System.currentTimeMillis();
 			if(nowTime -30000 > deviceCache.get(entry))
 			{
+				entry.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
 				log.warn("the device is off line. the concentrator is  " + entry);
 				ServiceContext.getInstance().getConcentratorManageService().offline(entry);
 			}

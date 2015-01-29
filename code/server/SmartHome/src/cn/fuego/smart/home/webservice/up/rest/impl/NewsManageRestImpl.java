@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.NewsManageService;
@@ -45,7 +46,15 @@ public class NewsManageRestImpl implements NewsManageRest
 	public GetNewsListRsp getNewsList(GetNewsListReq req)
 	{
 		GetNewsListRsp rsp = new GetNewsListRsp();
-		List<News> newsList = newsService.getDataSource().getAllPageData();
+		PageModel page = new PageModel();
+		
+		if(null != req.getPage())
+		{
+			page.setPageSize(req.getPage().getPageSize());
+			page.setCurrentPage(req.getPage().getCurrentPage());
+		}
+		
+		List<News> newsList = newsService.getDataSource().getCurrentPageData(page.getStartNum(),page.getPageSize());
 		for(News e : newsList)
 		{
 			NewsJson newsJson = ModelConvert.newsToJson(e);

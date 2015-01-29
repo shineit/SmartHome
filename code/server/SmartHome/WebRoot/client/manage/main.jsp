@@ -73,7 +73,7 @@ function submitFormAlarm(url){
 			
 			<tr target="sid_user" rel="${e.id}">
 				<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>
-				<td>${e.id}</td>
+				<td>${e.concentratorID}</td>
 				<td>${e.objID}</td>
 				<td>
 					<c:forEach var="at" items="${alarmFilter.alarmTypeList}">

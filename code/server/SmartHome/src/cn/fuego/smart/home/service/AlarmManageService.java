@@ -23,7 +23,7 @@ import cn.fuego.smart.home.domain.HomeAlarmView;
  */
 public interface AlarmManageService extends MispCommonService<Alarm>
 {
-	List<HomeAlarmView>  getAlarmOfUser(int userID);
+	List<HomeAlarmView>  getAlarmOfUser(int userID,int startNum,int pageSize);
  	void manualClear(int userID,int id);
     void autoClear(int id);
 	HomeAlarmView getHomeAlarmByID(String alarmID);

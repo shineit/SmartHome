@@ -34,7 +34,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 
 	 
  
-	public List<HomeAlarmView> getAlarmOfUser(int userID)
+	public List<HomeAlarmView> getAlarmOfUser(int userID,int startNum,int pageSize)
 	{
  		List<Long> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
  
@@ -46,7 +46,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
  	 		//condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objType",AlarmObjTypeEnmu.CONCENTRATOR_ALARM.getIntValue()));
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN,"concentratorID",concentorIDList));
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
- 			alarmList.addAll(this.getDao(HomeAlarmView.class).getAll(condtionList));
+ 	 		alarmList.addAll(this.getDao(HomeAlarmView.class).getAll(condtionList, startNum, pageSize));
  		}
  		
  		return alarmList;

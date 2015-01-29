@@ -3,7 +3,6 @@ package cn.fuego.smart.home.domain;
 import java.util.Date;
 
 import cn.fuego.common.domain.PersistenceObject;
-import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 
 

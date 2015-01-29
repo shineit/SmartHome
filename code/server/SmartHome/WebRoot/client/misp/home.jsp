@@ -170,7 +170,7 @@ function resetForm(objForm){
 		e.initEvent("click", true, true);
 		document.getElementById("Home").dispatchEvent(e);
 	}
-	}, 1000);
+	}, 2000);
  });
 </script>
 </body>
