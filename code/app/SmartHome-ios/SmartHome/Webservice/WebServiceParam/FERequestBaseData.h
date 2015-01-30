@@ -15,6 +15,7 @@
 #define __METHOD_MARK_DELET         @"user/mark/delete"
 #define __METHOD_SIGOUT             @"user/logout"
 #define __METHOD_MODIFY_PASSWORD    @"user/password/modify"
+#define __METHOD_CATOKEN            @"user/caToken/get"
 
 #define __METHOD_GET_NEWS           @"news/list"  //news
 #define __METHOD_SEVICE_ORDER       @"order/list" //orders

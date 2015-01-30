@@ -14,6 +14,8 @@
 #import "FEMarkSetRequest.h"
 #import "FEMarkRequest.h"
 #import "FESensorListRequest.h"
+#import "FEGetCaTokenRequest.h"
+#import "FEGetCaTokenResponse.h"
 
 @class FESiginResponse;
 @class FENewsResponse;
@@ -44,6 +46,9 @@
 
 //sigout
 -(AFHTTPRequestOperation *)sigoutWithParam:(FELogoutRequest *)udata response:(void (^)(NSError *error, FESigoutResponse *response))block;
+
+//get ca token
+-(AFHTTPRequestOperation *)getCatokenWithParam:(FEGetCaTokenRequest *)udata response:(void (^)(NSError *error, FEGetCaTokenResponse *response))block;
 
 //modify password
 -(AFHTTPRequestOperation *)modifyPassword:(FEModifyPasswordRequest *)mdata response:(void (^)(NSError *error, FEBaseResponse *response))block;

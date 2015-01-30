@@ -35,6 +35,12 @@
 		1475A0E91A048C5000EE8353 /* FEServiceOrederRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0E81A048C5000EE8353 /* FEServiceOrederRequest.m */; };
 		14950D531A787F36001416A7 /* SSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D521A787F36001416A7 /* SSObject.m */; };
 		14950D561A78819D001416A7 /* NSString+Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D551A78819D001416A7 /* NSString+Attribute.m */; };
+		14950D8D1A7A0006001416A7 /* FEGetCaTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D8C1A7A0006001416A7 /* FEGetCaTokenRequest.m */; };
+		14950D901A7A0DD6001416A7 /* FEGetCaTokenResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D8F1A7A0DD6001416A7 /* FEGetCaTokenResponse.m */; };
+		14950D931A7A0E15001416A7 /* FECatoken.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D921A7A0E15001416A7 /* FECatoken.m */; };
+		14950D971A7A64E4001416A7 /* FECameraVerfyPhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D951A7A64E4001416A7 /* FECameraVerfyPhoneVC.m */; };
+		14950D981A7A64E4001416A7 /* FECameraVerfyPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14950D961A7A64E4001416A7 /* FECameraVerfyPhoneVC.xib */; };
+		14950D9B1A7A6ACF001416A7 /* NSString+YSParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D9A1A7A6ACF001416A7 /* NSString+YSParam.m */; };
 		149894201A4C081300903B22 /* FEUserMarkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498941F1A4C081300903B22 /* FEUserMarkResponse.m */; };
 		1498945B1A4D84EE00903B22 /* FEPopPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945A1A4D84EE00903B22 /* FEPopPickerView.m */; };
 		1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945D1A4DAF8800903B22 /* FEDevicesCache.m */; };
@@ -191,6 +197,17 @@
 		14950D521A787F36001416A7 /* SSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSObject.m; sourceTree = "<group>"; };
 		14950D541A78819D001416A7 /* NSString+Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Attribute.h"; sourceTree = "<group>"; };
 		14950D551A78819D001416A7 /* NSString+Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Attribute.m"; sourceTree = "<group>"; };
+		14950D8B1A7A0006001416A7 /* FEGetCaTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEGetCaTokenRequest.h; sourceTree = "<group>"; };
+		14950D8C1A7A0006001416A7 /* FEGetCaTokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEGetCaTokenRequest.m; sourceTree = "<group>"; };
+		14950D8E1A7A0DD6001416A7 /* FEGetCaTokenResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEGetCaTokenResponse.h; sourceTree = "<group>"; };
+		14950D8F1A7A0DD6001416A7 /* FEGetCaTokenResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEGetCaTokenResponse.m; sourceTree = "<group>"; };
+		14950D911A7A0E15001416A7 /* FECatoken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECatoken.h; sourceTree = "<group>"; };
+		14950D921A7A0E15001416A7 /* FECatoken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECatoken.m; sourceTree = "<group>"; };
+		14950D941A7A64E4001416A7 /* FECameraVerfyPhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECameraVerfyPhoneVC.h; sourceTree = "<group>"; };
+		14950D951A7A64E4001416A7 /* FECameraVerfyPhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECameraVerfyPhoneVC.m; sourceTree = "<group>"; };
+		14950D961A7A64E4001416A7 /* FECameraVerfyPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FECameraVerfyPhoneVC.xib; sourceTree = "<group>"; };
+		14950D991A7A6ACF001416A7 /* NSString+YSParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YSParam.h"; sourceTree = "<group>"; };
+		14950D9A1A7A6ACF001416A7 /* NSString+YSParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YSParam.m"; sourceTree = "<group>"; };
 		1498941E1A4C081300903B22 /* FEUserMarkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUserMarkResponse.h; sourceTree = "<group>"; };
 		1498941F1A4C081300903B22 /* FEUserMarkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMarkResponse.m; sourceTree = "<group>"; };
 		149894591A4D84ED00903B22 /* FEPopPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEPopPickerView.h; sourceTree = "<group>"; };
@@ -452,6 +469,8 @@
 				144022BA1A0894BD0079253A /* FECategories.h */,
 				1408A79B1A39285900D02D52 /* UIFont+AppFont.h */,
 				1408A79C1A39285900D02D52 /* UIFont+AppFont.m */,
+				14950D991A7A6ACF001416A7 /* NSString+YSParam.h */,
+				14950D9A1A7A6ACF001416A7 /* NSString+YSParam.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -499,6 +518,8 @@
 				141E43101A010F9D008A58C1 /* FESiginRequest.m */,
 				14D7B6FE1A09B163008BE443 /* FELogoutRequest.h */,
 				14D7B6FF1A09B163008BE443 /* FELogoutRequest.m */,
+				14950D8B1A7A0006001416A7 /* FEGetCaTokenRequest.h */,
+				14950D8C1A7A0006001416A7 /* FEGetCaTokenRequest.m */,
 			);
 			name = UserRequest;
 			sourceTree = "<group>";
@@ -571,6 +592,8 @@
 				1499E6C71A0BAD0E002F5DDB /* FEUser.m */,
 				1499E6C81A0BAD0E002F5DDB /* FEUserMark.h */,
 				1499E6C91A0BAD0E002F5DDB /* FEUserMark.m */,
+				14950D911A7A0E15001416A7 /* FECatoken.h */,
+				14950D921A7A0E15001416A7 /* FECatoken.m */,
 			);
 			name = BaseDataModel;
 			path = SmartHome/Webservice/BaseDataModel;
@@ -629,6 +652,8 @@
 				1499E6E71A0BAD1A002F5DDB /* FESigoutResponse.m */,
 				1498941E1A4C081300903B22 /* FEUserMarkResponse.h */,
 				1498941F1A4C081300903B22 /* FEUserMarkResponse.m */,
+				14950D8E1A7A0DD6001416A7 /* FEGetCaTokenResponse.h */,
+				14950D8F1A7A0DD6001416A7 /* FEGetCaTokenResponse.m */,
 			);
 			name = UserManager;
 			sourceTree = "<group>";
@@ -835,6 +860,9 @@
 				14C6DEC319F54F9C006384B2 /* FECloudCameraVC.m */,
 				14B447B819F698F00078EAB4 /* FECollectionViewCameraCell.h */,
 				14B447B919F698F00078EAB4 /* FECollectionViewCameraCell.m */,
+				14950D941A7A64E4001416A7 /* FECameraVerfyPhoneVC.h */,
+				14950D951A7A64E4001416A7 /* FECameraVerfyPhoneVC.m */,
+				14950D961A7A64E4001416A7 /* FECameraVerfyPhoneVC.xib */,
 			);
 			path = CloudCamera;
 			sourceTree = "<group>";
@@ -996,6 +1024,7 @@
 				14C6DE5D19F549EE006384B2 /* Images.xcassets in Resources */,
 				14B1637F1A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle in Resources */,
 				14B52AC11A45B9670005F0D7 /* LaunchScreen.xib in Resources */,
+				14950D981A7A64E4001416A7 /* FECameraVerfyPhoneVC.xib in Resources */,
 				145B21931A3582B8000AE204 /* PushConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1049,6 +1078,8 @@
 				146D34DE19FB6CE1000F14F5 /* FECloudSafeTableCell.m in Sources */,
 				149894201A4C081300903B22 /* FEUserMarkResponse.m in Sources */,
 				14B447C019F6A7C70078EAB4 /* FEControlPointCell.m in Sources */,
+				14950D9B1A7A6ACF001416A7 /* NSString+YSParam.m in Sources */,
+				14950D8D1A7A0006001416A7 /* FEGetCaTokenRequest.m in Sources */,
 				1438BAFD19FFC59900E5A905 /* FERate.m in Sources */,
 				149A018F1A08CC76008F239F /* FESensorSetRequest.m in Sources */,
 				1475A0E91A048C5000EE8353 /* FEServiceOrederRequest.m in Sources */,
@@ -1109,18 +1140,21 @@
 				1499E6EA1A0BAD1A002F5DDB /* FEHistoryAlarmResponse.m in Sources */,
 				149A01921A08CDD3008F239F /* FERelyUserRequest.m in Sources */,
 				14B03B331A51A111000826C9 /* CustomIOS7AlertView.m in Sources */,
+				14950D931A7A0E15001416A7 /* FECatoken.m in Sources */,
 				1499E6CF1A0BAD0E002F5DDB /* FEResult.m in Sources */,
 				146617271A049975009C85B8 /* FENewsRequest.m in Sources */,
 				145320CE1A10F8A400C4E209 /* FEEnumString.m in Sources */,
 				1498945B1A4D84EE00903B22 /* FEPopPickerView.m in Sources */,
 				14C6DEE919F54F9C006384B2 /* FECollectionViewCell.m in Sources */,
 				1475A0E01A03D05800EE8353 /* CDUser.m in Sources */,
+				14950D971A7A64E4001416A7 /* FECameraVerfyPhoneVC.m in Sources */,
 				14C6DE8119F54AD3006384B2 /* SmartHome.xcdatamodeld in Sources */,
 				14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */,
 				1499E6D21A0BAD0E002F5DDB /* FEUserMark.m in Sources */,
 				14C6DEEE19F54F9C006384B2 /* FENewsVC.m in Sources */,
 				14A2FA221A7756EA007D5017 /* FETableViewController.m in Sources */,
 				14FDBDE61A0234D600C130A2 /* FERequestBaseData.m in Sources */,
+				14950D901A7A0DD6001416A7 /* FEGetCaTokenResponse.m in Sources */,
 				149A018C1A08CC52008F239F /* FESensorListRequest.m in Sources */,
 				14B03B781A592977000826C9 /* FEHomeItemCell.m in Sources */,
 				149A01891A08C4EE008F239F /* FEHistoryAlarmRequest.m in Sources */,

@@ -226,6 +226,17 @@
     }];
 }
 
+-(AFHTTPRequestOperation *)getCatokenWithParam:(FEGetCaTokenRequest *)udata response:(void (^)(NSError *error, FEGetCaTokenResponse *response))block{
+    return [self POST:udata.method parameters:udata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FEGetCaTokenResponse *response = [[FEGetCaTokenResponse alloc] initWithResponse:responseObject];
+        [self showerrorResponse:response];
+        block(NULL,response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showerror:error];
+        block(error,NULL);
+    }];
+}
+
 -(void)showerror:(NSError *)error{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
     [alert show];

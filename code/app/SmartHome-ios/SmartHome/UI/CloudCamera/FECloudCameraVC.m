@@ -13,6 +13,11 @@
 #import "YSHTTPClient.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "YSCamera.h"
+#import "FEWebServiceManager.h"
+#import "FECoreDataHandler.h"
+#import "CDUser.h"
+#import "AppDelegate.h"
+#import "FECameraVerfyPhoneVC.h"
 
 @interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -50,43 +55,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
-    [self login];
-    _ysPlayer = [[YSPlayerController alloc] initWithDelegate:self];
+//    [self login];
+//    _ysPlayer = [[YSPlayerController alloc] initWithDelegate:self];
+    [self sign];
 }
 
-
-- (void)login {
-    NSString *apiKey = YSAppKey; // 已申请的 apikey.
-    __weak typeof (self) weakself = self;
-    _page = [[YSMobilePages alloc] init];
-    [_page login:self.navigationController withAppKey:apiKey complition:^(NSString *accessToken) {
-        if (accessToken) {
-            NSLog(@"Client access token is: %@", accessToken);
-            [[YSHTTPClient sharedInstance] setClientAccessToken:accessToken];
-            weakself.token = accessToken;
-            [weakself.navigationController popViewControllerAnimated:YES];
-            [weakself requestCameras];
-        } }];
-}
-
--(void)requestCameras{
-    __weak typeof (self) weakself = self;
-    [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:30 complition:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            NSDictionary *dictionary = (NSDictionary *)responseObject;
-            NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
-            if (resultCode.intValue == 200) {
-                NSMutableArray *carray = [NSMutableArray new];
-                for (NSDictionary *item in responseObject[@"cameraList"]) {
-                    [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
-                }
-                weakself.cameras = carray;
-                [weakself.collectionView reloadData];
-            }
-            
-        }
-    }];
-}
+//-(void)requestCameras{
+//    __weak typeof (self) weakself = self;
+//    [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:30 complition:^(id responseObject, NSError *error) {
+//        if (responseObject) {
+//            NSDictionary *dictionary = (NSDictionary *)responseObject;
+//            NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
+//            if (resultCode.intValue == 200) {
+//                NSMutableArray *carray = [NSMutableArray new];
+//                for (NSDictionary *item in responseObject[@"cameraList"]) {
+//                    [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
+//                }
+//                weakself.cameras = carray;
+//                [weakself.collectionView reloadData];
+//            }
+//
+//        }
+//    }];
+//}
 
 -(void)initUI{
     
@@ -153,6 +144,39 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)playerOperationMessage:(YSPlayerMessageType)msgType withValue:(id)value{
+    
+}
+
+-(void)sign{
+    //4548
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] getCatokenWithParam:[[FEGetCaTokenRequest alloc] initWithUserID:FELoginUser.userid phone:@"18550075727"] response:^(NSError *error, FEGetCaTokenResponse *response) {
+        
+        if (!error){
+            if(response.result.errorCode.integerValue == 10004){
+                FECameraVerfyPhoneVC *vc = [[FECameraVerfyPhoneVC alloc] initWithNibName:@"FECameraVerfyPhoneVC" bundle:nil];
+                vc.phoneNumber = @"18550075727";
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }else if(response.result.errorCode.integerValue == 0){
+                [[YSHTTPClient sharedInstance] setClientAccessToken:response.caToken.accessToken];
+                [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:10 complition:^(id responseObject, NSError *error) {
+                    if (response) {
+                        NSDictionary *dictionary = (NSDictionary *)responseObject;
+                        NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
+                        if (resultCode.intValue == 200) {
+                            NSMutableArray *carray = [NSMutableArray new];
+                            for (NSDictionary *item in responseObject[@"cameraList"]) {
+                                [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
+                            }
+                            weakself.cameras = carray;
+                            [weakself.collectionView reloadData];
+                        }
+                        
+                    }
+                }];
+            }
+        }
+    }];
     
 }
 
