@@ -27,11 +27,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:FEString(@"返回") style:UIBarButtonItemStylePlain target:self action:@selector(backPress:)];
+    self.navigationItem.backBarButtonItem = backButton;
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if (SYSTEM_VERSION_UP7) { // 判断是否是IOS7
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     }
     self.view.backgroundColor = FEViewBackGroundColor;
+}
+
+-(void)backPress:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

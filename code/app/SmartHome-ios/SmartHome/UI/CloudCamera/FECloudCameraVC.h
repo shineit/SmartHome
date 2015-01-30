@@ -9,5 +9,5 @@
 #import "FECommonViewController.h"
 
 @interface FECloudCameraVC : FECommonViewController
-
+@property (nonatomic, strong) NSString *accessToken;
 @end

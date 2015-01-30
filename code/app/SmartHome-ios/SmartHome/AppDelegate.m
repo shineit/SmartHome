@@ -23,6 +23,7 @@
 #import "YSHTTPClient.h"
 #import "YSMobilePages.h"
 #import "FEEmptyVC.h"
+#import "FECameraShouldVerfyVC.h"
 
 @implementation AppDelegate
 
@@ -150,8 +151,10 @@
         FECommonNavgationController *controlnc = [[FECommonNavgationController alloc] initWithRootViewController:control];
         
         //云视
-        FECloudCameraVC *camera = [FECloudCameraVC new];
-        FECommonNavgationController *camnc = [[FECommonNavgationController alloc] initWithRootViewController:camera];
+//        FECloudCameraVC *camera = [FECloudCameraVC new];
+        FECameraShouldVerfyVC *cvc = [[FECameraShouldVerfyVC alloc] initWithNibName:@"FECameraShouldVerfyVC" bundle:nil];
+        FECommonNavgationController *camnc = [[FECommonNavgationController alloc] initWithRootViewController:cvc];
+        
         
         
         //setting

@@ -8,6 +8,7 @@ PODS:
   - SDWebImage/Core (3.7.1)
   - SSKeychain (1.2.2)
   - TouchJSON (1.1)
+  - UIAlertView-Blocks (1.0)
   - ZBarSDK (1.3.1)
   - ZBUtilities (0.0.4):
     - MBProgressHUD (~> 0.8)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7.1)
   - SSKeychain
   - TouchJSON
+  - UIAlertView-Blocks (~> 1.0)
   - ZBarSDK
   - ZBUtilities
 
@@ -30,6 +32,7 @@ SPEC CHECKSUMS:
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   TouchJSON: b40940e40e53bb9b1ad60c63e01ed83bff93d53e
+  UIAlertView-Blocks: f3271e84372beb97aea115cd1fb26ae66457f12f
   ZBarSDK: 3ed560856963f765b66d834f464590bd6ba13b44
   ZBUtilities: 30a3c15d49e8d06e3118f1a2f65b362744bb47ba
 

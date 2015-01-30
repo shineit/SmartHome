@@ -9,7 +9,6 @@
 #import "FESiginResponse.h"
 #import "FEResult.h"
 #import "FEUser.h"
-#import "NSObject+Dictionary.h"
 
 @implementation FESiginResponse
 

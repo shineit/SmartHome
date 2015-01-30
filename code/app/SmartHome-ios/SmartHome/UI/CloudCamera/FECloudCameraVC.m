@@ -18,14 +18,17 @@
 #import "CDUser.h"
 #import "AppDelegate.h"
 #import "FECameraVerfyPhoneVC.h"
+#import <ZBarSDK/ZBarReaderViewController.h>
+#import "GAAlertObj.h"
 
-@interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ZBarReaderDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *cameras;
 @property (nonatomic, strong) YSMobilePages *page;
 @property (nonatomic, strong) YSPlayerController *ysPlayer;
 @property (nonatomic, strong) NSString *token;
+@property (strong, nonatomic) ZBarReaderViewController *zbarReaderVC;
 
 @end
 
@@ -55,31 +58,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
-//    [self login];
-//    _ysPlayer = [[YSPlayerController alloc] initWithDelegate:self];
-    [self sign];
+    [self loadCamera];
 }
 
-//-(void)requestCameras{
-//    __weak typeof (self) weakself = self;
-//    [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:30 complition:^(id responseObject, NSError *error) {
-//        if (responseObject) {
-//            NSDictionary *dictionary = (NSDictionary *)responseObject;
-//            NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
-//            if (resultCode.intValue == 200) {
-//                NSMutableArray *carray = [NSMutableArray new];
-//                for (NSDictionary *item in responseObject[@"cameraList"]) {
-//                    [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
-//                }
-//                weakself.cameras = carray;
-//                [weakself.collectionView reloadData];
-//            }
-//
-//        }
-//    }];
-//}
-
 -(void)initUI{
+    
+    [self loadRightCustomButtonItemWithTitle:FEString(@"添加") image:nil];
     
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
     UICollectionView *cview = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
@@ -93,6 +77,63 @@
     self.collectionView = cview;
     [self.view addSubview:cview];
     
+}
+
+-(void)rightbarpressed:(UIButton *)button{
+    ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    self.zbarReaderVC = reader;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, reader.view.bounds.size.height - 54, reader.view.bounds.size.width, 54)];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+    view.backgroundColor = [UIColor blackColor];
+    
+    UIToolbar *toolbar = [UIToolbar new];
+    toolbar.frame = CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height);
+    toolbar.barStyle = UIBarStyleBlackOpaque;
+    toolbar.autoresizingMask =
+    UIViewAutoresizingFlexibleWidth |
+    UIViewAutoresizingFlexibleHeight;
+    
+    toolbar.items = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)],[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil],nil];
+    [view addSubview: toolbar];
+    
+    
+    reader.cameraOverlayView = view;
+    reader.showsZBarControls = NO;
+    reader.readerDelegate = self;
+    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+    
+    ZBarImageScanner *scanner = reader.scanner;
+    
+    // TODO: (optional) additional reader configuration here
+    
+    // EXAMPLE: disable rarely used I2/5 to improve performance
+    [scanner setSymbology: ZBAR_I25
+                   config: ZBAR_CFG_ENABLE
+                       to: 0];
+    
+    // present and release the controller
+    [self presentViewController:reader animated:YES completion:nil];
+}
+
+-(void)cancel{
+    [self.zbarReaderVC dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerViewDelegate
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    // ADD: get the decode results
+    id<NSFastEnumeration> results =
+    [info objectForKey: ZBarReaderControllerResults];
+    ZBarSymbol *symbol = nil;
+    for(symbol in results)
+        // EXAMPLE: just grab the first barcode
+        break;
+    NSData *data = [symbol.data dataUsingEncoding:NSUTF8StringEncoding];
+    if (data) {
+        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -147,36 +188,25 @@
     
 }
 
--(void)sign{
-    //4548
+-(void)loadCamera{
     __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] getCatokenWithParam:[[FEGetCaTokenRequest alloc] initWithUserID:FELoginUser.userid phone:@"18550075727"] response:^(NSError *error, FEGetCaTokenResponse *response) {
-        
-        if (!error){
-            if(response.result.errorCode.integerValue == 10004){
-                FECameraVerfyPhoneVC *vc = [[FECameraVerfyPhoneVC alloc] initWithNibName:@"FECameraVerfyPhoneVC" bundle:nil];
-                vc.phoneNumber = @"18550075727";
-                [weakself.navigationController pushViewController:vc animated:YES];
-            }else if(response.result.errorCode.integerValue == 0){
-                [[YSHTTPClient sharedInstance] setClientAccessToken:response.caToken.accessToken];
-                [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:10 complition:^(id responseObject, NSError *error) {
-                    if (response) {
-                        NSDictionary *dictionary = (NSDictionary *)responseObject;
-                        NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
-                        if (resultCode.intValue == 200) {
-                            NSMutableArray *carray = [NSMutableArray new];
-                            for (NSDictionary *item in responseObject[@"cameraList"]) {
-                                [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
-                            }
-                            weakself.cameras = carray;
-                            [weakself.collectionView reloadData];
-                        }
-                        
-                    }
-                }];
+    [[YSHTTPClient sharedInstance] setClientAccessToken:self.accessToken];
+    [[YSHTTPClient sharedInstance] requestSearchCameraListPageFrom:0 pageSize:10 complition:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            NSDictionary *dictionary = (NSDictionary *)responseObject;
+            NSNumber *resultCode = [dictionary objectForKey:@"resultCode"];
+            if (resultCode.intValue == 200) {
+                NSMutableArray *carray = [NSMutableArray new];
+                for (NSDictionary *item in responseObject[@"cameraList"]) {
+                    [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
+                }
+                weakself.cameras = carray;
+                [weakself.collectionView reloadData];
             }
+            
         }
     }];
+
     
 }
 
