@@ -17,7 +17,9 @@
 #import "FEWarringDetailVC.h"
 
 
-@interface FECurrentWarringVC ()
+@interface FECurrentWarringVC ()<FETableViewRefreshDelegate>{
+    NSInteger _page;
+}
 
 @property (nonatomic, strong) NSMutableArray *warringList;
 
@@ -38,17 +40,26 @@
 //request alarm list
 -(void)requestHistoryWarring{
     
-    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+    FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:0 count:0];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     FEHistoryAlarmRequest *hdata = [[FEHistoryAlarmRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:@[attr]];
     
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] historyAlarmList:hdata reponse:^(NSError *error, FEHistoryAlarmResponse *response) {
+        FETableView *tableView = (FETableView *)self.tableView;
         if (!error && response.result.errorCode.integerValue == 0){
-            [weakself.warringList removeAllObjects];
-            [weakself.warringList addObjectsFromArray:response.alarmList];
-            [weakself.tableView reloadData];
+            if (response.alarmList.count) {
+                _page++;
+                [weakself.warringList addObjectsFromArray:response.alarmList];
+                [weakself.tableView reloadData];
+                [tableView endLoadMoreRefresing];
+            }else{
+                [tableView endMoreOverWithMessage:@"没有更多了"];
+            }
+        }else{
+            [tableView endLoadMoreRefresing];
         }
+        [tableView endPullDownRefreshing];
     }];
     
 }
@@ -57,8 +68,32 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _page = 0;
+    FETableView *tableView = [[FETableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    self.tableView = tableView;
+    tableView.loadMore = YES;
+    tableView.pullRefresh = YES;
+    tableView.refreshDelegate = self;
+    [tableView addRefresh];
+    
     _warringList = [NSMutableArray new];
+//    [self requestHistoryWarring];
+    [tableView startPullDownRefreshing];
+}
+
+#pragma mark - FETableViewRefreshDelegate
+-(void)beginLoadMore:(FETableView *)tableview{
     [self requestHistoryWarring];
+}
+
+-(void)beginPullRefresh:(FETableView *)tableview{
+    _page = 0;
+    [self.warringList removeAllObjects];
+    [self.tableView reloadData];
+    [self requestHistoryWarring];
+    
 }
 
 

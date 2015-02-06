@@ -16,6 +16,7 @@
 #import "FESensorListRequest.h"
 #import "FEGetCaTokenRequest.h"
 #import "FEGetCaTokenResponse.h"
+#import "FESensorOperationRequest.h"
 
 @class FESiginResponse;
 @class FENewsResponse;
@@ -73,10 +74,10 @@
 -(AFHTTPRequestOperation *)sensorSet:(FESensorSetRequest *)sdata response:(void (^)(NSError *error, FESensorSetResponse *response))block;
 
 //sensor batch enable
--(AFHTTPRequestOperation *)SensorBatchEnable:(FESensorBatchEnableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+-(AFHTTPRequestOperation *)SensorBatchEnable:(FESensorOperationRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 //sensor batch disable
--(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorBatchDisableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
+-(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorOperationRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 
 

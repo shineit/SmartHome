@@ -229,25 +229,25 @@
 }
 
 -(void)controlViewDidSelectAllClose:(FEControlView *)cview{
-    [self displayHUD:FEString(@"LOADING...")];
-    NSMutableArray *allsensors = [NSMutableArray array];
-    for (NSDictionary *item in self.deviceList) {
-        [allsensors addObjectsFromArray:item[__SENSOR_LIST]];
-    }
-    FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:allsensors];
-    __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] SensorBatchDisable:sdata response:^(NSError *error, FEBaseResponse *response) {
-        [weakself hideHUD:YES];
-        if (!error && response.result.errorCode.integerValue == 0) {
-            NSLog(@"ALL close!");
-        }
-    }];
+//    [self displayHUD:FEString(@"LOADING...")];
+//    NSMutableArray *allsensors = [NSMutableArray array];
+//    for (NSDictionary *item in self.deviceList) {
+//        [allsensors addObjectsFromArray:item[__SENSOR_LIST]];
+//    }
+//    FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:allsensors];
+//    __weak typeof(self) weakself = self;
+//    [[FEWebServiceManager sharedInstance] SensorBatchDisable:sdata response:^(NSError *error, FEBaseResponse *response) {
+//        [weakself hideHUD:YES];
+//        if (!error && response.result.errorCode.integerValue == 0) {
+//            NSLog(@"ALL close!");
+//        }
+//    }];
 }
 
 -(void)changeSensorStatus:(FESensor *)sensor enable:(BOOL)enable{
     [self displayHUD:FEString(@"LOADING...")];
     if (enable) {
-        FESensorBatchEnableRequest *edata = [[FESensorBatchEnableRequest alloc] initWithSensorList:@[sensor]];
+        FESensorOperationRequest *edata = [[FESensorOperationRequest alloc] initWithUserId:FELoginUser.userid enableSensors:@[sensor.sensorID]];
         __weak typeof(self) weakself = self;
         [[FEWebServiceManager sharedInstance] SensorBatchEnable:edata response:^(NSError *error, FEBaseResponse *response) {
             [weakself hideHUD:YES];
@@ -256,7 +256,7 @@
             }
         }];
     }else{
-        FESensorBatchDisableRequest *sdata = [[FESensorBatchDisableRequest alloc] initWithSensorList:@[sensor]];
+        FESensorOperationRequest *sdata = [[FESensorOperationRequest alloc] initWithUserId:FELoginUser.userid disableSensors:@[sensor.sensorID]];
         __weak typeof(self) weakself = self;
         [[FEWebServiceManager sharedInstance] SensorBatchDisable:sdata response:^(NSError *error, FEBaseResponse *response) {
             [weakself hideHUD:YES];

@@ -203,7 +203,7 @@
 }
 
 //batch enable
--(AFHTTPRequestOperation *)SensorBatchEnable:(FESensorBatchEnableRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *respone))block{
+-(AFHTTPRequestOperation *)SensorBatchEnable:(FESensorOperationRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *respone))block{
     return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FEBaseResponse *response = [[FEBaseResponse alloc] initWithResponse:responseObject];
         [self showerrorResponse:response];
@@ -215,7 +215,7 @@
 }
 
 //batch disable
--(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorBatchDisableRequest *)sdata response:(void (^)(NSError *, FEBaseResponse *))block{
+-(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorOperationRequest *)sdata response:(void (^)(NSError *, FEBaseResponse *))block{
     return [self POST:sdata.method parameters:sdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FEBaseResponse *response = [[FEBaseResponse alloc] initWithResponse:responseObject];
         [self showerrorResponse:response];

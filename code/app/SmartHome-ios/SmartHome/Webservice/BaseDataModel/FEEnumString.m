@@ -13,7 +13,8 @@
 +(NSString *)alarmType:(NSNumber *)type{
     static NSArray *array = NULL;
     if (!array) {
-        array = [NSArray arrayWithObjects:FEString(@"UNKNOW"),FEString(@"OFFLINE_ALARM"),FEString(@"FAULT_ALARM"),FEString(@"SUBPRESSURE_ALARM"),FEString(@"WARN_ALARM"),FEString(@"ERROR_ALARM"),FEString(@"FEEDBACK_ALARM"),FEString(@"ACTION_ALARM"),FEString(@"RESET_ALARM"),FEString(@"SETUP_ALARM"),FEString(@"REMOVE_ALARM"), nil];
+
+        array = [NSArray arrayWithObjects:FEString(@"UNKNOW"),FEString(@"掉线"),FEString(@"掉线恢复"),FEString(@"欠压"),FEString(@"欠压恢复"),FEString(@"设防"),FEString(@"撤防"),FEString(@"故障"),FEString(@"故障恢复"),FEString(@"预警"),FEString(@"火警"),@"反馈",@"复位",@"动作",@"动作复位", nil];
     }
     return array[type.integerValue];
 }
