@@ -7,9 +7,11 @@
 //
 
 #import "FECameraPlayerVC.h"
+#import "YSPlayerController.h"
 
-@interface FECameraPlayerVC ()
-@property (strong, nonatomic) IBOutlet UIImageView *playerView;
+@interface FECameraPlayerVC ()<YSPlayerControllerDelegate>
+@property (strong, nonatomic) IBOutlet UIView *playerView;
+@property (strong, nonatomic) YSPlayerController *control;
 
 @end
 
@@ -18,6 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    self.playerView
+    self.control = [[YSPlayerController alloc] initWithDelegate:self];
+    [self.control startRealPlayWithCamera:self.camera.cameraId accessToken:self.accessToken inView:self.playerView];
+}
+
+#pragma mark 
+- (void)playerOperationMessage:(YSPlayerMessageType)msgType withValue:(id)value{
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,24 +18,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AbG-2y-aNg">
-                                <rect key="frame" x="0.0" y="64" width="600" height="240"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="200"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JZs-SV-ffC">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="240"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BrI-E8-mSe">
-                                        <rect key="frame" x="280" y="100" width="40" height="40"/>
+                                        <rect key="frame" x="10" y="150" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="ARe-Sk-R36"/>
-                                            <constraint firstAttribute="width" constant="40" id="qud-Bj-8ji"/>
+                                            <constraint firstAttribute="height" constant="40" id="Set-lB-he1"/>
+                                            <constraint firstAttribute="width" constant="40" id="obx-mH-n03"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="BrI-E8-mSe" secondAttribute="centerY" id="47D-zI-2zx"/>
-                                    <constraint firstAttribute="centerX" secondItem="BrI-E8-mSe" secondAttribute="centerX" id="A3c-TH-fyy"/>
-                                    <constraint firstAttribute="height" constant="240" id="GgN-Sv-Dws"/>
+                                    <constraint firstAttribute="height" constant="200" id="GgN-Sv-Dws"/>
+                                    <constraint firstItem="BrI-E8-mSe" firstAttribute="leading" secondItem="AbG-2y-aNg" secondAttribute="leading" constant="10" id="MQ6-ht-q1p"/>
+                                    <constraint firstAttribute="bottom" secondItem="BrI-E8-mSe" secondAttribute="bottom" constant="10" id="UeS-so-8aF"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -48,7 +45,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="playerView" destination="JZs-SV-ffC" id="tjD-Be-ZbA"/>
+                        <outlet property="playerView" destination="AbG-2y-aNg" id="yjl-xA-0R9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bIE-bn-Oxo" userLabel="First Responder" sceneMemberID="firstResponder"/>

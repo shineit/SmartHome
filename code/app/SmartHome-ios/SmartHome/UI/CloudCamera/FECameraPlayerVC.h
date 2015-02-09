@@ -10,4 +10,5 @@
 #import "YSCamera.h"
 @interface FECameraPlayerVC : FECommonViewController
 @property (nonatomic, strong) YSCamera *camera;
+@property (nonatomic, strong) NSString *accessToken;
 @end

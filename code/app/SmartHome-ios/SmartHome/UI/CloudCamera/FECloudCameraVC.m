@@ -21,6 +21,7 @@
 #import <ZBarSDK/ZBarReaderViewController.h>
 #import "GAAlertObj.h"
 #import "FECameraItemCell.h"
+#import "FECameraPlayerVC.h"
 
 @interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ZBarReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -160,6 +161,15 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 90;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([sender isKindOfClass:[FECameraItemCell class]]) {
+        FECameraItemCell *cell = sender;
+        FECameraPlayerVC *vc = segue.destinationViewController;
+        vc.accessToken = self.accessToken;
+        vc.camera = cell.camera;
+    }
 }
 
 
