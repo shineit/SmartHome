@@ -20,10 +20,12 @@
 #import "FECameraVerfyPhoneVC.h"
 #import <ZBarSDK/ZBarReaderViewController.h>
 #import "GAAlertObj.h"
+#import "FECameraItemCell.h"
 
-@interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ZBarReaderDelegate>
+@interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ZBarReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+//@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *cameras;
 @property (nonatomic, strong) YSMobilePages *page;
 @property (nonatomic, strong) YSPlayerController *ysPlayer;
@@ -63,19 +65,26 @@
 
 -(void)initUI{
     
-    [self loadRightCustomButtonItemWithTitle:FEString(@"添加") image:nil];
+//    [self loadRightCustomButtonItemWithTitle:FEString(@"添加") image:nil];
     
-    UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
-    UICollectionView *cview = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    cview.alwaysBounceVertical = YES;
-    cview.delegate = self;
-    cview.dataSource = self;
-    cview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [cview registerClass:[FECollectionViewCameraCell class] forCellWithReuseIdentifier:@"cell"];
-//    cview.backgroundColor = [UIColor lightGrayColor];
-    cview.backgroundColor = [UIColor clearColor];
-    self.collectionView = cview;
-    [self.view addSubview:cview];
+//    FETableView *table = [[FETableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+//    table.dataSource = self;
+//    table.delegate = self;
+//    table.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+//    [self.view addSubview:table];
+//    self.tableView = table;
+    
+//    UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
+//    UICollectionView *cview = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+//    cview.alwaysBounceVertical = YES;
+//    cview.delegate = self;
+//    cview.dataSource = self;
+//    cview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+//    [cview registerClass:[FECollectionViewCameraCell class] forCellWithReuseIdentifier:@"cell"];
+////    cview.backgroundColor = [UIColor lightGrayColor];
+//    cview.backgroundColor = [UIColor clearColor];
+//    self.collectionView = cview;
+//    [self.view addSubview:cview];
     
 }
 
@@ -132,9 +141,27 @@
         break;
     NSData *data = [symbol.data dataUsingEncoding:NSUTF8StringEncoding];
     if (data) {
-        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+//        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     }
 }
+
+#pragma mark - UITableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    static NSString *identifier = @"cell";
+    YSCamera *camera = self.cameras[indexPath.row];
+    FECameraItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cameraCell" forIndexPath:indexPath];
+    [cell configWithCamera:camera];
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.cameras.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 90;
+}
+
 
 #pragma mark - UICollectionViewDataSource
 
@@ -201,7 +228,8 @@
                     [carray addObject:[[YSCamera alloc] initWithDictionary:item]];
                 }
                 weakself.cameras = carray;
-                [weakself.collectionView reloadData];
+                [weakself.tableView reloadData];
+//                [weakself.collectionView reloadData];
             }
             
         }

@@ -74,9 +74,11 @@
                 vc.phoneNumber = phone;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }else if(response.result.errorCode.integerValue == 0){
-                FECloudCameraVC *cvc = [[FECloudCameraVC alloc] init];
+                FECloudCameraVC *cvc = [[UIStoryboard storyboardWithName:@"Camera" bundle:nil] instantiateInitialViewController];
+                
                 cvc.hidesBottomBarWhenPushed = YES;
                 cvc.accessToken = response.caToken.accessToken;
+            
                 [weakself.navigationController pushViewController:cvc animated:YES];
             }
         }
