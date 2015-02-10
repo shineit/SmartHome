@@ -6,6 +6,7 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
+  - SSCommon-Utilities (0.0.2)
   - SSKeychain (1.2.2)
   - TouchJSON (1.1)
   - UIAlertView-Blocks (1.0)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - HMSegmentedControl
   - RATreeView
   - SDWebImage (~> 3.7.1)
+  - SSCommon-Utilities (from `https://github.com/Seven-Sun/SSCommon-Utilities.git`)
   - SSKeychain
   - TouchJSON
   - UIAlertView-Blocks (~> 1.0)
@@ -26,12 +28,17 @@ DEPENDENCIES:
   - ZBarSDK
   - ZBUtilities
 
+EXTERNAL SOURCES:
+  SSCommon-Utilities:
+    :git: https://github.com/Seven-Sun/SSCommon-Utilities.git
+
 SPEC CHECKSUMS:
   AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
   HMSegmentedControl: c0517a8d4b80c978b8386f863f1c44729cfd7d6f
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   RATreeView: f603a3854c9c56ac4f586fc26f1ac13af7c3d1ba
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SSCommon-Utilities: cc5259626dd0336255c780b993ee1c102bc90f12
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   TouchJSON: b40940e40e53bb9b1ad60c63e01ed83bff93d53e
   UIAlertView-Blocks: f3271e84372beb97aea115cd1fb26ae66457f12f

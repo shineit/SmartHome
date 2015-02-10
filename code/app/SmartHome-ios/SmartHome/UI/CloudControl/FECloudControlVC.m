@@ -73,6 +73,7 @@
 
 -(void)initUI{
     RATreeView *treeView = [[RATreeView alloc] initWithFrame:self.view.bounds];
+    treeView.treeFooterView = [UIView new];
     treeView.delegate = self;
     treeView.dataSource = self;
     treeView.autoresizingMask = UIViewAutoresizingFlexibleHeight;

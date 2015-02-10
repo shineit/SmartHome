@@ -7,7 +7,7 @@
 //
 
 //#import "FERequestBaseData.h"
-#import "SSObject.h"
+#import <SSCommon-Utilities/SSObject.h>
 
 @interface FEUserMark : SSObject
 

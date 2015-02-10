@@ -101,7 +101,13 @@
         cell.accessoryView = btn;
         
     }
-    cell.textLabel.text = ((FEUserMark *)self.marks[indexPath.row]).mark;
+    FEUserMark *mark = self.marks[indexPath.row];
+    if ([mark.mark isEqualToString:@"未分组"]) {
+        cell.accessoryView.hidden = YES;
+    }else{
+        cell.accessoryView.hidden = NO;
+    }
+    cell.textLabel.text = mark.mark;
     return cell;
     
 }

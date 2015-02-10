@@ -17,10 +17,10 @@
 #import "FEUserMarkManagerVC.h"
 
 
-@interface FEDeviceControllVC ()<FEPopPickerViewDataSource,FEPopPickerViewDelegate>
+@interface FEDeviceControllVC ()
 
 @property (nonatomic, strong) UITextView *descripTextField;
-@property (nonatomic, strong) FEPopPickerView *labelPickerView;
+//@property (nonatomic, strong) FEPopPickerView *labelPickerView;
 @property (nonatomic, strong) UITextField *regionNumberTextField;
 @property (nonatomic, strong) FEUserMark *selectedMark;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -98,9 +98,9 @@
     llabel.text = FEString(@"CONTROLL_LABEL");
     [contentview addSubview:llabel];
     
-    _labelPickerView = [[FEPopPickerView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, llabel.frame.origin.y, twidth - 100, height)];
-    _labelPickerView.dataSource = self;
-    _labelPickerView.delegate = self;
+//    _labelPickerView = [[FEPopPickerView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, llabel.frame.origin.y, twidth - 100, height)];
+//    _labelPickerView.dataSource = self;
+//    _labelPickerView.delegate = self;
     NSInteger index = -1;
     for (FEUserMark *mark in self.marks) {
         if ([mark.mark isEqualToString:self.sensor.mark]) {
@@ -109,8 +109,8 @@
             break;
         }
     }
-    [_labelPickerView setSelected:index];
-    [contentview addSubview:_labelPickerView];
+//    [_labelPickerView setSelected:index];
+//    [contentview addSubview:_labelPickerView];
     
     FEButton *add = [FEButton buttonWithType:UIButtonTypeCustom];
     add.frame = CGRectMake(x + lwidth + xspace + twidth - 90, llabel.frame.origin.y, 90, height);

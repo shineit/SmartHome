@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 FUEGO. All rights reserved.
 //
 
-#import "SSObject.h"
+#import <SSCommon-Utilities/SSObject.h>
 
 @interface FECatoken : SSObject
 @property (nonatomic, strong, readonly) NSString *accessToken;

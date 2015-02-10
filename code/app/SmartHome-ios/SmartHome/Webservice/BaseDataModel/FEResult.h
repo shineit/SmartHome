@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "SSObject.h"
+#import <SSCommon-Utilities/SSObject.h>
 //#import "NSObject+Dictionary.h"
 
 @interface FEResult : SSObject

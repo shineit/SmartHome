@@ -36,7 +36,6 @@
 		1475A0E31A047CDF00EE8353 /* FEMarkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0E21A047CDF00EE8353 /* FEMarkRequest.m */; };
 		1475A0E91A048C5000EE8353 /* FEServiceOrederRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1475A0E81A048C5000EE8353 /* FEServiceOrederRequest.m */; };
 		148B131B1A887E51009099E7 /* FECameraPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 148B131A1A887E51009099E7 /* FECameraPlayerVC.m */; };
-		14950D531A787F36001416A7 /* SSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D521A787F36001416A7 /* SSObject.m */; };
 		14950D561A78819D001416A7 /* NSString+Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D551A78819D001416A7 /* NSString+Attribute.m */; };
 		14950D8D1A7A0006001416A7 /* FEGetCaTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D8C1A7A0006001416A7 /* FEGetCaTokenRequest.m */; };
 		14950D901A7A0DD6001416A7 /* FEGetCaTokenResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950D8F1A7A0DD6001416A7 /* FEGetCaTokenResponse.m */; };
@@ -48,7 +47,6 @@
 		14950DA01A7B16ED001416A7 /* FECameraShouldVerfyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14950D9E1A7B16ED001416A7 /* FECameraShouldVerfyVC.xib */; };
 		14950DA41A7B2776001416A7 /* GAAlertObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 14950DA31A7B2776001416A7 /* GAAlertObj.m */; };
 		149894201A4C081300903B22 /* FEUserMarkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498941F1A4C081300903B22 /* FEUserMarkResponse.m */; };
-		1498945B1A4D84EE00903B22 /* FEPopPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945A1A4D84EE00903B22 /* FEPopPickerView.m */; };
 		1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498945D1A4DAF8800903B22 /* FEDevicesCache.m */; };
 		1499E6CA1A0BAD0E002F5DDB /* FEAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6B91A0BAD0E002F5DDB /* FEAlarm.m */; };
 		1499E6CB1A0BAD0E002F5DDB /* FEAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 1499E6BB1A0BAD0E002F5DDB /* FEAttribute.m */; };
@@ -205,8 +203,6 @@
 		1475A0E81A048C5000EE8353 /* FEServiceOrederRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEServiceOrederRequest.m; sourceTree = "<group>"; };
 		148B13191A887E51009099E7 /* FECameraPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECameraPlayerVC.h; sourceTree = "<group>"; };
 		148B131A1A887E51009099E7 /* FECameraPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECameraPlayerVC.m; sourceTree = "<group>"; };
-		14950D511A787F36001416A7 /* SSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSObject.h; sourceTree = "<group>"; };
-		14950D521A787F36001416A7 /* SSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSObject.m; sourceTree = "<group>"; };
 		14950D541A78819D001416A7 /* NSString+Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Attribute.h"; sourceTree = "<group>"; };
 		14950D551A78819D001416A7 /* NSString+Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Attribute.m"; sourceTree = "<group>"; };
 		14950D8B1A7A0006001416A7 /* FEGetCaTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEGetCaTokenRequest.h; sourceTree = "<group>"; };
@@ -227,8 +223,6 @@
 		14950DA31A7B2776001416A7 /* GAAlertObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAAlertObj.m; sourceTree = "<group>"; };
 		1498941E1A4C081300903B22 /* FEUserMarkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUserMarkResponse.h; sourceTree = "<group>"; };
 		1498941F1A4C081300903B22 /* FEUserMarkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUserMarkResponse.m; sourceTree = "<group>"; };
-		149894591A4D84ED00903B22 /* FEPopPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEPopPickerView.h; sourceTree = "<group>"; };
-		1498945A1A4D84EE00903B22 /* FEPopPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEPopPickerView.m; sourceTree = "<group>"; };
 		1498945C1A4DAF8800903B22 /* FEDevicesCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDevicesCache.h; sourceTree = "<group>"; };
 		1498945D1A4DAF8800903B22 /* FEDevicesCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEDevicesCache.m; sourceTree = "<group>"; };
 		1499E6B81A0BAD0E002F5DDB /* FEAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEAlarm.h; sourceTree = "<group>"; };
@@ -526,8 +520,6 @@
 		1499E6B21A0BAB43002F5DDB /* BaseRequest */ = {
 			isa = PBXGroup;
 			children = (
-				14950D511A787F36001416A7 /* SSObject.h */,
-				14950D521A787F36001416A7 /* SSObject.m */,
 				14950D541A78819D001416A7 /* NSString+Attribute.h */,
 				14950D551A78819D001416A7 /* NSString+Attribute.m */,
 				14FDBDE41A0234D600C130A2 /* FERequestBaseData.h */,
@@ -855,8 +847,6 @@
 		14C6DEB419F54AE2006384B2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				149894591A4D84ED00903B22 /* FEPopPickerView.h */,
-				1498945A1A4D84EE00903B22 /* FEPopPickerView.m */,
 				14C6DEB519F54AE2006384B2 /* FECommonNavgationController.h */,
 				14C6DEB619F54AE2006384B2 /* FECommonNavgationController.m */,
 				14C6DEB719F54AE2006384B2 /* FECommonTabBarController.h */,
@@ -1140,7 +1130,6 @@
 				14B447BD19F6A5FD0078EAB4 /* FEControlObject.m in Sources */,
 				1499E6CE1A0BAD0E002F5DDB /* FEPage.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
-				14950D531A787F36001416A7 /* SSObject.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
 				1475A0E31A047CDF00EE8353 /* FEMarkRequest.m in Sources */,
 				14C6DEBC19F54AE2006384B2 /* FECommonTabBarController.m in Sources */,
@@ -1189,7 +1178,6 @@
 				1499E6CF1A0BAD0E002F5DDB /* FEResult.m in Sources */,
 				146617271A049975009C85B8 /* FENewsRequest.m in Sources */,
 				145320CE1A10F8A400C4E209 /* FEEnumString.m in Sources */,
-				1498945B1A4D84EE00903B22 /* FEPopPickerView.m in Sources */,
 				14C6DEE919F54F9C006384B2 /* FECollectionViewCell.m in Sources */,
 				1475A0E01A03D05800EE8353 /* CDUser.m in Sources */,
 				14950D971A7A64E4001416A7 /* FECameraVerfyPhoneVC.m in Sources */,

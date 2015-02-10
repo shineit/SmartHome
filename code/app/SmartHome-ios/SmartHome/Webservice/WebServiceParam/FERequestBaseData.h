@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SSObject.h"
+#import <SSCommon-Utilities/SSObject.h>
 
 #define __METHOD_SIGIN              @"user/login" //登陆
 #define __METHOD_MARK_LIST          @"user/mark/list"

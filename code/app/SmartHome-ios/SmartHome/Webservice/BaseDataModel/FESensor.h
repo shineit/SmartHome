@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import "SSObject.h"
+#import <SSCommon-Utilities/SSObject.h>
 
 @interface FESensor : SSObject
 
@@ -25,20 +25,22 @@
 //private String descriptions;  //描述
 //private String mark;         //自定义标签
 
-@property (nonatomic, strong, readonly) NSNumber *id;
-@property (nonatomic, strong, readonly) NSNumber *concentratorID;
-@property (nonatomic, strong, readonly) NSNumber *sensorID;
-@property (nonatomic, strong, readonly) NSNumber *channelID;
-@property (nonatomic, strong, readonly) NSNumber *sensorKind;
-@property (nonatomic, strong, readonly) NSNumber *sensorType;
-@property (nonatomic, strong, readonly) NSString *sensorTypeName;
-@property (nonatomic, strong, readonly) NSNumber *status;
-@property (nonatomic, strong, readonly) NSNumber *warnValue;
-@property (nonatomic, strong, readonly) NSNumber *errorValue;
-@property (nonatomic, strong, readonly) NSNumber *groupID;
-@property (nonatomic, strong, readonly) NSString *ctrGroupID;
-@property (nonatomic, strong, readonly) NSString *descriptions;
-@property (nonatomic, strong, readonly) NSString *mark;
+@property (nonatomic, strong) NSNumber *id;
+@property (nonatomic, strong) NSNumber *concentratorID;
+@property (nonatomic, strong) NSNumber *sensorID;
+@property (nonatomic, strong) NSNumber *channelID;
+@property (nonatomic, strong) NSNumber *sensorKind;
+@property (nonatomic, strong) NSNumber *sensorType;
+@property (nonatomic, strong) NSString *sensorTypeName;
+@property (nonatomic, strong) NSNumber *status;
+@property (nonatomic, strong) NSNumber *warnValue;
+@property (nonatomic, strong) NSNumber *errorValue;
+@property (nonatomic, strong) NSNumber *groupID;
+@property (nonatomic, strong) NSString *ctrGroupID;
+@property (nonatomic, strong) NSString *descriptions;
+@property (nonatomic, strong) NSString *mark;
 
+@property (nonatomic, strong, readonly) NSNumber *ctrSensorID;
+@property (nonatomic, strong, readonly) NSNumber *ctrChannelID;
 
 @end

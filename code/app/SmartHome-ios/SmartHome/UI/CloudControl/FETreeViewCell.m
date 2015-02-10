@@ -76,7 +76,7 @@
         self.imageView.image = [UIImage imageNamed:@"doorControl"];
         self.indicatorView.hidden = NO;
         self.indicatorView.image = [UIImage imageNamed:@"controlIndicator"];
-        self.backgroundColor = FEColor(229, 229, 229, 1);//[UIColor whiteColor];
+        self.backgroundColor = [UIColor whiteColor];
     } else if (level == 1) {
         [self.controllContentView setHidden:NO];
         self.imageView.hidden = YES;
@@ -87,7 +87,7 @@
         self.backgroundColor = [UIColor whiteColor];
     } else if (level >= 2) {
         self.indicatorView.hidden = YES;
-        self.backgroundColor = [UIColor brownColor];
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     CGFloat left = 45 + 20 * level;

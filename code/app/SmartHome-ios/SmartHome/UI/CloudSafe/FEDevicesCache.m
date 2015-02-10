@@ -17,11 +17,13 @@
 #import "FEPage.h"
 #import "FEWebServiceManager.h"
 #import "FESensorListResponse.h"
+#import "FEUserMark.h"
+#import "CDUser.h"
 
 @interface FEDevicesCache ()
 
 @property (nonatomic, strong) NSArray *alldevices;
-@property (nonatomic, strong) NSArray *allmarks;
+@property (nonatomic, strong) NSMutableArray *allmarks;
 
 @end
 
@@ -36,20 +38,24 @@
     return instance;
 }
 
--(void)addMark:(FEUserMark *)mark{
-    if (self.allmarks) {
-        NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:self.allmarks];
-        [temp addObject:mark];
-        self.allmarks = temp;
-    }else{
-        self.allmarks = @[mark];
+-(id)init{
+    self = [super init];
+    if (self) {
+        
     }
+    
+    return self;
+}
+
+-(void)addMark:(FEUserMark *)mark{
+    [self.allmarks addObject:mark];
 }
 
 -(void)removeMark:(FEUserMark *)mark{
-    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:self.allmarks];
-    [temp removeObject:mark];
-    self.allmarks = temp;
+//    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:self.allmarks];
+//    [temp removeObject:mark];
+//    self.allmarks = temp;
+    [self.allmarks removeObject:mark];
 }
 
 
@@ -57,6 +63,8 @@
     if (self.allmarks) {
         block(self.allmarks);
     }else{
+        FEUserMark *mark = [[FEUserMark alloc] initWithUserID:FELoginUser.userid mark:@"未分组"];
+        _allmarks = [[NSMutableArray alloc] initWithObjects:mark, nil];
         [self requestMarks:block];
     }
 }
@@ -80,6 +88,9 @@
             NSArray *marks = set.allObjects;
             
             for (NSString *mark in marks) {
+                if ([mark isKindOfClass:[NSNull class]]) {
+                    continue;
+                }
                 [sensors addObject:@{__SENSOR_MARK:mark,__SENSOR_LIST:[sensorList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.mark == %@",mark]]}];
             }
         }
@@ -110,6 +121,7 @@
     FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
     FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
     [[FEWebServiceManager sharedInstance] sensorList:request response:^(NSError *error, FESensorListResponse *response) {
+        
         if (!error && response.result.errorCode.integerValue == 0) {
             _alldevices = response.sensorList;
             block(_alldevices);
@@ -120,15 +132,13 @@
 }
 
 -(void)requestMarks:(void (^)(NSArray *items))block{
-    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
+    FEPage *page = [[FEPage alloc] initWithPageSize:20 currentPage:0 count:0];
     FEMarkRequest *rdata = [[FEMarkRequest alloc] initWithUserid:FELoginUser.userid page:page];
     [[FEWebServiceManager sharedInstance] markList:rdata response:^(NSError *error, FEUserMarkResponse *response) {
         if (!error && response.result.errorCode.integerValue == 0) {
-            _allmarks = response.markList;
-            block(_allmarks);
-        }else{
-            block(nil);
+            [_allmarks addObjectsFromArray:response.markList];
         }
+        block(_allmarks);
     }];
 }
 
