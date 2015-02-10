@@ -290,6 +290,7 @@ public class AlarmPageActivity extends BaseActivtiy implements OnClickListener, 
 			SoundPoolHandler.stopSound();
 			break;
 		case R.id.alarm_clear_btn: 
+			SoundPoolHandler.stopSound();
 			refreshFireAlarm();
 			break;
 		default:break;
@@ -299,6 +300,9 @@ public class AlarmPageActivity extends BaseActivtiy implements OnClickListener, 
 
 	private void refreshFireAlarm()
 	{
+		//初始化bageNum
+		MemoryCache.setBageNum(1);
+		
 		ClearAlarmListReq req = new ClearAlarmListReq();
 		req.setToken(MemoryCache.getToken());
 		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());

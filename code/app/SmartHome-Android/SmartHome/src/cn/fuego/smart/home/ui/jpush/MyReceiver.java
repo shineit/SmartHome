@@ -137,8 +137,9 @@ public class MyReceiver extends BroadcastReceiver {
         		getDetail.showNews(context, pushMsg);
         		break;
         	case ALRAM_MSG: 
-        	case FATAL_ALARM: 
         		getDetail.showHomeAlarm(context, pushMsg);
+        	case FATAL_ALARM: 
+        		getDetail.showFatalAlarm(context, pushMsg);
 
         		break;
         		
@@ -159,17 +160,14 @@ public class MyReceiver extends BroadcastReceiver {
         switch(msgType)
         {
         	case FATAL_ALARM:
-        	
-
-        		//getDetail.showHomeAlarm(context, pushMsg);
-        		SoundPoolHandler.playSound(1,-1);
-        		
+   
+        		SoundPoolHandler.playSound(1,-1);       		
         		AppShortCutUtil appShortCut= new AppShortCutUtil(context);
         		appShortCut.addBage();
         		
         		break;
         	case NEWS_MSG:
-        case ALRAM_MSG:
+        	case ALRAM_MSG:
 
         		//getDetail.showNews(context, pushMsg);
         		//spHandler.playSound(1, 0);

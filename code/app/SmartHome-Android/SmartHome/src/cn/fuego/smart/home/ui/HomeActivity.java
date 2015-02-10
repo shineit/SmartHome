@@ -2,6 +2,7 @@ package cn.fuego.smart.home.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,11 +11,13 @@ import android.widget.Button;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.service.SensorDataCache;
 import cn.fuego.smart.home.service.SoundPoolHandler;
 import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
+import cn.fuego.smart.home.ui.base.widgt.BadgeView;
 import cn.fuego.smart.home.ui.info.AlarmPageActivity;
 import cn.fuego.smart.home.ui.info.NewsPageActivity;
 import cn.fuego.smart.home.ui.setting.concent.ConcentListActivity;
@@ -53,7 +56,20 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		Button camera_btn= (Button) findViewById(R.id.home_menu_camera);
 		camera_btn.setOnClickListener(this);		
 		Button alarm_btn= (Button) findViewById(R.id.home_menu_alarm);
-		alarm_btn.setOnClickListener(this);		
+		alarm_btn.setOnClickListener(this);	
+		//MENU 加bage 提醒
+		if(MemoryCache.getBageNum()>1)
+		{
+			BadgeView badge2 = new BadgeView(this, alarm_btn);
+	    	badge2.setText("!");
+	    	badge2.setTextColor(Color.WHITE);
+	    	badge2.setBadgeBackgroundColor(Color.RED);
+	    	badge2.setTextSize(15);
+	    	badge2.toggle();
+		}
+
+
+    	
 		Button plane_btn= (Button) findViewById(R.id.home_menu_plane);
 		plane_btn.setOnClickListener(this);
 		

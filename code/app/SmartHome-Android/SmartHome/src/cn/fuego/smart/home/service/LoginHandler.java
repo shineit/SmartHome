@@ -19,6 +19,7 @@ import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.ui.HomeActivity;
 import cn.fuego.smart.home.ui.LoginActivity;
+import cn.fuego.smart.home.ui.MyService;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
@@ -65,8 +66,10 @@ public class LoginHandler extends BaseActivtiy
 		req.setDevToken(getDeviceID());
 		
 		req.setPush_userID(req.getUserName());
-		JPushInterface.setAliasAndTags(mContext, req.getUserName(), null, mAliasCallback);
-        
+		
+		JPushInterface.setAliasAndTags(mContext, userName, null, mAliasCallback);
+	
+
 	    
 		WebServiceContext.getInstance().getUserManageRest(this).login(req);
 	}

@@ -15,6 +15,7 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.ui.info.AlarmManageActivity;
+import cn.fuego.smart.home.ui.info.AlarmPageActivity;
 import cn.fuego.smart.home.ui.info.NewsViewActivity;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
@@ -66,28 +67,10 @@ public class GetDetail
 	}
 	public void  showFatalAlarm(final Context context,PushMessageJson pushMsg)
 	{
-		GetAlarmByIDReq alarmReq = new GetAlarmByIDReq();
-		alarmReq.setAlarmID(String.valueOf(pushMsg.getObj()));
-		alarmReq.setToken(MemoryCache.getToken());
-		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
-			@Override
-			public void handle(MispHttpMessage msg)
-			{
-				GetAlarmByIDRsp rsp = (GetAlarmByIDRsp) msg.getMessage().obj;
-				
-				alarmIntent.putExtra(alarmModel.getAlarmID(),String.valueOf(rsp.getHomeAlarm().getId()));
-				alarmIntent.putExtra(alarmModel.getTime(), DateUtil.getStrTime(rsp.getHomeAlarm().getAlarmTime()));
-				alarmIntent.putExtra(alarmModel.getContent(), rsp.getHomeAlarm().getConcentDesp());
-				alarmIntent.putExtra(alarmModel.getTerminDesp(), rsp.getHomeAlarm().getSensorDesp());
-				alarmIntent.putExtra(alarmModel.getTerminType(),rsp.getHomeAlarm().getSensorTypeName());
-				 
-				alarmIntent.putExtra(alarmModel.getTitle(),AlarmTypeEnum.getEnumByInt(rsp.getHomeAlarm().getAlarmType()).getStrValue());
-		        alarmIntent.setClass(context,AlarmManageActivity.class);
-	            alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-	            context.startActivity(alarmIntent); 
 
-			}
-		}).getAlarm(alarmReq);
+        alarmIntent.setClass(context,AlarmPageActivity.class);
+        alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        context.startActivity(alarmIntent); 
 		
 	}
 	public void showPopWindow(Context context)
