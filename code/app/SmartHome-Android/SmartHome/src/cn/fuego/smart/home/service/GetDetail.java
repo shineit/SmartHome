@@ -6,7 +6,7 @@
 * @date 2014-12-10 上午10:39:59 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.ui.base;
+package cn.fuego.smart.home.service;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
-import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.info.AlarmManageActivity;
 import cn.fuego.smart.home.ui.info.NewsViewActivity;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
@@ -51,7 +50,7 @@ public class GetDetail
 			public void handle(MispHttpMessage msg)
 			{
 				GetAlarmByIDRsp rsp = (GetAlarmByIDRsp) msg.getMessage().obj;
-				alarmIntent.putExtra(alarmModel.getAlarmID(),rsp.getHomeAlarm().getId());
+				alarmIntent.putExtra(alarmModel.getAlarmID(),String.valueOf(rsp.getHomeAlarm().getId()));
 				alarmIntent.putExtra(alarmModel.getTime(), DateUtil.getStrTime(rsp.getHomeAlarm().getAlarmTime()));
 				alarmIntent.putExtra(alarmModel.getContent(), rsp.getHomeAlarm().getConcentDesp());
 				alarmIntent.putExtra(alarmModel.getTerminDesp(), rsp.getHomeAlarm().getSensorDesp());
@@ -65,7 +64,36 @@ public class GetDetail
 			}
 		}).getAlarm(alarmReq);
 	}
-	
+	public void  showFatalAlarm(final Context context,PushMessageJson pushMsg)
+	{
+		GetAlarmByIDReq alarmReq = new GetAlarmByIDReq();
+		alarmReq.setAlarmID(String.valueOf(pushMsg.getObj()));
+		alarmReq.setToken(MemoryCache.getToken());
+		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage msg)
+			{
+				GetAlarmByIDRsp rsp = (GetAlarmByIDRsp) msg.getMessage().obj;
+				
+				alarmIntent.putExtra(alarmModel.getAlarmID(),String.valueOf(rsp.getHomeAlarm().getId()));
+				alarmIntent.putExtra(alarmModel.getTime(), DateUtil.getStrTime(rsp.getHomeAlarm().getAlarmTime()));
+				alarmIntent.putExtra(alarmModel.getContent(), rsp.getHomeAlarm().getConcentDesp());
+				alarmIntent.putExtra(alarmModel.getTerminDesp(), rsp.getHomeAlarm().getSensorDesp());
+				alarmIntent.putExtra(alarmModel.getTerminType(),rsp.getHomeAlarm().getSensorTypeName());
+				 
+				alarmIntent.putExtra(alarmModel.getTitle(),AlarmTypeEnum.getEnumByInt(rsp.getHomeAlarm().getAlarmType()).getStrValue());
+		        alarmIntent.setClass(context,AlarmManageActivity.class);
+	            alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+	            context.startActivity(alarmIntent); 
+
+			}
+		}).getAlarm(alarmReq);
+		
+	}
+	public void showPopWindow(Context context)
+	{
+		
+	}
 /*	public void showHomeSensor(final Context context,final AlarmJson alarm)
 	{
 		GetaByIDReq req = new GetSensorByIDReq();

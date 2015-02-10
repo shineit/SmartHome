@@ -12,6 +12,7 @@ import cn.fuego.misp.ui.list.ListViewResInfo;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.service.SoundPoolHandler;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
@@ -104,6 +105,10 @@ public class AlarmManageActivity extends BaseActivtiy implements View.OnClickLis
 		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		WebServiceContext.getInstance().getSensorManageRest(this).clearAlarm(req);
  		
+		if(alarmModel.getTitle()!=null)
+		{
+			SoundPoolHandler.stopSound();
+		}
 		
 	}
 

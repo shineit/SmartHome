@@ -9,14 +9,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
-import cn.fuego.smart.home.AlarmPageActivity;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.service.SensorDataCache;
+import cn.fuego.smart.home.service.SoundPoolHandler;
 import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.info.AlarmActivity;
-import cn.fuego.smart.home.ui.info.NewsActivity;
+import cn.fuego.smart.home.ui.info.AlarmPageActivity;
 import cn.fuego.smart.home.ui.info.NewsPageActivity;
 import cn.fuego.smart.home.ui.setting.concent.ConcentListActivity;
 import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
@@ -28,6 +27,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	private Boolean isLoadSensor=false;
 	private ProgressDialog proDialog;
 	private int tabIndex;
+    private SoundPoolHandler spHandler;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -35,8 +35,10 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		setContentView(R.layout.activity_home);
 		ExitApplication.getInstance().addActivity(this);
 		
+		spHandler= new SoundPoolHandler(this);
+		spHandler.initSoundPool();
 		initView();
-
+		//initSoundPool();
 		
 	}
 

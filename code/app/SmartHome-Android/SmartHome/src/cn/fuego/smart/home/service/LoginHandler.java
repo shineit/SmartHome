@@ -6,7 +6,7 @@
 * @date 2015-1-26 上午9:29:49 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.ui.base;
+package cn.fuego.smart.home.service;
 
 import java.util.Set;
 
@@ -17,10 +17,11 @@ import android.telephony.TelephonyManager;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
-import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.service.SystemUser;
 import cn.fuego.smart.home.ui.HomeActivity;
 import cn.fuego.smart.home.ui.LoginActivity;
+import cn.fuego.smart.home.ui.base.BaseActivtiy;
+import cn.fuego.smart.home.ui.base.SharedPreUtil;
+import cn.fuego.smart.home.ui.base.UserEntity;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;

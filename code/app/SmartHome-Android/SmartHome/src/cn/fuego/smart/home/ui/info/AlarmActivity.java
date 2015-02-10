@@ -13,6 +13,7 @@ import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.service.SoundPoolHandler;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
@@ -35,8 +36,13 @@ public class AlarmActivity extends MispListActivity<HomeAlarmJson> implements On
 	{
 		super.onCreate(savedInstanceState);
 		Button back_btn= (Button) findViewById(R.id.alarm_back);
-		back_btn.setTag(1);
 		back_btn.setOnClickListener(this);
+		
+		Button mute_btn= (Button) findViewById(R.id.alarm_mute_btn);
+		mute_btn.setOnClickListener(this);
+		
+		Button clear_btn = (Button) findViewById(R.id.alarm_clear_btn);
+		clear_btn.setOnClickListener(this);
 	}
 
 	@Override
@@ -84,12 +90,18 @@ public class AlarmActivity extends MispListActivity<HomeAlarmJson> implements On
 	@Override
 	public void onClick(View v)
 	{
-		int tag = (Integer) v.getTag();
-		switch(tag)
+		
+		switch(v.getId())
 		{
-		case 1: this.finish();
-				break;
-
+		case R.id.alarm_back: 
+			this.finish();
+			break;
+		case R.id.alarm_mute_btn: 
+			SoundPoolHandler.stopSound();
+			break;
+		case R.id.alarm_clear_btn: 
+			this.finish();
+			break;
 		default:break;
 		}
 		

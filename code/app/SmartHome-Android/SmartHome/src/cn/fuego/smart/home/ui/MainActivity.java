@@ -7,7 +7,9 @@ import android.os.CountDownTimer;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.ui.base.LoginHandler;
+import cn.fuego.smart.home.service.LoginHandler;
+import cn.fuego.smart.home.service.SoundPoolHandler;
+import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
 import cn.fuego.smart.home.ui.jpush.MyReceiver;
@@ -22,12 +24,15 @@ public class MainActivity extends InstrumentedActivity
 	public static boolean isForeground = false;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_welcome);
 		//本地缓存;  
 		SharedPreUtil.initSharedPreference(getApplicationContext());
 		
+		SoundPoolHandler spHandler= new SoundPoolHandler(this);;
+		spHandler.initSoundPool();
 		registerMessageReceiver();  // used for receive msg
 		new CountDownTimer(2000, 1000)
 		{
@@ -76,7 +81,7 @@ public class MainActivity extends InstrumentedActivity
 
 	@Override
 	protected void onResume() {
-		isForeground = true;
+		isForeground = true;		
 		super.onResume();
 	}
 

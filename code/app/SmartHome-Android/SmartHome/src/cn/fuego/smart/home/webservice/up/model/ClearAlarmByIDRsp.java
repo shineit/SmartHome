@@ -1,28 +1,22 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 
+/** 
+* @ClassName: ClearAlarmByIDRsp 
+* @Description: TODO
+* @author Aether
+* @date 2015-2-8 下午6:00:55 
+*  
+*/
 public class ClearAlarmByIDRsp extends BaseJsonRsp
 {
-	private AlarmJson alarm;
-
-	public AlarmJson getAlarm()
-	{
-		return alarm;
-	}
-
-	public void setAlarm(AlarmJson alarm)
-	{
-		this.alarm = alarm;
-	}
 
 	@Override
 	public String toString()
 	{
-		return "ClearAlarmByIDRsp [alarm=" + alarm + ", result=" + result + "]";
+		return "ClearAlarmByIDRsp [result=" + result + "]";
 	}
 
- 
-	
+
 }

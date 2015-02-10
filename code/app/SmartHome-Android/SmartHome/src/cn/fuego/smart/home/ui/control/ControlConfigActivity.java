@@ -166,7 +166,7 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		req.setToken(MemoryCache.getToken());
 		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
-		HomeSensorJson homesensor= new HomeSensorJson();
+/*		HomeSensorJson homesensor= new HomeSensorJson();
 		//后台通过id 索引
 		homesensor.setId(sensor.getId());		
 		//与web同处理
@@ -181,8 +181,9 @@ public class ControlConfigActivity extends BaseActivtiy implements OnClickListen
 		//spinner 标签选中项
 		homesensor.setMark(selMark);
 		//homesensor.setGroupID(Integer.valueOf(this.getTxt_groupID().getText().toString().trim()));
-		req.setSensor(homesensor);
-		
+		req.setSensor(homesensor);*/
+		sensor.setDescriptions(txt_desp.getText().toString().trim());
+		sensor.setMark(selMark);
 		WebServiceContext.getInstance().getSensorManageRest(this).setSensor(req);
 		
 	}

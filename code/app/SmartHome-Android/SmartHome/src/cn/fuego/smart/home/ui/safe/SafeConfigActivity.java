@@ -182,7 +182,7 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		req.setToken(MemoryCache.getToken());
 		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
 		req.setCommand(SensorSetCmdEnum.MODIFY.getIntValue());
-		HomeSensorJson homesensor= new HomeSensorJson();
+/*		HomeSensorJson homesensor= new HomeSensorJson();
 		//不更改字段
 		homesensor.setId(sensor.getId());
 		homesensor.setSensorTypeName(sensor.getSensorTypeName());
@@ -196,7 +196,15 @@ public class SafeConfigActivity extends BaseActivtiy implements OnClickListener,
 		homesensor.setMark(selMark);
 		homesensor.setCtrSensorID(Long.valueOf(selCtrSensorID));
 		homesensor.setCtrChannelID(Integer.valueOf(selCtrChannelID));
-		req.setSensor(homesensor);
+		req.setSensor(homesensor);*/
+		
+		sensor.setDescriptions(this.getTxt_desp().getText().toString().trim());
+		sensor.setWarnValue(Float.parseFloat(this.getTxt_warn().getText().toString().trim()));
+		sensor.setErrorValue(Float.parseFloat(this.getTxt_error().getText().toString().trim()));
+		sensor.setMark(selMark);
+		sensor.setCtrSensorID(Long.valueOf(selCtrSensorID));
+		sensor.setCtrChannelID(Integer.valueOf(selCtrChannelID));
+		req.setSensor(sensor);
 		//回传参数做单个缓存用
 		//bundle.putSerializable("newSensor", homesensor);
 		

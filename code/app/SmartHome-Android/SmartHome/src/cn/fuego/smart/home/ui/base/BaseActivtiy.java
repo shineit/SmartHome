@@ -18,7 +18,6 @@ import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
-import cn.fuego.smart.home.ui.HomeActivity;
 
 public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListener
 {

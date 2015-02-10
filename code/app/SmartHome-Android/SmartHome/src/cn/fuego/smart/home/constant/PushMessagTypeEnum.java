@@ -18,8 +18,8 @@ package cn.fuego.smart.home.constant;
 public enum PushMessagTypeEnum
 {
 	ALRAM_MSG(0,"告警通知"),
-	NEWS_MSG(1,"公告通知");
- 
+	NEWS_MSG(1,"公告通知"),
+	FATAL_ALARM(2,"严重警告");
  
 	private int intValue;
 	private String strValue;

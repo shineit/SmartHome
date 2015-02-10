@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
+import cn.fuego.smart.home.service.GetDetail;
+import cn.fuego.smart.home.service.SoundPoolHandler;
 import cn.fuego.smart.home.ui.MainActivity;
-import cn.fuego.smart.home.ui.base.GetDetail;
+import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.jpush.android.api.JPushInterface;
 
@@ -27,9 +29,13 @@ public class MyReceiver extends BroadcastReceiver {
 	
     //自定义通知显示公共方法
     private GetDetail getDetail = new GetDetail();
+	
+
 	@Override
-	public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
+	public void onReceive(Context context, Intent intent) 
+	{
+
+		Bundle bundle = intent.getExtras();
 		Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 		
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -43,8 +49,12 @@ public class MyReceiver extends BroadcastReceiver {
         
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
-            int notifactionId = bundle.getInt(JPushInterface.EXTRA_EXTRA);
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+           // int notifactionId = bundle.getInt(JPushInterface.EXTRA_EXTRA);
+            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知 __bundle extra_extra"+bundle.getString(JPushInterface.EXTRA_EXTRA));
+            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            playAlarm(context,extras);
+            
+           // Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
         	
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] jtest用户点击打开了通知");
@@ -68,7 +78,9 @@ public class MyReceiver extends BroadcastReceiver {
         } else {
         	Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
+        
 	}
+
 
 	// 打印所有的 intent extra 数据
 	private static String printBundle(Bundle bundle) {
@@ -117,9 +129,7 @@ public class MyReceiver extends BroadcastReceiver {
 		
    	    PushMessageJson pushMsg = (PushMessageJson) JsonConvert.jsonToObject(msg, PushMessageJson.class);
    	    PushMessagTypeEnum msgType=PushMessagTypeEnum.getEnumByInt(pushMsg.getObjType());
-   	    //AlarmJson alarm= ;
-   	   // AlarmJson alarmObject = (AlarmJson) pushMsg.getObj();
-   	    
+
         switch(msgType)
         {
         	case NEWS_MSG:
@@ -127,7 +137,7 @@ public class MyReceiver extends BroadcastReceiver {
         		getDetail.showNews(context, pushMsg);
         		break;
         	case ALRAM_MSG: 
-
+        	case FATAL_ALARM: 
         		getDetail.showHomeAlarm(context, pushMsg);
 
         		break;
@@ -135,11 +145,41 @@ public class MyReceiver extends BroadcastReceiver {
         	default:break;
         
         }
-     
-
 
 	}
+    /**
+     * 报警类型为火警需要响铃
+     * @param context
+     * @param extras
+     */
+	private void playAlarm(Context context, String extras)
+	{
+		PushMessageJson pushMsg = (PushMessageJson) JsonConvert.jsonToObject(extras, PushMessageJson.class);
+		PushMessagTypeEnum msgType=PushMessagTypeEnum.getEnumByInt(pushMsg.getObjType());
+        switch(msgType)
+        {
+        	case FATAL_ALARM:
+        	
 
+        		//getDetail.showHomeAlarm(context, pushMsg);
+        		SoundPoolHandler.playSound(1,-1);
+        		
+        		AppShortCutUtil appShortCut= new AppShortCutUtil(context);
+        		appShortCut.addBage();
+        		
+        		break;
+        	case NEWS_MSG:
+        case ALRAM_MSG:
+
+        		//getDetail.showNews(context, pushMsg);
+        		//spHandler.playSound(1, 0);
+        		//SoundPoolHandler.playSound(1, 0);
+        		break;	
+        	default:break;
+        
+        }
+		
+	}
 
 
 

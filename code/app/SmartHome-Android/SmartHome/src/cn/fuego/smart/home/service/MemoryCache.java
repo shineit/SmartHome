@@ -16,10 +16,9 @@ public class MemoryCache
 	private static int flag=0;//判断进入页面方式，0-表示首次进入，1-其他切换进入
 	private static String cachePhone=null;//缓存电话号码，用于云视验证
 	
-	//public static String hostURL = "http://192.168.0.102:8080/SmartHome/rest";
-	//public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
-	//public static String hostURL = "http://115.231.168.14:8080/SmartHome/rest";//嘉兴服务器地址
-	//public static String hostURL = "http://192.168.1.104:8080/SmartHome/rest";
+	private static boolean isPausePlay=false;//声音播放暂停标志
+	
+	private static int bageNum=1;//桌面图标提醒数字
     public static Boolean isLogin()
     {
     	Boolean result= false;
@@ -104,6 +103,16 @@ public class MemoryCache
 		MemoryCache.cachePhone = cachePhone;
 	}
  
+	public static boolean isPausePlay()
+	{
+		return isPausePlay;
+	}
+
+	public static void setPausePlay(boolean isPausePlay)
+	{
+		MemoryCache.isPausePlay = isPausePlay;
+	}
+
 	public static String getHostUrl()
 	{
 		return "http://"+MemoryCache.getServerIp()+":"+MemoryCache.getServerPort();
@@ -117,5 +126,16 @@ public class MemoryCache
 		return getWebContextUrl()+"/rest";
 		
 	}
+
+	public static int getBageNum()
+	{
+		return bageNum++;
+	}
+
+	public static void setBageNum(int bageNum)
+	{
+		MemoryCache.bageNum = bageNum;
+	}
+	
 
 }

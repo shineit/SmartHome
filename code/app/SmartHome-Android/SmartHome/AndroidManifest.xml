@@ -80,6 +80,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
         </activity>
         <!-- camera start -->
         <activity
@@ -362,8 +365,9 @@
             android:label="@string/title_activity_news_page" >
         </activity>
         <activity
-            android:name=".AlarmPageActivity"
-            android:label="@string/title_activity_alarm_page" >
+            android:name="cn.fuego.smart.home.ui.info.AlarmPageActivity"
+            android:label="@string/title_activity_alarm_page"
+            android:launchMode="singleTask"  >
         </activity>
     </application>
 

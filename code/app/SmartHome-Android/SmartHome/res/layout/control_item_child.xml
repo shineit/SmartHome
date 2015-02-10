@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/hhh"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/item_backgroud"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="10dp" >
 
     <TextView
         android:id="@+id/TextView01"
@@ -17,7 +18,8 @@
         android:gravity="center_vertical"
         android:text="编号:"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/item_control_id"
@@ -27,25 +29,51 @@
         android:layout_alignBottom="@+id/TextView01"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/item_control_room"
         android:layout_toRightOf="@+id/TextView01"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="C0000001"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/item_control_room"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="100dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:text="厨房"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@+id/item_control_desp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center_vertical"
+            android:text="在这里输入传感器的描述信息"
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size_sm" />
+
+        <TextView
+            android:id="@+id/item_control_room"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="厨房"
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size_sm"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/item_control_chk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/checkbox"
+            android:button="@null"
+            android:checked="true"
+            android:focusable="false"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
 
 </RelativeLayout>

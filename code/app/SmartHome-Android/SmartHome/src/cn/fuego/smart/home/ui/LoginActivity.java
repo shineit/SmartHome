@@ -8,10 +8,10 @@ import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.service.LoginHandler;
 import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.base.LoginHandler;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
 
