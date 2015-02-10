@@ -17,10 +17,13 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
+import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.service.AlarmManageService;
 import cn.fuego.smart.home.webservice.down.service.WebServiceContext;
+import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 
 /** 
  * @ClassName: AlarmManageServiceImpl 
@@ -33,6 +36,44 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 {
 
 	 
+	@Override
+	public List<HomeAlarmView> getAlarmOfUser(int userID, int startNum,	int pageSize, List<AttributeJson> attrList)
+	{
+ 		List<Long> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
+ 		 
+ 		List<HomeAlarmView> alarmList = new ArrayList<HomeAlarmView>();
+
+ 		if(!ValidatorUtil.isEmpty(concentorIDList))
+ 		{
+ 			List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+ 	 		//condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objType",AlarmObjTypeEnmu.CONCENTRATOR_ALARM.getIntValue()));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN,"concentratorID",concentorIDList));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+ 	 		if(!ValidatorUtil.isEmpty(attrList))
+ 	 		{
+ 	 			for(AttributeJson attr:attrList)
+ 	 	 		{
+ 	 	 			if(attr.getAttrName().equals(AttributeConst.ALARM_TYPE))
+ 	 	 			{
+ 	 	 				if(attr.getAttrValue().equals(AlarmTypeEnum.FIRE_ALARM.getStrValue()))
+ 	 	 				{
+ 	 	 					condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",AlarmTypeEnum.FIRE_ALARM.getIntValue()));
+ 	 	 				}
+ 	 	 				else
+ 	 	 				{
+ 	 	 					condtionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"alarmType",AlarmTypeEnum.FIRE_ALARM.getIntValue()));
+ 	 	 				}
+ 	 	 			}
+ 	 	 		}
+ 	 		}
+ 	 		
+ 	 		
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
+ 	 		alarmList.addAll(this.getDao(HomeAlarmView.class).getAll(condtionList, startNum, pageSize));
+ 		}
+ 		
+ 		return alarmList;
+	}
  
 	public List<HomeAlarmView> getAlarmOfUser(int userID,int startNum,int pageSize)
 	{
@@ -46,6 +87,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
  	 		//condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objType",AlarmObjTypeEnmu.CONCENTRATOR_ALARM.getIntValue()));
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN,"concentratorID",concentorIDList));
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+ 	 		condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
  	 		alarmList.addAll(this.getDao(HomeAlarmView.class).getAll(condtionList, startNum, pageSize));
  		}
  		
@@ -97,6 +139,41 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		HomeAlarmView homeAlarm =(HomeAlarmView) this.getDao(HomeAlarmView.class).getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"id",alarmID));
 		return homeAlarm;
 	}
+
+	@Override
+	public void manualClearList(int userID, List<String> alarmIDList)
+	{
+
+		List<String> idList = new ArrayList<String>();
+		if(!ValidatorUtil.isEmpty(alarmIDList))
+		{
+			idList.addAll(alarmIDList);
+		}
+		else
+		{
+
+			idList= getIDListByType(userID,AlarmTypeEnum.FIRE_ALARM.getIntValue());
+		}
+
+		Modify(idList,"clearStatus", AlarmClearEnum.MANUAL_CLEAR.getIntValue());
+		
+	}
+
+	private List<String> getIDListByType(int userID, int type)
+	{
+		List<String> idList = new ArrayList<String>();
+		List<Long> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
+		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+		condtionList.add(new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentorIDList));
+		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "alarmType", type));
+		List<Alarm> alarmList= this.getDataSource(condtionList).getAllPageData();
+		for(Alarm alarm:alarmList)
+		{
+			idList.add(String.valueOf(alarm.getId()));
+		}
+		return idList;
+	}
+
 
  
 }

@@ -19,6 +19,10 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class UserMark implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int markID;//自增长
 	private int userID;
 	private String mark;

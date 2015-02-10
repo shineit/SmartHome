@@ -16,6 +16,11 @@ import cn.fuego.common.util.format.DateUtil;
  */
 public class News implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String PRI_KEY = "newsID";
 	
 	private int   newsID; //新闻编号,自增长

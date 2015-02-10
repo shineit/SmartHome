@@ -24,6 +24,8 @@
 		 <property name="clearStatus" column="CLEAR_STATUS"></property>
 		 <property name="clearTime" column="CLEAR_TIME"></property>
 		 
+		 <property name="objID1" column="OBJ_ID1"></property>
+		 <property name="objID2" column="OBJ_ID2"></property>
 		 
 	</class>
  

@@ -11,6 +11,7 @@ package cn.fuego.smart.home.constant;
  */
 public enum AlarmTypeEnum
 {
+	NON_FIRE_ALARM(0,"非火警类"),
 	OFFLINE_ALARM(1,"掉线"),
 	OFFLINE_RECOVER(2,"掉线恢复"),
 	SUBPRESSURE_ALARM(3,"欠压"),

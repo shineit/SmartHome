@@ -17,7 +17,8 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
-import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.MISPException;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
@@ -159,7 +160,7 @@ public class DeviceManagerImpl implements DeviceManager
 		data += DataTypeConvert.intToByteStr(sensor.getGroupID(),1);
 
 	    data += DataTypeConvert.intToByteStr(sensor.getCtrSensorID(),4);
-		data += DataTypeConvert.intToByteStr(sensor.getCtrChannelID(),2);
+		data += DataTypeConvert.intToByteStr(sensor.getCtrChannelID(),1);
 		 
  
 		String temp = sensor.getDescription();
@@ -292,12 +293,12 @@ public class DeviceManagerImpl implements DeviceManager
 		{
 			if(!DeviceOnlineCache.getInstance().isOnline(concentrator))
 			{
-				//throw new MISPException(ErrorMessageConst.DEVICE_IS_OFFLINE);
+				throw new MISPException(ErrorMessageConst.DEVICE_IS_OFFLINE);
 			}
 			Concentrator cacheDevice = DeviceOnlineCache.getInstance().getConcentrator(concentrator.getConcentratorID());
 			if(null == cacheDevice)
 			{
-				//throw new MISPException(ErrorMessageConst.DEVICE_IS_OFFLINE);
+				throw new MISPException(ErrorMessageConst.DEVICE_IS_OFFLINE);
 			}
 			this.concentrator.setIpAddr(cacheDevice.getIpAddr());
 			this.concentrator.setPort(cacheDevice.getPort());
@@ -326,7 +327,12 @@ public class DeviceManagerImpl implements DeviceManager
 				buf.append(DataTypeConvert.intToByteStr(RecieveCommandConst.PACKET_RECV_MSG,1));
 				buf.append(DataTypeConvert.intToByteStr(0,1));
 				
-
+				Concentrator cacheDevice = DeviceOnlineCache.getInstance().getConcentrator(concentrator.getConcentratorID());
+				if(null != cacheDevice)
+				{
+					this.concentrator.setIpAddr(cacheDevice.getIpAddr());
+					this.concentrator.setPort(cacheDevice.getPort());
+				}
 				
 				Communicator communicator = CommunicatorFactory.getInstance().getCommunicator(this.concentrator.getIpAddr(), concentrator.getPort());
 				communicator.open();

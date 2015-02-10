@@ -31,9 +31,13 @@ public class FireAlarmView implements PersistenceObject
 	//通过concenratorID关联concentrator表
 	private String concentDesp;		//集中器描述
     //通过objID关联FireSensor表	
+	private int planNodeID; //平面图节点ID
 	private int machineID; //机号
 	private int loopID;    //回路号
 	private int codeID;    //编号
+	private String locationDesp;  //位置描述
+	private float locationX;  //X 偏移，相对当前图片尺寸宽度
+	private float locationY;  //Y 偏移，相当当前图片尺寸高度
 	
 	public int getId()
 	{
@@ -124,6 +128,38 @@ public class FireAlarmView implements PersistenceObject
 	public void setCodeID(int codeID)
 	{
 		this.codeID = codeID;
+	}
+	public int getPlanNodeID()
+	{
+		return planNodeID;
+	}
+	public void setPlanNodeID(int planNodeID)
+	{
+		this.planNodeID = planNodeID;
+	}
+	public String getLocationDesp()
+	{
+		return locationDesp;
+	}
+	public void setLocationDesp(String locationDesp)
+	{
+		this.locationDesp = locationDesp;
+	}
+	public float getLocationX()
+	{
+		return locationX;
+	}
+	public void setLocationX(float locationX)
+	{
+		this.locationX = locationX;
+	}
+	public float getLocationY()
+	{
+		return locationY;
+	}
+	public void setLocationY(float locationY)
+	{
+		this.locationY = locationY;
 	}
 
 

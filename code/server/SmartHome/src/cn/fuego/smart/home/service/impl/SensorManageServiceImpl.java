@@ -58,6 +58,8 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 			old.setDescription(homeSensor.getDescription());
 			old.setCtrSensorID(homeSensor.getCtrSensorID());
 			old.setCtrChannelID(homeSensor.getCtrChannelID());
+			//
+			old.setStatus(homeSensor.getStatus());
 			Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(old.getConcentratorID());
 			if(null != concentrator)
 			{

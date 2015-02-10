@@ -15,6 +15,10 @@ import cn.fuego.common.domain.PersistenceObject;
  */                                
 public class ServiceOrder implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String PRI_KEY = "orderID";
 	private String orderID;         //申请单号，
     private String orderName;       //申请单名称

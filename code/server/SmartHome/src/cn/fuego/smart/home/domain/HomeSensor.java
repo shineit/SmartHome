@@ -19,6 +19,10 @@ import cn.fuego.smart.home.constant.SensorStatusEnum;
  */
 public class HomeSensor implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String PRI_KEY = "id";
 	private long id;              //唯一ID 终端设备的出场ID，具有唯一性
 	private long concentratorID;  //集中器ID

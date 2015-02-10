@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MispCommonService;
@@ -16,12 +15,10 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.Concentrator;
-import cn.fuego.smart.home.domain.SensorType;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.ConcentFilterModel;
-import cn.fuego.smart.home.web.model.SensorTypeFilterModel;
 
 public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 {

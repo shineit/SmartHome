@@ -45,7 +45,7 @@ public class PushServiceImpl implements PushService
 	{
 		 for(Alarm alarm : alarmList)
 		 {
-			 if(AlarmTypeEnum.OFFLINE_ALARM.getIntValue()==alarm.getAlarmType()||AlarmTypeEnum.OFFLINE_RECOVER.getIntValue()==alarm.getAlarmType())
+			 if(AlarmTypeEnum.FIRE_ALARM.getIntValue()!=alarm.getAlarmType())
 			 {
 				 return;
 			 }
@@ -63,11 +63,20 @@ public class PushServiceImpl implements PushService
 						 if(null != pushInfo)
 						 {
 							 PushMessageJson json = new PushMessageJson();
+							 String title=null;
+							 if(alarm.getAlarmType()==AlarmTypeEnum.FIRE_ALARM.getIntValue())
+							 {
+								 title = PushMessagTypeEnum.FATAL_ALARM.getStrValue()+AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
+								 json.setObjType(PushMessagTypeEnum.FATAL_ALARM.getIntValue());
+							 }
+							 else
+							 {
+								 title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
+								 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
+							 }
 							 
-							 String title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
-							 String content = AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
-						 
-	 						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
+							 String content = AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();					 
+	 						 
 							 json.setObj(alarm.getId());
 			 
 	 						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);

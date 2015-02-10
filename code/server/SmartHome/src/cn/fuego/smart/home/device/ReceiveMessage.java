@@ -123,7 +123,9 @@ public class ReceiveMessage
 				{
 					
 					alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
-					alarm.setObjID(sensor.getId());
+					alarm.setObjID(sensor.getMachineID());
+					alarm.setObjID1(sensor.getLoopID());
+					alarm.setObjID2(sensor.getCodeID());
 					alarmList.add(alarm);
 				}
 				else
@@ -140,7 +142,8 @@ public class ReceiveMessage
 					if(null != sensor)
 					{
 						alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
-						alarm.setObjID(sensor.getId());
+						alarm.setObjID(sensor.getSensorID());
+						alarm.setObjID1(sensor.getChannelID());
 						alarmList.add(alarm);
 					}
 					else
@@ -269,7 +272,7 @@ public class ReceiveMessage
 		{
 
 			long ctrSensorID = this.getLongValue(index+17,index+20);
-			int ctrChannelID = this.getIntValue(index+21,index+22);
+			int ctrChannelID = this.getIntValue(index+21);
 			sensor.setCtrSensorID(ctrSensorID);
 			sensor.setCtrChannelID(ctrChannelID);
 		}

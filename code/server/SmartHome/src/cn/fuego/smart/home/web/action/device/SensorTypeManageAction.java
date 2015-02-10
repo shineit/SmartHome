@@ -8,20 +8,16 @@
 */ 
 package cn.fuego.smart.home.web.action.device;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
-import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.SensorType;
 import cn.fuego.smart.home.service.ServiceContext;
-import cn.fuego.smart.home.web.model.HomeSensorFilterModel;
 import cn.fuego.smart.home.web.model.SensorTypeFilterModel;
 
 /** 

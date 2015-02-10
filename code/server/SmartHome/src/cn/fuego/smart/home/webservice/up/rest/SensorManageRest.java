@@ -14,6 +14,8 @@ import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorReq;
 import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.ClearAlarmListReq;
+import cn.fuego.smart.home.webservice.up.model.ClearAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -75,5 +77,9 @@ public interface SensorManageRest
 	@POST
 	@Path("/alarm/clear/id")
 	public ClearAlarmByIDRsp clearAlarm(ClearAlarmByIDReq req);
+	
+	@POST
+	@Path("/alarm/clear/list")
+	public ClearAlarmListRsp clearAlarm(ClearAlarmListReq req);
  
 }

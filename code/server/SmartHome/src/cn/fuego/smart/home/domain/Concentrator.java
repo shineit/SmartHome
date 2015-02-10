@@ -12,6 +12,10 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class Concentrator implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long concentratorID;     //集中器编号
 	private String ipAddr;			//集中器IP地址
 	private int port;

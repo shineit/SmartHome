@@ -59,7 +59,7 @@ function submitFormAlarm(url){
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
 				<th width="20%" align="center">集中器编号</th>
-				<th width="20%" align="center">告警用户</th>
+				<th width="20%" align="center">终端编号</th>
 				<th width="20%" align="center">告警类型</th>
 				<th width="20%" align="center">告警时间</th>
 				<th width="15%" align="center">清除状态</th>

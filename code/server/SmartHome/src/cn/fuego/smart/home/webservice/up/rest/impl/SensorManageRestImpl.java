@@ -30,6 +30,8 @@ import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorReq;
 import cn.fuego.smart.home.webservice.up.model.BatchOperateSensorRsp;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.ClearAlarmListReq;
+import cn.fuego.smart.home.webservice.up.model.ClearAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -166,7 +168,7 @@ public class SensorManageRestImpl implements SensorManageRest
 			page.setCurrentPage(req.getPage().getCurrentPage());
 		}
 
-		List<HomeAlarmView> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID(),page.getStartNum(),page.getPageSize());
+		List<HomeAlarmView> alarmList = ServiceContext.getInstance().getAlarmManageService().getAlarmOfUser(req.getUserID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
 		for(HomeAlarmView alarmview : alarmList)
 		{
 			HomeAlarmJson alarmJson = ModelConvert.HomeAlarmToJson(alarmview);
@@ -306,6 +308,29 @@ public class SensorManageRestImpl implements SensorManageRest
 
 
  		
+		return rsp;
+	}
+
+	@Override
+	public ClearAlarmListRsp clearAlarm(ClearAlarmListReq req)
+	{
+		ClearAlarmListRsp rsp = new ClearAlarmListRsp();
+		try
+		{
+ 
+		    ServiceContext.getInstance().getAlarmManageService().manualClearList(req.getUserID(), req.getAlarmIDList());
+ 
+		}
+		catch(MISPException e)
+		{
+			log.error("clear alarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("clear alarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}		
 		return rsp;
 	}
 

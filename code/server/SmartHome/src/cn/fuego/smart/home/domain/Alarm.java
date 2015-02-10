@@ -16,6 +16,11 @@ import cn.fuego.smart.home.constant.AlarmClearEnum;
  */
 public class Alarm implements PersistenceObject
 {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String PRI_KEY = "id";
 	
 	private int id;  			//告警ID，自增长
@@ -32,6 +37,8 @@ public class Alarm implements PersistenceObject
 	private Date clearTime;	//告警清除的时间
 	private String statusColor;//状态颜色，对应清除状态
 
+	private int objID1=0;       //备选id1,homesensor-channelID;loopID; //回路号
+	private int objID2=0;       //备选id2,  codeID;//编号
 
 	public int getId()
 	{
@@ -169,6 +176,34 @@ public class Alarm implements PersistenceObject
 	public void setClearTime(Date clearTime)
 	{
 		this.clearTime = clearTime;
+	}
+
+
+
+	public int getObjID1()
+	{
+		return objID1;
+	}
+
+
+
+	public void setObjID1(int objID1)
+	{
+		this.objID1 = objID1;
+	}
+
+
+
+	public int getObjID2()
+	{
+		return objID2;
+	}
+
+
+
+	public void setObjID2(int objID2)
+	{
+		this.objID2 = objID2;
 	}
 
 

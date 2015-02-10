@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="SensorPlan" table="sensor_plan">
+
+		<composite-id>
+		   <key-property name="userID" column="USER_ID"  ></key-property>
+		
+	       <key-property name="nodeID" column="NODE_ID"  ></key-property>
+	    </composite-id>
+	    
+	     <property name="nodeName" column="NODE_NAME" ></property>
+	     <property name="nodeType" column="NODE_TYPE" ></property>
+	     <property name="parentID" column="PARENT_ID" ></property>
+	     <property name="filePath" column="FILE_PATH" ></property>
+
+	</class>
+</hibernate-mapping>

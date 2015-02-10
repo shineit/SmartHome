@@ -17,6 +17,7 @@
 	<s:form method="post" action="device/HomeSensorManage" class="pageForm required-validate" name="concentForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="pageFormContent" layoutH="58">
             <input type="hidden" name="obj.sensorType" value="${obj.sensorType}"/>
+            <input type="hidden" name="obj.status" value="${obj.status}"/>
 			<dl style="width:100%;">
 				<dt style="width:15%;">传感器编号：</dt>			
 				<dd style="width:80%;"><input type="text" name="obj.id"  size="25" readonly="readonly" value="${obj.id}"/></dd>		 

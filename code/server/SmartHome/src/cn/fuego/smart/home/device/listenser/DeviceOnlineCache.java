@@ -48,6 +48,7 @@ public class DeviceOnlineCache
 		log.info("checking device is online or not");
 		for (Concentrator entry : deviceCache.keySet()) 
 		{
+			log.info("the concentrator is " + entry);
 			long nowTime = System.currentTimeMillis();
 			if(nowTime -30000 > deviceCache.get(entry))
 			{
