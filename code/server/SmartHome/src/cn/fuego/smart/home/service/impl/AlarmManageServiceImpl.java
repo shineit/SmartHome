@@ -156,6 +156,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		}
 
 		Modify(idList,"clearStatus", AlarmClearEnum.MANUAL_CLEAR.getIntValue());
+		Modify(idList,"clearUser", userID);
 		
 	}
 
