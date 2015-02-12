@@ -58,8 +58,10 @@ public class DeviceManagerImpl implements DeviceManager
 	@Override
 	public void reset(Concentrator concentrator)
 	{
-		// TODO Auto-generated method stub
+		String sendMessage = makeSendData(SendCommandConst.RESET_CONCENTRATOR,null);
+		String readMessage = getData(sendMessage);
 		
+		log.info("the read message is " + readMessage);
 	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.device.send.DeviceManager#clear(cn.fuego.smart.home.domain.Concentrator)

@@ -19,9 +19,14 @@ import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
+import cn.fuego.smart.home.device.send.DeviceManager;
+import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeAlarmView;
+import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.AlarmManageService;
+import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.down.service.WebServiceContext;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 
@@ -143,7 +148,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 	@Override
 	public void manualClearList(int userID, List<String> alarmIDList)
 	{
-
+		List<Long> concentorIDList=new ArrayList<Long>();
 		List<String> idList = new ArrayList<String>();
 		if(!ValidatorUtil.isEmpty(alarmIDList))
 		{
@@ -151,19 +156,26 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		}
 		else
 		{
-
-			idList= getIDListByType(userID,AlarmTypeEnum.FIRE_ALARM.getIntValue());
+			concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
+			idList= getIDListByType(userID,AlarmTypeEnum.FIRE_ALARM.getIntValue(),concentorIDList);
 		}
 
 		Modify(idList,"clearStatus", AlarmClearEnum.MANUAL_CLEAR.getIntValue());
 		Modify(idList,"clearUser", userID);
+		for(Long concentorID:concentorIDList)
+		{
+			Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(String.valueOf(concentorID));
+			DeviceManager device = DeviceManagerFactory.getInstance().getDeviceManger(concentrator);
+			device.reset(concentrator);
+		}
+
 		
 	}
 
-	private List<String> getIDListByType(int userID, int type)
+	private List<String> getIDListByType(int userID, int type,List<Long> concentorIDList)
 	{
 		List<String> idList = new ArrayList<String>();
-		List<Long> concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
+		
 		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN, "concentratorID", concentorIDList));
 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "alarmType", type));

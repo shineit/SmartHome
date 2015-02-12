@@ -8,11 +8,14 @@
 */ 
 package cn.fuego.smart.home.webservice.up.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
@@ -53,8 +56,9 @@ public class NewsManageRestImpl implements NewsManageRest
 			page.setPageSize(req.getPage().getPageSize());
 			page.setCurrentPage(req.getPage().getCurrentPage());
 		}
-		
-		List<News> newsList = newsService.getDataSource().getCurrentPageData(page.getStartNum(),page.getPageSize());
+		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+		condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"date"));
+		List<News> newsList = newsService.getDataSource(condtionList).getCurrentPageData(page.getStartNum(),page.getPageSize());
 		for(News e : newsList)
 		{
 			NewsJson newsJson = ModelConvert.newsToJson(e);
