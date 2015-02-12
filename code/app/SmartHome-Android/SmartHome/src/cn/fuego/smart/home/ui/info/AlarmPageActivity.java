@@ -30,8 +30,10 @@ import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.service.SoundPoolHandler;
+import cn.fuego.smart.home.ui.HomeActivity;
+import cn.fuego.smart.home.ui.authrun.AlarmSoundService;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
@@ -287,17 +289,34 @@ public class AlarmPageActivity extends BaseActivtiy implements OnClickListener, 
 		switch(v.getId())
 		{
 		case R.id.alarm_back: 
+			if(MemoryCache.getEnterFlag()==IntentCodeConst.FIRE_ALARM_ENTER)
+			{
+				Intent i= new Intent();
+				i.setClass(this, HomeActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+		        this.startActivity(i);
+		        MemoryCache.setEnterFlag(0);
+			}
 			this.finish();
 			break;
 		case R.id.alarm_mute_btn: 
-			SoundPoolHandler.stopSound();
+			//SoundPoolHandler.stopSound();
+			muteService();
 			break;
 		case R.id.alarm_clear_btn: 
-			SoundPoolHandler.stopSound();
+			//SoundPoolHandler.stopSound();
+			muteService();
 			refreshFireAlarm();
 			break;
 		default:break;
 		}
+		
+	}
+
+	private void muteService()
+	{
+		Intent serviceIntent = new Intent(AlarmPageActivity.this, AlarmSoundService.class);
+		stopService(serviceIntent);
 		
 	}
 

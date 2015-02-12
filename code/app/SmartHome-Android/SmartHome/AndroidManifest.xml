@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.fuego.smart.home"
-    android:versionCode="101"
-    android:versionName="1.0.1" 
+    android:versionCode="102"
+    android:versionName="1.0.2" 
     android:installLocation="internalOnly"
     >
 		
@@ -380,6 +380,8 @@
             android:label="@string/title_activity_alarm_page"
             android:launchMode="singleTask"  >
         </activity>
+        <!--播放告警音服务  -->
+        <service android:name="cn.fuego.smart.home.ui.authrun.AlarmSoundService"></service>
     </application>
 
 </manifest>

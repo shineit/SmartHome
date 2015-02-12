@@ -18,6 +18,7 @@ import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
+import cn.fuego.smart.home.service.MemoryCache;
 
 public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListener
 {
@@ -142,6 +143,15 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 
 	    Toast.makeText(mContext, MISPErrorMessageConst.getMessageByErrorCode(message.getErrorCode()), Toast.LENGTH_SHORT).show();
     }
+    /**
+     * 如何进程被杀死，则取消登录状态
+     */
+	@Override
+	protected void onDestroy()
+	{
+		MemoryCache.setLogin(false);
+		super.onDestroy();
+	}
 
 
 }

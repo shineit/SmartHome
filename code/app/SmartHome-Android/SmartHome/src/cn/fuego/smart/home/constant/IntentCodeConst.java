@@ -22,4 +22,7 @@ public class IntentCodeConst
 	
 	public static final String BUNDLE_HOMESENSOR="ser_homesensor";//序列化传递对象名homesensor
 	public static final String BUNDLE_NEWS="ser_news";//序列化传递对象名news
+	
+	public static final int FIRE_ALARM_ENTER= 1;
+	public static final int NEWS_ENTER= 2;
 }

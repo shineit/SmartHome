@@ -22,7 +22,9 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.ListViewResInfo;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.ui.HomeActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
@@ -195,6 +197,14 @@ public class NewsPageActivity extends BaseActivtiy implements OnScrollListener, 
 	@Override
 	public void onClick(View v)
 	{
+		if(MemoryCache.getEnterFlag()==IntentCodeConst.NEWS_ENTER)
+		{
+			Intent i= new Intent();
+			i.setClass(this, HomeActivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+	        this.startActivity(i);
+	        MemoryCache.setEnterFlag(0);
+		}
 		this.finish();
 		
 	}

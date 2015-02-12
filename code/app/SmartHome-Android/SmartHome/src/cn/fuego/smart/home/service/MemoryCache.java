@@ -7,7 +7,8 @@ public class MemoryCache
 	private static String version = "0.1";
 	private static String serverIp = "115.231.168.14"; //嘉兴服务器地址
 	//private static String serverIp = "192.168.1.106"; //本地1
-	//private static String serverIp = "192.168.0.102"; //本地2
+	//private static String serverIp = "192.168.0.104"; //本地2
+	//public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
 	private static String serverPort= "8080";
 	private static AppDeviceInfo pushInfo= new AppDeviceInfo() ;
 	
@@ -19,6 +20,10 @@ public class MemoryCache
 	private static boolean isPausePlay=false;//声音播放暂停标志
 	
 	private static int bageNum=1;//桌面图标提醒数字
+	
+	private static int enterFlag=0; //首页进入方式，0-进入到首页；1-进入告警页面；2-进入到新闻界面
+	
+	private static boolean isLogin=false; //标注登陆状态
     public static Boolean isLogin()
     {
     	Boolean result= false;
@@ -135,6 +140,21 @@ public class MemoryCache
 	public static void setBageNum(int bageNum)
 	{
 		MemoryCache.bageNum = bageNum;
+	}
+
+	public static int getEnterFlag()
+	{
+		return enterFlag;
+	}
+
+	public static void setEnterFlag(int enterFlag)
+	{
+		MemoryCache.enterFlag = enterFlag;
+	}
+
+	public static void setLogin(boolean isLogin)
+	{
+		MemoryCache.isLogin = isLogin;
 	}
 	
 

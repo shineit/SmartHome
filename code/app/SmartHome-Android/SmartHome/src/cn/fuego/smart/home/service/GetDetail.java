@@ -14,6 +14,8 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
+import cn.fuego.smart.home.constant.IntentCodeConst;
+import cn.fuego.smart.home.ui.MainActivity;
 import cn.fuego.smart.home.ui.info.AlarmManageActivity;
 import cn.fuego.smart.home.ui.info.AlarmPageActivity;
 import cn.fuego.smart.home.ui.info.NewsViewActivity;
@@ -68,9 +70,22 @@ public class GetDetail
 	public void  showFatalAlarm(final Context context,PushMessageJson pushMsg)
 	{
 
-        alarmIntent.setClass(context,AlarmPageActivity.class);
+       /* alarmIntent.setClass(context,AlarmPageActivity.class);
         alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-        context.startActivity(alarmIntent); 
+        context.startActivity(alarmIntent); */
+		MemoryCache.setEnterFlag(IntentCodeConst.FIRE_ALARM_ENTER);
+		Intent i = new Intent();
+		if(MemoryCache.isLogin())
+		{
+			i.setClass(context,AlarmPageActivity.class);
+		}
+		else
+		{
+			i.setClass(context,MainActivity.class);
+		}
+		
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+        context.startActivity(i);
 		
 	}
 	public void showPopWindow(Context context)
@@ -107,6 +122,26 @@ public class GetDetail
 	
 	public void showNews(final Context context,PushMessageJson pushMsg)
 	{
+
+
+		if(MemoryCache.isLogin())
+		{
+			//i.setClass(context,MainActivity.class);
+			showNewsDetail(context,pushMsg);
+		}
+		else
+		{
+			MemoryCache.setEnterFlag(IntentCodeConst.NEWS_ENTER);
+			Intent i = new Intent();
+			i.setClass(context,MainActivity.class);
+	        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+	        context.startActivity(i);
+		}
+		
+
+	}
+	private void showNewsDetail(final Context context, PushMessageJson pushMsg)
+	{
 		GetNewsByIDReq newsReq = new GetNewsByIDReq();
 		newsReq.setToken(MemoryCache.getToken());
 		newsReq.setNewsID(String.valueOf(pushMsg.getObj()));
@@ -124,5 +159,7 @@ public class GetDetail
 			}
 			
 		}).getNews(newsReq);
+	
 	}
+
 }

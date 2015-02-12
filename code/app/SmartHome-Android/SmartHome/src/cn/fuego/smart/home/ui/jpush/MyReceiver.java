@@ -9,11 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import cn.fuego.common.util.format.JsonConvert;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
 import cn.fuego.smart.home.service.GetDetail;
-import cn.fuego.smart.home.service.SoundPoolHandler;
+import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.MainActivity;
-import cn.fuego.smart.home.ui.base.AppShortCutUtil;
+import cn.fuego.smart.home.ui.authrun.AlarmSoundService;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.jpush.android.api.JPushInterface;
 
@@ -140,7 +141,6 @@ public class MyReceiver extends BroadcastReceiver {
         		getDetail.showHomeAlarm(context, pushMsg);
         	case FATAL_ALARM: 
         		getDetail.showFatalAlarm(context, pushMsg);
-
         		break;
         		
         	default:break;
@@ -160,10 +160,11 @@ public class MyReceiver extends BroadcastReceiver {
         switch(msgType)
         {
         	case FATAL_ALARM:
-   
-        		SoundPoolHandler.playSound(1,-1);       		
-        		AppShortCutUtil appShortCut= new AppShortCutUtil(context);
-        		appShortCut.addBage();
+    			Intent serviceIntent = new Intent(context, AlarmSoundService.class);
+    			context.startService(serviceIntent);
+        		//SoundPoolHandler.playSound(1,-1);       		
+        		//AppShortCutUtil appShortCut= new AppShortCutUtil(context);
+        		//appShortCut.addBage();
         		
         		break;
         	case NEWS_MSG:

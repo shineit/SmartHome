@@ -17,11 +17,14 @@ import android.telephony.TelephonyManager;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.ui.HomeActivity;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
+import cn.fuego.smart.home.ui.info.AlarmPageActivity;
+import cn.fuego.smart.home.ui.info.NewsPageActivity;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -77,8 +80,9 @@ public class LoginHandler extends BaseActivtiy
 	{
 		if (message.isSuccess())
 		{
+			MemoryCache.setLogin(true);
+			
 			LoginRsp rsp = (LoginRsp) message.getMessage().obj;
-
 			SystemUser user = new  SystemUser();
 			user.setRole(rsp.getUser().getRole());
 			user.setUserID(rsp.getUser().getUserID());
@@ -96,13 +100,26 @@ public class LoginHandler extends BaseActivtiy
                 SharedPreUtil.getInstance().putUser(userInfo);
                 proDialog.dismiss();
             }
-            jumpIntent(HomeActivity.class);
+            if(MemoryCache.getEnterFlag()==IntentCodeConst.FIRE_ALARM_ENTER)
+            {
+            	jumpIntent(AlarmPageActivity.class);
+            }
+            else if(MemoryCache.getEnterFlag()==IntentCodeConst.NEWS_ENTER)
+            {
+            	jumpIntent(NewsPageActivity.class);
+            }
+            else
+            {
+            	jumpIntent(HomeActivity.class);
+            }
+            
             
 		}
 		else
 		{
 			if(spHas)
 			{
+				//自动登录失效，跳转到登录页面
 				jumpIntent(LoginActivity.class);
 				MemoryCache.setFlag(1);//非首次进入
 			}
