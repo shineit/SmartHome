@@ -13,6 +13,7 @@
 #import "FEWebServiceManager.h"
 #import "FELogoutRequest.h"
 #import "FESigoutResponse.h"
+#import "FEDevicesCache.h"
 
 @interface FEProfileVC ()
 
@@ -92,6 +93,7 @@
             [FECoreData deleteCoreData:@[FELoginUser]];
             [FECoreData saveCoreData];
             [[AppDelegate sharedDelegate] loadSigin];
+            [[FEDevicesCache sharedInstance] clearCache];
         }
     }];
     

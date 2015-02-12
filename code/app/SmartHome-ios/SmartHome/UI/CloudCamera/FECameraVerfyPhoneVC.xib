@@ -19,34 +19,134 @@
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="短信验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7KR-sG-hhm">
                     <rect key="frame" x="29" y="101" width="97" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Fo0-jF-uLV"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Fo0-jF-uLV"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="Fo0-jF-uLV"/>
+                        </mask>
+                    </variation>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUk-cd-ssI">
                     <rect key="frame" x="147" y="101" width="46" height="30"/>
-                    <state key="normal" title="Button">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="HR7-pv-g4S"/>
+                        <constraint firstAttribute="width" constant="60" id="gFw-ya-3Qn">
+                            <variation key="widthClass=compact" constant="80"/>
+                        </constraint>
+                    </constraints>
+                    <state key="normal" title="获取验证码">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="HR7-pv-g4S"/>
+                            <exclude reference="gFw-ya-3Qn"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="HR7-pv-g4S"/>
+                            <include reference="gFw-ya-3Qn"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="verfy:" destination="-1" eventType="touchUpInside" id="ZG2-wk-jQV"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-Hd-d6u">
                     <rect key="frame" x="80" y="145" width="46" height="30"/>
-                    <state key="normal" title="Button">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="Kxa-t9-e1o"/>
+                        <constraint firstAttribute="width" constant="180" id="lKJ-oN-9h4"/>
+                    </constraints>
+                    <state key="normal" title="提交">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Kxa-t9-e1o"/>
+                            <exclude reference="lKJ-oN-9h4"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="Kxa-t9-e1o"/>
+                            <include reference="lKJ-oN-9h4"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="sign:" destination="-1" eventType="touchUpInside" id="zA5-CB-h4S"/>
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="手机号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tQd-sI-lZa">
                     <rect key="frame" x="29" y="50" width="97" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="poZ-h3-9Me"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="poZ-h3-9Me"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="poZ-h3-9Me"/>
+                        </mask>
+                    </variation>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="AUk-cd-ssI" firstAttribute="top" secondItem="tQd-sI-lZa" secondAttribute="bottom" constant="10" id="3p2-l1-RbZ"/>
+                <constraint firstItem="AUk-cd-ssI" firstAttribute="leading" secondItem="7KR-sG-hhm" secondAttribute="trailing" constant="5" id="5yN-h4-Pwb"/>
+                <constraint firstItem="7KR-sG-hhm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Fht-wz-nt8"/>
+                <constraint firstItem="7KR-sG-hhm" firstAttribute="top" secondItem="tQd-sI-lZa" secondAttribute="bottom" constant="10" id="G1R-zG-I9j"/>
+                <constraint firstItem="tQd-sI-lZa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="aYi-RX-DuD"/>
+                <constraint firstAttribute="trailing" secondItem="tQd-sI-lZa" secondAttribute="trailing" constant="20" id="e0C-qn-jTL"/>
+                <constraint firstItem="aAX-Hd-d6u" firstAttribute="top" secondItem="7KR-sG-hhm" secondAttribute="bottom" constant="10" id="gnT-VA-R4K"/>
+                <constraint firstAttribute="centerX" secondItem="aAX-Hd-d6u" secondAttribute="centerX" id="m5Y-9p-DIN"/>
+                <constraint firstItem="tQd-sI-lZa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="u2L-UD-gdq"/>
+                <constraint firstAttribute="trailing" secondItem="AUk-cd-ssI" secondAttribute="trailing" constant="20" id="vvl-mS-4Vn"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="aYi-RX-DuD"/>
+                    <exclude reference="e0C-qn-jTL"/>
+                    <exclude reference="u2L-UD-gdq"/>
+                    <exclude reference="Fht-wz-nt8"/>
+                    <exclude reference="G1R-zG-I9j"/>
+                    <exclude reference="gnT-VA-R4K"/>
+                    <exclude reference="m5Y-9p-DIN"/>
+                    <exclude reference="3p2-l1-RbZ"/>
+                    <exclude reference="5yN-h4-Pwb"/>
+                    <exclude reference="vvl-mS-4Vn"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="aYi-RX-DuD"/>
+                    <include reference="e0C-qn-jTL"/>
+                    <include reference="u2L-UD-gdq"/>
+                    <include reference="Fht-wz-nt8"/>
+                    <include reference="G1R-zG-I9j"/>
+                    <include reference="gnT-VA-R4K"/>
+                    <include reference="m5Y-9p-DIN"/>
+                    <include reference="3p2-l1-RbZ"/>
+                    <include reference="5yN-h4-Pwb"/>
+                    <include reference="vvl-mS-4Vn"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

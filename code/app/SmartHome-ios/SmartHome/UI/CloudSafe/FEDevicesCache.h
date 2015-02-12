@@ -32,4 +32,6 @@ typedef enum : NSUInteger {
 -(void)getFilterSensors:(void (^)(NSArray *items))block;
 -(void)getFilterControlDevice:(void (^)(NSArray *items))block;
 
+-(void)clearCache;
+
 @end

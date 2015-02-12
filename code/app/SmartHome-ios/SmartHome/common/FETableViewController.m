@@ -24,6 +24,41 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)loadRightCustomButtonItemWithTitle:(NSString *)title image:(UIImage *)image{
+    [self loadNavItemWithTitle:title image:image target:self action:@selector(rightbarpressed:) direction:FENavItemRightDirection];
+}
+
+- (UIButton *)loadNavItemWithTitle:(NSString *)title image:(UIImage *)bimage target:(id)target action:(SEL)action direction:(FENavItemDirection)direction {
+    UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setTitle:title forState:UIControlStateNormal];
+    bt.frame = CGRectMake(0, 0, 50, 30);
+    [bt setBackgroundImage:bimage forState:UIControlStateNormal];
+    [bt addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bt];
+    if (SYSTEM_VERSION_UP7) {
+        if (direction==FENavItemLeftDirection) {
+            self.navigationItem.leftBarButtonItem = item;
+        }else {
+            self.navigationItem.rightBarButtonItem = item;
+        }
+    }else {
+        UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        spaceItem.width = 10;
+        
+        if (direction==FENavItemLeftDirection) {
+            self.navigationItem.leftBarButtonItems = @[spaceItem,item];
+        }else {
+            self.navigationItem.rightBarButtonItems = @[spaceItem,item];
+        }
+    }
+    
+    return bt;
+}
+
+-(void)rightbarpressed:(UIButton *)button{
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

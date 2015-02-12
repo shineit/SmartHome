@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FETableViewController : UITableViewController
+- (void)loadRightCustomButtonItemWithTitle:(NSString *)title image:(UIImage *)image;
+-(void)rightbarpressed:(UIButton *)button;
 
 @end

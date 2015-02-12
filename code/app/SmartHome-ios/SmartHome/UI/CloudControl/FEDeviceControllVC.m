@@ -15,15 +15,19 @@
 #import "FESensorSetResponse.h"
 #import "FEWebServiceManager.h"
 #import "FEUserMarkManagerVC.h"
+#import "AppDelegate.h"
+#import <SSCommon-Utilities/FEPopPickerView.h>
 
 
-@interface FEDeviceControllVC ()
+@interface FEDeviceControllVC ()<FEPopPickerViewDataSource>
 
 @property (nonatomic, strong) UITextView *descripTextField;
 //@property (nonatomic, strong) FEPopPickerView *labelPickerView;
 @property (nonatomic, strong) UITextField *regionNumberTextField;
 @property (nonatomic, strong) FEUserMark *selectedMark;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIButton *markButton;
+@property (nonatomic, strong) NSString *markName;
 
 @end
 
@@ -50,7 +54,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.markName = self.sensor.mark;
     [self initUI];
 }
 
@@ -98,17 +102,25 @@
     llabel.text = FEString(@"CONTROLL_LABEL");
     [contentview addSubview:llabel];
     
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(x + lwidth + xspace, llabel.frame.origin.y, twidth - 100, height);
+    [btn addTarget:self action:@selector(selectMark) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn setTitle:@"未命名" forState:UIControlStateNormal];
+    [contentview addSubview:btn];
+    [btn setBackgroundImage:[UIImage imageFromColor:[UIColor lightGrayColor]] forState:UIControlStateNormal];
+    self.markButton = btn;
 //    _labelPickerView = [[FEPopPickerView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, llabel.frame.origin.y, twidth - 100, height)];
 //    _labelPickerView.dataSource = self;
 //    _labelPickerView.delegate = self;
-    NSInteger index = -1;
-    for (FEUserMark *mark in self.marks) {
-        if ([mark.mark isEqualToString:self.sensor.mark]) {
-            index = [self.marks indexOfObject:mark];
-            self.selectedMark = mark;
-            break;
-        }
-    }
+//    NSInteger index = -1;
+//    for (FEUserMark *mark in self.marks) {
+//        if ([mark.mark isEqualToString:self.sensor.mark]) {
+//            index = [self.marks indexOfObject:mark];
+//            self.selectedMark = mark;
+//            break;
+//        }
+//    }
 //    [_labelPickerView setSelected:index];
 //    [contentview addSubview:_labelPickerView];
     
@@ -138,15 +150,44 @@
     scrollview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 }
 
-#pragma mark - FEPopPickerViewDataSource
--(NSString *)popPickerTitleAtIndex:(NSInteger)index{
+-(void)selectMark{
+    FEPopPickerView *popPicker = [[FEPopPickerView alloc] initFromView:[[AppDelegate sharedDelegate].window viewWithTag:0]];
+    popPicker.tlabel.text = @"标签";
+    popPicker.titleColor = FEThemeColor;
+    NSInteger index = -1;
+    for (FEUserMark *mark in self.marks) {
+        if ([self.markName isEqualToString:mark.mark]) {
+            index = [self.marks indexOfObject:mark];
+            break;
+        }
+    }
+    popPicker.selectIndex = index;
+    popPicker.dataSource = self;
+    [popPicker show];
+}
+
+#pragma mark - FEPopPickerView
+-(NSInteger)numberInPicker:(FEPopPickerView *)picker{
+    return self.marks.count;
+}
+-(NSString *)picker:(FEPopPickerView *)picker titleAtIndex:(NSInteger)index{
     return ((FEUserMark *)self.marks[index]).mark;
 }
 
--(NSInteger)popPickerItemNumber{
-    return self.marks.count;
+-(void)picker:(FEPopPickerView *)picker didSelectAtIndex:(NSInteger)index{
+    self.markName = ((FEUserMark *)self.marks[index]).mark;
+    [self.markButton setTitle:self.markName forState:UIControlStateNormal];
 }
 
+//#pragma mark - FEPopPickerViewDataSource
+//-(NSString *)popPickerTitleAtIndex:(NSInteger)index{
+//    return ((FEUserMark *)self.marks[index]).mark;
+//}
+//
+//-(NSInteger)popPickerItemNumber{
+//    return self.marks.count;
+//}
+//
 -(void)manageMark:(UIButton *)button{
     FEUserMarkManagerVC *manager = [FEUserMarkManagerVC new];
     [self.navigationController pushViewController:manager animated:YES];
@@ -158,13 +199,13 @@
     [self displayHUD:FEString(@"LOADING...")];
     __weak typeof(self) weakself = self;
     FESensor *sensor = [self.sensor copy];
-    [sensor setValue:self.selectedMark.mark forKey:@"mark"];
-    [sensor setValue:self.descripTextField.text forKey:@"descriptions"];
+    sensor.mark = self.markName;
+    sensor.descriptions = self.descripTextField.text;
     FESensorSetRequest *rdata = [[FESensorSetRequest alloc] initWithCommond:@(0) sensor:sensor];
     [[FEWebServiceManager sharedInstance] sensorSet:rdata response:^(NSError *error, FESensorSetResponse *response) {
         if (!error && response.result.errorCode.integerValue == 0) {
-            [weakself.sensor setValue:weakself.selectedMark.mark forKey:@"mark"];
-            [weakself.sensor setValue:self.descripTextField.text forKey:@"descriptions"];
+            weakself.sensor.mark = sensor.mark; //setValue:weakself.selectedMark.mark forKey:@"mark"];
+            weakself.sensor.descriptions = sensor.descriptions;// setValue:self.descripTextField.text forKey:@"descriptions"];
             if ([weakself.delegate respondsToSelector:@selector(sensorDidConfig)]) {
                 [weakself.delegate sensorDidConfig];
             }

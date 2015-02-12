@@ -91,7 +91,7 @@
 }
 
 - (void)loadBackButtonItem{
-    [self loadNavItemWithTitle:nil image:[UIImage imageNamed:@"img_back"] target:self action:@selector(backpressed:) direction:FENavItemLeftDirection];
+    [self loadNavItemWithTitle:@"返回" image:[UIImage imageNamed:@"img_back"] target:self action:@selector(backpressed:) direction:FENavItemLeftDirection];
 }
 
 - (UIButton *)loadNavItemWithTitle:(NSString *)title image:(UIImage *)bimage target:(id)target action:(SEL)action direction:(FENavItemDirection)direction {

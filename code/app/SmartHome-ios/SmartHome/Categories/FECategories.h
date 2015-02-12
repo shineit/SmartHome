@@ -14,5 +14,6 @@
 #import "UIColor+Theme.h"
 #import "NSString+UUID.h"
 #import "NSString+MD5.h"
+#import "UIColor+Hex.h"
 
 #endif

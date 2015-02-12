@@ -22,6 +22,8 @@
 #import "GAAlertObj.h"
 #import "FECameraItemCell.h"
 #import "FECameraPlayerVC.h"
+#import "FECameraCode.h"
+#import "FECameraWifiConfigVC.h"
 
 @interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ZBarReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -32,6 +34,7 @@
 @property (nonatomic, strong) YSPlayerController *ysPlayer;
 @property (nonatomic, strong) NSString *token;
 @property (strong, nonatomic) ZBarReaderViewController *zbarReaderVC;
+@property (strong, nonatomic) FECameraCode *ccode;
 
 @end
 
@@ -61,35 +64,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initUI];
+    
     [self loadCamera];
 }
 
 -(void)initUI{
     
-//    [self loadRightCustomButtonItemWithTitle:FEString(@"添加") image:nil];
-    
-//    FETableView *table = [[FETableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-//    table.dataSource = self;
-//    table.delegate = self;
-//    table.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-//    [self.view addSubview:table];
-//    self.tableView = table;
-    
-//    UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
-//    UICollectionView *cview = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-//    cview.alwaysBounceVertical = YES;
-//    cview.delegate = self;
-//    cview.dataSource = self;
-//    cview.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-//    [cview registerClass:[FECollectionViewCameraCell class] forCellWithReuseIdentifier:@"cell"];
-////    cview.backgroundColor = [UIColor lightGrayColor];
-//    cview.backgroundColor = [UIColor clearColor];
-//    self.collectionView = cview;
-//    [self.view addSubview:cview];
-    
+    self.tableView.tableFooterView = [UIView new];
 }
 
--(void)rightbarpressed:(UIButton *)button{
+- (IBAction)addDevice:(id)sender {
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     self.zbarReaderVC = reader;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, reader.view.bounds.size.height - 54, reader.view.bounds.size.width, 54)];
@@ -136,15 +120,67 @@
     // ADD: get the decode results
     id<NSFastEnumeration> results =
     [info objectForKey: ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-    for(symbol in results)
-        // EXAMPLE: just grab the first barcode
+//    ZBarSymbol *symbol = nil;
+    NSString * strQRcode = nil;
+    for (ZBarSymbol *sym in results)
+    {
+        strQRcode = sym.data;
         break;
-    NSData *data = [symbol.data dataUsingEncoding:NSUTF8StringEncoding];
-    if (data) {
-//        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    }
+    
+    if ([strQRcode length] == 0)
+    {
+        return;
+    }
+    
+    FECameraCode *code = [[FECameraCode alloc] initWithString:strQRcode];
+    if (code.m_strSN.length == 9) {
+//        __weak typeof(self) weakself = self;
+        self.ccode = code;
+        [reader dismissViewControllerAnimated:YES completion:nil];
+        [self performSegueWithIdentifier:@"configWifiSegue" sender:nil];
+        
     }
 }
+
+
+/**
+ *  处理获取到的二维码
+ *
+ *  @param strQRCode 二维码信息
+ */
+//- (FECameraCode *)dealScanQR:(NSString *)strQRCode
+//{
+//    NSLog(@"read QRcode: %@", strQRCode);
+//    
+//    //设备二维码名片
+//    FECameraCode *qcode = [[FECameraCode alloc] initWithString:strQRCode];
+////    self.m_strSN = [self snFromQRcode:strQRCode];
+//    
+//    NSLog(@"read SN: %@, verify is %@, model is %@", qcode.m_strSN, qcode.strVerifyCode, qcode.strModel);
+//    
+//    BOOL avaliable = [qcode.m_strSN length] == 9;
+    
+//    dispatch_async(dispatch_get_main_queue(), ^
+//                   {
+//                       if (avaliable)
+//                       {
+////                           [self pushToResult];
+//                       }
+//                       else
+//                       {
+////                           [CAttention showCustomAutoHiddenAttention:NSLocalizedString(@"无法识别的二维码", nil)
+////                                                              toView:self.view
+////                                                           toYOffset:-30
+////                                                          toFontSize:nil
+////                                                   toIsDimBackground:NO];
+//                           
+//                       }
+//                   });
+//    
+//    return qcode;
+//    
+//}
 
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -169,6 +205,10 @@
         FECameraPlayerVC *vc = segue.destinationViewController;
         vc.accessToken = self.accessToken;
         vc.camera = cell.camera;
+    }else if ([segue.identifier isEqualToString:@"configWifiSegue"]){
+        FECameraWifiConfigVC *vc = segue.destinationViewController;
+        vc.ccode = self.ccode;
+        vc.accessToken = self.accessToken;
     }
 }
 
@@ -245,6 +285,32 @@
         }
     }];
 
+    
+}
+- (IBAction)deleteCamera:(id)sender {
+    
+    id sview;
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
+        sview = [[[sender superview] superview] superview];
+    }else{
+        sview = [[sender superview] superview];
+    }
+    
+    if ([sview isKindOfClass:[FECameraItemCell class]]) {
+        FECameraItemCell *cell = sview;
+        YSCamera *camera = cell.camera;
+        __weak typeof(self) weakself = self;
+        [self displayHUD:@"删除中..."];
+        [[YSHTTPClient sharedInstance] requestDeleteCameraWithCameraId:camera.deviceId complition:^(id responseObject, NSError *error) {
+            NSNumber *resultCode = [responseObject objectForKey:@"resultCode"];
+            
+            if (!error && resultCode.integerValue == 200) {
+                [weakself.cameras removeObject:camera];
+                [weakself.tableView reloadData];
+            }
+            [weakself hideHUD:YES];
+        }];
+    }
     
 }
 

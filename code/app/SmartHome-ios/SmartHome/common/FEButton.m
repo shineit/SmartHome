@@ -26,6 +26,17 @@
     return btn;
 }
 
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.layer.cornerRadius = 5;
+        self.layer.masksToBounds = YES;
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setBackgroundImage:[UIImage imageFromColor:FEButtonColor] forState:UIControlStateNormal];
+    }
+    return self;
+}
 //-(id)init{
 //    self = [super init];
 //    if (self) {

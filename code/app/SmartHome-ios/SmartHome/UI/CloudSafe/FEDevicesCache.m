@@ -142,4 +142,9 @@
     }];
 }
 
+-(void)clearCache{
+    _alldevices = nil;
+    _allmarks = nil;
+}
+
 @end
