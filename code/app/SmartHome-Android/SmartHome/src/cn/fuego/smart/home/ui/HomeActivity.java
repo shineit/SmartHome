@@ -61,7 +61,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		if(MemoryCache.getBageNum()>1)
 		{
 			BadgeView badge2 = new BadgeView(this, alarm_btn);
-	    	badge2.setText("!");
+	    	badge2.setText(" ! ");
 	    	badge2.setTextColor(Color.WHITE);
 	    	badge2.setBadgeBackgroundColor(Color.RED);
 	    	badge2.setTextSize(15);

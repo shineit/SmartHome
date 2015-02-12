@@ -108,6 +108,9 @@ public class AlarmPageActivity extends BaseActivtiy implements OnClickListener, 
         // 绑定监听器
         lv.setOnScrollListener(this);
         lv.setOnItemClickListener(this);
+        
+        //bageNum清零
+        MemoryCache.setBageNum(1);
 
 
     }

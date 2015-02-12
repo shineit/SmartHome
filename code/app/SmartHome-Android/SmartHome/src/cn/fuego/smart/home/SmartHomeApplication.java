@@ -15,6 +15,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.EzvizConfigConst;
+import cn.jpush.android.api.JPushInterface;
 
 import com.videogo.openapi.EzvizAPI;
 
@@ -35,7 +36,8 @@ public class SmartHomeApplication extends Application
         EzvizAPI.init(this, EzvizConfigConst.APP_KEY, EzvizConfigConst.SECRET_KEY); 
         EzvizAPI.getInstance().setServerUrl(EzvizConfigConst.API_URL, EzvizConfigConst.WEB_URL);     
 		PackageManager packageManager = getPackageManager();
-
+		
+		JPushInterface.init(this);  
 		try
 		{
 			PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);

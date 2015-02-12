@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.fuego.smart.home"
-    android:versionCode="1"
-    android:versionName="1.0.1" >
-
+    android:versionCode="101"
+    android:versionName="1.0.1" 
+    android:installLocation="internalOnly"
+    >
+		
     <permission
         android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
@@ -61,16 +63,19 @@
     <uses-permission android:name="com.videogo.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="7"
+        android:targetSdkVersion="17" />
 
     <application
         android:name=".SmartHomeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@android:style/Theme.NoTitleBar" 
+        android:persistent="true">
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
@@ -265,7 +270,8 @@
         <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true" >
+            android:enabled="true" 
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter android:priority="1000" >
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
@@ -281,6 +287,11 @@
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
                 <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+				<category android:name="android.intent.category.LAUNCHER" />
+                
             </intent-filter>
         </receiver>
 

@@ -19,7 +19,6 @@ import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.ui.HomeActivity;
 import cn.fuego.smart.home.ui.LoginActivity;
-import cn.fuego.smart.home.ui.MyService;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
