@@ -301,7 +301,7 @@
         YSCamera *camera = cell.camera;
         __weak typeof(self) weakself = self;
         [self displayHUD:@"删除中..."];
-        [[YSHTTPClient sharedInstance] requestDeleteCameraWithCameraId:camera.deviceId complition:^(id responseObject, NSError *error) {
+        [[YSHTTPClient sharedInstance] requestDeleteDeviceWithDeviceId:camera.deviceId complition:^(id responseObject, NSError *error) {
             NSNumber *resultCode = [responseObject objectForKey:@"resultCode"];
             
             if (!error && resultCode.integerValue == 200) {
@@ -310,6 +310,9 @@
             }
             [weakself hideHUD:YES];
         }];
+//        [[YSHTTPClient sharedInstance] requestDeleteCameraWithCameraId:camera.deviceId complition:^(id responseObject, NSError *error) {
+        
+//        }];
     }
     
 }

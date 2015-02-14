@@ -74,7 +74,7 @@
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    
+    NSLog(@"remote notification  %@",userInfo);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -26,8 +26,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "App_icon_ios6-1.png",
       "scale" : "1x"
     },
     {

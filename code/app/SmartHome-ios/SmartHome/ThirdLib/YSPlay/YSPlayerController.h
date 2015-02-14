@@ -103,6 +103,15 @@ extern NSString * const kAuthServer;                // 认证中心服务器
                          inView:(UIView *)playView;
 
 /**
+ *  视频广场预览
+ *
+ *  @param rtspUrl  广场视频RTSP地址
+ *  @param playView 播放窗口
+ */
+- (void)startRealPlayWithURLString:(NSString *)rtspUrl
+                            inView:(UIView *)playView;
+
+/**
  *  停止设备预览
  *
  *  @since v1.0.0.0

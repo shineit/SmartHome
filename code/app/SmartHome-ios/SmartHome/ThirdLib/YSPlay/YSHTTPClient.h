@@ -103,7 +103,7 @@ typedef void (^ComplitionBlock)(id responseObject, NSError *error);
  *
  *  @since v1.0.0.0
  */
-- (void)requestDeleteCameraWithCameraId:(NSString *)cameraId complition:(ComplitionBlock)block;
+- (void)requestDeleteDeviceWithDeviceId:(NSString *)deviceId complition:(ComplitionBlock)block;
 
 /**
  *  获取指定录像uuid 的抓图
@@ -139,7 +139,25 @@ typedef void (^ComplitionBlock)(id responseObject, NSError *error);
                                     phoneNumber:(NSString *)no
                                verificationCode:(NSString *)code
                                    complication:(ComplitionBlock)block;
+/**
+ *  获取视频广场栏位
+ *
+ *  @param block 查询成功, 回调视频广场栏目信息
+ */
+- (void)requestSquareColumnWithComplication:(ComplitionBlock)block;
 
+/**
+ *  根据栏位获取视频列表
+ *
+ *  @param channel 广场频道
+ *  @param pageNo  开始页
+ *  @param size    页大小
+ *  @param block   查询成功, 回调广场视频信息
+ */
+- (void)requestSquareVideoListWithChannel:(NSInteger)channel
+                                 pageFrom:(NSInteger)pageNo
+                                 pageSize:(NSInteger)size
+                             complication:(ComplitionBlock)block;
 
 @end
 

@@ -128,10 +128,11 @@
 		14447BE01A8C78C200045B88 /* connect3.png in Resources */ = {isa = PBXBuildFile; fileRef = 14447B771A8C78C200045B88 /* connect3.png */; };
 		14447BE11A8C78C200045B88 /* connect4.png in Resources */ = {isa = PBXBuildFile; fileRef = 14447B781A8C78C200045B88 /* connect4.png */; };
 		14447BE21A8C78C200045B88 /* connect_failed.png in Resources */ = {isa = PBXBuildFile; fileRef = 14447B791A8C78C200045B88 /* connect_failed.png */; };
-		14447BE31A8C78C200045B88 /* connect_reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 14447B7A1A8C78C200045B88 /* connect_reset.png */; };
 		14447BE41A8C78C200045B88 /* connect_success.png in Resources */ = {isa = PBXBuildFile; fileRef = 14447B7B1A8C78C200045B88 /* connect_success.png */; };
 		14447BE51A8C78C200045B88 /* lineConnect.png in Resources */ = {isa = PBXBuildFile; fileRef = 14447B7C1A8C78C200045B88 /* lineConnect.png */; };
-		14447BE71A8C7F9700045B88 /* 1822.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 14447BE61A8C7F9700045B88 /* 1822.aiff */; };
+		14447BE71A8C7F9700045B88 /* warring.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 14447BE61A8C7F9700045B88 /* warring.aiff */; };
+		14447BF51A8EE21800045B88 /* EzvizOpenSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14447BF31A8EE21800045B88 /* EzvizOpenSDKBundle.bundle */; };
+		14447BF61A8EE21800045B88 /* libEzvizRealPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14447BF41A8EE21800045B88 /* libEzvizRealPlay.a */; };
 		145320CE1A10F8A400C4E209 /* FEEnumString.m in Sources */ = {isa = PBXBuildFile; fileRef = 145320CD1A10F8A400C4E209 /* FEEnumString.m */; };
 		1454A5761A04FA8E00A9AE35 /* FEServiceOrderSetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1454A5751A04FA8E00A9AE35 /* FEServiceOrderSetRequest.m */; };
 		145B21911A357C04000AE204 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 145B21901A357C04000AE204 /* libPushSDK.a */; };
@@ -203,8 +204,6 @@
 		14B162D21A63EE5C006CF154 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162D11A63EE5C006CF154 /* AVFoundation.framework */; };
 		14B162D41A63EE6E006CF154 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162D31A63EE6E006CF154 /* AudioToolbox.framework */; };
 		14B162D61A63EE7B006CF154 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162D51A63EE7B006CF154 /* CoreMotion.framework */; };
-		14B1637F1A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */; };
-		14B163801A63FBDE006CF154 /* libEzvizRealPlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */; };
 		14B163861A640F36006CF154 /* AFHTTPClient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B163851A640F36006CF154 /* AFHTTPClient+Json.m */; };
 		14B1638A1A64B0CC006CF154 /* YSCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B163891A64B0CC006CF154 /* YSCamera.m */; };
 		14B447A319F5FB8E0078EAB4 /* FEWarringDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B447A219F5FB8E0078EAB4 /* FEWarringDetailVC.m */; };
@@ -403,10 +402,16 @@
 		14447B771A8C78C200045B88 /* connect3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connect3.png; sourceTree = "<group>"; };
 		14447B781A8C78C200045B88 /* connect4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connect4.png; sourceTree = "<group>"; };
 		14447B791A8C78C200045B88 /* connect_failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connect_failed.png; sourceTree = "<group>"; };
-		14447B7A1A8C78C200045B88 /* connect_reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connect_reset.png; sourceTree = "<group>"; };
 		14447B7B1A8C78C200045B88 /* connect_success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connect_success.png; sourceTree = "<group>"; };
 		14447B7C1A8C78C200045B88 /* lineConnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lineConnect.png; sourceTree = "<group>"; };
-		14447BE61A8C7F9700045B88 /* 1822.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 1822.aiff; sourceTree = "<group>"; };
+		14447BE61A8C7F9700045B88 /* warring.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = warring.aiff; sourceTree = "<group>"; };
+		14447BEC1A8DB03200045B88 /* NSData+AES128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES128.h"; sourceTree = "<group>"; };
+		14447BED1A8DB03200045B88 /* YSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHTTPClient.h; sourceTree = "<group>"; };
+		14447BEE1A8DB03200045B88 /* YSMobilePages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMobilePages.h; sourceTree = "<group>"; };
+		14447BEF1A8DB03200045B88 /* YSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPlayerController.h; sourceTree = "<group>"; };
+		14447BF21A8DB06900045B88 /* YSConstStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSConstStrings.h; sourceTree = "<group>"; };
+		14447BF31A8EE21800045B88 /* EzvizOpenSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EzvizOpenSDKBundle.bundle; sourceTree = "<group>"; };
+		14447BF41A8EE21800045B88 /* libEzvizRealPlay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEzvizRealPlay.a; sourceTree = "<group>"; };
 		145320CC1A10F8A400C4E209 /* FEEnumString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEnumString.h; sourceTree = "<group>"; };
 		145320CD1A10F8A400C4E209 /* FEEnumString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEnumString.m; sourceTree = "<group>"; };
 		1454A5741A04FA8E00A9AE35 /* FEServiceOrderSetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEServiceOrderSetRequest.h; sourceTree = "<group>"; };
@@ -535,13 +540,6 @@
 		14B162D11A63EE5C006CF154 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		14B162D31A63EE6E006CF154 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		14B162D51A63EE7B006CF154 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EzvizOpenSDKBundle.bundle; sourceTree = "<group>"; };
-		14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEzvizRealPlay.a; sourceTree = "<group>"; };
-		14B1637A1A63FBDE006CF154 /* NSData+AES128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES128.h"; sourceTree = "<group>"; };
-		14B1637B1A63FBDE006CF154 /* YSConstStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSConstStrings.h; sourceTree = "<group>"; };
-		14B1637C1A63FBDE006CF154 /* YSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHTTPClient.h; sourceTree = "<group>"; };
-		14B1637D1A63FBDE006CF154 /* YSMobilePages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMobilePages.h; sourceTree = "<group>"; };
-		14B1637E1A63FBDE006CF154 /* YSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPlayerController.h; sourceTree = "<group>"; };
 		14B163841A640F36006CF154 /* AFHTTPClient+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+Json.h"; sourceTree = "<group>"; };
 		14B163851A640F36006CF154 /* AFHTTPClient+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPClient+Json.m"; sourceTree = "<group>"; };
 		14B163881A64B0CC006CF154 /* YSCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCamera.h; sourceTree = "<group>"; };
@@ -662,7 +660,7 @@
 				14B162CD1A63EE38006CF154 /* OpenAL.framework in Frameworks */,
 				14B162CE1A63EE39006CF154 /* OpenGLES.framework in Frameworks */,
 				14B162CA1A63EE04006CF154 /* libstdc++.dylib in Frameworks */,
-				14B163801A63FBDE006CF154 /* libEzvizRealPlay.a in Frameworks */,
+				14447BF61A8EE21800045B88 /* libEzvizRealPlay.a in Frameworks */,
 				146081201A302B0A0057EA9A /* libz.dylib in Frameworks */,
 				14B162C81A63EDDB006CF154 /* libiconv.2.4.0.dylib in Frameworks */,
 				1460811C1A302AF00057EA9A /* CoreTelephony.framework in Frameworks */,
@@ -885,7 +883,6 @@
 				14447B771A8C78C200045B88 /* connect3.png */,
 				14447B781A8C78C200045B88 /* connect4.png */,
 				14447B791A8C78C200045B88 /* connect_failed.png */,
-				14447B7A1A8C78C200045B88 /* connect_reset.png */,
 				14447B7B1A8C78C200045B88 /* connect_success.png */,
 				14447B7C1A8C78C200045B88 /* lineConnect.png */,
 			);
@@ -1108,19 +1105,19 @@
 		14B163771A63FBDE006CF154 /* YSPlay */ = {
 			isa = PBXGroup;
 			children = (
+				14447BF31A8EE21800045B88 /* EzvizOpenSDKBundle.bundle */,
+				14447BF41A8EE21800045B88 /* libEzvizRealPlay.a */,
+				14447BF21A8DB06900045B88 /* YSConstStrings.h */,
+				14447BEC1A8DB03200045B88 /* NSData+AES128.h */,
+				14447BED1A8DB03200045B88 /* YSHTTPClient.h */,
+				14447BEE1A8DB03200045B88 /* YSMobilePages.h */,
+				14447BEF1A8DB03200045B88 /* YSPlayerController.h */,
 				14447B0F1A8C78C200045B88 /* image */,
 				14447B0C1A8C738300045B88 /* THud.h */,
 				14447B0D1A8C738300045B88 /* THud.m */,
 				14447AF91A8C6E8200045B88 /* WifiConfig */,
 				14447AF21A8C6E2800045B88 /* SimpleWifi */,
 				14B163871A64B074006CF154 /* model */,
-				14B163781A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle */,
-				14B163791A63FBDE006CF154 /* libEzvizRealPlay.a */,
-				14B1637A1A63FBDE006CF154 /* NSData+AES128.h */,
-				14B1637B1A63FBDE006CF154 /* YSConstStrings.h */,
-				14B1637C1A63FBDE006CF154 /* YSHTTPClient.h */,
-				14B1637D1A63FBDE006CF154 /* YSMobilePages.h */,
-				14B1637E1A63FBDE006CF154 /* YSPlayerController.h */,
 			);
 			path = YSPlay;
 			sourceTree = "<group>";
@@ -1196,7 +1193,7 @@
 		14C6DE4E19F549EE006384B2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				14447BE61A8C7F9700045B88 /* 1822.aiff */,
+				14447BE61A8C7F9700045B88 /* warring.aiff */,
 				14C6DE4F19F549EE006384B2 /* SmartHome-Info.plist */,
 				14C6DE5019F549EE006384B2 /* InfoPlist.strings */,
 				14C6DE5319F549EE006384B2 /* main.m */,
@@ -1485,7 +1482,7 @@
 				14447B8E1A8C78C200045B88 /* full_loading_logo.png in Resources */,
 				14447B941A8C78C200045B88 /* full_stop.png in Resources */,
 				14447BB31A8C78C200045B88 /* ptz_left_sel.png in Resources */,
-				14447BE71A8C7F9700045B88 /* 1822.aiff in Resources */,
+				14447BE71A8C7F9700045B88 /* warring.aiff in Resources */,
 				14447BC81A8C78C200045B88 /* video_time_bg.png in Resources */,
 				14447BC71A8C78C200045B88 /* video_start.png in Resources */,
 				14447BB51A8C78C200045B88 /* ptz_right_sel.png in Resources */,
@@ -1511,7 +1508,6 @@
 				14447BBD1A8C78C200045B88 /* speech.png in Resources */,
 				14447B821A8C78C200045B88 /* deviceManage_img_unonline.png in Resources */,
 				14447BB21A8C78C200045B88 /* ptz_left.png in Resources */,
-				14B1637F1A63FBDE006CF154 /* EzvizOpenSDKBundle.bundle in Resources */,
 				14447BC21A8C78C200045B88 /* talk.png in Resources */,
 				14447BBF1A8C78C200045B88 /* spkBtn.png in Resources */,
 				14447BCC1A8C78C200045B88 /* playback_playbar_bg.jpg in Resources */,
@@ -1538,6 +1534,7 @@
 				14447BAB1A8C78C200045B88 /* ptz_bottom_sel.png in Resources */,
 				14447BD71A8C78C200045B88 /* circle1.png in Resources */,
 				14447BE51A8C78C200045B88 /* lineConnect.png in Resources */,
+				14447BF51A8EE21800045B88 /* EzvizOpenSDKBundle.bundle in Resources */,
 				14447B9A1A8C78C200045B88 /* hd_sel.png in Resources */,
 				14447B961A8C78C200045B88 /* full_video.png in Resources */,
 				14447BDE1A8C78C200045B88 /* connect1.png in Resources */,
@@ -1561,7 +1558,6 @@
 				14447B811A8C78C200045B88 /* Default@2x.png in Resources */,
 				14447BD51A8C78C200045B88 /* button_red.png in Resources */,
 				14447BD21A8C78C200045B88 /* title.png in Resources */,
-				14447BE31A8C78C200045B88 /* connect_reset.png in Resources */,
 				14447BCE1A8C78C200045B88 /* playback_playbar_progress.png in Resources */,
 				14447BA81A8C78C200045B88 /* playback_button_sel.png in Resources */,
 				14447B9B1A8C78C200045B88 /* number_bg.png in Resources */,
@@ -1800,10 +1796,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "bd14c854-9849-4687-a6d6-fb1cceb38393";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -1823,8 +1819,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chao Sun (PYXGNPJVW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chao Sun (PYXGNPJVW5)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1835,10 +1831,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "bd14c854-9849-4687-a6d6-fb1cceb38393";
+				PROVISIONING_PROFILE = "d3367f23-56b2-4a4d-8244-b81af1020056";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -1855,11 +1851,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/lib",
-					"$(PROJECT_DIR)/SmartHome/ThirdLib/SDK",
-					/Users/Seven/Desktop/SDK,
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/YSPlay",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bd14c854-9849-4687-a6d6-fb1cceb38393";
 				WRAPPER_EXTENSION = app;
@@ -1872,19 +1866,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chao Sun (PYXGNPJVW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chao Sun (PYXGNPJVW5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/lib",
-					"$(PROJECT_DIR)/SmartHome/ThirdLib/SDK",
-					/Users/Seven/Desktop/SDK,
 					"$(PROJECT_DIR)/SmartHome/ThirdLib/YSPlay",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bd14c854-9849-4687-a6d6-fb1cceb38393";
+				PROVISIONING_PROFILE = "d3367f23-56b2-4a4d-8244-b81af1020056";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1899,7 +1892,7 @@
 				14C6DE7319F549EE006384B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		14C6DE7419F549EE006384B2 /* Build configuration list for PBXNativeTarget "SmartHome" */ = {
 			isa = XCConfigurationList;
@@ -1908,7 +1901,7 @@
 				14C6DE7619F549EE006384B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

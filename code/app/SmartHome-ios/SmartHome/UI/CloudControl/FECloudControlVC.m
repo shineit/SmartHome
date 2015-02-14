@@ -42,7 +42,8 @@
         if (SYSTEM_VERSION_UP7) {
             UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"CLOUD_CONTROL") image:[UIImage imageNamed:@"tabbar_control"] selectedImage:nil];
             self.tabBarItem = tabitem;
-        }else{
+        }
+        else{
             [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_control_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_control"]];
         }
     }
