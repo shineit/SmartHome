@@ -38,6 +38,10 @@
 <link href="<%=request.getContextPath()%>/client/lib/dwz/themes/css/progressbar.css" rel="stylesheet" type="text/css" media="screen"/>
 <script src="<%=request.getContextPath()%>/client/lib/newJS/jQuery.md5.js" type="text/javascript"></script> 
 <link href="<%=request.getContextPath()%>/client/lib/newCSS/BS.css" rel="stylesheet" type="text/css" media="screen"/>
+
+<script src="<%=request.getContextPath()%>/client/lib/zTree_v3/js/jquery.ztree.core-3.5.js" type="text/javascript"></script> 
+<link href="<%=request.getContextPath()%>/client/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" media="screen"/>
+
 <script type="text/javascript">
 $(function()
 {
