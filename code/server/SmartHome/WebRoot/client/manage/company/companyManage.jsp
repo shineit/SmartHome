@@ -4,15 +4,11 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
 
-function submitFormN(url){
-    var thisForm = document.userForm;
-	thisForm.action="info/NewsManage!"+url;
-	return validateCallback(thisForm,navTabAjax);
-}
+ 
 
 </script>
 <div class="pageHeader">
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="info/NewsManage" method="post" name="newsSearch">
+	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/CompanyManage" method="post" name="newsSearch">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	
@@ -50,8 +46,8 @@ function submitFormN(url){
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="NewsManage!show.action?operateType=create" target="dialog" mask="true" title="新增公告"><span>新增公告</span></a></li>
-			<li><a class="delete" href="CompanyManage!deleteList.action" onclick="submitFormN('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
+			<li><a class="add" href="CompanyManage!show.action?operateType=create" target="dialog" mask="true" title="新增单位"><span>新增单位</span></a></li>
+			<li><a class="delete" href="CompanyManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
@@ -63,6 +59,7 @@ function submitFormN(url){
 				<th width="15%" align="center">单位地址</th>
 				<th width="10%" align="center">单位类型</th>
 				<th width="10%" align="center">操作</th>
+				
 			</tr>
 		</thead>
 		<s:form  id="newsForm"  method="POST"  name="newsForm" >
@@ -76,7 +73,12 @@ function submitFormN(url){
 			 
  				<td>${e.companyAddr}</td>
 				<td>${e.companyType}</td>
-				<td><a  title="平面图管理" target="navTab" href="<%=request.getContextPath()%>/client/manage/company/buildingManage.jsp"   >查看内容详情</a></td>
+	            <td style="text-align: center;">
+	            
+	            <a title="楼层管理" target="navTab" href="device/BuildingManage?selectedID=${e.companyID}" rel="configSensor"
+	            class="btnAdd"  style="margin-left:10px;"></a>
+             
+	            </td> 
 			</tr>
 		</c:forEach>  	
 

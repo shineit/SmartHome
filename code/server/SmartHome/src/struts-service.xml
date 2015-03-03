@@ -59,6 +59,8 @@
 		
 	    <action name="CompanyManage" class="cn.fuego.smart.home.web.action.company.CompanyManageAction">
 			<result type="dispatcher">/client/manage/company/companyManage.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
 		</action>
  	</package> 
  	
