@@ -56,6 +56,7 @@
 	<mapping resource="cn/fuego/smart/home/domain/Company.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Knowledge.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Product.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/Building.hbm.xml" />
 
 
 

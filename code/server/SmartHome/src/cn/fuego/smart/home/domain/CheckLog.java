@@ -146,11 +146,7 @@ public class CheckLog implements PersistenceObject
 	{
 		this.status = status;
 	}
-	public static String getPriKey()
-	{
-		return PRI_KEY;
-	}
-	
+
 	
 	
 }

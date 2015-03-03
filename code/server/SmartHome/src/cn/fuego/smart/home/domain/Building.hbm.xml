@@ -6,15 +6,15 @@
 	
 <hibernate-mapping
 	package="cn.fuego.smart.home.domain">
-	<class name="SensorPlan" table="sensor_plan">
+	<class name="Building" table="building">
 
-	    <id name="planID" column="PLAN_ID" >
+	    <id name="buildingID" column="BUILDING_ID" >
 	     <generator class="identity"/> 
 		</id>	    
-	     <property name="buildingID" column="BUILDING_ID" ></property>
-	     <property name="floor" column="FLOOR" ></property>
+	     <property name="companyID" column="COMPANY_ID" ></property>
 	     <property name="name" column="NAME" ></property>
 	     <property name="desp" column="DESP" ></property>
+	     <property name="addr" column="ADDR" ></property>
 	     <property name="picPath" column="PIC_PATH" ></property>
 
 	</class>

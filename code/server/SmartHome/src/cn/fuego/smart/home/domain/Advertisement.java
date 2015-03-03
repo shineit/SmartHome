@@ -71,10 +71,7 @@ public class Advertisement implements PersistenceObject
 	{
 		this.adImg = adImg;
 	}
-	public static String getPriKey()
-	{
-		return PRI_KEY;
-	}
+
 	
 	
 }

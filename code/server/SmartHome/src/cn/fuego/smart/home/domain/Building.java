@@ -17,29 +17,22 @@ import cn.fuego.common.domain.PersistenceObject;
  * @date 2015-1-29 下午3:57:58 
  *  
  */
-public class SensorPlan implements PersistenceObject
+public class Building implements PersistenceObject
 {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final String PRI_KEY = "planID";
+	public static final String PRI_KEY = "buildingID";
 	
-	private int planID; 	//自增长，主键
-	private int buildingID; //楼编号
-	private String floor;	//
+	
+	private int buildingID; //自增长，主键
+	private int companyID; //
 	private String name;
 	private String desp;
+	private String addr;
 	private String picPath; //文件路径
-	public int getPlanID()
-	{
-		return planID;
-	}
-	public void setPlanID(int planID)
-	{
-		this.planID = planID;
-	}
 	public int getBuildingID()
 	{
 		return buildingID;
@@ -48,13 +41,13 @@ public class SensorPlan implements PersistenceObject
 	{
 		this.buildingID = buildingID;
 	}
-	public String getFloor()
+	public int getCompanyID()
 	{
-		return floor;
+		return companyID;
 	}
-	public void setFloor(String floor)
+	public void setCompanyID(int companyID)
 	{
-		this.floor = floor;
+		this.companyID = companyID;
 	}
 	public String getName()
 	{
@@ -72,6 +65,14 @@ public class SensorPlan implements PersistenceObject
 	{
 		this.desp = desp;
 	}
+	public String getAddr()
+	{
+		return addr;
+	}
+	public void setAddr(String addr)
+	{
+		this.addr = addr;
+	}
 	public String getPicPath()
 	{
 		return picPath;
@@ -82,5 +83,8 @@ public class SensorPlan implements PersistenceObject
 	}
 
 
+
+	
+	
 	
 }

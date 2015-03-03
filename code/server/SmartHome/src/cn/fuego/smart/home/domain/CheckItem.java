@@ -62,10 +62,6 @@ public class CheckItem implements PersistenceObject
 	{
 		this.companyID = companyID;
 	}
-	public static String getPriKey()
-	{
-		return PRI_KEY;
-	}
 
 	
 }

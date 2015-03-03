@@ -107,10 +107,7 @@ public class Product  implements PersistenceObject
 	{
 		this.type = type;
 	}
-	public static String getPriKey()
-	{
-		return PRI_KEY;
-	}
+
 	
 	
 }

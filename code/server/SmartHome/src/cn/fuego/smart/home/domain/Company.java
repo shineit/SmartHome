@@ -154,10 +154,6 @@ public class Company implements PersistenceObject
 	{
 		this.extendInfo = extendInfo;
 	}
-	public static String getPriKey()
-	{
-		return PRI_KEY;
-	}
-	
+
 	
 }

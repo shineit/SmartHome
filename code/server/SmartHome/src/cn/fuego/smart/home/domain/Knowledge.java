@@ -71,10 +71,7 @@ public class Knowledge implements PersistenceObject
 	{
 		this.knowledgeKind = knowledgeKind;
 	}
-	public static String getPriKey()
-	{
-		return PRI_KEY;
-	}
+
 
 	
 }
