@@ -56,6 +56,11 @@
 	    <action name="SensorTypeManage" class="cn.fuego.smart.home.web.action.device.SensorTypeManageAction">
 			<result type="dispatcher">/client/manage/sensorTypeList.jsp</result>
 		</action>
+		
+	    <action name="CompanyManage" class="cn.fuego.smart.home.web.action.company.CompanyManageAction">
+			<result type="dispatcher">/client/manage/company/companyManage.jsp</result>
+		</action>
  	</package> 
-</struts>
+ 	
+ </struts>
 

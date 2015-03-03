@@ -287,7 +287,7 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 		}
         return this.getDao().getAll(conditionList);
 	}
-	
+ 
 	
 	@Override
 	public  List get(Class clazz,QueryCondition condition)

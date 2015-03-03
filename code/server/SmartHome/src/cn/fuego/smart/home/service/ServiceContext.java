@@ -1,6 +1,7 @@
 package cn.fuego.smart.home.service;
 
 import cn.fuego.smart.home.service.impl.AlarmManageServiceImpl;
+import cn.fuego.smart.home.service.impl.CompanyManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
@@ -20,6 +21,8 @@ public class ServiceContext
 	private UserManageService userManageService = null;
 	
 	private AlarmManageService alarmManageService =null;
+	
+	private CompanyManageService companyManageService = null;
 	private ServiceContext()
 	{
 
@@ -91,5 +94,12 @@ public class ServiceContext
 		}
 		return sensorTypeManageService;
 	}	
-	
+	public synchronized CompanyManageService  getCompanyManageService()
+	{
+		if (null == companyManageService)
+		{
+			companyManageService =  new CompanyManageServiceImpl();
+		}
+		return companyManageService;
+	}
 }

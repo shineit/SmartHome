@@ -13,20 +13,24 @@ import java.util.List;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmIsFeedBackEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.AlarmType;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.AlarmManageService;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.cache.AlarmTypeCache;
 import cn.fuego.smart.home.webservice.down.service.WebServiceContext;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 
@@ -39,6 +43,8 @@ import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
  */
 public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> implements AlarmManageService
 {
+
+	private FuegoLog log =  FuegoLog.getLog(getClass());
 
 	 
 	@Override
@@ -103,6 +109,64 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 	@Override
 	public void create(List<Alarm> objList)
 	{
+		for(Alarm alarm : objList )
+		{
+
+			AlarmType alarmType = AlarmTypeCache.getInstance().getAlarmType(alarm.getAlarmType());
+			
+			if(AlarmIsFeedBackEnum.NORMAL.getIntValue() == alarmType.getIsFeedback())
+			{
+				
+				List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+				
+				
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",alarm.getConcentratorID()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID",alarm.getObjID()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID1",alarm.getObjID1()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID2",alarm.getObjID2()));
+	 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarm.getAlarmType()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+				List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
+				if(ValidatorUtil.isEmpty(oldAlarm))
+				{
+					super.create(alarm); 
+ 				}
+				else
+				{
+
+					log.warn("the alarm is exist, maybe the alarm is repeat package,so discard is," + alarm);
+				}
+			}
+			else
+			{
+				List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+				
+				
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",alarm.getConcentratorID()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID",alarm.getObjID()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID1",alarm.getObjID1()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID2",alarm.getObjID2()));
+	 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarmType.getFeedbackID()));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+				List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
+				if(ValidatorUtil.isEmpty(oldAlarm))
+				{
+					log.warn("the feebback alarm is exist, maybe the alarm is repeat package,so discard is," + alarm);
+
+				}
+				else
+				{
+					oldAlarm.get(0).setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
+					super.modify(oldAlarm.get(0));
+					alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
+					super.create(alarm); 
+
+				}
+			}
+
+
+
+		}
 		
 		super.create(objList); 
 		WebServiceContext.getInstance().getPushService().pushAlarm(objList);
