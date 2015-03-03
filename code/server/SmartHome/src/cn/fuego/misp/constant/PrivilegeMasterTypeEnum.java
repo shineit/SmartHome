@@ -19,7 +19,7 @@ public enum PrivilegeMasterTypeEnum
 {
 	USER("USER"),
 	ROLE("ROLE"),
-	DEPTARTMENT("DEPP");
+	DEPTARTMENT("DEPT");
 	private String masterType;
 	private PrivilegeMasterTypeEnum(String masterType)
 	{
