@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="Company" table="company">
+
+	    <id name="companyID" column="COMPANY_ID" >
+	       <generator class="identity"/> 
+		</id>
+		
+		 <property name="companyName" column="COMPANY_NAME"></property>
+		 <property name="applyName" column="APPLY_NAME"></property>
+		 <property name="companyAddr" column="COMPANY_ADDR"></property>
+		 <property name="companyType" column="COMPANY_TYPE"></property>
+		 <property name="companyPhone" column="COMPANY_PHONE"></property>
+		 <property name="buildingArea" column="BUILDING_AREA"></property>
+		 <property name="legalOfficer" column="LEGAL_OFFICER"></property>
+		 <property name="fireManager" column="FIRE_MANAGER"></property>
+		 <property name="managerPhone" column="MANAGER_PHONE"></property>
+		 <property name="fireDuty" column="FIRE_DUTY"></property>
+		 <property name="dutyPhone" column="DUTY_PHONE"></property>
+		 <property name="extendInfo" column="EXTEND_INFO"></property>
+ 
+	</class>
+ 
+</hibernate-mapping>

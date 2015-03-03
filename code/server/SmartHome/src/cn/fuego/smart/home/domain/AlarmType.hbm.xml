@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="AlarmType" table="alarm_type">
+
+	    <id name="typeID" column="TYPE_ID" >
+	        
+		</id>
+		
+		 <property name="typeName" column="TYPE_NAME"></property>
+		 <property name="kind" column="KIND"></property>
+		 <property name="isPush" column="IS_PUSH"></property>
+		 <property name="pushType" column="PUSH_TYPE"></property>
+		 <property name="isFeedback" column="IS_FEEDBACK"></property>
+		 <property name="feedbackID" column="FEEDBACK_ID"></property>
+
+	</class>
+ 
+</hibernate-mapping>

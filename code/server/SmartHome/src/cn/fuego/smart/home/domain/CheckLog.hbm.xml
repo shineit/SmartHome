@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="CheckLog" table="check_log">
+
+	    <id name="logID" column="LOG_ID" >
+	       <generator class="identity"/> 
+		</id>
+		<property name="companyID" column="COMPANY_ID"></property>
+		<property name="checkItem" column="CHECK_ITEM"></property>
+		<property name="checkSys" column="CHECK_SYS"></property>
+		<property name="checkResult" column="CHECK_RESULT"></property>
+		<property name="abnormalDesp" column="ABNORMAL_DESP"></property>
+		<property name="abnormalPic" column="ABNORMAL_PIC"></property>
+		<property name="checker" column="CHECKER"></property>
+		<property name="checkTime" column="CHECK_TIME"></property>
+		<property name="handler" column="HANDLER"></property>
+		<property name="handleResult" column="HANDLE_RESULT"></property>		
+		<property name="handleTime" column="HANDLE_TIME"></property>
+		<property name="status" column="STATUS"></property>		
+		
+
+		 
+	</class>
+ 
+</hibernate-mapping>

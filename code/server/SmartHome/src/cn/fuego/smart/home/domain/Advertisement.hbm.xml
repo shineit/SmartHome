@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="Advertisement" table="advertisement">
+
+	    <id name="adID" column="AD_ID" >
+	       <generator class="identity"/> 
+		</id>
+
+		 <property name="adName" column="AD_NAME"></property>
+		 <property name="adInfo" column="AD_INFO"></property>
+		 <property name="adURL" column="AD_URL"></property>
+		 <property name="adImg" column="AD_IMG"></property>
+
+	</class>
+ 
+</hibernate-mapping>

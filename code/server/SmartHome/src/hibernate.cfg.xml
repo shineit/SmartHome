@@ -48,6 +48,14 @@
 		resource="cn/fuego/smart/home/domain/ClientVersion.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/SensorType.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/SensorPlan.hbm.xml" />
+	<mapping
+		resource="cn/fuego/smart/home/domain/Advertisement.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/AlarmType.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/CheckItem.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/CheckLog.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/Company.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/Knowledge.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/Product.hbm.xml" />
 
 
 

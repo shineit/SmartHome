@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="CheckItem" table="check_item">
+
+	    <id name="itemID" column="item_ID" >
+	       <generator class="identity"/> 
+		</id>
+		
+		 <property name="itemName" column="ITEM_NAME"></property>
+		 <property name="itemSys" column="ITEM_SYS"></property>
+		 <property name="companyID" column="COMPANY_ID"></property>
+		 
+	</class>
+ 
+</hibernate-mapping>
