@@ -2,15 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<script type="text/javascript">
 
-function submitFormN(url){
-    var thisForm = document.userForm;
-	thisForm.action="info/NewsManage!"+url;
-	return validateCallback(thisForm,navTabAjax);
-}
-
-</script>
 <div class="pageHeader">
 	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="info/NewsManage" method="post" name="newsSearch">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
@@ -51,7 +43,7 @@ function submitFormN(url){
 	<div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="NewsManage!show.action?operateType=create" target="dialog" mask="true" title="新增公告"><span>新增公告</span></a></li>
-			<li><a class="delete" href="NewsManage!deleteList.action" onclick="submitFormN('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
+			<li><a class="delete" href="NewsManage!deleteList.action"  target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除公告</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">

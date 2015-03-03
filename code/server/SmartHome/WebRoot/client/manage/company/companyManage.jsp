@@ -62,6 +62,7 @@ function submitFormN(url){
 				<th width="15%" align="center">使用名称</th>
 				<th width="15%" align="center">单位地址</th>
 				<th width="10%" align="center">单位类型</th>
+				<th width="10%" align="center">操作</th>
 			</tr>
 		</thead>
 		<s:form  id="newsForm"  method="POST"  name="newsForm" >
@@ -75,7 +76,7 @@ function submitFormN(url){
 			 
  				<td>${e.companyAddr}</td>
 				<td>${e.companyType}</td>
-
+				<td><a  title="平面图管理" target="navTab" href="<%=request.getContextPath()%>/client/manage/company/buildingManage.jsp"   >查看内容详情</a></td>
 			</tr>
 		</c:forEach>  	
 
