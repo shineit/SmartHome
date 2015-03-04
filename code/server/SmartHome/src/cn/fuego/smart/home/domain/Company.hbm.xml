@@ -25,6 +25,7 @@
 		 <property name="dutyPhone" column="DUTY_PHONE"></property>
 		 <property name="extendInfo" column="EXTEND_INFO"></property>
  
+ 		<property name="fireRisk" column="FIRE_RISK"></property>
 	</class>
  
 </hibernate-mapping>

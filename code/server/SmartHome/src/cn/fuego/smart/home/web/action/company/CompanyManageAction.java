@@ -8,11 +8,15 @@
 */ 
 package cn.fuego.smart.home.web.action.company;
 
+import java.util.List;
+
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.service.CompanyManageService;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.web.model.CompanyFilterModel;
 
 
  /** 
@@ -26,6 +30,7 @@ public class CompanyManageAction extends DWZTableAction<Company>
 {
 	private CompanyManageService concentService = ServiceContext.getInstance().getCompanyManageService();
 
+	private CompanyFilterModel filter = new  CompanyFilterModel();
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
@@ -35,5 +40,20 @@ public class CompanyManageAction extends DWZTableAction<Company>
 		// TODO Auto-generated method stub
 		return concentService;
 	}
+	@Override
+	public List<QueryCondition> getFilterCondition()
+	{
+		// TODO Auto-generated method stub
+		return this.filter.getConidtionList();
+	}
+	public CompanyFilterModel getFilter()
+	{
+		return filter;
+	}
+	public void setFilter(CompanyFilterModel filter)
+	{
+		this.filter = filter;
+	}
+	
 
 }

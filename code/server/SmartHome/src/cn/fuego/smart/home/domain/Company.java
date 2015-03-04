@@ -34,6 +34,7 @@ public class Company implements PersistenceObject
 	private String companyType;				//单位类型
 	private String companyPhone;			//单位电话
 	private float buildingArea=(float)0;	//建筑面积
+	
 	private String legalOfficer;			//法人名字
 	private String officerPhone;			//法人电话
 	private String fireManager;				//管理人名字
@@ -41,6 +42,8 @@ public class Company implements PersistenceObject
 	private String fireDuty;				//责任人名字
 	private String dutyPhone; 				//责任人电话
 	private String extendInfo;				//扩展字段，其他信息补充
+	
+	private String fireRisk;                //火灾危险性
 	
 	public int getCompanyID()
 	{
@@ -153,6 +156,14 @@ public class Company implements PersistenceObject
 	public void setExtendInfo(String extendInfo)
 	{
 		this.extendInfo = extendInfo;
+	}
+	public String getFireRisk()
+	{
+		return fireRisk;
+	}
+	public void setFireRisk(String fireRisk)
+	{
+		this.fireRisk = fireRisk;
 	}
 
 	

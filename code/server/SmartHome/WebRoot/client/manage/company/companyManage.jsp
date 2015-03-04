@@ -3,29 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="pageHeader" style="border:1px #B8D0D6 solid">
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/CompanyManage" method="post" name="newsSearch">
+<div class="pageHeader" >
+	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="company/CompanyManage" method="post" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
-	
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					标题：<input type="text" name="newsFilter.title" value="${newsFilter.title}" />
+					单位名称：<input type="text" name="filter.companyName" value="${filter.companyName}" />
 				</td>	
                 <td>
-					内容：<input type="text" name="newsFilter.content"  value="${newsFilter.content}"/>
+					使用名称：<input type="text" name="filter.applyName"  value="${filter.applyName}"/>
 				</td>							
 				<td>
-					发布人：<input type="text" name="newsFilter.author" value="${newsFilter.author}" />
-				</td>
-
-				<td class="dateRange">
-					发布时间:
-					<input type="text"  readonly="readonly" class="date" name="newsFilter.startDate" value="${newsFilter.startDate}"/>
-					<span class="limit">-</span>
-					<input type="text"  readonly="readonly" class="date" name="newsFilter.endDate" value="${newsFilter.endDate}"/>
+					单位类型：<input type="text" name="filter.companyType" value="${filter.companyType}" />
 				</td>
 				<td>
 					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
@@ -65,13 +57,12 @@
 			<tr target="sid_user" rel="${e.companyID}">
 				<td><input name="selectedIDList" value="${e.companyID}" type="checkbox" style="margin-top:5px;"></td>
 				<td>${e.companyName}</td>
-				<td>${e.applyName}</td>
-			 
+				<td>${e.applyName}</td>			 
  				<td>${e.companyAddr}</td>
 				<td>${e.companyType}</td>
 	            <td style="text-align: center;">
 	            
-	            <a title="楼层管理" target="navTab" href="device/BuildingManage!loadTreeData?selectedID=${e.companyID}" rel="configSensor"
+	            <a title="楼层管理" target="navTab" href="device/BuildingManage!loadTreeData?selectedID=${e.companyID}" rel="companyModify"
 	            class="btnAdd"  style="margin-left:10px;"></a>
              
 	            </td> 
