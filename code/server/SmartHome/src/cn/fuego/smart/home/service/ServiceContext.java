@@ -4,9 +4,10 @@ import cn.fuego.smart.home.service.impl.AlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.BuildingManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CompanyManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
+import cn.fuego.smart.home.service.impl.FireSensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
-import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.PlanManageServiceImpl;
+import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.SensorTypeManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ServiceOrderManageServiceImpl;
 import cn.fuego.smart.home.service.impl.UserManageServiceImpl;
@@ -30,7 +31,9 @@ public class ServiceContext
 
 	
 	private PlanManageService planManageService = null;
+	private FireSensorManageService fireSensorManageService = null;
 
+	
 	private ServiceContext()
 	{
 
@@ -110,7 +113,14 @@ public class ServiceContext
 		}
 		return companyManageService;
 	}
-	
+	public synchronized BuildingManageService  getBuildingManageService()
+	{
+		if (null == buildingManageService)
+		{
+			buildingManageService =  new BuildingManageServiceImpl();
+		}
+		return buildingManageService;
+	}
 	public synchronized PlanManageService  getPlanManageService()
 	{
 		if (null == planManageService)
@@ -120,12 +130,12 @@ public class ServiceContext
 		return planManageService;
 	}
 	
-	public synchronized BuildingManageService  getBuildingManageService()
+	public synchronized FireSensorManageService  getFireSensorManageService()
 	{
-		if (null == buildingManageService)
+		if (null == fireSensorManageService)
 		{
-			buildingManageService =  new BuildingManageServiceImpl();
+			fireSensorManageService =  new FireSensorManageServiceImpl();
 		}
-		return buildingManageService;
+		return fireSensorManageService;
 	}
 }
