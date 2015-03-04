@@ -4,26 +4,67 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () {
-			$.pdialog.resizeDialog({style: {width: 660,height:360}}, 				
+			$.pdialog.resizeDialog({style: {width: 660,height:400}}, 				
 			$.pdialog.getCurrent(), "");
         });//dialog 宽度重新定义
 </script>
+	
 <div class="pageContent">
 	<s:form method="post" action="device/CompanyManage!create.action" class="pageForm required-validate" name="newsForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="pageFormContent" layoutH="58">
 
-			<dl style="width:100%;">
-				<dt style="width:10%;">单位名称：</dt>			
-				<dd style="width:80%;"><input type="text" name="obj.companyName"  size="30"  value="${obj.companyName}"/></dd>
+			<dl style="width:50%;">
+				<dt style="width:25%;">单位名称：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.companyName"  size="30"  value="${obj.companyName}" class="required"/></dd>
 			</dl>
 			<dl style="width:50%;">
-				<dt style="width:20%;">使用名称：</dt>			
+				<dt style="width:25%;">使用名称：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.applyName"  size="30" value="${obj.applyName}" class="required"/></dd>
 			</dl>
 			<dl style="width:100%;">
-				<dt style="width:10%;">单位地址：</dt>			
-				<dd style="width:80%;"><textarea name="obj.companyAddr" cols="87" rows="8" maxlength="500">${obj.companyAddr}</textarea></dd>
-			</dl>						
+				<dt style="width:13%;">单位地址：</dt>			
+				<dd style="width:80%;"><input type="text" name="obj.companyAddr"  size="80" value="${obj.companyAddr}" class="required"/></dd>
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">单位类型：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.companyType"  size="30"  value="${obj.companyType}" class="required"/></dd>
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">单位电话：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.companyPhone"  size="30" value="${obj.companyPhone}" class="required"/></dd>
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">建筑面积：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.buildingArea"  size="30"  value="${obj.buildingArea}" /></dd>
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">火灾危险性：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.fireRisk"  size="30" value="${obj.fireRisk}" /></dd>
+			</dl>	
+			<dl style="width:50%;">
+				<dt style="width:25%;">法定代表人：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.legalOfficer"  size="30"  value="${obj.legalOfficer}" /></dd>
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">法人手机号：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.officerPhone"  size="30" value="${obj.officerPhone}" /></dd>
+			</dl>			
+			<dl style="width:50%;">
+				<dt style="width:25%;">消防管理人：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.fireManager"  size="30" value="${obj.fireManager}" /></dd>
+			</dl>	
+			<dl style="width:50%;">
+				<dt style="width:25%;">管理人手机：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.managerPhone"  size="30" value="${obj.managerPhone}" /></dd>
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">消防责任人：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.fireDuty"  size="30" value="${obj.fireDuty}" /></dd>
+			</dl>	
+			<dl style="width:50%;">
+				<dt style="width:25%;">责任人手机：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.dutyPhone"  size="30" value="${obj.dutyPhone}" /></dd>
+			</dl>																		
 		</div>		
 
 		<div class="formBar">
