@@ -11,6 +11,8 @@ package cn.fuego.smart.home.web.action.company;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.smart.home.domain.SensorPlan;
+import cn.fuego.smart.home.service.PlanManageService;
+import cn.fuego.smart.home.service.ServiceContext;
 
  /** 
  * @ClassName: PlanManageAction 
@@ -21,6 +23,7 @@ import cn.fuego.smart.home.domain.SensorPlan;
  */
 public class PlanManageAction extends DWZTableAction<SensorPlan>
 {
+	private PlanManageService service = ServiceContext.getInstance().getPlanManageService();
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
@@ -29,7 +32,7 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	public MispCommonService<SensorPlan> getService()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return service;
 	}
 
 }

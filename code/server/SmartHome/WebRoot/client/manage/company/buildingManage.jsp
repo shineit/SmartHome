@@ -12,15 +12,20 @@
 				<div layoutH="12" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
 				    <ul class="tree treeFolder">
 
-						<li><a href="<%=request.getContextPath()%>/client/manage/company/buildingList.jsp" target="ajax" rel="jbsxBox">单位名称</a>
+						<li><a href="device/BuildingManage?selectedID=${company.companyID}" target="ajax" rel="jbsxBox">${company.companyName}</a>
 							<ul>
-								<li><a href="<%=request.getContextPath()%>/client/manage/company/planManage.jsp" target="ajax" rel="jbsxBox">楼层1</a>
+							  <c:forEach var="b" items="${buildingList}"> 	
+							    
+								<li><a href="device/PlanManage?selectedID=${b.building.buildingID}" target="ajax" rel="jbsxBox">${b.building.name}</a>
 									<ul>
-										<li><a href="<%=request.getContextPath()%>/client/manage/company/planManage.jsp" target="ajax" rel="jbsxBox">平面图1</a></li>
-										<li><a href="<%=request.getContextPath()%>/client/manage/company/planManage.jsp" target="ajax" rel="jbsxBox">平面图2</a></li>
+									   <c:forEach var="e" items="${b.planList}"> 	
+									
+										  <li><a href="device/PlanManage?selectedID=${e.planID}" target="ajax" rel="jbsxBox">${e.name}</a></li>
+ 									   </c:forEach>	
+										
 									</ul>
 								</li>
-								
+							 </c:forEach>	
 							</ul>
 						</li>
 				     </ul>
@@ -28,6 +33,8 @@
 				
 				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
 					<!--#include virtual="list1.html" -->
+				   <c:set var="table" value="${table}" scope="request"/>
+					
 					<jsp:include page="buildingList.jsp"/>
 				</div>
 	

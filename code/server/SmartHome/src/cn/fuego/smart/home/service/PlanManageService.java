@@ -23,7 +23,7 @@ import cn.fuego.smart.home.domain.SensorPlan;
  * @date 2014-10-24 下午10:58:38 
  *  
  */
-public interface SensorPlanManageService extends MispCommonService<SensorPlan>
+public interface PlanManageService extends MispCommonService<SensorPlan>
 {
  	
   

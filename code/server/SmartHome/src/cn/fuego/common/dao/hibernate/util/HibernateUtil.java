@@ -17,6 +17,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.mapping.PersistentClass;
 
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.meta.ReflectionUtil;
@@ -28,6 +29,7 @@ public final class HibernateUtil
 	private static SessionFactory sessionFactory;
 	private static ThreadLocal session = new ThreadLocal();
 
+	private static Configuration cfg;
 	private HibernateUtil()
 	{
 	}
@@ -36,8 +38,9 @@ public final class HibernateUtil
 	{
 		try
 		{
-			Configuration cfg = new Configuration();
+			cfg = new Configuration();
 			cfg.configure();
+			
 			sessionFactory = cfg.buildSessionFactory();
 		}	
 		catch(Throwable e)
@@ -48,6 +51,13 @@ public final class HibernateUtil
 		}
 
 		
+	}
+
+	public static PersistentClass getPersistentClass(Class clazz)
+	{
+		PersistentClass pc = cfg.getClassMapping(clazz.getName());
+
+		return pc;
 	}
 
 	public static Session getThreadLocalSession()

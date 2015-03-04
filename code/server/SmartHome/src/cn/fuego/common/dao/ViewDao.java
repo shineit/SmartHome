@@ -23,6 +23,7 @@ import cn.fuego.common.domain.PersistenceObject;
 
 public interface ViewDao<E>
 {
+	String getUniPriKey();
 	List<E> getAll();
 	long getCount(List<QueryCondition> conditionList);
 	List<E> getAll(List<QueryCondition> conditionList);

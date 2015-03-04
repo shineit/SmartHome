@@ -2,12 +2,8 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<script type="text/javascript">
 
- 
-
-</script>
-<div class="pageHeader">
+<div class="pageHeader" style="border:1px #B8D0D6 solid">
 	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/CompanyManage" method="post" name="newsSearch">
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
@@ -75,7 +71,7 @@
 				<td>${e.companyType}</td>
 	            <td style="text-align: center;">
 	            
-	            <a title="楼层管理" target="navTab" href="device/BuildingManage?selectedID=${e.companyID}" rel="configSensor"
+	            <a title="楼层管理" target="navTab" href="device/BuildingManage!loadTreeData?selectedID=${e.companyID}" rel="configSensor"
 	            class="btnAdd"  style="margin-left:10px;"></a>
              
 	            </td> 

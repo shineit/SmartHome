@@ -8,22 +8,19 @@
 */ 
 package cn.fuego.common.dao.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
+import org.hibernate.metadata.ClassMetadata;
 
 import cn.fuego.common.dao.GenricTypeClass;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.ViewDao;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
-import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.common.log.FuegoLog;
 
 /** 
@@ -43,6 +40,17 @@ public class AbstractViewDao<E> extends GenricTypeClass<E> implements ViewDao<E>
 		this.persistentClass= clazz;
 	}
  
+	
+	public String getUniPriKey()
+	{
+ 		//String priKey = HibernateUtil.getPersistentClass(this.persistentClass).getTable().getPrimaryKey().getColumn(0).getName();
+ 		ClassMetadata meta = HibernateUtil.getSessionFactory().getClassMetadata(persistentClass);  
+ 		//实体名称  
+ 		//String entityName = meta.getEntityName();  
+ 		//主键名称  
+ 		String pkName = meta.getIdentifierPropertyName();
+		return pkName;
+	}
 	
  	public List<E> getAll()
 	{

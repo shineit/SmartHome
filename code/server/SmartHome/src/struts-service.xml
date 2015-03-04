@@ -64,8 +64,14 @@
 		</action>
 		
 	    <action name="BuildingManage" class="cn.fuego.smart.home.web.action.company.BuildingManageAction">
-			<result type="dispatcher">/client/manage/company/buildingManage.jsp</result>
+			<result type="dispatcher">/client/manage/company/buildingList.jsp</result>
+			<result type="dispatcher" name="all">/client/manage/company/buildingManage.jsp</result>
  			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
+		</action>
+		<action name="PlanManage" class="cn.fuego.smart.home.web.action.company.PlanManageAction">
+			<result type="dispatcher">/client/manage/company/planManage.jsp</result>
+  			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
  			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
 		</action>
  	</package> 
