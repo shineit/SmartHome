@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.domain;
 
+import cn.fuego.smart.home.constant.SensorKindEunm;
+
  /** 
  * @ClassName: FireSensor 
  * @Description: TODO
@@ -26,6 +28,11 @@ public class FireSensor
 	private String locationDesp;  //位置描述
 	private float locationX;  //X 偏移，相对当前图片尺寸宽度
 	private float locationY;  //Y 偏移，相当当前图片尺寸高度
+	
+	
+	private Integer sensorType=0;      //传感器类型
+	private String sensorTypeName="未命名";  //传感器类型名称
+	
 	public long getId()
 	{
 		return id;
@@ -99,6 +106,22 @@ public class FireSensor
 	public void setLocationY(float locationY)
 	{
 		this.locationY = locationY;
+	}
+	public Integer getSensorType()
+	{
+		return sensorType;
+	}
+	public void setSensorType(Integer sensorType)
+	{
+		this.sensorType = sensorType;
+	}
+	public String getSensorTypeName()
+	{
+		return sensorTypeName;
+	}
+	public void setSensorTypeName(String sensorTypeName)
+	{
+		this.sensorTypeName = sensorTypeName;
 	}
 
 

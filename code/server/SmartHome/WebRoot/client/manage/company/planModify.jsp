@@ -19,7 +19,7 @@
 </style>
 
 <div class="pageHeader" style="border:1px #B8D0D6 solid">
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/BuildingManage" method="post" name="newsSearch">
+	<s:form  id="pagerForm"  onsubmit="return divSearch(this, 'jbsxBox');" action="device/FireSensorManage" method="post" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	
@@ -40,7 +40,7 @@
 <div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
 <div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="demo/pagination/dialog2.html" target="dialog" mask="true"><span>新增楼层</span></a></li>
+			<li><a class="add" href="FireSensorManage!show.action?operateType=create"  target="dialog" mask="true" rel="fsNew"><span>新增传感器</span></a></li>
 			<li><a class="delete" href="demo/pagination/ajaxDone3.html?uid={sid_obj}" target="ajaxTodo" title="确定要删除吗?"><span>删除楼层</span></a></li>
 			<li><a class="edit" href="demo/pagination/dialog2.html?uid={sid_obj}" target="dialog" mask="true"><span>修改</span></a></li>
 			<li class="line">line</li>
@@ -58,7 +58,7 @@
 				<th width="80">位置描述</th>
 			</tr>
 		</thead>
-		<s:form  id="newsForm"  method="POST"  name="newsForm" >
+		<s:form   method="POST" rel="jbsxBox" >
 		<tbody>
  		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.id}">
@@ -93,7 +93,7 @@
 			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
+		<div class="pagination" rel="jbsxBox" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 <div id="container1" >

@@ -10,7 +10,7 @@
 </script>
 	
 <div class="pageContent">
-	<s:form method="post" action="device/CompanyManage!create.action" class="pageForm required-validate" name="newsForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
+	<s:form method="post" action="company/CompanyManage!create.action" class="pageForm required-validate" name="newsForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="pageFormContent" layoutH="58">
 
 			<dl style="width:50%;">

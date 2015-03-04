@@ -40,7 +40,18 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	
 	
 	
-	
+	@Override
+	public String create()
+	{
+		// TODO Auto-generated method stub
+		this.getOperateMessage().setRel("jbsxBox");
+		return super.create();
+	}
+
+
+
+
+
 	@Override
 	public String execute()
 	{

@@ -39,6 +39,9 @@ public class FireAlarmView implements PersistenceObject
 	private float locationX;  //X 偏移，相对当前图片尺寸宽度
 	private float locationY;  //Y 偏移，相当当前图片尺寸高度
 	
+	private Integer sensorType=0;      //传感器类型
+	private String sensorTypeName="未命名";  //传感器类型名称
+	
 	public int getId()
 	{
 		return id;
@@ -160,6 +163,22 @@ public class FireAlarmView implements PersistenceObject
 	public void setLocationY(float locationY)
 	{
 		this.locationY = locationY;
+	}
+	public Integer getSensorType()
+	{
+		return sensorType;
+	}
+	public void setSensorType(Integer sensorType)
+	{
+		this.sensorType = sensorType;
+	}
+	public String getSensorTypeName()
+	{
+		return sensorTypeName;
+	}
+	public void setSensorTypeName(String sensorTypeName)
+	{
+		this.sensorTypeName = sensorTypeName;
 	}
 
 

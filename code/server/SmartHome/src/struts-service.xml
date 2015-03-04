@@ -74,8 +74,8 @@
 		
 		<action name="FireSensorManage" class="cn.fuego.smart.home.web.action.device.FireSensorManageAction">
 			<result type="dispatcher">/client/manage/company/planModify.jsp</result>
-  			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
- 			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
+  			<result type="dispatcher" name="create">/client/manage/company/fireSensorShow.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/company/fireSensorShow.jsp</result>
 		</action>
  	</package> 
  	

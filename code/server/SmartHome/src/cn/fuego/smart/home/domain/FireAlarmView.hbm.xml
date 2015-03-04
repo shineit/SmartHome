@@ -22,6 +22,8 @@
 		 <property name="machineID" column="MACHINE_ID"></property>
 		 <property name="loopID" column="LOOP_ID"></property>
 		 <property name="codeID" column="CODE_ID"></property>
+		 <property name="sensorType" column="SENSOR_TYPE"></property>
+		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>	
 	 
 	</class>
  

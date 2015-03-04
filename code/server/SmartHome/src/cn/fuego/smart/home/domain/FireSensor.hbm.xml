@@ -19,6 +19,8 @@
 		 <property name="locationDesp" column="LOCATION_DESP"></property>
 		 <property name="locationX" column="LOCATION_X"></property>
 		 <property name="locationY" column="LOCATION_Y"></property>
+		 <property name="sensorType" column="SENSOR_TYPE"></property>
+		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>	
 
 	</class>
  

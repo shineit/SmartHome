@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="pageHeader" style="border:1px #B8D0D6 solid">
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/BuildingManage" method="post" name="newsSearch">
+	<s:form  id="pagerForm"   onsubmit="return divSearch(this, 'jbsxBox');"  action="device/BuildingManage" method="post" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	
@@ -35,22 +35,20 @@
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
  				<th width="25%" align="center">楼名称</th>
-				<th width="15%" align="center">使用名称</th>
+				<th width="15%" align="center">描述</th>
 				<th width="15%" align="center">单位地址</th>
-				<th width="10%" align="center">单位类型</th>
 				<th width="10%" align="center">操作</th>
 				
 			</tr>
 		</thead>
-		<s:form  id="newsForm"  method="POST"  name="newsForm" >
+		<s:form  id="newsForm"  method="POST"   rel="jbsxBox">
 		<tbody>
 
  		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.buildingID}">
 				<td><input name="selectedIDList" value="${e.buildingID}" type="checkbox" style="margin-top:5px;"></td>
 				<td>${e.name}</td>
-				<td>${e.desp}</td>
-			 
+				<td>${e.desp}</td>			 
  				<td>${e.addr}</td>
  	            <td style="text-align: center;">
 	            
@@ -83,7 +81,7 @@
 			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
+		<div class="pagination" rel="jbsxBox" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 </div>
