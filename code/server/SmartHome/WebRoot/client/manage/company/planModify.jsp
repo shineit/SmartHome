@@ -16,11 +16,10 @@
 </style>
 
 <div class="pageHeader" style="border:1px #B8D0D6 solid">
-	<form id="pagerForm" onsubmit="return divSearch(this, 'jbsxBox');" action="demo/pagination/list1.html" method="post">
-	<input type="hidden" name="pageNum" value="1" />
-	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
-	<input type="hidden" name="orderField" value="${param.orderField}" />
-	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/BuildingManage" method="post" name="newsSearch">
+		<input type="hidden" name="pageNum" value="${pageNum}" />
+	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
+	
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
@@ -28,11 +27,11 @@
 				<td>
 					平面图编号：<input type="text" name="keyword" />
 				</td>
-				<td><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="bindEvent()">检索</button></div></div></td>
+				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
 			</tr>
 		</table>
 	</div>
-	</form>
+	</s:form>
 </div>
 
 <div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
@@ -48,43 +47,50 @@
 	<table class="table" width="99%"  layoutH="500" rel="jbsxBox">
 		<thead>
 			<tr>
-				<th width="80">序号</th>
-				<th width="120" >诊所编号</th>
-				<th >诊所名称</th>
-				<th width="100">病人编号</th>
-				<th width="100">病人姓名</th>
-				<th width="120">尿检日期</th>
-				<th width="100">尿检结果</th>
-				<th width="80">检验次数</th>
+				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
+				<th width="100">集中器编号</th>
+				<th width="100">机号</th>
+				<th width="100">回路号</th>
+				<th width="100">点号</th>
+				<th width="80">位置描述</th>
 			</tr>
 		</thead>
+		<s:form  id="newsForm"  method="POST"  name="newsForm" >
 		<tbody>
-			<tr target="sid_obj" rel="1">
-				<td>1</td>
-				<td>bj0001</td>
-				<td>xxx诊所</td>
-				<td>xxx</td>
-				<td>张三</td>
-				<td>2011-9-6</td>
-				<td>xxx</td>
-				<td>1</td>
+ 		<c:forEach var="e" items="${table.currentPageData}"> 	
+			<tr target="sid_user" rel="${e.id}">
+				<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>
+				<td>${e.concentratorID}</td>
+				<td>${e.machineID}</td>
+				<td>${e.loopID}</td>
+ 				<td>${e.codeID}</td>
+ 				<td>${e.locationDesp}</td>
 			</tr>
+		</c:forEach>  	
 
 		</tbody>
+		</s:form>
 	</table>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox')">
-				<option value="20">20</option>
-				<option value="50">50</option>
-				<option value="100">100</option>
-				<option value="200">200</option>
+	        <c:set var="page" value="${table.page}" scope="request"/>
+			
+			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox')">
+				<c:forEach var="e" items="${page.pageSizeList}"> 	
+			       <c:if test="${e==page.pageSize}">
+			         <option value="${e}" selected>${e}</option>
+				  </c:if>
+                  <c:if test="${e!=page.pageSize}">
+			         <option value="${e}">${e}</option>
+				  </c:if>
+				</c:forEach>
+ 
 			</select>
-			<span>条，共50条</span>
+			<span>条，共${page.count}条</span>
 		</div>
 		
-		<div class="pagination" rel="jbsxBox" totalCount="200" numPerPage="20" pageNumShown="5" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 	</div>
 <div id="container1" >
