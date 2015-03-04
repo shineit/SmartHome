@@ -22,14 +22,5 @@ import cn.fuego.smart.home.service.CompanyManageService;
 public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  implements  CompanyManageService 
 {
 
-	/* (non-Javadoc)
-	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
-	 */
-	@Override
-	public String GetPrimaryName()
-	{
-		// TODO Auto-generated method stub
-		return Company.PRI_KEY;
-	}
  
 }

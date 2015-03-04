@@ -62,6 +62,12 @@
  			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
  			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
 		</action>
+		
+	    <action name="BuildingManage" class="cn.fuego.smart.home.web.action.company.BuildingManageAction">
+			<result type="dispatcher">/client/manage/company/buildingManage.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
+		</action>
  	</package> 
  	
  </struts>

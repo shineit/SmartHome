@@ -9,8 +9,8 @@
 package cn.fuego.smart.home.service.impl;
 
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
-import cn.fuego.smart.home.domain.SensorPlan;
-import cn.fuego.smart.home.service.SensorPlanManageService;
+import cn.fuego.smart.home.domain.Building;
+import cn.fuego.smart.home.service.BuildingManageService;
 
  /** 
  * @ClassName: SensorPlanManageServiceImpl 
@@ -19,7 +19,7 @@ import cn.fuego.smart.home.service.SensorPlanManageService;
  * @date 2015-3-3 下午10:30:56 
  *  
  */
-public class SensorPlanManageServiceImpl extends MispCommonServiceImpl<SensorPlan> implements SensorPlanManageService
+public class BuildingManageServiceImpl extends MispCommonServiceImpl<Building> implements BuildingManageService
 {
  
 }

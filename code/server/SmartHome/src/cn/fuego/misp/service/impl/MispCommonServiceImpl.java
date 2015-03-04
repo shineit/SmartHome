@@ -305,7 +305,10 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
          
         return this.getDao(clazz).getAll(conditionList);
 	}
-	public abstract String GetPrimaryName();
+	public String GetPrimaryName()
+	{
+		return this.getDao().getUniPriKey();
+	}
 	
    
 
