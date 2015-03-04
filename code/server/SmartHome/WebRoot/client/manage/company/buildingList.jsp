@@ -14,7 +14,7 @@
 			<tr>
 
 				<td>
-					平面图编号：<input type="text" name="keyword" />
+					楼层编号：<input type="text" name="keyword" />
 				</td>
 				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
 			</tr>
@@ -29,8 +29,6 @@
 			<li><a class="add" href="demo/pagination/dialog2.html" target="dialog" mask="true"><span>新增楼层</span></a></li>
 			<li><a class="delete" href="demo/pagination/ajaxDone3.html?uid={sid_obj}" target="ajaxTodo" title="确定要删除吗?"><span>删除楼层</span></a></li>
 			<li><a class="edit" href="demo/pagination/dialog2.html?uid={sid_obj}" target="dialog" mask="true"><span>修改</span></a></li>
-			<li class="line">line</li>
-			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="99%" layoutH="125" rel="jbsxBox">

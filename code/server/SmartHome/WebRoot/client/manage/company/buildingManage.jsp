@@ -12,7 +12,7 @@
 				<div layoutH="12" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
 				    <ul class="tree treeFolder">
 
-						<li><a href="javascript">单位名称</a>
+						<li><a href="<%=request.getContextPath()%>/client/manage/company/buildingList.jsp" target="ajax" rel="jbsxBox">单位名称</a>
 							<ul>
 								<li><a href="<%=request.getContextPath()%>/client/manage/company/planManage.jsp" target="ajax" rel="jbsxBox">楼层1</a>
 									<ul>
@@ -28,6 +28,7 @@
 				
 				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
 					<!--#include virtual="list1.html" -->
+					<jsp:include page="buildingList.jsp"/>
 				</div>
 	
 			</div>
