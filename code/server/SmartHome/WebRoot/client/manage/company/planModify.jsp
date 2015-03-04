@@ -13,6 +13,9 @@
 .mark1{
 	position:absolute; width:6px; height:6px; font-size:0px; background:#FF0000;
 }
+.mark2{
+	position:absolute; width:6px; height:6px; font-size:0px; background:#0000FF;
+}
 </style>
 
 <div class="pageHeader" style="border:1px #B8D0D6 solid">
@@ -47,7 +50,7 @@
 	<table class="table" width="99%"  layoutH="500" rel="jbsxBox">
 		<thead>
 			<tr>
-				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
+				<th width="5%" align="center"> </th>
 				<th width="100">集中器编号</th>
 				<th width="100">机号</th>
 				<th width="100">回路号</th>
@@ -59,7 +62,7 @@
 		<tbody>
  		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.id}">
-				<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>
+				<td><input name="selectedIDList" value="${e.id}" type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
 				<td>${e.concentratorID}</td>
 				<td>${e.machineID}</td>
 				<td>${e.loopID}</td>
@@ -94,7 +97,7 @@
 
 	</div>
 <div id="container1" >
-<div id="map1">
+    <div id="map1">
 		<img src="plane1.jpg" />
     </div>
 </div>
@@ -106,27 +109,7 @@
  <script type="text/javascript">
 var mark = [];
 
-function setCookie(name,value)
-{
-    var Days = 365;
-    var exp  = new Date();
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-}
-function getCookie(name)     
-{
-    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
-     if(arr != null) return unescape(arr[2]); return null;
-
-}
-function delCookie(name)
-{
-    var exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    var cval=getCookie(name);
-    if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-}
-
+ 
 function getObj(id){
 	return document.getElementById(id);
 }
@@ -144,51 +127,122 @@ function getOffset(obj){
 	}
 	return {x : x, y : y };
 }
+
+function bindEvent(){
+	getObj("map1").ondblclick = function(oEvent){
+		oEvent = oEvent || event;
+		 
+		if(null != selectedID)
+		{
+		 
+		  var container = getMapContainer();
+		  var offset = getOffset(container);
+		  var x = oEvent.clientX - offset.x;
+		  var y = oEvent.clientY - offset.y;
+		
+		 container.removeChild(getObj("mark1"+selectedID));
+		  addMark(container, x, y, selectedID);
+		  selectMark(selectedID);
+ 
+		  saveMark(selectedID,x,y);
+		}
+
+	};
+}
+
+function getMarkByID(id)
+{
+
+   return getObj("mark1"+id);
+}
+
+function getMapContainer()
+{
+
+   return getObj("map1");
+}
+ 
+function selectMark(id)
+{
+ 	if(null != selectedID)
+	{
+	   unSelectMark(selectedID);
+	}
+	selectedID = id;
+	
+	if(null != getMarkByID(id))
+	{
+		getMarkByID(id).className ="mark2";
+	
+	}
+
+}
+
+function unSelectMark(id)
+{
+	if(null != getMarkByID(id))
+	{
+		getMarkByID(id).className ="mark1";
+	
+	}
+ 
+}
+
 function addMark(p, x, y, index){
-	var div = document.createElement("div");
+     
+ 	var div = document.createElement("div");
 	div.id = "mark1" + index;
 	div.className = "mark1";
 	div.style.left = x + "px";
 	div.style.top = y + "px";
 	p.appendChild(div);
 }
-function bindEvent(){
-	getObj("map1").ondblclick = function(oEvent){
-		oEvent = oEvent || event;
-		var container = getObj("container1");
-		var offset = getOffset(container);
-		var x = oEvent.clientX - offset.x;
-		var y = oEvent.clientY - offset.y;
-		addMark(container, x, y, mark.length);
-		mark.push(x + "," + y);
-		saveMark();
-	};
-}
 
-function saveMark(){
-	setCookie("mark", mark.join("|"));
-}
 function loadMark(){
-	var cookie = getCookie("mark");
-	
-	var json= '<%=request.getAttribute("locationJson")%>';
-	var sensorList = $.parseJSON(json);
+ 
+ 	 var container = getMapContainer();
+	 for(var i=0; i<sensorList.length; i++)
+	 {
 	 
- 	 var container = getObj("container1");
-	 for(var i=0; i<sensorList.length; i++){
-		 addMark(container, sensorList[i].locationX, sensorList[i].locationY, i);
+		 addMark(container, sensorList[i].locationX, sensorList[i].locationY, sensorList[i].id);
 	 }
-	 
-}
-function clearMark(){
-	var container = getObj("container1");
-	for(var i=0; i<mark.length; i++){
-		container.removeChild(getObj("mark1"+i));
-	}
-	mark.length = 0;
-	saveMark();
 }
 
+
+function saveMark(sensorID,locationX,locationY)
+{
+	 for(var i=0; i<sensorList.length; i++)
+	 { 
+	    if(sensorList[i].id == sensorID)
+	    {
+	      sensorList[i].locationX = locationX;
+	      sensorList[i].locationY = locationY;
+	      var sensorJson = JSON.stringify(sensorList[i]);
+	      $.ajax({
+					type : "POST",
+					url : "device/FireSensorManage!modifyLocation.action",
+					dataType : "text",
+					data : {
+						sensorJson : sensorJson
+					},
+					success : function(json) {
+						if (json == 'false') {
+							$("#warn").html("验证码输入错误！");
+						} else {
+							$("form[name='loginForm']").submit();
+						}
+
+					}
+
+				});
+	    }
+	  }
+}
+
+ 
+var json= '<%=request.getAttribute("locationJson")%>';
+var sensorList = $.parseJSON(json);
+var selectedID;
 init();
 
 function init()
