@@ -21,6 +21,7 @@
 									   <c:forEach var="e" items="${b.planList}"> 	
 									
 										  <li><a href="device/FireSensorManage?selectedID=${e.planID}" target="ajax" rel="jbsxBox">${e.name}</a></li>
+ 										  
  									   </c:forEach>	
 										
 									</ul>

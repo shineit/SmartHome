@@ -2,16 +2,15 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script> 
-
+ 
 <style type="text/css">
-#mainArea{
+#container1{
 	position:relative; width:98%; height:350px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
 }
-#map{
+#map1{
 	position:absolute;margin: 0 auto;
 }
-.mark{
+.mark1{
 	position:absolute; width:6px; height:6px; font-size:0px; background:#FF0000;
 }
 </style>
@@ -88,9 +87,9 @@
 		<div class="pagination" rel="jbsxBox" totalCount="200" numPerPage="20" pageNumShown="5" currentPage="1"></div>
 
 	</div>
-<div id="mainArea" >
-	<div id="map" ondblclick="dbcl(oEvent);">
-		<img src="<%=request.getContextPath()%>/client/manage/company/plane1.jpg" />
+<div id="container1" >
+<div id="map1">
+		<img src="plane1.jpg" />
     </div>
 </div>
 	
@@ -98,10 +97,7 @@
 	
 	
 </div>
-<script type="text/javascript">
-	//bindEvent();
-	//loadMark();
-
+ <script type="text/javascript">
 var mark = [];
 
 function setCookie(name,value)
@@ -125,7 +121,9 @@ function delCookie(name)
     if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }
 
-
+function getObj(id){
+	return document.getElementById(id);
+}
 function point(x, y){
 	this.x = x;
 	this.y = y;
@@ -142,19 +140,16 @@ function getOffset(obj){
 }
 function addMark(p, x, y, index){
 	var div = document.createElement("div");
-	div.id = "mark" + index;
-	div.className = "mark";
+	div.id = "mark1" + index;
+	div.className = "mark1";
 	div.style.left = x + "px";
 	div.style.top = y + "px";
 	p.appendChild(div);
 }
 function bindEvent(){
-alert("OK");
-alert($("#map"));
-	$("#map").ondblclick = function(oEvent){
-		alert("OK");
+	getObj("map1").ondblclick = function(oEvent){
 		oEvent = oEvent || event;
-		var container = $("#mainArea");
+		var container = getObj("container1");
 		var offset = getOffset(container);
 		var x = oEvent.clientX - offset.x;
 		var y = oEvent.clientY - offset.y;
@@ -163,38 +158,40 @@ alert($("#map"));
 		saveMark();
 	};
 }
-function dbcl (oEvent){
-		alert("OK");
-		oEvent = oEvent || event;
-		var container = $("#mainArea");
-		var offset = getOffset(container);
-		var x = oEvent.clientX - offset.x;
-		var y = oEvent.clientY - offset.y;
-		addMark(container, x, y, mark.length);
-		mark.push(x + "," + y);
-		saveMark();
-	};
+
 function saveMark(){
 	setCookie("mark", mark.join("|"));
 }
 function loadMark(){
 	var cookie = getCookie("mark");
-	if(cookie){
-		mark = cookie.split("|");
-		var container = $("#mainArea");
-		for(var i=0; i<mark.length; i++){
-			addMark(container, mark[i].split(",")[0], mark[i].split(",")[1], i);
-		}
-	}
+	
+	var json= '<%=request.getAttribute("locationJson")%>';
+	var sensorList = $.parseJSON(json);
+	 
+ 	 var container = getObj("container1");
+	 for(var i=0; i<sensorList.length; i++){
+		 addMark(container, sensorList[i].locationX, sensorList[i].locationY, i);
+	 }
+	 
 }
 function clearMark(){
-	var container = $("#mainArea");
+	var container = getObj("container1");
 	for(var i=0; i<mark.length; i++){
-		container.removeChild($("#mark"+i));
+		container.removeChild(getObj("mark1"+i));
 	}
 	mark.length = 0;
 	saveMark();
 }
 
+init();
+
+function init()
+{
+	bindEvent();
+	loadMark();
+}
+ 
+ 
 </script>
+ 
 	
