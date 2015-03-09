@@ -5,8 +5,10 @@ import cn.fuego.smart.home.service.impl.BuildingManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CompanyManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.FireSensorManageServiceImpl;
+import cn.fuego.smart.home.service.impl.KnowledgeManageServiceImpl;
 import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
 import cn.fuego.smart.home.service.impl.PlanManageServiceImpl;
+import cn.fuego.smart.home.service.impl.ProductManageServiceImpl;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.SensorTypeManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ServiceOrderManageServiceImpl;
@@ -32,6 +34,11 @@ public class ServiceContext
 	
 	private PlanManageService planManageService = null;
 	private FireSensorManageService fireSensorManageService = null;
+
+	
+	private KnowledgeManageService knowledgeManageService = null;
+	
+	private ProductManageService productManageService = null;
 
 	
 	private ServiceContext()
@@ -137,5 +144,30 @@ public class ServiceContext
 			fireSensorManageService =  new FireSensorManageServiceImpl();
 		}
 		return fireSensorManageService;
+	}
+
+	/**
+	 * @return
+	 */
+	public synchronized KnowledgeManageService getKnowledgeManageService()
+	{
+		if (null == knowledgeManageService)
+		{
+			knowledgeManageService =  new  KnowledgeManageServiceImpl();
+		}
+		return knowledgeManageService;
+		
+	}
+
+	/**
+	 * @return
+	 */
+	public ProductManageService getProductManageService()
+	{
+		if (null == productManageService)
+		{
+			productManageService =  new  ProductManageServiceImpl();
+		}
+		return productManageService;
 	}
 }

@@ -18,6 +18,8 @@
 							    
 								<li><a href="device/PlanManage?selectedID=${b.building.buildingID}" target="ajax" rel="jbsxBox">${b.building.name}</a>
 									<ul>
+									    <li style="display:none"><a href="" target="ajax" rel="jbsxBox">aaa</a></li>
+ 
 									   <c:forEach var="e" items="${b.planList}"> 	
 									
 										  <li><a href="device/FireSensorManage?selectedID=${e.planID}" target="ajax" rel="jbsxBox">${e.name}</a></li>
@@ -26,6 +28,7 @@
 										
 									</ul>
 								</li>
+ 
 							 </c:forEach>	
 							</ul>
 						</li>
@@ -35,7 +38,8 @@
 				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
 					<!--#include virtual="list1.html" -->
 				   <c:set var="table" value="${table}" scope="request"/>
-					
+					<c:set var="company" value="${company}" scope="request"/>
+			 
 					<jsp:include page="buildingList.jsp"/>
 				</div>
 	

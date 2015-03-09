@@ -1,5 +1,5 @@
 
-package cn.fuego.smart.home.device.listenser;
+package cn.fuego.smart.home.device.listenser.tcp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.device.ReceiveMessage;
+import cn.fuego.smart.home.device.listenser.RecieveCommandConst;
 import cn.fuego.smart.home.device.read.ReadStreamThread;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -36,7 +37,7 @@ public class MessageHandler implements Runnable
  	
  	private Queue<String>  messageBuffer = new LinkedList<String>();
 	
-	public MessageHandler(Socket socket,DataCollectionCache dataCache)
+	public MessageHandler(Socket socket)
 	{
  
 		this.socket = socket;

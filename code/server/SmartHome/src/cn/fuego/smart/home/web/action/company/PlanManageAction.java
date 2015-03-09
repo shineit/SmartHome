@@ -8,6 +8,12 @@
 */ 
 package cn.fuego.smart.home.web.action.company;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.smart.home.domain.SensorPlan;
@@ -34,5 +40,15 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 		// TODO Auto-generated method stub
 		return service;
 	}
-
+	@Override
+	public List<QueryCondition> getFilterCondition()
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		if(!ValidatorUtil.isEmpty(this.getSelectedID()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"buildingID",this.getSelectedID()));
+ 		}
+ 
+		return conditionList;
+	}
 }

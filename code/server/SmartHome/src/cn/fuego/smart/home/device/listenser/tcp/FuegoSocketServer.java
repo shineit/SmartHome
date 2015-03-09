@@ -6,7 +6,7 @@
 * @date 2014-6-26 下午10:50:42 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.device.listenser;
+package cn.fuego.smart.home.device.listenser.tcp;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -34,8 +34,7 @@ public class FuegoSocketServer extends Thread
 	private int listenPort = 8600;
  
 	private ExecutorService threadPool = Executors.newFixedThreadPool(100);
-	private DataCollectionCache dataCache = new DataCollectionCache();
- 
+  
 	public void init(int listenPort)
 	{
 		this.listenPort = listenPort;
@@ -57,10 +56,9 @@ public class FuegoSocketServer extends Thread
  				socket = this.serverSocket.accept();
  
  				log.info("recevie a message " + socket.getRemoteSocketAddress());
- 				threadPool.execute(new MessageHandler(socket, dataCache));
+ 				threadPool.execute(new MessageHandler(socket));
  				log.info("receive done" + socket.getRemoteSocketAddress());
-
-			}
+ 			}
 		}
 		catch (IOException e)
 		{

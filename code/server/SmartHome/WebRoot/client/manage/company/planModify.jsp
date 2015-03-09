@@ -40,14 +40,14 @@
 <div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
 <div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="FireSensorManage!show.action?operateType=create"  target="dialog" mask="true" rel="fsNew"><span>新增传感器</span></a></li>
-			<li><a class="delete" href="demo/pagination/ajaxDone3.html?uid={sid_obj}" target="ajaxTodo" title="确定要删除吗?"><span>删除楼层</span></a></li>
+			<li><a class="add" href="FireSensorManage!show.action?operateType=create"  target="dialog" mask="true" rel="fsNew"><span>新增</span></a></li>
+			<li><a class="delete" href="FireSensorManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
 			<li><a class="edit" href="demo/pagination/dialog2.html?uid={sid_obj}" target="dialog" mask="true"><span>修改</span></a></li>
 			<li class="line">line</li>
 			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="99%"  layoutH="500" rel="jbsxBox">
+	<table class="table" width="99%"  layoutH="800" rel="jbsxBox">
 		<thead>
 			<tr>
 				<th width="5%" align="center"> </th>

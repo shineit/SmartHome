@@ -54,7 +54,7 @@ public class DeviceOnlineCache
 			{
 				entry.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
 				log.warn("the device is off line. the concentrator is  " + entry);
-				ServiceContext.getInstance().getConcentratorManageService().offline(entry);
+				ServiceContext.getInstance().getConcentratorManageService().offline(entry.getIpAddr(),entry.getPort());
 			}
  		}
 	}

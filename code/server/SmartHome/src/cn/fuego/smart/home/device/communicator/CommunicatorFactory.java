@@ -37,6 +37,6 @@ public class CommunicatorFactory
 	public synchronized Communicator getCommunicator(String ip,int port)
 	{
 		 
-		return new UdpCommunicatorImpl(ip,port);
+		return new MinaCommunicatorImpl(ip,port);
 	}
 }
