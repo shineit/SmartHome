@@ -16,6 +16,7 @@
 <div class="pageContent">
 	<s:form method="post" action="device/FireSensorManage" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)"  >
 		<div class="pageFormContent" layoutH="58">
+		    <input type="hidden" name="obj.planNodeID" value="${obj.planNodeID}"/>
 			<input type="hidden" name="obj.sensorType" value="${obj.sensorType}"/>
 			<dl style="width:50%;">
 				<dt style="width:30%;">传感器编号：</dt>			

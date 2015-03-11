@@ -11,9 +11,11 @@
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
-
+                <td>
+					 <input type="text" name="companyID" style="display:none" value="${company.companyID}"/>
+				</td>
 				<td>
-					楼层编号：<input type="text" name="keyword" />
+					楼层编号：<input type="text" name="keyword" /> 
 				</td>
 				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
 			</tr>
@@ -25,10 +27,10 @@
 <div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
 <div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="demo/pagination/dialog2.html" target="dialog" mask="true"><span>新增楼层</span></a></li>
-			<li><a class="delete" href="demo/pagination/ajaxDone3.html?uid={sid_obj}" target="ajaxTodo" title="确定要删除吗?"><span>删除楼层</span></a></li>
-			<li><a class="edit" href="demo/pagination/dialog2.html?uid={sid_obj}" target="dialog" mask="true"><span>修改</span></a></li>
-		</ul>
+			<li><a class="add" href="BuildingManage!show.action?selectedID=${company.companyID}&operateType=create" target="dialog" mask="true" title="新增单位"><span>新增</span></a></li>
+			<li><a class="delete" href="BuildingManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
+  	
+  		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
 		<thead>

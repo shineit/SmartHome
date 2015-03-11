@@ -6,7 +6,7 @@
 * @date 2014-6-26 下午10:50:42 
 * @version V1.0   
 */ 
-package cn.fuego.smart.home.device.listenser;
+package cn.fuego.smart.home.device.listenser.udp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.smart.home.device.ApplicationProtocol;
+import cn.fuego.smart.home.device.listenser.DeviceOnlineTask;
 import cn.fuego.smart.home.domain.Concentrator;
 
 /** 

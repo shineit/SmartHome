@@ -63,6 +63,22 @@ public class SystemConfigInfo
 	{
 		return PropertyReader.getInstance().getPropertyByName(SystemConfigNameConst.DEVICE_PORT);
 	}
+	
+	
+	public static int getHeartBeatTime()
+	{
+		String timeOut = PropertyReader.getInstance().getPropertyByName("HEART_BEAT_TIME");
+		int timeSecond = Integer.valueOf(timeOut);
+		return timeSecond;
+
+	}
+	public static int getDeviceTimeOut()
+	{
+		String timeOut = PropertyReader.getInstance().getPropertyByName("DEVICE_TIME_OUT");
+		int timeSecond = Integer.valueOf(timeOut);
+		return timeSecond;
+
+	}
 	public static String getServerPort()
 	{
 		return PropertyReader.getInstance().getPropertyByName("SERVER_PORT");

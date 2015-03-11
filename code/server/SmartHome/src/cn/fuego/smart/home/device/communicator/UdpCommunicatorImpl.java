@@ -31,7 +31,7 @@ import cn.fuego.smart.home.device.read.UdpDataReadThread;
  * @date 2014-10-31 下午3:23:18
  * 
  */
-public class UdpCommunicatorImpl implements Communicator
+public abstract class UdpCommunicatorImpl implements Communicator
 {
 	private Log log = LogFactory.getLog(ReadStreamThread.class);
 
