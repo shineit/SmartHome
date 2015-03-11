@@ -13,7 +13,7 @@ import javax.servlet.ServletContextListener;
 
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.SystemConfigInfo;
-import cn.fuego.smart.home.device.listenser.mina.MinaServer;
+import cn.fuego.smart.home.device.listenser.FuegoUdpServer;
 
  /** 
  * @ClassName: DeviceListener 
@@ -45,7 +45,7 @@ public class DeviceListener implements ServletContextListener
 	{
 		log.info("now start device message server");
 		int port = Integer.valueOf(SystemConfigInfo.getServerPort());
-		MinaServer server = MinaServer.getInstance();
+		FuegoUdpServer server = new FuegoUdpServer();
 		server.init(port);
 		server.start();
 		log.info("server load sucess");

@@ -48,8 +48,6 @@ public interface Communicator
 	 */
 	public String readData(String end);
  
-	
- 	
 	public void close();
  
 }

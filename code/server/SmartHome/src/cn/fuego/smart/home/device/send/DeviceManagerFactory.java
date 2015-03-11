@@ -24,7 +24,7 @@ import cn.fuego.smart.home.domain.Concentrator;
 public class DeviceManagerFactory
 {
 	private static DeviceManagerFactory instance;
-	private static Map<Long,DeviceManager> map = new HashMap<Long,DeviceManager>();
+	private static Map<Concentrator,DeviceManager> map = new HashMap<Concentrator,DeviceManager>();
 	private DeviceManagerFactory()
 	{
  
@@ -41,7 +41,7 @@ public class DeviceManagerFactory
 	
 	public DeviceManager getDeviceManger(Concentrator concentrator)
 	{
-		DeviceManager manager = map.get(concentrator.getConcentratorID());
+		DeviceManager manager = map.get(concentrator);
 		if(null == manager)
 		{
 			manager = new DeviceManagerImpl(concentrator);

@@ -44,7 +44,8 @@ public class DeviceManagerImpl implements DeviceManager
 	private Log log = LogFactory.getLog(DeviceManagerImpl.class);	
 
 	private Concentrator concentrator;
-
+	private int port = Integer.valueOf(SystemConfigInfo.getDevicePort());
+	 
 	
 	public DeviceManagerImpl(Concentrator concentrator)
 	{

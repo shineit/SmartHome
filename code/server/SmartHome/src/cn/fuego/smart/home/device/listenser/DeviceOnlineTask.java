@@ -13,8 +13,6 @@ import java.util.TimerTask;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.smart.home.device.listenser.udp.FuegoUdpServer;
-
  /** 
  * @ClassName: DeviceOnlineTask 
  * @Description: TODO

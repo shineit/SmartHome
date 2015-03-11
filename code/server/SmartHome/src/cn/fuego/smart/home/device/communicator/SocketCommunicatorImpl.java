@@ -31,7 +31,7 @@ import cn.fuego.smart.home.device.read.ReadStreamThread;
  * @date 2014-10-31 下午3:23:18
  * 
  */
-public abstract class SocketCommunicatorImpl implements Communicator
+public class SocketCommunicatorImpl implements Communicator
 {
 	private Log log = LogFactory.getLog(ReadStreamThread.class);
 

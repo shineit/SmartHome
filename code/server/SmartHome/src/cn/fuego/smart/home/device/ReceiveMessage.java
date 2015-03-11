@@ -61,14 +61,6 @@ public class ReceiveMessage
 	
 
 	
-	public byte[] getDataBytes()
-	{
-		return dataBytes;
-	}
-	public void setDataBytes(byte[] dataBytes)
-	{
-		this.dataBytes = dataBytes;
-	}
 	public ReceiveMessage(String allMessage,String ipAddr,int port)
 	{
 		this.dataBytes = DataTypeConvert.strToBytes(allMessage);

@@ -8,7 +8,6 @@
 */ 
 package cn.fuego.smart.home.domain;
 
-import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.smart.home.constant.SensorKindEunm;
 
  /** 
@@ -18,7 +17,7 @@ import cn.fuego.smart.home.constant.SensorKindEunm;
  * @date 2014-10-30 下午11:29:20 
  *  
  */
-public class FireSensor implements PersistenceObject
+public class FireSensor
 {
 	private long id; //
 	private int planNodeID; //平面图节点ID

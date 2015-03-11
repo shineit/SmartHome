@@ -14,20 +14,9 @@
    		<action name="NewsManage" class="cn.fuego.smart.home.web.action.info.NewsManageAction">
 			<result type="dispatcher"  >/client/manage/newsManage.jsp</result>
  			<result type="dispatcher" name="create">/client/manage/newsCreate.jsp</result>
-		</action> 
-		<action name="KnowledgeManage" class="cn.fuego.smart.home.web.action.info.KnowledgeManageAction">
-			<result type="dispatcher"  >/client/manage/info/knowledgeManage.jsp</result>
- 			<result type="dispatcher" name="create">/client/manage/info/knowledgeCreate.jsp</result>
+	    
 		</action> 
  	</package>
- 	
-    <package name="mall"  extends="misp">
-		<action name="ProductManage" class="cn.fuego.smart.home.web.action.mall.ProductManageAction">
-			<result type="dispatcher"  >/client/manage/mall/productManage.jsp</result>
- 			<result type="dispatcher" name="create">/client/manage/mall/productCreate.jsp</result>
-		</action> 
- 	</package>
- 	
     <package name="sys"  extends="misp">
  
    		<action name="UserManage" class="cn.fuego.smart.home.web.action.sys.UserManageAction">
@@ -61,11 +50,6 @@
             <result type="dispatcher" name="modify">/client/manage/sensorConfig.jsp</result>
 			<result type="dispatcher" name="showType">/client/manage/sensorTypeList.jsp</result>
 		</action>
-		
-	    <action name="AlarmManage" class="cn.fuego.smart.home.web.action.device.AlarmManageAction">
-			<result type="dispatcher">/client/manage/alarmManage.jsp</result>
- 		</action>
-	    
 	    <action name="SensorTypeManage" class="cn.fuego.smart.home.web.action.device.SensorTypeManageAction">
 			<result type="dispatcher">/client/manage/sensorTypeList.jsp</result>
 		</action>
@@ -79,8 +63,8 @@
 	    <action name="BuildingManage" class="cn.fuego.smart.home.web.action.company.BuildingManageAction">
 			<result type="dispatcher">/client/manage/company/buildingList.jsp</result>
 			<result type="dispatcher" name="all">/client/manage/company/buildingManage.jsp</result>
- 			<result type="dispatcher" name="create">/client/manage/company/buildingShow.jsp</result>
- 			<result type="dispatcher" name="modify">/client/manage/company/buildingShow.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
 		</action>
 		<action name="PlanManage" class="cn.fuego.smart.home.web.action.company.PlanManageAction">
 			<result type="dispatcher">/client/manage/company/planManage.jsp</result>
@@ -95,7 +79,5 @@
 		</action>
  	</package> 
  	
-    
- 
  </struts>
 

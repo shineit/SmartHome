@@ -16,7 +16,6 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
-import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
@@ -36,8 +35,8 @@ public class BuildingManageAction extends DWZTableAction<Building>
 {
 	
 	private Company company;
-	private BuildingManageService service = ServiceContext.getInstance().getBuildingManageService();
 	private List<BuildingModel> buildingList = new ArrayList<BuildingModel>();
+	private BuildingManageService service = ServiceContext.getInstance().getBuildingManageService();
 
 	
  
@@ -73,26 +72,6 @@ public class BuildingManageAction extends DWZTableAction<Building>
 	}
 
 
-
-	@Override
-	public String show()
-	{
-		if(TableOperateTypeEnum.CREATE.getType().equals(getOperateType()))
-        {
-			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
-			{
-				this.getObj().setCompanyID(Integer.valueOf(this.getSelectedID()));
-			}
-		}
-		else
-		{
-			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
-			{
-				this.setObj(getService().get(this.getSelectedID()));
-			}
-		}
-		return this.getNextPage();
-	}
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()

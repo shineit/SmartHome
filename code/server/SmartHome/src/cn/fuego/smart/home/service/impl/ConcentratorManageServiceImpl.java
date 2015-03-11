@@ -59,8 +59,6 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	    	old.setStatus(concentrator.getStatus());
 	    	old.setLocationNS(concentrator.getLocationNS());
 	    	old.setLocationWE(concentrator.getLocationWE());
-	    	old.setIpAddr(concentrator.getIpAddr());
-	    	old.setPort(concentrator.getPort());
 	    	super.modify(concentrator);
 	    }
 	    else
@@ -69,32 +67,18 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	    	super.create(concentrator);
 	    }
  
-	    //ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
+	    ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
 	    
 	    
 	}
 	@Override
-	public void offline(String ipAddr,int port)
+	public void offline(Concentrator concentrator)
 	{
-		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-
-	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"ipAddr",ipAddr));
-	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"port",port));
-	     
-		Concentrator old = this.getDao().getUniRecord(conditionList);
-		if(null != old)
-		{
-			log.info("the concentrator is offline.the concentrator "+ old);
-			old.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
-			this.modify(old);
-		}
-		else
-		{
-			log.warn("can not find the concentrator by ip and port.the ipAddr is"+ipAddr + ",the port is "+port);
-		}
+		Concentrator old = super.get(String.valueOf(concentrator.getConcentratorID()));
+		old.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
+		this.modify(old);
+		
 	}
-	
-	
 	@Override
 	public String getOperatePemission(int userID, String concentratorID)
 	{

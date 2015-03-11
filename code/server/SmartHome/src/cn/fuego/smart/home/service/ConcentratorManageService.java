@@ -26,7 +26,7 @@ import cn.fuego.smart.home.domain.UserConcentrator;
 public interface ConcentratorManageService extends MispCommonService<Concentrator>
 {
 	void online(Concentrator concentrator);
-	void offline(String ipAddr,int port);
+	void offline(Concentrator concentrator);
 
  	Concentrator getDistributionInfo(List<QueryCondition> mapConidtionList);
 
