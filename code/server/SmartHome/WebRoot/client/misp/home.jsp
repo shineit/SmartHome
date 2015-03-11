@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -133,7 +134,7 @@ function resetForm(objForm){
 				<div class="tabsPageHeader">
 					<div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
 						<ul class="navTab-tab">
-							<li tabid="main" class="main"><a href="javascript:;"><span>我的主页</span></a></li>
+							<li tabid="main" class="main"><a href="javascript:;"><span>今日通告</span></a></li>
 						</ul>
 					</div>
 					<div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
@@ -143,7 +144,10 @@ function resetForm(objForm){
 
 				<div class="navTab-panel tabsPageContent layoutBox">
 				
-					<div class="page unitBox" >
+					<div class="page unitBox" >			
+							
+					<jsp:include page="main.jsp" />
+					
 
 					</div>
 					
@@ -156,22 +160,6 @@ function resetForm(objForm){
 	</div>
 
 	<div id="footer"> &copy; 2014  <a href="http://www.fuego.cn/" target="">Fuego</a>.All rights reserved.</div>
-<script type="text/javascript">
-// 进入首页准备
- $(document).ready(function(){
- 	setTimeout(function() {
-	// IE
-	if(document.all) {
-		document.getElementById("Home").click();
-	}
-	// 其它浏览器
-	else {
-		var e = document.createEvent("MouseEvents");
-		e.initEvent("click", true, true);
-		document.getElementById("Home").dispatchEvent(e);
-	}
-	}, 2000);
- });
-</script>
+
 </body>
 </html>

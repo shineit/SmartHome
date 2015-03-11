@@ -15,6 +15,7 @@ import java.util.List;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.News;
@@ -60,7 +61,10 @@ public class NewsManageServiceImpl extends MispCommonServiceImpl<News> implement
 		Date today=DateUtil.getCurrentDateTime();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.BIGER_EQ,"date",DateUtil.DateToString(today)));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.LOWER,"date",DateUtil.DateToString(DateUtil.dayCalculate(today, 1))));
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"author",userName));
+		if(!ValidatorUtil.isEmpty(userName))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"author",userName));
+		}
 		
 		newsList = (List<News>) DaoContext.getInstance().getNewsDao().getAll(conditionList);
 		return newsList;

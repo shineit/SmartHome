@@ -16,7 +16,6 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.service.AlarmManageService;
 import cn.fuego.smart.home.service.ServiceContext;
-import cn.fuego.smart.home.web.action.info.KnowledgeManageAction;
 
  /** 
  * @ClassName: AlarmManageAction 
@@ -27,12 +26,13 @@ import cn.fuego.smart.home.web.action.info.KnowledgeManageAction;
  */
 public class AlarmManageAction extends DWZTableAction<Alarm>
 {
-	private Log log = LogFactory.getLog(KnowledgeManageAction.class);
+	private Log log = LogFactory.getLog(AlarmManageAction.class);
 	
 	
 	private static final long serialVersionUID = 1L;
 	private AlarmManageService service = ServiceContext.getInstance().getAlarmManageService();
 	
+    
 	public String loadFireAlarm()
 	{
 		

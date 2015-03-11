@@ -55,7 +55,7 @@
              </result>      
 		</action> 
 		<action name="Index" class="cn.fuego.misp.web.action.login.IndexAction">
-			<result type="dispatcher">/client/manage/main.jsp</result>
+			<result type="dispatcher">/client/misp/main.jsp</result>
 		</action>		  
 
  	</package>

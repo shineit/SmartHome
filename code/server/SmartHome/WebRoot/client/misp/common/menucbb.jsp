@@ -34,7 +34,7 @@
 
 				
 				<c:choose>
-					<c:when test="${menuItem.menu.menuID==1002}"> <!----主页判断--->
+					<c:when test="${menuItem.menu.menuID==1010}"> <!----主页判断--->
 					<li><a href="<%=request.getContextPath()%>/client/${menuItem.menu.url}?selectedID=${loginUser.userName}&selectedMenuID=${menuItem.menu.menuID}" target="navTab" rel="main" id="Home">${menuItem.menu.value}</a></li>
 					</c:when>
 					<c:otherwise>

@@ -4,7 +4,9 @@ import cn.fuego.smart.home.service.impl.AlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.BuildingManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CompanyManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
+import cn.fuego.smart.home.service.impl.FireAlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.FireSensorManageServiceImpl;
+import cn.fuego.smart.home.service.impl.HomeAlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.KnowledgeManageServiceImpl;
 import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
 import cn.fuego.smart.home.service.impl.PlanManageServiceImpl;
@@ -40,6 +42,8 @@ public class ServiceContext
 	
 	private ProductManageService productManageService = null;
 
+	private HomeAlarmManageService homeAlarmService=null;
+	private FireAlarmManageService fireAlarmService=null;
 	
 	private ServiceContext()
 	{
@@ -170,4 +174,24 @@ public class ServiceContext
 		}
 		return productManageService;
 	}
+	
+	public HomeAlarmManageService getHomeAlarmService()
+	{
+		if (null == homeAlarmService)
+		{
+			homeAlarmService =  new  HomeAlarmManageServiceImpl();
+		}
+		return homeAlarmService;
+	}
+
+	public FireAlarmManageService getFireAlarmService()
+	{
+		if (null == fireAlarmService)
+		{
+			fireAlarmService =  new  FireAlarmManageServiceImpl();
+		}
+		return fireAlarmService;
+	}
+
+
 }
