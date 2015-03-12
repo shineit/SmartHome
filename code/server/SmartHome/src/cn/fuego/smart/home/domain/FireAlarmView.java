@@ -28,10 +28,15 @@ public class FireAlarmView implements PersistenceObject
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private Date alarmTime;	//告警产生的时间
 	private Integer clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
+
+	private Float dataValue ;	//告警值,模拟量类型 才有
+	private String clearUser;  //清除人 手动清除需要填写
+	private Date clearTime;	//告警清除的时间
 	//通过concenratorID关联concentrator表
+	private Integer status;			//集中器状态，0 离线 1在线
 	private String concentDesp;		//集中器描述
+	
     //通过objID关联FireSensor表	
-	private int planNodeID; //平面图节点ID
 	private int machineID; //机号
 	private int loopID;    //回路号
 	private int codeID;    //编号
@@ -39,8 +44,8 @@ public class FireAlarmView implements PersistenceObject
 	private float locationX;  //X 偏移，相对当前图片尺寸宽度
 	private float locationY;  //Y 偏移，相当当前图片尺寸高度
 	
-	private Integer sensorType=0;      //传感器类型
-	private String sensorTypeName="未命名";  //传感器类型名称
+	private Integer sensorType;      //传感器类型
+	private String sensorTypeName;  //传感器类型名称
 	
 	public int getId()
 	{
@@ -132,14 +137,7 @@ public class FireAlarmView implements PersistenceObject
 	{
 		this.codeID = codeID;
 	}
-	public int getPlanNodeID()
-	{
-		return planNodeID;
-	}
-	public void setPlanNodeID(int planNodeID)
-	{
-		this.planNodeID = planNodeID;
-	}
+
 	public String getLocationDesp()
 	{
 		return locationDesp;
@@ -179,6 +177,38 @@ public class FireAlarmView implements PersistenceObject
 	public void setSensorTypeName(String sensorTypeName)
 	{
 		this.sensorTypeName = sensorTypeName;
+	}
+	public Float getDataValue()
+	{
+		return dataValue;
+	}
+	public void setDataValue(Float dataValue)
+	{
+		this.dataValue = dataValue;
+	}
+	public String getClearUser()
+	{
+		return clearUser;
+	}
+	public void setClearUser(String clearUser)
+	{
+		this.clearUser = clearUser;
+	}
+	public Date getClearTime()
+	{
+		return clearTime;
+	}
+	public void setClearTime(Date clearTime)
+	{
+		this.clearTime = clearTime;
+	}
+	public Integer getStatus()
+	{
+		return status;
+	}
+	public void setStatus(Integer status)
+	{
+		this.status = status;
 	}
 
 

@@ -5,14 +5,13 @@ import java.util.Date;
 import cn.fuego.common.domain.PersistenceObject;
 
 
-/**
- * 
-* @ClassName: SensorAlarm 
+/** 
+* @ClassName: HomeAlarmView 
 * @Description: TODO
-* @author Tang Jun
-* @date 2014-10-20 上午11:01:17 
-*
- */
+* @author Aether
+* @date 2015-3-11 下午11:25:28 
+*  
+*/ 
 public class HomeAlarmView implements PersistenceObject
 {	
 	
@@ -28,7 +27,12 @@ public class HomeAlarmView implements PersistenceObject
 	private int alarmType;		//告警事件类型 AlarmTypeEnum
 	private Date alarmTime;	//告警产生的时间
 	private Integer clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
+
+	private Float dataValue ;	//告警值,模拟量类型 才有
+	private String clearUser;  //清除人 手动清除需要填写
+	private Date clearTime;	//告警清除的时间
 	//通过concenratorID关联concentrator表
+	private Integer status;			//集中器状态，0 离线 1在线
 	private String concentDesp;		//集中器描述
     //通过objID关联HomeSensor表	
 	private Integer sensorType;      //传感器类型
@@ -125,6 +129,38 @@ public class HomeAlarmView implements PersistenceObject
 	public void setSensorDesp(String sensorDesp)
 	{
 		this.sensorDesp = sensorDesp;
+	}
+	public Float getDataValue()
+	{
+		return dataValue;
+	}
+	public void setDataValue(Float dataValue)
+	{
+		this.dataValue = dataValue;
+	}
+	public String getClearUser()
+	{
+		return clearUser;
+	}
+	public void setClearUser(String clearUser)
+	{
+		this.clearUser = clearUser;
+	}
+	public Date getClearTime()
+	{
+		return clearTime;
+	}
+	public void setClearTime(Date clearTime)
+	{
+		this.clearTime = clearTime;
+	}
+	public Integer getStatus()
+	{
+		return status;
+	}
+	public void setStatus(Integer status)
+	{
+		this.status = status;
 	}
 
 

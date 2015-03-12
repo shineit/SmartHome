@@ -44,7 +44,17 @@ public enum AlarmClearEnum
 		}
 		return null;
 	}	
-	
+	public static AlarmClearEnum getEnumByStr(String strValue)
+	{
+		for (AlarmClearEnum c : AlarmClearEnum.values())
+		{
+			if (strValue.equals(c.strValue))
+			{
+				return c;
+			}
+		}
+		return null;
+	} 	
 	
 
 }

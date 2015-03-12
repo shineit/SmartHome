@@ -62,10 +62,13 @@
 			<result type="dispatcher" name="showType">/client/manage/sensorTypeList.jsp</result>
 		</action>
 		
-	    <action name="AlarmManage" class="cn.fuego.smart.home.web.action.device.AlarmManageAction">
-			<result type="dispatcher">/client/manage/alarmManage.jsp</result>
+
+	    <action name="HomeAlarmManage" class="cn.fuego.smart.home.web.action.device.HomeAlarmManageAction">
+			<result type="dispatcher">/client/manage/device/homeAlarm.jsp</result>
  		</action>
-	    
+	    <action name="FireAlarmManage" class="cn.fuego.smart.home.web.action.device.FireAlarmManageAction">
+			<result type="dispatcher">/client/manage/device/fireAlarm.jsp</result>
+ 		</action>    
 	    <action name="SensorTypeManage" class="cn.fuego.smart.home.web.action.device.SensorTypeManageAction">
 			<result type="dispatcher">/client/manage/sensorTypeList.jsp</result>
 		</action>

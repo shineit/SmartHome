@@ -4,20 +4,44 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="pageHeader" >
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="company/CompanyManage" method="post" >
+	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/HomeAlarmManage" method="post" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					单位名称：<input type="text" name="filter.companyName" value="${filter.companyName}" />
+					集中器编号：<input type="text" name="filter.concentratorID" value="${filter.concentratorID}" />
 				</td>	
                 <td>
-					使用名称：<input type="text" name="filter.applyName"  value="${filter.applyName}"/>
+					告警类型：<input type="text" name="filter.alarmType"  value="${filter.alarmType}"/>
 				</td>							
 				<td>
-					单位类型：<input type="text" name="filter.companyType" value="${filter.companyType}" />
+					<select  name="filter.clearStatus" >
+						 <option value="">清除状态</option>
+
+					 		<c:forEach var="ac" items="${filter.alarmClearList}">
+
+ 						  		 <c:choose>		       
+							   		 <c:when test="${ac.strValue == filter.clearStatus}">  
+	                            		<option value="${ac.strValue}" selected='selected'> ${ac.strValue}</option>
+	                            		 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   		<option value="${ac.strValue}" > ${ac.strValue}</option>
+							   		   </c:otherwise>
+							   
+						   		 </c:choose> 
+						    </c:forEach>								
+				 											
+
+					</select>
+				</td>
+				<td class="dateRange">
+					告警时间:
+					<input type="text"  readonly="readonly" class="date" name="filter.startDate" value="${filter.startDate}"/>
+					<span class="limit">-</span>
+					<input type="text"  readonly="readonly" class="date" name="filter.endDate" value="${filter.endDate}"/>
 				</td>
 				<td>
 					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
@@ -33,45 +57,44 @@
 </div>
 <div class="pageContent">
 	<div class="panelBar">
-		<ul class="toolBar">
-			<li><a class="add" href="CompanyManage!show.action?operateType=create" target="dialog" mask="true" title="新增单位"><span>新增</span></a></li>
-			<li><a class="delete" href="CompanyManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
-		</ul>
+
 	</div>
 	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
-				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
- 				<th width="25%" align="center">单位名称</th>
-				<th width="15%" align="center">使用名称</th>
-				<th width="15%" align="center">单位地址</th>
-				<th width="10%" align="center">单位类型</th>
-				<th width="10%" align="center">操作</th>
 				
+ 				<th width="20%" align="center">集中器编号</th>
+				<th width="15%" align="center">传感器类型</th>
+				<th width="15%" align="center">传感器描述</th>
+				<th width="10%" align="center">告警类型</th>
+				<th width="10%" align="center">告警时间</th>
+				<th width="10%" align="center">状态</th>
 			</tr>
 		</thead>
-		<s:form  id="newsForm"  method="POST"  name="newsForm" >
 		<tbody>
 
  		<c:forEach var="e" items="${table.currentPageData}"> 	
-			<tr target="sid_user" rel="${e.companyID}">
-				<td><input name="selectedIDList" value="${e.companyID}" type="checkbox" style="margin-top:5px;"></td>
-				<td>${e.companyName}</td>
-				<td>${e.applyName}</td>			 
- 				<td>${e.companyAddr}</td>
-				<td>${e.companyType}</td>
-	            <td style="text-align: center;">
-	            
-	            <a title="楼层管理" target="navTab" href="device/BuildingManage!loadTreeData?selectedID=${e.companyID}" rel="companyModify"
-	            class="btnAdd"  style="margin-left:10px;"></a>
-             
-	            </td> 
+			<tr target="sid_user" rel="${e.id}">
+				<td>${e.concentratorID}</td>
+				<td>${e.sensorTypeName}</td>			 
+ 				<td>${e.sensorDesp}</td>
+				<td>${e.alarmType}</td>
+				<td>${e.alarmTime}</td>
+				<td>            	
+				<c:forEach var="acl" items="${filter.alarmClearList}">
+						  <c:choose>		       
+							   <c:when test="${acl.intValue == e.clearStatus}">  
+	                             ${acl.strValue}
+							   </c:when>
+							   <c:otherwise></c:otherwise>					   
+						   </c:choose>
+					</c:forEach>
+				</td>
 			</tr>
 		</c:forEach>  	
 
 
 		</tbody>
-		</s:form>
 	</table>
 	<div class="panelBar">
 		<div class="pages">

@@ -15,16 +15,24 @@
 		 <property name="objType" column="OBJ_TYPE"></property>
  		 <property name="objID" column="OBJ_ID"></property>
 		 <property name="alarmType" column="ALARM_TYPE"></property>
+		 <property name="alarmTime" column="ALARM_TIME"></property>
 		 <property name="clearStatus" column="CLEAR_STATUS"></property>
-         
-		 <property name="concentDesp" column="CONCENT_DESP"></property>
+         <property name="dataValue" column="DATA_VALUE"></property>
+		 <property name="clearUser" column="CLEAR_USER"></property>
+		 <property name="clearTime" column="CLEAR_TIME"></property>
 		 
+		 <property name="status" column="STATUS"></property>
+		 <property name="concentDesp" column="CONCENT_DESP"></property>
+
 		 <property name="machineID" column="MACHINE_ID"></property>
 		 <property name="loopID" column="LOOP_ID"></property>
 		 <property name="codeID" column="CODE_ID"></property>
+		 <property name="locationDesp" column="LOCATION_DESP"></property>
+		 <property name="locationX" column="LOCATION_X"></property>
+		 <property name="locationY" column="LOCATION_Y"></property>
 		 <property name="sensorType" column="SENSOR_TYPE"></property>
 		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>	
-	 
+
 	</class>
  
 </hibernate-mapping>

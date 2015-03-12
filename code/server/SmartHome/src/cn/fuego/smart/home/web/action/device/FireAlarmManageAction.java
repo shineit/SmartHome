@@ -13,8 +13,8 @@ import java.util.List;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
-import cn.fuego.smart.home.domain.HomeAlarmView;
-import cn.fuego.smart.home.service.HomeAlarmManageService;
+import cn.fuego.smart.home.domain.FireAlarmView;
+import cn.fuego.smart.home.service.FireAlarmManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.AlarmFilterModel;
 
@@ -25,15 +25,15 @@ import cn.fuego.smart.home.web.model.AlarmFilterModel;
  * @date 2015-3-11 下午5:07:24 
  *  
  */
-public class HomeAlarmManageAction extends DWZTableAction<HomeAlarmView>
+public class FireAlarmManageAction extends DWZTableAction<FireAlarmView>
 {
 
-	private HomeAlarmManageService service = ServiceContext.getInstance().getHomeAlarmService();
+	private FireAlarmManageService service = ServiceContext.getInstance().getFireAlarmService();
 	
 	private AlarmFilterModel filter = new  AlarmFilterModel();
 	
 	@Override
-	public MispCommonService<HomeAlarmView> getService()
+	public MispCommonService<FireAlarmView> getService()
 	{
 		// TODO Auto-generated method stub
 		return service;

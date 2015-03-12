@@ -9,7 +9,6 @@
 package cn.fuego.smart.home.domain;
 
 import cn.fuego.common.domain.PersistenceObject;
-import cn.fuego.smart.home.constant.SensorKindEunm;
 
  /** 
  * @ClassName: FireSensor 
