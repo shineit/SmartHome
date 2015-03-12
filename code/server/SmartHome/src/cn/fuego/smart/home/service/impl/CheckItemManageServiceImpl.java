@@ -9,18 +9,19 @@
 package cn.fuego.smart.home.service.impl;
 
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
-import cn.fuego.smart.home.domain.FireSensor;
-import cn.fuego.smart.home.service.FireSensorManageService;
+import cn.fuego.smart.home.domain.CheckItem;
+import cn.fuego.smart.home.service.CheckItemManageService;
+
 
 
 /** 
-* @ClassName: FireSensorManageServiceImpl 
+* @ClassName: CheckItemManageServiceImpl 
 * @Description: TODO
 * @author Aether
-* @date 2015-3-12 下午2:36:20 
+* @date 2015-3-12 下午2:38:51 
 *  
 */ 
-public class FireSensorManageServiceImpl extends MispCommonServiceImpl<FireSensor> implements FireSensorManageService
+public class CheckItemManageServiceImpl extends MispCommonServiceImpl<CheckItem> implements CheckItemManageService
 {
  
 }

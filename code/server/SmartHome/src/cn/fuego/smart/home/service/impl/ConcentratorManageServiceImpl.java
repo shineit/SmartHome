@@ -29,7 +29,6 @@ import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
-import cn.fuego.smart.home.service.ServiceContext;
 
  /** 
  * @ClassName: ServiceOrderManageServiceImpl 

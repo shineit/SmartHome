@@ -90,6 +90,12 @@
  			<result type="dispatcher" name="modify">/client/manage/company/planShow.jsp</result>
 		</action>
 		
+		<action name="CheckLogManage" class="cn.fuego.smart.home.web.action.company.CheckLogManageAction">
+			<result type="dispatcher">/client/manage/company/checkLogManage.jsp</result>
+
+		</action>
+	
+					
 		<action name="FireSensorManage" class="cn.fuego.smart.home.web.action.device.FireSensorManageAction">
 			<result type="dispatcher">/client/manage/company/fireSensor.jsp</result>
   			<result type="dispatcher" name="create">/client/manage/company/fireSensorShow.jsp</result>

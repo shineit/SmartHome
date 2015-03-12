@@ -2,6 +2,8 @@ package cn.fuego.smart.home.service;
 
 import cn.fuego.smart.home.service.impl.AlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.BuildingManageServiceImpl;
+import cn.fuego.smart.home.service.impl.CheckItemManageServiceImpl;
+import cn.fuego.smart.home.service.impl.CheckLogManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CompanyManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.FireAlarmManageServiceImpl;
@@ -33,17 +35,18 @@ public class ServiceContext
 	
 	private BuildingManageService  buildingManageService = null;
 
-	
 	private PlanManageService planManageService = null;
 	private FireSensorManageService fireSensorManageService = null;
-
 	
 	private KnowledgeManageService knowledgeManageService = null;
 	
 	private ProductManageService productManageService = null;
-
+	//家庭告警和企业告警
 	private HomeAlarmManageService homeAlarmService=null;
 	private FireAlarmManageService fireAlarmService=null;
+	//巡检相关
+	private CheckLogManageService checkLogService=null;
+	private CheckItemManageService checkItemService=null;
 	
 	private ServiceContext()
 	{
@@ -166,7 +169,7 @@ public class ServiceContext
 	/**
 	 * @return
 	 */
-	public ProductManageService getProductManageService()
+	public synchronized ProductManageService getProductManageService()
 	{
 		if (null == productManageService)
 		{
@@ -175,7 +178,7 @@ public class ServiceContext
 		return productManageService;
 	}
 	
-	public HomeAlarmManageService getHomeAlarmService()
+	public synchronized HomeAlarmManageService getHomeAlarmService()
 	{
 		if (null == homeAlarmService)
 		{
@@ -184,7 +187,7 @@ public class ServiceContext
 		return homeAlarmService;
 	}
 
-	public FireAlarmManageService getFireAlarmService()
+	public synchronized FireAlarmManageService getFireAlarmService()
 	{
 		if (null == fireAlarmService)
 		{
@@ -193,5 +196,25 @@ public class ServiceContext
 		return fireAlarmService;
 	}
 
+	public synchronized CheckLogManageService getCheckLogService()
+	{
+		if (null == checkLogService)
+		{
+			checkLogService =  new  CheckLogManageServiceImpl();
+		}
+		return checkLogService;
+	}
+
+	public synchronized CheckItemManageService getCheckItemService()
+	{
+		if (null == checkItemService)
+		{
+			checkItemService =  new  CheckItemManageServiceImpl();
+		}
+		return checkItemService;
+	}
+
+
+	
 
 }

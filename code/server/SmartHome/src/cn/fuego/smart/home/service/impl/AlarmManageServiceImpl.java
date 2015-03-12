@@ -27,7 +27,6 @@ import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.AlarmType;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.HomeAlarmView;
-import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.AlarmManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AlarmTypeCache;
