@@ -14,7 +14,6 @@ import java.util.List;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 
 
 /** 

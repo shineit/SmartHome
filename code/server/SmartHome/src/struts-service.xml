@@ -9,11 +9,11 @@
    		<action name="OrderManage" class="cn.fuego.smart.home.web.action.info.OrderManageAction">
 			<result type="dispatcher">/client/manage/orderManage.jsp</result>
  			<result type="dispatcher" name="modify">/client/manage/orderHandle.jsp</result>
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+					    
 		</action>
    		<action name="NewsManage" class="cn.fuego.smart.home.web.action.info.NewsManageAction">
-			<result type="dispatcher"  >/client/manage/newsManage.jsp</result>
- 			<result type="dispatcher" name="create">/client/manage/newsCreate.jsp</result>
+			<result type="dispatcher"  >/client/manage/info/newsManage.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/info/newsCreate.jsp</result>
 		</action> 
 		<action name="KnowledgeManage" class="cn.fuego.smart.home.web.action.info.KnowledgeManageAction">
 			<result type="dispatcher"  >/client/manage/info/knowledgeManage.jsp</result>
@@ -35,7 +35,7 @@
  			<result type="dispatcher" name="create">/client/manage/userCreate.jsp</result>
  			<result type="dispatcher" name="modify">/client/manage/userCreate.jsp</result>
 			<result type="dispatcher" name="addUser">/client/manage/addUser.jsp</result>
-			<result type="dispatcher" name="LoginFailed">/client/expert/login.jsp</result>		    
+				    
 		</action>
 
  	</package>

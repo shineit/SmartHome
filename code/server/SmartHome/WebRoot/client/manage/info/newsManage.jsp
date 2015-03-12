@@ -66,7 +66,8 @@
 				<td>${e.newsID}</td>
 				<td>${e.title}</td>
 				<td>
-				<a style="color:blue !important;text-decoration:underline;" title="新闻内容" target="dialog" href="<%=request.getContextPath()%>/client/manage/newsDetail.jsp?newsContent=${e.content}"  rel="Menu${selectedMenuID}" mask="true" >查看内容详情</a></td>
+				<a style="color:blue !important;text-decoration:underline;" title="知识内容" target="dialog" href="<%=request.getContextPath()%>/client/manage/info/infoContent.jsp?infoContent=${e.content}"  rel="Menu${selectedMenuID}" mask="true" >查看内容详情</a>
+				</td>
 				<td>${e.date}</td>
 				<td>${e.author}</td>
 

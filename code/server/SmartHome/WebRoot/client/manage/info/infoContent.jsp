@@ -4,14 +4,15 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () {
-			$.pdialog.resizeDialog({style: {width: 500,height:230,}}, 				
+			$.pdialog.resizeDialog({style: {width: 600,height:300,}}, 				
 			$.pdialog.getCurrent(), "");
         });//dialog 宽度重新定义
 </script>
 <%
-String newsContent=request.getParameter("newsContent");
+String infoContent=request.getParameter("infoContent");
  %>
-<textarea style="width:98%;height:200px;font-size:1.5em;line-height:20px;" readonly="readonly">
+<textarea style="width:98%;height:300px;font-size:1.5em;line-height:20px;" readonly="readonly">
 
-<%=newsContent%>
+<%=infoContent%>
 </textarea>
+

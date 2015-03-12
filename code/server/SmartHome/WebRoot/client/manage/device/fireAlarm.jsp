@@ -80,7 +80,7 @@
 			<tr target="sid_user" rel="${e.id}">
 				<td>${e.concentratorID}</td>
 				<td>${e.sensorTypeName}</td>			 
- 				<td>${e.sensorDesp}</td>
+ 				<td>${e.locationDesp}</td>
  				<td>${e.machineID}</td>
  				<td>${e.loopID}</td>
  				<td>${e.codeID}</td>

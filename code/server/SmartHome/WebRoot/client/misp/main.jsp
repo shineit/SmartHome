@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <div class="pageCentent">
-<div class="panel "  >
+<div class="panel " layoutH="3" >
 	
 	<div align="center">
 			<c:choose>

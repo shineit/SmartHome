@@ -27,9 +27,6 @@ import cn.fuego.misp.web.model.menu.MenuTreeModel;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.user.PasswordModel;
 import cn.fuego.misp.web.model.user.UserModel;
-import cn.fuego.smart.home.domain.News;
-import cn.fuego.smart.home.service.NewsManageService;
-import cn.fuego.smart.home.service.ServiceContext;
 
 import com.opensymphony.xwork2.ActionContext;
 
@@ -50,11 +47,7 @@ public class LoginAction extends MISPAction
 	private String message ="";
 	private String code;
     private PasswordModel pwdModel;
-    
-    
-    //首页获取内容,需要保持一致
-    private List<News> newsContent ;
-    private NewsManageService newsService = ServiceContext.getInstance().getNewsManageService();
+
     
 	public String execute()
 	{
@@ -77,8 +70,7 @@ public class LoginAction extends MISPAction
 			user.setAccountType(systemUser.getRole());
 			// Loading MenuTree
 			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(user.getUserID());
-			//首页加载新闻信息，不采用模拟点击的方式
-			newsContent = newsService.getIndexNews(user.getUserName());
+
 			
 		}
 		catch (MISPException ex)
@@ -205,14 +197,6 @@ public class LoginAction extends MISPAction
 	public void setCode(String code)
 	{
 		this.code = code;
-	}
-	public List<News> getNewsContent()
-	{
-		return newsContent;
-	}
-	public void setNewsContent(List<News> newsContent)
-	{
-		this.newsContent = newsContent;
 	}
 
 	
