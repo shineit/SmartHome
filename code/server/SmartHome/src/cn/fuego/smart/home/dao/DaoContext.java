@@ -3,6 +3,7 @@ package cn.fuego.smart.home.dao;
 import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.HomeSensor;
@@ -36,6 +37,8 @@ public class DaoContext
 	private Dao<UserConcentrator> userConcentratorDao = null;
 	private Dao<Customer> customerDao=null;
 	private Dao<SensorType> sensorTypeDao = null;
+	
+	private Dao<Company> companyDao = null;
 	private DaoContext()
 	{
 
@@ -130,5 +133,14 @@ public class DaoContext
 			sensorTypeDao = new AbstractDao<SensorType>(SensorType.class);
 		}
 		return sensorTypeDao;
+	}
+
+	public Dao<Company>  getCompanyDao()
+	{
+		if (null == companyDao)
+		{
+			companyDao = new AbstractDao<Company>(Company.class);
+		}
+		return companyDao;
 	}
 }

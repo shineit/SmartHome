@@ -68,7 +68,7 @@ public class MISPServiceContext
 		return operLogService;
 	}
 	
-	public synchronized MISPPrivilegeManage MISPPrivilegeManage()
+	public synchronized MISPPrivilegeManage getMISPPrivilegeManage()
 	{
 		if (null == privilegeManage)
 		{

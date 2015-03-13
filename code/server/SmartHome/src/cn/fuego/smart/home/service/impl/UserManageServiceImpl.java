@@ -17,14 +17,18 @@ import org.apache.commons.logging.LogFactory;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.SystemConfigInfo;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.UserStatusEnum;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.UserManageService;
@@ -147,5 +151,6 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 		
 		return customer;
 	}
+
 
 }

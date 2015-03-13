@@ -43,8 +43,54 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 
 		return String.valueOf(targetUser.getRole());
 	}
-
-
+	/*
+	 * (non-Javadoc)
+	 * @see cn.fuego.misp.service.MISPPrivilegeManage#getMenuIDListByUser(java.lang.String)
+	 */
+	public Set<String> getObjectIDListByUser(String accessObjType,String userID)
+	{
+		
+ 
+		//根据用户ID，获取具有权限的菜单ID
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.USER.getMasterType()));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterValueAttr(), userID));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeAttr(),accessObjType));
+		List<Privilege> privilegeList = (List<Privilege>) MISPDaoContext.getInstance().getPrivilegeDao().getAll(conditionList);
+		
+		Set<String> objIDList = new HashSet<String>();
+		for(Privilege e : privilegeList)
+		{
+			objIDList.add(e.getAccessObjValue());
+		}
+		
+		//根据用户角色获取具有权限的菜单ID
+ 		objIDList.addAll(getObjectIDListByRole(accessObjType,getUserRole(userID)));
+ 		
+ 		
+			
+		return objIDList;
+	}
+	public Set<String> getObjectIDListByRole(String accessObjType,String roleID)
+	{
+		
+ 
+		//根据用户ID，获取具有权限的菜单ID
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.USER.getMasterType()));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterValueAttr(), roleID));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeAttr(),accessObjType));
+		List<Privilege> privilegeList = (List<Privilege>) MISPDaoContext.getInstance().getPrivilegeDao().getAll(conditionList);
+		
+		Set<String> objIDList = new HashSet<String>();
+		for(Privilege e : privilegeList)
+		{
+			objIDList.add(e.getAccessObjValue());
+		}
+ 
+			
+		return objIDList;
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see cn.fuego.misp.service.MISPPrivilegeManage#getMenuIDListByUser(java.lang.String)

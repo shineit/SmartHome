@@ -42,5 +42,11 @@ public interface MISPPrivilegeManage
 	 */
 	public boolean hasPrivilege(String userID,int prvilegeID);
 	
- 
+	/**
+	 * 
+	 * @param userID
+	 * @param accessObjType
+	 * @return
+	 */
+	public Set<String> getObjectIDListByUser(String accessObjType,String userID);
 }

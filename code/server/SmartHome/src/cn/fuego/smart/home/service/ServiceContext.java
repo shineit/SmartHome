@@ -41,10 +41,10 @@ public class ServiceContext
 	private KnowledgeManageService knowledgeManageService = null;
 	
 	private ProductManageService productManageService = null;
-	//¼ÒÍ¥¸æ¾¯ºÍÆóÒµ¸æ¾¯
+	//å®¶åº­å‘Šè­¦å’Œä¼ä¸šå‘Šè­¦
 	private HomeAlarmManageService homeAlarmService=null;
 	private FireAlarmManageService fireAlarmService=null;
-	//Ñ²¼ìÏà¹Ø
+	//å·¡æ£€ç›¸å…³
 	private CheckLogManageService checkLogService=null;
 	private CheckItemManageService checkItemService=null;
 	

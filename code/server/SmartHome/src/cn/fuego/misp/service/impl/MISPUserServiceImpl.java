@@ -113,7 +113,7 @@ public class MISPUserServiceImpl<E> extends MispCommonServiceImpl<SystemUser> im
 	
 	public List<MenuTreeModel> getMenuTreeByUserID(int userID)
 	{
-		Set<String> menuIDList = MISPServiceContext.getInstance().MISPPrivilegeManage().getMenuIDListByUser(String.valueOf(userID));
+		Set<String> menuIDList = MISPServiceContext.getInstance().getMISPPrivilegeManage().getMenuIDListByUser(String.valueOf(userID));
 		
 		return SystemMenuCache.getInstance().getMenuListWithShowIDList(menuIDList);
 	}

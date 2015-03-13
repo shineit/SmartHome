@@ -22,6 +22,7 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -30,6 +31,8 @@ import cn.fuego.smart.home.service.cache.AppLoginInfo;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyListReq;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
@@ -42,6 +45,7 @@ import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
 import cn.fuego.smart.home.webservice.up.model.SetCustomerRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
+import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
@@ -325,6 +329,21 @@ public class UserManageRestImpl implements UserManageRest
 			log.error("create mark failed",e);
 		}
  
+		return rsp;
+	}
+
+	@Override
+	public GetCompanyListRsp getCompanyList(GetCompanyListReq req)
+	{
+		GetCompanyListRsp rsp = new GetCompanyListRsp();
+		List<Company> companyList = ServiceContext.getInstance().getCompanyManageService().getCompanyList(req.getUserID());
+
+		for(Company company : companyList)
+		{
+			CompanyJson json = ModelConvert.CompanyToJson(company);
+			rsp.getCompanyList().add(json);	
+		}
+		
 		return rsp;
 	}
 

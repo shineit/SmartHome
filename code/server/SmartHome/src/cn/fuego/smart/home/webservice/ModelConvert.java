@@ -15,6 +15,7 @@ import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.ClientVersion;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.FireAlarmView;
@@ -25,6 +26,7 @@ import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.ClientVersionJson;
+import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
@@ -83,15 +85,21 @@ public class ModelConvert
 		FireAlarmJson json = new FireAlarmJson();
 		json.setId(fireAlarm.getId());
 		json.setConcentratorID(fireAlarm.getConcentratorID());
-		json.setObjType(fireAlarm.getObjType());
-		json.setObjID(fireAlarm.getObjID());
 		json.setAlarmType(fireAlarm.getAlarmType());
 		json.setAlarmTime(DateUtil.getDateTime(fireAlarm.getAlarmTime()));
 		json.setClearStatus(fireAlarm.getClearStatus());
+		json.setClearTime(DateUtil.getDateTime(fireAlarm.getClearTime()));
+		json.setStatus(fireAlarm.getStatus());
 		json.setConcentDesp(fireAlarm.getConcentDesp());
+		
 		json.setMachineID(fireAlarm.getMachineID());
 		json.setLoopID(fireAlarm.getLoopID());
 		json.setCodeID(fireAlarm.getCodeID());
+		json.setLocationDesp(fireAlarm.getLocationDesp());
+		json.setLocationX(fireAlarm.getLocationX());
+		json.setLocationY(fireAlarm.getLocationY());
+		
+		json.setSensorTypeName(fireAlarm.getSensorTypeName());
 		return json;
 		
 	}	
@@ -306,6 +314,28 @@ public class ModelConvert
 		concent.setName(concentratorJson.getName());
 		concent.setDescription(concentratorJson.getDescription());
 		return concent;
+	}
+	
+	public static CompanyJson  CompanyToJson(Company company)
+	{
+		CompanyJson json = new CompanyJson();
+		json.setApplyName(company.getApplyName());
+		json.setBuildingArea(company.getBuildingArea());
+		json.setCompanyAddr(company.getCompanyAddr());
+		json.setCompanyID(company.getCompanyID());
+		json.setCompanyName(company.getCompanyName());
+		json.setCompanyPhone(company.getCompanyPhone());
+		json.setCompanyType(company.getCompanyType());
+		json.setDutyPhone(company.getDutyPhone());
+		json.setFireDuty(company.getFireDuty());
+		json.setFireManager(company.getFireManager());
+		json.setFireRisk(company.getFireRisk());
+		json.setLegalOfficer(company.getLegalOfficer());
+		json.setManagerPhone(company.getManagerPhone());
+		json.setOfficerPhone(company.getOfficerPhone());
+		
+		return json;
+		
 	}
 	
 }
