@@ -33,7 +33,7 @@
 
 -(void)msg{
     
-    NSDictionary *map = @{@"type":@(1),@"userId":FELoginUser.userid,@"phone":self.phoneNumber};
+    NSDictionary *map = @{@"type":@(1),@"userId":FELoginUser.userid,@"phone":self.phoneNumberTextField.text};
 
     [[YSHTTPClient sharedInstance] requestGetSMSVerificationCodeWithSign:[NSString ysParam:map method:@"msg/get"] complication:^(id responseObject, NSError *error) {
         NSLog(@"%@",responseObject);
@@ -41,7 +41,7 @@
 }
 - (IBAction)sign:(id)sender {
     if (self.codeTextfield.text.length) {
-        [[YSHTTPClient sharedInstance] requestCheckSMSVerificationCodeWithType:1 userId:FELoginUser.userid.stringValue phoneNumber:self.phoneNumber verificationCode:self.codeTextfield.text complication:^(id responseObject, NSError *error) {
+        [[YSHTTPClient sharedInstance] requestCheckSMSVerificationCodeWithType:1 userId:FELoginUser.userid.stringValue phoneNumber:self.phoneNumberTextField.text verificationCode:self.codeTextfield.text complication:^(id responseObject, NSError *error) {
             if (!error) {
                 NSLog(@"%@",responseObject);
             }

@@ -8,10 +8,13 @@
 
 #import "FECameraPlayerVC.h"
 #import "YSPlayerController.h"
+#import "FECameraVerfyPhoneVC.h"
 
 @interface FECameraPlayerVC ()<YSPlayerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIView *playerView;
 @property (strong, nonatomic) YSPlayerController *control;
+@property (strong, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UIButton *soundButton;
 
 @end
 
@@ -22,11 +25,41 @@
     // Do any additional setup after loading the view.
 //    self.playerView
     self.control = [[YSPlayerController alloc] initWithDelegate:self];
+    [self startPlay];
+    
+}
+- (IBAction)play:(id)sender {
+    if (self.playButton.selected == YES) {
+        [self.control stopPlayback];
+        [self.playButton setSelected:NO];
+    }else{
+        [self startPlay];
+    }
+}
+
+- (IBAction)sound:(id)sender {
+    
+}
+
+-(void)startPlay{
+    [self.playButton setSelected:YES];
     [self.control startRealPlayWithCamera:self.camera.cameraId accessToken:self.accessToken inView:self.playerView];
 }
 
 #pragma mark 
 - (void)playerOperationMessage:(YSPlayerMessageType)msgType withValue:(id)value{
+    if ([value integerValue] != 200) {
+        [self.playButton setSelected:NO];
+    }
+    if ([value integerValue] == 20005) {
+        FECameraVerfyPhoneVC *vc = [[FECameraVerfyPhoneVC alloc] initWithNibName:@"FECameraVerfyPhoneVC" bundle:nil];
+//        vc.phoneNumber = 
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+
+- (void)realPlayDidStartedWithDict:(NSDictionary *)dict{
     
 }
 
