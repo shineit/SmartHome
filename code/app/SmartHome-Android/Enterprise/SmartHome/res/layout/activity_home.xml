@@ -1,0 +1,223 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_height"
+        android:background="@color/themecolor"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="首页"
+                android:textColor="@color/white"
+                android:textSize="@dimen/head_font_size_sm" />
+
+            <Button
+                android:id="@+id/home_about_us_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="关于我们"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/backcolor" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="智慧消防"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/black" />
+
+                <GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:columnCount="3"
+                    android:orientation="horizontal"
+                    android:rowCount="2"
+                    android:useDefaultMargins="true" >
+
+                    <Button
+                        android:id="@+id/home_menu_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_alarm"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_alarm" />
+
+                    <Button
+                        android:id="@+id/home_menu_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_safe"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_status" />
+
+                    <Button
+                        android:id="@+id/home_menu_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_area"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_check" />
+
+                    <Button
+                        android:id="@+id/home_menu_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_account"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_info" />
+
+                    <Button
+                        android:id="@+id/home_menu_manage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_plane"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_manage" />
+                </GridLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/View01"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/backcolor" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="5dp" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="其他信息"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/black" />
+
+                <GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:columnCount="3"
+                    android:orientation="horizontal"
+                    android:rowCount="3"
+                    android:useDefaultMargins="true" >
+
+                    <Button
+                        android:id="@+id/home_menu_knowledge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_note"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_fireknowledge" />
+
+                    <Button
+                        android:id="@+id/home_menu_mall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_mall"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_mall" />
+
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_column="2"
+                        android:layout_gravity="center_horizontal|top"
+                        android:layout_row="0"
+                        android:background="@drawable/menu_borde_noner"
+                        android:paddingBottom="10dp" />
+
+                </GridLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

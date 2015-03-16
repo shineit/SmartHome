@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_height"
+        android:background="@color/themecolor"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/tabbar_safe"
+                android:textColor="@color/white"
+                android:textSize="@dimen/head_font_size_sm" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <cn.fuego.misp.ui.expandable.StickyLayout
+        android:id="@+id/sticky_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/sticky_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/safe_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sticky_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <cn.fuego.misp.ui.expandable.PinnedHeaderExpandableListView
+                android:id="@+id/safe_main_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="@null"
+                android:childDivider="@drawable/child_bg"
+                android:childIndicatorLeft="0dp"
+                android:divider="@color/disablecolor"
+                android:dividerHeight="1dp"
+                android:groupIndicator="@null"
+                android:scrollbarAlwaysDrawHorizontalTrack="false" />
+
+        </LinearLayout>
+
+</cn.fuego.misp.ui.expandable.StickyLayout>
+
+</LinearLayout>

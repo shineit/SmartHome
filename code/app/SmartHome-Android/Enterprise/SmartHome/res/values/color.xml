@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="white">#FFFFFF</color><!--白色 -->
+	<color name="black">#000000</color><!-- 黑色 -->
+	<color name="lightblack">#CC000000</color><!-- 黑色 -->
+	<color name="ivory">#FFFFF0</color><!--象牙色 -->
+	<color name="lightyellow">#FFFFE0</color><!--亮黄色 -->
+	<color name="yellow">#FFFF00</color><!--黄色 -->
+	<color name="tabbarback">#E9EAED</color>
+	<color name="themecolor">#FC9C38</color> <!-- 主题橘色 -->
+	
+	<color name="backcolor">#E7E6E3</color>  <!-- 背景墙纸颜色 -->
+	<color name="theme_text_color">#FFFFFF</color>
+	<color name="content_text_color">#000000</color>
+
+	<color name="presscolor">#af7b05</color><!-- button按下颜色 ,对应主题橘黄色，颜色加深-->
+	<color name="disablecolor">#c4cedc</color><!-- button禁用颜色（196,206,220） -->
+	
+	<color name="greencolor">#48B805</color><!-- 鲜绿色 （72,184,5） -->
+	<color name="dgreencolor">#3c9905</color><!-- 深绿色 （60,150,5） -->
+	
+	<color name="focuscolor">#FF643F</color> <!-- 选中字体颜色 ，橘红色（255,100,63）-->
+	<color name="darkfocuscolor">#a54123</color> <!-- 深橘红色（165,65,35）--> 
+	<color name="selectedcolor">#F6AB00</color>
+	
+    <color name="grid_back_color">#F0F0F0</color>
+    <color name="blue_light">#FF179dc5</color>
+    <color name="red_notice">#FFd90707</color>
+
+	    <drawable name="list_normal">#FFFFFF</drawable> 
+	    <drawable name="list_active">#FFFFFF</drawable> 
+	    <drawable name="list_pressed">#c4cedc</drawable> 
+
+	    <drawable name="misp_list_item_normal">#FFFFFF</drawable> 
+	    <drawable name="misp_list_item_active">#FFFFFF</drawable> 
+	    <drawable name="misp_list_item_pressed">#c4cedc</drawable> 
+	    
+	    <drawable name="misp_title_btn_seletor_normal">#143844</drawable> 
+	    <drawable name="misp_title_btn_seletor_active">#143844</drawable> 
+	    <drawable name="misp_title_btn_seletor_pressed">#143823</drawable> 
+	</resources>

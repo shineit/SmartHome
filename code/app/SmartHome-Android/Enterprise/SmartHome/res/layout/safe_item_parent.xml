@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/safe_group_parent"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp" >
+
+    <TextView
+        android:id="@+id/safe_group_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/safe_group_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="10dp"
+        android:text="未配置传感器"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/themecolor"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/safe_group_icon"
+        android:layout_width="20dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:src="@null" />
+
+</RelativeLayout>

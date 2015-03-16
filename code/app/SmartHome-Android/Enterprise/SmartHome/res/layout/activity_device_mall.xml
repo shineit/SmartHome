@@ -1,0 +1,240 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_height"
+        android:background="@color/themecolor"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/home_menu_mall"
+                android:textColor="@color/white"
+                android:textSize="@dimen/head_font_size_sm" />
+
+            <Button
+                android:id="@+id/device_mall_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/back"
+                android:drawablePadding="5dp"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <cn.fuego.misp.ui.imgScroll.MyImgScroll
+            android:id="@+id/myvp"
+            android:layout_width="fill_parent"
+            android:layout_height="120dp" />
+
+        <LinearLayout
+            android:id="@+id/vb"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="3dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/product_1" />
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="left|center_vertical"
+                android:text="￥ 236"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/content_font_size" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="left|center_vertical"
+                android:text="电气火灾监控报警器"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/product_2" />
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="left|center_vertical"
+                android:text="￥ 577"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/content_font_size" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="left|center_vertical"
+                android:text="防火阀"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/ImageView03"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/product_3" />
+
+            <TextView
+                android:id="@+id/TextView07"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="left|center_vertical"
+                android:text="￥ 87"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/content_font_size" />
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="left|center_vertical"
+                android:text="干粉贮存容器"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/ImageView02"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/product_4" />
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="left|center_vertical"
+                android:text="￥ 355"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/content_font_size" />
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="left|center_vertical"
+                android:text="送风机"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/head_height"
+        android:background="@color/themecolor"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="云控"
+                android:textColor="@color/white"
+                android:textSize="@dimen/head_font_size_sm" />
+
+            <Button
+                android:id="@+id/control_manage_back"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/back"
+                android:drawablePadding="5dp"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="集中器编号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/control_manage_concentID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/TextView02"
+                        android:text="1234"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:id="@+id/alarm_view_objID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="控制器编号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/control_manage_ctrID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/alarm_view_objID"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:text="1234"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="通道    编号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/control_channel_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/TextView03"
+                        android:text="1234"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:id="@+id/TextView04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="控制器类型:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/control_manage_ctrType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="36dp"
+                        android:layout_toRightOf="@+id/TextView04"
+                        android:text="控制类"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="描述:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <EditText
+                        android:id="@+id/control_manage_desp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/textView3"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:gravity="center_vertical|top"
+                        android:height="20dp"
+                        android:hint="输入不得超过13字数"
+                        android:maxLength="13"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size_sm" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
+                        android:id="@+id/TextView06"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="标签:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="27dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView06" >
+
+                        <Spinner
+                            android:id="@+id/control_mark_spinner"
+                            style="?android:attr/spinnerDropDownItemStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" />
+
+                        <Button
+                            android:id="@+id/control_mark_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/common_btn"
+                            android:text="管理标签"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/TextView05"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="区号:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <EditText
+                        android:id="@+id/control_manage_groupID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView05"
+                        android:background="@drawable/edittext_sel"
+                        android:ems="10"
+                        android:height="20dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp" >
+
+                <Button
+                    android:id="@+id/control_config_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/common_btn"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="配    置"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_font_size" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

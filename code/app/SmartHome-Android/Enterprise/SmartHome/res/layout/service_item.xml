@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp" >
+
+        <TextView
+            android:id="@+id/service_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:paddingLeft="20dp"
+            android:text="000001"
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size" />
+
+        <TextView
+            android:id="@+id/service_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="安装服务"
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size" />
+
+        <TextView
+            android:id="@+id/service_status"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="待处理"
+            android:textColor="@color/themecolor"
+            android:textSize="@dimen/content_font_size" />
+
+    </TableRow>
+
+

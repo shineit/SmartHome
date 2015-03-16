@@ -1,0 +1,101 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="tab_button_bottom">
+       <item name="android:textSize">15px</item>
+       <item name="android:textColor">@color/themecolor</item>
+       <item name="android:ellipsize">marquee</item>
+       <item name="android:gravity">center_horizontal</item>
+       <item name="android:button">@null</item>
+       <item name="android:layout_width">fill_parent</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:layout_weight">1.0</item>
+       <item name="android:singleLine">true</item>
+    </style>
+   <style name="MispWaitDailog" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item> 
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <style name="dialog" parent="@android:style/Theme.Dialog">  
+        <item name="android:windowFrame">@null</item><!--边框-->  
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->  
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->  
+        <item name="android:windowNoTitle">true</item><!--无标题-->  
+       <!-- <item name="android:windowBackground">@color/alpha_bg</item>背景透明-->  
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->  
+    </style> 
+       <style name="push_style">
+		<item name="android:hint">@string/style_hint</item>
+		<item name="android:inputType">number</item>
+		<item name="android:textSize">14sp</item>
+	</style>
+	<style name="push_alias">
+		<item name="android:hint">@string/alias_hint</item>
+		<item name="android:textSize">14sp</item>
+	</style>
+	<style name="push_tag">
+		<item name="android:hint">@string/tag_hint</item>
+		<item name="android:textSize">14sp</item>
+	</style>
+	<!--萤石云style  -->
+	    <style name="TitleBar_Light">
+        <item name="textColor">@color/common_text</item>
+        <item name="background">@drawable/common_title</item>
+        <item name="backButton">@drawable/common_title_back_selector</item>
+    </style>
+
+    <style name="TitleBar_Light_Web" parent="TitleBar_Light">
+        <item name="backButton">@drawable/common_title_cancel_selector</item>
+    </style>
+
+    <style name="TitleBar_Dark">
+        <item name="textColor">@android:color/white</item>
+        <item name="background">@color/dark_bg_70p</item>
+        <item name="backButton">@drawable/message_back_selector</item>
+    </style>
+    
+    <style name="CommonGridView" parent="@android:style/Widget.GridView">
+        <item name="android:cacheColorHint">#0000</item>
+        <item name="android:fadingEdgeLength">0dp</item>
+        <item name="android:listSelector">#0000</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:headerDividersEnabled">false</item>
+        <item name="android:footerDividersEnabled">false</item>
+    </style>
+
+    <style name="CommonListView" parent="@android:style/Widget.ListView">
+        <item name="android:cacheColorHint">#0000</item>
+        <item name="android:fadingEdgeLength">0dp</item>
+        <item name="android:listSelector">#0000</item>
+        <item name="android:fastScrollEnabled">false</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:headerDividersEnabled">false</item>
+        <item name="android:footerDividersEnabled">false</item>
+    </style>
+
+    <style name="popwindowUpAnim">
+        <item name="android:windowEnterAnimation">@anim/fade_up</item>
+        <item name="android:windowExitAnimation">@anim/fade_down</item>
+    </style>
+</resources>
