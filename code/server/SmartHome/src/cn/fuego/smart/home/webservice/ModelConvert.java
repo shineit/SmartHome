@@ -23,7 +23,9 @@ import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
+import cn.fuego.smart.home.domain.Knowledge;
 import cn.fuego.smart.home.domain.News;
+import cn.fuego.smart.home.domain.Product;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
@@ -36,8 +38,10 @@ import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
+import cn.fuego.smart.home.webservice.up.model.base.KnowledgeJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
+import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
@@ -403,5 +407,43 @@ public class ModelConvert
 		checkLog.setStatus(checkLogJson.getStatus());
 		
 		return checkLog;
+	}
+	
+	/**
+	 * 
+	 * @param checkLogJson
+	 * @return
+	 */
+	public static ProductJson productToJson(Product product)
+	{
+		ProductJson json = new ProductJson();
+		json.setProductID(product.getProductID()); 
+		json.setName(product.getName());
+		json.setDesp(product.getDesp());
+		json.setPrice(product.getPrice());
+ 		json.setPicLabel(product.getPicLabel());
+		json.setPicDetail1(product.getPicDetail1());
+		json.setPicDetail2(product.getPicDetail2());
+		json.setPicDetail3(product.getPicDetail3());
+		json.setType(product.getType());
+		
+		return json;
+	}
+	
+	/**
+	 * 
+	 * @param checkLogJson
+	 * @return
+	 */
+	public static KnowledgeJson knowledgeToJson(Knowledge knowledge)
+	{
+		KnowledgeJson json = new KnowledgeJson();
+ 
+		json.setKnowledgeID(knowledge.getKnowledgeID());
+		json.setTitle(knowledge.getTitle());
+		json.setContent(knowledge.getContent());
+		json.setKnowledgeType(knowledge.getKnowledgeType());
+		json.setKnowledgeKind(knowledge.getKnowledgeKind());
+		return json;
 	}
 }
