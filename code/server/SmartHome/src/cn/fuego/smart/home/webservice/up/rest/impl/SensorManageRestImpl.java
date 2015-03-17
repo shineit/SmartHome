@@ -351,7 +351,7 @@ public class SensorManageRestImpl implements SensorManageRest
 				page.setPageSize(req.getPage().getPageSize());
 				page.setCurrentPage(req.getPage().getCurrentPage());
 			}
-			List<FireAlarmView> fireAlarmList= ServiceContext.getInstance().getAlarmManageService().getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
+			List<FireAlarmView> fireAlarmList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
 			
 			for(FireAlarmView alarmview : fireAlarmList)
 			{

@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.service;
 
+import java.util.List;
+
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.CheckItem;
 
@@ -21,6 +23,8 @@ import cn.fuego.smart.home.domain.CheckItem;
 */ 
 public interface CheckItemManageService extends MispCommonService<CheckItem>
 {
+
+	List<CheckItem> getCheckItemByID(String companyID);
  
 	
 }
