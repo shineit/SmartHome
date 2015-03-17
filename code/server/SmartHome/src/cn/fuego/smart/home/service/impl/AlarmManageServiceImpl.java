@@ -25,7 +25,9 @@ import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.AlarmType;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Concentrator;
+import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.service.AlarmManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -248,6 +250,36 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 			idList.add(String.valueOf(alarm.getId()));
 		}
 		return idList;
+	}
+
+	@Override
+	public List<FireAlarmView> getFireAlarmByCompany(String companyID,int startNum, int pageSize, List<AttributeJson> filterList)
+	{
+		Company company=ServiceContext.getInstance().getCompanyManageService().get(Integer.valueOf(companyID));
+		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+		List<FireAlarmView>  fireAlarmList= new ArrayList<FireAlarmView>();
+		//是否需要做判空处理
+		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID", company.getConcentratorID()));
+		
+		if(!ValidatorUtil.isEmpty(filterList))
+		{
+			for(AttributeJson attr:filterList)
+			{
+				if(attr.getAttrName().equals(AttributeConst.ALARM_KIND))
+				{
+					if(!ValidatorUtil.isEmpty(attr.getAttrValue()))
+					{
+						condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "kind", attr.getAttrValue()));
+					}
+					
+				}
+			}
+			
+		}
+	 	condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
+	 	fireAlarmList.addAll(this.getDao(FireAlarmView.class).getAll(condtionList, startNum, pageSize));
+	 	
+	 	return fireAlarmList;
 	}
 
 

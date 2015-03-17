@@ -32,7 +32,11 @@
 		 <property name="locationY" column="LOCATION_Y"></property>
 		 <property name="sensorType" column="SENSOR_TYPE"></property>
 		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>	
-
+		 
+		 <property name="alarmTypeName" column="ALARM_TYPE_NAME"></property>
+		 <property name="kind" column="KIND"></property>
+		 <property name="isPush" column="IS_PUSH"></property>
+		 <property name="pushType" column="PUSH_TYPE"></property>
 	</class>
  
 </hibernate-mapping>

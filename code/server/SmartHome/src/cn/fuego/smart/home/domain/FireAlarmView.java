@@ -25,7 +25,7 @@ public class FireAlarmView implements PersistenceObject
 	private long concentratorID;
 	private int objType;      //0 集中器,1家庭终端，2消防终端 AlarmObjTypeEnmu
 	private long objID;        //对应snesorID
-	private int alarmType;		//告警事件类型 AlarmTypeEnum
+	private int alarmType;		//告警事件类型 AlarmTypeEnum，已改为对应告警类型表的type_id
 	private Date alarmTime;	//告警产生的时间
 	private Integer clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 
@@ -46,6 +46,12 @@ public class FireAlarmView implements PersistenceObject
 	
 	private Integer sensorType;      //传感器类型
 	private String sensorTypeName;  //传感器类型名称
+	
+	private String alarmTypeName; //新增，告警类型名称
+	
+	private int kind;			//0-告警；1-设备状态；
+	private int isPush; 	//0-不推送；1-推送；
+	private int pushType;		//0-不长鸣；1-长鸣；n-循环次数(作为拓展)
 	
 	public int getId()
 	{
@@ -209,6 +215,38 @@ public class FireAlarmView implements PersistenceObject
 	public void setStatus(Integer status)
 	{
 		this.status = status;
+	}
+	public String getAlarmTypeName()
+	{
+		return alarmTypeName;
+	}
+	public void setAlarmTypeName(String alarmTypeName)
+	{
+		this.alarmTypeName = alarmTypeName;
+	}
+	public int getKind()
+	{
+		return kind;
+	}
+	public void setKind(int kind)
+	{
+		this.kind = kind;
+	}
+	public int getIsPush()
+	{
+		return isPush;
+	}
+	public void setIsPush(int isPush)
+	{
+		this.isPush = isPush;
+	}
+	public int getPushType()
+	{
+		return pushType;
+	}
+	public void setPushType(int pushType)
+	{
+		this.pushType = pushType;
 	}
 
 

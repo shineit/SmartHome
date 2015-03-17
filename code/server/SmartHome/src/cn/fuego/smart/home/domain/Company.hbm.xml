@@ -11,7 +11,7 @@
 	    <id name="companyID" column="COMPANY_ID" >
 	       <generator class="identity"/> 
 		</id>
-		
+		<property name="concentratorID" column="CONCENTRATOR_ID"></property>
 		 <property name="companyName" column="COMPANY_NAME"></property>
 		 <property name="applyName" column="APPLY_NAME"></property>
 		 <property name="companyAddr" column="COMPANY_ADDR"></property>

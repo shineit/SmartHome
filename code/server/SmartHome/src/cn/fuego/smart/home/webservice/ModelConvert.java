@@ -14,6 +14,8 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.CheckItem;
+import cn.fuego.smart.home.domain.CheckLog;
 import cn.fuego.smart.home.domain.ClientVersion;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Concentrator;
@@ -25,6 +27,8 @@ import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.CheckItemJson;
+import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
 import cn.fuego.smart.home.webservice.up.model.base.ClientVersionJson;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
@@ -85,7 +89,7 @@ public class ModelConvert
 		FireAlarmJson json = new FireAlarmJson();
 		json.setId(fireAlarm.getId());
 		json.setConcentratorID(fireAlarm.getConcentratorID());
-		json.setAlarmType(fireAlarm.getAlarmType());
+		json.setAlarmTypeName(fireAlarm.getAlarmTypeName());
 		json.setAlarmTime(DateUtil.getDateTime(fireAlarm.getAlarmTime()));
 		json.setClearStatus(fireAlarm.getClearStatus());
 		json.setClearTime(DateUtil.getDateTime(fireAlarm.getClearTime()));
@@ -316,7 +320,7 @@ public class ModelConvert
 		return concent;
 	}
 	
-	public static CompanyJson  CompanyToJson(Company company)
+	public static CompanyJson  companyToJson(Company company)
 	{
 		CompanyJson json = new CompanyJson();
 		json.setApplyName(company.getApplyName());
@@ -337,5 +341,67 @@ public class ModelConvert
 		return json;
 		
 	}
-	
+	/**
+	 * 巡检项目传送json
+	 * @param checkItem
+	 * @return
+	 */
+	public static CheckItemJson  checkItemToJson(CheckItem checkItem)
+	{
+		CheckItemJson json = new CheckItemJson();
+		json.setItemID(checkItem.getItemID());
+		json.setItemName(checkItem.getItemName());
+		json.setItemSys(checkItem.getItemSys());
+		
+		return json;
+		
+	}
+	/**
+	 * 巡检日志传送json
+	 * @param checkLog
+	 * @return
+	 */
+	public static CheckLogJson  checkLogToJson(CheckLog checkLog)
+	{
+		CheckLogJson json = new CheckLogJson();
+		json.setLogID(checkLog.getLogID());
+		json.setCompanyID(checkLog.getCompanyID());
+		json.setCheckItem(checkLog.getCheckItem());
+		json.setCheckSys(checkLog.getCheckSys());
+		json.setCheckResult(checkLog.getCheckResult());
+		json.setAbnormalDesp(checkLog.getAbnormalDesp());
+		json.setAbnormalPic(checkLog.getAbnormalPic());
+		json.setChecker(checkLog.getChecker());
+		json.setCheckTime(DateUtil.getDateTime(checkLog.getCheckTime()));
+		json.setHandler(checkLog.getHandler());
+		json.setHandleResult(checkLog.getHandleResult());
+		json.setHandleTime(DateUtil.getDateTime(checkLog.getHandleTime()));
+		json.setStatus(checkLog.getStatus());
+		
+		return json;
+		
+	}
+	/**
+	 * 巡检日志提交
+	 * @param checkLogJson
+	 * @return
+	 */
+	public static CheckLog jsonToCheckLog(CheckLogJson checkLogJson)
+	{
+		CheckLog checkLog = new CheckLog();
+		checkLog.setCompanyID(checkLogJson.getCompanyID());
+		checkLog.setCheckItem(checkLogJson.getCheckItem());
+		checkLog.setCheckResult(checkLogJson.getCheckResult());
+		checkLog.setCheckSys(checkLogJson.getCheckSys());
+		checkLog.setAbnormalDesp(checkLogJson.getAbnormalDesp());
+		checkLog.setAbnormalPic(checkLogJson.getAbnormalPic());
+		checkLog.setChecker(checkLogJson.getChecker());
+		checkLog.setCheckTime(new Date(checkLogJson.getCheckTime()));
+		checkLog.setHandler(checkLogJson.getHandler());
+		checkLog.setHandleResult(checkLogJson.getHandleResult());
+		checkLog.setHandleTime(new Date(checkLogJson.getHandleTime()));
+		checkLog.setStatus(checkLogJson.getStatus());
+		
+		return checkLog;
+	}
 }

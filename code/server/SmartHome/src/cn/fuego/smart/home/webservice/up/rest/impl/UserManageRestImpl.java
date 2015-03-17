@@ -340,7 +340,7 @@ public class UserManageRestImpl implements UserManageRest
 
 		for(Company company : companyList)
 		{
-			CompanyJson json = ModelConvert.CompanyToJson(company);
+			CompanyJson json = ModelConvert.companyToJson(company);
 			rsp.getCompanyList().add(json);	
 		}
 		

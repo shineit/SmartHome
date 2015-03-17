@@ -26,7 +26,7 @@ public class Company implements PersistenceObject
 	private static final long serialVersionUID = 1L;
 	
 	public static final String PRI_KEY = "companyID";
-	
+	private long concentratorID;     //集中器编号
 	private int companyID;					//单位编号，自增长，主键
 	private String companyName; 			//单位名称，可变需控制长度
 	private String applyName;				//使用名称，可变需控制长度
@@ -45,6 +45,15 @@ public class Company implements PersistenceObject
 	
 	private String fireRisk;                //火灾危险性
 	
+	
+	public long getConcentratorID()
+	{
+		return concentratorID;
+	}
+	public void setConcentratorID(long concentratorID)
+	{
+		this.concentratorID = concentratorID;
+	}
 	public int getCompanyID()
 	{
 		return companyID;

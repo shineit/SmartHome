@@ -19,6 +19,10 @@ import cn.fuego.common.domain.PersistenceObject;
  */
 public class FireSensor implements PersistenceObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id; //
 	private int planNodeID; //平面图节点ID
 	private long concentratorID;  //集中器ID

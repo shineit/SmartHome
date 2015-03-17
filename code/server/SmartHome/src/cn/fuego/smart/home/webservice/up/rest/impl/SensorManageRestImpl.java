@@ -19,6 +19,7 @@ import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
+import cn.fuego.smart.home.domain.FireAlarmView;
 import cn.fuego.smart.home.domain.HomeAlarmView;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.UserConcentrator;
@@ -34,6 +35,8 @@ import cn.fuego.smart.home.webservice.up.model.ClearAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorByIDReq;
@@ -42,6 +45,7 @@ import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 import cn.fuego.smart.home.webservice.up.rest.SensorManageRest;
@@ -331,6 +335,40 @@ public class SensorManageRestImpl implements SensorManageRest
 			log.error("clear alarm error",e);
 			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}		
+		return rsp;
+	}
+
+	@Override
+	public GetFireAlarmByIDRsp getFireAlarm(GetFireAlarmByIDReq req)
+	{
+		GetFireAlarmByIDRsp rsp = new GetFireAlarmByIDRsp();
+		try
+		{
+			PageModel page = new PageModel();
+			
+			if(null != req.getPage())
+			{
+				page.setPageSize(req.getPage().getPageSize());
+				page.setCurrentPage(req.getPage().getCurrentPage());
+			}
+			List<FireAlarmView> fireAlarmList= ServiceContext.getInstance().getAlarmManageService().getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
+			
+			for(FireAlarmView alarmview : fireAlarmList)
+			{
+				FireAlarmJson alarmJson = ModelConvert.FireAlarmToJson(alarmview);
+				rsp.getFireAlarmList().add(alarmJson);
+			}
+		}
+		catch(MISPException e)
+		{
+			log.error("get FireAlarm error",e);
+			rsp.getResult().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get FireAlarm error",e);
+			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}	
 		return rsp;
 	}
 

@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<div class="pageCentent">
-<div class="panel " layoutH="3" >
+
+<div class="pageContent" layoutH="5">
+<div  class="panel" >
 	
 	<div align="center">
 			<c:choose>
