@@ -8,11 +8,21 @@
 */ 
 package cn.fuego.smart.home.web.action.company;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.file.FileUtil;
+import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
@@ -33,12 +43,14 @@ import cn.fuego.smart.home.web.model.BuildingModel;
  */
 public class PlanManageAction extends DWZTableAction<SensorPlan>
 {
+	private FuegoLog log = FuegoLog.getLog(getClass());
+
 	private static String companyID;
 	private static Company company;
 	private static List<BuildingModel> buildingList = new ArrayList<BuildingModel>();
 	private PlanManageService service = ServiceContext.getInstance().getPlanManageService();
 
-	/* (non-Javadoc)
+ 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
 	@Override
@@ -76,6 +88,20 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 		
   
 	}
+	
+	
+	@Override
+	public String create()
+	{
+		
+		String fileName = saveUploadFile();
+		
+		this.obj.setPicPath(fileName);
+ 
+
+		return super.create();
+	}
+	
 	
 	@Override
 	public String show()

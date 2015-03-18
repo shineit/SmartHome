@@ -1,10 +1,16 @@
 package cn.fuego.misp.web.action.basic;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
+import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.file.FileUtil;
+import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuModel;
@@ -17,6 +23,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MISPAction extends ActionSupport
 {
+	private FuegoLog log = FuegoLog.getLog(getClass());
+
 	/**
 	 * 
 	 */
@@ -26,8 +34,32 @@ public class MISPAction extends ActionSupport
 	private MispMessageModel operateMessage = new MispMessageModel();
 	public static final String MISP_DONE_PAGE = "misp-done";
 	
-	 
+	
+	private File upload;
+	private String uploadFileName;
+	private String uploadContentType;
+	
 
+	public String saveUploadFile()
+	{
+		String fileName ="";
+		
+		if(null != this.getUpload())
+		{
+			String path = ServletActionContext.getServletContext().getRealPath("/") + "upload/";
+
+			String prefix=uploadFileName.substring(uploadFileName.lastIndexOf(".")+1);
+			fileName = DataCreateUtil.getUUID() + "." + prefix;
+ 			FileUtil.createFile(getUpload(), path+fileName);
+ 		}
+		else
+		{
+			log.warn("uplaod file is empty");
+		}
+		
+		return fileName;
+	}
+	
     public UserModel getLoginUser()
     {
     	ActionContext actionContext = ActionContext.getContext();
@@ -131,6 +163,37 @@ public class MISPAction extends ActionSupport
 	{
 		this.menuHeadList = menuHeadList;
 	}
+
+	public File getUpload()
+	{
+		return upload;
+	}
+
+	public void setUpload(File upload)
+	{
+		this.upload = upload;
+	}
+
+	public String getUploadFileName()
+	{
+		return uploadFileName;
+	}
+
+	public void setUploadFileName(String uploadFileName)
+	{
+		this.uploadFileName = uploadFileName;
+	}
+
+	public String getUploadContentType()
+	{
+		return uploadContentType;
+	}
+
+	public void setUploadContentType(String uploadContentType)
+	{
+		this.uploadContentType = uploadContentType;
+	}
+ 
 
 	
 

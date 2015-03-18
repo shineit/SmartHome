@@ -152,11 +152,11 @@ public class MinaServerHandler extends IoHandlerAdapter
 
 			DeviceOnlineCache.getInstance().online(concentrator);
 
-			
-			break;
+ 			break;
 		case RecieveCommandConst.ALARM_MSG:
 			if(0 == message.getDataNum())
 			{
+				
 				log.info("the message is heart packet");
 			}
 			else
@@ -181,12 +181,7 @@ public class MinaServerHandler extends IoHandlerAdapter
   
 		default:	
 		{
-			synchronized(session)
-			{
-				session.setAttribute(REVICE_DATA, allMessage);
-  				session.notify();
-			}
-			
+ 
 		}
 		
 		}

@@ -103,7 +103,7 @@
 	</div>
 <div id="container1" >
     <div id="map1">
-		<img src="plane1.jpg" />
+		<img src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}" />
     </div>
 </div>
 	

@@ -21,6 +21,7 @@ import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.FireSensor;
+import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.service.FireSensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.BuildingModel;
@@ -33,7 +34,11 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 
 	private static String companyID;
 	private static Company company;
+	
+	
 	private static List<BuildingModel> buildingList = new ArrayList<BuildingModel>();
+	
+	private SensorPlan sensorPlan;
 	
 	private String locationJson;
 	private String sensorJson;
@@ -55,6 +60,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	{
 		loadTreeData(companyID);
 
+		this.sensorPlan = ServiceContext.getInstance().getPlanManageService().get(this.getSelectedID());
 		List<FireSensor> sensorList = service.get("planNodeID",this.getSelectedID());
 		locationJson = JsonConvert.ObjectToJson(sensorList);
 
@@ -214,6 +220,22 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	public void setBuildingList(List<BuildingModel> buildingList)
 	{
 		this.buildingList = buildingList;
+	}
+
+
+
+
+	public SensorPlan getSensorPlan()
+	{
+		return sensorPlan;
+	}
+
+
+
+
+	public void setSensorPlan(SensorPlan sensorPlan)
+	{
+		this.sensorPlan = sensorPlan;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.service;
 
+import cn.fuego.smart.home.service.impl.AdManageServiceImpl;
 import cn.fuego.smart.home.service.impl.AlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.BuildingManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CheckItemManageServiceImpl;
@@ -41,12 +42,16 @@ public class ServiceContext
 	private KnowledgeManageService knowledgeManageService = null;
 	
 	private ProductManageService productManageService = null;
+	private AdManageService adManageService = null;
+	
 	//家庭告警和企业告警
 	private HomeAlarmManageService homeAlarmService=null;
 	private FireAlarmManageService fireAlarmService=null;
 	//巡检相关
 	private CheckLogManageService checkLogService=null;
 	private CheckItemManageService checkItemService=null;
+	
+	
 	
 	private ServiceContext()
 	{
@@ -176,6 +181,17 @@ public class ServiceContext
 			productManageService =  new  ProductManageServiceImpl();
 		}
 		return productManageService;
+	}
+	/**
+	 * @return
+	 */
+	public synchronized AdManageService getAdManageService()
+	{
+		if (null == adManageService)
+		{
+			adManageService =  new AdManageServiceImpl();
+		}
+		return adManageService;
 	}
 	
 	public synchronized HomeAlarmManageService getHomeAlarmService()

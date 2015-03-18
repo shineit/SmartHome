@@ -27,6 +27,10 @@ public class AlarmTypeCache
 	private List<AlarmType> dataList;
 
 
+	private AlarmTypeCache()
+	{
+		reload();
+	}
 	public static synchronized AlarmTypeCache getInstance()
 	{
 		if (null == instance)

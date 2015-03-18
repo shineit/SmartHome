@@ -12,9 +12,15 @@
 			}
 		}, $.pdialog.getCurrent(), "");
 		});//dialog 宽度重新定义
+ 
+    $(function () 
+    {
+    	//图片预览js
+        $("#up1").uploadPreview({ Img: "ImgPr1",ImgType:["jpg","bmp","png"] });        
+     });
 </script>
 <div class="pageContent">
-	<s:form method="post" action="device/PlanManage" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)"  >
+	<s:form method="post" action="device/PlanManage" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)" enctype="multipart/form-data"  >
 		<div class="pageFormContent" layoutH="58">
 			<input type="hidden" name="obj.buildingID" value="${obj.buildingID}"/>
 			<dl style="width:50%;">
@@ -29,7 +35,20 @@
 				<dt style="width:30%;">地址：</dt>			
 				<dd style="width:65%;"><input type="text" name="obj.floor"  size="25" value="${obj.floor}"/></dd>		 
 			</dl>
-			 
+			<div style="float:right; margin-top:5px; margin-right:6%;width:40%;">
+						<div
+							style="margin-bottom:5px; width:120px; height:140px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
+							<div>
+								<img id="ImgPr1" src="<%=request.getContextPath()%>/${obj.picPath}" height="140" width="120" alt="个人照片">
+							</div>
+
+						</div>
+						<div>
+		 
+							<s:file name="upload" id="up1"  ></s:file>
+						</div>
+						<span class="info">上传图片大小不得超过65KB,只支持bmp与jpg格式</span>
+					</div> 
 				
 		</div>		
 
