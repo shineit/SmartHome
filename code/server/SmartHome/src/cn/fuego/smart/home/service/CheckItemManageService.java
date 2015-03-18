@@ -24,7 +24,7 @@ import cn.fuego.smart.home.domain.CheckItem;
 public interface CheckItemManageService extends MispCommonService<CheckItem>
 {
 
-	List<CheckItem> getCheckItemByID(String companyID);
+	List<CheckItem> getCheckItemByID(int companyID);
  
 	
 }

@@ -159,6 +159,27 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
 
          this.getDao().update(objList);
      }
+	 public void ModifyByCondition(List<QueryCondition> conditionList,String fieldName,Object fieldValue)
+     {
+         if (ValidatorUtil.isEmpty(conditionList))
+         {
+             log.warn("the condition list is empty");
+             return;
+         }
+         List<E> objList = this.getDao().getAll(conditionList);
+         if (ValidatorUtil.isEmpty(objList))
+         {
+            log.warn("can not find the object by condition list " + conditionList.toString());
+            return;
+         }
+
+         for(E e : objList)
+         {
+             ReflectionUtil.setObjetField(e,fieldName,fieldValue);
+         }
+
+         this.getDao().update(objList);
+     }
 	/*
 	 * (non-Javadoc)
 	 * 

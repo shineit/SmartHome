@@ -4,17 +4,23 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 
 public class GetCheckItemByIDReq extends BaseJsonReq
 {
-	private String companyID;
+	private int companyID;
 
-	public String getCompanyID()
+
+
+	public int getCompanyID()
 	{
 		return companyID;
 	}
 
-	public void setCompanyID(String companyID) 
+
+
+	public void setCompanyID(int companyID)
 	{
 		this.companyID = companyID;
 	}
+
+
 
 	@Override
 	public String toString()

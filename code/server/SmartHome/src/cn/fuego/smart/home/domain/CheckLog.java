@@ -11,6 +11,8 @@ package cn.fuego.smart.home.domain;
 import java.util.Date;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.smart.home.constant.CheckLogStatusEnum;
 
 /** 
  * @ClassName: CheckLog 
@@ -36,11 +38,11 @@ public class CheckLog implements PersistenceObject
 	private String abnormalDesp;	//异常描述
 	private String abnormalPic; 	//异常图片地址
 	private String checker;			//巡查员名字
-	private Date  checkTime;		//巡检时间
+	private Date  checkTime=DateUtil.getCurrentDate();		//巡检时间
 	private String handler;			//处理人名字
 	private String handleResult;	//处理结论
 	private Date handleTime;		//处理时间
-	private int status;          	//处理状态，0-未处理；1-已处理
+	private int status=CheckLogStatusEnum.LATEST.getIntValue();          	//处理状态，0-历史；1-最新
 	
 	public long getLogID()
 	{

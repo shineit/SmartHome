@@ -400,7 +400,7 @@ public class ModelConvert
 		checkLog.setAbnormalDesp(checkLogJson.getAbnormalDesp());
 		checkLog.setAbnormalPic(checkLogJson.getAbnormalPic());
 		checkLog.setChecker(checkLogJson.getChecker());
-		checkLog.setCheckTime(new Date(checkLogJson.getCheckTime()));
+		//checkLog.setCheckTime(new Date(checkLogJson.getCheckTime()));
 		checkLog.setHandler(checkLogJson.getHandler());
 		checkLog.setHandleResult(checkLogJson.getHandleResult());
 		checkLog.setHandleTime(new Date(checkLogJson.getHandleTime()));

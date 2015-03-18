@@ -68,5 +68,14 @@ public class AppLoginCache
 	{
 		return loginUser.get(token);
 	}
+	
+	public static int getUserID(String token)
+	{
+		if(null != loginUser.get(token))
+		{
+			return loginUser.get(token).getUser().getUserID();
+		}
+		return 0;
+	}
 
 }

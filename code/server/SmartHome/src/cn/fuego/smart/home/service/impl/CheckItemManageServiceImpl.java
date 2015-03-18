@@ -13,7 +13,6 @@ import java.util.List;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.CheckItem;
@@ -32,16 +31,16 @@ public class CheckItemManageServiceImpl extends MispCommonServiceImpl<CheckItem>
 {
 
 	@Override
-	public List<CheckItem> getCheckItemByID(String companyID)
+	public List<CheckItem> getCheckItemByID(int companyID)
 	{
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-		if(!ValidatorUtil.isEmpty(companyID))
-		{
-			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "companyID", companyID));
-		}
+
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "companyID", companyID));
+
 		List<CheckItem> itemList=  new ArrayList<CheckItem>();
 		itemList= DaoContext.getInstance().getCheckItemDao().getAll(conditionList);
 		return itemList;
 	}
+
  
 }

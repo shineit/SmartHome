@@ -8,7 +8,7 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
+import cn.fuego.smart.home.constant.HandleStatusEnum;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
 import cn.fuego.smart.home.domain.ServiceOrder;
 
@@ -26,7 +26,7 @@ public class OrderFilterModel
     private String orderStatus;
     private String startDate;
     private String endDate;
-    private ServiceOrderStatusEnum[] statusList =ServiceOrderStatusEnum.values();
+    private HandleStatusEnum[] statusList =HandleStatusEnum.values();
     private ServiceOrderTypeEnum[] typeList = ServiceOrderTypeEnum.values();
     
     public List<QueryCondition> getConidtionList()
@@ -43,7 +43,7 @@ public class OrderFilterModel
 			}
 			if(!ValidatorUtil.isEmpty(this.getOrderStatus()))
 			{
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"orderStatus",String.valueOf(ServiceOrderStatusEnum.getEnumByStr(this.getOrderStatus()).getIntValue())));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"orderStatus",String.valueOf(HandleStatusEnum.getEnumByStr(this.getOrderStatus()).getIntValue())));
 			}
 			if(!ValidatorUtil.isEmpty(this.getStartDate()))
 			{
@@ -100,14 +100,14 @@ public class OrderFilterModel
 	/**
 	 * @return the statusList
 	 */
-	public ServiceOrderStatusEnum[] getStatusList()
+	public HandleStatusEnum[] getStatusList()
 	{
 		return statusList;
 	}
 	/**
 	 * @param statusList the statusList to set
 	 */
-	public void setStatusList(ServiceOrderStatusEnum[] statusList)
+	public void setStatusList(HandleStatusEnum[] statusList)
 	{
 		this.statusList = statusList;
 	}
