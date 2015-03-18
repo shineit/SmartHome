@@ -11,14 +11,12 @@ package cn.fuego.smart.home.service;
 import android.content.Context;
 import android.content.Intent;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.ui.MainActivity;
-import cn.fuego.smart.home.ui.info.AlarmManageActivity;
-import cn.fuego.smart.home.ui.info.AlarmPageActivity;
-import cn.fuego.smart.home.ui.info.NewsViewActivity;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
@@ -47,7 +45,6 @@ public class GetDetail
 	{
 		GetAlarmByIDReq alarmReq = new GetAlarmByIDReq();
 		alarmReq.setAlarmID(String.valueOf(pushMsg.getObj()));
-		alarmReq.setToken(MemoryCache.getToken());
 		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage msg)
@@ -60,7 +57,7 @@ public class GetDetail
 				alarmIntent.putExtra(alarmModel.getTerminType(),rsp.getHomeAlarm().getSensorTypeName());
 				 
 				alarmIntent.putExtra(alarmModel.getTitle(),AlarmTypeEnum.getEnumByInt(rsp.getHomeAlarm().getAlarmType()).getStrValue());
-		        alarmIntent.setClass(context,AlarmManageActivity.class);
+		       // alarmIntent.setClass(context,AlarmManageActivity.class);
 	            alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
 	            context.startActivity(alarmIntent); 
 
@@ -73,11 +70,11 @@ public class GetDetail
        /* alarmIntent.setClass(context,AlarmPageActivity.class);
         alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
         context.startActivity(alarmIntent); */
-		MemoryCache.setEnterFlag(IntentCodeConst.FIRE_ALARM_ENTER);
+		//MemoryCache.setEnterFlag(IntentCodeConst.FIRE_ALARM_ENTER);
 		Intent i = new Intent();
-		if(MemoryCache.isLogin())
+		if(MemoryCache.isLogined())
 		{
-			i.setClass(context,AlarmPageActivity.class);
+			//i.setClass(context,AlarmPageActivity.class);
 		}
 		else
 		{
@@ -124,14 +121,14 @@ public class GetDetail
 	{
 
 
-		if(MemoryCache.isLogin())
+		if(MemoryCache.isLogined())
 		{
 			//i.setClass(context,MainActivity.class);
 			showNewsDetail(context,pushMsg);
 		}
 		else
 		{
-			MemoryCache.setEnterFlag(IntentCodeConst.NEWS_ENTER);
+			//MemoryCache.setEnterFlag(IntentCodeConst.NEWS_ENTER);
 			Intent i = new Intent();
 			i.setClass(context,MainActivity.class);
 	        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
@@ -153,7 +150,7 @@ public class GetDetail
 				newsIntent.putExtra(newsModel.getTitle(), rsp.getNews().getTitle());
 				newsIntent.putExtra(newsModel.getContent(), rsp.getNews().getContent());
 				newsIntent.putExtra(newsModel.getAuthor(), rsp.getNews().getAuthor());
-				newsIntent.setClass(context,NewsViewActivity.class);
+				//newsIntent.setClass(context,NewsViewActivity.class);
 				newsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 context.startActivity(newsIntent);
 			}

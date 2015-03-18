@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/misp_tilte_with_save_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backcolor"
+        android:orientation="vertical" >
+
+        <RadioGroup
+            android:id="@+id/check_operate_radiogroup"
+            style="@null"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radio_btn_normal"
+                style="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@color/backcolor"
+                android:button="@null"
+                android:checked="true"
+                android:drawableLeft="@drawable/radio_btn"
+                android:drawablePadding="5dp"
+                android:gravity="left|center_vertical"
+                android:text="正常"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/radio_btn_abnormal"
+                style="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@color/backcolor"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_btn"
+                android:drawablePadding="5dp"
+                android:gravity="left|center_vertical"
+                android:text="异常"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/radio_btn_unset"
+                style="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="@color/backcolor"
+                android:button="@null"
+                android:drawableLeft="@drawable/radio_btn"
+                android:drawablePadding="5dp"
+                android:gravity="left|center_vertical"
+                android:text="未设置"
+                android:textColor="@color/black" />
+        </RadioGroup>
+
+        <RelativeLayout
+            android:id="@+id/check_operate_desp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edittext_sel" >
+
+            <EditText
+                android:id="@+id/check_operate_abnormal_desp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="请输入异常状况描述信息"
+                android:padding="10dp" >
+
+                <requestFocus />
+            </EditText>
+
+            <RelativeLayout
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp" >
+
+                <Button
+                    android:id="@+id/check_operate_upload_btn"
+                    style="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_green"
+                    android:text="上传图片"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_font_size_sm" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

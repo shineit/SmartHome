@@ -15,6 +15,8 @@ public class ListViewResInfo
 	 */
 	private Class clickActivityClass;
 	
+	private boolean noResult = true;
+	
 	public int getListView()
 	{
 		return listView;
@@ -46,6 +48,14 @@ public class ListViewResInfo
 	public void setListType(int listType)
 	{
 		this.listType = listType;
+	}
+	public boolean isNoResult()
+	{
+		return noResult;
+	}
+	public void setNoResult(boolean noResult)
+	{
+		this.noResult = noResult;
 	}
  
 	

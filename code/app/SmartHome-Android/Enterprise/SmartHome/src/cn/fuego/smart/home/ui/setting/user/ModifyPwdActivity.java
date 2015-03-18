@@ -8,7 +8,7 @@ import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
@@ -67,7 +67,7 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 				ModifyPwdReq req = new ModifyPwdReq();
 				req.setOldPwd(this.MD5(this.getTrimText(txt_oldPwd)));
 				req.setPwdNew(this.MD5(this.getTrimText(txt_newPwd1)));
-				req.setUserName(MemoryCache.getLoginInfo().getUser().getUserName());
+				req.setUserName(AppCache.getInstance().getUser().getUserName());
 				WebServiceContext.getInstance().getUserManageRest(this).modifyPassword(req);
 				
 			}
@@ -93,7 +93,7 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 
 			Intent intent = new Intent(ModifyPwdActivity.this,LoginActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-			MemoryCache.setFlag(1);
+			//MemoryCache.setFlag(1);
 			startActivity(intent);
 			this.finish();
 			//ExitApplication.getInstance().exit(this);

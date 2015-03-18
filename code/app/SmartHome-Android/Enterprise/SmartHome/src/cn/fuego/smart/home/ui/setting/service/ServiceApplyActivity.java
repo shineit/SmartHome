@@ -14,8 +14,8 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.ServiceOrderTypeEnum;
-import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.DeleteOrderByIDReq;
@@ -162,7 +162,6 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	{
 		proDialog =ProgressDialog.show(ServiceApplyActivity.this, "请稍等", "正在删除数据……");
 		DeleteOrderByIDReq req = new DeleteOrderByIDReq();
-		req.setToken(MemoryCache.getToken());
 		req.setOrderID(orderID);
 		WebServiceContext.getInstance().getOrderManageRest(new MispHttpHandler(){
 			@Override
@@ -205,7 +204,6 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	{
 		proDialog =ProgressDialog.show(ServiceApplyActivity.this, "请稍等", "正在提交数据……");
 		SetServiceOrderReq req = new SetServiceOrderReq();
-		req.setToken(MemoryCache.getToken());
 		
 		ServiceOrderJson serviceOrder = new ServiceOrderJson();
 		serviceOrder.setOrderType(this.getApplyType());
@@ -215,8 +213,8 @@ public class ServiceApplyActivity extends BaseActivtiy implements View.OnClickLi
 	
 		serviceOrder.setPhoneNum(this.getTextPhone().getText().toString().trim());
 		serviceOrder.setContactAddr(this.getTextAddr().getText().toString().trim());
-
-		serviceOrder.setCreator(MemoryCache.getLoginInfo().getUser().getUserName());
+		
+		serviceOrder.setCreator(AppCache.getInstance().getUser().getUserName());
 		req.setServiceOrder(serviceOrder);
 		WebServiceContext.getInstance().getOrderManageRest(this).setServiceOrder(req);
 		

@@ -1,44 +1,64 @@
 package cn.fuego.smart.home.ui.enterprise.alarm;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
-import android.widget.Toast;
+import android.widget.TextView;
+import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.ui.base.MispBaseActivtiy;
+import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 
-public class FireAlarmViewActivity extends Activity {
-
+public class FireAlarmViewActivity extends MispBaseActivtiy 
+{
+	private FuegoLog log = FuegoLog.getLog(MispBaseActivtiy.class);
 	private Window window;
 	private PopupWindow popupWindow=null; 
 	private View view;
 	
+	private FireAlarmJson fireAlarm;
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void initRes()
+	{
+		
+		this.activityRes.setName("智慧告警");
+
+		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm_view);
+
+		
+	}
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fire_alarm_view);
 		window=FireAlarmViewActivity.this.getWindow();
+		fireAlarm= (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		//log.info("fireAlarm is :"+fireAlarm.getAlarmTypeName());
 		Button location_btn = (Button) findViewById(R.id.fire_alarm_loc);
-		location_btn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//loadLocaPic(v);
-				Toast.makeText(FireAlarmViewActivity.this, "OK", Toast.LENGTH_SHORT).show();
-				loadLocaPic(v);
-			}
-		});
+		
+		TextView txt_machineID= (TextView) findViewById(R.id.alarm_machine_id);
+		txt_machineID.setText(fireAlarm.getMachineID());
+		TextView txt_loopID= (TextView) findViewById(R.id.alarm_loop_id);
+		txt_loopID.setText(String.valueOf(fireAlarm.getLoopID()));
+		TextView txt_codeID= (TextView) findViewById(R.id.alarm_code_id);
+		txt_codeID.setText(String.valueOf(fireAlarm.getCodeID()));
+		TextView txt_sensorType= (TextView) findViewById(R.id.alarm_sensor_type);
+		txt_sensorType.setText(fireAlarm.getSensorTypeName());
+		TextView txt_alarmType= (TextView) findViewById(R.id.alarm_type_name);
+		txt_alarmType.setText(fireAlarm.getAlarmTypeName());
+
 	}
 	
 
@@ -91,4 +111,6 @@ public class FireAlarmViewActivity extends Activity {
 		});
 		
 	}
+
+
 }

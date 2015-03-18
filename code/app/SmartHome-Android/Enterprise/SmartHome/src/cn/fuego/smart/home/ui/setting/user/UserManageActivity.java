@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
@@ -42,10 +42,10 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		user_phone = (EditText) findViewById(R.id.user_info_phone);
 		user_addr = (EditText) findViewById(R.id.user_info_address);
 		
-		String view_name = MemoryCache.getLoginInfo().getUser().getUserName();
-		String view_email = MemoryCache.getLoginInfo().getCustomer().getEmail();
-		String view_phone = MemoryCache.getLoginInfo().getCustomer().getPhone();
-		String view_addr = MemoryCache.getLoginInfo().getCustomer().getAddr();
+		String view_name = AppCache.getInstance().getUser().getUserName();
+		String view_email = AppCache.getInstance().getCustomer().getEmail();
+		String view_phone = AppCache.getInstance().getCustomer().getPhone();
+		String view_addr = AppCache.getInstance().getCustomer().getAddr();
 		user_name.setText(view_name);
 		if(view_email!=null)
 		{
@@ -103,10 +103,10 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 	private void modfiyInfo()
 	{
 		SetCustomerReq req = new SetCustomerReq();
-		req.setToken(MemoryCache.getToken());
+
 		CustomerJson json = new CustomerJson();
-		json.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
-		json.setCustomerName(MemoryCache.getLoginInfo().getUser().getUserName());
+		json.setUserID(AppCache.getInstance().getUser().getUserID());
+		json.setCustomerName(AppCache.getInstance().getUser().getUserName());
 		json.setEmail(user_email.getText().toString());
 		json.setPhone(user_phone.getText().toString());
 		json.setAddr(user_addr.getText().toString());		
@@ -122,9 +122,9 @@ public class UserManageActivity extends BaseActivtiy implements View.OnClickList
 		
 		if (message.isSuccess())
 		{
-			MemoryCache.getLoginInfo().getCustomer().setPhone(user_phone.getText().toString());
-			MemoryCache.getLoginInfo().getCustomer().setEmail(user_email.getText().toString());
-			MemoryCache.getLoginInfo().getCustomer().setAddr(user_addr.getText().toString());
+			AppCache.getInstance().getCustomer().setPhone(user_phone.getText().toString());
+			AppCache.getInstance().getCustomer().setEmail(user_email.getText().toString());
+			AppCache.getInstance().getCustomer().setAddr(user_addr.getText().toString());
 			proDialog.dismiss();
 			showToast(this,"用户信息保存成功！");
 		}

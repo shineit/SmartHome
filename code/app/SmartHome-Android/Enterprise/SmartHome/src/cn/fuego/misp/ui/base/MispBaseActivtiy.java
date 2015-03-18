@@ -26,6 +26,8 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 	private Map<Integer,Button> buttonViewList = new HashMap<Integer,Button>();
 	private TextView titleView;
 	private Button saveButton;
+	public abstract void initRes();
+	
 	public void backOnClick()
 	{
 		this.finish();
@@ -92,11 +94,14 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 				titleView.setText(this.activityRes.getName());
 			}
 		}
-		if(!ValidatorUtil.isEmpty(activityRes.getSaveBtnName()))
+		saveButton = (Button) findViewById(MispCommonIDName.misp_tilte_save);
+		if(null != saveButton)
 		{
-			saveButton = (Button) findViewById(MispCommonIDName.misp_tilte_save);
+			if(!ValidatorUtil.isEmpty(activityRes.getSaveBtnName()))
+			{
+				saveButton.setText(activityRes.getSaveBtnName());
+			}
 			saveButton.setVisibility(View.VISIBLE);
-			saveButton.setText(activityRes.getSaveBtnName());
 			saveButton.setOnClickListener(new OnClickListener()
 			{
 				
@@ -108,6 +113,8 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 				}
 			});
 		}
+
+
 		
 		
 	}
@@ -147,7 +154,7 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 	}
 	public ActivityResInfo activityRes = new ActivityResInfo();
 
-	public abstract void initRes();
+	
 	public void showMessage(MispHttpMessage message)
 	{
 		showMessage(message.getErrorCode());	
@@ -209,7 +216,6 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 		return titleView;
 	}
  
-	
-	
+
 
 }

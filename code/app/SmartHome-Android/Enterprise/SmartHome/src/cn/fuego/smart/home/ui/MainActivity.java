@@ -1,15 +1,11 @@
 package cn.fuego.smart.home.ui;
 
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.LoginHandler;
-import cn.fuego.smart.home.service.SoundPoolHandler;
-import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
 import cn.fuego.smart.home.ui.jpush.MyReceiver;
@@ -29,11 +25,8 @@ public class MainActivity extends InstrumentedActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_welcome);
 		//本地缓存;  
-		SharedPreUtil.initSharedPreference(getApplicationContext());
-		
-		SoundPoolHandler spHandler= new SoundPoolHandler(this);;
-		spHandler.initSoundPool();
-		registerMessageReceiver();  // used for receive msg
+ 		
+ 		registerMessageReceiver();  // used for receive msg
 		new CountDownTimer(2000, 1000)
 		{
 
@@ -45,19 +38,16 @@ public class MainActivity extends InstrumentedActivity
 			@Override
 			public void onFinish()
 			{
-				 UserEntity userInfo = SharedPreUtil.getInstance().getUser();
-				 log.info("userInfo"+userInfo);
-				 if(!ValidatorUtil.isEmpty(userInfo.getUserName())&&!ValidatorUtil.isEmpty(userInfo.getPassword()))
+ 
+				 if(!MemoryCache.isLogined())
 				 {
-					 LoginHandler longinHandler= new LoginHandler(MainActivity.this);
-					 longinHandler.checkLogin(userInfo.getUserName(), userInfo.getPassword(),true);
+					 LoginActivity.jump(MainActivity.this, HomeActivity.class);
 				 }
 				 else
 				 {
-					 Intent intent = new Intent();
-					 intent.setClass(MainActivity.this, LoginActivity.class);
-					 startActivity(intent);
+					 HomeActivity.jump(MainActivity.this);
 				 }
+ 
 
 				@SuppressWarnings("deprecation")
 				int VERSION = Integer.parseInt(android.os.Build.VERSION.SDK);

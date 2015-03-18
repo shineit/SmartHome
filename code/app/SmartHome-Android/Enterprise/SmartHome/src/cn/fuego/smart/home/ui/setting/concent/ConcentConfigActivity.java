@@ -16,7 +16,6 @@ import android.widget.Toast;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.SetConcentratorReq;
@@ -82,7 +81,6 @@ public class ConcentConfigActivity extends BaseActivtiy implements OnClickListen
 	{
 		proDialog =ProgressDialog.show(ConcentConfigActivity.this, "请稍等", "正在同步数据……");
 		SetConcentratorReq req = new SetConcentratorReq();
-		req.setToken(MemoryCache.getToken());
 		ConcentratorJson json = new ConcentratorJson();
 		json.setConcentratorID(Long.valueOf(txt_id.getText().toString()));
 		json.setDescription(txt_desp.getText().toString());

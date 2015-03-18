@@ -17,7 +17,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="18dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black" />
+            android:textColor="@color/themecolor"
+            android:textSize="@dimen/content_font_size_sm" />
 
     </RelativeLayout>
 

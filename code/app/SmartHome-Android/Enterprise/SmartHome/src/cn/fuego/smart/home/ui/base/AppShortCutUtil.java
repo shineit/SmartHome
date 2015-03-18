@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.widget.Toast;
-import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.MainActivity;
 
 /** 
@@ -39,7 +38,8 @@ public class AppShortCutUtil extends Activity
 	public void addBage()
 	{
 
-		sendBadgeNumber(String.valueOf(MemoryCache.getBageNum()));
+		//临时调整，待修改
+		sendBadgeNumber(String.valueOf("!"));
 		
 	}
 	   public void sendBadgeNumber(String number) 

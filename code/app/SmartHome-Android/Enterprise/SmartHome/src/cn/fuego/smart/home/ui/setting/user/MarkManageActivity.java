@@ -24,8 +24,7 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.service.SensorDataCache;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
@@ -58,7 +57,7 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 		//log.info("传递curMark:"+curMark);
 		
 		markListView = (ListView) findViewById(R.id.user_mark_manage_list);	
-	    markList = SensorDataCache.getInstance().getMarkList();
+	    //markList = SensorDataCache.getInstance().getMarkList();
 	    //log.info("marklist is:"+markList);
 	    markAdapter = new MarkAdapter(MarkManageActivity.this,markList,curMark);
 		markListView.setAdapter(markAdapter);
@@ -148,11 +147,9 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 					{
 						addPDialog =ProgressDialog.show(MarkManageActivity.this, "请稍等", "正在提交数据……");
 						SetUserMarkReq req = new SetUserMarkReq();
-						req.setToken(MemoryCache.getToken());
 						UserMarkJson userMark = new UserMarkJson();
 						userMark.setMark(newMark);
-						userMark.setUserID(MemoryCache.getLoginInfo().getUser()
-								.getUserID());
+						userMark.setUserID(AppCache.getInstance().getUser().getUserID());
 						req.setUserMark(userMark);
 						WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler()
 								{
@@ -164,7 +161,7 @@ public class MarkManageActivity extends BaseActivtiy implements OnClickListener
 										if (message.isSuccess())
 										{
 											//log.info("标签新增成功");
-											SensorDataCache.getInstance().getMarkList().add(newMark);
+											//SensorDataCache.getInstance().getMarkList().add(newMark);
 											//markList.add(newMark);
 											markAdapter.notifyDataSetChanged();
 											setListViewHeightBasedOnChildren(markListView);

@@ -115,7 +115,7 @@
                     android:id="@+id/alarm_clear_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/alarmlist"
+                    
                     android:background="@drawable/common_btn"
                     android:text="确  认"
                     android:textColor="@color/white"
@@ -133,7 +133,7 @@
                     android:id="@+id/alarm_mute_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/alarmlist"
+                    
                     android:background="@drawable/common_btn"
                     android:text="消  音"
                     android:textColor="@color/white"

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -25,10 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
-import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.base.ClientVersionJson;
 
@@ -77,7 +76,7 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 	private void initData()
 	{
 		String appName= getResources().getString(R.string.app_name);
-		String versionName = AppCache.getInstance().getVersionNname();
+		String versionName = MemoryCache.getVersionNname();
 		StringBuffer sb = new StringBuffer(); 
 		sb.append(appName);
 		sb.append(" ");
@@ -113,7 +112,7 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 	private void checkVersion()
 	{
 		
-        int vercode = AppCache.getInstance().getVersionCode();
+        int vercode = MemoryCache.getVersionCode();
         if (null != newVerInfo && newVerInfo.getVersionCode() > vercode) {  
             doNewVersionUpdate(); // 更新新版本  
         } else {  
@@ -123,8 +122,8 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 
 
 	private void notNewVersionShow() {  
-	    int verCode = AppCache.getInstance().getVersionCode();
-	    String verName = AppCache.getInstance().getVersionNname();
+	    int verCode = MemoryCache.getVersionCode();
+	    String verName = MemoryCache.getVersionNname();
 	    StringBuffer sb = new StringBuffer();  
 	    sb.append("当前版本:");  
 	    sb.append(verName);  
@@ -146,8 +145,8 @@ public class UpgradeActivity extends MispBaseActivtiy implements OnClickListener
 	}  
 	private void doNewVersionUpdate() 
 	{
-	    int verCode = AppCache.getInstance().getVersionCode();
-	    String verName = AppCache.getInstance().getVersionNname();
+	    int verCode = MemoryCache.getVersionCode();
+	    String verName = MemoryCache.getVersionNname();
 	    StringBuffer sb = new StringBuffer();
 	    sb.append("当前版本:");
 	    sb.append(verName);

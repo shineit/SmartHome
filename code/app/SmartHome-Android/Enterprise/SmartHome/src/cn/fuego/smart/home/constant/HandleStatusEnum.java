@@ -8,7 +8,7 @@ package cn.fuego.smart.home.constant;
 * @date 2014-10-20 上午11:00:56 
 *
  */
-public enum ServiceOrderStatusEnum
+public enum HandleStatusEnum
 {
 	APPLYED(0,"待处理"),
 	HANDLED(1,"已处理");
@@ -18,7 +18,7 @@ public enum ServiceOrderStatusEnum
 	 * @param intValue
 	 * @param strValue
 	 */
-	private ServiceOrderStatusEnum(int intValue,String strValue)
+	private HandleStatusEnum(int intValue,String strValue)
 	{
 		this.intValue = intValue;
 		this.strValue = strValue;
@@ -32,9 +32,9 @@ public enum ServiceOrderStatusEnum
 		return strValue;
 	}
 	
-	public static ServiceOrderStatusEnum getEnumByInt(int intValue)
+	public static HandleStatusEnum getEnumByInt(int intValue)
 	{
-		for (ServiceOrderStatusEnum c : ServiceOrderStatusEnum.values())
+		for (HandleStatusEnum c : HandleStatusEnum.values())
 		{
 			if (intValue == c.intValue)
 			{
@@ -43,9 +43,9 @@ public enum ServiceOrderStatusEnum
 		}
 		return null;
 	}
-	public static ServiceOrderStatusEnum getEnumByStr(String strValue)
+	public static HandleStatusEnum getEnumByStr(String strValue)
 	{
-		for (ServiceOrderStatusEnum c : ServiceOrderStatusEnum.values())
+		for (HandleStatusEnum c : HandleStatusEnum.values())
 		{
 			if (strValue.equals(c.strValue) )
 			{

@@ -11,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
-import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.ui.setting.service.ServiceActivity;
 import cn.fuego.smart.home.webservice.up.model.GetConcentratorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetConcentratorListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
@@ -47,8 +46,7 @@ public class ConcentListActivity extends MispListActivity<ConcentratorJson> impl
 	public void loadSendList()
 	{
 		GetConcentratorListReq req = new GetConcentratorListReq();
-		req.setToken(MemoryCache.getToken());
-		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
 		WebServiceContext.getInstance().getConcentManageRest(this).getConcentList(req);
 		
 	}

@@ -1,522 +1,64 @@
 <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backcolor"
     android:orientation="vertical"
-    tools:context="${relativePackage}.${activityClass}" xmlns:android="http://schemas.android.com/apk/res/android">
+    tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/misp_tilte_with_back_layout" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/head_height"
-        android:background="@color/themecolor"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" >
 
-        <RelativeLayout
+        <ListView
+            android:id="@+id/check_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_above="@+id/check_btn_area" >
 
-            <TextView
-                android:id="@+id/item_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/home_menu_check"
-                android:textColor="@color/white"
-                android:textSize="@dimen/head_font_size_sm" />
+        </ListView>
 
-            <Button
-                android:id="@+id/check_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+        <LinearLayout
+            android:id="@+id/check_btn_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/themecolor" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
                 android:background="@null"
-                android:drawableLeft="@drawable/back"
-                android:drawablePadding="5dp"
-                android:text="返回"
-                android:textColor="@color/white"
-                android:textSize="@dimen/content_font_size" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:padding="10dp" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/item_alarm_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="报警系统控制状况"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size" />
-
-            <TextView
-                android:id="@+id/item_alarm_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="火灾自动报警系统"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
+                <Button
+                    android:id="@+id/check_submit_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/alarmlist"
+                    android:background="@drawable/common_btn"
+                    android:text="提    交"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/content_font_size" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/item_alarm_status"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="待检查"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/themecolor"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/ImageView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/forward" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView12"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="消防水箱液位"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size" />
-
-            <TextView
-                android:id="@+id/TextView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="喷淋、消火栓系统"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView10"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="正常"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/themecolor"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/ImageView09"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/forward" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView09"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="报警阀前后级水压"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size" />
-
-            <TextView
-                android:id="@+id/TextView08"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="喷淋、消火栓系统"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/mark_img" />
-
-            <TextView
-                android:id="@+id/TextView07"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="异常"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/themecolor"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/ImageView05"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/forward" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="给水泵、稳压泵工作状况"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size" />
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="喷淋、消火栓系统"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/ImageView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/mark_img" />
-
-            <TextView
-                android:id="@+id/TextView03"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="异常"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/themecolor"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/ImageView04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/forward" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView13"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="消火栓、灭火器状况"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size" />
-
-            <TextView
-                android:id="@+id/TextView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="喷淋、消火栓系统"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView14"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="正常"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/themecolor"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/ImageView03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/forward" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/TextView04"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="泡沫发生装置"
-                android:textColor="@color/black"
-                android:textSize="@dimen/content_font_size" />
-
-            <TextView
-                android:id="@+id/TextView05"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="泡沫灭火系统"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/ImageView06"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/mark_img" />
-
-            <TextView
-                android:id="@+id/TextView06"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:text="异常"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/themecolor"
-                android:textSize="@dimen/content_font_size_sm"
-                android:visibility="visible" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" >
-
-            <ImageView
-                android:id="@+id/ImageView07"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/forward" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/alarm_btn_area"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:padding="10dp" >
-
-            <Button
-                android:id="@+id/alarm_clear_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/alarmlist"
-                android:background="@drawable/btn_red"
-                android:text="提 交"
-                android:textColor="@color/white"
-                android:textSize="@dimen/content_font_size" />
-        </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -13,7 +13,8 @@ import android.widget.LinearLayout;
 import cn.fuego.misp.ui.imgScroll.MyImgScroll;
 import cn.fuego.smart.home.R;
 
-public class DeviceMallActivity extends Activity {
+public class DeviceMallActivity extends Activity 
+{
 
 
 	MyImgScroll myPager; // 图片容器

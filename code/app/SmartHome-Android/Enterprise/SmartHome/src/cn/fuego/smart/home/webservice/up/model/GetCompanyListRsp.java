@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
@@ -14,7 +15,8 @@ import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 */
 public class GetCompanyListRsp extends BaseJsonRsp
 {
-	private List<CompanyJson> companyList;
+	
+	private List<CompanyJson> companyList= new ArrayList<CompanyJson>();
 
 	public List<CompanyJson> getCompanyList() {
 		return companyList;

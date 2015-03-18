@@ -138,8 +138,7 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	}
 
 	@Override
-	final public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id)
+	final public void onItemClick(AdapterView<?> parent, View view, int position,long id)
 	{
 
 		E item = this.adapter.getItem(position);
@@ -149,11 +148,24 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	
 	public void onItemListClick(AdapterView<?> parent, View view,long id, E item)
 	{
-		
+		if(this.listViewRes.getClickActivityClass()==null)
+		{
+			return;
+		}
 		Intent intent = new Intent(this,this.listViewRes.getClickActivityClass());
 		intent.putExtra(ListViewResInfo.SELECT_ITEM, (Serializable) item);
 
-		this.startActivity(intent);
+		if(this.listViewRes.isNoResult())
+		{
+			this.startActivity(intent);	
+		}
+		else
+		{
+			this.startActivityForResult(intent, 1);
+		}
+		
 	}
+	
+
 
 }

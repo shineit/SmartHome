@@ -1,37 +1,87 @@
 package cn.fuego.smart.home.cache;
 
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.dao.SharedPreUtil;
+import cn.fuego.misp.service.MemoryCache;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
+import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
+import cn.fuego.smart.home.webservice.up.model.base.UserJson;
+import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class AppCache
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
+	
+	public static String PAY_NOTIFY_URL = MemoryCache.getWebContextUrl() + "/index.php/AlipayNotify/GetNotify";
 
+	private UserJson user;
+	private CustomerJson customer;
+	private CompanyJson company;
 	private static AppCache instance;
-	
-	private String versionName;
-	private int versionCode;
-
+	private  int company_id = 1;
  
-	public String getVersionNname()
-	{
-		return versionName;
-	}
-
-	public int getVersionCode()
-	{
-		return versionCode;
-	}
+	
+	public static final String USER_CACHE="user";
+	public static final String CUSTOMER_CACHE="customer";
+	public static final String TOKEN_CACHE="token";
 	
 	
+	private boolean firstStarted = true;
+	private boolean started = false;
 
-	public void setVersionNname(String versionNname)
+	
+	
+ 
+
+	public boolean isFirstStarted()
 	{
-		this.versionName = versionNname;
+		String startStr = (String) SharedPreUtil.getInstance().get("isFirstStarted");
+		if(!ValidatorUtil.isEmpty(startStr))
+		{
+			firstStarted = Boolean.valueOf(startStr);
+		}
+		
+		return firstStarted;
 	}
 
-	public void setVersionCode(int versionCode)
+	public void setFirstStarted(boolean firstStarted)
 	{
-		this.versionCode = versionCode;
+		this.firstStarted = firstStarted;
+		SharedPreUtil.getInstance().put("isFirstStarted", String.valueOf(firstStarted));
+
+	}
+
+	public boolean isStarted()
+	{
+		return started;
+	}
+
+	public void setStarted(boolean started)
+	{
+		this.started = started;
+	}
+
+	public CompanyJson getCompany()
+	{
+		return company;
+	}
+
+	public int getCompany_id()
+	{
+		return company_id;
+	}
+ 
+ 
+ 
+
+	private AppCache()
+	{
+		 company_id = 1;
+		 
+		  
 	}
 	
 	public synchronized static AppCache getInstance()
@@ -43,6 +93,61 @@ public class AppCache
 		return instance;
 		
 	}
+	
+	public void clear()
+	{
+		MemoryCache.setToken(null);
+		user = null;
+		customer = null;
+		SharedPreUtil.getInstance().delete(USER_CACHE);
+		SharedPreUtil.getInstance().delete(CUSTOMER_CACHE);
+		SharedPreUtil.getInstance().delete(TOKEN_CACHE);
+				
+	}
 
+	public CustomerJson getCustomer()
+	{
+		return customer;
+	}
+	public void update(CustomerJson customer)
+	{
+		this.customer = customer;
+		SharedPreUtil.getInstance().put(CUSTOMER_CACHE, customer);
+		load();
+
+	}
+	public void update(String token,UserJson user,CustomerJson customer)
+	{
+ 
+		SharedPreUtil.getInstance().put(USER_CACHE, user);
+		SharedPreUtil.getInstance().put(CUSTOMER_CACHE, customer);
+		SharedPreUtil.getInstance().put(TOKEN_CACHE,token );
+		load();
+
+	}
+
+	public void load()
+	{
+		this.user =  (UserJson) SharedPreUtil.getInstance().get(USER_CACHE);
+		this.customer = (CustomerJson) SharedPreUtil.getInstance().get(CUSTOMER_CACHE);
+		MemoryCache.setToken((String) SharedPreUtil.getInstance().get(TOKEN_CACHE));
+	 
+
+		
+	}
+ 
+	public UserJson getUser()
+	{
+		return user;
+	}
+
+ 
+	 
+	
+ 
+
+	
+
+	
 	 
 }

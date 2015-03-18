@@ -8,10 +8,18 @@ public class MemoryCache
 {
 	private static String token;
 
- 	
+//	private static String token;
+//
+//	private static String version = "0.1";
+//	//private static String serverIp = "115.231.168.14"; //嘉兴服务器地址
+//	//private static String serverIp = "192.168.1.107"; //本地1
+//	private static String serverIp = "192.168.0.103"; //本地2
+//	//public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
+//	private static String serverPort= "8080";
+	
 	private static String version = "0.1";
-	private static String serverIp =  "www.kkxd.com.cn";
-	private static String serverPort= "80";
+	private static String serverIp =  "192.168.0.105";
+	private static String serverPort= "8080";
 	
 	private static float density = 1;
 	 
@@ -96,13 +104,17 @@ public class MemoryCache
 	}
 	public static String getWebContextUrl()
 	{
-		return getHostUrl()+"/Laundry";
+		return getHostUrl()+"/SmartHome";
 	}
 	public static String getImageUrl()
 	{
-		return MemoryCache.getHostUrl() + "/Laundry/Public/Fuego/uploads/";
+		return MemoryCache.getWebContextUrl() + "/upload/";
 	}
-	
+	public static String getRestUrl()
+	{
+		return getWebContextUrl()+"/rest";
+		
+	}
  
 
 }

@@ -26,7 +26,7 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -169,9 +169,8 @@ public class MarkAdapter extends BaseAdapter
 	private void delMark(String targetMark)
 	{
 		SetUserMarkReq req= new SetUserMarkReq();
-		req.setToken(MemoryCache.getToken());
 		UserMarkJson userMark = new UserMarkJson();
-		userMark.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+		userMark.setUserID(AppCache.getInstance().getUser().getUserID());
 		userMark.setMark(targetMark);
 		req.setUserMark(userMark);
 		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){

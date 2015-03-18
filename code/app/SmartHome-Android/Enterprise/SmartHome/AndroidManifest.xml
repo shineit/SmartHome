@@ -180,15 +180,6 @@
             android:name=".ui.camera.discovery.VideoSquareActivity"
             android:screenOrientation="portrait" />
 
-        <receiver
-            android:name=".ui.EzvizBroadcastReceiver"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.vedeogo.action.OAUTH_SUCCESS_ACTION" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.videogo.androidpn.NOTIFICATION_RECEIVED_ACTION" />
-            </intent-filter>
-        </receiver>
         <!-- camera end -->
         <activity
             android:name=".ui.LoginActivity"
@@ -337,7 +328,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.HomeActivity"
+            android:name=".ui.HomeActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -388,24 +379,52 @@
             android:label="@string/title_activity_fire_alarm" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.enterprise.ui.info.FireAlarmViewActivityity"
+            android:name=".ui.enterprise.alarm.FireAlarmViewActivity"
             android:label="@string/title_activity_fire_alarm_view" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.enterprise.check.CheckActivity"
+            android:name=".ui.enterprise.check.CheckActivity"
             android:label="@string/title_activity_check" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.common.mall.DeviceMallActivity"
+            android:name=".ui.common.mall.DeviceMallActivity"
             android:label="@string/title_activity_device_mall" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity"
+            android:name=".ui.enterprise.company.CompanyViewActivity"
             android:label="@string/title_activity_company_info" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity"
+            android:name=".ui.enterprise.company.CompanyListActivity"
             android:label="@string/title_activity_company_list" >
+        </activity>
+        <activity
+            android:name=".ui.enterprise.check.CheckLogActivity"
+            android:label="@string/title_activity_check_log" >
+        </activity>
+        <activity
+            android:name=".ui.enterprise.check.CheckOperateActivity"
+            android:label="@string/title_activity_check_operate" >
+        </activity>
+        <activity
+            android:name=".ui.enterprise.help.HelpActivity"
+            android:label="@string/title_activity_help" >
+        </activity>
+        <activity
+            android:name=".ui.common.knowledge.CommonSenseActivity"
+            android:label="@string/title_activity_common_sense" >
+        </activity>
+        <activity
+            android:name=".ui.common.knowledge.ContentViewActivity"
+            android:label="@string/title_activity_content_view" >
+        </activity>
+        <activity
+            android:name=".ui.common.mall.ProductMallActivity"
+            android:label="@string/title_activity_product_mall" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.common.mall.ProductViewActivity"
+            android:label="@string/title_activity_product_view" >
         </activity>
     </application>
 

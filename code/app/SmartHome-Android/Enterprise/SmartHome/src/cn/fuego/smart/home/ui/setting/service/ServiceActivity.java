@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.constant.ServiceOrderStatusEnum;
-import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.cache.AppCache;
+import cn.fuego.smart.home.constant.HandleStatusEnum;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListReq;
 import cn.fuego.smart.home.webservice.up.model.GetServiceOrderListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
@@ -53,8 +53,7 @@ public class ServiceActivity extends MispListActivity<ServiceOrderJson> implemen
 	public void loadSendList()
 	{
 		GetServiceOrderListReq req = new GetServiceOrderListReq();
-		req.setToken(MemoryCache.getToken());
-		req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
 		WebServiceContext.getInstance().getOrderManageRest(this).getOrderList(req);
 		
 	}
@@ -78,7 +77,7 @@ public class ServiceActivity extends MispListActivity<ServiceOrderJson> implemen
 		txt_title.setText(item.getOrderName());
 		
 		TextView txt_status= (TextView) view.findViewById(R.id.service_status);
-		txt_status.setText(ServiceOrderStatusEnum.getEnumByInt(item.getOrderStatus()).getStrValue());
+		txt_status.setText(HandleStatusEnum.getEnumByInt(item.getOrderStatus()).getStrValue());
 		
 		return view;
 	}

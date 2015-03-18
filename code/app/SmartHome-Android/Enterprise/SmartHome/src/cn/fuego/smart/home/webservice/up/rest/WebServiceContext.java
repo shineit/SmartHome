@@ -5,9 +5,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispProxyFactory;
-import cn.fuego.smart.home.service.MemoryCache;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 
 public class WebServiceContext
@@ -85,5 +85,22 @@ public class WebServiceContext
 		ConcentManageRest rest = MispProxyFactory.create( hostURL,ConcentManageRest.class, getHttpClient(),handler);
 		return rest;
 	}
-    
+
+	public  CheckManageRest getCheckManageRest(HttpListener handler)
+	{
+		CheckManageRest rest = MispProxyFactory.create( hostURL,CheckManageRest.class, getHttpClient(),handler);
+		return rest;
+	}
+	
+	public  KnowledgeManageRest getKnowledgeManageRest(HttpListener handler)
+	{
+		KnowledgeManageRest rest = MispProxyFactory.create( hostURL,KnowledgeManageRest.class, getHttpClient(),handler);
+		return rest;
+	}
+	
+	public  ProductManageRest getProductManageRest(HttpListener handler)
+	{
+		ProductManageRest rest = MispProxyFactory.create( hostURL,ProductManageRest.class, getHttpClient(),handler);
+		return rest;
+	}
 }

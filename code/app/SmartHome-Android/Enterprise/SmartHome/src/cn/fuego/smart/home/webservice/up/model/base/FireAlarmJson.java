@@ -22,8 +22,7 @@ public class FireAlarmJson implements Serializable
 
 	private int id;  			//告警ID，自增长
 	private long concentratorID;
-
-	private int alarmType;		//告警事件类型 AlarmTypeEnum
+	private String alarmTypeName; //告警类型名称
 	private long alarmTime;	//告警产生的时间
 	private Integer clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 
@@ -41,6 +40,7 @@ public class FireAlarmJson implements Serializable
 	private float locationY;  //Y 偏移，相当当前图片尺寸高度
 	
 	private String sensorTypeName;  //传感器类型名称
+	
 
 	public int getId()
 	{
@@ -62,14 +62,16 @@ public class FireAlarmJson implements Serializable
 		this.concentratorID = concentratorID;
 	}
 
-	public int getAlarmType()
+
+
+	public String getAlarmTypeName()
 	{
-		return alarmType;
+		return alarmTypeName;
 	}
 
-	public void setAlarmType(int alarmType)
+	public void setAlarmTypeName(String alarmTypeName)
 	{
-		this.alarmType = alarmType;
+		this.alarmTypeName = alarmTypeName;
 	}
 
 	public long getAlarmTime()
@@ -196,16 +198,14 @@ public class FireAlarmJson implements Serializable
 	public String toString()
 	{
 		return "FireAlarmJson [id=" + id + ", concentratorID=" + concentratorID
-				+ ", alarmType=" + alarmType + ", alarmTime=" + alarmTime
-				+ ", clearStatus=" + clearStatus + ", clearTime=" + clearTime
-				+ ", status=" + status + ", concentDesp=" + concentDesp
-				+ ", machineID=" + machineID + ", loopID=" + loopID
-				+ ", codeID=" + codeID + ", locationDesp=" + locationDesp
-				+ ", locationX=" + locationX + ", locationY=" + locationY
-				+ ", sensorTypeName=" + sensorTypeName + "]";
+				+ ", alarmTime=" + alarmTime + ", clearStatus=" + clearStatus
+				+ ", clearTime=" + clearTime + ", status=" + status
+				+ ", concentDesp=" + concentDesp + ", machineID=" + machineID
+				+ ", loopID=" + loopID + ", codeID=" + codeID
+				+ ", locationDesp=" + locationDesp + ", locationX=" + locationX
+				+ ", locationY=" + locationY + ", sensorTypeName="
+				+ sensorTypeName + ", alarmTypeName=" + alarmTypeName + "]";
 	}
-
-
 
  
 }

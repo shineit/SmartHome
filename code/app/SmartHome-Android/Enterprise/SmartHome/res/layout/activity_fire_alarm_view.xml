@@ -7,43 +7,10 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/head_height"
-        android:background="@color/themecolor"
-        android:orientation="vertical" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-
-            <TextView
-                android:id="@+id/item_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/home_menu_alarm"
-                android:textColor="@color/white"
-                android:textSize="@dimen/head_font_size_sm" />
-
-            <Button
-                android:id="@+id/alarm_manage_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@null"
-                android:drawableLeft="@drawable/back"
-                android:drawablePadding="5dp"
-                android:text="返回"
-                android:textColor="@color/white"
-                android:textSize="@dimen/content_font_size" />
-        </RelativeLayout>
-    </LinearLayout>
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/misp_tilte_with_back_layout" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -83,7 +50,7 @@
                         android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/control_manage_ctrID"
+                        android:id="@+id/alarm_machine_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -113,7 +80,7 @@
                         android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/control_channel_id"
+                        android:id="@+id/alarm_loop_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -141,7 +108,7 @@
                         android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/control_manage_ctrType"
+                        android:id="@+id/alarm_code_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -168,6 +135,36 @@
                     android:layout_marginTop="10dp" >
 
                     <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:text="设备类型:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                    <TextView
+                        android:id="@+id/alarm_sensor_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toRightOf="@+id/TextView02"
+                        android:text="2#楼3层 503室"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp" >
+
+                    <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -178,7 +175,7 @@
                         android:textSize="@dimen/content_font_size" />
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/alarm_location_desp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -186,7 +183,8 @@
                         android:layout_marginRight="20dp"
                         android:layout_toRightOf="@+id/textView3"
                         android:text="2#楼3层 503室"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/content_font_size" />
 
                 </RelativeLayout>
 
@@ -216,7 +214,7 @@
                         android:layout_toRightOf="@+id/TextView06" >
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/alarm_type_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

@@ -40,5 +40,12 @@
     <string name="title_activity_device_mall">DeviceMallActivity</string>
     <string name="title_activity_company_info">CompanyInfoActivity</string>
     <string name="title_activity_company_list">CompanyListActivity</string>
+    <string name="title_activity_check_log">CheckLogActivity</string>
+    <string name="title_activity_check_operate">CheckOperateActivity</string>
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_common_sense">CommonSenseActivity</string>
+    <string name="title_activity_content_view">ContentViewActivity</string>
+    <string name="title_activity_product_mall">ProductMallActivity</string>
+    <string name="title_activity_product_view">ProductViewActivity</string>
 
 </resources>

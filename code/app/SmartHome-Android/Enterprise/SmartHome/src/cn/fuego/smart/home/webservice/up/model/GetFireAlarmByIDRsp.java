@@ -1,31 +1,32 @@
 package cn.fuego.smart.home.webservice.up.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 
 public class GetFireAlarmByIDRsp extends BaseJsonRsp
 {
-	
-	private FireAlarmJson fireAlarm;
+	private List<FireAlarmJson> fireAlarmList= new ArrayList<FireAlarmJson>();
 
-	public FireAlarmJson getFireAlarm()
+	public List<FireAlarmJson> getFireAlarmList()
 	{
-		return fireAlarm;
+		return fireAlarmList;
 	}
 
-	public void setFireAlarm(FireAlarmJson fireAlarm)
+	public void setFireAlarmList(List<FireAlarmJson> fireAlarmList)
 	{
-		this.fireAlarm = fireAlarm;
+		this.fireAlarmList = fireAlarmList;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "GetFireAlarmByIDRsp [fireAlarm=" + fireAlarm + ", result="
-				+ result + "]";
+		return "GetFireAlarmByIDRsp [fireAlarmList=" + fireAlarmList
+				+ ", result=" + result + "]";
 	}
-
-
+	
 
 	
 }

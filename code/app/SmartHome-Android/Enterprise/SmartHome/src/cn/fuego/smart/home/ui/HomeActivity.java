@@ -1,8 +1,8 @@
 package cn.fuego.smart.home.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,16 +11,15 @@ import android.widget.Button;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
-import cn.fuego.smart.home.service.SensorDataCache;
-import cn.fuego.smart.home.service.SoundPoolHandler;
 import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.base.widgt.BadgeView;
+import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
 import cn.fuego.smart.home.ui.common.mall.DeviceMallActivity;
+import cn.fuego.smart.home.ui.common.mall.ProductMallActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
+import cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity;
 
@@ -29,17 +28,21 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	private FuegoLog log = FuegoLog.getLog(getClass());
 	private Boolean isLoadSensor=false;
 	private ProgressDialog proDialog;
-	private int tabIndex;
-    private SoundPoolHandler spHandler;
+      
+	public static void jump(Context context)
+	{
+ 
+ 		Intent intent = new Intent();
+  		intent.setClass(context, HomeActivity.class);
+ 		context.startActivity(intent);
+  	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		ExitApplication.getInstance().addActivity(this);
-		
-		spHandler= new SoundPoolHandler(this);
-		spHandler.initSoundPool();
+ 
 		initView();
 		//initSoundPool();
 		
@@ -66,7 +69,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		Button mall_btn= (Button) findViewById(R.id.home_menu_mall);
 		mall_btn.setOnClickListener(this);		
 		
-		//MENU 加bage 提醒
+/*		//MENU 加bage 提醒
 		if(MemoryCache.getBageNum()>1)
 		{
 			BadgeView badge2 = new BadgeView(this, alarm_btn);
@@ -75,7 +78,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	    	badge2.setBadgeBackgroundColor(Color.RED);
 	    	badge2.setTextSize(15);
 	    	badge2.toggle();
-		}
+		}*/
 
 		
 		Button about_btn= (Button) findViewById(R.id.home_about_us_btn);
@@ -109,12 +112,14 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			//jumpActivity(CompanyListActivity.class);
 			break;
 		case R.id.home_menu_manage:
+			CompanyListActivity.jump(this, CheckLogActivity.class);
 			break;
 			
 		case R.id.home_menu_knowledge:
+			jumpActivity(CommonSenseActivity.class);
 			break;
 		case R.id.home_menu_mall: 
-			jumpActivity(DeviceMallActivity.class);
+			jumpActivity(ProductMallActivity.class);
 			break;
 		case R.id.home_about_us_btn:
 			jumpActivity(AboutUsActivity.class);
@@ -141,21 +146,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		
 	}
 
-	private void loadSensorData(int index)
-	{
-		tabIndex=index;
-		if(!isLoadSensor||SensorDataCache.getInstance().noData())
-		{
-			isLoadSensor=true;
-			proDialog =ProgressDialog.show(HomeActivity.this, "请稍等", "正在加载数据……");
-			SensorDataCache.getInstance().load(this);
-		}
-		else
-		{
-			//jumpTab(tabIndex);
-		}
-	}
-
+ 
 
 	
 	

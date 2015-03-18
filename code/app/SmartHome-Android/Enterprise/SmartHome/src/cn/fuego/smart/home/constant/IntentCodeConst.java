@@ -25,4 +25,6 @@ public class IntentCodeConst
 	
 	public static final int FIRE_ALARM_ENTER= 1;
 	public static final int NEWS_ENTER= 2;
+	
+	public static final String JUMP_CLASS_NAME = "jumpClass";//intent 跳转activity名称
 }

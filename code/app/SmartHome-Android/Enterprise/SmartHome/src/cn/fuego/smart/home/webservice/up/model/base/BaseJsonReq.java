@@ -1,7 +1,7 @@
 package cn.fuego.smart.home.webservice.up.model.base;
 
-import cn.fuego.smart.home.service.MemoryCache;
-
+import cn.fuego.misp.service.MemoryCache;
+ 
 /**
  * 
 * @ClassName: BaseJsonReq 

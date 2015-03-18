@@ -5,12 +5,11 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import cn.fuego.misp.ui.list.MispListActivity;
-import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.service.MemoryCache;
+import cn.fuego.smart.home.cache.AppCache;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.up.model.GetCompanyListReq;
 import cn.fuego.smart.home.webservice.up.model.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
@@ -30,7 +29,7 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 		
 		this.listViewRes.setListItemView(R.layout.misp_list_item_btntype);
 		
-		Class clazz = (Class) this.getIntent().getSerializableExtra(JUMP_CLASS_NAME);
+		Class clazz = (Class) this.getIntent().getSerializableExtra(IntentCodeConst.JUMP_CLASS_NAME);
 		this.listViewRes.setClickActivityClass(clazz);
 		
 		this.activityRes.setName("基本信息");
@@ -39,7 +38,7 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 	public static void jump(Context context,Class jumpClass)
 	{
 		Intent intent = new Intent(context,CompanyListActivity.class);
-		intent.putExtra(JUMP_CLASS_NAME, jumpClass);
+		intent.putExtra(IntentCodeConst.JUMP_CLASS_NAME, jumpClass);
 
 		context.startActivity(intent);
 	}
@@ -56,8 +55,8 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 	public void loadSendList()
 	{
 		GetCompanyListReq req = new GetCompanyListReq();
-        req.setUserID(MemoryCache.getLoginInfo().getUser().getUserID());
-		req.setToken(MemoryCache.getToken());
+        req.setUserID(AppCache.getInstance().getUser().getUserID());
+
 		WebServiceContext.getInstance().getUserManageRest(this).getCompanyList(req);
 		
 	}

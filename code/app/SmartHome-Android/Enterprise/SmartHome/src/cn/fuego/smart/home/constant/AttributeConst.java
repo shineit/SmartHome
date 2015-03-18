@@ -17,6 +17,8 @@ package cn.fuego.smart.home.constant;
  */
 public class AttributeConst
 {
-	 public static final String ALARM_TYPE="alarmTypeAttr";
+	public static final String ALARM_TYPE="alarmTypeAttr";
+	public static final String ALARM_KIND="alarmKind";
+	
 
 }
