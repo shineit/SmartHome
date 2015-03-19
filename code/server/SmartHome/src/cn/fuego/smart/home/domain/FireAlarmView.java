@@ -37,6 +37,7 @@ public class FireAlarmView implements PersistenceObject
 	private String concentDesp;		//集中器描述
 	
     //通过objID关联FireSensor表	
+	private int planID;
 	private int machineID; //机号
 	private int loopID;    //回路号
 	private int codeID;    //编号
@@ -247,6 +248,14 @@ public class FireAlarmView implements PersistenceObject
 	public void setPushType(int pushType)
 	{
 		this.pushType = pushType;
+	}
+	public int getPlanID()
+	{
+		return planID;
+	}
+	public void setPlanID(int planID)
+	{
+		this.planID = planID;
 	}
 
 

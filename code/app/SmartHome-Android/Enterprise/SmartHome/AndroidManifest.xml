@@ -379,7 +379,7 @@
             android:label="@string/title_activity_fire_alarm" >
         </activity>
         <activity
-            android:name=".ui.enterprise.alarm.FireAlarmViewActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmViewActivity"
             android:label="@string/title_activity_fire_alarm_view" >
         </activity>
         <activity
@@ -433,6 +433,10 @@
         <activity
             android:name="cn.fuego.misp.ui.common.upload.MispUploadImgActivity"
             android:label="@string/title_activity_misp_upload_img" >
+        </activity>
+         <activity
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.SensorLocationActivity"
+            android:label="@string/title_activity_product_view" >
         </activity>
         
         <activity android:name="cn.fuego.misp.ui.common.upload.SelectPicActivity" android:theme="@style/DialogStyleBottom"/>   

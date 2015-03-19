@@ -39,6 +39,18 @@ public class FireAlarmJson implements Serializable
 	private float locationX;  //X 偏移，相对当前图片尺寸宽度
 	private float locationY;  //Y 偏移，相当当前图片尺寸高度
 	
+	private int planID;
+	
+	public int getPlanID()
+	{
+		return planID;
+	}
+
+	public void setPlanID(int planID)
+	{
+		this.planID = planID;
+	}
+
 	private String sensorTypeName;  //传感器类型名称
 	
 

@@ -1,9 +1,8 @@
 package cn.fuego.misp.ui.base;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -27,6 +26,12 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
  	private TextView titleView;
 	private Button saveButton;
 	public abstract void initRes();
+	protected static void jumpToActivity(Context context,Class clazz)
+	{
+		Intent intent = new Intent(context,clazz);
+ 
+		context.startActivity(intent);
+	}
 	
 	public void backOnClick()
 	{

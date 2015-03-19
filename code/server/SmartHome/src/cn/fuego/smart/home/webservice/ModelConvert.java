@@ -26,6 +26,7 @@ import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.Knowledge;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.Product;
+import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
@@ -42,6 +43,7 @@ import cn.fuego.smart.home.webservice.up.model.base.KnowledgeJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
+import cn.fuego.smart.home.webservice.up.model.base.SensorPlanJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
@@ -85,6 +87,7 @@ public class ModelConvert
 		json.setSensorDesp(homeAlarm.getSensorDesp());
 		json.setSensorType(homeAlarm.getSensorType());
 		json.setSensorTypeName(homeAlarm.getSensorTypeName());
+		
 		return json;
 		
 	}
@@ -106,7 +109,7 @@ public class ModelConvert
 		json.setLocationDesp(fireAlarm.getLocationDesp());
 		json.setLocationX(fireAlarm.getLocationX());
 		json.setLocationY(fireAlarm.getLocationY());
-		
+		json.setPlanID(fireAlarm.getPlanID());
 		json.setSensorTypeName(fireAlarm.getSensorTypeName());
 		return json;
 		
@@ -444,6 +447,22 @@ public class ModelConvert
 		json.setContent(knowledge.getContent());
 		json.setKnowledgeType(knowledge.getKnowledgeType());
 		json.setKnowledgeKind(knowledge.getKnowledgeKind());
+		return json;
+	}
+	/**
+	 * @param plan
+	 * @return
+	 */
+	public static SensorPlanJson planToJson(SensorPlan plan)
+	{
+		SensorPlanJson json = new SensorPlanJson();
+		 
+		json.setPlanID(plan.getPlanID());
+		json.setName(plan.getName());
+		json.setBuildingID(plan.getBuildingID());
+		json.setDesp(plan.getDesp());
+		json.setFloor(plan.getFloor());
+		json.setPicPath(plan.getPicPath());
 		return json;
 	}
 }

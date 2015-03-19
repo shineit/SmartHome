@@ -23,7 +23,8 @@
 		 
 		 <property name="status" column="STATUS"></property>
 		 <property name="concentDesp" column="CONCENT_DESP"></property>
-
+		 <property name="planID" column="PLAN_ID"></property>
+		 
 		 <property name="machineID" column="MACHINE_ID"></property>
 		 <property name="loopID" column="LOOP_ID"></property>
 		 <property name="codeID" column="CODE_ID"></property>

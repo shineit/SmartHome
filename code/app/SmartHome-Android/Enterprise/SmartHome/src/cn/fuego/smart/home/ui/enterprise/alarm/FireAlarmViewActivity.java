@@ -35,9 +35,10 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		this.activityRes.setName("智慧告警");
 
 		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm_view);
-
 		
-	}
+		this.activityRes.getButtonIDList().add(R.id.fire_alarm_loc);
+
+ 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -46,10 +47,9 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		window=FireAlarmViewActivity.this.getWindow();
 		fireAlarm= (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
 		//log.info("fireAlarm is :"+fireAlarm.getAlarmTypeName());
-		Button location_btn = (Button) findViewById(R.id.fire_alarm_loc);
-		
+ 	
 		TextView txt_machineID= (TextView) findViewById(R.id.alarm_machine_id);
-		txt_machineID.setText(fireAlarm.getMachineID());
+		txt_machineID.setText(String.valueOf(fireAlarm.getMachineID()));
 		TextView txt_loopID= (TextView) findViewById(R.id.alarm_loop_id);
 		txt_loopID.setText(String.valueOf(fireAlarm.getLoopID()));
 		TextView txt_codeID= (TextView) findViewById(R.id.alarm_code_id);
@@ -60,7 +60,12 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		txt_alarmType.setText(fireAlarm.getAlarmTypeName());
 
 	}
-	
+ 
+	@Override
+	public void onClick(View v)
+	{
+		SensorLocationActivity.jump(this, fireAlarm);
+	}
 
 	private void loadLocaPic(View parent) {
 

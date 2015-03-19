@@ -18,7 +18,7 @@ public class MemoryCache
 //	private static String serverPort= "8080";
 	
 	private static String version = "0.1";
-	private static String serverIp =  "192.168.0.103";
+	private static String serverIp =  "192.168.0.105";
 	private static String serverPort= "8080";
 	
 	private static float density = 1;

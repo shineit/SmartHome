@@ -55,6 +55,13 @@ public class WebServiceContext
 
 		return rest;
 	}
+	public CompanyManageRest getCompanyManageRest(HttpListener handler)
+	{
+ 
+		CompanyManageRest rest = MispProxyFactory.create( hostURL,CompanyManageRest.class, getHttpClient(),handler);
+
+		return rest;
+	}
 	private HttpClient getHttpClient()
 	{
 		HttpClient httpClient = new DefaultHttpClient();
