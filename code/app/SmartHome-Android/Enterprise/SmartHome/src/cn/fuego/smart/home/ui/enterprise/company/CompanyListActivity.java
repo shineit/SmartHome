@@ -17,8 +17,6 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class CompanyListActivity extends MispListActivity<CompanyJson>
 {
-	private static final String JUMP_CLASS_NAME = "jumpClass";
-
 	
 	@Override
 	public void initRes() 
@@ -32,7 +30,7 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 		Class clazz = (Class) this.getIntent().getSerializableExtra(IntentCodeConst.JUMP_CLASS_NAME);
 		this.listViewRes.setClickActivityClass(clazz);
 		
-		this.activityRes.setName("基本信息");
+		this.activityRes.setName("公司列表");
 		
 	}
 	public static void jump(Context context,Class jumpClass)

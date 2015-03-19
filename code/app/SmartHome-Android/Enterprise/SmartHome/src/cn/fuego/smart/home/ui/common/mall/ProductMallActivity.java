@@ -112,7 +112,7 @@ public class ProductMallActivity extends MispListActivity<ProductJson>
 	{
 		GetProductListReq req = new GetProductListReq();
  		req.setUserID(AppCache.getInstance().getUser().getUserID());		
-		WebServiceContext.getInstance().getProductManageRest(this).getProductList(req);
+		WebServiceContext.getInstance().getMallManageRest(this).getProductList(req);
 		
 		
 	}

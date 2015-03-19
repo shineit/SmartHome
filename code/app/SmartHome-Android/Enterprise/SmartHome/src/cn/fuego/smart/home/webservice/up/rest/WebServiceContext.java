@@ -105,9 +105,9 @@ public class WebServiceContext
 		return rest;
 	}
 	
-	public  ProductManageRest getProductManageRest(HttpListener handler)
+	public  MallManageRest getMallManageRest(HttpListener handler)
 	{
-		ProductManageRest rest = MispProxyFactory.create( hostURL,ProductManageRest.class, getHttpClient(),handler);
+		MallManageRest rest = MispProxyFactory.create( hostURL,MallManageRest.class, getHttpClient(),handler);
 		return rest;
 	}
 }

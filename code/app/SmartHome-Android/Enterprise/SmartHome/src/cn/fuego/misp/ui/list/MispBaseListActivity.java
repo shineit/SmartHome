@@ -7,8 +7,10 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
@@ -160,7 +162,8 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	public void adapterForScrollView()
 	{
     	ListAdapter listAdapter = listView.getAdapter();   
-        if (listAdapter == null) {   
+        if (listAdapter == null) 
+        {   
             return;   
         }   
    

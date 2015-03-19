@@ -1,11 +1,8 @@
 package cn.fuego.smart.home.ui.common.mall;
 
-import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import cn.fuego.smart.home.R;
 
 public class ProductViewActivity extends Activity
 {

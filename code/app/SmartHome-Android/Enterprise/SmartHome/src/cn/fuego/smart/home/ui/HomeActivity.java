@@ -15,7 +15,6 @@ import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
-import cn.fuego.smart.home.ui.common.mall.DeviceMallActivity;
 import cn.fuego.smart.home.ui.common.mall.ProductMallActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
@@ -26,7 +25,7 @@ import cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity;
 public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
-	private Boolean isLoadSensor=false;
+
 	private ProgressDialog proDialog;
       
 	public static void jump(Context context)

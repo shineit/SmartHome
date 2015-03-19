@@ -142,14 +142,7 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 
 	    Toast.makeText(mContext, MISPErrorMessageConst.getMessageByErrorCode(message.getErrorCode()), Toast.LENGTH_SHORT).show();
     }
-    /**
-     * 如何进程被杀死，则取消登录状态
-     */
-	@Override
-	protected void onDestroy()
-	{
-		super.onDestroy();
-	}
+
 
 
 }
