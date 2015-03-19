@@ -84,12 +84,12 @@ public class OrderManageRestImpl implements OrderManageRest
 		}
 		catch(MISPException e)
 		{
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 			log.error("create order failed",e);
 		}
 		catch(Exception e)
 		{
-			rsp.getResult().setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
+			rsp.setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
 			log.error("create order failed",e);
 
 		}
@@ -111,12 +111,12 @@ public class OrderManageRestImpl implements OrderManageRest
 		catch(MISPException e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 	
 		return rsp;
@@ -132,12 +132,12 @@ public class OrderManageRestImpl implements OrderManageRest
 		}
 		catch(MISPException e)
 		{
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 			log.error("create order failed",e);
 		}
 		catch(Exception e)
 		{
-			rsp.getResult().setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
+			rsp.setErrorCode(MISPErrorMessageConst.ERROR_MSG_WRONG);
 			log.error("create order failed",e);
 
 		}

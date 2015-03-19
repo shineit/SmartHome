@@ -68,7 +68,7 @@ public class ConcentManageRestImpl implements ConcentManageRest
 		catch(Exception e)
 		{
 			log.error("get concentList error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -89,7 +89,7 @@ public class ConcentManageRestImpl implements ConcentManageRest
 		} catch (Exception e)
 		{
 			log.error("modify Concent error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
 		}
  		
 		return rsp;

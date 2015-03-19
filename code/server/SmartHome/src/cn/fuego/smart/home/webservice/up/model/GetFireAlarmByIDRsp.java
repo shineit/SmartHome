@@ -3,10 +3,10 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 
-public class GetFireAlarmByIDRsp extends BaseJsonRsp
+public class GetFireAlarmByIDRsp extends MispBaseRspJson
 {
 	private List<FireAlarmJson> fireAlarmList= new ArrayList<FireAlarmJson>();
 
@@ -24,8 +24,11 @@ public class GetFireAlarmByIDRsp extends BaseJsonRsp
 	public String toString()
 	{
 		return "GetFireAlarmByIDRsp [fireAlarmList=" + fireAlarmList
-				+ ", result=" + result + "]";
+				+ ", errorCode=" + errorCode + ", errorMsg=" + errorMsg
+				+ ", obj=" + obj + "]";
 	}
+
+ 
 	
 
 	

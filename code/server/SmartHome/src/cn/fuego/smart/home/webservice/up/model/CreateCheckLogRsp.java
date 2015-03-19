@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 
 
 /** 
@@ -18,14 +18,16 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 * @date 2015-3-17 下午10:25:03 
 *  
 */
-public class CreateCheckLogRsp extends BaseJsonRsp
+public class CreateCheckLogRsp extends MispBaseRspJson
 {
 
 	@Override
 	public String toString()
 	{
-		return "CreateCheckLogRsp [result=" + result + "]";
+		return "CreateCheckLogRsp [errorCode=" + errorCode + ", errorMsg="
+				+ errorMsg + ", obj=" + obj + "]";
 	}
+ 
 
 
 }

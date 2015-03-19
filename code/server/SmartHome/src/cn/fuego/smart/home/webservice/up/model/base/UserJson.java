@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
 import java.util.List;
 
  /** 
@@ -17,7 +18,7 @@ import java.util.List;
  * @date 2014-11-1 下午12:13:54 
  *  
  */
-public class UserJson
+public class UserJson implements Serializable
 {
 	private int userID;
 	private String userName;

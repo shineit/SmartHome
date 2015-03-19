@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
 
 /**
@@ -11,7 +11,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 * @date 2014-10-20 上午10:59:10 
 *
  */
-public class GetCustomerByIDReq extends BaseJsonReq
+public class GetCustomerByIDReq extends MispBaseReqJson
 {
 
 	private int userID;

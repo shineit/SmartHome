@@ -23,6 +23,12 @@ import java.util.regex.Pattern;
 
 public class ValidatorUtil
 {
+	
+	public static boolean isLength(String value,int min,int maxLength)
+	{
+		return ValidatorRules.isValid( ValidatorRules.isLength(min, maxLength), value);
+		 
+	}
 	public static boolean isEmpty(List list)
 	{
 		if(null == list)
@@ -144,8 +150,12 @@ public class ValidatorUtil
      */  
     public static boolean isPhone(String phone)
     {  
-        String regEx = "(\\+\\d+)?1[3458]\\d{9}$";  
-        return Pattern.matches(regEx,phone);  
+         return Pattern.matches(ValidatorRules.isPhone(),phone);  
+    }  
+    
+    public static boolean isMobile(String phone)
+    {  
+         return Pattern.matches(ValidatorRules.isMobile(),phone);  
     }  
     /** 
      * 验证日期（年月日） 
@@ -185,5 +195,24 @@ public class ValidatorUtil
     public static boolean isIp(String ip) {  
         String regEx = "[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))";  
         return Pattern.matches(regEx, ip);  
-    }  
+    }
+    
+    /**
+     * 检验字符串是否是一个数字
+     * @return
+     */
+	public static boolean isInt(String num)
+	{
+		String regEx = "^[0-9]*$";  
+		return Pattern.matches(regEx, num);  
+	}
+	/**
+     * 检验字符串是否是一个浮点数
+     * @return
+     */
+	public static boolean isFloat(String num)
+	{
+		String regEx =  "^[+-]?([0-9]*\\.?[0-9]+|[0-9]+\\.?[0-9]*)([eE][+-]?[0-9]+)?$";
+		return Pattern.matches(regEx, num);  
+	}  
 }

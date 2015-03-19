@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 
  /** 
  * @ClassName: BatchSetSensorRsp 
@@ -17,7 +17,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
  * @date 2014-11-4 下午9:33:23 
  *  
  */
-public class BatchOperateSensorRsp extends BaseJsonRsp
+public class BatchOperateSensorRsp extends MispBaseRspJson
 {
 
 }

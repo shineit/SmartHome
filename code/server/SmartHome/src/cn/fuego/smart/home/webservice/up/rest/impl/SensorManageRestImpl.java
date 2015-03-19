@@ -108,13 +108,13 @@ public class SensorManageRestImpl implements SensorManageRest
 				}
 				else
 				{
-					rsp.getResult().setErrorCode(ErrorMessageConst.SENSOR_NOT_EXISTED);
+					rsp.setErrorCode(ErrorMessageConst.SENSOR_NOT_EXISTED);
 				}
 
 			}
 			else
 			{
-				rsp.getResult().setErrorCode(ErrorMessageConst.CONCENTRATOR_NOT_EXISTED);
+				rsp.setErrorCode(ErrorMessageConst.CONCENTRATOR_NOT_EXISTED);
 			}
 
 			
@@ -122,7 +122,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(Exception e)
 		{
 			log.error("get sensor list error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -146,12 +146,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("set sensor error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("set sensor error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 		return rsp;
@@ -196,12 +196,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 		return rsp;
 	}
@@ -221,12 +221,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 		return rsp;
@@ -246,12 +246,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -275,12 +275,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -302,12 +302,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("clear alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("clear alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -328,12 +328,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("clear alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("clear alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}		
 		return rsp;
 	}
@@ -362,12 +362,12 @@ public class SensorManageRestImpl implements SensorManageRest
 		catch(MISPException e)
 		{
 			log.error("get FireAlarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get FireAlarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}	
 		return rsp;
 	}

@@ -1,6 +1,6 @@
-package cn.fuego.smart.home.webservice.up.model.base;
+package cn.fuego.misp.webservice.up.model;
 
-
+ 
 /**
  * 
 * @ClassName: BaseJsonReq 
@@ -9,8 +9,9 @@ package cn.fuego.smart.home.webservice.up.model.base;
 * @date 2014-10-20 上午10:57:41 
 *
  */
-public class BaseJsonReq
+public class MispBaseReqJson
 {
+	protected String app_id = "1";
 	protected String token;
 
 	public String getToken()
@@ -26,8 +27,9 @@ public class BaseJsonReq
 	@Override
 	public String toString()
 	{
-		return "BaseJsonReq [token=" + token + "]";
+		return "MispBaseReqJson [app_id=" + app_id + ", token=" + token + "]";
 	}
+
  
 
 }

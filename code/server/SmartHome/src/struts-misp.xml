@@ -56,17 +56,22 @@
 		</action> 
 		<action name="Index" class="cn.fuego.misp.web.action.login.IndexAction">
 			<result type="dispatcher">/client/misp/main.jsp</result>
-		</action>		  
+		</action>
 
  	</package>
- 		<package name="log" extends="misp">
+ 	<package name="log" extends="misp">
 		<action name="LogManage" class="cn.fuego.misp.web.action.log.LogManageAction">
 			<result>/client/misp/log/logManage.jsp</result>
  
  		</action>
  
  	</package>
-
+ 	<package name="upload" extends="misp" >
+		<action name="UploadFile" class="cn.fuego.misp.web.action.upload.UploadFileAction">
+			<result>/client/misp/home.jsp</result>
+ 		</action>
+ 
+ 	</package>
  
  
 </struts>

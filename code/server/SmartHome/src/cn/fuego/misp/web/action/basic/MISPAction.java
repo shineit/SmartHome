@@ -1,6 +1,8 @@
 package cn.fuego.misp.web.action.basic;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.file.FileUtil;
 import cn.fuego.common.util.format.DataCreateUtil;
+import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuModel;
@@ -58,6 +61,18 @@ public class MISPAction extends ActionSupport
 		}
 		
 		return fileName;
+	}
+	
+	protected void ReturnJson(Object rsp)
+	{
+		try
+		{
+			PrintWriter out = ServletActionContext.getResponse().getWriter();
+			out.write(JsonConvert.ObjectToJson(rsp));
+		} catch (IOException e)
+		{
+			log.error("response failed",e);
+		}
 	}
 	
     public UserModel getLoginUser()

@@ -72,12 +72,12 @@ public class KnowledgeManageRestImpl implements KnowledgeManageRest
 		catch(MISPException e)
 		{
 			log.error("get KnowledgeList error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get KnowledgeList error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -114,12 +114,12 @@ public class KnowledgeManageRestImpl implements KnowledgeManageRest
 		catch(MISPException e)
 		{
 			log.error("get CommonSenseList error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get CommonSenseList error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 		
 		return rsp;
@@ -154,12 +154,12 @@ public class KnowledgeManageRestImpl implements KnowledgeManageRest
 		catch(MISPException e)
 		{
 			log.error("get HelpList error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get HelpList error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 		
 		return rsp;

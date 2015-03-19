@@ -1,9 +1,9 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.ServiceOrderJson;
 
-public class GetOrderByIDRsp extends BaseJsonRsp
+public class GetOrderByIDRsp extends MispBaseRspJson
 {
 	private ServiceOrderJson order;
 
@@ -20,9 +20,11 @@ public class GetOrderByIDRsp extends BaseJsonRsp
 	@Override
 	public String toString()
 	{
-		return "GetOrderByIDRsp [order=" + order + ", result=" + result + "]";
+		return "GetOrderByIDRsp [order=" + order + ", errorCode=" + errorCode
+				+ ", errorMsg=" + errorMsg + ", obj=" + obj + "]";
 	}
 
+ 
 
 
 }

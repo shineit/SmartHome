@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.KnowledgeJson;
 
 
@@ -15,7 +15,7 @@ import cn.fuego.smart.home.webservice.up.model.base.KnowledgeJson;
 * @date 2014-10-20 上午10:58:58 
 *
  */
-public class GetKnowledgeListRsp extends BaseJsonRsp
+public class GetKnowledgeListRsp extends MispBaseRspJson
 {
 	private List<KnowledgeJson> knowledgeList = new ArrayList<KnowledgeJson>();
 

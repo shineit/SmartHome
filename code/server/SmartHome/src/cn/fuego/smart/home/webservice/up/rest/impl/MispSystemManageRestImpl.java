@@ -49,12 +49,12 @@ public class MispSystemManageRestImpl implements MispSystemManageRest
 		catch(MISPException e)
 		{
 			log.error("get clientVersion error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get clientVersion error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 		return rsp;

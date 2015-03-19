@@ -78,7 +78,7 @@ public class UserManageRestImpl implements UserManageRest
 		if(null == req)
 		{
 			log.error("the logni request is null");
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_MSG_WRONG);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_MSG_WRONG);
 			
 		}
 		
@@ -126,7 +126,7 @@ public class UserManageRestImpl implements UserManageRest
 		catch(MISPException e)
 		{
 			log.error("login failed",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		return rsp;
 	}
@@ -175,11 +175,11 @@ public class UserManageRestImpl implements UserManageRest
 		catch(MISPException e)
 		{
 			log.error("create mark failed",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
-		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		    rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
 			log.error("create mark failed",e);
 		}
  
@@ -197,11 +197,11 @@ public class UserManageRestImpl implements UserManageRest
 		catch(MISPException e)
 		{
 			log.error("create mark failed",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
-		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		    rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
 			log.error("create mark failed",e);
 		}
  
@@ -222,11 +222,11 @@ public class UserManageRestImpl implements UserManageRest
 		catch(MISPException e)
 		{
 			log.error("create mark failed",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
-		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		    rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
 			log.error("create mark failed",e);
 		}
  
@@ -245,7 +245,7 @@ public class UserManageRestImpl implements UserManageRest
 			{
 				if("200".equals(result.getCode()))
 				{
-					rsp.getResult().setErrorCode(MISPErrorMessageConst.SUCCESS);
+					rsp.setErrorCode(MISPErrorMessageConst.SUCCESS);
 					if(null != result.getData())
 					{
 						rsp.getCaToken().setAccessToken(result.getData().getAccessToken());
@@ -253,28 +253,28 @@ public class UserManageRestImpl implements UserManageRest
 					}
 					else
 					{
-						rsp.getResult().setErrorCode(ErrorMessageConst.CAMERA_LINK_ERROR);
+						rsp.setErrorCode(ErrorMessageConst.CAMERA_LINK_ERROR);
 					}
  
 				}
 				else if("10011".equals(result.getCode()))
 				{
-					rsp.getResult().setErrorCode(ErrorMessageConst.CAMERA_ACCOUNT_NOT_BUNDLE);//私有云账号未绑定
+					rsp.setErrorCode(ErrorMessageConst.CAMERA_ACCOUNT_NOT_BUNDLE);//私有云账号未绑定
 				}
 				else
 				{
-					rsp.getResult().setErrorCode(ErrorMessageConst.CAMERA_LINK_ERROR);//连接异常
+					rsp.setErrorCode(ErrorMessageConst.CAMERA_LINK_ERROR);//连接异常
 				}
 			}
  		}
 		catch(MISPException e)
 		{
 			log.error("create mark failed",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
-		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		    rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
 			log.error("create mark failed",e);
 		}
  
@@ -296,12 +296,12 @@ public class UserManageRestImpl implements UserManageRest
 		catch(MISPException e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get alarm error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
@@ -321,11 +321,11 @@ public class UserManageRestImpl implements UserManageRest
 		catch(MISPException e)
 		{
 			log.error("create mark failed",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
-		    rsp.getResult().setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		    rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
 			log.error("create mark failed",e);
 		}
  

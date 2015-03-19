@@ -1,8 +1,8 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
-public class GetClientVersionReq extends BaseJsonReq
+public class GetClientVersionReq extends MispBaseReqJson
 {
 
 }

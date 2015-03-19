@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
  /** 
  * @ClassName: ModifyPwdReq 
@@ -17,7 +17,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
  * @date 2014-11-4 下午11:07:00 
  *  
  */
-public class ModifyPwdReq extends BaseJsonReq
+public class ModifyPwdReq extends MispBaseReqJson
 {
 	 
 	private String userName;

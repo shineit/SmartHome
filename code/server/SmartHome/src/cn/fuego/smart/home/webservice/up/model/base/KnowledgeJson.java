@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
+
  /** 
  * @ClassName: KnowledgeJson 
  * @Description: TODO
@@ -15,9 +17,13 @@ package cn.fuego.smart.home.webservice.up.model.base;
  * @date 2015-3-17 上午10:49:56 
  *  
  */
-public class KnowledgeJson
+public class KnowledgeJson implements Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int knowledgeID;		//知识ID，自增长，主键
 	private String title;			//知识标题
 	private String content;			//知识内容，数据库对应text类型

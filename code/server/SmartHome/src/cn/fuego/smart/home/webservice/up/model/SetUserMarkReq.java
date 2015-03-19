@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 
 
@@ -12,7 +12,7 @@ import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 * @date 2014-10-20 上午11:00:03 
 *
  */
-public class SetUserMarkReq extends BaseJsonReq
+public class SetUserMarkReq extends MispBaseReqJson
 {
  
 	private UserMarkJson userMark;

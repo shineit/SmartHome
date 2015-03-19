@@ -2,11 +2,11 @@ package cn.fuego.smart.home.webservice.up.model;
 
 import java.util.List;
 
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 
-public class GetFireAlarmByIDReq extends BaseJsonReq
+public class GetFireAlarmByIDReq extends MispBaseReqJson
 {
 	private String companyID;
 	private PageJson page;

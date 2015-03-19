@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 
 
@@ -15,7 +15,7 @@ import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
 * @date 2014-10-20 上午10:59:14 
 *
  */
-public class GetUserMarkListRsp extends BaseJsonRsp
+public class GetUserMarkListRsp extends MispBaseRspJson
 {
 	private List<UserMarkJson> markList = new ArrayList<UserMarkJson>();
 

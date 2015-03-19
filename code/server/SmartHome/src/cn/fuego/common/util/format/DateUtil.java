@@ -1,5 +1,6 @@
 package cn.fuego.common.util.format;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,7 +38,8 @@ public class DateUtil
 	public static String DateToString(Date date)
 	{
 		String str = null;
-		DateFormat d = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		//DateFormat d = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd ");
 
 		if (null == date)
 		{
@@ -64,7 +66,7 @@ public class DateUtil
 		return str;
 
 	}
-
+	
 	public static Date stringToDate(String date)
 	{
 		DateFormat d = DateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -90,10 +92,35 @@ public class DateUtil
 
 	}
 
+	public static Date shortStrToDate(String date)
+	{
+		SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date da;
+		if (null == date || date.trim().isEmpty())
+		{
+			return null;
+
+		}
+
+		try
+		{
+			da = d.parse(date);
+		}
+		catch (Exception e)
+		{
+			log.error("Err: Date Str is:" + date);
+			throw new RuntimeException(e);
+
+		}
+		return da;
+
+	}
+
 	public static Date addYear(String purchaseDate, int expectYear)
 	{
 
-		return addYear(stringToDate(purchaseDate), expectYear);
+		return addYear(shortStrToDate(purchaseDate), expectYear);
 	}
 
 	/**
@@ -170,6 +197,14 @@ public class DateUtil
 		strTime=sdf.format(new Date(l_stamp));
 		return strTime;
 		
+	}
+
+	public static CharSequence DateToShotString(Date datetime)
+	{
+		String strTime=null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");		
+		strTime=sdf.format(datetime);
+		return strTime;
 	}
 
 }

@@ -65,12 +65,12 @@ public class CheckManageRestImpl implements CheckManageRest
 		catch(MISPException e)
 		{
 			log.error("Get CheckItem error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("Get CheckItem error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 		return rsp;
@@ -98,12 +98,12 @@ public class CheckManageRestImpl implements CheckManageRest
 		catch(MISPException e)
 		{
 			log.error("Create CheckLog error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("Create CheckLog error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 	
 		return rsp;
@@ -129,12 +129,12 @@ public class CheckManageRestImpl implements CheckManageRest
 		catch(MISPException e)
 		{
 			log.error("get CheckLog error",e);
-			rsp.getResult().setErrorCode(e.getErrorCode());
+			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
 			log.error("get CheckLog error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 	
 		

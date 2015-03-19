@@ -1,9 +1,9 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 
-public class GetSensorByIDRsp extends BaseJsonRsp
+public class GetSensorByIDRsp extends MispBaseRspJson
 {
 	private HomeSensorJson sensor;
 
@@ -20,8 +20,9 @@ public class GetSensorByIDRsp extends BaseJsonRsp
 	@Override
 	public String toString()
 	{
-		return "GetSensorByIDRsp [sensor=" + sensor + ", result=" + result
-				+ "]";
+		return "GetSensorByIDRsp [sensor=" + sensor + ", errorCode="
+				+ errorCode + ", errorMsg=" + errorMsg + ", obj=" + obj + "]";
 	}
 
+ 
 }

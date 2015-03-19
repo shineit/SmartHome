@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 
 
@@ -15,7 +15,7 @@ import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 * @date 2014-10-20 上午10:58:47 
 *
  */
-public class GetNewsListRsp extends BaseJsonRsp
+public class GetNewsListRsp extends MispBaseRspJson
 {
 	private List<NewsJson> newsList = new ArrayList<NewsJson>();
 

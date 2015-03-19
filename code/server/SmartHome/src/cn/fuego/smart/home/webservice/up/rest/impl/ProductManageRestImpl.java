@@ -62,7 +62,7 @@ public class ProductManageRestImpl implements ProductManageRest
 		catch(Exception e)
 		{
 			log.error("get sensor list error",e);
-			rsp.getResult().setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 
 
