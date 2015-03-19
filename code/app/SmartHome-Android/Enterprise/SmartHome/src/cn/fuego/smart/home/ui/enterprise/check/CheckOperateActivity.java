@@ -11,8 +11,10 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
+import cn.fuego.misp.ui.common.upload.MispUploadImgActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
@@ -76,8 +78,6 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		RadioGroup group = (RadioGroup) findViewById(R.id.check_operate_radiogroup);
 		group.setOnCheckedChangeListener(this);
 		
-		Button upload_btn= (Button) findViewById(R.id.check_operate_upload_btn);
-		upload_btn.setOnClickListener(this);
 		
 	}
 
@@ -89,7 +89,7 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		CheckOperateActivity.this.setResult(IntentCodeConst.RESULT_CODE,intent);
 		checkLog.setAbnormalDesp(abnormal_desp.getText().toString().trim());
-		checkLog.setAbnormalPic(abnormalPic);
+		 
 		CheckLogCache.getInstance().update(checkLog);
 		this.finish();
 		
@@ -106,7 +106,7 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 	private void uploadImg()
 	{
 		
-		
+		MispUploadImgActivity.jump(this, 1);
 	}
 
 	@Override
@@ -133,6 +133,19 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		
 		
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		MispBaseRspJson rsp = (MispBaseRspJson) data.getSerializableExtra(RETURN_DATA);
+		checkLog.setAbnormalPic((String)rsp.getObj());
+		
+		
+	}
+	
+	
 	
 	
 }

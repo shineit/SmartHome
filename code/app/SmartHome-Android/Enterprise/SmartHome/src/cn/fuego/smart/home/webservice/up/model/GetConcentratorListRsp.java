@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
 
 
@@ -15,7 +15,7 @@ import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
 * @date 2014-10-20 上午10:58:28 
 *
  */
-public class GetConcentratorListRsp extends BaseJsonRsp
+public class GetConcentratorListRsp extends MispBaseRspJson
 {
 	private List<ConcentratorJson> concentList=new ArrayList<ConcentratorJson>();
 
@@ -33,9 +33,11 @@ public class GetConcentratorListRsp extends BaseJsonRsp
 	public String toString()
 	{
 		return "GetConcentratorListRsp [concentList=" + concentList
-				+ ", result=" + result + "]";
+				+ ", errorCode=" + errorCode + ", errorMsg=" + errorMsg
+				+ ", obj=" + obj + "]";
 	}
 
+ 
 
 
 }

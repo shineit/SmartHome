@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 
 /** 
@@ -10,7 +10,7 @@ import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 * @date 2015-1-13 上午12:04:22 
 *  
 */ 
-public class GetCustomerByIDRsp extends BaseJsonRsp
+public class GetCustomerByIDRsp extends MispBaseRspJson
 {
 	
 	private CustomerJson customer;
@@ -28,9 +28,10 @@ public class GetCustomerByIDRsp extends BaseJsonRsp
 	@Override
 	public String toString()
 	{
-		return "GetCustomerByIDRsp [customer=" + customer + ", result="
-				+ result + "]";
+		return "GetCustomerByIDRsp [customer=" + customer + ", errorCode="
+				+ errorCode + ", errorMsg=" + errorMsg + ", obj=" + obj + "]";
 	}
-	
+
+ 
 	
 }

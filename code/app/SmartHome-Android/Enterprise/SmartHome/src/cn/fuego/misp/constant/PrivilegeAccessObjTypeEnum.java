@@ -18,7 +18,8 @@ package cn.fuego.misp.constant;
 public enum PrivilegeAccessObjTypeEnum
 {
 	MENU("MENU"),
-	BUTTON("BUTTON");
+	BUTTON("BUTTON"),
+	COMPANY("COMPANY");
 	private String objectType;
 	private PrivilegeAccessObjTypeEnum(String objectType)
 	{

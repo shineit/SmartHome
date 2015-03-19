@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.CameraAccessJson;
 
 
@@ -12,7 +12,7 @@ import cn.fuego.smart.home.webservice.up.model.base.CameraAccessJson;
 * @date 2014-10-20 上午10:59:10 
 *
  */
-public class GetCaTokenByIDRsp extends BaseJsonRsp
+public class GetCaTokenByIDRsp extends MispBaseRspJson
 {
 
 	private CameraAccessJson caToken = new CameraAccessJson();

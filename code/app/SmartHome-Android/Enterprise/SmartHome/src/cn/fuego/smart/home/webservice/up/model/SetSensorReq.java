@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 
 
@@ -12,7 +12,7 @@ import cn.fuego.smart.home.webservice.up.model.base.HomeSensorJson;
 * @date 2014-10-20 上午10:59:45 
 *
  */
-public class SetSensorReq extends BaseJsonReq
+public class SetSensorReq extends MispBaseReqJson
 {
 	private int command;
 	private HomeSensorJson sensor;

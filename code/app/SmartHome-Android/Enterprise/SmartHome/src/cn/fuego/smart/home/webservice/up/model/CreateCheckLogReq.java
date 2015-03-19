@@ -11,7 +11,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
 
 /** 
@@ -21,7 +21,7 @@ import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
  * @date 2015-3-17 下午10:19:31 
  *  
  */
-public class CreateCheckLogReq extends BaseJsonReq
+public class CreateCheckLogReq extends MispBaseReqJson
 {
 	
 	private List<CheckLogJson> checkLogList = new ArrayList<CheckLogJson>();

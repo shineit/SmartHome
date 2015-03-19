@@ -1,9 +1,9 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 
 
-public class SetCustomerRsp extends BaseJsonRsp
+public class SetCustomerRsp extends MispBaseRspJson
 {
 	
 }

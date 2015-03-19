@@ -66,7 +66,31 @@ public class DateUtil
 		return str;
 
 	}
+	
+	public static Date stringToDate(String date)
+	{
+		DateFormat d = DateFormat.getDateInstance(DateFormat.MEDIUM);
 
+		Date da;
+		if (null == date || date.trim().isEmpty())
+		{
+			return null;
+
+		}
+
+		try
+		{
+			da = d.parse(date);
+		}
+		catch (Exception e)
+		{
+			log.error("Err: Date Str is:" + date);
+			throw new RuntimeException(e);
+
+		}
+		return da;
+
+	}
 
 	public static Date shortStrToDate(String date)
 	{

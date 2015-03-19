@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
 
 /**
@@ -11,7 +11,7 @@ import cn.fuego.smart.home.webservice.up.model.base.ConcentratorJson;
 * @date 2014-10-20 上午10:57:25 
 *
  */
-public class SetConcentratorReq extends BaseJsonReq
+public class SetConcentratorReq extends MispBaseReqJson
 {
 	private ConcentratorJson concentrator;
 

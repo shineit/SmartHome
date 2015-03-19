@@ -1,10 +1,10 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.HomeAlarmJson;
 
-public class GetAlarmByIDRsp extends BaseJsonRsp
+public class GetAlarmByIDRsp extends MispBaseRspJson
 {
 	
 	private HomeAlarmJson homeAlarm;
@@ -36,8 +36,11 @@ public class GetAlarmByIDRsp extends BaseJsonRsp
 	public String toString()
 	{
 		return "GetAlarmByIDRsp [homeAlarm=" + homeAlarm + ", fireAlarm="
-				+ fireAlarm + ", result=" + result + "]";
+				+ fireAlarm + ", errorCode=" + errorCode + ", errorMsg="
+				+ errorMsg + ", obj=" + obj + "]";
 	}
+
+	 
 
 	
 }

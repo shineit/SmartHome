@@ -2,7 +2,7 @@ package cn.fuego.misp.service.http;
 
 import android.os.Message;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 
 public class MispHttpMessage 
 {
@@ -43,13 +43,11 @@ public class MispHttpMessage
 
 	public int getErrorCode()
 	{
-		BaseJsonRsp rsp = (BaseJsonRsp) message.obj;
+		MispBaseRspJson rsp = (MispBaseRspJson) message.obj;
 		if(null != rsp)
 		{
-			if(null != rsp.getResult())
-			{
- 				return rsp.getResult().getErrorCode();
-			}
+			return rsp.getErrorCode();
+			
 		}
 		return MISPErrorMessageConst.NET_FAIL;
 	}

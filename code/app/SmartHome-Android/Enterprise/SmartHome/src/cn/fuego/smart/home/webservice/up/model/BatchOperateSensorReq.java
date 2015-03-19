@@ -10,7 +10,7 @@ package cn.fuego.smart.home.webservice.up.model;
 
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
  /** 
  * @ClassName: BatchSetSensorReq 
@@ -19,7 +19,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
  * @date 2014-11-4 下午9:32:13 
  *  
  */
-public class BatchOperateSensorReq extends BaseJsonReq
+public class BatchOperateSensorReq extends MispBaseReqJson
 {
 	private List<String> sensorList;
     private int userID;

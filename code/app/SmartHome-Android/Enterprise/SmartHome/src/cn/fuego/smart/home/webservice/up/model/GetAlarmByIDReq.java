@@ -1,8 +1,8 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
-public class GetAlarmByIDReq extends BaseJsonReq
+public class GetAlarmByIDReq extends MispBaseReqJson
 {
 	private String alarmID;
 

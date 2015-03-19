@@ -423,9 +423,19 @@
             android:label="@string/title_activity_product_mall" >
         </activity>
         <activity
-            android:name="cn.fuego.smart.home.ui.common.mall.ProductViewActivity"
+            android:name=".ui.common.mall.ProductViewActivity"
             android:label="@string/title_activity_product_view" >
         </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity"
+            android:label="@string/title_activity_device_status" >
+        </activity>
+        <activity
+            android:name="cn.fuego.misp.ui.common.upload.MispUploadImgActivity"
+            android:label="@string/title_activity_misp_upload_img" >
+        </activity>
+        
+        <activity android:name="cn.fuego.misp.ui.common.upload.SelectPicActivity" android:theme="@style/DialogStyleBottom"/>   
     </application>
 
 </manifest>

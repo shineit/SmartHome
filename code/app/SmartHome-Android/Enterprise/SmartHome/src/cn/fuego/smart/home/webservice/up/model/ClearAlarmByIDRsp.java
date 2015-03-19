@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 
 /** 
 * @ClassName: ClearAlarmByIDRsp 
@@ -9,14 +9,16 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
 * @date 2015-2-8 下午6:00:55 
 *  
 */
-public class ClearAlarmByIDRsp extends BaseJsonRsp
+public class ClearAlarmByIDRsp extends MispBaseRspJson
 {
 
 	@Override
 	public String toString()
 	{
-		return "ClearAlarmByIDRsp [result=" + result + "]";
+		return "ClearAlarmByIDRsp [errorCode=" + errorCode + ", errorMsg="
+				+ errorMsg + ", obj=" + obj + "]";
 	}
 
+ 
 
 }

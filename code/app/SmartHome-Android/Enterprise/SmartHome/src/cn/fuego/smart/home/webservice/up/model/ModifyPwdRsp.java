@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 
  /** 
  * @ClassName: ModifyPwdRsp 
@@ -17,7 +17,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
  * @date 2014-11-4 下午11:10:47 
  *  
  */
-public class ModifyPwdRsp extends BaseJsonRsp
+public class ModifyPwdRsp extends MispBaseRspJson
 {
 
 }

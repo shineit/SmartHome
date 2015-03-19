@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.CheckItemJson;
 
 /** 
@@ -13,7 +13,7 @@ import cn.fuego.smart.home.webservice.up.model.base.CheckItemJson;
 * @date 2015-3-13 上午10:17:00 
 *  
 */
-public class GetCheckItemByIDRsp extends BaseJsonRsp
+public class GetCheckItemByIDRsp extends MispBaseRspJson
 {
 	
 	private List<CheckItemJson> checkItemList = new ArrayList<CheckItemJson>();
@@ -32,8 +32,11 @@ public class GetCheckItemByIDRsp extends BaseJsonRsp
 	public String toString()
 	{
 		return "GetCheckItemByIDRsp [checkItemList=" + checkItemList
-				+ ", result=" + result + "]";
+				+ ", errorCode=" + errorCode + ", errorMsg=" + errorMsg
+				+ ", obj=" + obj + "]";
 	}
+
+ 
 
 
 

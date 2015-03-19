@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.ButtonJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
@@ -19,7 +19,7 @@ import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 * @date 2014-10-20 上午10:59:34 
 *
  */
-public class LoginRsp extends BaseJsonRsp
+public class LoginRsp extends MispBaseRspJson
 {
 	private UserJson user;
 	private String token;

@@ -1,10 +1,10 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 
 
-public class SetCustomerReq extends BaseJsonReq
+public class SetCustomerReq extends MispBaseReqJson
 {
  
 	private CustomerJson customer;

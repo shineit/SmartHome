@@ -22,9 +22,9 @@ import cn.fuego.misp.ui.model.ActivityResInfo;
 
 public abstract class MispBaseActivtiy extends Activity implements OnClickListener
 {
+	public static String RETURN_DATA = "returnData";
 	private FuegoLog log = FuegoLog.getLog(MispBaseActivtiy.class);
-	private Map<Integer,Button> buttonViewList = new HashMap<Integer,Button>();
-	private TextView titleView;
+ 	private TextView titleView;
 	private Button saveButton;
 	public abstract void initRes();
 	
@@ -65,12 +65,11 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 		{
 			for(Integer id :this.activityRes.getButtonIDList() )
 			{
-				Button btn =   (Button) findViewById(id);
+				View btn =    findViewById(id);
 				if(null != btn)
 				{
 					btn.setOnClickListener(this);
-					buttonViewList.put(id, btn);
-				}
+ 				}
 				else
 				{
 					log.warn("the button id is not exist in the view, the id is "+id);
@@ -148,10 +147,7 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 			button.setOnClickListener(l);
 		}
 	}
-	public Button getButtonByID(int id)
-	{
-		return this.buttonViewList.get(id);
-	}
+ 
 	public ActivityResInfo activityRes = new ActivityResInfo();
 
 	

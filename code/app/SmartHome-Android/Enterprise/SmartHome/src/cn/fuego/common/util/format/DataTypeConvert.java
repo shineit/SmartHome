@@ -48,7 +48,35 @@ public class DataTypeConvert
 		}
 		return strList;
 	}
+
+	public static byte[] strToGbkBytes(String str)
+	{
+		byte[] bytes = null;
+		try
+		{
+			bytes = str.getBytes("gbk");
+		} catch (UnsupportedEncodingException e)
+		{
+			log.error("convert error",e);
+		}
+		return bytes;
+	}
 	
+	public static String gbkBytesToStr(byte[] bytes)
+	{
+		String isoString = null;
+		try
+		{
+			isoString = new String(bytes, "gbk");
+		} catch (UnsupportedEncodingException e)
+		{
+			// TODO Auto-generated catch block
+			log.error("convert error",e);
+		}
+		return isoString;
+	}
+	/**将单字节数组转换为字符串**/
+
 	public static String bytesToStr(byte[] bytes)
 	{
 		String isoString = null;
@@ -62,6 +90,8 @@ public class DataTypeConvert
 		}
 		return isoString;
 	}
+	/**为了方便处理，将java字符串当做单字节处理，用于二进制通信**/
+
 	public static byte[] strToBytes(String str)
 	{
 		byte[] bytes = null;
@@ -122,11 +152,8 @@ public class DataTypeConvert
 	{ 
 		int fbit = Float.floatToIntBits(value);  
 	      
-	    byte[] b = new byte[4];    
-	    for (int i = 0; i < 4; i++) {    
-	        b[3-i] = (byte) (fbit >> (24 - i * 8));    
-	    } 
-	    return DataTypeConvert.bytesToStr(b);
+	   
+	    return DataTypeConvert.intToByteStr(fbit);
 		 
 	}
 	public static List objectToList(Object str)
@@ -204,7 +231,7 @@ public class DataTypeConvert
 		}
 		else if(fieldClass == Date.class)
 		{
-			object = DateUtil.shortStrToDate(value);
+			object = DateUtil.stringToDate(value);
 		}
 		else
 		{

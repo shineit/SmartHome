@@ -1,8 +1,8 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
-public class ClearAlarmByIDReq extends BaseJsonReq
+public class ClearAlarmByIDReq extends MispBaseReqJson
 {
 	private int userID;
 	private String alarmID;

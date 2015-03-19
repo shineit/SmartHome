@@ -46,6 +46,10 @@ public class MISPErrorMessageConst
 
 	public static final int ERROR_UPDATE_VERSION_FAILED = 15;//更新版本失败
 	public static final int ERROR_NET_FAIL = 17 ; // 网络连接异常
+	public static final int ERROR_WRITE_FILE = 16;//更新版本失败
+	public static final int ERROR_FILE_NOT_EXIST = 30;
+	public static final int ERROR_UPLOAD_FAILED = 31;
+
 	public static String getMessageByErrorCode(int errorCode)
 	{
 		return MispMessageReader.getInstance().getPropertyByName(String.valueOf(errorCode));

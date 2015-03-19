@@ -3,7 +3,7 @@ package cn.fuego.smart.home.webservice.up.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonRsp;
+import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
 
 
@@ -15,7 +15,7 @@ import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
 * @date 2014-10-20 上午10:58:58 
 *
  */
-public class GetProductListRsp extends BaseJsonRsp
+public class GetProductListRsp extends MispBaseRspJson
 {
 	private List<ProductJson> productList = new ArrayList<ProductJson>();
 
@@ -32,10 +32,11 @@ public class GetProductListRsp extends BaseJsonRsp
 	@Override
 	public String toString()
 	{
-		return "GetProductListRsp [productList=" + productList + ", result="
-				+ result + "]";
+		return "GetProductListRsp [productList=" + productList + ", errorCode="
+				+ errorCode + ", errorMsg=" + errorMsg + ", obj=" + obj + "]";
 	}
 
+	 
  
 
 

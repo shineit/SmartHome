@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,8 +117,9 @@ public class UpgradeActivity extends MispBaseActivtiy
         }
         else
         {
-    		this.getButtonByID(MispCommonIDName.misp_upgrade_version_btn).setEnabled(false);
-    		this.getButtonByID(MispCommonIDName.misp_upgrade_version_btn).setText("当前是最新版本");
+        	Button button = (Button) findViewById(MispCommonIDName.misp_upgrade_version_btn);
+        	button.setEnabled(false);
+        	button.setText("当前是最新版本");
         }
   	}
 

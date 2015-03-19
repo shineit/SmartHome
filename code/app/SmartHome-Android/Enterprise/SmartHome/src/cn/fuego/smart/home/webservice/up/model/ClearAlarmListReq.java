@@ -10,7 +10,7 @@ package cn.fuego.smart.home.webservice.up.model;
 
 import java.util.List;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 
 
 /** 
@@ -20,7 +20,7 @@ import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 * @date 2015-2-8 下午5:59:30 
 *  
 */
-public class ClearAlarmListReq extends BaseJsonReq
+public class ClearAlarmListReq extends MispBaseReqJson
 {
 	private List<String> alarmIDList;
     private int userID;

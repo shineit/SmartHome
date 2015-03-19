@@ -2,8 +2,8 @@ package cn.fuego.smart.home.webservice.up.model;
 
 import java.util.List;
 
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
 import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 
 
@@ -14,7 +14,7 @@ import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 * @date 2015-3-18 下午3:27:18 
 *  
 */
-public class GetHelpListReq extends BaseJsonReq
+public class GetHelpListReq extends MispBaseReqJson
 {
  	private int userID;
 	private PageJson page;

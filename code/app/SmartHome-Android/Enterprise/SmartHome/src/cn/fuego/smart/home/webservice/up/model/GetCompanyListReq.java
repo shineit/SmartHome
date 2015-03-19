@@ -1,6 +1,6 @@
 package cn.fuego.smart.home.webservice.up.model;
 
-import cn.fuego.smart.home.webservice.up.model.base.BaseJsonReq;
+import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
 import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 
 
@@ -11,7 +11,7 @@ import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 * @date 2015-3-13 上午10:11:48 
 *  
 */
-public class GetCompanyListReq extends BaseJsonReq
+public class GetCompanyListReq extends MispBaseReqJson
 {
 	private PageJson page;
 	private int userID;
