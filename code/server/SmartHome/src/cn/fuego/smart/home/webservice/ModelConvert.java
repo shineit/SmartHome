@@ -13,6 +13,7 @@ import java.util.Date;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.smart.home.domain.Advertisement;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.CheckItem;
 import cn.fuego.smart.home.domain.CheckLog;
@@ -29,6 +30,7 @@ import cn.fuego.smart.home.domain.Product;
 import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.domain.ServiceOrder;
 import cn.fuego.smart.home.domain.UserMark;
+import cn.fuego.smart.home.webservice.up.model.base.AdvertisementJson;
 import cn.fuego.smart.home.webservice.up.model.base.AlarmJson;
 import cn.fuego.smart.home.webservice.up.model.base.CheckItemJson;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
@@ -463,6 +465,20 @@ public class ModelConvert
 		json.setDesp(plan.getDesp());
 		json.setFloor(plan.getFloor());
 		json.setPicPath(plan.getPicPath());
+		return json;
+	}
+	/**
+	 * @param ad
+	 * @return
+	 */
+	public static AdvertisementJson adToJson(Advertisement ad)
+	{
+		AdvertisementJson json = new AdvertisementJson();
+		json.setAdID(ad.getAdID());
+		json.setAdImg(ad.getAdImg());
+		json.setAdInfo(ad.getAdInfo());
+		json.setAdName(ad.getAdName());
+		json.setAdURL(ad.getAdURL());
 		return json;
 	}
 }

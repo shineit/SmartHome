@@ -13,13 +13,17 @@ import java.util.List;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.domain.Advertisement;
 import cn.fuego.smart.home.domain.Product;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
+import cn.fuego.smart.home.webservice.up.model.GetAdListReq;
+import cn.fuego.smart.home.webservice.up.model.GetAdListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetProductListReq;
 import cn.fuego.smart.home.webservice.up.model.GetProductListRsp;
+import cn.fuego.smart.home.webservice.up.model.base.AdvertisementJson;
 import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
-import cn.fuego.smart.home.webservice.up.rest.ProductManageRest;
+import cn.fuego.smart.home.webservice.up.rest.MallManageRest;
 
  /** 
  * @ClassName: MallManageRestImpl 
@@ -28,7 +32,7 @@ import cn.fuego.smart.home.webservice.up.rest.ProductManageRest;
  * @date 2015-3-17 上午10:22:22 
  *  
  */
-public class ProductManageRestImpl implements ProductManageRest
+public class MallManageRestImpl implements MallManageRest
 {
 
 	private FuegoLog log = FuegoLog.getLog(getClass());
@@ -67,6 +71,33 @@ public class ProductManageRestImpl implements ProductManageRest
 
 
  		
+		return rsp;
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.up.rest.MallManageRest#getAdList(cn.fuego.smart.home.webservice.up.model.GetProductListReq)
+	 */
+	@Override
+	public GetAdListRsp getAdList(GetAdListReq req)
+	{
+		GetAdListRsp rsp = new GetAdListRsp();
+		
+		try
+		{
+ 
+
+			List<Advertisement> adList = ServiceContext.getInstance().getAdManageService().getDataSource().getAllPageData();
+			for(Advertisement ad : adList)
+			{
+				AdvertisementJson json = ModelConvert.adToJson(ad);
+				rsp.getAdList().add(json);
+			}
+
+ 		}
+		catch(Exception e)
+		{
+			log.error("get sensor list error",e);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
 		return rsp;
 	}
 
