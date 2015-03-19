@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
  /**
-  * ͼƬ��������ʱ�������  ,�����Ĭ��ʱ����ò������
+  * 图片滑动动画时间控制类  ,如果用默认时间可用不这个类
   * @author Administrator
   * 
   *	FixedSpeedScroller scroller = new FixedSpeedScroller(context,new AccelerateInterpolator());
@@ -24,9 +24,9 @@ public class FixedSpeedScroller extends Scroller {
         this.context=context;
     } 
     /**
-     *  ���û���ʱ��  ,�����Ĭ��ʱ��ɲ�������� ,���似��ʵ��
-     * @param vp  ViewPager ����
-     * @param time  ʱ��
+     *  设置滑动时间  ,如果用默认时间可不用这个类 ,反射技术实现
+     * @param vp  ViewPager 对象
+     * @param time  时间
      */
  
     public void setDuration(ViewPager vp,int time) {

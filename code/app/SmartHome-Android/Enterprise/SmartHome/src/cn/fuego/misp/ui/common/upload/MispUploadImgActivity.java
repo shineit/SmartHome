@@ -6,8 +6,6 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,40 +17,38 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.common.upload.UploadUtil.OnUploadProcessListener;
+import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.R;
 
 public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadProcessListener
 {
 
-
-	private static final String TAG = "uploadImage";
-	//ȥ�ϴ��ļ�
+	//去上传文件
 	protected static final int TO_UPLOAD_FILE = 1;  
-	//�ϴ��ļ���Ӧ
+	//上传文件响应
 	protected static final int UPLOAD_FILE_DONE = 2;  
-	//ѡ���ļ�
+	//选择文件
 	public static final int TO_SELECT_PHOTO = 3;
-	//�ϴ���ʼ��
+	//上传初始化
 	private static final int UPLOAD_INIT_PROCESS = 4;
-	//�ϴ���
+	//上传中
 	private static final int UPLOAD_IN_PROCESS = 5;
-	//���������uri
-	//private String requestURL ="http://10.0.0.143:8888/AndroidServer/servlet/HttpServlet";
-	///private static String requestURL = "http://192.168.1.100:8080/MyTest/p/file!upload";
+	//请求服务器uri
 	private static String requestURL = MemoryCache.getWebContextUrl()+"/UploadFile!uploadFile";
  	private ImageView imageView;
  
 	private ProgressBar progressBar;
- 	public static String picPath = null;
+ 	private String picPath = null;
 	private ProgressDialog progressDialog;
+	private View submit_btn_area;
 	
 	@Override
 	public void initRes()
 	{
 		this.activityRes.setAvtivityView(R.layout.misp_upload_img);
-		this.activityRes.getButtonIDList().add(R.id.uploadImage);
-		this.activityRes.getButtonIDList().add(R.id.camera);
+		this.activityRes.getButtonIDList().add(R.id.upload_img_camera);
+		this.activityRes.getButtonIDList().add(R.id.upload_img_submitbtn);
 		
 	}
     /** Called when the activity is first created. */
@@ -60,8 +56,11 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
  
- 		progressBar = (ProgressBar) findViewById(R.id.progressBar1);
-        imageView = (ImageView) findViewById(R.id.imageView);
+ 		progressBar = (ProgressBar) findViewById(R.id.upload_img_progressBar);
+        imageView = (ImageView) findViewById(R.id.upload_imgview_area);
+        submit_btn_area = findViewById(R.id.submit_btn_area);
+        submit_btn_area.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         progressDialog = new ProgressDialog(this);
         
     }
@@ -76,18 +75,18 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 		switch (v.getId()) 
 		{
 
-		case R.id.uploadImage:
+		case R.id.upload_img_submitbtn:
 			if(picPath!=null)
 			{		
 				MispHttpMessage msg = new MispHttpMessage();
 			    msg.getMessage().what = TO_UPLOAD_FILE;
-			 
+			    
 			    handler.sendMessage(msg);
  			}else{
 				Toast.makeText(this, "上传的文件路径出错", Toast.LENGTH_LONG).show();
 			}
 			break;
-		case R.id.camera:
+		case R.id.upload_img_camera:
 			Intent intent1 = new Intent(this,SelectPicActivity.class);
 			startActivityForResult(intent1, TO_SELECT_PHOTO);
 			break;
@@ -99,10 +98,12 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if(resultCode==Activity.RESULT_OK && requestCode == TO_SELECT_PHOTO){
- 			imageView.setImageBitmap(null);
+ 			//imageView.setImageBitmap(null);
  			picPath = data.getStringExtra(SelectPicActivity.KEY_PHOTO_PATH);
-			Bitmap bm = BitmapFactory.decodeFile(picPath);
-			imageView.setImageBitmap(bm);
+ 			LoadImageUtil.getInstance().loadImage(imageView, "file://"+picPath);
+ 			
+			//Bitmap bm = BitmapFactory.decodeFile(picPath);
+			//imageView.setImageBitmap(bm);
 	}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -127,7 +128,6 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 		UploadUtil uploadUtil = UploadUtil.getInstance();;
 		uploadUtil.setOnUploadProcessListener(this);   		
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("orderId", "111");
 		uploadUtil.uploadFile( picPath,fileKey, requestURL,params);
 	}
 	
@@ -136,6 +136,8 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 		public void handle(MispHttpMessage msg) {
 			switch (msg.getMessage().what) {
 			case TO_UPLOAD_FILE:
+				progressBar.setVisibility(View.VISIBLE);
+				submit_btn_area.setVisibility(View.GONE);
 				toUploadFile();
 				break;			
 			case UPLOAD_INIT_PROCESS:

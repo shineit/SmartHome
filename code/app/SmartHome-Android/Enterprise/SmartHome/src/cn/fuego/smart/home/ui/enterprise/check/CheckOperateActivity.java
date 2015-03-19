@@ -5,14 +5,17 @@ package cn.fuego.smart.home.ui.enterprise.check;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.common.upload.MispUploadImgActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
+import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.R;
@@ -27,7 +30,8 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 	private View abnormalView;
 	private CheckLogJson checkLog;
 	private TextView abnormal_desp;
-	private String abnormalPic="";
+	private ImageView abnormal_img;
+	//private String abnormalPic="";
 	@Override
 	public void initRes()
 	{
@@ -78,6 +82,12 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		RadioGroup group = (RadioGroup) findViewById(R.id.check_operate_radiogroup);
 		group.setOnCheckedChangeListener(this);
 		
+		abnormal_img= (ImageView) findViewById(R.id.check_operate_img);
+		if(!ValidatorUtil.isEmpty(checkLog.getAbnormalPic()))
+		{
+			loadImag(checkLog.getAbnormalPic());
+		}
+		
 		
 	}
 
@@ -89,7 +99,7 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		CheckOperateActivity.this.setResult(IntentCodeConst.RESULT_CODE,intent);
 		checkLog.setAbnormalDesp(abnormal_desp.getText().toString().trim());
-		 
+	 
 		CheckLogCache.getInstance().update(checkLog);
 		this.finish();
 		
@@ -109,9 +119,20 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		MispUploadImgActivity.jump(this, 1);
 	}
 
+	/**
+	 * 
+	 */
+	private void clearCache()
+	{
+		checkLog.setAbnormalDesp("");
+		checkLog.setAbnormalPic("");
+		abnormal_desp.setText("");
+		loadImag(checkLog.getAbnormalPic());
+	}
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId)
 	{
+		clearCache();
 		switch(checkedId)
 		{
 			case R.id.radio_btn_normal:
@@ -139,13 +160,24 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 	{
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		MispBaseRspJson rsp = (MispBaseRspJson) data.getSerializableExtra(RETURN_DATA);
-		checkLog.setAbnormalPic((String)rsp.getObj());
-		
-		
+		if(null!=data)
+		{
+			MispBaseRspJson rsp = (MispBaseRspJson) data.getSerializableExtra(RETURN_DATA);
+			if(null!=rsp)
+			{
+				checkLog.setAbnormalPic((String)rsp.getObj());
+				
+				loadImag(checkLog.getAbnormalPic());
+			}
+		}
+	
 	}
 	
-	
-	
-	
+	private void loadImag(String picName)
+	{
+		LoadImageUtil.getInstance().loadImage(abnormal_img, MemoryCache.getImageUrl()+picName);
+		
+	}
+
+
 }

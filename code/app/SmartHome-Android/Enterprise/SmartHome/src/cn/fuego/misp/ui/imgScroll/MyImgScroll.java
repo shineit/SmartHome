@@ -16,14 +16,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- * ͼƬ������
+ * 图片滚动类
  * 
  * @author Administrator
  * 
  */
 public class MyImgScroll extends ViewPager {
-	Activity mActivity; // ������
-	List<View> mListViews; // ͼƬ��
+	Activity mActivity; // 上下文
+	List<View> mListViews; // 图片组
 	int mScrollTime = 0;
 	Timer timer;
 	int oldIndex = 0;
@@ -34,24 +34,24 @@ public class MyImgScroll extends ViewPager {
 	}
 
 	/**
-	 * ��ʼ������
+	 * 开始广告滚动
 	 * 
 	 * @param mainActivity
-	 *            ��ʾ����������
+	 *            显示广告的主界面
 	 * @param imgList
-	 *            ͼƬ�б�, ����Ϊnull ,����һ��
+	 *            图片列表, 不能为null ,最少一张
 	 * @param scrollTime
-	 *            ������� ,0Ϊ������
+	 *            滚动间隔 ,0为不滚动
 	 * @param ovalLayout
-	 *            Բ������,��Ϊ��,LinearLayout����
+	 *            圆点容器,可为空,LinearLayout类型
 	 * @param ovalLayoutId
-	 *            ovalLayoutΪ��ʱ д0, Բ��layout XMl
+	 *            ovalLayout为空时 写0, 圆点layout XMl
 	 * @param ovalLayoutItemId
-	 *            ovalLayoutΪ��ʱ д0,Բ��layout XMl Բ��XMl��View ID
+	 *            ovalLayout为空时 写0,圆点layout XMl 圆点XMl下View ID
 	 * @param focusedId
-	 *            ovalLayoutΪ��ʱ д0, Բ��layout XMl ѡ��ʱ�Ķ���
+	 *            ovalLayout为空时 写0, 圆点layout XMl 选中时的动画
 	 * @param normalId
-	 *            ovalLayoutΪ��ʱ д0, Բ��layout XMl ��ʱ����
+	 *            ovalLayout为空时 写0, 圆点layout XMl 正常时背景
 	 */
 	public void start(Activity mainActivity, List<View> imgList,
 			int scrollTime, LinearLayout ovalLayout, int ovalLayoutId,
@@ -59,16 +59,16 @@ public class MyImgScroll extends ViewPager {
 		mActivity = mainActivity;
 		mListViews = imgList;
 		mScrollTime = scrollTime;
-		// ����Բ��
+		// 设置圆点
 		setOvalLayout(ovalLayout, ovalLayoutId, ovalLayoutItemId, focusedId,
 				normalId);
-		this.setAdapter(new MyPagerAdapter());// ����������
+		this.setAdapter(new MyPagerAdapter());// 设置适配器
 		if (scrollTime != 0 && imgList.size() > 1) {
-			// ���û�������ʱ��  ,�����Ĭ�϶���ʱ��ɲ��� ,���似��ʵ��
+			// 设置滑动动画时间  ,如果用默认动画时间可不用 ,反射技术实现
 			 new FixedSpeedScroller(mActivity).setDuration(this, 700);
 	
 			startTimer();
-			// ����ʱֹͣ����
+			// 触摸时停止滚动
 			this.setOnTouchListener(new OnTouchListener() {
 				public boolean onTouch(View v, MotionEvent event) {
 					if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -82,11 +82,11 @@ public class MyImgScroll extends ViewPager {
 		} 
 		if (mListViews.size() > 1) {
 			this.setCurrentItem((Integer.MAX_VALUE / 2)
-					- (Integer.MAX_VALUE / 2) % mListViews.size());// ����ѡ��Ϊ�м�/ͼƬΪ�͵�0��һ��
+					- (Integer.MAX_VALUE / 2) % mListViews.size());// 设置选中为中间/图片为和第0张一样
 		}
 	}
 
-	// ����Բ��
+	// 设置圆点
 	private void setOvalLayout(final LinearLayout ovalLayout, int ovalLayoutId,
 			final int ovalLayoutItemId, final int focusedId, final int normalId) {
 		if (ovalLayout != null) {
@@ -95,16 +95,16 @@ public class MyImgScroll extends ViewPager {
 				ovalLayout.addView(inflater.inflate(ovalLayoutId, null));
 				
 			}
-			//ѡ�е�һ��
+			//选中第一个
 			ovalLayout.getChildAt(0).findViewById(ovalLayoutItemId)
 			.setBackgroundResource(focusedId);
 			this.setOnPageChangeListener(new OnPageChangeListener() {
 				public void onPageSelected(int i) {
 					curIndex = i % mListViews.size();
-                    //ȡ��Բ��ѡ��
+                    //取消圆点选中
 					ovalLayout.getChildAt(oldIndex).findViewById(ovalLayoutItemId)
 							.setBackgroundResource(normalId);
-					 //Բ��ѡ��
+					 //圆点选中
 					ovalLayout.getChildAt(curIndex).findViewById(ovalLayoutItemId)
 					.setBackgroundResource(focusedId);
 					oldIndex = curIndex;
@@ -119,14 +119,14 @@ public class MyImgScroll extends ViewPager {
 		}
 	}
 	/**
-	 * ȡ�õ���ѡ���±�
+	 * 取得当明选中下标
 	 * @return
 	 */
     public int getCurIndex() {
 		return curIndex;
 	}
 	/**
-	 * ֹͣ����
+	 * 停止滚动
 	 */
 	public void stopTimer() {
 		if (timer != null) {
@@ -136,7 +136,7 @@ public class MyImgScroll extends ViewPager {
 	}
 
 	/**
-	 * ��ʼ����
+	 * 开始滚动
 	 */
 	public void startTimer() {
 		timer = new Timer();
@@ -152,7 +152,7 @@ public class MyImgScroll extends ViewPager {
 		}, mScrollTime, mScrollTime);
 	}
 
-	// ������ //ѭ������
+	// 适配器 //循环设置
 	private class MyPagerAdapter extends PagerAdapter {
 		public void finishUpdate(View arg0) {
 		}
@@ -162,7 +162,7 @@ public class MyImgScroll extends ViewPager {
 		}
 
 		public int getCount() {
-			if (mListViews.size() == 1) {// һ��ͼƬʱ��������
+			if (mListViews.size() == 1) {// 一张图片时不用流动
 				return mListViews.size();
 			}
 			return Integer.MAX_VALUE;

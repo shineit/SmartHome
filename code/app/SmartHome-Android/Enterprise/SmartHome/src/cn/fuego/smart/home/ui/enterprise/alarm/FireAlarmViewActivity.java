@@ -21,11 +21,8 @@ import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 
 public class FireAlarmViewActivity extends MispBaseActivtiy 
 {
-	private FuegoLog log = FuegoLog.getLog(MispBaseActivtiy.class);
-	private Window window;
-	private PopupWindow popupWindow=null; 
-	private View view;
-	
+	private FuegoLog log = FuegoLog.getLog(getClass());
+
 	private FireAlarmJson fireAlarm;
 
 	@Override
@@ -38,16 +35,14 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		
 		this.activityRes.getButtonIDList().add(R.id.fire_alarm_loc);
 
- 	}
+		fireAlarm= (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		window=FireAlarmViewActivity.this.getWindow();
-		fireAlarm= (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
-		//log.info("fireAlarm is :"+fireAlarm.getAlarmTypeName());
- 	
+
 		TextView txt_machineID= (TextView) findViewById(R.id.alarm_machine_id);
 		txt_machineID.setText(String.valueOf(fireAlarm.getMachineID()));
 		TextView txt_loopID= (TextView) findViewById(R.id.alarm_loop_id);
@@ -67,55 +62,6 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		SensorLocationActivity.jump(this, fireAlarm);
 	}
 
-	private void loadLocaPic(View parent) {
-
-		if (popupWindow == null)
-		{		
-			LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
-			view = layoutInflater.inflate(R.layout.pop_fire_alarm_location, null);
-
-			// 创建一个PopuWidow对象
-			 popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			// 使其聚集
-			popupWindow.setFocusable(true);
-			// 设置允许在外点击消失
-			popupWindow.setOutsideTouchable(true);
-
-			// 实例化一个ColorDrawable颜色为半透明
-			ColorDrawable dw = new ColorDrawable(0x90000000);
-			popupWindow.setBackgroundDrawable(dw);
-			popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);         
-			popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-			 
-		}
-
-
-        //设置背景变暗
-        WindowManager.LayoutParams lp=window.getAttributes();
-        lp.alpha = 0.4f;
-        window.setAttributes(lp); 
-		
-
-        
-		
-		WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-
-		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);//在屏幕居中，无偏移
-		
-		popupWindow.setOnDismissListener(new OnDismissListener()
-		{
-			
-			@Override
-			public void onDismiss()
-			{
-				WindowManager.LayoutParams lp=window.getAttributes();
-			    lp.alpha = 1f;
-			    window.setAttributes(lp);
-			    popupWindow=null;
-			}
-		});
-		
-	}
 
 
 }
