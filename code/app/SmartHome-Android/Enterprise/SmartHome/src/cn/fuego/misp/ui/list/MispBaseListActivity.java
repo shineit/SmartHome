@@ -28,9 +28,17 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	private MispListAdapter<E> adapter;
 
 	protected ListViewResInfo listViewRes = new ListViewResInfo();
+	private ListView listView;
+	
+	private boolean isAdapterForScrollView = false;
 	
 	
-	
+
+	public void setAdapterForScrollView(boolean isAdapterForScrollView)
+	{
+		this.isAdapterForScrollView = isAdapterForScrollView;
+	}
+
 
 	public List<E> getDataList()
 	{
@@ -61,7 +69,7 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 		{
 			case ListViewResInfo.VIEW_TYPE_LIST:
 			{
-				ListView listView = (ListView) findViewById(this.listViewRes.getListView());
+				listView = (ListView) findViewById(this.listViewRes.getListView());
 				if(null != listView)
 				{
 					listView.setAdapter(adapter);
@@ -105,6 +113,10 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 		if(null != adapter)
 		{
 			this.adapter.notifyDataSetChanged();
+			if(isAdapterForScrollView)
+			{
+				this.adapterForScrollView();
+			}
 
 		}
 	}
@@ -128,7 +140,7 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 				this.dataList.addAll(newData);
 			}
 
-			this.adapter.notifyDataSetChanged();
+			repaint();
 
 		} else
 		{
@@ -145,6 +157,30 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 		onItemListClick(parent,view,id,item);
 
 	}
+	public void adapterForScrollView()
+	{
+    	ListAdapter listAdapter = listView.getAdapter();   
+        if (listAdapter == null) {   
+            return;   
+        }   
+   
+        int totalHeight = 0;   
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {   
+            // listAdapter.getCount()返回数据项的数目   
+            View listItem = listAdapter.getView(i, null, listView);   
+            // 计算子项View 的宽高   
+            listItem.measure(0, 0);    
+            // 统计所有子项的总高度   
+            totalHeight += listItem.getMeasuredHeight();    
+        }   
+   
+        ViewGroup.LayoutParams params = listView.getLayoutParams();   
+        params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));   
+        // listView.getDividerHeight()获取子项间分隔符占用的高度   
+        // params.height最后得到整个ListView完整显示需要的高度   
+        listView.setLayoutParams(params);  
+	}
+	
 	
 	public void onItemListClick(AdapterView<?> parent, View view,long id, E item)
 	{
