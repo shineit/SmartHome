@@ -46,6 +46,16 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 		companyList = DaoContext.getInstance().getCompanyDao().getAll(conditionList);
 		return companyList;
 	}
+	
+	public Company getCompanyByConcentorID(long concentorID)
+	{
+		List<Company> concentorList = this.get("concentratorID", concentorID);
+		if(!ValidatorUtil.isEmpty(concentorList))
+		{
+			return concentorList.get(0);
+		}
+		return null;
+	}
 
  
 }

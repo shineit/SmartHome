@@ -18,4 +18,6 @@ public interface CompanyManageService extends MispCommonService<Company>
 {
  
 	List<Company> getCompanyList(int userID);
+	Company getCompanyByConcentorID(long concentorID);
+
 }

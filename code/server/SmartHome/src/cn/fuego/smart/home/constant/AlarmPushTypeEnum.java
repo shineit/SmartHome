@@ -15,7 +15,7 @@ package cn.fuego.smart.home.constant;
 * @date 2015-3-12 上午10:50:41 
 *  
 */ 
-public enum AlarmIsPushEnum
+public enum AlarmPushTypeEnum
 {
 	NO_PUSH(0,"不推送"),
 	PUSH(1,"推送");
@@ -26,7 +26,7 @@ public enum AlarmIsPushEnum
 	 * @param intValue
 	 * @param strValue
 	 */
-	private AlarmIsPushEnum(int intValue, String strValue)
+	private AlarmPushTypeEnum(int intValue, String strValue)
 	{
 		this.intValue = intValue;
 		this.strValue = strValue;
@@ -39,9 +39,9 @@ public enum AlarmIsPushEnum
 	{
 		return strValue;
 	}
-	public static AlarmIsPushEnum getEnumByInt(int intValue)
+	public static AlarmPushTypeEnum getEnumByInt(int intValue)
 	{
-		for (AlarmIsPushEnum c : AlarmIsPushEnum.values())
+		for (AlarmPushTypeEnum c : AlarmPushTypeEnum.values())
 		{
 			if (intValue == c.intValue)
 			{

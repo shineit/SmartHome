@@ -14,14 +14,20 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.smart.home.constant.AlarmTypeEnum;
+import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
+import cn.fuego.misp.service.MISPServiceContext;
+import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
+import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
 import cn.fuego.smart.home.domain.Alarm;
+import cn.fuego.smart.home.domain.AlarmType;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ServiceContext;
-import cn.fuego.smart.home.service.cache.AppLoginCache;
+import cn.fuego.smart.home.service.cache.AlarmTypeCache;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
+import cn.fuego.smart.home.webservice.down.model.AlarmPushInfoJson;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.fuego.smart.home.webservice.down.service.PushService;
 import cn.fuego.smart.home.webservice.down.service.PushToolFactory;
@@ -45,58 +51,83 @@ public class PushServiceImpl implements PushService
 	{
 		 for(Alarm alarm : alarmList)
 		 {
-			 if(AlarmTypeEnum.FIRE_ALARM.getIntValue()!=alarm.getAlarmType())
+			 AlarmType type = AlarmTypeCache.getInstance().getAlarmType(alarm.getAlarmType());
+			 if(null == type)
 			 {
-				 return;
+				 log.warn("can not find the alarm type,the type id "+alarm.getAlarmType());
+				 break;
+			 }
+			 if(AlarmPushTypeEnum.NO_PUSH.getIntValue() == type.getPushType())
+			 {
+				 log.warn("the type no need to push,the "+type);
+				 break;
+			 }
+			 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
+			 
+			 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
+			
+			 if(!ValidatorUtil.isEmpty(userConList))
+			 {
+				for(UserConcentrator userCon : userConList)
+				{
+						
+					 FuegoPushInfo pushInfo = PushToolFactory.getInstance().getPushInfo(userCon.getUserID());
+					 
+					 if(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue() ==alarm.getObjType())
+					 {
+						 pushFireAlarm(pushInfo,userCon,type,alarm);
+					 }
+					 else
+					 {
+						 PushMessageJson json = new PushMessageJson();
+						 String title=null;
+						 title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+type.getTypeName();
+						 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
+							 
+						 String content = "";//type.getTypeName();	 
+ 						 
+						 json.setObj(alarm.getId());
+						 
+		 
+ 						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
+					 }
+				 }
 			 }
 			 else
 			 {
-				 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
-				 
-				 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
-				 if(!ValidatorUtil.isEmpty(userConList))
-				 {
-					 for(UserConcentrator userCon : userConList)
-					 {
-						 FuegoPushInfo pushInfo = AppLoginCache.getPushInfo(userCon.getUserID());
-						 
-						 if(null != pushInfo)
-						 {
-							 PushMessageJson json = new PushMessageJson();
-							 String title=null;
-							 if(alarm.getAlarmType()==AlarmTypeEnum.FIRE_ALARM.getIntValue())
-							 {
-								 title = PushMessagTypeEnum.FATAL_ALARM.getStrValue()+AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
-								 json.setObjType(PushMessagTypeEnum.FATAL_ALARM.getIntValue());
-							 }
-							 else
-							 {
-								 title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();
-								 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
-							 }
-							 
-							 String content = AlarmTypeEnum.getEnumByInt(alarm.getAlarmType()).getStrValue();					 
-	 						 
-							 json.setObj(alarm.getId());
-			 
-	 						 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
-						 }
-						 else
-						 {
-							 log.info("no need to push,the user have not been logined, user id is " + userCon.getUserID());
-						 }
-					 
-					 }
-				 }
-				 else
-				 {
-					 log.warn("can not get manage user,we will not push anythig for the alarm"  + alarm);
-	 			 }
+				 log.warn("can not get manage user,we will not push anythig for the alarm"  + alarm);
 			 }
-
-			 
+  
 		 }
 		
+	}
+	
+	private void pushFireAlarm(FuegoPushInfo pushInfo,UserConcentrator userCon,AlarmType type,Alarm alarm)
+	{
+		 Company company = ServiceContext.getInstance().getCompanyManageService().getCompanyByConcentorID(userCon.getConcentratorID());
+		 if(null == company)
+		 {
+			 log.warn("the concentor have not been set to any company so no need to push"+userCon.getConcentratorID());
+			 return;
+		 }
+		 if(!MISPServiceContext.getInstance().getMISPPrivilegeManage().hasPrivilege(String.valueOf(userCon.getUserID()), PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),String.valueOf(company.getCompanyID())))
+		 {
+			 log.warn("the user have no right for the company.the user id is "+userCon.getUserID() + "the conmpany id is " + company.getCompanyID());
+			 return;
+		 }
+		 
+		 PushMessageJson json = new PushMessageJson();
+		 String title=null;
+		 title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+type.getTypeName();
+		 json.setObjType(PushMessagTypeEnum.ALRAM_MSG.getIntValue());
+		 
+		 String content = "";//type.getTypeName();	 
+		 AlarmPushInfoJson alarmPushInfo = new AlarmPushInfoJson();
+		 alarmPushInfo.setCompanyID(company.getCompanyID());
+		 alarmPushInfo.setPushType(type.getPushType());
+		 json.setObj(alarmPushInfo);
+ 		 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
+
 	}
 
 	/* (non-Javadoc)

@@ -2,6 +2,7 @@ package cn.fuego.smart.home.device.listenser.mina;
 
 //Download by http://www.codefans.net
 import java.net.InetSocketAddress;
+import java.util.Random;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -34,9 +35,52 @@ public class MinaServerHandler extends IoHandlerAdapter
 	public void sessionCreated(IoSession session)
 	{
 		// 显示客户端的ip和端口
-		log.info(session.getRemoteAddress().toString());
+		log.info("new client connected "+session.getRemoteAddress().toString());
+		
+		/**
+		 * 当客户端刚建立连接的时候，发送复位命令
+		 * 设备收到复位命令，会给服务器发送上线命令
+		 * 这样复位就可以更新从存储 连接IP与端口号
+		 * 为服务器主动给设备发送消息做准备。
+		 * 
+		 * */
+
+		sendReset(session);
 	}
 
+	private void sendReset(IoSession session)
+	{
+		    log.info("send reset message");
+	 
+			try
+			{
+				Random random1 = new Random(128);
+				StringBuffer buf = new StringBuffer();
+	 
+			 	 /*
+		         * 像设备发送命令的时候应该是要发送集中器ID的，但是连接刚建立
+				 * 没有集中器ID所以填0，只是为了通知集中器连接建立
+				 */
+				buf.append(DataTypeConvert.intToByteStr(0));
+				
+				buf.append(DataTypeConvert.intToByteStr(random1.nextInt(), 1));
+				buf.append(DataTypeConvert.intToByteStr(SendCommandConst.RESET_CONCENTRATOR,1));
+				buf.append(DataTypeConvert.intToByteStr(0,1));
+				
+				byte[] bytes = DataTypeConvert.strToBytes(ApplicationProtocol.encode(buf.toString()));
+				IoBuffer b = IoBuffer.allocate(bytes.length);
+				b.put(bytes);
+				b.flip();
+				session.write(b);
+ 
+	 		}
+			catch (Exception e)
+			{
+				log.error("send data error",e);
+			}
+		 
+
+	}
 	@Override
 	/**
 	 * 消息接收事件
@@ -48,9 +92,12 @@ public class MinaServerHandler extends IoHandlerAdapter
  
 		byte[] bytes = new byte[buf.limit()];   
 		buf.get(bytes);   
-
-
-		parseData(session,DataTypeConvert.bytesToStr(bytes));
+		
+		log.info("recive data from " + session.getRemoteAddress());
+		
+		String data = DataTypeConvert.bytesToStr(bytes);
+		log.info("the data is " + DataTypeConvert.toHexStringList(data));
+		parseData(session,data);
  
  	}
 
@@ -80,33 +127,30 @@ public class MinaServerHandler extends IoHandlerAdapter
 		super.sessionClosed(session);
 	}
 
-	public void sendReturnData(IoSession session,long concentratorID,int packetNum)
+	private void sendReturnData(IoSession session,long concentratorID,int packetNum)
 	{
-		synchronized (this)
+		try
 		{
-			try
-			{
-				StringBuffer buf = new StringBuffer();
-	 
-				buf.append(DataTypeConvert.intToByteStr(concentratorID));
-				buf.append(DataTypeConvert.intToByteStr(packetNum,1));
-				buf.append(DataTypeConvert.intToByteStr(RecieveCommandConst.PACKET_RECV_MSG,1));
-				buf.append(DataTypeConvert.intToByteStr(0,1));
-				
-				byte[] bytes = DataTypeConvert.strToBytes(ApplicationProtocol.encode(buf.toString()));
-				IoBuffer b = IoBuffer.allocate(bytes.length);
-		 
-				b.put(bytes);
-				b.flip();
-				session.write(b);
- 
-	 		}
-			catch (Exception e)
-			{
-				log.error("send data error",e);
-			}
+			StringBuffer buf = new StringBuffer();
+
+			buf.append(DataTypeConvert.intToByteStr(concentratorID));
+			buf.append(DataTypeConvert.intToByteStr(packetNum, 1));
+			buf.append(DataTypeConvert.intToByteStr(
+					RecieveCommandConst.PACKET_RECV_MSG, 1));
+			buf.append(DataTypeConvert.intToByteStr(0, 1));
+
+			byte[] bytes = DataTypeConvert.strToBytes(ApplicationProtocol
+					.encode(buf.toString()));
+			IoBuffer b = IoBuffer.allocate(bytes.length);
+
+			b.put(bytes);
+			b.flip();
+			session.write(b);
+
+		} catch (Exception e)
+		{
+			log.error("send data error", e);
 		}
- 
 
 	}
 	private void parseData(IoSession session,String receiveData)

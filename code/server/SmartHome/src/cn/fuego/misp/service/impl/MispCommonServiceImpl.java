@@ -283,6 +283,12 @@ public abstract class  MispCommonServiceImpl<E> implements MispCommonService<E>
         QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL,fieldName, fieldValue);
         return this.getDao().getAll(condition);
 	}
+	public List<E> get(String fieldName,long fieldValue)
+	{
+ 
+        QueryCondition condition = new QueryCondition(ConditionTypeEnum.EQUAL,fieldName, fieldValue);
+        return this.getDao().getAll(condition);
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

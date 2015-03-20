@@ -33,7 +33,15 @@ public interface MISPPrivilegeManage
 	 */
 	public Set<String> getMenuIDListByRole(String roleID);
 	
- 
+	/**
+	 * 
+	 * @param userID
+	 * @param accessObjType
+	 * @param accessObjValue
+	 * @return
+	 */
+	public boolean hasPrivilege(String userID, String accessObjType,String accessObjValue);
+
 	/**
 	 * 
 	 * @param userID

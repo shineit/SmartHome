@@ -77,7 +77,7 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
  
 		//根据用户ID，获取具有权限的菜单ID
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.USER.getMasterType()));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.ROLE.getMasterType()));
 		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterValueAttr(), roleID));
 		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeAttr(),accessObjType));
 		List<Privilege> privilegeList = (List<Privilege>) MISPDaoContext.getInstance().getPrivilegeDao().getAll(conditionList);
@@ -143,7 +143,28 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 		return menuIDList;
 	}
 
-	
+	/* (non-Javadoc)
+	 * @see cn.fuego.misp.service.MISPPrivilegeManage#hasPrivilege(java.lang.String, int)
+	 */
+	@Override
+	public boolean hasPrivilege(String userID, String accessObjType,String accessObjValue)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.USER.getMasterType()));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterValueAttr(), userID));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeAttr(),accessObjType));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, "accessObjValue",accessObjValue));
+
+		List<Privilege> privilegeList = (List<Privilege>) MISPDaoContext.getInstance().getPrivilegeDao().getAll(conditionList);
+		
+		Set<String> objIDList = new HashSet<String>();
+		for(Privilege e : privilegeList)
+		{
+			objIDList.add(e.getAccessObjValue());
+		}
+ 
+		return false;
+	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.service.MISPPrivilegeManage#hasPrivilege(java.lang.String, int)
 	 */

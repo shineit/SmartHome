@@ -44,7 +44,7 @@ public class JPushToolImpl implements PushToolInterface
     public static final String MSG_CONTENT = "Test from API Example - msgContent";
     public static final String REGISTRATION_ID = "0900e8d85ef";
     public static final String TAG = "tag_api";
-	/* (non-Javadoc)
+	/* jpush推送 只要给用户ID就可以了，这个用户ID 可以是自己内容系统ID，app要将这个ID注册到jpush服务器
 	 * @see cn.fuego.smart.home.webservice.down.service.PushToolInterface#pushNotification(cn.fuego.smart.home.service.cache.FuegoPushInfo, java.lang.Object)
 	 */
 	@Override
@@ -153,5 +153,6 @@ public class JPushToolImpl implements PushToolInterface
 		// TODO Auto-generated method stub
 		
 	}
+ 
 
 }
