@@ -20,8 +20,7 @@ public class AlarmType
 	private int typeID;			//主键，设备配置好编码
 	private String typeName;	//类型名称
 	private int kind;			//0-告警；1-设备状态；
-	private int isPush; 	//0-不推送；1-推送；
-	private int pushType;		//0-不长鸣；1-长鸣；n-循环次数(作为拓展)
+	private int pushType;		//0-不推送；1-推送不长鸣；2-退送且长鸣
 	private int isFeedback;	//0-为恢复类型；1-不为恢复类型；
 	private int feedbackID; 	//恢复码
 	public int getTypeID()
@@ -49,14 +48,6 @@ public class AlarmType
 		this.kind = kind;
 	}
 
-	public int getIsPush()
-	{
-		return isPush;
-	}
-	public void setIsPush(int isPush)
-	{
-		this.isPush = isPush;
-	}
 	public int getIsFeedback()
 	{
 		return isFeedback;

@@ -12,7 +12,6 @@ import java.util.List;
 
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.smart.home.domain.CheckLog;
-import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 
 
 /** 

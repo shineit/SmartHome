@@ -14,7 +14,6 @@
 		
 		 <property name="typeName" column="TYPE_NAME"></property>
 		 <property name="kind" column="KIND"></property>
-		 <property name="isPush" column="IS_PUSH"></property>
 		 <property name="pushType" column="PUSH_TYPE"></property>
 		 <property name="isFeedback" column="IS_FEEDBACK"></property>
 		 <property name="feedbackID" column="FEEDBACK_ID"></property>

@@ -51,8 +51,7 @@ public class FireAlarmView implements PersistenceObject
 	private String alarmTypeName; //新增，告警类型名称
 	
 	private int kind;			//0-告警；1-设备状态；
-	private int isPush; 	//0-不推送；1-推送；
-	private int pushType;		//0-不长鸣；1-长鸣；n-循环次数(作为拓展)
+	private int pushType;		//0-不推送；1-推送不长鸣；2-退送且长鸣
 	
 	public int getId()
 	{
@@ -232,14 +231,6 @@ public class FireAlarmView implements PersistenceObject
 	public void setKind(int kind)
 	{
 		this.kind = kind;
-	}
-	public int getIsPush()
-	{
-		return isPush;
-	}
-	public void setIsPush(int isPush)
-	{
-		this.isPush = isPush;
 	}
 	public int getPushType()
 	{

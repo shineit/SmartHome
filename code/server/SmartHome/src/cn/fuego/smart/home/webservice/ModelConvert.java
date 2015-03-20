@@ -113,6 +113,7 @@ public class ModelConvert
 		json.setLocationY(fireAlarm.getLocationY());
 		json.setPlanID(fireAlarm.getPlanID());
 		json.setSensorTypeName(fireAlarm.getSensorTypeName());
+		json.setAlarmKind(fireAlarm.getKind());
 		return json;
 		
 	}	

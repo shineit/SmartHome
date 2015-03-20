@@ -10,8 +10,6 @@ package cn.fuego.smart.home.webservice.up.model.base;
 
 import java.io.Serializable;
 
-import cn.fuego.common.domain.PersistenceObject;
-
 /** 
  * @ClassName: AD 
  * @Description: TODO
