@@ -18,8 +18,9 @@ package cn.fuego.smart.home.constant;
 public enum AlarmPushTypeEnum
 {
 	NO_PUSH(0,"不推送"),
-	PUSH(1,"推送");
- 
+	PUSH(1,"推送"),
+	LONG_PUSH(2,"推送长鸣"),
+	SHORT_PUSH(3,"推送短鸣");
 	private int intValue;
 	private String strValue;
 	/**
