@@ -17,6 +17,7 @@ import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.ui.MainActivity;
+import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.model.AlarmViewModel;
 import cn.fuego.smart.home.ui.model.NewsViewModel;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
@@ -74,7 +75,7 @@ public class GetDetail
 		Intent i = new Intent();
 		if(MemoryCache.isLogined())
 		{
-			//i.setClass(context,AlarmPageActivity.class);
+			i.setClass(context,FireAlarmActivity.class);
 		}
 		else
 		{

@@ -1,17 +1,7 @@
 package cn.fuego.smart.home.ui.enterprise.alarm;
 
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
@@ -29,7 +19,7 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 	public void initRes()
 	{
 		
-		this.activityRes.setName("智慧告警");
+		this.activityRes.setName("设备信息");
 
 		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm_view);
 		

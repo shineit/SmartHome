@@ -21,7 +21,6 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson>
 {
 
 	private CompanyJson company;
-	private int curPage=1;  //默认起始页数
 	@Override
 	public void initRes()
 	{

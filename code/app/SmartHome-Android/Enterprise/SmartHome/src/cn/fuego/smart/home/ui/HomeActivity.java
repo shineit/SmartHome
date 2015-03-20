@@ -16,6 +16,7 @@ import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
 import cn.fuego.smart.home.ui.common.mall.ProductMallActivity;
+import cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity;
@@ -94,21 +95,16 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		{
 
 		case R.id.home_menu_alarm:	
-			//jumpActivity(AlarmActivity.class);
 			CompanyListActivity.jump(this, FireAlarmActivity.class);
-			//jumpActivity(FireAlarmActivity.class);
 			break;
 		case R.id.home_menu_status:
-			CompanyListActivity.jump(this, FireAlarmActivity.class);
+			CompanyListActivity.jump(this, DeviceStatusActivity.class);
 			break;
 		case R.id.home_menu_check:	
-			//jumpActivity(AlarmActivity.class);
-			//jumpActivity(CheckActivity.class);
 			CompanyListActivity.jump(this, CheckActivity.class);
 			break;			
 		case R.id.home_menu_account: 
 			CompanyListActivity.jump(this, CompanyViewActivity.class);
-			//jumpActivity(CompanyListActivity.class);
 			break;
 		case R.id.home_menu_manage:
 			CompanyListActivity.jump(this, CheckLogActivity.class);

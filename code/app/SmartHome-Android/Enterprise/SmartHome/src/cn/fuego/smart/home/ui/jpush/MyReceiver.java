@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
+import cn.fuego.smart.home.service.AlarmSoundService;
 import cn.fuego.smart.home.service.GetDetail;
 import cn.fuego.smart.home.ui.MainActivity;
-import cn.fuego.smart.home.ui.authrun.AlarmSoundService;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.jpush.android.api.JPushInterface;
 
@@ -167,10 +167,6 @@ public class MyReceiver extends BroadcastReceiver {
         		break;
         	case NEWS_MSG:
         	case ALRAM_MSG:
-
-        		//getDetail.showNews(context, pushMsg);
-        		//spHandler.playSound(1, 0);
-        		//SoundPoolHandler.playSound(1, 0);
         		break;	
         	default:break;
         

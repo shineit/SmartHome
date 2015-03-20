@@ -12,11 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.base.MispBaseActivtiy;
+import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
-import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.base.SharedPreUtil;
 import cn.fuego.smart.home.ui.base.UserEntity;
@@ -26,7 +28,7 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
-public class LoginActivity extends BaseActivtiy
+public class LoginActivity extends MispBaseActivtiy
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 	private Button loginBtn;
@@ -85,7 +87,8 @@ public class LoginActivity extends BaseActivtiy
        
 		
 	}
-	private OnClickListener loginClick = new OnClickListener() {
+	private OnClickListener loginClick = new OnClickListener()
+	{
 		
 		@Override
 		public void onClick(View v) 
@@ -95,6 +98,7 @@ public class LoginActivity extends BaseActivtiy
 			if(ValidatorUtil.isEmpty(userName))
 			{
 				showToast(LoginActivity.this, "用户名不能为空");
+				showMessage("用户名不能为空");
 				return;
 			}
 			if(ValidatorUtil.isEmpty(password))
@@ -115,7 +119,7 @@ public class LoginActivity extends BaseActivtiy
  
 		
 		LoginReq req = new LoginReq();
-		req.setPassword(MD5(pwd));
+		req.setPassword(StrUtil.MD5(pwd));
 		req.setUserName(userName);
 		req.setClientType(ClientTypeEnum.ANDRIOD_CLIENT.getIntValue());
  		req.setDevToken(getDeviceID());
@@ -123,10 +127,28 @@ public class LoginActivity extends BaseActivtiy
 		req.setPush_userID(req.getUserName());
 		
 		JPushInterface.setAliasAndTags(this, userName, null, mAliasCallback);
-	
 
-	    
-		WebServiceContext.getInstance().getUserManageRest(this).login(req);
+		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+
+				if (message.isSuccess())
+				{
+			 
+					LoginRsp rsp = (LoginRsp) message.getMessage().obj;
+			 
+					AppCache.getInstance().update(rsp.getToken(), rsp.getUser(), rsp.getCustomer());
+					Class jumpClass = (Class) getIntent().getSerializableExtra(JUMP_SOURCE);
+		            jumpIntent( jumpClass);
+		 
+				}
+				else
+				{
+					showMessage(message);
+				}
+			}
+		}).login(req);
 	}
 	
 	private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
@@ -154,27 +176,7 @@ public class LoginActivity extends BaseActivtiy
         }
 	    
 	};
-	@Override
-	public void handle(MispHttpMessage message)
-	{
-		if (message.isSuccess())
-		{
-	 
-			LoginRsp rsp = (LoginRsp) message.getMessage().obj;
-	 
-			AppCache.getInstance().update(rsp.getToken(), rsp.getUser(), rsp.getCustomer());
-			Class jumpClass = (Class) this.getIntent().getSerializableExtra(JUMP_SOURCE);
-            jumpIntent( jumpClass);
- 
-		}
-		else
-		{
-			showMessage(message);
- 
-			
-		}
- 
-	}
+
 	private void jumpIntent(Class clazz)
 	{
 		Intent toIntent = new Intent();

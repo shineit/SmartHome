@@ -41,6 +41,7 @@ public class FireAlarmJson implements Serializable
 	
 	private int planID;
 	
+	private int alarmKind;//0-告警；1-设备状态；
 	public int getPlanID()
 	{
 		return planID;
@@ -206,18 +207,30 @@ public class FireAlarmJson implements Serializable
 		this.sensorTypeName = sensorTypeName;
 	}
 
+	public int getAlarmKind()
+	{
+		return alarmKind;
+	}
+
+	public void setAlarmKind(int alarmKind)
+	{
+		this.alarmKind = alarmKind;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "FireAlarmJson [id=" + id + ", concentratorID=" + concentratorID
-				+ ", alarmTime=" + alarmTime + ", clearStatus=" + clearStatus
-				+ ", clearTime=" + clearTime + ", status=" + status
-				+ ", concentDesp=" + concentDesp + ", machineID=" + machineID
-				+ ", loopID=" + loopID + ", codeID=" + codeID
-				+ ", locationDesp=" + locationDesp + ", locationX=" + locationX
-				+ ", locationY=" + locationY + ", sensorTypeName="
-				+ sensorTypeName + ", alarmTypeName=" + alarmTypeName + "]";
+				+ ", alarmTypeName=" + alarmTypeName + ", alarmTime="
+				+ alarmTime + ", clearStatus=" + clearStatus + ", clearTime="
+				+ clearTime + ", status=" + status + ", concentDesp="
+				+ concentDesp + ", machineID=" + machineID + ", loopID="
+				+ loopID + ", codeID=" + codeID + ", locationDesp="
+				+ locationDesp + ", locationX=" + locationX + ", locationY="
+				+ locationY + ", planID=" + planID + ", alarmKind=" + alarmKind
+				+ ", sensorTypeName=" + sensorTypeName + "]";
 	}
+
 
  
 }

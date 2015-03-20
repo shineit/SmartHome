@@ -36,9 +36,9 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	
 	
 
-	public void setAdapterForScrollView(boolean isAdapterForScrollView)
+	public void setAdapterForScrollView()
 	{
-		this.isAdapterForScrollView = isAdapterForScrollView;
+		this.isAdapterForScrollView = true;
 	}
 
 

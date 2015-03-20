@@ -217,6 +217,14 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 		return titleView;
 	}
  
+    public void showToast(Context mContext,String Msg)
+    {
+    	Toast.makeText(mContext, Msg, Toast.LENGTH_SHORT).show();
+    }
+    public void showToast(Context mContext,MispHttpMessage message)
+    {
 
+	    Toast.makeText(mContext, MISPErrorMessageConst.getMessageByErrorCode(message.getErrorCode()), Toast.LENGTH_SHORT).show();
+    }
 
 }

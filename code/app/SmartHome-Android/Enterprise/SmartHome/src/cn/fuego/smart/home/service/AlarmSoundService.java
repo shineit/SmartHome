@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.ui.authrun;
+package cn.fuego.smart.home.service;
 
 import android.app.Service;
 import android.content.Intent;

@@ -9,14 +9,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.setting.upgrade.UpgradeActivity;
 import cn.fuego.smart.home.webservice.up.model.GetClientVersionReq;
 import cn.fuego.smart.home.webservice.up.model.GetClientVersionRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
-public class AboutUsActivity extends BaseActivtiy implements OnClickListener
+public class AboutUsActivity extends MispBaseActivtiy implements OnClickListener
 {
 
 	@Override

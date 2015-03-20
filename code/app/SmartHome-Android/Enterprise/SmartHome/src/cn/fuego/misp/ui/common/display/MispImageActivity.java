@@ -8,13 +8,12 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ImageDisplayInfo;
 import cn.fuego.misp.ui.pager.ImagePagerAdapter;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.ui.base.BaseActivtiy;
 
-public class MispImageActivity extends BaseActivtiy
+public class MispImageActivity extends MispBaseActivtiy
 {
 
 	public static String JUMP_DATA = "jumpData";
@@ -22,12 +21,6 @@ public class MispImageActivity extends BaseActivtiy
 	
 	private ViewGroup group;
 	private ViewPager viewPager;
-	@Override
-	public void handle(MispHttpMessage message)
-	{
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public static void jump(Activity activity,ImageDisplayInfo imageInfo)
 	{

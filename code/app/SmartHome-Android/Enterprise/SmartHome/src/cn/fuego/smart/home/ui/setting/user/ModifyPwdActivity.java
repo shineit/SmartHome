@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.LoginActivity;
@@ -60,13 +61,13 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 
 	private void modifyPwd()
 	{
-		if(getTrimText(txt_oldPwd)!=null&&getTrimText(txt_newPwd1)!=null&&getTrimText(txt_newPwd2)!=null)
+		if(StrUtil.getTrimText(txt_oldPwd)!=null&&StrUtil.getTrimText(txt_newPwd1)!=null&&StrUtil.getTrimText(txt_newPwd2)!=null)
 		{
-			if(getTrimText(txt_newPwd1).equals(getTrimText(txt_newPwd2)))
+			if(StrUtil.getTrimText(txt_newPwd1).equals(StrUtil.getTrimText(txt_newPwd2)))
 			{
 				ModifyPwdReq req = new ModifyPwdReq();
-				req.setOldPwd(this.MD5(this.getTrimText(txt_oldPwd)));
-				req.setPwdNew(this.MD5(this.getTrimText(txt_newPwd1)));
+				req.setOldPwd(StrUtil.MD5(StrUtil.getTrimText(txt_oldPwd)));
+				req.setPwdNew(StrUtil.MD5(StrUtil.getTrimText(txt_newPwd1)));
 				req.setUserName(AppCache.getInstance().getUser().getUserName());
 				WebServiceContext.getInstance().getUserManageRest(this).modifyPassword(req);
 				
@@ -109,4 +110,6 @@ public class ModifyPwdActivity extends BaseActivtiy implements View.OnClickListe
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }

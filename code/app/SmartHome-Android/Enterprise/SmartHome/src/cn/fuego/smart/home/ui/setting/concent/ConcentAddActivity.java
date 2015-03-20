@@ -10,14 +10,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.ui.base.BaseActivtiy;
 
 import com.example.smartlinklib.ModuleInfo;
 import com.example.smartlinklib.SmartLinkManipulator;
 import com.example.smartlinklib.SmartLinkManipulator.ConnectCallBack;
 
-public class ConcentAddActivity extends BaseActivtiy implements OnClickListener
+public class ConcentAddActivity extends MispBaseActivtiy implements OnClickListener
 {
 
 	Button config_btn;

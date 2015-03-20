@@ -9,6 +9,7 @@ import android.widget.TextView;
 import cn.fuego.misp.ui.info.MispInfoListActivity;
 import cn.fuego.misp.ui.model.CommonItemMeta;
 import cn.fuego.misp.ui.model.ListViewResInfo;
+import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 
@@ -60,12 +61,12 @@ public class CompanyViewActivity extends MispInfoListActivity
 			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "建筑面积", company.getBuildingArea()));
 			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "单位电话", company.getCompanyPhone()));
 			list.add(new CommonItemMeta(CommonItemMeta.DIVIDER_ITEM, null, null));
-			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "法定代表人", company.getLegalOfficer()+
-					"("+company.getDutyPhone()+")"));
-			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "消防安全管理人", company.getFireManager()+
-					"("+company.getManagerPhone()+")"));
-			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "消防安全责任人", company.getFireDuty()+
-					"("+company.getDutyPhone()+")"));
+			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "法定代表人", StrUtil.noNullStr(company.getLegalOfficer())+
+					"\n"+StrUtil.noNullStr(company.getDutyPhone())));
+			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "消防安全管理人", StrUtil.noNullStr(company.getFireManager())+
+					"\n"+StrUtil.noNullStr(company.getManagerPhone())));
+			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "消防安全责任人", StrUtil.noNullStr(company.getFireDuty())+
+					"\n"+StrUtil.noNullStr(company.getDutyPhone())));
 
 
 			
