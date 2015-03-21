@@ -19,27 +19,31 @@
 		<div class="pageFormContent" layoutH="58">
 
 			<dl style="width:50%;">
-				<dt style="width:20%;">标题：</dt>			
+				<dt style="width:20%;">产品名称：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.name"  size="30" value="${obj.name}" class="required"/></dd>
 			</dl>
+ 
 			<dl style="width:100%;">
-				<dt style="width:10%;">公告内容：</dt>			
+				<dt style="width:10%;">产品描述：</dt>			
 				<dd style="width:80%;"><textarea name="obj.desp" cols="87" rows="8" maxlength="500">${obj.desp}</textarea></dd>
 			</dl>	
-						<div style="float:right; margin-top:5px; margin-right:6%;width:40%;">
-						<div
-							style="margin-bottom:5px; width:120px; height:140px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
-							<div>
+		   <dl style="width:50%;">	
+				<dt style="width:20%;">产品图片：</dt>	
+				<dd style="width:70%;">	 
+						<div>
+ 							<div>
 								<img id="ImgPr1" src="<%=request.getContextPath()%>/upload/${obj.picLabel}" height="140" width="120" alt="个人照片">
 							</div>
 
 						</div>
-						<div>
+					 
 		 
 							<s:file name="upload" id="up1"  ></s:file>
 						</div>
 						<span class="info">上传图片大小不得超过65KB,只支持bmp与jpg格式</span>
-					</div> 					
+					</div>
+				 </dd> 		
+			</dl> 			
 		</div>		
 
 		<div class="formBar">

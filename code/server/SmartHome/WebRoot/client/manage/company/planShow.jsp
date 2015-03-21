@@ -24,18 +24,22 @@
 		<div class="pageFormContent" layoutH="58">
 			<input type="hidden" name="obj.buildingID" value="${obj.buildingID}"/>
 			<dl style="width:50%;">
-				<dt style="width:30%;">名称：</dt>			
+				<dt style="width:20%;">名称：</dt>			
 				<dd style="width:65%;"><input type="text" name="obj.name"  size="25" value="${obj.name}" /></dd>		 
 			</dl>
 			<dl style="width:50%;">
-				<dt style="width:30%;">描述：</dt>			
+				<dt style="width:20%;">描述：</dt>			
 				<dd style="width:65%;"><input type="text" name="obj.desp"  size="25" value="${obj.desp}"/></dd>		 
 			</dl>
-			<dl style="width:50%;">
-				<dt style="width:30%;">地址：</dt>			
-				<dd style="width:65%;"><input type="text" name="obj.floor"  size="25" value="${obj.floor}"/></dd>		 
+			 <dl style="width:50%;">
+				<dt style="width:20%;">楼层：</dt>			
+				<dd style="width:65%;"><input type="text" name="obj.floor"  size="25" value="${obj.desp}"/></dd>		 
 			</dl>
-			<div style="float:right; margin-top:5px; margin-right:6%;width:40%;">
+ 
+			<dl style="width:100%;">
+				<dt style="width:15%;">平面图：</dt>			
+				<dd style="width:65%;">
+							<div  >
 						<div
 							style="margin-bottom:5px; width:120px; height:140px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 							<div>
@@ -49,6 +53,9 @@
 						</div>
 						<span class="info">上传图片大小不得超过65KB,只支持bmp与jpg格式</span>
 					</div> 
+				</dd>		 
+			</dl>
+
 				
 		</div>		
 

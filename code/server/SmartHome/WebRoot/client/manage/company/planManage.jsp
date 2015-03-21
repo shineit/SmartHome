@@ -27,7 +27,10 @@
 					                    </td>
 
 										<td>
-											平面图编号：<input type="text" name="keyword" />
+											平面图名称：<input type="text" name="keyword" />
+										</td>
+										<td>
+											楼层：<input type="text" name="keyword" />
 										</td>
 										<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
 									</tr>

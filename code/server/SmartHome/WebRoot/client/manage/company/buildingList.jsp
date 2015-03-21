@@ -15,8 +15,8 @@
 					 <input type="text" name="companyID" style="display:none" value="${company.companyID}"/>
 				</td>
 				<td>
-					楼层编号：<input type="text" name="keyword" /> 
-				</td>
+					楼名称：<input type="text" name="keyword" /> 
+ 				</td>
 				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
 			</tr>
 		</table>
