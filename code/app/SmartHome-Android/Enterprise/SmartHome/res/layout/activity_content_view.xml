@@ -15,7 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="10dp" >
 
         <TextView
             android:id="@+id/content_view_title"
@@ -26,7 +27,7 @@
             android:text="未命名标题"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="@dimen/content_font_size" />
 
         <TextView
             android:id="@+id/content_view_author"
@@ -40,13 +41,15 @@
         <EditText
             android:id="@+id/content_view_content"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_focused"
             android:clickable="false"
             android:editable="false"
             android:ems="10"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:gravity="center_vertical|top"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="@dimen/content_font_size" >
 

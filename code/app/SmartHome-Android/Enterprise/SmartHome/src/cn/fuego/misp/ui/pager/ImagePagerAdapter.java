@@ -79,7 +79,7 @@ public class ImagePagerAdapter extends PagerAdapter implements OnPageChangeListe
                     
                   LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT,    
                           LayoutParams.WRAP_CONTENT));  
-                  layoutParams.leftMargin = 5;  
+                 layoutParams.leftMargin = 5;  
                 //  layoutParams.rightMargin = 5;  
                   group.addView(imageView, layoutParams);  
               }  
@@ -88,7 +88,7 @@ public class ImagePagerAdapter extends PagerAdapter implements OnPageChangeListe
              for(String url : imageUrlList)
              {  
                  ImageView imageView = new ImageView(context);
-                 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                  LoadImageUtil.getInstance().loadImage(imageView, url,LoadImageUtil.getInstance().largeImageSetting());
                  imageList.add(imageView);
               }  

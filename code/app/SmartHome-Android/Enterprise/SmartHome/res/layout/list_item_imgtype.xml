@@ -16,7 +16,7 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
-            android:src="@drawable/device_online" />
+            android:src="@drawable/load_image_failed" />
 
         <TextView
             android:id="@+id/item_imgtype_name"

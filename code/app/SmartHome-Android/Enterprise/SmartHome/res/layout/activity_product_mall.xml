@@ -20,29 +20,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp" >
-                <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+            android:orientation="vertical">
+			<RelativeLayout    
+                   
+				        android:layout_width="fill_parent"    
+				        android:layout_height="wrap_content"   
+				        android:orientation="vertical" >    
 
-        <cn.fuego.misp.ui.imgScroll.MyImgScroll
-            android:id="@+id/myvp"
-            android:layout_width="fill_parent"
-            android:layout_height="120dp" />
+                  <android.support.v4.view.ViewPager  
+			        android:id="@+id/mall_ad_image"  
+			        android:layout_width="match_parent"  
+			        android:layout_height="200dp"  
+			        android:layout_gravity="center"
+			      
+			        android:background="@color/backcolor"
+			     
+                    android:persistentDrawingCache="animation" >  
+			    </android.support.v4.view.ViewPager>  
 
-        <LinearLayout
-            android:id="@+id/vb"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginTop="3dip"
-            android:gravity="center"
-            android:orientation="horizontal" >
-        </LinearLayout>
-
-
-    </LinearLayout>
+				        <LinearLayout    
+				            android:id="@+id/mall_ad_image_group"    
+				            android:layout_width="fill_parent"    
+				            android:layout_height="wrap_content"    
+				            android:layout_alignParentBottom="true"   
+				            android:layout_marginBottom="10dp"    
+				            android:gravity="center"    
+				            android:orientation="horizontal" >    
+				        </LinearLayout>    
+			</RelativeLayout>
 
             <cn.fuego.misp.ui.base.MispGridView
                 android:id="@+id/product_mall_gridview"

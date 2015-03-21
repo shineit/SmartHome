@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.service.http.MispHttpMessage;
-import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
@@ -35,6 +34,7 @@ public class SensorLocationActivity extends MispHttpActivtiy
 	@Override
 	public void initRes()
 	{
+		this.waitDailog.show();
 		this.activityRes.setName("定位");
 		this.activityRes.setAvtivityView(R.layout.activity_sensor_location);
 		alarm = (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
@@ -57,6 +57,7 @@ public class SensorLocationActivity extends MispHttpActivtiy
 	@Override
 	public void handle(MispHttpMessage message)
 	{
+		this.waitDailog.dismiss();
 		if(message.isSuccess())
 		{
 			GetSensorPlanByIDRsp rsp = (GetSensorPlanByIDRsp) message.getMessage().obj;

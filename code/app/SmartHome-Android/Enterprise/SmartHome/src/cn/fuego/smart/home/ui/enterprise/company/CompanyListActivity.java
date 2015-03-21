@@ -21,16 +21,17 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 	@Override
 	public void initRes() 
 	{
+		this.waitDailog.show();
 		this.activityRes.setAvtivityView(R.layout.activity_company_list);
+		this.activityRes.setName("公司列表");
 		
 		this.listViewRes.setListView(R.id.company_list_content);
-		
 		this.listViewRes.setListItemView(R.layout.misp_list_item_btntype);
 		
 		Class clazz = (Class) this.getIntent().getSerializableExtra(IntentCodeConst.JUMP_CLASS_NAME);
 		this.listViewRes.setClickActivityClass(clazz);
 		
-		this.activityRes.setName("公司列表");
+		
 		
 	}
 	public static void jump(Context context,Class jumpClass)
@@ -62,8 +63,8 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 	@Override
 	public List<CompanyJson> loadListRecv(Object obj) 
 	{
-		GetCompanyListRsp rsp = (GetCompanyListRsp) obj;
-		
+		this.waitDailog.dismiss();
+		GetCompanyListRsp rsp = (GetCompanyListRsp) obj;	
 		return rsp.getCompanyList();
 	}
 

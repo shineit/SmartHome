@@ -9,6 +9,7 @@ import android.os.Bundle;
 import cn.fuego.misp.service.http.HttpListener;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
+import cn.fuego.smart.home.cache.AppCache;
 
 public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListener
 {
@@ -26,9 +27,10 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
 	{
 		super.showMessage(message.getErrorCode());	
 	}
-	public void exitDialog(Context context) { 
+	public void exitDialog(Context context) 
+	{ 
 		contextDialog = context;
-		SharedPreUtil.initSharedPreference(context);
+		
         AlertDialog.Builder builder = new Builder(contextDialog);   
         builder.setMessage("确定要退出吗?");   
         builder.setTitle("提示");   
@@ -37,7 +39,8 @@ public abstract class BaseActivtiy extends MispHttpActivtiy implements HttpListe
             public void onClick(DialogInterface dialog, int which) {   
                 dialog.dismiss();   
                 //android.os.Process.killProcess(android.os.Process.myPid()); 
-                SharedPreUtil.getInstance().DeleteUser();
+
+                AppCache.getInstance().clear();
                 ExitApplication.getInstance().exit(contextDialog);
                 
             }   

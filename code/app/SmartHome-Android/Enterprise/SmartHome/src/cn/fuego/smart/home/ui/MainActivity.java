@@ -6,8 +6,6 @@ import android.os.CountDownTimer;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.smart.home.R;
-import cn.fuego.smart.home.ui.base.SharedPreUtil;
-import cn.fuego.smart.home.ui.base.UserEntity;
 import cn.fuego.smart.home.ui.jpush.MyReceiver;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 import cn.jpush.android.api.InstrumentedActivity;
@@ -42,12 +40,13 @@ public class MainActivity extends InstrumentedActivity
 				 if(!MemoryCache.isLogined())
 				 {
 					 LoginActivity.jump(MainActivity.this, HomeActivity.class);
+					 
 				 }
 				 else
 				 {
 					 HomeActivity.jump(MainActivity.this);
 				 }
- 
+				 
 
 				@SuppressWarnings("deprecation")
 				int VERSION = Integer.parseInt(android.os.Build.VERSION.SDK);
@@ -56,7 +55,7 @@ public class MainActivity extends InstrumentedActivity
 					MainActivity.this.overridePendingTransition(
 							R.anim.alpha_in, R.anim.alpha_out);
 				}
-				//finish();
+				finish();
 			}
 		}.start();
 		

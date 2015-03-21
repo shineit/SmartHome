@@ -27,15 +27,21 @@
     <color name="blue_light">#FF179dc5</color>
     <color name="red_notice">#FFd90707</color>
 
-	    <drawable name="list_normal">#FFFFFF</drawable> 
-	    <drawable name="list_active">#FFFFFF</drawable> 
-	    <drawable name="list_pressed">#c4cedc</drawable> 
+    <!-- 引用萤石云颜色定义 -->
+   	<color name="blue">#205ba9</color>
+    <color name="gray">#c8c8c8</color>
+    <color name="active_color">#f08300</color>
+    
+    
+    <drawable name="list_normal">#FFFFFF</drawable> 
+    <drawable name="list_active">#FFFFFF</drawable> 
+    <drawable name="list_pressed">#c4cedc</drawable> 
 
-	    <drawable name="misp_list_item_normal">#FFFFFF</drawable> 
-	    <drawable name="misp_list_item_active">#FFFFFF</drawable> 
-	    <drawable name="misp_list_item_pressed">#c4cedc</drawable> 
-	    
-	    <drawable name="misp_title_btn_seletor_normal">#143844</drawable> 
-	    <drawable name="misp_title_btn_seletor_active">#143844</drawable> 
-	    <drawable name="misp_title_btn_seletor_pressed">#143823</drawable> 
+    <drawable name="misp_list_item_normal">#FFFFFF</drawable> 
+    <drawable name="misp_list_item_active">#FFFFFF</drawable> 
+    <drawable name="misp_list_item_pressed">#c4cedc</drawable> 
+    
+    <drawable name="misp_title_btn_seletor_normal">#143844</drawable> 
+    <drawable name="misp_title_btn_seletor_active">#143844</drawable> 
+    <drawable name="misp_title_btn_seletor_pressed">#143823</drawable> 
 	</resources>

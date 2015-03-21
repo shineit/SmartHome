@@ -3,21 +3,18 @@ package cn.fuego.misp.ui.common.upload;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import android.util.Log;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
-
-import android.util.Log;
 
 //上传工具类 支持上传文件和参数
 public class UploadUtil 

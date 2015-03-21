@@ -19,8 +19,8 @@ public class CommonSenseActivity extends MispListActivity<KnowledgeJson>
 	@Override
 	public void initRes()
 	{
+		this.waitDailog.show();
 		this.activityRes.setName("消防常识");
-
 		this.activityRes.setAvtivityView(R.layout.activity_common_sense);
 		
 		this.listViewRes.setListView(R.id.common_sense_list);	
@@ -52,6 +52,7 @@ public class CommonSenseActivity extends MispListActivity<KnowledgeJson>
 	@Override
 	public List<KnowledgeJson> loadListRecv(Object obj)
 	{
+		this.waitDailog.dismiss();
 		GetCommonSenseListRsp rsp = (GetCommonSenseListRsp) obj;
 		return rsp.getKnowledgeList();
 	}

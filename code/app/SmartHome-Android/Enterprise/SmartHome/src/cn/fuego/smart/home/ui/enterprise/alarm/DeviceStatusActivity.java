@@ -38,7 +38,7 @@ public class DeviceStatusActivity extends FireAlarmActivity
 	public void loadSendList()
 	{
 		GetFireAlarmByIDReq req= new GetFireAlarmByIDReq();
-        req.setCompanyID(String.valueOf(company.getCompanyID()));
+        req.setCompanyID(String.valueOf(companyID));
         
     	List<AttributeJson> attrList = new ArrayList<AttributeJson>();
     	AttributeJson attr = new AttributeJson();

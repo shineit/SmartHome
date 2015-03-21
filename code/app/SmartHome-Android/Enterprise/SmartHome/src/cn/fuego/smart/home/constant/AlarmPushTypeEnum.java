@@ -1,32 +1,33 @@
 /**   
-* @Title: PushMessagTypeEnum.java 
+* @Title: AlarmIsFeedBackEunm.java 
 * @Package cn.fuego.smart.home.constant 
 * @Description: TODO
 * @author Tang Jun   
-* @date 2014-12-4 上午12:03:00 
+* @date 2015-3-3 下午6:01:22 
 * @version V1.0   
 */ 
 package cn.fuego.smart.home.constant;
 
- /** 
- * @ClassName: PushMessagTypeEnum 
- * @Description: TODO
- * @author Tang Jun
- * @date 2014-12-4 上午12:03:00 
- *  
- */
-public enum PushMessagTypeEnum
+/** 
+* @ClassName: AlarmIsPushEnum 
+* @Description: TODO
+* @author Aether
+* @date 2015-3-12 上午10:50:41 
+*  
+*/ 
+public enum AlarmPushTypeEnum
 {
-	ALRAM_MSG(0,"告警通知--"),
-	NEWS_MSG(1,"公告通知--");
-  
+	NO_PUSH(0,"不推送"),
+	PUSH(1,"推送"),
+	LONG_PUSH(2,"推送长鸣"),
+	SHORT_PUSH(3,"推送短鸣");
 	private int intValue;
 	private String strValue;
 	/**
 	 * @param intValue
 	 * @param strValue
 	 */
-	private PushMessagTypeEnum(int intValue, String strValue)
+	private AlarmPushTypeEnum(int intValue, String strValue)
 	{
 		this.intValue = intValue;
 		this.strValue = strValue;
@@ -39,9 +40,9 @@ public enum PushMessagTypeEnum
 	{
 		return strValue;
 	}
-	public static PushMessagTypeEnum getEnumByInt(int intValue)
+	public static AlarmPushTypeEnum getEnumByInt(int intValue)
 	{
-		for (PushMessagTypeEnum c : PushMessagTypeEnum.values())
+		for (AlarmPushTypeEnum c : AlarmPushTypeEnum.values())
 		{
 			if (intValue == c.intValue)
 			{

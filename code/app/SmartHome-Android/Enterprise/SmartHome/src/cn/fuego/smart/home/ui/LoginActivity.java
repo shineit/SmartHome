@@ -20,8 +20,6 @@ import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.ui.base.ExitApplication;
-import cn.fuego.smart.home.ui.base.SharedPreUtil;
-import cn.fuego.smart.home.ui.base.UserEntity;
 import cn.fuego.smart.home.webservice.up.model.LoginReq;
 import cn.fuego.smart.home.webservice.up.model.LoginRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
@@ -59,27 +57,9 @@ public class LoginActivity extends MispBaseActivtiy
 		setContentView(R.layout.activity_login);
 		ExitApplication.getInstance().addActivity(this);
 		//本地存储个人信息
-		SharedPreUtil.initSharedPreference(getApplicationContext());
-		
+ 		
 		textName = (EditText) findViewById(R.id.txt_username);
 		textPwd =(EditText) findViewById(R.id.txt_password);
-		UserEntity userInfo = SharedPreUtil.getInstance().getUser();
-		// log.info("userInfo"+userInfo);
-		if(!ValidatorUtil.isEmpty(userInfo.getUserName()))
-		 {
-			 textName.setText(userInfo.getUserName());
-			 
-		 }
-/*		if(MemoryCache.getFlag()==1)
-		{
-			textPwd.setText("");
-			textPwd.requestFocus();
-			textPwd.requestFocusFromTouch();
-		}*/
-		else if(!ValidatorUtil.isEmpty(userInfo.getPassword()))
-		{
-			textPwd.setText(userInfo.getPassword());
-		}
 
 		loginBtn = (Button)findViewById(R.id.login_btn);
 		loginBtn.setOnClickListener(loginClick);

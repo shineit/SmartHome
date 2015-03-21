@@ -2,12 +2,8 @@
 <resources>
 
     <string name="app_name">智慧消防</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main_tabbar">MainTabbarActivity</string>
     <string name="tabbar_home">首页</string>
     <string name="tabbar_safe">云安</string>
     <string name="tabbar_control">云控</string>
@@ -25,8 +21,7 @@
     <string name="error_network">Failed to init due to network exception.</string>
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
-    <string name="title_activity_news_page">NewsPageActivity</string>
-    <string name="title_activity_alarm_page">AlarmPageActivity</string>
+
     <string name="home_menu_alarm">智慧告警</string>
     <string name="home_menu_status">设备状态</string>
     <string name="home_menu_check">日常巡检</string>
@@ -37,12 +32,10 @@
     <string name="title_activity_fire_alarm">FireAlarmActivity</string>
     <string name="title_activity_fire_alarm_view">FireAlarmViewActivity</string>
     <string name="title_activity_check">CheckActivity</string>
-    <string name="title_activity_device_mall">DeviceMallActivity</string>
     <string name="title_activity_company_info">CompanyInfoActivity</string>
     <string name="title_activity_company_list">CompanyListActivity</string>
     <string name="title_activity_check_log">CheckLogActivity</string>
     <string name="title_activity_check_operate">CheckOperateActivity</string>
-    <string name="title_activity_help">HelpActivity</string>
     <string name="title_activity_common_sense">CommonSenseActivity</string>
     <string name="title_activity_content_view">ContentViewActivity</string>
     <string name="title_activity_product_mall">ProductMallActivity</string>

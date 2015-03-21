@@ -4,12 +4,9 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.SharedPreUtil;
 import cn.fuego.misp.service.MemoryCache;
-import cn.fuego.misp.service.http.MispHttpHandler;
-import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
-import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class AppCache
 {

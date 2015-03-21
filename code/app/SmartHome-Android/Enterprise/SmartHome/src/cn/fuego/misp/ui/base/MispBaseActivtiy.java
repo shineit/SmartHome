@@ -17,6 +17,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.MispCommonIDName;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.dailog.MispWaitDailog;
 import cn.fuego.misp.ui.model.ActivityResInfo;
 
 public abstract class MispBaseActivtiy extends Activity implements OnClickListener
@@ -25,6 +26,7 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 	private FuegoLog log = FuegoLog.getLog(MispBaseActivtiy.class);
  	private TextView titleView;
 	private Button saveButton;
+	protected MispWaitDailog waitDailog;
 	public abstract void initRes();
 	protected static void jumpToActivity(Context context,Class clazz)
 	{
@@ -45,15 +47,16 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
-	{
+	{  		
+		
+		super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		waitDailog = new MispWaitDailog(this);  
 		initRes();
 		// TODO Auto-generated method stub
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-  		super.onCreate(savedInstanceState);
  		if(0 != activityRes.getAvtivityView())
  		{
  			setContentView(activityRes.getAvtivityView());
-
  		}
 		initBackButton();
 		//setup title

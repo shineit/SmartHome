@@ -30,10 +30,9 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	private MispListAdapter<E> adapter;
 
 	protected ListViewResInfo listViewRes = new ListViewResInfo();
-	private ListView listView;
-	
+ 	
 	private boolean isAdapterForScrollView = false;
-	
+	private ListView listView;
 	
 
 	public void setAdapterForScrollView()
@@ -61,17 +60,13 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
- 
-		//ListView user_info_list = (ListView) findViewById(R.id.user_info_list);
-		//ArrayList<HashMap<String,Object>> datasource = new ArrayList<HashMap<String,Object>>();
-		//String[] data={"昵称","user1",};
-		
+
 		adapter = new MispListAdapter<E>(this, this,this.listViewRes,this.dataList);
 		switch(this.listViewRes.getListType())
 		{
 			case ListViewResInfo.VIEW_TYPE_LIST:
 			{
-				listView = (ListView) findViewById(this.listViewRes.getListView());
+				 listView = (ListView) findViewById(this.listViewRes.getListView());
 				if(null != listView)
 				{
 					listView.setAdapter(adapter);
@@ -159,7 +154,8 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 		onItemListClick(parent,view,id,item);
 
 	}
-	public void adapterForScrollView()
+
+	private void adapterForScrollView()
 	{
     	ListAdapter listAdapter = listView.getAdapter();   
         if (listAdapter == null) 

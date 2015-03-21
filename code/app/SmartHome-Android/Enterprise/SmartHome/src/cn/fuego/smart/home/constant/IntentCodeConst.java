@@ -20,11 +20,7 @@ public class IntentCodeConst
 	public static final int REQUEST_CODE= 1;
 	public static final int RESULT_CODE= 10;
 	
-	public static final String BUNDLE_HOMESENSOR="ser_homesensor";//序列化传递对象名homesensor
-	public static final String BUNDLE_NEWS="ser_news";//序列化传递对象名news
-	
-	public static final int FIRE_ALARM_ENTER= 1;
-	public static final int NEWS_ENTER= 2;
-	
 	public static final String JUMP_CLASS_NAME = "jumpClass";//intent 跳转activity名称
+	
+	public static final String COMPANY_ID = "companyID";//intent 传递推送的告警信息companyID
 }

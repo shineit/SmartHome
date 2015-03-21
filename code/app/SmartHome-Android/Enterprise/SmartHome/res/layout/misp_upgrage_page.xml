@@ -21,7 +21,7 @@
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/upgrate_image" />
+            android:src="@drawable/app_logo" />
 
     </RelativeLayout>
 
@@ -67,6 +67,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="@color/content_text_color"
-         android:text="快客公司，版权所有"
+         android:text="孚思科技，版权所有"
         android:textSize="@dimen/content_font_size" />
 </LinearLayout>

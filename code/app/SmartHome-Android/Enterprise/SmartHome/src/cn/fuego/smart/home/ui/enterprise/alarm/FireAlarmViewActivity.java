@@ -3,7 +3,6 @@ package cn.fuego.smart.home.ui.enterprise.alarm;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
@@ -11,8 +10,6 @@ import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 
 public class FireAlarmViewActivity extends MispBaseActivtiy 
 {
-	private FuegoLog log = FuegoLog.getLog(getClass());
-
 	private FireAlarmJson fireAlarm;
 
 	@Override

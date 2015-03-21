@@ -13,6 +13,7 @@ import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.AlarmSoundService;
 import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
@@ -25,25 +26,34 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 {
 
 	protected CompanyJson company;
+	protected int companyID;
 	@Override
 	public void initRes()
 	{
+		this.waitDailog.show();
 		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm);
 		this.activityRes.setName("智慧告警");
+		this.setAdapterForScrollView();
 		this.listViewRes.setListView(R.id.fire_alarm_list);
 		this.activityRes.getButtonIDList().add(R.id.fire_alarm_mute_btn);
 		this.listViewRes.setListItemView(R.layout.fire_alarm_item);
-		this.setAdapterForScrollView();
+		
 		
 		this.listViewRes.setClickActivityClass(FireAlarmViewActivity.class);
 		
 		Intent intent = this.getIntent();
 		company = (CompanyJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
-		
-		
-		
-
+		if(company!=null)
+		{
+			companyID=company.getCompanyID();
+		}
+		else
+		{
+			companyID =intent.getIntExtra(IntentCodeConst.COMPANY_ID, 0);
+		}
+	
 	}
+	
 
 	@Override
 	public void onClick(View v)
@@ -80,7 +90,7 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	public void loadSendList()
 	{
 		GetFireAlarmByIDReq req= new GetFireAlarmByIDReq();
-        req.setCompanyID(String.valueOf(company.getCompanyID()));
+        req.setCompanyID(String.valueOf(companyID));
     	List<AttributeJson> attrList = new ArrayList<AttributeJson>();
     	AttributeJson attr = new AttributeJson();
 		attr.setAttrName(AttributeConst.ALARM_KIND);
@@ -94,8 +104,8 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	@Override
 	public List<FireAlarmJson> loadListRecv(Object obj)
 	{
+		this.waitDailog.dismiss();
 		GetFireAlarmByIDRsp rsp = (GetFireAlarmByIDRsp) obj;
-		
 		return rsp.getFireAlarmList();
 	}
 

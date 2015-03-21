@@ -34,13 +34,15 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/fire_alarm_top" />
 
-                <ListView
+
+                <cn.fuego.misp.ui.base.MispListViewAdaptScroll
                     android:id="@+id/fire_alarm_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:divider="@color/backcolor"
-                    android:dividerHeight="1dp" >
-                </ListView>
+                    android:dividerHeight="1dp"  >
+                </cn.fuego.misp.ui.base.MispListViewAdaptScroll>
+
             </LinearLayout>
         </ScrollView>
 

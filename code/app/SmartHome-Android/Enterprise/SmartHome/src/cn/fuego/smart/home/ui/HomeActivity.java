@@ -1,19 +1,16 @@
 package cn.fuego.smart.home.ui;
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.ui.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
-import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
 import cn.fuego.smart.home.ui.common.mall.ProductMallActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity;
@@ -27,8 +24,20 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
-	private ProgressDialog proDialog;
-      
+	@Override
+	public void initRes() 
+	{
+		this.activityRes.setAvtivityView(R.layout.activity_home);
+		
+		this.activityRes.getButtonIDList().add(R.id.home_menu_alarm);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_status);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_check);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_account);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_manage);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_knowledge);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_mall);
+		this.activityRes.getButtonIDList().add(R.id.home_about_us_btn);
+	} 
 	public static void jump(Context context)
 	{
  
@@ -36,57 +45,6 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
   		intent.setClass(context, HomeActivity.class);
  		context.startActivity(intent);
   	}
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home);
-		ExitApplication.getInstance().addActivity(this);
- 
-		initView();
-		//initSoundPool();
-		
-	}
-
-
-
-	private void initView()
-	{
-		Button alarm_btn= (Button) findViewById(R.id.home_menu_alarm);
-		alarm_btn.setOnClickListener(this);
-		Button status_btn= (Button) findViewById(R.id.home_menu_status);
-		status_btn.setOnClickListener(this);	
-		Button check_btn= (Button) findViewById(R.id.home_menu_check);
-		check_btn.setOnClickListener(this);
-
-		Button account_btn= (Button) findViewById(R.id.home_menu_account);
-		account_btn.setOnClickListener(this);
-		Button manage_btn= (Button) findViewById(R.id.home_menu_manage);
-		manage_btn.setOnClickListener(this);
-		
-		Button knowledge_btn= (Button) findViewById(R.id.home_menu_knowledge);
-		knowledge_btn.setOnClickListener(this);
-		Button mall_btn= (Button) findViewById(R.id.home_menu_mall);
-		mall_btn.setOnClickListener(this);		
-		
-/*		//MENU 加bage 提醒
-		if(MemoryCache.getBageNum()>1)
-		{
-			BadgeView badge2 = new BadgeView(this, alarm_btn);
-	    	badge2.setText(" ! ");
-	    	badge2.setTextColor(Color.WHITE);
-	    	badge2.setBadgeBackgroundColor(Color.RED);
-	    	badge2.setTextSize(15);
-	    	badge2.toggle();
-		}*/
-
-		
-		Button about_btn= (Button) findViewById(R.id.home_about_us_btn);
-		about_btn.setOnClickListener(this);
-		
-	}
-
-
 
 	@Override
 	public void onClick(View v)
@@ -134,55 +92,49 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		
 	}
 
+	@Override  
+    public boolean onKeyDown(int keyCode, KeyEvent event)  
+    {  
+        if (keyCode == KeyEvent.KEYCODE_BACK )  
+        {  
+            // 创建退出对话框  
+            AlertDialog isExit = new AlertDialog.Builder(this).create();  
+            // 设置对话框标题  
+            isExit.setTitle("系统提示");  
+            // 设置对话框消息  
+            isExit.setMessage("确定要退出吗");  
+            // 添加选择按钮并注册监听  
+            isExit.setButton("确定", listener);  
+            isExit.setButton2("取消", listener);  
+            // 显示对话框  
+            isExit.show();  
+  
+        }  
+          
+        return false;  
+          
+    }  
+    /**监听对话框里面的button点击事件*/  
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()  
+    {  
+        public void onClick(DialogInterface dialog, int which)  
+        {  
+            switch (which)  
+            {  
+            case AlertDialog.BUTTON_POSITIVE:// "确认"按钮退出程序  
+                finish();  
+                //int nPid = android.os.Process.myPid();  
+                //android.os.Process.killProcess(nPid);  
+                break;  
+            case AlertDialog.BUTTON_NEGATIVE:// "取消"第二个按钮取消对话框  
+                break;  
+            default:  
+                break;  
+            }  
+        }  
+    };
 
-	private void showDisable()
-	{
-		showToast(HomeActivity.this, "功能还在开发中");
-		
-	}
 
- 
-
-	
-	
-	@Override
-	public void handle(MispHttpMessage message)
-	{
-		if (message.isSuccess())
-		{
-			proDialog.dismiss();
-			//jumpTab(tabIndex);
-			
-		}
-		else
-		{
-			proDialog.dismiss();
-			showToast(HomeActivity.this, message);
-		}
-	}
-
-
-
-	//Android按返回键退出程序但不销毁，程序后台运行
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-
-		if (keyCode == KeyEvent.KEYCODE_BACK) 
-		{
-			moveTaskToBack(false);
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
-
-
-	@Override
-	public void initRes() {
-		// TODO Auto-generated method stub
-		
-	} 
      
 	
 }

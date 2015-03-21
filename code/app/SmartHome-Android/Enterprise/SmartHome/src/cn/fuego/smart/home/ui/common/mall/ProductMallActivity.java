@@ -2,32 +2,42 @@ package cn.fuego.smart.home.ui.common.mall;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
 import cn.fuego.misp.service.MemoryCache;
-import cn.fuego.misp.ui.imgScroll.MyImgScroll;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.imgScroll.FixedSpeedScroller;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
+import cn.fuego.misp.ui.pager.ImagePagerAdapter;
 import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
+import cn.fuego.smart.home.service.AdDataCache;
+import cn.fuego.smart.home.webservice.up.model.GetAdListReq;
+import cn.fuego.smart.home.webservice.up.model.GetAdListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetProductListReq;
 import cn.fuego.smart.home.webservice.up.model.GetProductListRsp;
+import cn.fuego.smart.home.webservice.up.model.base.AdvertisementJson;
 import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class ProductMallActivity extends MispListActivity<ProductJson>
 {
 
-	MyImgScroll myPager; // 图片容器
-	LinearLayout ovalLayout; // 圆点容器
-	private List<View> listViews; // 图片组
+	private ViewGroup group;
+	private ViewPager viewPager;
+	private Timer timer;
 	
 	@Override
 	public void initRes()
@@ -41,6 +51,7 @@ public class ProductMallActivity extends MispListActivity<ProductJson>
 		this.listViewRes.setNoResult(true);
 		this.listViewRes.setClickActivityClass(ProductViewActivity.class);
 		
+		this.waitDailog.show();
 		
 	} 
 
@@ -49,15 +60,107 @@ public class ProductMallActivity extends MispListActivity<ProductJson>
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		myPager = (MyImgScroll) findViewById(R.id.myvp);
-		ovalLayout = (LinearLayout) findViewById(R.id.vb);
-		InitViewPager();//初始化图片
-		//开始滚动
-		myPager.start(this, listViews, 4000, ovalLayout,
-				R.layout.ad_bottom_item, R.id.ad_item_v,
-				R.drawable.dot_focused, R.drawable.dot_normal);
+		group = (ViewGroup)findViewById(R.id.mall_ad_image_group);  
+		viewPager = (ViewPager) findViewById(R.id.mall_ad_image);
+		viewPager.getLayoutParams().height = (int) (this.getScreenWidth()*0.4);
+		loadAdd();
+
 	}
 
+	private void loadAdd()
+	{
+		if(AdDataCache.getInstance().isEmpty())
+		{
+			GetAdListReq req = new GetAdListReq();
+			req.setUserID(AppCache.getInstance().getUser().getUserID());
+			
+			WebServiceContext.getInstance().getMallManageRest(new MispHttpHandler(){
+				@Override
+				public void handle(MispHttpMessage message)
+				{
+					if(message.isSuccess())
+					{
+						GetAdListRsp rsp =(GetAdListRsp) message.getMessage().obj;
+						AdDataCache.getInstance().init(rsp.getAdList());
+
+						initAdView(rsp.getAdList());
+					}
+					else
+					{
+						showMessage(message);
+					}
+				}
+
+
+			}).getAdList(req);
+			
+		}
+		else
+		{
+			initAdView(AdDataCache.getInstance().getDataList());
+		}
+
+	}
+	private void initAdView(List<AdvertisementJson> adList)
+	{
+ 		
+		List<String> urlList = new ArrayList<String>();
+		for(AdvertisementJson json : adList)
+		{
+			urlList.add(MemoryCache.getImageUrl()+json.getAdImg());
+		}
+		ImagePagerAdapter adapter = new ImagePagerAdapter(this,group,urlList);
+	    viewPager.setAdapter(adapter);  
+	    viewPager.setCurrentItem(0); 
+	    viewPager.setOnPageChangeListener(adapter);
+	    if(urlList.size()>1)
+	    {
+	    	// 设置滑动动画时间  ,如果用默认动画时间可不用 ,反射技术实现
+	    	new FixedSpeedScroller(this).setDuration(viewPager, 700);
+		    startCarouselTimer(adHandler);
+	    }
+
+	}
+	 
+	private Handler adHandler = new Handler()
+	{
+
+		@Override
+		public void handleMessage(Message msg)
+		{
+			// TODO Auto-generated method stub
+			viewPager.setCurrentItem(msg.what);
+		}
+		
+	};
+
+	private void startCarouselTimer(final Handler handler)
+	{
+ 		timer = new Timer();
+		timer.schedule(new TimerTask()
+		{
+
+			@Override
+			public void run()
+			{
+				int index = viewPager.getCurrentItem()+1;
+				if(index>=3)
+				{
+					index = 0;
+				}
+				handler.sendEmptyMessage(index);
+			}
+		}, 4000, 4000);
+	}
+
+	@Override
+	public void onDestroy()
+	{
+		if (timer != null)
+			timer.cancel();
+
+ 		super.onDestroy();
+	}
 	@Override
 	public View getListItemView(View view, ProductJson item)
 	{
@@ -65,48 +168,16 @@ public class ProductMallActivity extends MispListActivity<ProductJson>
 		product_name.setText(item.getName());
 		TextView product_price = (TextView) view.findViewById(R.id.item_product_price);
 		product_price.setText("￥ "+String.valueOf(item.getPrice()));
-		
+		//暂时不显示
+		product_price.setVisibility(View.GONE);
 		ImageView product_pic= (ImageView) view.findViewById(R.id.item_product_img);
 		LoadImageUtil.getInstance().loadImage(product_pic, MemoryCache.getImageUrl()+item.getPicLabel());
 	
 
 		return view;
 	}
-	@Override
-	protected void onRestart() {
-		myPager.startTimer();
-		super.onRestart();
-	}
-    
-	@Override
-	protected void onStop() {
-		myPager.stopTimer();
-		super.onStop();
-	}
 
-	public void stop(View v) {
-		myPager.stopTimer();
-	}
 
-	/**
-	 * 初始化图片
-	 */
-	private void InitViewPager() {
-		listViews = new ArrayList<View>();
-		int[] imageResId = new int[] {  R.drawable.b,
-				R.drawable.c, R.drawable.d};
-		for (int i = 0; i < imageResId.length; i++) {
-			ImageView imageView = new ImageView(this);
-			imageView.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {// 设置图片点击事件
-
-				}
-			});
-			imageView.setImageResource(imageResId[i]);
-			imageView.setScaleType(ScaleType.CENTER_CROP);
-			listViews.add(imageView);
-		}
-	}
 	@Override
 	public void loadSendList()
 	{
@@ -120,6 +191,7 @@ public class ProductMallActivity extends MispListActivity<ProductJson>
 	@Override
 	public List<ProductJson> loadListRecv(Object obj)
 	{
+		waitDailog.dismiss();
 		GetProductListRsp rsp = (GetProductListRsp) obj;
 		return rsp.getProductList();
 	}

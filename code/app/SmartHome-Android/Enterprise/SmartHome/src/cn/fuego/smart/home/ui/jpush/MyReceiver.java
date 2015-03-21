@@ -8,12 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import cn.fuego.common.util.format.JsonConvert;
-import cn.fuego.smart.home.constant.PushMessagTypeEnum;
-import cn.fuego.smart.home.service.AlarmSoundService;
-import cn.fuego.smart.home.service.GetDetail;
+import cn.fuego.smart.home.service.NotificationUtil;
 import cn.fuego.smart.home.ui.MainActivity;
-import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -23,12 +19,9 @@ import cn.jpush.android.api.JPushInterface;
  * 1) 默认用户会打开主界面
  * 2) 接收不到自定义消息
  */
-public class MyReceiver extends BroadcastReceiver {
+public class MyReceiver extends BroadcastReceiver 
+{
 	private static final String TAG = "JPush";
-	
-    //自定义通知显示公共方法
-    private GetDetail getDetail = new GetDetail();
-	
 
 	@Override
 	public void onReceive(Context context, Intent intent) 
@@ -50,20 +43,19 @@ public class MyReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
            // int notifactionId = bundle.getInt(JPushInterface.EXTRA_EXTRA);
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知 __bundle extra_extra"+bundle.getString(JPushInterface.EXTRA_EXTRA));
+            
             String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            playAlarm(context,extras);
+            NotificationUtil.getInstance().playAlarm(context, extras);
             
            // Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
         	
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] jtest用户点击打开了通知");
-            
-        	//打开自定义的Activity
-    		//Intent i = new Intent();
-    		String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
 
-    			showNotifcation(context,extras);
-           	    Log.d(TAG, "[MyReceiver] bundle extra_extra"+bundle.getString(JPushInterface.EXTRA_EXTRA));
+    		String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+    		NotificationUtil.getInstance().showNotifcation(context, extras);
+    		
+           	Log.d(TAG, "[MyReceiver] bundle extra_extra"+bundle.getString(JPushInterface.EXTRA_EXTRA));
 
 
         	
@@ -119,60 +111,8 @@ public class MyReceiver extends BroadcastReceiver {
 		}
 	}
 	
-	/*
-	 * 根据objType 显示相应的内容
-	 */
-	private void showNotifcation(final Context context,String msg)
-	{
-		
-		
-   	    PushMessageJson pushMsg = (PushMessageJson) JsonConvert.jsonToObject(msg, PushMessageJson.class);
-   	    PushMessagTypeEnum msgType=PushMessagTypeEnum.getEnumByInt(pushMsg.getObjType());
 
-        switch(msgType)
-        {
-        	case NEWS_MSG:
 
-        		getDetail.showNews(context, pushMsg);
-        		break;
-        	case ALRAM_MSG: 
-        		getDetail.showHomeAlarm(context, pushMsg);
-        	case FATAL_ALARM: 
-        		getDetail.showFatalAlarm(context, pushMsg);
-        		break;
-        		
-        	default:break;
-        
-        }
-
-	}
-    /**
-     * 报警类型为火警需要响铃
-     * @param context
-     * @param extras
-     */
-	private void playAlarm(Context context, String extras)
-	{
-		PushMessageJson pushMsg = (PushMessageJson) JsonConvert.jsonToObject(extras, PushMessageJson.class);
-		PushMessagTypeEnum msgType=PushMessagTypeEnum.getEnumByInt(pushMsg.getObjType());
-        switch(msgType)
-        {
-        	case FATAL_ALARM:
-    			Intent serviceIntent = new Intent(context, AlarmSoundService.class);
-    			context.startService(serviceIntent);
-        		//SoundPoolHandler.playSound(1,-1);       		
-        		//AppShortCutUtil appShortCut= new AppShortCutUtil(context);
-        		//appShortCut.addBage();
-        		
-        		break;
-        	case NEWS_MSG:
-        	case ALRAM_MSG:
-        		break;	
-        	default:break;
-        
-        }
-		
-	}
 
 
 

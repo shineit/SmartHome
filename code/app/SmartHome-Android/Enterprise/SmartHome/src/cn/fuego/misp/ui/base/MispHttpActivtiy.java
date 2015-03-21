@@ -8,7 +8,7 @@ import cn.fuego.misp.ui.dailog.MispWaitDailog;
 
 public abstract class MispHttpActivtiy extends MispBaseActivtiy implements HttpListener
 {
-	protected MispWaitDailog waitDailog;
+	
 	private Handler handler = new Handler()
 	{
 		@Override
