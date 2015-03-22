@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.ui.about;
+package cn.fuego.smart.home.ui.common.about;
 
 import java.io.Serializable;
 
