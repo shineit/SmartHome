@@ -24,11 +24,13 @@
     <package name="mall"  extends="misp">
 		<action name="ProductManage" class="cn.fuego.smart.home.web.action.mall.ProductManageAction">
 			<result type="dispatcher"  >/client/manage/mall/productManage.jsp</result>
- 			<result type="dispatcher" name="create">/client/manage/mall/productCreate.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/mall/productShow.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/mall/productShow.jsp</result>
 		</action> 
 		<action name="AdManage" class="cn.fuego.smart.home.web.action.mall.AdManageAction">
 			<result type="dispatcher"  >/client/manage/mall/adManage.jsp</result>
- 			<result type="dispatcher" name="create">/client/manage/mall/adCreate.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/mall/adShow.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/mall/adShow.jsp</result>
 		</action> 
  	</package>
  	
