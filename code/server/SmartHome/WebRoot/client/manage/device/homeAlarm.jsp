@@ -14,7 +14,24 @@
 					集中器编号：<input type="text" name="filter.concentratorID" value="${filter.concentratorID}" />
 				</td>	
                 <td>
-					告警类型：<input type="text" name="filter.alarmType"  value="${filter.alarmType}"/>
+					
+					<select  name="filter.alarmTypeName" >
+						 <option value="">告警类型</option>
+
+					 		<c:forEach var="at" items="${filter.alarmTypeList}">
+
+ 						  		 <c:choose>		       
+							   		 <c:when test="${at == filter.alarmTypeName}">  
+	                            		<option value="${at}" selected='selected'> ${at}</option>
+	                            		 
+	                            	  </c:when>
+							   		  <c:otherwise>  
+							   	   		<option value="${at}" > ${at}</option>
+							   		   </c:otherwise>
+							   
+						   		 </c:choose> 
+						    </c:forEach>
+					</select>
 				</td>							
 				<td>
 					<select  name="filter.clearStatus" >

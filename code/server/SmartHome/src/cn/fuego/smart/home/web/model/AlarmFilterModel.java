@@ -31,12 +31,11 @@ public class AlarmFilterModel
 
 
 	private String concentratorID;
-	private String alarmType;		//告警事件类型 AlarmTypeEnum
 	private String clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private String startDate;
 	private String endDate;
 	
-	//private AlarmTypeEnum[] alarmTypeList = AlarmTypeEnum.values();
+	private String alarmTypeName;
 	private List<String> alarmTypeList;
 	private AlarmClearEnum[] alarmClearList = AlarmClearEnum.values();
 	public List<QueryCondition> getConidtionList()
@@ -47,9 +46,9 @@ public class AlarmFilterModel
     	{
     		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",this.getConcentratorID()));
     	}
-    	if(!ValidatorUtil.isEmpty(this.getAlarmType()))
+    	if(!ValidatorUtil.isEmpty(this.getAlarmTypeName()))
     	{
-    		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",this.getAlarmType()));
+    		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmTypeName",this.getAlarmTypeName()));
     	}
     	if(!ValidatorUtil.isEmpty(this.getClearStatus()))
     	{
@@ -95,14 +94,7 @@ public class AlarmFilterModel
 	{
 		this.concentratorID = concentratorID;
 	}
-	public String getAlarmType()
-	{
-		return alarmType;
-	}
-	public void setAlarmType(String alarmType)
-	{
-		this.alarmType = alarmType;
-	}
+
 	public String getClearStatus()
 	{
 		return clearStatus;
@@ -126,6 +118,16 @@ public class AlarmFilterModel
 	public void setEndDate(String endDate)
 	{
 		this.endDate = endDate;
+	}
+
+	public String getAlarmTypeName()
+	{
+		return alarmTypeName;
+	}
+
+	public void setAlarmTypeName(String alarmTypeName)
+	{
+		this.alarmTypeName = alarmTypeName;
 	}
 	
 	

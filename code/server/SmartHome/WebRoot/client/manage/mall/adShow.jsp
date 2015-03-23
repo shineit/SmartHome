@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () {
-			$.pdialog.resizeDialog({style: {width: 660,height:400}}, 				
+			$.pdialog.resizeDialog({style: {width: 660,height:420}}, 				
 			$.pdialog.getCurrent(), "");
         });//dialog 宽度重新定义
         

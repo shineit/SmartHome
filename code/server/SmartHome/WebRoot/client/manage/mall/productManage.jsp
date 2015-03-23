@@ -44,7 +44,7 @@
  
 			</tr>
 		</thead>
-		<s:form  id="KnowledgeForm"  method="POST"  name="KnowledgeForm" >
+		<s:form   method="POST"   >
 		<tbody>
 
  		<c:forEach var="e" items="${table.currentPageData}"> 	
