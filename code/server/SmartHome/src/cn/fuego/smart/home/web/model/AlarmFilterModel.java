@@ -17,7 +17,7 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
-import cn.fuego.smart.home.constant.AlarmTypeEnum;
+import cn.fuego.smart.home.service.cache.AlarmTypeCache;
 
 /** 
  * @ClassName: AlarmFilterModel 
@@ -36,7 +36,8 @@ public class AlarmFilterModel
 	private String startDate;
 	private String endDate;
 	
-	private AlarmTypeEnum[] alarmTypeList = AlarmTypeEnum.values();
+	//private AlarmTypeEnum[] alarmTypeList = AlarmTypeEnum.values();
+	private List<String> alarmTypeList;
 	private AlarmClearEnum[] alarmClearList = AlarmClearEnum.values();
 	public List<QueryCondition> getConidtionList()
     {
@@ -67,14 +68,17 @@ public class AlarmFilterModel
 		conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
 		return conditionList;
     }
-	public AlarmTypeEnum[] getAlarmTypeList()
+
+	public List<String> getAlarmTypeList()
 	{
-		return alarmTypeList;
+		return AlarmTypeCache.getInstance().getTypeNameList();
 	}
-	public void setAlarmTypeList(AlarmTypeEnum[] alarmTypeList)
+
+	public void setAlarmTypeList(List<String> alarmTypeList)
 	{
 		this.alarmTypeList = alarmTypeList;
 	}
+
 	public AlarmClearEnum[] getAlarmClearList()
 	{
 		return alarmClearList;

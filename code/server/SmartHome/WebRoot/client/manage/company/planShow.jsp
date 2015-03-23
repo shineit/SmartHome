@@ -8,7 +8,7 @@
 		$.pdialog.resizeDialog({
 			style : {
 				width : 660,
-				height : 360
+				height : 400
 			}
 		}, $.pdialog.getCurrent(), "");
 		});//dialog 宽度重新定义
@@ -28,31 +28,28 @@
 				<dd style="width:65%;"><input type="text" name="obj.name"  size="25" value="${obj.name}" /></dd>		 
 			</dl>
 			<dl style="width:50%;">
-				<dt style="width:20%;">描述：</dt>			
-				<dd style="width:65%;"><input type="text" name="obj.desp"  size="25" value="${obj.desp}"/></dd>		 
-			</dl>
-			 <dl style="width:50%;">
 				<dt style="width:20%;">楼层：</dt>			
-				<dd style="width:65%;"><input type="text" name="obj.floor"  size="25" value="${obj.desp}"/></dd>		 
+				<dd style="width:65%;"><input type="text" name="obj.floor"  size="25" value="${obj.floor}"/></dd>		 
+			</dl>
+		 	<dl class="nowrap">
+				<dt style="width:10%;">描述：</dt>			
+				<dd style="width:80%;"><textarea name="obj.desp" cols="80" rows="3" maxlength="200">${obj.desp}</textarea></dd>
 			</dl>
  
-			<dl style="width:100%;">
-				<dt style="width:15%;">平面图：</dt>			
-				<dd style="width:65%;">
-							<div  >
-						<div
-							style="margin-bottom:5px; width:120px; height:140px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
+			<dl class="nowrap">
+				<dt style="width:10%;">平面图：</dt>			
+				<dd style="width:50%;">
+						<div style="margin-bottom:5px; width:300px; height:180px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 							<div>
-								<img id="ImgPr1" src="<%=request.getContextPath()%>/${obj.picPath}" height="140" width="120" alt="个人照片">
+								<img id="ImgPr1" src="<%=request.getContextPath()%>/${obj.picPath}" height="180" width="300" alt="待上传图片">
 							</div>
-
 						</div>
+				</dd>
+				<dd style="width:25%;">
 						<div>
-		 
 							<s:file name="upload" id="up1"  ></s:file>
 						</div>
-						<span class="info">上传图片大小不得超过65KB,只支持bmp与jpg格式</span>
-					</div> 
+						<span class="info">上传图片只支持bmp与jpg格式</span>
 				</dd>		 
 			</dl>
 

@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="pageHeader" style="border:1px #B8D0D6 solid">
-	<s:form  id="pagerForm"   onsubmit="return divSearch(this, 'jbsxBox');"  action="device/BuildingManage" method="post" >
+<div class="pageHeader" >
+	<s:form  id="pagerForm"   onsubmit="return navTabSearch(this);"  action="device/BuildingManage" method="post" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	
@@ -15,9 +15,15 @@
 					 <input type="text" name="companyID" style="display:none" value="${company.companyID}"/>
 				</td>
 				<td>
-					楼名称：<input type="text" name="keyword" /> 
+					楼宇名称：<input type="text" name="buildingName" value="${buildingName}"/> 
  				</td>
-				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
+				
+				<td>
+					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+				</td>
+				<td>
+					<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -32,18 +38,18 @@
   	
   		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="113">
+	<table class="table" width="100%" layoutH="123">
 		<thead>
 			<tr>
 				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
- 				<th width="25%" align="center">楼名称</th>
-				<th width="15%" align="center">描述</th>
-				<th width="15%" align="center">单位地址</th>
+ 				<th width="15%" align="center">楼宇名称</th>
+				<th width="20%" align="center">描述</th>
+				<th width="20%" align="center">楼宇地址</th>
 				<th width="10%" align="center">操作</th>
 				
 			</tr>
 		</thead>
-		<s:form  id="newsForm"  method="POST"   rel="jbsxBox">
+		<s:form   method="POST"   rel="jbsxBox">
 		<tbody>
 
  		<c:forEach var="e" items="${table.currentPageData}"> 	
@@ -53,10 +59,8 @@
 				<td>${e.desp}</td>			 
  				<td>${e.addr}</td>
  	            <td style="text-align: center;">
-	            
-	            <a title="楼层管理" target="navTab" href="device/BuildingManage?selectedID=${e.companyID}" rel="configSensor"
-	            class="btnAdd"  style="margin-left:10px;"></a>
-             
+             	<a title="楼层信息修改" target="dialog" href="device/BuildingManage!show.action?selectedID=${e.buildingID}&operateType=modify" 
+             		class="btnEdit" mask="true" rel="configBuilding"></a>
 	            </td> 
 			</tr>
 		</c:forEach>  	

@@ -63,7 +63,7 @@
 	            <td style="text-align: center;">
 	            
 	            <a title="楼层管理" target="navTab" href="device/BuildingManage?companyID=${e.companyID}&selectedID=${e.companyID}" 
-	            class="btnAdd"  style="margin-left:10px;"></a>
+	            class="btnAdd"  style="margin-left:10px;" rel="buildingManage"></a>
              
 	            </td> 
 			</tr>

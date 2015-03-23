@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="pageHeader">
-	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="mall/ProductManage" method="post" name="KnowledgeSearch">
+	<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="mall/ProductManage" method="post" >
 		<input type="hidden" name="pageNum" value="${pageNum}" />
 	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
 	
@@ -12,21 +12,8 @@
 		<table class="searchContent">
 			<tr>
 				<td>
-					标题：<input type="text" name="newsFilter.title" value="${newsFilter.title}" />
+					产品名称：<input type="text" name="productName" value="${productName}" />
 				</td>	
-                <td>
-					内容：<input type="text" name="newsFilter.content"  value="${newsFilter.content}"/>
-				</td>							
-				<td>
-					发布人：<input type="text" name="newsFilter.author" value="${newsFilter.author}" />
-				</td>
-
-				<td class="dateRange">
-					发布时间:
-					<input type="text"  readonly="readonly" class="date" name="newsFilter.startDate" value="${newsFilter.startDate}"/>
-					<span class="limit">-</span>
-					<input type="text"  readonly="readonly" class="date" name="newsFilter.endDate" value="${newsFilter.endDate}"/>
-				</td>
 				<td>
 					<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 				</td>
@@ -42,8 +29,10 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="ProductManage!show.action?operateType=create" target="dialog" mask="true" title="新增公告"><span>新增</span></a></li>
+			<li><a class="add" href="ProductManage!show.action?operateType=create" target="dialog" mask="true" title="产品信息"><span>新增</span></a></li>
 			<li><a class="delete" href="ProductManage!deleteList.action"  target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="ProductManage!show.action?selectedID={sid_user}&operateType=modify"						
+				target="dialog" mask="true" title="产品信息"><span>修改</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">

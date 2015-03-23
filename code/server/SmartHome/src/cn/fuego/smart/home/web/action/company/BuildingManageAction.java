@@ -17,10 +17,8 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
-import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
-import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.service.BuildingManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.BuildingModel;
@@ -40,8 +38,7 @@ public class BuildingManageAction extends DWZTableAction<Building>
 
 	private BuildingManageService service = ServiceContext.getInstance().getBuildingManageService();
 
-	
- 
+	private String buildingName;
 
 	@Override
 	public List<QueryCondition> getFilterCondition()
@@ -53,6 +50,10 @@ public class BuildingManageAction extends DWZTableAction<Building>
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"companyID",companyID));
  		}
  
+		if(!ValidatorUtil.isEmpty(buildingName))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"name",buildingName));
+		}
 		return conditionList;
 	}
 	
@@ -140,9 +141,16 @@ public class BuildingManageAction extends DWZTableAction<Building>
 		this.companyID = companyID;
 	}
 
- 
-	
-	
+	public String getBuildingName()
+	{
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName)
+	{
+		this.buildingName = buildingName;
+	}
+
 	
 
 }

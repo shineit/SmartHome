@@ -49,6 +49,8 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	private static Company company;
 	private static List<BuildingModel> buildingList = new ArrayList<BuildingModel>();
 	private PlanManageService service = ServiceContext.getInstance().getPlanManageService();
+	
+	private String planName,floor;
 
  	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
@@ -68,7 +70,14 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 		{
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"buildingID",this.getSelectedID()));
  		}
- 
+		if(!ValidatorUtil.isEmpty(this.getPlanName()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"name",this.getPlanName()));
+ 		}
+		if(!ValidatorUtil.isEmpty(this.getFloor()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"floor",this.getFloor()));
+ 		}
 		return conditionList;
 	}
 	
@@ -145,6 +154,22 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	public  void setCompanyID(String companyID)
 	{
 		this.companyID = companyID;
+	}
+	public String getPlanName()
+	{
+		return planName;
+	}
+	public void setPlanName(String planName)
+	{
+		this.planName = planName;
+	}
+	public String getFloor()
+	{
+		return floor;
+	}
+	public void setFloor(String floor)
+	{
+		this.floor = floor;
 	}
  
 	

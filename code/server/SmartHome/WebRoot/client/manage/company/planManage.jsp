@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div class="pageContent" style="padding:1px">
+<div class="pageContent" >
 	<div class="tabs">
 
 		<div class="tabsContent">
@@ -15,7 +15,7 @@
 
 
 						<div class="pageHeader" style="border:1px #B8D0D6 solid">
-							<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/PlanManage" method="post" name="newsSearch">
+							<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/PlanManage" method="post" >
 								<input type="hidden" name="pageNum" value="${pageNum}" />
 								<input type="hidden" name="numPerPage" value="${numPerPage}" />
 							
@@ -27,12 +27,18 @@
 					                    </td>
 
 										<td>
-											平面图名称：<input type="text" name="keyword" />
+											平面图名称：<input type="text" name="planName" value="${planName}"/>
 										</td>
 										<td>
-											楼层：<input type="text" name="keyword" />
+											楼层：<input type="text" name="floor" value="${floor}" />
 										</td>
-										<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
+
+										<td>
+											<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+										</td>
+										<td>
+											<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
+										</td>
 									</tr>
 								</table>
 							</div>
@@ -42,13 +48,11 @@
 						<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
 						<div class="panelBar">
 								<ul class="toolBar">
-									<li><a class="add" href="PlanManage!show.action?selectedID=${selectedID}&operateType=create" target="dialog" mask="true" title="新增单位"><span>新增</span></a></li>
+									<li><a class="add" href="PlanManage!show.action?selectedID=${selectedID}&operateType=create" target="dialog" mask="true" title="平面图信息"><span>新增</span></a></li>
 									<li><a class="delete" href="PlanManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
-									<li class="line">line</li>
-									<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
 								</ul>
 							</div>
-							<table class="table" width="100%" layoutH="113">
+							<table class="table" width="100%" layoutH="125">
 								<thead>
 									<tr>
 										<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
@@ -107,3 +111,5 @@
 		<div class="tabsFooter">
 			<div class="tabsFooterContent"></div>
 		</div>
+	</div>
+</div>

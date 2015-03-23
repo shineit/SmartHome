@@ -27,7 +27,7 @@ public class MISPErrorMessageConst
 	public static final int ERROR_LOGIN_FAILED = 4;  //登录失败
 	public static final int ERROR_OLD_PASSWORD_WORD = 5; //原始密码错误
 	
-	public static final int CLIENT_VERSION_LOW = 6 ; // 
+	public static final int CLIENT_VERSION_LOW = 6 ; // 当前版本较低
 
 	public static final int USER_EXISTED = 7;//用户已存在
 
@@ -42,13 +42,14 @@ public class MISPErrorMessageConst
 	public static final int ADMIN_NOT_DELETED = 12; //超级管理员不能被删除
 	public static final int OPERATE_PROHIBITED = 13; //无权操作
 	
-	public static final int ERROR_QUREY_FAILED = 14;
+	public static final int ERROR_QUREY_FAILED = 14;  //查询失败
 
 	public static final int ERROR_UPDATE_VERSION_FAILED = 15;//更新版本失败
+	public static final int ERROR_WRITE_FILE = 16;//文件写入失败
 	public static final int ERROR_NET_FAIL = 17 ; // 网络连接异常
-	public static final int ERROR_WRITE_FILE = 16;//更新版本失败
-	public static final int ERROR_FILE_NOT_EXIST = 30;
-	public static final int ERROR_UPLOAD_FAILED = 31;
+	
+	public static final int ERROR_FILE_NOT_EXIST = 30;  //文件不存在
+	public static final int ERROR_UPLOAD_FAILED = 31;  //文件上传失败
 
 	public static String getMessageByErrorCode(int errorCode)
 	{

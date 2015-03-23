@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.util.file.FileUtil;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.constant.CheckLogStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
@@ -24,6 +25,8 @@ import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogRsp;
+import cn.fuego.smart.home.webservice.up.model.DeleteImgByNameReq;
+import cn.fuego.smart.home.webservice.up.model.DeleteImgByNameRsp;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDReq;
@@ -138,6 +141,31 @@ public class CheckManageRestImpl implements CheckManageRest
 		}
 	
 		
+		return rsp;
+	}
+
+	@Override
+	public DeleteImgByNameRsp deleteImgByName(DeleteImgByNameReq req)
+	{
+		DeleteImgByNameRsp rsp = new DeleteImgByNameRsp();
+		try
+		{
+/*			ServletContext context=ServletActionContext.getServletContext();
+			String path=context.getRealPath("/");*/
+
+			FileUtil.deleteFile(req.getImgName());
+		}		
+		catch(MISPException e)
+		{
+			log.error("delete Img By Name error",e);
+			rsp.setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("delete Img By Name error",e);
+			rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		}
+	
 		return rsp;
 	}
 

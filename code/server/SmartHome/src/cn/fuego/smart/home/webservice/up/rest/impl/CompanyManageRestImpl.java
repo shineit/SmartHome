@@ -13,15 +13,11 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
-import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.SensorPlan;
-import cn.fuego.smart.home.service.PlanManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
-import cn.fuego.smart.home.webservice.up.model.GetNewsByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
 import cn.fuego.smart.home.webservice.up.model.base.SensorPlanJson;
 import cn.fuego.smart.home.webservice.up.rest.CompanyManageRest;
 

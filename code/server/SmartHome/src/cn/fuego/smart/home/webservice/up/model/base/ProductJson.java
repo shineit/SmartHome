@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.webservice.up.model.base;
 
+import java.io.Serializable;
+
  /** 
  * @ClassName: ProductJson 
  * @Description: TODO
@@ -15,8 +17,13 @@ package cn.fuego.smart.home.webservice.up.model.base;
  * @date 2015-3-17 上午10:21:03 
  *  
  */
-public class ProductJson
+public class ProductJson implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int productID;			//产品ID，自增长，主键
 	private String name;			//产品名称
 	private String desp;			//产品描述
@@ -97,6 +104,15 @@ public class ProductJson
 	public void setType(int type)
 	{
 		this.type = type;
+	}
+	@Override
+	public String toString()
+	{
+		return "ProductJson [productID=" + productID + ", name=" + name
+				+ ", desp=" + desp + ", price=" + price + ", picLabel="
+				+ picLabel + ", picDetail1=" + picDetail1 + ", picDetail2="
+				+ picDetail2 + ", picDetail3=" + picDetail3 + ", type=" + type
+				+ "]";
 	}
 	
 	

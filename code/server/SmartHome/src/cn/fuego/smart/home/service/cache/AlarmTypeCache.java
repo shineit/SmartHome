@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.service.cache;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.fuego.smart.home.dao.DaoContext;
@@ -56,4 +57,14 @@ public class AlarmTypeCache
 		}
 		return null;
 	}
+	public List<String> getTypeNameList()
+	{
+		List<String> typeNameList = new ArrayList<String>();
+		for(AlarmType type : dataList)
+		{
+			typeNameList.add(type.getTypeName());
+		}
+		return typeNameList;
+	}
+	
 }

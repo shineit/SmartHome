@@ -8,6 +8,8 @@ import javax.ws.rs.Produces;
 
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogRsp;
+import cn.fuego.smart.home.webservice.up.model.DeleteImgByNameReq;
+import cn.fuego.smart.home.webservice.up.model.DeleteImgByNameRsp;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDReq;
@@ -40,5 +42,9 @@ public interface CheckManageRest
 	@Path("/checkLog/get")
 	GetCheckLogByIDRsp getCheckLogByID(GetCheckLogByIDReq req);
 
-	
+	@POST
+	@Path("/img/delete")
+	DeleteImgByNameRsp deleteImgByName(DeleteImgByNameReq req);
+
+
 }

@@ -2,10 +2,9 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
- 
 <style type="text/css">
 #container1{
-	position:relative; width:98%; height:350px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
+	position:relative; width:99%; height:360px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
 }
 #map1{
 	position:absolute;margin: 0 auto;
@@ -17,112 +16,142 @@
 	position:absolute; width:6px; height:6px; font-size:0px; background:#0000FF;
 }
 </style>
+<div class="pageContent" >
+	<div class="tabs">
 
-<jsp:include page="buildingTree.jsp"/>
-
-<div class="pageHeader" style="border:1px #B8D0D6 solid">
-	<s:form  id="pagerForm"  onsubmit="return divSearch(this, 'jbsxBox');" action="device/FireSensorManage" method="post" >
-		<input type="hidden" name="pageNum" value="${pageNum}" />
-	    <input type="hidden" name="numPerPage" value="${numPerPage}" />
+		<div class="tabsContent">
+			<div>
 	
-	<div class="searchBar">
-		<table class="searchContent">
-			<tr>
-				  <td>
-				  <input type="text" name="selectedID" style="display:none" value="${selectedID}"/>
-				  </td>
-				<td>
-					平面图编号：<input type="text" name="keyword" />
-				</td>
-				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
-			</tr>
-		</table>
-	</div>
-	</s:form>
-</div>
+				<jsp:include page="buildingTree.jsp"/>
+				
+				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
+					<div class="pageHeader" style="border:1px #B8D0D6 solid">
+							<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/FireSensorManage" method="post" >
+								<input type="hidden" name="pageNum" value="${pageNum}" />
+								<input type="hidden" name="numPerPage" value="${numPerPage}" />
+							
+							<div class="searchBar">
+								<table class="searchContent">
+									<tr>
+									    <td>
+									    <input type="text" name="selectedID" style="display:none" value="${selectedID}"/>
+									 	</td>
+										<td>
+										机号：<input type="text" name="machineID" value="${machineID}"/>
+										</td>
+										<td>
+										回路号：<input type="text" name="loopID" value="${loopID}"/>
+										</td>
+										<td>
+										点号：<input type="text" name="codeID" value="${codeID}"/>
+										</td>
+										<td>
+										<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
+										</td>
+										<td>
+										<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
+										</td>
+									</tr>
+								</table>
+							</div>
+							</s:form>
+						</div>
 
-<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
-<div class="panelBar">
-		<ul class="toolBar">
-			<li><a class="add" href="FireSensorManage!show.action?selectedID=${selectedID}&operateType=create"  target="dialog" mask="true" rel="fsNew"><span>新增</span></a></li>
-			<li><a class="delete" href="FireSensorManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
-			<li><a class="edit" href="demo/pagination/dialog2.html?uid={sid_obj}" target="dialog" mask="true"><span>修改</span></a></li>
-			<li class="line">line</li>
-			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
-		</ul>
-	</div>
-	<table class="table" width="99%"  layoutH="800" rel="jbsxBox">
-		<thead>
-			<tr>
-				<th width="5%" align="center"> </th>
-				<th width="100">集中器编号</th>
-				<th width="100">机号</th>
-				<th width="100">回路号</th>
-				<th width="100">点号</th>
-				<th width="80">位置描述</th>
-			</tr>
-		</thead>
-		<s:form   method="POST" rel="jbsxBox" >
-		<tbody>
- 		<c:forEach var="e" items="${table.currentPageData}"> 	
-			<tr target="sid_user" rel="${e.id}">
-				<td><input name="selectedIDList" value="${e.id}" type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
-				<td>${e.concentratorID}</td>
-				<td>${e.machineID}</td>
-				<td>${e.loopID}</td>
- 				<td>${e.codeID}</td>
- 		 
- 				<td>${e.locationDesp}</td>
-			</tr>
-		</c:forEach>  	
+						<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
+						<div class="panelBar">
+								<ul class="toolBar">
+									<li><a class="add" href="FireSensorManage!show.action?selectedID=${selectedID}&operateType=create" 
+									 target="dialog" mask="true" rel="fsNew" title="传感器信息"><span>新增</span></a></li>
+									<li><a class="delete" href="FireSensorManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
+									<li><a class="edit" href="FireSensorManage!show.action?selectedID={sid_user}&operateType=modify"						
+									 target="dialog" mask="true" title="传感器信息"><span>修改</span></a></li>
+									<li class="line">line</li>
+									<li><a class="icon" href="" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
+								</ul>
+							</div>
+							<table class="table" width="100%" layoutH="800">
+								<thead>
+									<tr>
+										<th width="5%" align="center"></th>
+										<th width="15%" align="center">传感器类型</th>
+										<th width="15%" align="center">集中器编号</th>
+										<th width="10%" align="center">机号</th>
+										<th width="10%" align="center">回路号</th>
+										<th width="10%" align="center">点号</th>
+										<th width="15%" align="center">位置描述</th>
+									</tr>
+								</thead>
+								<s:form   method="POST"  >
+								<tbody>
 
-		</tbody>
-		</s:form>
-	</table>
-	<div class="panelBar">
-		<div class="pages">
-			<span>显示</span>
-	        <c:set var="page" value="${table.page}" scope="request"/>
-			
-			<select class="combox" onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox')">
-				<c:forEach var="e" items="${page.pageSizeList}"> 	
-			       <c:if test="${e==page.pageSize}">
-			         <option value="${e}" selected>${e}</option>
-				  </c:if>
-                  <c:if test="${e!=page.pageSize}">
-			         <option value="${e}">${e}</option>
-				  </c:if>
-				</c:forEach>
- 
-			</select>
-			<span>条，共${page.count}条</span>
-		</div>
-		
-		<div class="pagination" rel="jbsxBox" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
+								<c:forEach var="e" items="${table.currentPageData}"> 	
+									<tr target="sid_user" rel="${e.id}">
+										<td><input name="selectedIDList" value="${e.id}" type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
+										<td>${e.sensorTypeName}</td>
+										<td>${e.concentratorID}</td>
+										<td>${e.machineID}</td>
+										<td>${e.loopID}</td>
+						 				<td>${e.codeID}</td> 		 
+						 				<td>${e.locationDesp}</td>
+									</tr>
+								</c:forEach>  	
 
-	</div>
-<div id="container1" >
+								</tbody>
+								</s:form>
+							</table>
+							<div class="panelBar">
+								<div class="pages">
+									<span>显示</span>
+									<c:set var="page" value="${table.page}" scope="request"/>
+									
+									<select class="combox" onchange="navTabPageBreak({numPerPage:this.value}, 'jbsxBox')">
+										<c:forEach var="e" items="${page.pageSizeList}"> 	
+										   <c:if test="${e==page.pageSize}">
+											 <option value="${e}" selected>${e}</option>
+										  </c:if>
+										  <c:if test="${e!=page.pageSize}">
+											 <option value="${e}">${e}</option>
+										  </c:if>
+										</c:forEach>
+						 
+									</select>
+									<span>条，共${page.count}条</span>
+								</div>
+								
+								<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
+
+							</div>
+						</div>
+						<div id="container1" >
     <div id="map1">
 		<img src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}" />
     </div>
 </div>
+				</div>
 	
-	
-	
-	
+			</div>
+
+		</div>
+		<div class="tabsFooter">
+			<div class="tabsFooterContent"></div>
+		</div>
+	</div>
 </div>
- <script type="text/javascript">
+<script type="text/javascript">
 var mark = [];
 
  
-function getObj(id){
+function getObj(id)
+{
 	return document.getElementById(id);
 }
-function point(x, y){
+function point(x, y)
+{
 	this.x = x;
 	this.y = y;
 }
-function getOffset(obj){
+function getOffset(obj)
+{
 	var x = 0, y = 0;
 	while(obj){
 		x += obj.offsetLeft;
@@ -130,10 +159,11 @@ function getOffset(obj){
 		
 		obj = obj.offsetParent;
 	}
-	return {x : x, y : y };
+	return {x : x, y : y, };
 }
 
-function bindEvent(){
+function bindEvent()
+{
 	getObj("map1").ondblclick = function(oEvent){
 		oEvent = oEvent || event;
 		 
@@ -193,7 +223,8 @@ function unSelectMark(id)
  
 }
 
-function addMark(p, x, y, index){
+function addMark(p, x, y, index)
+{
      
  	var div = document.createElement("div");
 	div.id = "mark1" + index;
@@ -253,8 +284,6 @@ function init()
 	bindEvent();
 	loadMark();
 }
- 
+
  
 </script>
- 
-	

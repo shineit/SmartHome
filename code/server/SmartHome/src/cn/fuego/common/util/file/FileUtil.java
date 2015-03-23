@@ -14,10 +14,13 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 
@@ -58,5 +61,38 @@ public class FileUtil
 			throw new MISPException(MISPErrorMessageConst.ERROR_WRITE_FILE);
 		}
 	}
+	
+	/** 
+	 * 删除单个文件 
+	 * @param   sPath    被删除文件的文件名 
+	 * @return 单个文件删除成功返回true，否则返回false 
+	 */  
+	public static boolean deleteFile(String fileName)
+	{  
+
+		String binPath=System.getProperty("user.dir");
+		
+	    System.out.println(System.getProperty("user.dir"));
+	    String tempdir=binPath.replace("bin", "webapps");  //把bin 文件夹变到 webapps文件里面 
+
+	    tempdir+="\\"+"SmartHome";  
+	    System.out.println(tempdir);
+		String sPath= tempdir+"\\upload\\"+fileName;
+		System.out.println(sPath);
+		boolean flag = false;  
+	    File file = new File(sPath);  
+	    // 路径为文件且不为空则进行删除  
+	    if (file.isFile() && file.exists()) 
+	    {  
+	        file.delete();  
+	        flag = true;  
+	    } 
+	    else
+	    {
+	    	throw new MISPException(MISPErrorMessageConst.ERROR_FILE_NOT_EXIST);
+	    }
+	    return flag;  
+	} 
+
 
 }

@@ -19,8 +19,6 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmIsFeedBackEnum;
-import cn.fuego.smart.home.constant.AlarmTypeEnum;
-import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Alarm;
@@ -59,7 +57,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
  	 		//condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objType",AlarmObjTypeEnmu.CONCENTRATOR_ALARM.getIntValue()));
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.IN,"concentratorID",concentorIDList));
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
- 	 		if(!ValidatorUtil.isEmpty(attrList))
+/* 	 		if(!ValidatorUtil.isEmpty(attrList))
  	 		{
  	 			for(AttributeJson attr:attrList)
  	 	 		{
@@ -75,7 +73,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
  	 	 				}
  	 	 			}
  	 	 		}
- 	 		}
+ 	 		}*/
  	 		
  	 		
  	 		condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
@@ -220,7 +218,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		else
 		{
 			concentorIDList = DataPrivilegeManage.getConcentorOfUser(userID);
-			idList= getIDListByType(userID,AlarmTypeEnum.FIRE_ALARM.getIntValue(),concentorIDList);
+			//idList= getIDListByType(userID,AlarmTypeEnum.FIRE_ALARM.getIntValue(),concentorIDList);
 		}
 
 		Modify(idList,"clearStatus", AlarmClearEnum.MANUAL_CLEAR.getIntValue());

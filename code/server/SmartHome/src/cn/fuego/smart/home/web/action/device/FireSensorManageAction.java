@@ -16,7 +16,6 @@ import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
-import cn.fuego.misp.web.action.login.LoginAction;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
@@ -42,6 +41,8 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	
 	private String locationJson;
 	private String sensorJson;
+	
+	private String 	machineID,loopID,codeID;
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
@@ -78,7 +79,18 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		{
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"planNodeID",this.getSelectedID()));
  		}
- 
+		if(!ValidatorUtil.isEmpty(this.getMachineID()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"machineID",this.getMachineID()));
+ 		} 
+		if(!ValidatorUtil.isEmpty(this.getLoopID()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"loopID",this.getLoopID()));
+ 		} 
+		if(!ValidatorUtil.isEmpty(this.getCodeID()))
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"codeID",this.getCodeID()));
+ 		} 
 		return conditionList;
 	}
 
@@ -236,6 +248,54 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	public void setSensorPlan(SensorPlan sensorPlan)
 	{
 		this.sensorPlan = sensorPlan;
+	}
+
+
+
+
+	public String getMachineID()
+	{
+		return machineID;
+	}
+
+
+
+
+	public void setMachineID(String machineID)
+	{
+		this.machineID = machineID;
+	}
+
+
+
+
+	public String getLoopID()
+	{
+		return loopID;
+	}
+
+
+
+
+	public void setLoopID(String loopID)
+	{
+		this.loopID = loopID;
+	}
+
+
+
+
+	public String getCodeID()
+	{
+		return codeID;
+	}
+
+
+
+
+	public void setCodeID(String codeID)
+	{
+		this.codeID = codeID;
 	}
 	
 	

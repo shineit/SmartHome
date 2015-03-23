@@ -62,7 +62,18 @@ public class MISPAction extends ActionSupport
 		
 		return fileName;
 	}
-	
+	public void deleteFileByName(String name)
+	{
+		if(!ValidatorUtil.isEmpty(name))
+		{
+			//String path = ServletActionContext.getServletContext().getRealPath("/") + "upload/";
+			FileUtil.deleteFile(name);
+		}
+		else
+		{
+			log.warn("delete file name is empty");
+		}
+	}
 	protected void ReturnJson(Object rsp)
 	{
 		try
