@@ -4,10 +4,12 @@ package cn.fuego.smart.home.ui.enterprise.check;
 
 import java.util.HashMap;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler.Callback;
@@ -51,11 +53,11 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 	private CheckLogJson checkLog;
 	private TextView abnormal_desp;
 	private ImageView abnormal_img;
-	//private String abnormalPic="";
-	
 	private static final int MSG_TOAST = 1;
 	private static final int MSG_ACTION_CCALLBACK = 2;
 	private static final int MSG_CANCEL_NOTIFY = 3;
+	
+	private String picPath;//图片本地地址
 	@Override
 	public void initRes()
 	{
@@ -132,6 +134,13 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 
 
 	@Override
+	public void backOnClick()
+	{
+		clearCache();
+		super.backOnClick();
+	}
+
+	@Override
 	public void onClick(View v)
 	{
 		if(v.getId()==R.id.check_operate_email)
@@ -152,13 +161,25 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		
 	}
 
+	/**
+	 * 邮件分享功能
+	 * @param title
+	 * @param content
+	 * @param abnormalPic
+	 */
 	private void sendEmail(String title,String content, String abnormalPic)
 	{
 		ShareParams sp = new ShareParams();
 		sp.setTitle(title);
 		sp.setText(content);
-		//sp.setImagePath("http://image.baidu.com/i?ct=503316480&z=0&tn=baiduimagedetail&ipn=d&word=%E6%B6%88%E9%98%B2&step_word=&pn=0&spn=0&di=198574994090&pi=&rn=1&is=&istype=&ie=utf-8&oe=utf-8&in=29148&cl=2&lm=-1&st=&cs=310490063%2C3383558116&os=2296154067%2C2050838882&adpicid=0&ln=1000&fr=&fmq=1427023123027_R&ic=&s=&se=&sme=0&tab=&width=&height=&face=&ist=&jit=&cg=&objurl=http%3A%2F%2Fpn.680.com%2Fnews%2F2012-10%2F2012102414187399_1.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fgjof_z%26e3Bmba_z%26e3Bv54AzdH3Fvi7wg2ytAzdH3Fda8d-8aAzdH3F88mm0_z%26e3Bip4s");
-		sp.setImageUrl("http://f1.sharesdk.cn/imgs/2014/05/21/oESpJ78_533x800.jpg");
+		if(!ValidatorUtil.isEmpty(picPath))
+		{
+			sp.setImagePath(picPath);
+		}
+		else
+		{
+			sp.setImageUrl("http://f1.sharesdk.cn/imgs/2014/05/21/oESpJ78_533x800.jpg");
+		}	
 		Platform email = ShareSDK.getPlatform(Email.NAME);
 		email.setPlatformActionListener(this); // 设置分享事件回调
 		// 执行图文分享
@@ -173,16 +194,18 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 	}
 
 	/**
-	 * 
+	 * 切换时清除缓存
 	 */
 	private void clearCache()
 	{
 		checkLog.setAbnormalDesp("");
-		checkLog.setAbnormalPic("");
 		abnormal_desp.setText("");
-		loadImag(checkLog.getAbnormalPic());
+		if(!ValidatorUtil.isEmpty(checkLog.getAbnormalPic()))
+		{
+			needClearImg();
+		}
 		
-		deleteImag(checkLog.getAbnormalPic());
+
 	}
 	/**
 	 * 切换radio时删除服务器图片
@@ -199,7 +222,8 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 			{
 				if(message.isSuccess())
 				{
-					
+					checkLog.setAbnormalPic("");
+					abnormal_img.setImageResource(R.drawable.load_image_failed);
 				}
 				else
 				{
@@ -237,6 +261,40 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		
 	}
 
+	
+	private void needClearImg()
+	{
+        // 创建退出对话框  
+        AlertDialog isExit = new AlertDialog.Builder(this).create();  
+        // 设置对话框标题  
+        isExit.setTitle("系统提示");  
+        // 设置对话框消息  
+        isExit.setMessage("该操作将清除图片资源？");  
+        // 添加选择按钮并注册监听  
+        isExit.setButton("确定", listener);  
+        isExit.setButton2("取消", listener);  
+        // 显示对话框  
+        isExit.show(); 
+		
+	}
+    /**监听对话框里面的button点击事件*/  
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()  
+    {  
+        public void onClick(DialogInterface dialog, int which)  
+        {  
+            switch (which)  
+            {  
+            case AlertDialog.BUTTON_POSITIVE:// "确认"按钮退出程序  
+            	deleteImag(checkLog.getAbnormalPic());
+                break;  
+            case AlertDialog.BUTTON_NEGATIVE:// "取消"第二个按钮取消对话框  
+                break;  
+            default:  
+                break;  
+            }  
+        }  
+    };
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -251,6 +309,8 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 				
 				loadImag(checkLog.getAbnormalPic());
 			}
+			picPath = data.getStringExtra("picPath");
+
 		}
 	
 	}
@@ -317,9 +377,8 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 				}
 				break;
 				case 2: { // 失败, fail notification
-					String expName = msg.obj.getClass().getSimpleName();
 
-						showNotification(2000, "分享失败！");
+					showNotification(2000, "分享失败！");
 
 				}
 				break;

@@ -105,6 +105,15 @@ public class ProductJson implements Serializable
 	{
 		this.type = type;
 	}
+	@Override
+	public String toString()
+	{
+		return "ProductJson [productID=" + productID + ", name=" + name
+				+ ", desp=" + desp + ", price=" + price + ", picLabel="
+				+ picLabel + ", picDetail1=" + picDetail1 + ", picDetail2="
+				+ picDetail2 + ", picDetail3=" + picDetail3 + ", type=" + type
+				+ "]";
+	}
 	
 	
 }

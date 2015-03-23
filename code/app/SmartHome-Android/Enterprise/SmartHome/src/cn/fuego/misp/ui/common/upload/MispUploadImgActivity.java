@@ -83,7 +83,7 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 			    
 			    handler.sendMessage(msg);
  			}else{
-				Toast.makeText(this, "上传的文件路径出错", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "图片不存在", Toast.LENGTH_LONG).show();
 			}
 			break;
 		case R.id.upload_img_camera:
@@ -95,16 +95,15 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
+	{
 
-		if(resultCode==Activity.RESULT_OK && requestCode == TO_SELECT_PHOTO){
+		if(resultCode==Activity.RESULT_OK && requestCode == TO_SELECT_PHOTO)
+		{
  			//imageView.setImageBitmap(null);
  			picPath = data.getStringExtra(SelectPicActivity.KEY_PHOTO_PATH);
  			LoadImageUtil.getInstance().loadImage(imageView, "file://"+picPath);
- 			
-			//Bitmap bm = BitmapFactory.decodeFile(picPath);
-			//imageView.setImageBitmap(bm);
-	}
+		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
@@ -153,6 +152,7 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 					MispBaseRspJson json = (MispBaseRspJson) msg.getMessage().obj;
 			        Intent intent = new Intent();
 			        intent.putExtra(RETURN_DATA, json);
+			        intent.putExtra("picPath", picPath);//本地图片地址
 			        setResult(0, intent);
 
 					finish();

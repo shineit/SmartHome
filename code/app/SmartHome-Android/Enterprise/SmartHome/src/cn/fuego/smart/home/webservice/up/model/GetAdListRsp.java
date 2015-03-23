@@ -29,6 +29,13 @@ public class GetAdListRsp extends MispBaseRspJson
 		this.adList = adList;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "GetAdListRsp [adList=" + adList + ", errorCode=" + errorCode
+				+ ", errorMsg=" + errorMsg + ", obj=" + obj + "]";
+	}
+
  
 
 	 
