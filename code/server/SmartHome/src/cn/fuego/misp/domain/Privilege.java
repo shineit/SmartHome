@@ -44,7 +44,11 @@ public class Privilege implements PersistenceObject
 	{
 		return "accessObjType";
 	}
-	
+
+	public static String getAccessObjTypeValue()
+	{
+		return "accessObjValue";
+	}
 	
 	public int getId()
 	{

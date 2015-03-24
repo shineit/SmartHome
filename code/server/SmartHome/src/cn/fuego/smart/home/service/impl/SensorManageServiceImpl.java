@@ -70,7 +70,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 				catch (Exception e)
 				{
 					log.error("config sensor on device failed,the sensor is " + old.toString(),e);
-					throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
+					throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAILED);
 				}
 			}
 			else
@@ -136,7 +136,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		catch(Exception e)
 		{
 			log.error("get home sensor config failed,the sensor id is " + sensor.getSensorID() + " ,the channel id is "+sensor.getChannelID(),e);
-			throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAiLED);
+			throw new MISPException(ErrorMessageConst.OPREATE_DEVICE_FAILED);
 		}
 	    super.modify(sensor);
  

@@ -83,6 +83,8 @@
 			<result type="dispatcher">/client/manage/company/companyManage.jsp</result>
  			<result type="dispatcher" name="create">/client/manage/company/show.jsp</result>
  			<result type="dispatcher" name="modify">/client/manage/company/show.jsp</result>
+ 			<result type="dispatcher" name="showPermission">/client/manage/company/userCompany.jsp</result>
+
 		</action>
 		
 	    <action name="BuildingManage" class="cn.fuego.smart.home.web.action.company.BuildingManageAction">

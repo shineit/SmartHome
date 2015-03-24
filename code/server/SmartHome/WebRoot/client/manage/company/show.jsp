@@ -4,15 +4,28 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () {
-			$.pdialog.resizeDialog({style: {width: 660,height:400}}, 				
+			$.pdialog.resizeDialog({style: {width: 660,height:330}}, 				
 			$.pdialog.getCurrent(), "");
         });//dialog 宽度重新定义
+        
+    var operate = $("#companyShowType").val();
+	if(operate=="create")
+	{
+		$("#csCreate").css("display", "block");
+		$("#csModify").css("display", "none");
+	}
+	if(operate=="modify")
+	{
+		$("#csCreate").css("display", "none");
+		$("#csModify").css("display", "block");	
+	}
 </script>
 	
 <div class="pageContent">
-	<s:form method="post" action="company/CompanyManage!create.action" class="pageForm required-validate" name="newsForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
+	<s:form method="post" action="company/CompanyManage" class="pageForm required-validate"  onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<div class="pageFormContent" layoutH="58">
-
+			<input type="hidden" name="obj.companyID" value="${obj.companyID}"/>
+			<input type="hidden" name="operateType" value="${operateType}" id="companyShowType"/>
 			<dl style="width:50%;">
 				<dt style="width:25%;">单位名称：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.companyName"  size="30"  value="${obj.companyName}" class="required"/></dd>
@@ -68,9 +81,10 @@
 		</div>		
 
 		<div class="formBar">
-			<ul style="margin-right:250px !important;" >
-				<li ><div class="buttonActive"><div class="buttonContent"><button type="submit">提 交</button></div></div></li>
-				<li style="padding-left:30px;"><div class="button"><div class="buttonContent"><button type="button" class="close">取 消</button></div></div></li>			
+			<ul style="padding:0px 10px;" >
+				<li style="margin:0px 15px;" id="csCreate"><s:submit method="create" value="创 建" cssClass="mispButton primary"></s:submit></li>
+				<li style="margin:0px 15px;"  id="csModify"><s:submit method="modify" value="修 改" cssClass="mispButton primary"></s:submit></li>
+				<li style="margin:0px 15px;"><button type="button" class="mispButton primary close" >关  闭</button></li>			
 
 			</ul>
 		</div>

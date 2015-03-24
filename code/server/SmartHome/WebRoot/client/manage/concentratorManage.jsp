@@ -111,7 +111,7 @@ function submitFormC(url){
 	            <a title="传感器配置" target="navTab" href="device/HomeSensorManage?selectedID=${e.concentratorID}" rel="configSensor"
 	            class="btnAdd"  style="margin-left:10px;"></a>
 	            <a title="添加管理用户" target="dialog" href="device/ConcentratorManage!showPermission.action?selectedID=${e.concentratorID}" rel="peDialog"
-	            class="btnAssign" mask="true" style="margin-left:10px;"></a>	            
+	            class="btnAssign" mask="true" style="margin-left:20px;"></a>	            
 	            </td> 
 				<td style="padding-top:2px;">
 				<a title="刷新" target="ajaxTodo" href="device/ConcentratorManage!syncSensor.action?selectedID=${e.concentratorID}&operateType=modify" 

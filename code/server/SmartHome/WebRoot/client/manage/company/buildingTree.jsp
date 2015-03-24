@@ -7,8 +7,9 @@
 				<div layoutH="12" style="float:left; display:block; overflow:auto; width:240px; border:solid 1px #CCC; line-height:21px; background:#fff">
 				    <ul class="tree treeFolder">
 
-						<li><a href="device/BuildingManage?companyID=${company.companyID}&selectedID=${company.companyID}" target="navTab">${company.companyName}</a>
+						<li><a href="device/BuildingManage?companyID=${company.companyID}&selectedID=${company.companyID}" target="navTab" rel="buildingManage">${company.companyName}</a>
 							<ul>
+							<li style="display:none"><a href="" target="ajax" >aaa</a></li>
 							  <c:forEach var="b" items="${buildingList}"> 	
 							    
 								<li><a href="device/PlanManage?companyID=${company.companyID}&selectedID=${b.building.buildingID}" target="navTab" >${b.building.name}</a>
@@ -27,6 +28,7 @@
 							 </c:forEach>	
 							</ul>
 						</li>
+						
 				     </ul>
 				</div>
 				

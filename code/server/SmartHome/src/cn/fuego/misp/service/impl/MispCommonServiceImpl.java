@@ -20,7 +20,6 @@ import cn.fuego.common.dao.impl.AbstractDao;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.meta.ReflectionUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 
 /**

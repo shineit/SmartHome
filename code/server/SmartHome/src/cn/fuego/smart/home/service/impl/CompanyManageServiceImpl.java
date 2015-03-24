@@ -14,13 +14,19 @@ import java.util.Set;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.dao.datasource.AbstractDataSource;
+import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
+import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.service.CompanyManageService;
+import cn.fuego.smart.home.web.model.UserCompanyModel;
 
  /** 
  * @ClassName: CompanyManageServiceImpl 
@@ -55,6 +61,53 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 			return concentorList.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public AbstractDataSource<SystemUser> getPermissionDataSource(List<String> userIDList)
+	{
+		AbstractDataSource<SystemUser> datasource = null;
+		List<QueryCondition> conditionList=new ArrayList<QueryCondition>();
+		if(!ValidatorUtil.isEmpty(userIDList))
+		{
+			
+			conditionList.add(new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList));
+			
+		}
+		else
+		{
+			conditionList.add(new QueryCondition(ConditionTypeEnum.FALSE, "userID"));
+		}
+		datasource = new DataBaseSourceImpl<SystemUser>(SystemUser.class,conditionList);
+		return datasource;
+	}
+
+	@Override
+	public void addPermission(UserCompanyModel userPermission)
+	{
+		if(!ValidatorUtil.isEmpty(userPermission.getUserID())&&!ValidatorUtil.isEmpty(userPermission.getCompanyID()))
+		{
+			MISPServiceContext.getInstance().getMISPPrivilegeManage().createUserCompany(userPermission.getUserID(), userPermission.getCompanyID());
+		}
+		else
+		{
+			throw new MISPException(MISPErrorMessageConst.INPUT_NULL);
+		}
+		
+	}
+
+	@Override
+	public void deletePermissionByID(UserCompanyModel userPermission)
+	{
+		if(!ValidatorUtil.isEmpty(userPermission.getUserID())&&!ValidatorUtil.isEmpty(userPermission.getCompanyID()))
+		{
+			MISPServiceContext.getInstance().getMISPPrivilegeManage().deleteUserCompany(userPermission.getUserID(), userPermission.getCompanyID());
+		}
+		else
+		{
+			throw new MISPException(MISPErrorMessageConst.INPUT_NULL);
+		}
+		
 	}
 
  

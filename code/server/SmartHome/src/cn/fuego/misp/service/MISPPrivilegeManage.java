@@ -57,4 +57,28 @@ public interface MISPPrivilegeManage
 	 * @return
 	 */
 	public Set<String> getObjectIDListByUser(String accessObjType,String userID);
+	
+	/**
+	 * 根据公司ID获取关联用户表
+	 * @param companyID
+	 * @return
+	 */
+	public Set<String>  getUserIDListByCommpany(String companyID);
+	
+	/**
+	 * 创建用户公司关联表
+	 * @param userID
+	 * @param companyID
+	 * @return
+	 */
+	public void createUserCompany(String userID,String companyID);
+	
+	/**
+	 * 删除用户公司关联
+	 * @param userID
+	 * @param companyID
+	 */
+	public void deleteUserCompany(String userID,String companyID);
+	
+	
 }

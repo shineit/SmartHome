@@ -15,11 +15,14 @@ import java.util.Set;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.constant.PrivilegeMasterTypeEnum;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.Privilege;
 import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPPrivilegeManage;
 
  /** 
@@ -39,9 +42,18 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 	 */
 	public String getUserRole(String userID)
 	{
+		String role=null;
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserIDAttr(),userID));
 
-		return String.valueOf(targetUser.getRole());
+		if(null!=targetUser)
+		{
+			role=String.valueOf(targetUser.getRole());
+		}
+		else
+		{
+			throw new MISPException(MISPErrorMessageConst.TARGET_NOT_EXISTED);
+		}
+		return role;
 	}
 	/*
 	 * (non-Javadoc)
@@ -64,10 +76,10 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 			objIDList.add(e.getAccessObjValue());
 		}
 		
-		//根据用户角色获取具有权限的菜单ID
+/*		//根据用户角色获取具有权限的菜单ID 看不懂什么意思
  		objIDList.addAll(getObjectIDListByRole(accessObjType,getUserRole(userID)));
  		
- 		
+ 		*/
 			
 		return objIDList;
 	}
@@ -174,6 +186,70 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	/**
+	 * 创建用户公司关联
+	 */
+	@Override
+	public void createUserCompany(String userID, String companyID)
+	{
+		Set<String> companyIDList= getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),userID);
+		if(!companyIDList.contains(companyID))
+		{
+			Privilege userCompany= new Privilege();
+			userCompany.setMasterType(PrivilegeMasterTypeEnum.USER.getMasterType());
+			userCompany.setMasterValue(userID);
+			userCompany.setAccessObjType(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType());
+			userCompany.setAccessObjValue(companyID);
+			MISPDaoContext.getInstance().getPrivilegeDao().create(userCompany);
+		}
+		else
+		{
+			
+			throw new MISPException(MISPErrorMessageConst.LINK_EXISTED);
+		}
 
+	}
+	/**
+	 * 删除用户公司关联
+	 */
+	@Override
+	public void deleteUserCompany(String userID, String companyID)
+	{
+		Set<String> companyIDList= getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),userID);
+		if(companyIDList.contains(companyID))
+		{
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			
+			conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.USER.getMasterType()));
+			conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterValueAttr(), userID));
+			conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeAttr(),PrivilegeAccessObjTypeEnum.COMPANY.getObjectType()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeValue(), companyID));
+			MISPDaoContext.getInstance().getPrivilegeDao().delete(conditionList);
+		}
+		else
+		{
+			throw new MISPException(MISPErrorMessageConst.LINK_NOT_EXISTED);
+		}
+	}
+	@Override
+	public Set<String> getUserIDListByCommpany(String companyID)
+	{
+		Set<String> userIDList= new HashSet<String>();
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeValue(), companyID));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getMasterTypeAttr(),PrivilegeMasterTypeEnum.USER.getMasterType()));
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, Privilege.getAccessObjTypeAttr(),PrivilegeAccessObjTypeEnum.COMPANY.getObjectType()));
+		List<Privilege> userCompanyList=MISPDaoContext.getInstance().getPrivilegeDao().getAll(conditionList);
+		if(!ValidatorUtil.isEmpty(userCompanyList))
+		{
+			for(Privilege p:userCompanyList)
+			{
+				userIDList.add(p.getMasterValue());
+			}
+		}
+		return userIDList;
+	}
+	
 
 }

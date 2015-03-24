@@ -3,6 +3,7 @@ package cn.fuego.smart.home.web.action.device;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +15,13 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
+import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.FireSensor;
@@ -41,8 +46,10 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	
 	private String locationJson;
 	private String sensorJson;
-	
+	//用于页面搜索关键字
 	private String 	machineID,loopID,codeID;
+	//用户关联之后的集中器编号列表
+	private List<String> concentIDList=new ArrayList<String>();
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
@@ -71,6 +78,40 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	
 	
 	
+	private List<String> loadConcentIDList(String companyID)
+	{
+		List<String> idList=new ArrayList<String>();
+		try
+		{
+			Set<String> objIDlist=MISPServiceContext.getInstance().getMISPPrivilegeManage().getUserIDListByCommpany(companyID);
+			if(!ValidatorUtil.isEmpty(objIDlist))
+			{
+				List<String> userIDList = new ArrayList<String>();
+				userIDList.addAll(objIDlist);
+				idList=service.getConcentIDListByUser(userIDList);
+			}
+
+		} 		
+		catch (MISPException e)
+		{
+			
+			log.error("load ConcentIDList failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			
+			log.error("load ConcentIDList failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+		return idList;
+	}
+
+
+
+
 	@Override
 	public List<QueryCondition> getFilterCondition()
 	{
@@ -151,6 +192,8 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	@Override
 	public String show()
 	{
+		//初始化加载用户关联后的集中器列表
+		concentIDList=loadConcentIDList(companyID);
 		if(TableOperateTypeEnum.CREATE.getType().equals(getOperateType()))
         {
 			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
@@ -296,6 +339,22 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	public void setCodeID(String codeID)
 	{
 		this.codeID = codeID;
+	}
+
+
+
+
+	public List<String> getConcentIDList()
+	{
+		return concentIDList;
+	}
+
+
+
+
+	public void setConcentIDList(List<String> concentIDList)
+	{
+		this.concentIDList = concentIDList;
 	}
 	
 	

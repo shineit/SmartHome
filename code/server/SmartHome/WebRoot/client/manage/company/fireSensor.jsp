@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <style type="text/css">
 #container1{
-	position:relative; width:99%; height:360px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
+	position:relative; width:99%; height:310px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
 }
 #map1{
 	position:absolute;margin: 0 auto;
@@ -69,7 +69,7 @@
 									<li><a class="icon" href="" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
 								</ul>
 							</div>
-							<table class="table" width="100%" layoutH="800">
+							<table class="table" width="100%" layoutH="450">
 								<thead>
 									<tr>
 										<th width="5%" align="center"></th>

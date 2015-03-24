@@ -37,7 +37,27 @@
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:30%;">集中器编号：</dt>			
-				<dd style="width:65%;"><input type="text" name="obj.concentratorID"  size="25" value="${obj.concentratorID}"/></dd>		 
+				<dd style="width:65%;">				
+					<select  name="obj.concentratorID" >
+					<option value="" >请选择集中器编号</option>
+						 <c:forEach var="cl" items="${concentIDList}">
+
+									<c:choose>		       
+								   		 <c:when test="${cl== obj.concentratorID}">  
+			                           		<option value="${cl}" selected='selected'> ${cl}</option>
+			                           		 
+			                           	  </c:when>
+								   		  <c:otherwise>  
+								   	   		<option value="${cl}" > ${cl}</option>
+								   		  </c:otherwise>
+					   
+				   		 			</c:choose> 
+
+
+						 </c:forEach>								
+
+					</select>
+				</dd>		 
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:30%;">机号：</dt>			

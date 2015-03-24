@@ -34,8 +34,10 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="CompanyManage!show.action?operateType=create" target="dialog" mask="true" title="新增单位"><span>新增</span></a></li>
+			<li><a class="add" href="CompanyManage!show.action?operateType=create" target="dialog" mask="true" title="公司信息"><span>新增</span></a></li>
 			<li><a class="delete" href="CompanyManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="CompanyManage!show.action?selectedID={sid_user}&operateType=modify"						
+				target="dialog" mask="true" title="公司信息"><span>修改</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
@@ -46,7 +48,7 @@
 				<th width="15%" align="center">使用名称</th>
 				<th width="15%" align="center">单位地址</th>
 				<th width="10%" align="center">单位类型</th>
-				<th width="10%" align="center">操作</th>
+				<th width="10%" align="center">配置</th>
 				
 			</tr>
 		</thead>
@@ -64,7 +66,8 @@
 	            
 	            <a title="楼层管理" target="navTab" href="device/BuildingManage?companyID=${e.companyID}&selectedID=${e.companyID}" 
 	            class="btnAdd"  style="margin-left:10px;" rel="buildingManage"></a>
-             
+             	<a title="添加管理用户" target="dialog" href="CompanyManage!showPermission.action?selectedID=${e.companyID}" rel="peDialog"
+	            class="btnAssign" mask="true" style="margin-left:20px;"></a>
 	            </td> 
 			</tr>
 		</c:forEach>  	

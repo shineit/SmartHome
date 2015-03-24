@@ -21,7 +21,7 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 {
  
 	
-	public static final int OPREATE_DEVICE_FAiLED= 10000 ; // 操作设备失败 
+	public static final int OPREATE_DEVICE_FAILED= 10000 ; // 操作设备失败 
 	public static final int PERMISSION_EXISTED= 10001 ; // 该用户对集中器权限已经存在
 	
 	public static final int DEVICE_IS_OFFLINE= 10002 ; // 设备离线
@@ -31,5 +31,7 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	
 	public static final int CONCENTRATOR_NOT_EXISTED=10005;  //集中器不存在
 	public static final int SENSOR_NOT_EXISTED = 10006;   //传感器不存在
+	
+	
  
 }

@@ -105,7 +105,7 @@
 				    </c:forEach>
 				</td>
 				<td>
-					<a class="btnSelect"  href="javascript:$.bringBack({userID:'${e.userID}'})" title="添加用户">选择</a>
+					<a class="btnSelect"  href="javascript:$.bringBack({userID:'${e.userID}',userName:'${e.userName}'})" title="添加用户">选择</a>
 				</td>
 			</tr>
 		</c:forEach>

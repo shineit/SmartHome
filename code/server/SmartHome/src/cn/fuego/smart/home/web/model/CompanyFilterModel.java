@@ -14,6 +14,7 @@ import java.util.List;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.UserTypeEnum;
 
 
 /** 
@@ -30,7 +31,7 @@ public class CompanyFilterModel
 	private String companyType; 	//单位类型
 	private String legalOfficer; 		//法人名称
 
-
+	private UserTypeEnum[] userTypeList = UserTypeEnum.values();//用户类型
 	public List<QueryCondition> getConidtionList()
     {
     	List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
@@ -92,6 +93,16 @@ public class CompanyFilterModel
 	public void setLegalOfficer(String legalOfficer)
 	{
 		this.legalOfficer = legalOfficer;
+	}
+
+	public UserTypeEnum[] getUserTypeList()
+	{
+		return userTypeList;
+	}
+
+	public void setUserTypeList(UserTypeEnum[] userTypeList)
+	{
+		this.userTypeList = userTypeList;
 	}
 
 	
