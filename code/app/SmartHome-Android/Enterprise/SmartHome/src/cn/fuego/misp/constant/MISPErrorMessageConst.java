@@ -48,8 +48,12 @@ public class MISPErrorMessageConst
 	public static final int ERROR_WRITE_FILE = 16;//文件写入失败
 	public static final int ERROR_NET_FAIL = 17 ; // 网络连接异常
 	
+	public static final int LINK_EXISTED=18;  //关联已存在
+	public static final int LINK_NOT_EXISTED=19;  //关联不存在
+	
 	public static final int ERROR_FILE_NOT_EXIST = 30;  //文件不存在
 	public static final int ERROR_UPLOAD_FAILED = 31;  //文件上传失败
+	public static final int ERROR_FILE_FORMAT_NOT_RIGHT = 32;  //文件格式错误
 
 	public static String getMessageByErrorCode(int errorCode)
 	{
