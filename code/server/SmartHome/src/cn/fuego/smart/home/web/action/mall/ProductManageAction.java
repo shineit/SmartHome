@@ -80,7 +80,7 @@ public class ProductManageAction extends DWZTableAction<Product>
 		String fileName = saveUploadFile();
 		if(!ValidatorUtil.isEmpty(fileName))
 		{
-			deleteFileByName(oldPicName);
+			deleteUploadFileByName(oldPicName);
 		}
 		this.obj.setPicLabel(fileName);
 		return super.modify();

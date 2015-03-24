@@ -67,6 +67,9 @@
 									 target="dialog" mask="true" title="传感器信息"><span>修改</span></a></li>
 									<li class="line">line</li>
 									<li><a class="icon" href="" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
+									<li><a class="add" href="<%=request.getContextPath()%>/client/manage/company/fireImportShow.jsp" 
+									 target="dialog" mask="true" rel="fsImport" title="导入传感器"><span>导入</span></a></li>
+									
 								</ul>
 							</div>
 							<table class="table" width="100%" layoutH="450">

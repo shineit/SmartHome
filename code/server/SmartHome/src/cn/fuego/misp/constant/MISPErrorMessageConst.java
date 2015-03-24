@@ -53,6 +53,7 @@ public class MISPErrorMessageConst
 	
 	public static final int ERROR_FILE_NOT_EXIST = 30;  //文件不存在
 	public static final int ERROR_UPLOAD_FAILED = 31;  //文件上传失败
+	public static final int ERROR_FILE_FORMAT_NOT_RIGHT = 32;  //文件不存在
 
 	public static String getMessageByErrorCode(int errorCode)
 	{

@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.web.action.device;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,20 @@ import org.apache.struts2.ServletActionContext;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.file.FileUtil;
+import cn.fuego.common.util.file.excel.ExcelColumnMeta;
+import cn.fuego.common.util.file.excel.ExcelMeta;
+import cn.fuego.common.util.file.excel.ExcelTool;
+import cn.fuego.common.util.file.excel.ExcelToolFactory;
 import cn.fuego.common.util.format.JsonConvert;
+import cn.fuego.common.util.validate.ValidatorRules;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.constant.MispConstant;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.smart.home.domain.Building;
@@ -42,7 +50,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	
 	private static List<BuildingModel> buildingList = new ArrayList<BuildingModel>();
 	
-	private SensorPlan sensorPlan;
+	private static SensorPlan sensorPlan;
 	
 	private String locationJson;
 	private String sensorJson;
@@ -149,6 +157,78 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 			buildingList.add(model);
 		}
  	}
+	
+	public String uploadSensor()
+	{
+		try
+		{
+			ExcelTool tool = ExcelToolFactory.getInstance().getExcelTool();
+			
+			String filePath = MispConstant.getUploadPath() +File.separator+ this.saveUploadFile();
+			List<FireSensor> sensorList = tool.readExcel(filePath, getSensorFireExcelMeta());
+			FileUtil.deleteFile(filePath);
+			for(FireSensor sensor : sensorList)
+			{
+				sensor.setConcentratorID(company.getConcentratorID());
+				sensor.setPlanNodeID(sensorPlan.getPlanID());
+ 			}
+			
+			service.create(this.getLoginUser().getUserID(), sensorList);
+			
+			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+
+		}
+		catch(MISPException e)
+		{
+			log.error("import sensor failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch (Exception e)
+		{
+			log.error("import sensor failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+		
+		return MISP_DONE_PAGE;
+		
+	}
+	
+	private ExcelMeta getSensorFireExcelMeta()
+	{
+		ExcelMeta meta = new ExcelMeta(FireSensor.class,2);
+		
+		 
+		ExcelColumnMeta column0 = new ExcelColumnMeta();
+		column0.setColumnName("机号");
+		column0.setColumn(0);
+		column0.setDataField("machineID");
+		column0.getRuleMap().put(ValidatorRules.isEmpty(), "机号不能为空");
+		meta.getColumnMap().put(column0.getColumn(), column0);
+		
+		ExcelColumnMeta column1 = new ExcelColumnMeta();
+		column1.setColumnName("回路号");
+		column1.setColumn(1);
+		column1.setDataField("loopID");
+		column1.getRuleMap().put(ValidatorRules.isEmpty(), "回路号不能为空");
+		meta.getColumnMap().put(column1.getColumn(), column1);
+
+		ExcelColumnMeta column2 = new ExcelColumnMeta();
+		column2.setColumnName("点号");
+		column2.setColumn(2);
+		column2.setDataField("codeID");
+		meta.getColumnMap().put(column0.getColumn(), column2);
+		column1.getRuleMap().put(ValidatorRules.isEmpty(), "点号不能为空");
+
+		ExcelColumnMeta column3 = new ExcelColumnMeta();
+		column3.setColumnName("位置");
+		column3.setColumn(3);
+		column3.setDataField("locationDesp");
+		meta.getColumnMap().put(column0.getColumn(), column3);
+		
+		return meta;
+	}
 
 
 

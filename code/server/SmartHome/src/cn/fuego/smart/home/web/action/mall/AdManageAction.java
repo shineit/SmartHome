@@ -78,7 +78,7 @@ public class AdManageAction extends DWZTableAction<Advertisement>
 		String fileName = saveUploadFile();
 		if(!ValidatorUtil.isEmpty(fileName))
 		{
-			deleteFileByName(oldPicName);
+			deleteUploadFileByName(oldPicName);
 		}
 		this.obj.setAdImg(fileName);
 		return super.modify();

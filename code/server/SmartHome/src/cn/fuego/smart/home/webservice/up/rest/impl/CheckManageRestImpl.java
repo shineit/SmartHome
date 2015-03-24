@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.smart.home.webservice.up.rest.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.file.FileUtil;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.web.constant.MispConstant;
 import cn.fuego.smart.home.constant.CheckLogStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.CheckItem;
@@ -153,7 +155,7 @@ public class CheckManageRestImpl implements CheckManageRest
 /*			ServletContext context=ServletActionContext.getServletContext();
 			String path=context.getRealPath("/");*/
 
-			FileUtil.deleteFile(req.getImgName());
+			FileUtil.deleteFile(MispConstant.getUploadPath()+File.separator+req.getImgName());
 		}		
 		catch(MISPException e)
 		{

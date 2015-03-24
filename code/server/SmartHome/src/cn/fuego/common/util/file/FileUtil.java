@@ -67,19 +67,12 @@ public class FileUtil
 	 * @param   sPath    被删除文件的文件名 
 	 * @return 单个文件删除成功返回true，否则返回false 
 	 */  
-	public static boolean deleteFile(String fileName)
+	public static boolean deleteFile(String filePath)
 	{  
 
-		String binPath=System.getProperty("user.dir");
-		
-	    System.out.println(System.getProperty("user.dir"));
-	    String tempdir=binPath.replace("bin", "webapps");  //把bin 文件夹变到 webapps文件里面 
-
-	    tempdir+="\\"+"SmartHome";  
-	    System.out.println(tempdir);
-		String sPath= tempdir+"\\upload\\"+fileName;
-		System.out.println(sPath);
-		boolean flag = false;  
+ 
+		String sPath= filePath;
+ 		boolean flag = false;  
 	    File file = new File(sPath);  
 	    // 路径为文件且不为空则进行删除  
 	    if (file.isFile() && file.exists()) 

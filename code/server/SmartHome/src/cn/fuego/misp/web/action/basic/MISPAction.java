@@ -15,6 +15,7 @@ import cn.fuego.common.util.file.FileUtil;
 import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.web.constant.MispConstant;
 import cn.fuego.misp.web.constant.SessionAttrNameConst;
 import cn.fuego.misp.web.model.menu.MenuModel;
 import cn.fuego.misp.web.model.menu.MenuTreeModel;
@@ -42,18 +43,18 @@ public class MISPAction extends ActionSupport
 	private String uploadFileName;
 	private String uploadContentType;
 	
-
+ 
 	public String saveUploadFile()
 	{
 		String fileName ="";
 		
 		if(null != this.getUpload())
 		{
-			String path = ServletActionContext.getServletContext().getRealPath("/") + "upload/";
+			String path = MispConstant.getUploadPath();
 
 			String prefix=uploadFileName.substring(uploadFileName.lastIndexOf(".")+1);
 			fileName = DataCreateUtil.getUUID() + "." + prefix;
- 			FileUtil.createFile(getUpload(), path+fileName);
+ 			FileUtil.createFile(getUpload(), path+File.separator+fileName);
  		}
 		else
 		{
@@ -62,11 +63,14 @@ public class MISPAction extends ActionSupport
 		
 		return fileName;
 	}
-	public void deleteFileByName(String name)
+	
+ 
+	public void deleteUploadFileByName(String name)
 	{
 		if(!ValidatorUtil.isEmpty(name))
 		{
 			//String path = ServletActionContext.getServletContext().getRealPath("/") + "upload/";
+			FileUtil.deleteFile(MispConstant.getUploadPath()+File.separator+name);
 			FileUtil.deleteFile(name);
 		}
 		else

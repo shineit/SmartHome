@@ -76,10 +76,10 @@ public class MISPPrivilegeManageImpl implements MISPPrivilegeManage
 			objIDList.add(e.getAccessObjValue());
 		}
 		
-/*		//根据用户角色获取具有权限的菜单ID 看不懂什么意思
+		//根据用户角色获取具有权限的菜单ID
  		objIDList.addAll(getObjectIDListByRole(accessObjType,getUserRole(userID)));
  		
- 		*/
+ 		
 			
 		return objIDList;
 	}
