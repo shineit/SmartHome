@@ -63,9 +63,16 @@
  				<td>${e.companyAddr}</td>
 				<td>${e.companyType}</td>
 	            <td style="text-align: center;">
-	            
-	            <a title="楼层管理" target="navTab" href="device/BuildingManage?companyID=${e.companyID}&selectedID=${e.companyID}" 
+	            <c:choose>
+	            	<c:when test="${e.concentratorID==0}">
+	            		
+	            	</c:when>
+	            	<c:otherwise>
+	            	<a title="楼层管理" target="navTab" href="device/BuildingManage?companyID=${e.companyID}&selectedID=${e.companyID}" 
 	            class="btnAdd"  style="margin-left:10px;" rel="buildingManage"></a>
+	            	</c:otherwise>
+	            </c:choose>
+	            
              	<a title="添加管理用户" target="dialog" href="CompanyManage!showPermission.action?selectedID=${e.companyID}" rel="peDialog"
 	            class="btnAssign" mask="true" style="margin-left:20px;"></a>
 	            </td> 

@@ -31,34 +31,11 @@
 		    <input type="hidden" name="obj.planNodeID" value="${obj.planNodeID}"/>
 			<input type="hidden" name="obj.sensorType" value="${obj.sensorType}"/>
 			<input type="hidden" name="operateType" value="${operateType}" id="sensorShowType"/>
-			<dl style="width:50%;">
+			<dl style="width:50%;display: none;" >
 				<dt style="width:30%;">传感器编号：</dt>			
 				<dd style="width:65%;"><input type="text" name="obj.id"  size="25" value="${obj.id}" readonly="readonly"/></dd>		 
 			</dl>
-			<dl style="width:50%;">
-				<dt style="width:30%;">集中器编号：</dt>			
-				<dd style="width:65%;">				
-					<select  name="obj.concentratorID" >
-					<option value="" >请选择集中器编号</option>
-						 <c:forEach var="cl" items="${concentIDList}">
 
-									<c:choose>		       
-								   		 <c:when test="${cl== obj.concentratorID}">  
-			                           		<option value="${cl}" selected='selected'> ${cl}</option>
-			                           		 
-			                           	  </c:when>
-								   		  <c:otherwise>  
-								   	   		<option value="${cl}" > ${cl}</option>
-								   		  </c:otherwise>
-					   
-				   		 			</c:choose> 
-
-
-						 </c:forEach>								
-
-					</select>
-				</dd>		 
-			</dl>
 			<dl style="width:50%;">
 				<dt style="width:30%;">机号：</dt>			
 				<dd style="width:65%;"><input type="text" name="obj.machineID"  size="25" value="${obj.machineID}"/></dd>		 

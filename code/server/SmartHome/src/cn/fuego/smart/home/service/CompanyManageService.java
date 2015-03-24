@@ -54,4 +54,5 @@ public interface CompanyManageService extends MispCommonService<Company>
 	 */
 	void deletePermissionByID(UserCompanyModel userPermission);
 
+
 }

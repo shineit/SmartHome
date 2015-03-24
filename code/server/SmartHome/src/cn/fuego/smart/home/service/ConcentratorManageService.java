@@ -43,5 +43,11 @@ public interface ConcentratorManageService extends MispCommonService<Concentrato
 	//获取用户id管辖下的所有集中器列表
 	List<UserConcentrator> getUserConcentListByID(int userID);
 	List<Concentrator> getConcentListByID(List<Long> concentIDList);
+	/**
+	 * 查找用户管理的集中器列表
+	 * @param userIDList
+	 * @return
+	 */
+	List<String> getConcentIDListByUser(List<String> userIDList);
 
 }

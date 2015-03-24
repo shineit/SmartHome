@@ -12,13 +12,13 @@
 							<li style="display:none"><a href="" target="ajax" >aaa</a></li>
 							  <c:forEach var="b" items="${buildingList}"> 	
 							    
-								<li><a href="device/PlanManage?companyID=${company.companyID}&selectedID=${b.building.buildingID}" target="navTab" >${b.building.name}</a>
+								<li><a href="device/PlanManage?companyID=${company.companyID}&selectedID=${b.building.buildingID}" target="navTab" rel="planManage">${b.building.name}</a>
 									<ul>
 									    <li style="display:none"><a href="" target="ajax" >aaa</a></li>
  
 									   <c:forEach var="e" items="${b.planList}"> 	
 									
-										  <li><a href="device/FireSensorManage?companyID=${company.companyID}&selectedID=${e.planID}" target="navTab">${e.name}</a></li>
+										  <li><a href="device/FireSensorManage?companyID=${company.companyID}&selectedID=${e.planID}" target="navTab" rel="sensorManage">${e.name}</a></li>
  										  
  									   </c:forEach>	
 										

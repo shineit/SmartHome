@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () {
-			$.pdialog.resizeDialog({style: {width: 660,height:330}}, 				
+			$.pdialog.resizeDialog({style: {width: 660,height:400}}, 				
 			$.pdialog.getCurrent(), "");
         });//dialog 宽度重新定义
         
@@ -31,11 +31,31 @@
 				<dd style="width:70%;"><input type="text" name="obj.companyName"  size="30"  value="${obj.companyName}" class="required"/></dd>
 			</dl>
 			<dl style="width:50%;">
+				<dt style="width:25%;">集中器编号：</dt>			
+				<dd style="width:70%;">				
+					<select  name="obj.concentratorID" >
+					<option value="" >请选择集中器编号</option>
+						 <c:forEach var="cl" items="${concentIDList}">
+									<c:choose>		       
+								   		 <c:when test="${cl== obj.concentratorID}">  
+			                           		<option value="${cl}" selected='selected'> ${cl}</option>
+			                           		 
+			                           	  </c:when>
+								   		  <c:otherwise>  
+								   	   		<option value="${cl}" > ${cl}</option>
+								   		  </c:otherwise>
+					   
+				   		 			</c:choose> 
+						 </c:forEach>								
+					</select>
+				</dd>		 
+			</dl>
+			<dl style="width:50%;">
 				<dt style="width:25%;">使用名称：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.applyName"  size="30" value="${obj.applyName}" class="required"/></dd>
 			</dl>
 			<dl style="width:100%;">
-				<dt style="width:13%;">单位地址：</dt>			
+				<dt style="width:12.5%;">单位地址：</dt>			
 				<dd style="width:80%;"><input type="text" name="obj.companyAddr"  size="80" value="${obj.companyAddr}" class="required"/></dd>
 			</dl>
 			<dl style="width:50%;">

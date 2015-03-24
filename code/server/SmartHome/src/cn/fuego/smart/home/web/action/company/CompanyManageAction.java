@@ -23,6 +23,7 @@ import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
+import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.domain.Company;
@@ -56,6 +57,9 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	
 	private UserCompanyModel userPermission= new UserCompanyModel();
 	
+	//用户关联之后的集中器编号列表
+	private List<String> concentIDList=new ArrayList<String>();
+	
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
@@ -71,13 +75,57 @@ public class CompanyManageAction extends DWZTableAction<Company>
 		// TODO Auto-generated method stub
 		return this.filter.getConidtionList();
 	}
-	public CompanyFilterModel getFilter()
+	
+	@Override
+	public String show()
 	{
-		return filter;
+		//初始化加载用户关联后的集中器列表
+		concentIDList=loadConcentIDList(this.getSelectedID());
+		if(TableOperateTypeEnum.CREATE.getType().equals(getOperateType()))
+        {
+			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
+			{
+				this.getObj().setCompanyID(Integer.valueOf(this.getSelectedID()));
+			}
+		}
+		else
+		{
+			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
+			{
+				this.setObj(getService().get(this.getSelectedID()));
+			}
+		}
+		return this.getNextPage();
 	}
-	public void setFilter(CompanyFilterModel filter)
+	private List<String> loadConcentIDList(String companyID)
 	{
-		this.filter = filter;
+		List<String> idList=new ArrayList<String>();
+		try
+		{
+			Set<String> objIDlist=MISPServiceContext.getInstance().getMISPPrivilegeManage().getUserIDListByCommpany(companyID);
+			if(!ValidatorUtil.isEmpty(objIDlist))
+			{
+				List<String> userIDList = new ArrayList<String>();
+				userIDList.addAll(objIDlist);
+				idList=ServiceContext.getInstance().getConcentratorManageService().getConcentIDListByUser(userIDList);
+			}
+
+		} 		
+		catch (MISPException e)
+		{
+			
+			log.error("load ConcentIDList failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			
+			log.error("load ConcentIDList failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+		return idList;
 	}
 	public String showPermission()
 	{
@@ -190,6 +238,21 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	{
 		this.userPermission = userPermission;
 	}
-
+	public CompanyFilterModel getFilter()
+	{
+		return filter;
+	}
+	public void setFilter(CompanyFilterModel filter)
+	{
+		this.filter = filter;
+	}
+	public List<String> getConcentIDList()
+	{
+		return concentIDList;
+	}
+	public void setConcentIDList(List<String> concentIDList)
+	{
+		this.concentIDList = concentIDList;
+	}
 
 }
