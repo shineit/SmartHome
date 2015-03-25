@@ -110,7 +110,7 @@ public class PushServiceImpl implements PushService
 			 log.warn("the concentor have not been set to any company so no need to push"+userCon.getConcentratorID());
 			 return;
 		 }
-		 if(!MISPServiceContext.getInstance().getMISPPrivilegeManage().hasPrivilege(String.valueOf(userCon.getUserID()), PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),String.valueOf(company.getCompanyID())))
+		 if(MISPServiceContext.getInstance().getMISPPrivilegeManage().hasPrivilege(String.valueOf(userCon.getUserID()), PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),String.valueOf(company.getCompanyID())))
 		 {
 			 log.warn("the user have no right for the company.the user id is "+userCon.getUserID() + "the conmpany id is " + company.getCompanyID());
 			 return;

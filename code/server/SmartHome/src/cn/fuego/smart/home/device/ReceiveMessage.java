@@ -119,12 +119,14 @@ public class ReceiveMessage
 			alarm.setAlarmType(getIntValue(i+5,i+5));
 			alarm.setAlarmTime(DateUtil.getCurrentDateTime());
 			
-			if( dataBytes[i] == 256 && dataBytes[i+1] == 256)
+			int flag = this.getIntValue(i, i+1);
+			if( flag == 0xffff)
 			{
+				log.info("the alarm is fire alarm");
 				int machineID = getIntValue(i+2,i+2);
 				int loopID = getIntValue(i+3,i+3);
 				int codeID = getIntValue(i+4,i+4);
-				FireSensor sensor = ServiceContext.getInstance().getSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
+				FireSensor sensor = ServiceContext.getInstance().getFireSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
 				
 		
 				if(null != sensor)
@@ -138,7 +140,7 @@ public class ReceiveMessage
 				}
 				else
 				{
-					log.error("can not find the sensor by the alarm so discard it");
+					log.error("can not find the sensor by the alarm so discard it.the alarm is " + alarm);
 				}
 
 			}

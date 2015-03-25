@@ -21,7 +21,7 @@ import cn.fuego.smart.home.domain.FireSensor;
 public interface FireSensorManageService extends MispCommonService<FireSensor>
 {
 
-
+	public FireSensor getFireSensor(long concentratorID, int machineID,int loopID, int codeID);
  
 	
 }

@@ -174,20 +174,7 @@ public class SensorManageServiceImpl extends MispCommonServiceImpl<HomeSensor> i
 		}
 		
 	}
-
  
-
-	/* (non-Javadoc)
-	 * @see cn.fuego.smart.home.service.SensorManageService#getFireSensor(int, int, int, int)
-	 */
-	@Override
-	public FireSensor getFireSensor(long concentratorID, int machineID,
-			int loopID, int codeID)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
  
  
 	/* (non-Javadoc)

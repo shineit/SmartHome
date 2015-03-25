@@ -106,6 +106,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 	@Override
 	public void create(List<Alarm> objList)
 	{
+		List<Alarm> realAlarmList = new ArrayList<Alarm>();
 		for(Alarm alarm : objList )
 		{
 
@@ -127,6 +128,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 				if(ValidatorUtil.isEmpty(oldAlarm))
 				{
 					super.create(alarm); 
+					realAlarmList.add(alarm);
  				}
 				else
 				{
@@ -148,7 +150,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 				List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
 				if(ValidatorUtil.isEmpty(oldAlarm))
 				{
-					log.warn("the feebback alarm is exist, maybe the alarm is repeat package,so discard is," + alarm);
+					log.warn("the alarm is not exist,maybe have been cleared, the feedback alarm is repeat package,so discard is," + alarm);
 
 				}
 				else
@@ -157,6 +159,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 					super.modify(oldAlarm.get(0));
 					alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
 					super.create(alarm); 
+					realAlarmList.add(alarm);
 
 				}
 			}
@@ -165,8 +168,8 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 
 		}
 		
-		super.create(objList); 
-		WebServiceContext.getInstance().getPushService().pushAlarm(objList);
+		//super.create(objList); 
+		WebServiceContext.getInstance().getPushService().pushAlarm(realAlarmList);
 	}
 
 	/* (non-Javadoc)
