@@ -19,6 +19,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmIsFeedBackEnum;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.device.send.DeviceManager;
 import cn.fuego.smart.home.device.send.DeviceManagerFactory;
 import cn.fuego.smart.home.domain.Alarm;
@@ -146,16 +147,30 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 			if(AlarmIsFeedBackEnum.NORMAL.getIntValue() == alarmType.getIsFeedback())
 			{
 				
-				if(ValidatorUtil.isEmpty(oldAlarm))
+				if(AlarmTypeEnum.RESET.getIntValue() == alarmType.getTypeID())
 				{
+					log.info("the alarm is reset");
+					
+					alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
 					super.create(alarm); 
 					realAlarmList.add(alarm);
- 				}
+
+					clearAlarm(alarm.getConcentratorID());
+				}
 				else
 				{
+					if(ValidatorUtil.isEmpty(oldAlarm))
+					{
+						super.create(alarm); 
+						realAlarmList.add(alarm);
+	 				}
+					else
+					{
 
-					log.warn("the alarm is exist, maybe the alarm is repeat package,so discard is," + alarm);
+						log.warn("the alarm is exist, maybe the alarm is repeat package,so discard is," + alarm);
+					}
 				}
+
 			}
 			else
 			{
