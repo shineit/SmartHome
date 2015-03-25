@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,7 +23,6 @@ import cn.fuego.common.util.validate.ValidatorRules;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
-import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.MispConstant;
@@ -236,11 +234,15 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	public String show()
 	{
 
+		Company company =  ServiceContext.getInstance().getCompanyManageService().get(companyID);
+		
 		if(TableOperateTypeEnum.CREATE.getType().equals(getOperateType()))
         {
 			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
 			{
 				this.getObj().setPlanNodeID(Integer.valueOf(this.getSelectedID()));
+			   
+				this.getObj().setConcentratorID(company.getConcentratorID());
 			}
 		}
 		else
@@ -248,6 +250,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
 			{
 				this.setObj(getService().get(this.getSelectedID()));
+				
 			}
 		}
 		return this.getNextPage();

@@ -31,6 +31,7 @@
 		    <input type="hidden" name="obj.planNodeID" value="${obj.planNodeID}"/>
 			<input type="hidden" name="obj.sensorType" value="${obj.sensorType}"/>
 			<input type="hidden" name="operateType" value="${operateType}" id="sensorShowType"/>
+			<input type="hidden" name="obj.concentratorID" value="${obj.concentratorID}"/>
 			<dl style="width:50%;display: none;" >
 				<dt style="width:30%;">传感器编号：</dt>			
 				<dd style="width:65%;"><input type="text" name="obj.id"  size="25" value="${obj.id}" readonly="readonly"/></dd>		 

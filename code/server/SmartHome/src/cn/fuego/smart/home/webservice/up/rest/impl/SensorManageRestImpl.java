@@ -10,12 +10,15 @@ package cn.fuego.smart.home.webservice.up.rest.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
@@ -351,7 +354,25 @@ public class SensorManageRestImpl implements SensorManageRest
 				page.setPageSize(req.getPage().getPageSize());
 				page.setCurrentPage(req.getPage().getCurrentPage());
 			}
-			List<FireAlarmView> fireAlarmList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
+			List<FireAlarmView> fireAlarmList= new ArrayList<FireAlarmView>();
+			//如果请求无companyID则根据userID查询
+			if(ValidatorUtil.isEmpty(req.getCompanyID()))
+			{
+				Set<String> companyIDList=MISPServiceContext.getInstance().getMISPPrivilegeManage().getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(req.getUserID()));
+				if(!ValidatorUtil.isEmpty(companyIDList))
+				{
+					for(String id:companyIDList)
+					{
+						fireAlarmList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(id,page.getStartNum(),page.getPageSize(),req.getFilterList());
+					}
+				}
+
+			}
+			else
+			{
+				fireAlarmList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
+			}
+			
 			
 			for(FireAlarmView alarmview : fireAlarmList)
 			{
