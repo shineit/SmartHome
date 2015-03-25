@@ -125,6 +125,7 @@ public class PushServiceImpl implements PushService
 		 AlarmPushInfoJson alarmPushInfo = new AlarmPushInfoJson();
 		 alarmPushInfo.setCompanyID(company.getCompanyID());
 		 alarmPushInfo.setPushType(type.getPushType());
+		 alarmPushInfo.setAlarmKind(type.getKind());
 		 json.setObj(alarmPushInfo);
  		 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
 
