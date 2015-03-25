@@ -230,6 +230,22 @@ public class Alarm implements PersistenceObject
 		return statusColor;
 	}
 
+
+
+	@Override
+	public String toString()
+	{
+		return "Alarm [id=" + id + ", concentratorID=" + concentratorID
+				+ ", objType=" + objType + ", objID=" + objID + ", alarmType="
+				+ alarmType + ", dataValue=" + dataValue + ", alarmTime="
+				+ alarmTime + ", clearUser=" + clearUser + ", clearStatus="
+				+ clearStatus + ", clearTime=" + clearTime + ", statusColor="
+				+ statusColor + ", objID1=" + objID1 + ", objID2=" + objID2
+				+ "]";
+	}
+	
+	
+
 	 
 	
 }

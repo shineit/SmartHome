@@ -104,27 +104,48 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 	}
 
 	@Override
+	public void create(Alarm obj)
+	{
+		if(null == obj)
+		{
+			log.warn("the alarm is null");
+			return;
+		}
+		List<Alarm> objList = new ArrayList<Alarm>();
+		objList.add(obj);
+		create(objList);
+	}
+	
+	@Override
 	public void create(List<Alarm> objList)
 	{
+		
 		List<Alarm> realAlarmList = new ArrayList<Alarm>();
 		for(Alarm alarm : objList )
 		{
 
 			AlarmType alarmType = AlarmTypeCache.getInstance().getAlarmType(alarm.getAlarmType());
 			
+			if(null == alarmType)
+			{
+				log.error("can not find the alarm type,so discard the alarm. the alarm is "+alarm);
+				break;
+			}
+			
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			
+			
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",alarm.getConcentratorID()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID",alarm.getObjID()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID1",alarm.getObjID1()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID2",alarm.getObjID2()));
+ 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarm.getAlarmType()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+            List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
+
 			if(AlarmIsFeedBackEnum.NORMAL.getIntValue() == alarmType.getIsFeedback())
 			{
 				
-				List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-				
-				
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",alarm.getConcentratorID()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID",alarm.getObjID()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID1",alarm.getObjID1()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID2",alarm.getObjID2()));
-	 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarm.getAlarmType()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
-				List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
 				if(ValidatorUtil.isEmpty(oldAlarm))
 				{
 					super.create(alarm); 
@@ -138,17 +159,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 			}
 			else
 			{
-				List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-				
-				
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",alarm.getConcentratorID()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID",alarm.getObjID()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID1",alarm.getObjID1()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID2",alarm.getObjID2()));
-	 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarmType.getFeedbackID()));
-				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
-				List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
-				if(ValidatorUtil.isEmpty(oldAlarm))
+ 				if(ValidatorUtil.isEmpty(oldAlarm))
 				{
 					log.warn("the alarm is not exist,maybe have been cleared, the feedback alarm is repeat package,so discard is," + alarm);
 
@@ -171,24 +182,15 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		//super.create(objList); 
 		WebServiceContext.getInstance().getPushService().pushAlarm(realAlarmList);
 	}
-
-	/* (non-Javadoc)
-	 * @see cn.fuego.misp.service.impl.MispCommonServiceImpl#GetPrimaryName()
-	 */
+ 
 	@Override
-	public String GetPrimaryName()
+	public void clearAlarm(long concentratorID)
 	{
-		// TODO Auto-generated method stub
-		return Alarm.PRI_KEY;
-	}
-	@Override
-	public void autoClear(int id)
-	{
-		Alarm alarm = this.get(String.valueOf(id));
-		alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
-		alarm.setClearUser(AlarmClearEnum.AUTO_CLEAR.getStrValue());
-		alarm.setClearTime(DateUtil.getCurrentDate());
-		this.modify(alarm);
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
+  
+		this.ModifyByCondition(conditionList, "clearStatus", AlarmClearEnum.AUTO_CLEAR);
 	}
 	
 	@Override

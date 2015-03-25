@@ -26,7 +26,7 @@ public interface AlarmManageService extends MispCommonService<Alarm>
 {
 	List<HomeAlarmView>  getAlarmOfUser(int userID,int startNum,int pageSize, List<AttributeJson> attrList);
  	void manualClear(int userID,int id);
-    void autoClear(int id);
+	void clearAlarm(long concentratorID);
 	HomeAlarmView getHomeAlarmByID(String alarmID);
 	
 	void manualClearList(int userID, List<String> alarmIDList);

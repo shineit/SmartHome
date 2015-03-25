@@ -16,20 +16,25 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
 import cn.fuego.common.dao.datasource.DataBaseSourceImpl;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
+import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.ConcentratorPermissionEnum;
 import cn.fuego.smart.home.constant.ConcentratorStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.UserTypeEnum;
 import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
+import cn.fuego.smart.home.service.ServiceContext;
 
  /** 
  * @ClassName: ServiceOrderManageServiceImpl 
@@ -68,10 +73,27 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	    	log.info("the concentrator is new " + concentrator);
 	    	super.create(concentrator);
 	    }
+	    
+	    //集中器器上线 发送上线告警日志
+	    Alarm alarm = getConcentorAlarm(concentrator,AlarmTypeEnum.ONLINE);
+	    ServiceContext.getInstance().getAlarmManageService().create(alarm);
+	    
+	    //集中器重新上电需要把所有未清除的告警 清除
+	    ServiceContext.getInstance().getAlarmManageService().clearAlarm(concentrator.getConcentratorID());
  
 	    //ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
 	    
 	    
+	}
+	private Alarm getConcentorAlarm(Concentrator cconcentrator,AlarmTypeEnum type)
+	{
+		Alarm alarm = new Alarm();
+		alarm.setConcentratorID(cconcentrator.getConcentratorID());
+		alarm.setAlarmType(type.getIntValue());
+		alarm.setObjType(AlarmObjTypeEnmu.CONCENTRATOR_ALARM.getIntValue());
+		alarm.setObjID(cconcentrator.getConcentratorID());
+		alarm.setAlarmTime(DateUtil.getCurrentDateTime());
+		return alarm;
 	}
 	@Override
 	public void offline(String ipAddr,int port)
@@ -86,7 +108,12 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		{
 			log.info("the concentrator is offline.the concentrator "+ old);
 			old.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
+			
 			this.modify(old);
+			Alarm alarm = getConcentorAlarm(old,AlarmTypeEnum.OFF_LINE);
+ 
+			ServiceContext.getInstance().getAlarmManageService().create(alarm);
+
 		}
 		else
 		{
