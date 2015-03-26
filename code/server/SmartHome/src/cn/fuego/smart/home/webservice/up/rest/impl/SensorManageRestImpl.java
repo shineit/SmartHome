@@ -363,8 +363,10 @@ public class SensorManageRestImpl implements SensorManageRest
 				{
 					for(String id:companyIDList)
 					{
-						fireAlarmList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(id,page.getStartNum(),page.getPageSize(),req.getFilterList());
+						List<FireAlarmView> tempList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(id,page.getStartNum(),page.getPageSize(),req.getFilterList());
+						fireAlarmList.addAll(tempList);
 					}
+					
 				}
 
 			}

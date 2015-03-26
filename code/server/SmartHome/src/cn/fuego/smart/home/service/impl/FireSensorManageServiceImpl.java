@@ -13,7 +13,10 @@ import java.util.List;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.log.FuegoLog;
+import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.service.FireSensorManageService;
 
@@ -27,6 +30,21 @@ import cn.fuego.smart.home.service.FireSensorManageService;
 */ 
 public class FireSensorManageServiceImpl extends MispCommonServiceImpl<FireSensor> implements FireSensorManageService
 {
+
+	private FuegoLog log = FuegoLog.getLog(getClass());
+ 
+	@Override
+	public void validatorForCreate(FireSensor obj)
+	{
+		// TODO Auto-generated method stub
+		super.validatorForCreate(obj);
+		FireSensor old = getFireSensor(obj.getConcentratorID(),obj.getMachineID(),obj.getLoopID(),obj.getCodeID());
+		if(null != old)
+		{
+			log.error("the fire sensor is existed.the firs" + obj);
+			throw new MISPException(ErrorMessageConst.SENSOR_EXISTED);
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.service.FireSensorManageService#getFireSensor(long, int, int, int)

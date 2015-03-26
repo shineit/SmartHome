@@ -18,7 +18,9 @@ import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
+import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.AlarmType;
 import cn.fuego.smart.home.domain.Company;
@@ -73,10 +75,10 @@ public class PushServiceImpl implements PushService
 						
 					 FuegoPushInfo pushInfo = PushToolFactory.getInstance().getPushInfo(userCon.getUserID());
 					 
-					 if(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue() ==alarm.getObjType())
+					 if(DeviceKindEunm.FIRE_CONCENTRATOR == ApplicationProtocol.getObjKindByID(userCon.getConcentratorID()))
 					 {
 						 pushFireAlarm(pushInfo,userCon,type,alarm);
-					 }
+					 }	 
 					 else
 					 {
 						 PushMessageJson json = new PushMessageJson();

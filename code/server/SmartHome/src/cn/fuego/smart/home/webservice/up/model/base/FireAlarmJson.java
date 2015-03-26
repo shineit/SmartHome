@@ -32,43 +32,35 @@ public class FireAlarmJson implements Serializable
 	private String concentDesp;		//集中器描述
 	
     //通过objID关联FireSensor表	
-	private int machineID; //机号
-	private int loopID;    //回路号
-	private int codeID;    //编号
+	private Integer machineID; //机号
+	private Integer loopID;    //回路号
+	private Integer codeID;    //编号
 	private String locationDesp;  //位置描述
-	private float locationX;  //X 偏移，相对当前图片尺寸宽度
-	private float locationY;  //Y 偏移，相当当前图片尺寸高度
+	private Float locationX;  //X 偏移，相对当前图片尺寸宽度
+	private Float locationY;  //Y 偏移，相当当前图片尺寸高度
 	
-	private int planID;
-	
-	private int alarmKind;//0-告警；1-设备状态；
-	public int getPlanID()
-	{
-		return planID;
-	}
-
-	public void setPlanID(int planID)
-	{
-		this.planID = planID;
-	}
-
+	private Integer planID;
 	private String sensorTypeName;  //传感器类型名称
+	private int alarmKind;//0-告警；1-设备状态；
 	
-
+	
 	public int getId()
 	{
 		return id;
 	}
+
 
 	public void setId(int id)
 	{
 		this.id = id;
 	}
 
+
 	public long getConcentratorID()
 	{
 		return concentratorID;
 	}
+
 
 	public void setConcentratorID(long concentratorID)
 	{
@@ -76,146 +68,185 @@ public class FireAlarmJson implements Serializable
 	}
 
 
-
 	public String getAlarmTypeName()
 	{
 		return alarmTypeName;
 	}
+
 
 	public void setAlarmTypeName(String alarmTypeName)
 	{
 		this.alarmTypeName = alarmTypeName;
 	}
 
+
 	public long getAlarmTime()
 	{
 		return alarmTime;
 	}
+
 
 	public void setAlarmTime(long alarmTime)
 	{
 		this.alarmTime = alarmTime;
 	}
 
+
 	public Integer getClearStatus()
 	{
 		return clearStatus;
 	}
+
 
 	public void setClearStatus(Integer clearStatus)
 	{
 		this.clearStatus = clearStatus;
 	}
 
+
 	public long getClearTime()
 	{
 		return clearTime;
 	}
+
 
 	public void setClearTime(long clearTime)
 	{
 		this.clearTime = clearTime;
 	}
 
+
 	public Integer getStatus()
 	{
 		return status;
 	}
+
 
 	public void setStatus(Integer status)
 	{
 		this.status = status;
 	}
 
+
 	public String getConcentDesp()
 	{
 		return concentDesp;
 	}
+
 
 	public void setConcentDesp(String concentDesp)
 	{
 		this.concentDesp = concentDesp;
 	}
 
-	public int getMachineID()
+
+	public Integer getMachineID()
 	{
 		return machineID;
 	}
 
-	public void setMachineID(int machineID)
+
+	public void setMachineID(Integer machineID)
 	{
 		this.machineID = machineID;
 	}
 
-	public int getLoopID()
+
+	public Integer getLoopID()
 	{
 		return loopID;
 	}
 
-	public void setLoopID(int loopID)
+
+	public void setLoopID(Integer loopID)
 	{
 		this.loopID = loopID;
 	}
 
-	public int getCodeID()
+
+	public Integer getCodeID()
 	{
 		return codeID;
 	}
 
-	public void setCodeID(int codeID)
+
+	public void setCodeID(Integer codeID)
 	{
 		this.codeID = codeID;
 	}
+
 
 	public String getLocationDesp()
 	{
 		return locationDesp;
 	}
 
+
 	public void setLocationDesp(String locationDesp)
 	{
 		this.locationDesp = locationDesp;
 	}
 
-	public float getLocationX()
+
+	public Float getLocationX()
 	{
 		return locationX;
 	}
 
-	public void setLocationX(float locationX)
+
+	public void setLocationX(Float locationX)
 	{
 		this.locationX = locationX;
 	}
 
-	public float getLocationY()
+
+	public Float getLocationY()
 	{
 		return locationY;
 	}
 
-	public void setLocationY(float locationY)
+
+	public void setLocationY(Float locationY)
 	{
 		this.locationY = locationY;
 	}
+
+
+	public Integer getPlanID()
+	{
+		return planID;
+	}
+
+
+	public void setPlanID(Integer planID)
+	{
+		this.planID = planID;
+	}
+
 
 	public String getSensorTypeName()
 	{
 		return sensorTypeName;
 	}
 
+
 	public void setSensorTypeName(String sensorTypeName)
 	{
 		this.sensorTypeName = sensorTypeName;
 	}
+
 
 	public int getAlarmKind()
 	{
 		return alarmKind;
 	}
 
+
 	public void setAlarmKind(int alarmKind)
 	{
 		this.alarmKind = alarmKind;
 	}
+
 
 	@Override
 	public String toString()

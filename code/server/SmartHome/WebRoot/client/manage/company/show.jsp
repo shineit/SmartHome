@@ -32,6 +32,10 @@
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:25%;">集中器编号：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.concentratorID"  size="30"  value="${obj.concentratorID}" class="required"/></dd>
+			</dl>
+<%-- 			<dl style="width:50%;">
+				<dt style="width:25%;">集中器编号：</dt>			
 				<dd style="width:70%;">				
 					<select  name="obj.concentratorID" >
 					<option value="" >请选择集中器编号</option>
@@ -49,26 +53,26 @@
 						 </c:forEach>								
 					</select>
 				</dd>		 
-			</dl>
+			</dl> --%>
 			<dl style="width:50%;">
 				<dt style="width:25%;">使用名称：</dt>			
-				<dd style="width:70%;"><input type="text" name="obj.applyName"  size="30" value="${obj.applyName}" class="required"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.applyName"  size="30" value="${obj.applyName}" /></dd>
 			</dl>
 			<dl style="width:100%;">
 				<dt style="width:12.5%;">单位地址：</dt>			
-				<dd style="width:80%;"><input type="text" name="obj.companyAddr"  size="80" value="${obj.companyAddr}" class="required"/></dd>
+				<dd style="width:80%;"><input type="text" name="obj.companyAddr"  size="80" value="${obj.companyAddr}" /></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:25%;">单位类型：</dt>			
-				<dd style="width:70%;"><input type="text" name="obj.companyType"  size="30"  value="${obj.companyType}" class="required"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.companyType"  size="30"  value="${obj.companyType}" /></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:25%;">单位电话：</dt>			
-				<dd style="width:70%;"><input type="text" name="obj.companyPhone"  size="30" value="${obj.companyPhone}" class="required"/></dd>
+				<dd style="width:70%;"><input type="text" name="obj.companyPhone"  size="30" value="${obj.companyPhone}" /></dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:25%;">建筑面积：</dt>			
-				<dd style="width:70%;"><input type="text" name="obj.buildingArea"  size="30"  value="${obj.buildingArea}" /></dd>
+				<dd style="width:70%;"><input type="text" name="obj.buildingArea"  size="25"  value="${obj.buildingArea}" class="number"/>平方米</dd>
 			</dl>
 			<dl style="width:50%;">
 				<dt style="width:25%;">火灾危险性：</dt>			

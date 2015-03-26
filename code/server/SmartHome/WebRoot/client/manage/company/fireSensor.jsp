@@ -7,7 +7,7 @@
 	position:relative; width:99%; height:310px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
 }
 #map1{
-	position:absolute;margin: 0 auto;
+	position:absolute;margin: 0 auto;text-align: center;
 }
 .mark1{
 	position:absolute; width:6px; height:6px; font-size:0px; background:#FF0000;
@@ -127,7 +127,7 @@
 						</div>
 						<div id="container1" >
     <div id="map1">
-		<img src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}" />
+		<img src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}"  max-width="90%"/>
     </div>
 </div>
 				</div>

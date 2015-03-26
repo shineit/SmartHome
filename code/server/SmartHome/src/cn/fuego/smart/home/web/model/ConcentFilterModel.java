@@ -31,6 +31,7 @@ public class ConcentFilterModel
 	private String name;			//集中器名称(预留字段)
 	private String description;		//集中器描述(预留字段)
 	private String cityName;//仅提供页面交互，数据库中不存在
+	private String concentratorKind;     //集中器种类
 
 	private ConcentratorStatusEnum[]  concentStatusList = ConcentratorStatusEnum.values();
 	
@@ -55,7 +56,10 @@ public class ConcentFilterModel
 			{
 				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"status",String.valueOf(ConcentratorStatusEnum.getEnumByStr(this.getStatus()).getIntValue())));
 			}
-			
+			if(!ValidatorUtil.isEmpty(this.getConcentratorKind()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorKind",this.getConcentratorKind()));
+			}			
 		 
 		return conditionList;
     }
@@ -128,6 +132,16 @@ public class ConcentFilterModel
 			ConcentratorPermissionEnum[] permissionTypeList)
 	{
 		this.permissionTypeList = permissionTypeList;
+	}
+
+	public String getConcentratorKind()
+	{
+		return concentratorKind;
+	}
+
+	public void setConcentratorKind(String concentratorKind)
+	{
+		this.concentratorKind = concentratorKind;
 	}
 
 }

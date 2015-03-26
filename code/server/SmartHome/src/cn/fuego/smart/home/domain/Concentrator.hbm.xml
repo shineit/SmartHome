@@ -19,7 +19,9 @@
 		 <property name="name" column="NAME"></property>
 		 <property name="description" column="DESCRIPTION"></property>	
 		 <property name="addr" column="ADDR"></property>
-		 <property name="mark" column="MARK"></property>		 		 	 
+		 <property name="mark" column="MARK"></property>
+		 <property name="concentratorKind" column="CONCENTRATOR_KIND"></property>
+		 		 		 	 
 
 	</class>
 </hibernate-mapping>

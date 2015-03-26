@@ -140,13 +140,14 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID",alarm.getObjID()));
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID1",alarm.getObjID1()));
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"objID2",alarm.getObjID2()));
- 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarm.getAlarmType()));
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
-            List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
+           
 
 			if(AlarmIsFeedBackEnum.NORMAL.getIntValue() == alarmType.getIsFeedback())
 			{
-				
+	 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarm.getAlarmType()));
+
+				 List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
 				if(AlarmTypeEnum.RESET.getIntValue() == alarmType.getTypeID())
 				{
 					log.info("the alarm is reset");
@@ -174,20 +175,25 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 			}
 			else
 			{
- 				if(ValidatorUtil.isEmpty(oldAlarm))
-				{
-					log.warn("the alarm is not exist,maybe have been cleared, the feedback alarm is repeat package,so discard is," + alarm);
+	 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmType",alarmType.getFeedbackID()));
 
-				}
-				else
-				{
-					oldAlarm.get(0).setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
-					super.modify(oldAlarm.get(0));
-					alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
-					super.create(alarm); 
-					realAlarmList.add(alarm);
+				 List<Alarm> oldAlarm = super.getDao().getAll(conditionList);
+			 
+	 			 if(ValidatorUtil.isEmpty(oldAlarm))
+				 {
+					 log.warn("the alarm is not exist,maybe have been cleared, the feedback alarm is repeat package,so discard is," + alarm);
 
-				}
+				 }
+				 else
+				 {
+						oldAlarm.get(0).setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
+						super.modify(oldAlarm.get(0));
+						alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
+						super.create(alarm); 
+						realAlarmList.add(alarm);
+				 }
+				 
+
 			}
 
 
@@ -205,7 +211,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));
   
-		this.ModifyByCondition(conditionList, "clearStatus", AlarmClearEnum.AUTO_CLEAR);
+		this.ModifyByCondition(conditionList, "clearStatus", AlarmClearEnum.AUTO_CLEAR.getIntValue());
 	}
 	
 	@Override

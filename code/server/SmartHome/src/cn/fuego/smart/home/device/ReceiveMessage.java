@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
-import cn.fuego.smart.home.constant.SensorKindEunm;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 import cn.fuego.smart.home.device.send.DeviceManagerImpl;
 import cn.fuego.smart.home.device.send.SendCommandConst;
@@ -95,6 +95,7 @@ public class ReceiveMessage
 		concentrator.setConcentratorID(this.concentratorID);
 		concentrator.setIpAddr(ipAddr);
 		concentrator.setPort(port);
+		concentrator.setConcentratorKind(ApplicationProtocol.getObjKindByID(this.concentratorID).getIntValue());
 		
 		if(this.isDataLengthEnough(DATA_START_INDEX+7))
 		{
@@ -102,8 +103,6 @@ public class ReceiveMessage
 			concentrator.setLocationNS(this.getFloatValue(DATA_START_INDEX+4, DATA_START_INDEX+7));
 		}
  
-;
-		
 		return concentrator;
 	}
 	
@@ -225,7 +224,7 @@ public class ReceiveMessage
 				HomeSensor sensor = new HomeSensor();
 				sensor.setConcentratorID(this.concentratorID);
 				sensor.setSensorID(sensorID);
-				sensor.setSensorKind(getSensorKind(sensorID).getIntValue());
+				sensor.setSensorKind(ApplicationProtocol.getObjKindByID(sensorID).getIntValue());
 				sensor.setChannelID(j+1);
 				sensorList.add(sensor);
 			}
@@ -234,23 +233,7 @@ public class ReceiveMessage
 		return new ArrayList<HomeSensor>(sensorList);
 	}
 	
-	private SensorKindEunm getSensorKind(long sensorID)
-	{
-		SensorKindEunm kind = SensorKindEunm.DISCRETE_SENSOR;
-		if(sensorID < 999999999)
-		{
-			kind = SensorKindEunm.DISCRETE_SENSOR;
-		}
-		else if(sensorID < 1999999999)
-		{
-			kind = SensorKindEunm.CONTIUOUS_SENSOR;
-		}
-		else
-		{
-			kind = SensorKindEunm.CTRL_SENSOR;
-		}
-		return kind;
-	}
+	 
 	
 	public HomeSensor getHomeSensor()
 	{

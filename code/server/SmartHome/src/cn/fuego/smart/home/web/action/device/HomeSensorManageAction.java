@@ -14,7 +14,7 @@ import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
-import cn.fuego.smart.home.constant.SensorKindEunm;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.HomeSensorFilterModel;
@@ -59,7 +59,7 @@ public class HomeSensorManageAction extends DWZTableAction<HomeSensor>
 		}
 		if (!ValidatorUtil.isEmpty(hsFilter.getSensorKind()))
 		{
-			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"sensorKind", SensorKindEunm.getEnumByStr(hsFilter.getSensorKind()).getIntValue()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"sensorKind", DeviceKindEunm.getEnumByStr(hsFilter.getSensorKind()).getIntValue()));
 		}
 		return conditionList;
 	}

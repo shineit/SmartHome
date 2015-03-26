@@ -29,7 +29,7 @@ public class UserConcentrator implements PersistenceObject
 	private static final long serialVersionUID = 1L;
 	private Integer userID;
 	private Long concentratorID;
-	private Integer operate;  //0,read 1 modify 2 delete 3 all
+	private Integer operate=0;  //0,read 1 modify 2 delete 3 all
 	public Integer getUserID()
 	{
 		return userID;

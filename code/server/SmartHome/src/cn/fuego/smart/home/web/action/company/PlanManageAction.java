@@ -94,8 +94,8 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	public String create()
 	{
 		
-		String fileName = saveUploadFile();
-		
+		//String fileName = saveUploadFile();
+		String fileName = saveUploadFileCompress(620, 310);
 		this.obj.setPicPath(fileName);
  
 

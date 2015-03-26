@@ -48,12 +48,13 @@
     <package name="device"  extends="misp">
  
    		<action name="ConcentratorManage" class="cn.fuego.smart.home.web.action.device.ConcentratorManageAction">
-			<result type="dispatcher">/client/manage/concentratorManage.jsp</result>
-  			<result type="dispatcher" name="create">/client/manage/concentratorModify.jsp</result>
- 			<result type="dispatcher" name="modify">/client/manage/concentratorModify.jsp</result>
+			<result type="dispatcher">/client/manage/device/homeConcentManage.jsp</result>
+			<result type="dispatcher" name="fireConcent">/client/manage/device/fireConcentManage.jsp</result>
+  			<result type="dispatcher" name="create">/client/manage/device/concentratorModify.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/device/concentratorModify.jsp</result>
  			
-		    <result type="dispatcher" name="addInfo">/client/manage/concentratorPermission.jsp</result>
-			<result type="dispatcher" name="modifyPermission">/client/manage/permissionModify.jsp</result>
+		    <result type="dispatcher" name="addInfo">/client/manage/device/concentratorPermission.jsp</result>
+			<result type="dispatcher" name="modifyPermission">/client/manage/device/permissionModify.jsp</result>
 		
 		</action>
 		

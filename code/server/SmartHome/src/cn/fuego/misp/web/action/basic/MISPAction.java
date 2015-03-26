@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 import org.apache.struts2.ServletActionContext;
 
 import cn.fuego.common.log.FuegoLog;
@@ -63,8 +65,37 @@ public class MISPAction extends ActionSupport
 		
 		return fileName;
 	}
+	/**
+	 * 图片压缩处理
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public String saveUploadFileCompress(int width,int height)
+	{
+		String fileName ="";
+		try
+		{
+			if(null != this.getUpload())
+			{
+				String path = MispConstant.getUploadPath();
+				String prefix=uploadFileName.substring(uploadFileName.lastIndexOf(".")+1);
+				fileName = DataCreateUtil.getUUID() + "." + prefix;
+				Thumbnails.of(this.getUpload())
+				.size(width, height)
+				.toFile(path+File.separator+fileName);
+			}
 	
- 
+			
+		} catch (IOException e)
+		{
+			log.error("save UploadFile and Compress failed"+e);
+			e.printStackTrace();
+		}
+		
+		return fileName; 
+	}
+
 	public void deleteUploadFileByName(String name)
 	{
 		if(!ValidatorUtil.isEmpty(name))

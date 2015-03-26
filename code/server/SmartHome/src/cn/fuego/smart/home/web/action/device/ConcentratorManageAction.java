@@ -14,6 +14,7 @@ import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ConcentratorManageService;
@@ -36,10 +37,35 @@ public class ConcentratorManageAction extends DWZTableAction<Concentrator>
 	private UserConcentrator userPermission;
 	private String concentratorID;
 
+
     @Override
     public List<QueryCondition> getFilterCondition()
     {
     	return filter.getConidtionList();
+    }
+    
+    
+    
+    @Override
+	public String execute()
+	{
+   	    List<QueryCondition> conditionList = this.getFilterCondition();
+   	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorKind",DeviceKindEunm.HOME_CONCENTRATOR.getIntValue()));
+		table.setPage(this.getPage());
+		table.setDataSource(this.getService().getDataSource(conditionList));
+		return SUCCESS;
+	}
+
+
+
+	public String fireConcentrator()
+    {
+		
+		List<QueryCondition> conditionList = this.getFilterCondition();
+    	conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorKind",DeviceKindEunm.FIRE_CONCENTRATOR.getIntValue()));
+		table.setPage(this.getPage());
+		table.setDataSource(this.getService().getDataSource(conditionList));
+    	return "fireConcent";
     }
     @Override
     public String show()

@@ -23,6 +23,8 @@ import cn.fuego.common.dao.datasource.AbstractDataSource;
 public interface MispCommonService<E>
 {
     void validator(E obj);
+    void validatorForCreate(E obj);
+
     AbstractDataSource<E> getDataSource();
     AbstractDataSource<E> getDataSource(List<QueryCondition> conditionList);
     void create(E obj);

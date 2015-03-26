@@ -32,6 +32,9 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	public static final int CONCENTRATOR_NOT_EXISTED=10005;  //集中器不存在
 	public static final int SENSOR_NOT_EXISTED = 10006;   //传感器不存在
 	
+	public static final int CONCENTRATOR_ID_WRONG = 10007;   //集中器编号输入格式不正确
+	public static final int SENSOR_EXISTED = 10008;			//传感器已经存在。请检查编号
+	
 	
  
 }

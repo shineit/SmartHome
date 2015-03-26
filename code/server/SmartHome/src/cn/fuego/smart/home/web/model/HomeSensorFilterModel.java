@@ -8,7 +8,7 @@
 */ 
 package cn.fuego.smart.home.web.model;
 
-import cn.fuego.smart.home.constant.SensorKindEunm;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 
 /** 
  * @ClassName: HomeSensorFilterModel 
@@ -22,7 +22,7 @@ public class HomeSensorFilterModel
 	private String concentratorID;
 	private String sensorID;
 	private String sensorKind;
-	private SensorKindEunm[] sensorKindList = SensorKindEunm.values();
+	private DeviceKindEunm[] sensorKindList = DeviceKindEunm.values();
 
 	
 	public String getConcentratorID()
@@ -49,11 +49,11 @@ public class HomeSensorFilterModel
 	{
 		this.sensorKind = sensorKind;
 	}
-	public SensorKindEunm[] getSensorKindList()
+	public DeviceKindEunm[] getSensorKindList()
 	{
 		return sensorKindList;
 	}
-	public void setSensorKindList(SensorKindEunm[] sensorKindList)
+	public void setSensorKindList(DeviceKindEunm[] sensorKindList)
 	{
 		this.sensorKindList = sensorKindList;
 	} 

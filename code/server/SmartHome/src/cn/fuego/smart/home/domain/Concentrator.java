@@ -1,6 +1,7 @@
 package cn.fuego.smart.home.domain;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 
 /**
  * 
@@ -27,9 +28,19 @@ public class Concentrator implements PersistenceObject
 	private String addr;			//集中器地址(预留字段)
 	private String mark;			//自定义标签(预留字段)
 	
+	private int concentratorKind = DeviceKindEunm.HOME_CONCENTRATOR.getIntValue();
+	
 	public static final String PRI_KEY = "concentratorID";
 
 	
+	public int getConcentratorKind()
+	{
+		return concentratorKind;
+	}
+	public void setConcentratorKind(int concentratorKind)
+	{
+		this.concentratorKind = concentratorKind;
+	}
 	public int getPort()
 	{
 		return port;

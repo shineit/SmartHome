@@ -23,6 +23,7 @@ import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.ConcentratorPermissionEnum;
@@ -56,6 +57,9 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	public void online(Concentrator concentrator)
 	{
 		Concentrator old = super.get(String.valueOf(concentrator.getConcentratorID()));
+		
+	    Alarm alarm = getConcentorAlarm(concentrator,AlarmTypeEnum.ONLINE);
+
 	    if(null != old)
 	    {
 	    	log.info("the concentor is existed in database");
@@ -67,21 +71,28 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 	    	old.setIpAddr(concentrator.getIpAddr());
 	    	old.setPort(concentrator.getPort());
 	    	super.modify(concentrator);
+	    	
+
+		    //集中器器上线 发送上线告警日志
+		    ServiceContext.getInstance().getAlarmManageService().create(alarm);
+		    
+		    //集中器重新上电需要把所有未清除的告警 清除
+		    ServiceContext.getInstance().getAlarmManageService().clearAlarm(concentrator.getConcentratorID());
+	 
+		    //ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
 	    }
 	    else
 	    {
 	    	log.info("the concentrator is new " + concentrator);
 	    	super.create(concentrator);
+	    	
+	    	//we need log the alarm, no need user create alarm logic
+			alarm.setClearStatus(AlarmClearEnum.AUTO_CLEAR.getIntValue());
+
+ 	    	DaoContext.getInstance().getAlarmDao().create(alarm);
 	    }
 	    
-	    //集中器器上线 发送上线告警日志
-	    Alarm alarm = getConcentorAlarm(concentrator,AlarmTypeEnum.ONLINE);
-	    ServiceContext.getInstance().getAlarmManageService().create(alarm);
-	    
-	    //集中器重新上电需要把所有未清除的告警 清除
-	    ServiceContext.getInstance().getAlarmManageService().clearAlarm(concentrator.getConcentratorID());
- 
-	    //ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
+
 	    
 	    
 	}

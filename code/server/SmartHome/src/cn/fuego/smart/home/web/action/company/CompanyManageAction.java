@@ -57,8 +57,8 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	
 	private UserCompanyModel userPermission= new UserCompanyModel();
 	
-	//用户关联之后的集中器编号列表
-	private List<String> concentIDList=new ArrayList<String>();
+
+	
 	
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
@@ -79,8 +79,7 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	@Override
 	public String show()
 	{
-		//初始化加载用户关联后的集中器列表
-		concentIDList=loadConcentIDList(this.getSelectedID());
+
 		if(TableOperateTypeEnum.CREATE.getType().equals(getOperateType()))
         {
 			if(!ValidatorUtil.isEmpty(this.getSelectedID()))
@@ -97,36 +96,7 @@ public class CompanyManageAction extends DWZTableAction<Company>
 		}
 		return this.getNextPage();
 	}
-	private List<String> loadConcentIDList(String companyID)
-	{
-		List<String> idList=new ArrayList<String>();
-		try
-		{
-			Set<String> objIDlist=MISPServiceContext.getInstance().getMISPPrivilegeManage().getUserIDListByCommpany(companyID);
-			if(!ValidatorUtil.isEmpty(objIDlist))
-			{
-				List<String> userIDList = new ArrayList<String>();
-				userIDList.addAll(objIDlist);
-				idList=ServiceContext.getInstance().getConcentratorManageService().getConcentIDListByUser(userIDList);
-			}
 
-		} 		
-		catch (MISPException e)
-		{
-			
-			log.error("load ConcentIDList failed",e);
-			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
-			this.getOperateMessage().setErrorCode(e.getErrorCode());
-		}
-		catch(Exception e)
-		{
-			
-			log.error("load ConcentIDList failed",e);
-			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
-			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
-		}
-		return idList;
-	}
 	public String showPermission()
 	{
 		List<String> userIDList= new ArrayList<String>();
@@ -245,14 +215,6 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	public void setFilter(CompanyFilterModel filter)
 	{
 		this.filter = filter;
-	}
-	public List<String> getConcentIDList()
-	{
-		return concentIDList;
-	}
-	public void setConcentIDList(List<String> concentIDList)
-	{
-		this.concentIDList = concentIDList;
 	}
 
 }

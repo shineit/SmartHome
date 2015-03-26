@@ -10,6 +10,7 @@ package cn.fuego.smart.home.device;
 
 import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 
 
 /** 
@@ -53,6 +54,32 @@ public class ApplicationProtocol
 			return false;
 		}
 		return true;
+	}
+	
+	public static DeviceKindEunm getObjKindByID(long id)
+	{
+		DeviceKindEunm kind = DeviceKindEunm.DISCRETE_SENSOR;
+		if(id < 999999999)
+		{
+			kind = DeviceKindEunm.DISCRETE_SENSOR;
+		}
+		else if(id < 1999999999)
+		{
+			kind = DeviceKindEunm.CONTIUOUS_SENSOR;
+		}
+		else if(id < 2999999999L)
+		{
+			kind = DeviceKindEunm.CTRL_SENSOR;
+		}
+		else if(id < 3999999999L)
+		{
+			kind = DeviceKindEunm.HOME_CONCENTRATOR;
+		}
+		else
+		{
+			kind = DeviceKindEunm.FIRE_CONCENTRATOR;
+		}
+		return kind;
 	}
 	
 	public static String decode(String data)

@@ -5,7 +5,7 @@ import java.util.List;
 
 import cn.fuego.common.domain.PersistenceObject;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.smart.home.constant.SensorKindEunm;
+import cn.fuego.smart.home.constant.DeviceKindEunm;
 import cn.fuego.smart.home.constant.SensorStatusEnum;
 
 
@@ -28,7 +28,7 @@ public class HomeSensor implements PersistenceObject
 	private long concentratorID;  //集中器ID
 	private long sensorID;         //终端ID，在集中中，每个终端设备，每个通道有一个唯一ID
  	private int channelID;       //终端设备的通道ID
-	private Integer sensorKind=SensorKindEunm.DISCRETE_SENSOR.getIntValue();      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
+	private Integer sensorKind=DeviceKindEunm.DISCRETE_SENSOR.getIntValue();      //传感器种类 0 告警类，1模拟类，2控制类型， SensorKindEunm
 	private Integer sensorType=0;      //传感器类型
 	private String sensorTypeName="未命名";  //传感器类型名称
 	private Integer status=SensorStatusEnum.DISABLE.getIntValue();          //告警使能状态，0-禁止，1-使能，SensorStatusEnum
