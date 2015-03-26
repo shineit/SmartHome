@@ -155,6 +155,10 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson>
 	{
 		this.waitDailog.dismiss();
 		GetCheckLogByIDRsp rsp = (GetCheckLogByIDRsp) obj;
+		if(ValidatorUtil.isEmpty(rsp.getCheckLogList()))
+		{
+			showToast(this, "当前无不良巡检记录！");
+		}
 		return rsp.getCheckLogList();
 	}
 

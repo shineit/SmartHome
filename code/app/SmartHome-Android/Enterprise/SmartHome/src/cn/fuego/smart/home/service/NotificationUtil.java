@@ -11,6 +11,7 @@ package cn.fuego.smart.home.service;
 import android.content.Context;
 import android.content.Intent;
 import cn.fuego.common.util.format.JsonConvert;
+import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
@@ -55,10 +56,16 @@ public class NotificationUtil
 	public void playAlarm(Context context, String extras)
 	{
 		PushMessageJson pushMsg = (PushMessageJson) JsonConvert.jsonToObject(extras, PushMessageJson.class);
-		AlarmPushInfoJson alarmPushInfo =(AlarmPushInfoJson) pushMsg.getObj();
+		String objJson = JsonConvert.ObjectToJson(pushMsg.getObj());
+		objJson=objJson.replace("\\", "");
+ 		int beginIndex = objJson.indexOf("\"") == 0 ? 1 : 0;  
+        int endIndex = objJson.lastIndexOf("\"") + 1 == objJson.length() ? objJson.lastIndexOf("\"") : objJson.length();  
+        objJson = objJson.substring(beginIndex, endIndex); 
+		AlarmPushInfoJson alarmPushInfo = (AlarmPushInfoJson) JsonConvert.jsonToObject(objJson, AlarmPushInfoJson.class);
+		//AlarmPushInfoJson alarmPushInfo =(AlarmPushInfoJson) pushMsg.getObj();
 		if(alarmPushInfo!=null)
 		{
-			AlarmPushTypeEnum pushType= AlarmPushTypeEnum.getEnumByInt(alarmPushInfo.getCompanyID());
+			AlarmPushTypeEnum pushType= AlarmPushTypeEnum.getEnumByInt(alarmPushInfo.getPushType());
 	        switch(pushType)
 	        {
 	        	case LONG_PUSH:
@@ -110,8 +117,14 @@ public class NotificationUtil
 	{
 
 		Intent i = new Intent();
-		AlarmPushInfoJson alarmPushInfo =(AlarmPushInfoJson) pushMsg.getObj();
-		if(alarmPushInfo.getPushType()==AlarmPushTypeEnum.LONG_PUSH.getIntValue())
+ 		String objJson = JsonConvert.ObjectToJson(pushMsg.getObj());
+		objJson=objJson.replace("\\", "");
+ 		int beginIndex = objJson.indexOf("\"") == 0 ? 1 : 0;  
+        int endIndex = objJson.lastIndexOf("\"") + 1 == objJson.length() ? objJson.lastIndexOf("\"") : objJson.length();  
+        objJson = objJson.substring(beginIndex, endIndex); 
+		AlarmPushInfoJson alarmPushInfo = (AlarmPushInfoJson) JsonConvert.jsonToObject(objJson, AlarmPushInfoJson.class);
+		//AlarmPushInfoJson alarmPushInfo = (AlarmPushInfoJson) JsonConvert.jsonToObject(JsonConvert.ObjectToJson(pushMsg.getObj()), AlarmPushInfoJson.class);
+		if(alarmPushInfo.getAlarmKind()==AlarmKindEnum.ALARM.getIntValue())
 		{
 			i.setClass(context, FireAlarmActivity.class);
 		}

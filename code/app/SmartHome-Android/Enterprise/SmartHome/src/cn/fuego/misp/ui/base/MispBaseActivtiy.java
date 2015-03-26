@@ -52,6 +52,8 @@ public abstract class MispBaseActivtiy extends Activity implements OnClickListen
 		super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		waitDailog = new MispWaitDailog(this);  
+		//点击外面不消失
+		waitDailog.setCanceledOnTouchOutside(false);
 		initRes();
 		// TODO Auto-generated method stub
  		if(0 != activityRes.getAvtivityView())

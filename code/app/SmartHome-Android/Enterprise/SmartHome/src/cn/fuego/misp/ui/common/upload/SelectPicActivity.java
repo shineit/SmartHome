@@ -1,14 +1,25 @@
 package cn.fuego.misp.ui.common.upload;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -150,10 +161,58 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 		}
 		Log.i(TAG, "imagePath = "+picPath);
 		/*if(picPath != null && ( picPath.endsWith(".png") || picPath.endsWith(".PNG") ||picPath.endsWith(".jpg") ||picPath.endsWith(".JPG")  ))*/
-		if(picPath !=null){
-			lastIntent.putExtra(KEY_PHOTO_PATH, picPath);
-			setResult(Activity.RESULT_OK, lastIntent);
-			finish();
+		if(picPath !=null)
+		{
+
+            Bitmap b=BitmapFactory.decodeFile(picPath);
+            String name = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+            String fileName = Environment.getExternalStorageDirectory().toString()+File.separator+"compress/image/"+name+".jpg";
+            picPath = fileName;
+            System.out.println(picPath+"----------");
+            File myCaptureFile =new File(fileName);
+			try {
+				if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+				{
+					if(!myCaptureFile.getParentFile().exists())
+					{
+						myCaptureFile.getParentFile().mkdirs();
+					}
+					//BufferedOutputStream baos;
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+					//baos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+					b.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
+				    int options = 100;  
+				        while ( baos.toByteArray().length / 1024>300) {  //循环判断如果压缩后图片是否大于300kb,大于继续压缩         
+				             baos.reset();//重置baos即清空baos  
+				            b.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中  
+				            options -= 10;//每次都减少10  
+				        } 
+					//b.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+				        FileOutputStream fos = new FileOutputStream(myCaptureFile);
+                        fos.write(baos.toByteArray());
+                        fos.flush();
+                        fos.close();
+					baos.flush();
+					baos.close();
+	                //以下原有跳转方式
+	    			lastIntent.putExtra(KEY_PHOTO_PATH, picPath);
+	    			setResult(Activity.RESULT_OK, lastIntent);
+	    			finish();
+				}
+				else
+				{
+		        	
+		        	 Toast toast= Toast.makeText(SelectPicActivity.this, "保存失败，SD卡无效", Toast.LENGTH_SHORT);
+		        	 toast.setGravity(Gravity.CENTER, 0, 0);
+		        	 toast.show();
+		        }
+			} catch (FileNotFoundException e) {
+					e.printStackTrace();
+			} catch (IOException e) {
+					e.printStackTrace();
+			}
+
+			
 		}else{
 			Toast.makeText(this, "选择文件不正确!", Toast.LENGTH_LONG).show();
 			

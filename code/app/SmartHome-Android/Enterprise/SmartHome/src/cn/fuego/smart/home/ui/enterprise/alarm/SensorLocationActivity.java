@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.view.View;
 import android.widget.ImageView;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
@@ -28,7 +27,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 public class SensorLocationActivity extends MispHttpActivtiy
 {
 
-	private static final int POINT_SIZE = 3;
+	private static final int POINT_SIZE = 10;
 	private FireAlarmJson alarm; 
  	private Canvas canvas;
 	@Override
@@ -79,13 +78,14 @@ public class SensorLocationActivity extends MispHttpActivtiy
 			public void onLoadingCancelled(String arg0, View arg1)
 			{
 				// TODO Auto-generated method stub
-				
+				waitDailog.dismiss();
 			}
 
 			@Override
 			public void onLoadingComplete(String arg0, View arg1, Bitmap arg2)
 			{
 				drawMark(arg2);
+				waitDailog.dismiss();
 				
 			}
 
@@ -93,13 +93,15 @@ public class SensorLocationActivity extends MispHttpActivtiy
 			public void onLoadingFailed(String arg0, View arg1, FailReason arg2)
 			{
 				showMessage(MISPErrorMessageConst.NET_FAIL);
+				waitDailog.dismiss();
 				
 			}
 
 			@Override
 			public void onLoadingStarted(String arg0, View arg1)
 			{
-				showMessage("加载中");
+				showMessage("正在加载平面图……");
+				waitDailog.show();
 				
 			}
 			
@@ -115,13 +117,16 @@ public class SensorLocationActivity extends MispHttpActivtiy
 		//canvas = new Canvas(baseBitmap.copy(Bitmap.Config.ARGB_8888, true));  
 		Paint paint = new Paint();  
         paint.setStrokeWidth(5);  
-        paint.setColor(Color.BLUE); 
+        paint.setColor(Color.RED); 
  
-        RectF r = new RectF(alarm.getLocationX()-POINT_SIZE, alarm.getLocationY()-POINT_SIZE, alarm.getLocationX()+POINT_SIZE, alarm.getLocationY()+POINT_SIZE);
-		canvas.drawRect(r, paint);
+        //RectF r = new RectF(alarm.getLocationX()-POINT_SIZE, alarm.getLocationY()-POINT_SIZE, alarm.getLocationX()+POINT_SIZE, alarm.getLocationY()+POINT_SIZE);
+		//canvas.drawRect(r, paint);
 		//canvas.drawColor(Color.WHITE);  
-		
+	    canvas.drawCircle(alarm.getLocationX(), alarm.getLocationY(), POINT_SIZE, paint);// 小圆  
+	    paint.setAntiAlias(true);// 设置画笔的锯齿效果。 true是去除，大家一看效果就明白了  
 		image.setImageBitmap(bit);
+		image.setRotation(90);
+		
 	}
 
 	

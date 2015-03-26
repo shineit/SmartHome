@@ -3,6 +3,7 @@ package cn.fuego.smart.home.ui.enterprise.alarm;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
@@ -40,7 +41,13 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		txt_sensorType.setText(fireAlarm.getSensorTypeName());
 		TextView txt_alarmType= (TextView) findViewById(R.id.alarm_type_name);
 		txt_alarmType.setText(fireAlarm.getAlarmTypeName());
-
+		
+		TextView txt_locaDesp= (TextView) findViewById(R.id.alarm_location_desp);
+		txt_locaDesp.setText(fireAlarm.getLocationDesp());
+		
+		TextView txt_alarmtime= (TextView) findViewById(R.id.alarm_time);
+		txt_alarmtime.setText(DateUtil.getStrTime(fireAlarm.getAlarmTime()));
+		
 	}
  
 	@Override

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.MispListActivity;
+import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.service.CheckLogCache;
@@ -16,13 +17,14 @@ import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
+import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class CheckActivity extends MispListActivity<CheckLogJson>
 {
 
 
-	private int companyID=0; //默认所有项目，后期考虑实际ID
+	private int companyID; //默认所有项目，后期考虑实际ID
 	@Override
 	public void initRes()
 	{
@@ -37,9 +39,9 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 		
 		this.activityRes.getButtonIDList().add(R.id.check_submit_btn);
 				
-		//Intent intent = this.getIntent();
-		//CompanyJson company = (CompanyJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
-		//companyID= company.getCompanyID();
+		Intent intent = this.getIntent();
+		CompanyJson company = (CompanyJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		companyID= company.getCompanyID();
 		
 		getCheckItem();
 
@@ -52,7 +54,8 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 	private void getCheckItem()
 	{
 		GetCheckItemByIDReq req = new GetCheckItemByIDReq();
-		req.setCompanyID(companyID);
+		//req.setCompanyID(companyID);
+		req.setCompanyID(0);
 		WebServiceContext.getInstance().getCheckManageRest(new MispHttpHandler()
 		{
 
@@ -102,8 +105,9 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 
 	private void submitCheckLog()
 	{
-		
+		this.waitDailog.show();
 		CreateCheckLogReq req = new CreateCheckLogReq();
+		
 		req.setCheckLogList(CheckLogCache.getInstance().getCheckLogList());
 		WebServiceContext.getInstance().getCheckManageRest(new MispHttpHandler()
 		{
@@ -116,6 +120,7 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 					CheckActivity.this.finish();
 				}
 				showMessage(message);
+				waitDailog.dismiss();
 			}
 		}).createCheckLog(req);
 		

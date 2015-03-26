@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
@@ -30,7 +31,7 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	@Override
 	public void initRes()
 	{
-		this.waitDailog.show();
+		
 		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm);
 		this.activityRes.setName("智慧告警");
 		this.setAdapterForScrollView();
@@ -51,7 +52,7 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 		{
 			companyID =intent.getIntExtra(IntentCodeConst.COMPANY_ID, 0);
 		}
-	
+
 	}
 	
 
@@ -78,17 +79,23 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 		{
 			item_icon.setImageResource(R.drawable.prealarm);
 		}
+		StringBuffer sbTitle= new StringBuffer();
+		sbTitle.append(StrUtil.noNullStr(item.getSensorTypeName()));
+		sbTitle.append("发生");
+		sbTitle.append(item.getAlarmTypeName());
 		TextView item_title = (TextView) view.findViewById(R.id.item_alarm_title);
-		item_title.setText(item.getSensorTypeName()+"发生"+item.getAlarmTypeName());
+		item_title.setText(sbTitle.toString());
 		TextView item_content = (TextView) view.findViewById(R.id.item_alarm_content);
 		item_content.setText(StrUtil.noNullStr(item.getLocationDesp()));
 		
 		return view;
 	}
 
+
 	@Override
 	public void loadSendList()
 	{
+		this.waitDailog.show();
 		GetFireAlarmByIDReq req= new GetFireAlarmByIDReq();
         req.setCompanyID(String.valueOf(companyID));
     	List<AttributeJson> attrList = new ArrayList<AttributeJson>();
@@ -106,7 +113,22 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	{
 		this.waitDailog.dismiss();
 		GetFireAlarmByIDRsp rsp = (GetFireAlarmByIDRsp) obj;
+		if(ValidatorUtil.isEmpty(rsp.getFireAlarmList()))
+		{
+			showToast(this, "当前无异常信息！");
+		}
 		return rsp.getFireAlarmList();
+	}
+
+
+	@Override
+	protected void onDestroy()
+	{
+		Intent intent=new Intent();
+        intent.putExtra("refresh", true);
+        intent.setAction("android.intent.action.bageNotify");//action与接收器相同
+        sendBroadcast(intent);
+		super.onDestroy();
 	}
 
 

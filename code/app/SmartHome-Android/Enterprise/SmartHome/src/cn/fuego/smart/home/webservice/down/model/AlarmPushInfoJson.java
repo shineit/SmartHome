@@ -17,8 +17,20 @@ package cn.fuego.smart.home.webservice.down.model;
  */
 public class AlarmPushInfoJson
 {
+	private int alarmKind;
 	private int pushType;
 	private int companyID;
+	
+	
+	
+	public int getAlarmKind()
+	{
+		return alarmKind;
+	}
+	public void setAlarmKind(int alarmKind)
+	{
+		this.alarmKind = alarmKind;
+	}
 	public int getPushType()
 	{
 		return pushType;

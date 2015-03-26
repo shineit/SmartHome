@@ -19,7 +19,7 @@ public class AlarmSoundService extends Service {
 		// TODO Auto-generated method stub
 		//Toast.makeText(this, "My Service created", Toast.LENGTH_LONG).show();
 		Log.i(TAG, "onCreate");
-		player = MediaPlayer.create(this, R.raw.alarm1);
+		player = MediaPlayer.create(this, R.raw.firealarm);
 		player.setLooping(true);
 		super.onCreate();
 	}

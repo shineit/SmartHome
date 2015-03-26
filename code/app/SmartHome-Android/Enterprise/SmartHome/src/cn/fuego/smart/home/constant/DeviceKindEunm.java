@@ -9,19 +9,21 @@ package cn.fuego.smart.home.constant;
 * @date 2014-10-20 上午11:00:47 
 *
  */
-public enum SensorKindEunm
+public enum DeviceKindEunm
 {
 	
 	DISCRETE_SENSOR(0,"告警类"),
 	CONTIUOUS_SENSOR(1,"模拟类"),
-	CTRL_SENSOR(2,"控制类");
+	CTRL_SENSOR(2,"控制类"),
+	HOME_CONCENTRATOR(3,"家庭集中器"),
+	FIRE_CONCENTRATOR(4,"企业集中器");
 	private int intValue;
 	private String strValue;
 	/**
 	 * @param intValue
 	 * @param strValue
 	 */
-	private SensorKindEunm(int intValue, String strValue)
+	private DeviceKindEunm(int intValue, String strValue)
 	{
 		this.intValue = intValue;
 		this.strValue = strValue;
@@ -34,9 +36,9 @@ public enum SensorKindEunm
 	{
 		return strValue;
 	}
-	public static SensorKindEunm getEnumByInt(int intValue)
+	public static DeviceKindEunm getEnumByInt(int intValue)
 	{
-		for (SensorKindEunm c : SensorKindEunm.values())
+		for (DeviceKindEunm c : DeviceKindEunm.values())
 		{
 			if (intValue == c.intValue)
 			{
@@ -45,9 +47,9 @@ public enum SensorKindEunm
 		}
 		return null;
 	}	
-	public static SensorKindEunm getEnumByStr(String strValue)
+	public static DeviceKindEunm getEnumByStr(String strValue)
 	{
-		for (SensorKindEunm c : SensorKindEunm.values())
+		for (DeviceKindEunm c : DeviceKindEunm.values())
 		{
 			if (strValue.equals(c.strValue) )
 			{

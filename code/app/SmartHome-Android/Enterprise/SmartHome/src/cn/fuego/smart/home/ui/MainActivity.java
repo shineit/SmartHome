@@ -45,6 +45,7 @@ public class MainActivity extends InstrumentedActivity
 				 else
 				 {
 					 HomeActivity.jump(MainActivity.this);
+					 
 				 }
 				 
 

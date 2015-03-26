@@ -148,11 +148,14 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 			StringBuffer sbTitle = new StringBuffer();
 			sbTitle.append(checkLog.getCheckItem());
 			sbTitle.append(CheckResultEnum.getEnumByInt(checkLog.getCheckResult()).getStrValue());
-			StringBuffer sbContent = new StringBuffer();
+/*			StringBuffer sbContent = new StringBuffer();
 			sbContent.append("所属系统：");
-			sbContent.append(checkLog.getCheckSys()+"\n");
-			sbContent.append(abnormal_desp.getText().toString().trim());
-			sendEmail(sbTitle.toString(),sbContent.toString(),checkLog.getAbnormalPic());
+			sbContent.append(checkLog.getCheckSys());
+			sbContent.append("\r\n");			
+			sbContent.append(abnormal_desp.getText().toString().trim());*/
+			//以上不能进行换行
+			String contents=new String("所属系统："+checkLog.getCheckSys()+"\n"+abnormal_desp.getText().toString().trim());
+			sendEmail(sbTitle.toString(),contents,checkLog.getAbnormalPic());
 		}
 		if(v.getId()==R.id.check_operate_upload_btn)
 		{
@@ -176,10 +179,7 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 		{
 			sp.setImagePath(picPath);
 		}
-		else
-		{
-			sp.setImageUrl("http://f1.sharesdk.cn/imgs/2014/05/21/oESpJ78_533x800.jpg");
-		}	
+
 		Platform email = ShareSDK.getPlatform(Email.NAME);
 		email.setPlatformActionListener(this); // 设置分享事件回调
 		// 执行图文分享
@@ -307,10 +307,9 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
 			{
 				checkLog.setAbnormalPic((String)rsp.getObj());
 				
-				loadImag(checkLog.getAbnormalPic());
 			}
 			picPath = data.getStringExtra("picPath");
-
+			LoadImageUtil.getInstance().loadImage(abnormal_img, "file://"+picPath);
 		}
 	
 	}

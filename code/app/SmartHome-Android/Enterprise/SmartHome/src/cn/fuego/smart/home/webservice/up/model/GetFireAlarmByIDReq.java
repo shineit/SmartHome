@@ -8,6 +8,7 @@ import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 
 public class GetFireAlarmByIDReq extends MispBaseReqJson
 {
+	private int userID;
 	private String companyID;
 	private PageJson page;
 	private List<AttributeJson> filterList;
@@ -41,11 +42,22 @@ public class GetFireAlarmByIDReq extends MispBaseReqJson
 		this.filterList = filterList;
 	}
 
+	public int getUserID()
+	{
+		return userID;
+	}
+
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "GetFireAlarmByIDReq [companyID=" + companyID + ", page=" + page
-				+ ", filterList=" + filterList + ", token=" + token + "]";
+		return "GetFireAlarmByIDReq [userID=" + userID + ", companyID="
+				+ companyID + ", page=" + page + ", filterList=" + filterList
+				+ ", app_id=" + app_id + ", token=" + token + "]";
 	}
 
 
