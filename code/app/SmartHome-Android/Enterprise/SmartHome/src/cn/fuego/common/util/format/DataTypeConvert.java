@@ -205,7 +205,7 @@ public class DataTypeConvert
 		{
  			object = Integer.valueOf(value);
 		}
-		if(fieldClass == long.class || fieldClass == Long.class)
+		else if(fieldClass == long.class || fieldClass == Long.class)
 		{
  			object = Long.valueOf(value);
 		}

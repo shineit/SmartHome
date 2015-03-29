@@ -3,6 +3,7 @@ package cn.fuego.smart.home.ui.enterprise.alarm;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,6 +95,15 @@ public class DeviceStatusActivity extends FireAlarmActivity
 			super.onItemListClick(parent, view, id, item);
 		}
 		
+	}
+	@Override
+	protected void onDestroy()
+	{
+		Intent intent=new Intent();
+        intent.putExtra("refresh", true);
+        intent.setAction("android.intent.action.bageNotify");//action与接收器相同
+        sendBroadcast(intent);
+		super.onDestroy();
 	}
 
 

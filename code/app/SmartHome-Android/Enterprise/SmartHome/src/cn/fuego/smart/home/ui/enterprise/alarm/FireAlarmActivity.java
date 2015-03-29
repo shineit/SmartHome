@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
@@ -16,6 +20,8 @@ import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.AlarmSoundService;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
@@ -51,10 +57,35 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 		else
 		{
 			companyID =intent.getIntExtra(IntentCodeConst.COMPANY_ID, 0);
+			loadCompayInfo(companyID);
 		}
 
 	}
 	
+
+	private void loadCompayInfo(int companyID)
+	{
+		GetCompanyByIDReq req = new GetCompanyByIDReq();
+		req.setCompanyID(companyID);
+		WebServiceContext.getInstance().getCompanyManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					GetCompanyByIDRsp rsp = (GetCompanyByIDRsp) message.getMessage().obj;
+					company=rsp.getCompany();
+					showMessage(company.getApplyName());
+				}
+				else
+				{
+					showMessage(message);
+				}
+			}
+		}).getCompanyByID(req);
+		
+	}
+
 
 	@Override
 	public void onClick(View v)
@@ -66,6 +97,19 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 			stopService(serviceIntent);
 		}
 	}
+
+	@Override
+	public void onItemListClick(AdapterView<?> parent, View view, long id,	FireAlarmJson item)
+	{
+		Intent i = new Intent();
+		i.setClass(this, FireAlarmViewActivity.class);
+		Bundle mBundle= new Bundle();
+	    mBundle.putSerializable(ListViewResInfo.SELECT_ITEM,item);
+	    mBundle.putSerializable(IntentCodeConst.COMPANY_INFO, company);
+        i.putExtras(mBundle);
+        this.startActivity(i);
+	}
+
 
 	@Override
 	public View getListItemView(View view, FireAlarmJson item)
@@ -125,7 +169,7 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	protected void onDestroy()
 	{
 		Intent intent=new Intent();
-        intent.putExtra("refresh", true);
+        intent.putExtra(IntentCodeConst.HOME_REFRESH, 1);
         intent.setAction("android.intent.action.bageNotify");//action与接收器相同
         sendBroadcast(intent);
 		super.onDestroy();

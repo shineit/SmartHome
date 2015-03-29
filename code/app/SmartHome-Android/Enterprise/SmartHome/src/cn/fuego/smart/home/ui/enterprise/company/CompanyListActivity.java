@@ -21,7 +21,7 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 	@Override
 	public void initRes() 
 	{
-		this.waitDailog.show();
+		
 		this.activityRes.setAvtivityView(R.layout.activity_company_list);
 		this.activityRes.setName("公司列表");
 		
@@ -53,10 +53,11 @@ public class CompanyListActivity extends MispListActivity<CompanyJson>
 	@Override
 	public void loadSendList()
 	{
+		this.waitDailog.show();
 		GetCompanyListReq req = new GetCompanyListReq();
         req.setUserID(AppCache.getInstance().getUser().getUserID());
 
-		WebServiceContext.getInstance().getUserManageRest(this).getCompanyList(req);
+		WebServiceContext.getInstance().getCompanyManageRest(this).getCompanyList(req);
 		
 	}
 

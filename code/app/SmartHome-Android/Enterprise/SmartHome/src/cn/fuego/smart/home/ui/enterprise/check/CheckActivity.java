@@ -12,6 +12,7 @@ import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.CheckResultEnum;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.CheckLogCache;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
 import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDReq;
@@ -19,6 +20,7 @@ import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
+import cn.sharesdk.framework.ShareSDK;
 
 public class CheckActivity extends MispListActivity<CheckLogJson>
 {
@@ -150,6 +152,18 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	protected void onDestroy()
+	{
+		Intent intent=new Intent();
+        intent.putExtra(IntentCodeConst.HOME_REFRESH, 2);
+        intent.setAction("android.intent.action.bageNotify");//action与接收器相同
+        sendBroadcast(intent);
+		super.onDestroy();
 	}	
 
 }

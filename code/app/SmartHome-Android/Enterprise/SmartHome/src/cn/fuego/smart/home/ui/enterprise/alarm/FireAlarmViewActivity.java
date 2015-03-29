@@ -7,11 +7,14 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
+import cn.fuego.smart.home.constant.IntentCodeConst;
+import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 
 public class FireAlarmViewActivity extends MispBaseActivtiy 
 {
 	private FireAlarmJson fireAlarm;
+	private CompanyJson company;
 
 	@Override
 	public void initRes()
@@ -24,6 +27,7 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		this.activityRes.getButtonIDList().add(R.id.fire_alarm_loc);
 
 		fireAlarm= (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		company =(CompanyJson) this.getIntent().getSerializableExtra(IntentCodeConst.COMPANY_INFO);
 	}
 	
 	@Override
@@ -48,6 +52,8 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		TextView txt_alarmtime= (TextView) findViewById(R.id.alarm_time);
 		txt_alarmtime.setText(DateUtil.getStrTime(fireAlarm.getAlarmTime()));
 		
+		TextView txt_companyName= (TextView) findViewById(R.id.fire_alarm_company_name);
+		txt_companyName.setText(company.getApplyName());
 	}
  
 	@Override

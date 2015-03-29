@@ -21,6 +21,7 @@ import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.common.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
@@ -31,8 +32,11 @@ import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity;
+import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
@@ -42,9 +46,9 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
-	private BadgeView alarmBageView,statusBageView;
-	private Button alarm_btn,status_btn;
-	private int alarmEnter=0,statusEnter=0;
+	private BadgeView alarmBageView,statusBageView,checkBageView;
+	private Button alarm_btn,status_btn,check_log_btn;
+	private int alarmEnter=0,statusEnter=0,checkLogEnter=0;
 	@Override
 	public void initRes() 
 	{
@@ -75,12 +79,63 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		
     	alarm_btn = (Button) findViewById(R.id.home_menu_alarm);
     	status_btn = (Button) findViewById(R.id.home_menu_status);
+    	check_log_btn = (Button) findViewById(R.id.home_menu_manage);
+    	
+		alarmBageView = new BadgeView(HomeActivity.this, alarm_btn);
+		regBageView(alarmBageView);
+   	
+    	statusBageView = new BadgeView(HomeActivity.this, status_btn);
+    	regBageView(statusBageView);
     	showAlarmBadge();
+    	
+    	checkBageView = new BadgeView(HomeActivity.this, check_log_btn);
+    	regBageView(checkBageView);
+    	showCheckBage();
         //注册广播，接收service中启动的线程发送过来的信息，同时更新UI  
         IntentFilter filter = new IntentFilter("android.intent.action.bageNotify");  
         this.registerReceiver(new HomeReceiver(), filter);  
 
 
+	}
+	private void showCheckBage()
+	{
+		GetCheckLogByIDReq req = new GetCheckLogByIDReq();
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
+		WebServiceContext.getInstance().getCheckManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					GetCheckLogByIDRsp rsp = (GetCheckLogByIDRsp) message.getMessage().obj;
+					List<CheckLogJson> logList = rsp.getCheckLogList();
+					int logSize= logList.size();
+					if(logSize!=0)
+					{
+						checkLogEnter=1;
+						if(logSize>99)
+						{
+							checkBageView.setText("99+");
+							checkBageView.show();
+						}
+						else
+						{
+							checkBageView.setText(String.valueOf(logSize));
+							checkBageView.show();
+						}
+					}
+				}
+			}
+		}).getCheckLogByID(req);
+		
+	}
+	//统一bageView样式
+	private void regBageView(BadgeView bageView)
+	{
+		bageView.setTextColor(Color.RED);
+		bageView.setBadgeBackgroundColor(Color.YELLOW);
+		bageView.setTextSize(15);
+		
 	}
 	private void showAlarmBadge()
 	{
@@ -114,8 +169,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 
 				    	if(alarmCount!=0)
 				    	{
+				    		//showMessage("alarmCount:"+alarmCount);
 				    		alarmEnter=1;
-				    		alarmBageView = new BadgeView(HomeActivity.this, alarm_btn);
 							if(alarmCount>99)
 							{
 								alarmBageView.setText("99+");
@@ -124,16 +179,13 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 							{
 								alarmBageView.setText(String.valueOf(alarmCount));
 							}
-							
-					    	alarmBageView.setTextColor(Color.RED);
-					    	alarmBageView.setBadgeBackgroundColor(Color.YELLOW);
-					    	alarmBageView.setTextSize(15);
-					    	alarmBageView.toggle();
+
+					    	alarmBageView.show();
 				    	}
 				    	if(statusCount!=0)
 				    	{
+				    		//showMessage("statusCount:"+statusCount);
 				    		statusEnter=1;
-				    		statusBageView = new BadgeView(HomeActivity.this, status_btn);
 							if(statusCount>99)
 							{
 								statusBageView.setText("99+");
@@ -142,11 +194,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 							{
 								statusBageView.setText(String.valueOf(statusCount));
 							}
-				    		
-				    		statusBageView.setTextColor(Color.RED);
-				    		statusBageView.setBadgeBackgroundColor(Color.YELLOW);
-				    		statusBageView.setTextSize(15);
-				    		statusBageView.toggle();
+				    		statusBageView.show();
 				    	}
 			    	}
 					
@@ -173,9 +221,9 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			if(alarmEnter==1)
 			{
 				alarmBageView.toggle();
+				
 				alarmEnter=0;
 			}
-			
 			CompanyListActivity.jump(this, FireAlarmActivity.class);
 			break;
 		case R.id.home_menu_status:
@@ -193,6 +241,11 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			CompanyListActivity.jump(this, CompanyViewActivity.class);
 			break;
 		case R.id.home_menu_manage:
+			if(checkLogEnter==1)
+			{
+				checkBageView.toggle();
+				checkLogEnter=0;
+			}
 			CompanyListActivity.jump(this, CheckLogActivity.class);
 			break;
 			
@@ -268,13 +321,17 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		@Override
 		public void onReceive(Context context, Intent intent)
 		{
-			
-			Boolean refresh=intent.getBooleanExtra("refresh", false);
-			if(refresh)
+
+			int refreshCode = intent.getIntExtra(IntentCodeConst.HOME_REFRESH, 0);
+			switch(refreshCode)
 			{
-				//更新数字提醒
-				showAlarmBadge();
+				case 1:showAlarmBadge();
+							break;
+				case 2:showCheckBage();
+							break;
+				default:break;
 			}
+
 		}
 	};
      

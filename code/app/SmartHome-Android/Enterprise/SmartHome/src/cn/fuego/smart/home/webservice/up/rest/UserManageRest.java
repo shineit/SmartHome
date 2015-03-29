@@ -8,8 +8,6 @@ import javax.ws.rs.Produces;
 
 import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCaTokenByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyListReq;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetUserMarkListReq;
@@ -75,8 +73,6 @@ public interface UserManageRest
 	@Path("/caToken/get")
 	GetCaTokenByIDRsp getCaToken(GetCaTokenByIDReq req);
 
-	@POST
-	@Path("/company/list")
-	GetCompanyListRsp getCompanyList(GetCompanyListReq req);
+
 	
 }

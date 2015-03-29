@@ -23,4 +23,8 @@ public class IntentCodeConst
 	public static final String JUMP_CLASS_NAME = "jumpClass";//intent 跳转activity名称
 	
 	public static final String COMPANY_ID = "companyID";//intent 传递推送的告警信息companyID
+	
+	public static final String COMPANY_INFO="companyInfo";//公司信息
+	
+	public static final String HOME_REFRESH="home_refresh";//刷新首页bageNum广播参数
 }
