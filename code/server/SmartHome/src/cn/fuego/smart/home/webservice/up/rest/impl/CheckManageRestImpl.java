@@ -11,12 +11,15 @@ package cn.fuego.smart.home.webservice.up.rest.impl;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.util.file.FileUtil;
+import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.service.MISPException;
+import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.constant.MispConstant;
 import cn.fuego.smart.home.constant.CheckLogStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
@@ -120,15 +123,29 @@ public class CheckManageRestImpl implements CheckManageRest
 		GetCheckLogByIDRsp rsp = new GetCheckLogByIDRsp();
 		try
 		{ 
- 
- 				List<CheckLog> logList= ServiceContext.getInstance().getCheckLogService().getCurrentLog(req.getCompanyID());
-			
-				for(CheckLog log : logList)
+			List<CheckLog> logList =new ArrayList<CheckLog>();
+			if(req.getCompanyID()==0)//如果只有用户ID传值，则搜索用户管理公司的id列表
+			{
+				List<CheckLog> tempList =new ArrayList<CheckLog>();
+				Set<String> companyIDList=MISPServiceContext.getInstance().getMISPPrivilegeManage().getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(req.getUserID()));
+				for(String id:companyIDList)
 				{
-					CheckLogJson json = ModelConvert.checkLogToJson(log);
-					rsp.getCheckLogList().add(json);
+					tempList= ServiceContext.getInstance().getCheckLogService().getCurrentLog(Integer.valueOf(id));
+					logList.addAll(tempList);
 				}
-				
+			}
+			else
+			{
+				logList= ServiceContext.getInstance().getCheckLogService().getCurrentLog(req.getCompanyID());
+			}
+			
+		
+			for(CheckLog log : logList)
+			{
+				CheckLogJson json = ModelConvert.checkLogToJson(log);
+				rsp.getCheckLogList().add(json);
+			}
+			
 			 
 		} 		
 		catch(MISPException e)

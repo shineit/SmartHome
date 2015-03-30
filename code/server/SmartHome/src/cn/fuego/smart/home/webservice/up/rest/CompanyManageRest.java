@@ -5,6 +5,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyListReq;
+import cn.fuego.smart.home.webservice.up.model.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDRsp;
 
@@ -26,4 +30,11 @@ public interface CompanyManageRest
 	public GetSensorPlanByIDRsp getPlanByID(GetSensorPlanByIDReq req);
 
  
+	@POST
+	@Path("/company/list")
+	GetCompanyListRsp getCompanyList(GetCompanyListReq req);
+	
+	@POST
+	@Path("/company/id")
+	GetCompanyByIDRsp getCompanyByID(GetCompanyByIDReq req);
 }

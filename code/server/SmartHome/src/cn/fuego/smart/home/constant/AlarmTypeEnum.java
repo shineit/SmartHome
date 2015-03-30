@@ -19,8 +19,7 @@ public enum AlarmTypeEnum
 {
 	RESET(0,"主机复位"),
 	OFF_LINE(17,"集中器离线"),
-	ONLINE(18,"集中器上线"),
- ;
+	ONLINE(18,"集中器上线");
 	private int intValue;
 	private String strValue;
 	/**

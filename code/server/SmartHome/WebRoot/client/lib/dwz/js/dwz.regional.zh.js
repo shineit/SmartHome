@@ -22,12 +22,13 @@
 		max: $.validator.format("请输入一个最大为 {0} 的值"),
 		min: $.validator.format("请输入一个最小为 {0} 的值"),
 		
-		alphanumeric: "字母、数字、下划线",
+		alphanumeric: "输入字母/数字/下划线",
 		lettersonly: "必须是字母",
-		phone: "请输入有效的移动电话号码",
+		mobilephone: "请输入有效的移动电话号码",
 	    telephone:"请输入有效的座机号码",
-	    QQ:"请输入正确的QQ号",
-	    phonelist:"请输入正确电话组格式"
+	    QQ:"请输入有效的QQ号",
+	    phonelistTen:"最多只能输入10个电话号码",
+	    phonelistFormat:"号码格式有误或未以英文分号结尾"	
 	});
 	
 	// DWZ regional
