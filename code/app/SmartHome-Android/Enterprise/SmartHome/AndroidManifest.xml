@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.fuego.smart.home"
     android:installLocation="internalOnly"
-    android:versionCode="104"
-    android:versionName="1.0.4" >
+    android:versionCode="106"
+    android:versionName="1.0.6" >
 
     <permission
         android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE"
@@ -31,7 +31,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
 
-
+	<uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>  
     <!-- 后台自启动. -->
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

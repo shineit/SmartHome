@@ -1,9 +1,15 @@
 package cn.fuego.smart.home.ui.enterprise.alarm;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import cn.fuego.common.util.format.DateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.home.R;
@@ -25,7 +31,7 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm_view);
 		
 		this.activityRes.getButtonIDList().add(R.id.fire_alarm_loc);
-
+		this.activityRes.getButtonIDList().add(R.id.fire_alarm_dial);
 		fireAlarm= (FireAlarmJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
 		company =(CompanyJson) this.getIntent().getSerializableExtra(IntentCodeConst.COMPANY_INFO);
 	}
@@ -54,14 +60,62 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		
 		TextView txt_companyName= (TextView) findViewById(R.id.fire_alarm_company_name);
 		txt_companyName.setText(company.getApplyName());
+		
+		TextView txt_contacts = (TextView) findViewById(R.id.fire_alarm_contacts);
+		txt_contacts.setText(fireAlarm.getContacts());
+		TextView txt_contactPhone = (TextView) findViewById(R.id.fire_alarm_contact_phone);
+		txt_contactPhone.setText(fireAlarm.getContactPhone());	
+		
+		Button dial_btn = (Button) findViewById(R.id.fire_alarm_dial);
+		if(ValidatorUtil.isEmpty(fireAlarm.getContactPhone()))
+		{
+			dial_btn.setVisibility(View.INVISIBLE);
+		}
 	}
  
 	@Override
 	public void onClick(View v)
 	{
-		SensorLocationActivity.jump(this, fireAlarm);
+		if(v.getId()==R.id.fire_alarm_loc)
+		{
+			SensorLocationActivity.jump(this, fireAlarm);
+		}
+		if(v.getId()==R.id.fire_alarm_dial)
+		{
+			dial();
+		}
+		
 	}
+	private void dial()
+	{
+		
+		final String content = fireAlarm.getContactPhone();
+		if(ValidatorUtil.isEmpty(content))
+		{
+			return;
+		}
+		 
+ 		new AlertDialog.Builder(FireAlarmViewActivity.this)    
+        .setTitle("客服电话").setMessage(content) 
+                .setPositiveButton("拨打", new DialogInterface.OnClickListener()
+				{
 
+					@Override
+					public void onClick(DialogInterface dialog, int which)
+					{
+						 
+		                //用intent启动拨打电话  
+		                Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+content));  
+		                startActivity(intent); 
+						
+					}
+					
+					 
+				})
+                .setNegativeButton("取消", null)
+                .show();  
+	}
+	
 
 
 }

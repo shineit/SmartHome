@@ -42,7 +42,10 @@ public class FireAlarmJson implements Serializable
 	private Integer planID;
 	private String sensorTypeName;  //传感器类型名称
 	private int alarmKind;//0-告警；1-设备状态；
-	
+
+
+	private String contacts; //联系人
+	private String contactPhone; //联系电话
 	
 	public int getId()
 	{
@@ -248,6 +251,30 @@ public class FireAlarmJson implements Serializable
 	}
 
 
+	public String getContacts()
+	{
+		return contacts;
+	}
+
+
+	public void setContacts(String contacts)
+	{
+		this.contacts = contacts;
+	}
+
+
+	public String getContactPhone()
+	{
+		return contactPhone;
+	}
+
+
+	public void setContactPhone(String contactPhone)
+	{
+		this.contactPhone = contactPhone;
+	}
+
+
 	@Override
 	public String toString()
 	{
@@ -258,9 +285,12 @@ public class FireAlarmJson implements Serializable
 				+ concentDesp + ", machineID=" + machineID + ", loopID="
 				+ loopID + ", codeID=" + codeID + ", locationDesp="
 				+ locationDesp + ", locationX=" + locationX + ", locationY="
-				+ locationY + ", planID=" + planID + ", alarmKind=" + alarmKind
-				+ ", sensorTypeName=" + sensorTypeName + "]";
+				+ locationY + ", planID=" + planID + ", sensorTypeName="
+				+ sensorTypeName + ", alarmKind=" + alarmKind + ", contacts="
+				+ contacts + ", contactPhone=" + contactPhone + "]";
 	}
+
+
 
 
  
