@@ -34,7 +34,23 @@ public class ReflectionUtil
 		return filedClass;
 	}
  
- 
+	public static Object getValueByFieldName(Object obj,String fieldName)
+	{
+		Object result = null;
+		try
+		{
+	    	String methodName  = "get" + fieldName.replaceFirst(fieldName.substring(0, 1),fieldName.substring(0, 1).toUpperCase())  ; 
+	    	Method getter =  obj.getClass().getDeclaredMethod(methodName);
+	    	result = getter.invoke(obj);
+		}
+		catch (Exception e)
+		{
+			log.error("get value from obj failed,the field name is " + fieldName,e);
+		}
+		return result;
+
+	}
+
 	public static Object convertToFieldObject(Class clazz,String fieldName,Object value)  
 	{
 		Object object = null;

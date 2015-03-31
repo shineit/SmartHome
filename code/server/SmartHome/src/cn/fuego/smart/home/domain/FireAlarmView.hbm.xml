@@ -33,7 +33,9 @@
 		 <property name="locationY" column="LOCATION_Y"></property>
 		 <property name="sensorType" column="SENSOR_TYPE"></property>
 		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>	
-		 
+		 <property name="contacts" column="CONTACTS"></property>	
+		 <property name="contactPhone" column="CONTACT_PHONE"></property>			 
+
 		 <property name="alarmTypeName" column="ALARM_TYPE_NAME"></property>
 		 <property name="kind" column="KIND"></property>
 		 <property name="pushType" column="PUSH_TYPE"></property>

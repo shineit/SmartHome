@@ -114,6 +114,9 @@ public class ModelConvert
 		json.setPlanID(fireAlarm.getPlanID());
 		json.setSensorTypeName(fireAlarm.getSensorTypeName());
 		json.setAlarmKind(fireAlarm.getKind());
+		
+		json.setContacts(fireAlarm.getContacts());
+		json.setContactPhone(fireAlarm.getContactPhone());
 		return json;
 		
 	}	

@@ -2,7 +2,18 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<script type="text/javascript">
 
+	$(function() {
+		$.pdialog.resizeDialog({
+			style : {
+				width : 400,
+				height : 200
+			}
+		}, $.pdialog.getCurrent(), "");
+		});//dialog 宽度重新定义
+
+</script>
 <div class="pageContent">
 	<s:form method="post" action="device/FireSensorManage" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)" enctype="multipart/form-data"  >
 		<div class="pageFormContent" layoutH="58">

@@ -2,6 +2,16 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<script type="text/javascript">
+function submitFireForm(url)
+{
+    var thisForm = document.fireSearchForm;
+	thisForm.action="device/FireSensorManage!"+url;
+	thisForm.submit();
+ 	thisForm.action="device/FireSensorManage";
+	
+}
+</script>
 <style type="text/css">
 #container1{
 	position:relative; width:99%; height:310px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
@@ -26,7 +36,7 @@
 				
 				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
 					<div class="pageHeader" style="border:1px #B8D0D6 solid">
-							<s:form  id="pagerForm"  onsubmit="return navTabSearch(this);" action="device/FireSensorManage" method="post" >
+							<s:form  id="pagerForm"   onsubmit="return navTabSearch(this);"  action="device/FireSensorManage" method="post" name="fireSearchForm">
 								<input type="hidden" name="pageNum" value="${pageNum}" />
 								<input type="hidden" name="numPerPage" value="${numPerPage}" />
 							
@@ -51,6 +61,8 @@
 										<td>
 										<s:submit  value="重 置" cssClass="mispButton primary"  onclick="resetForm(this.form) "></s:submit>
 										</td>
+										<td>
+
 									</tr>
 								</table>
 							</div>
@@ -64,24 +76,29 @@
 									 target="dialog" mask="true" rel="fsNew" title="传感器信息"><span>新增</span></a></li>
 									<li><a class="delete" href="FireSensorManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
 									<li><a class="edit" href="FireSensorManage!show.action?selectedID={sid_user}&operateType=modify"						
-									 target="dialog" mask="true" title="传感器信息"><span>修改</span></a></li>
+									 target="dialog" mask="true" title="传感器信息" rel="sensorModify"><span>修改</span></a></li>
 									<li class="line">line</li>
-									<li style="display:none;"><a class="icon" href="#" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
+									<li ><a class="icon" href="<%=request.getContextPath()%>/client/resource/tableModel/fireSensorModel.xls" target="dwzExport" ><span>导出模板</span></a></li>
 									<li><a class="add" href="<%=request.getContextPath()%>/client/manage/company/fireImportShow.jsp" 
-									 target="dialog" mask="true" rel="fsImport" title="导入传感器"><span>导入</span></a></li>
-									
+									 target="dialog" mask="true" rel="fsImport" title="导入传感器"><span>数据导入</span></a></li>
+									<li class="line">line</li>
+									<li ><a class="icon" href="#" target="dwzExport" onclick="submitFireForm('downloadSensor')"><span>导出数据</span></a></li>
 								</ul>
 							</div>
 							<table class="table" width="100%" layoutH="450">
 								<thead>
 									<tr>
-										<th width="5%" align="center"></th>
+									<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
+
+										<th width="5%" align="center">标注</th>
 										<th width="15%" align="center">传感器类型</th>
 										<th width="15%" align="center">集中器编号</th>
-										<th width="10%" align="center">机号</th>
-										<th width="10%" align="center">回路号</th>
-										<th width="10%" align="center">点号</th>
+										<th width="5%" align="center">机号</th>
+										<th width="5%" align="center">回路号</th>
+										<th width="5%" align="center">点号</th>
 										<th width="15%" align="center">位置描述</th>
+										<th width="10%" align="center">联系人</th>
+										<th width="15%" align="center">联系电话</th>										
 									</tr>
 								</thead>
 								<s:form   method="POST"  >
@@ -89,6 +106,7 @@
 
 								<c:forEach var="e" items="${table.currentPageData}"> 	
 									<tr target="sid_user" rel="${e.id}">
+										<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>
 										<td><input name="selectedIDList" value="${e.id}" type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
 										<td>${e.sensorTypeName}</td>
 										<td>${e.concentratorID}</td>
@@ -96,6 +114,8 @@
 										<td>${e.loopID}</td>
 						 				<td>${e.codeID}</td> 		 
 						 				<td>${e.locationDesp}</td>
+						 				<td>${e.contacts}</td>
+						 				<td>${e.contactPhone}</td>
 									</tr>
 								</c:forEach>  	
 

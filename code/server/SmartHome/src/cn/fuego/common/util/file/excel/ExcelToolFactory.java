@@ -8,10 +8,6 @@
 */ 
 package cn.fuego.common.util.file.excel;
 
-import cn.fuego.smart.home.device.send.DeviceManager;
-import cn.fuego.smart.home.device.send.DeviceManagerFactory;
-import cn.fuego.smart.home.device.send.DeviceManagerImpl;
-import cn.fuego.smart.home.domain.Concentrator;
 
  /** 
  * @ClassName: ExcelToolFactory 

@@ -22,5 +22,6 @@ public interface ExcelTool
 {
 	public List readExcel(File excelFile,ExcelMeta excelMeta);
 	public List readExcel(String fileName, ExcelMeta excelMeta);
+	public void writeExcel(List objList,String path,ExcelMeta excelMeta);
 
 }

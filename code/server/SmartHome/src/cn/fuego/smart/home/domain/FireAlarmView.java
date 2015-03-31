@@ -48,6 +48,9 @@ public class FireAlarmView implements PersistenceObject
 	private Integer sensorType;      //传感器类型
 	private String sensorTypeName;  //传感器类型名称
 	
+	private String contacts; //联系人
+	private String contactPhone; //联系电话
+	
 	private String alarmTypeName; //新增，告警类型名称
 	
 	private int kind;			//0-告警；1-设备状态；
@@ -243,6 +246,22 @@ public class FireAlarmView implements PersistenceObject
 	public void setPushType(int pushType)
 	{
 		this.pushType = pushType;
+	}
+	public String getContacts()
+	{
+		return contacts;
+	}
+	public void setContacts(String contacts)
+	{
+		this.contacts = contacts;
+	}
+	public String getContactPhone()
+	{
+		return contactPhone;
+	}
+	public void setContactPhone(String contactPhone)
+	{
+		this.contactPhone = contactPhone;
 	}
 	
 

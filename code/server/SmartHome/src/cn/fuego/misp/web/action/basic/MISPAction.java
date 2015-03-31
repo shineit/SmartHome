@@ -2,6 +2,7 @@ package cn.fuego.misp.web.action.basic;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +45,8 @@ public class MISPAction extends ActionSupport
 	private File upload;
 	private String uploadFileName;
 	private String uploadContentType;
+	
+	private InputStream downloadFile;
 	
  
 	public String saveUploadFile()
@@ -253,6 +256,14 @@ public class MISPAction extends ActionSupport
 	public void setUploadContentType(String uploadContentType)
 	{
 		this.uploadContentType = uploadContentType;
+	}
+	public InputStream getDownloadFile()
+	{
+		return downloadFile;
+	}
+	public void setDownloadFile(InputStream downloadFile)
+	{
+		this.downloadFile = downloadFile;
 	}
  
 

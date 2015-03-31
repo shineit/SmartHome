@@ -1,7 +1,9 @@
 package cn.fuego.smart.home.web.action.device;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import cn.fuego.common.util.file.excel.ExcelColumnMeta;
 import cn.fuego.common.util.file.excel.ExcelMeta;
 import cn.fuego.common.util.file.excel.ExcelTool;
 import cn.fuego.common.util.file.excel.ExcelToolFactory;
+import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.common.util.validate.ValidatorRules;
 import cn.fuego.common.util.validate.ValidatorUtil;
@@ -34,6 +37,7 @@ import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.service.FireSensorManageService;
 import cn.fuego.smart.home.service.ServiceContext;
+import cn.fuego.smart.home.service.cache.SensorTypeCache;
 import cn.fuego.smart.home.web.model.BuildingModel;
 
 public class FireSensorManageAction extends DWZTableAction<FireSensor>
@@ -54,6 +58,9 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	private String sensorJson;
 	//用于页面搜索关键字
 	private String 	machineID,loopID,codeID;
+	//excel 导出
+	private InputStream excelStream ;
+	private String excelName;
 
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
@@ -121,6 +128,8 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	
 	public String uploadSensor()
 	{
+
+		//FireSensor sensorTemp=new FireSensor();
 		try
 		{
 			ExcelTool tool = ExcelToolFactory.getInstance().getExcelTool();
@@ -128,15 +137,69 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 			String filePath = MispConstant.getUploadPath() +File.separator+ this.saveUploadFile();
 			List<FireSensor> sensorList = tool.readExcel(filePath, getSensorFireExcelMeta());
 			FileUtil.deleteFile(filePath);
+			
+			//List<FireSensor> toCreate = new ArrayList<FireSensor>();
+			//List<FireSensor> toModify = new ArrayList<FireSensor>();
+
 			for(FireSensor sensor : sensorList)
 			{
+				//sensorTemp=sensor;
 				sensor.setConcentratorID(company.getConcentratorID());
 				sensor.setPlanNodeID(sensorPlan.getPlanID());
+				sensor.setSensorTypeName(SensorTypeCache.getInstance().getSensorType(sensor.getSensorType()).getTypeName());
+				
+				service.validatorForCreate(sensor);
+/*				if(sensor.getId()==0)
+				{
+					 
+					service.validatorForCreate(sensor);
+					toCreate.add(sensor);
+				}
+				else
+				{
+					toModify.add(sensor);
+				}*/
+				
  			}
-			
-			service.create(this.getLoginUser().getUserID(), sensorList);
+		    service.create(this.getLoginUser().getUserID(), sensorList);
+		    
 			
 			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+
+		}
+		catch(MISPException e)
+		{
+			log.error("import sensor failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			//this.getOperateMessage().setMessage("sensor="+String.valueOf(sensorTemp.getMachineID()));
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch (Exception e)
+		{
+			log.error("import sensor failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+		
+		return MISP_DONE_PAGE;
+		
+	}
+	public String downloadSensor()
+	{
+		try
+		{
+			ExcelTool tool = ExcelToolFactory.getInstance().getExcelTool();
+			
+			String filePath = MispConstant.getUploadPath() +File.separator+ DataCreateUtil.getUUID()+".xls";
+			
+			execute();
+			List<FireSensor> sensorList = this.table.getDataSource().getAllPageData();
+			tool.writeExcel(sensorList, filePath, getSensorFireExcelMeta());
+			excelStream = new FileInputStream(new File(filePath));
+			this.setDownloadFile(excelStream);
+			excelName= "fireSensor"+".xls";
+			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+			return "excel";
 
 		}
 		catch(MISPException e)
@@ -153,13 +216,17 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		}
 		
 		return MISP_DONE_PAGE;
-		
 	}
 	
 	private ExcelMeta getSensorFireExcelMeta()
 	{
-		ExcelMeta meta = new ExcelMeta(FireSensor.class,2);
-		
+		ExcelMeta meta = new ExcelMeta(FireSensor.class,1);
+/*
+		ExcelColumnMeta column0 = new ExcelColumnMeta();
+		column0.setColumnName("传感器编号");
+		column0.setColumn(0);
+		column0.setDataField("id");
+		meta.getColumnMap().put(column0.getColumn(), column0);*/
 		 
 		ExcelColumnMeta column0 = new ExcelColumnMeta();
 		column0.setColumnName("机号");
@@ -179,19 +246,56 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		column2.setColumnName("点号");
 		column2.setColumn(2);
 		column2.setDataField("codeID");
-		meta.getColumnMap().put(column0.getColumn(), column2);
-		column1.getRuleMap().put(ValidatorRules.isEmpty(), "点号不能为空");
+		meta.getColumnMap().put(column2.getColumn(), column2);
+		column2.getRuleMap().put(ValidatorRules.isEmpty(), "点号不能为空");
 
 		ExcelColumnMeta column3 = new ExcelColumnMeta();
-		column3.setColumnName("位置");
+		column3.setColumnName("位置描述");
 		column3.setColumn(3);
 		column3.setDataField("locationDesp");
-		meta.getColumnMap().put(column0.getColumn(), column3);
+		meta.getColumnMap().put(column3.getColumn(), column3);
+		
+		ExcelColumnMeta column4 = new ExcelColumnMeta();
+		column4.setColumnName("传感器类型编码");
+		column4.setColumn(4);
+		column4.setDataField("sensorType");
+		meta.getColumnMap().put(column4.getColumn(), column4);
+		column4.getRuleMap().put(ValidatorRules.isEmpty(), "传感器类型码不能为空");
+
+		ExcelColumnMeta column5 = new ExcelColumnMeta();
+		column5.setColumnName("联系人");
+		column5.setColumn(5);
+		column5.setDataField("contacts");
+		meta.getColumnMap().put(column5.getColumn(), column5);
+	
+		ExcelColumnMeta column6 = new ExcelColumnMeta();
+		column6.setColumnName("联系人电话");
+		column6.setColumn(6);
+		column6.setDataField("contactPhone");
+		meta.getColumnMap().put(column6.getColumn(), column6);
+		
+		
+		ExcelColumnMeta column7 = new ExcelColumnMeta();
+		column7.setColumnName("传感器X坐标");
+		column7.setColumn(7);
+		column7.setDataField("locationX");
+		meta.getColumnMap().put(column7.getColumn(), column7);
+
+		
+		ExcelColumnMeta column8 = new ExcelColumnMeta();
+		column8.setColumnName("传感器Y坐标");
+		column8.setColumn(8);
+		column8.setDataField("locationY");
+		meta.getColumnMap().put(column8.getColumn(), column8);
 		
 		return meta;
 	}
 
-
+	public String downloadFireSensor()
+	{
+		
+		return MISP_DONE_PAGE;
+	}
 
 	public String modifyLocation()
 	{
@@ -379,6 +483,38 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	public void setCodeID(String codeID)
 	{
 		this.codeID = codeID;
+	}
+
+
+
+
+	public InputStream getExcelStream()
+	{
+		return excelStream;
+	}
+
+
+
+
+	public void setExcelStream(InputStream excelStream)
+	{
+		this.excelStream = excelStream;
+	}
+
+
+
+
+	public String getExcelName()
+	{
+		return excelName;
+	}
+
+
+
+
+	public void setExcelName(String excelName)
+	{
+		this.excelName = excelName;
 	}
 
 }

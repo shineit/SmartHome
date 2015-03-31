@@ -54,12 +54,24 @@
 				<dd style="width:65%;">
 				<input type="text" name="obj.locationDesp"  size="25"  value="${obj.locationDesp}"/>
 				</dd>
-			</dl>					
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:30%;">联系人：</dt>			
+				<dd style="width:65%;">
+				<input type="text" name="obj.contacts"  size="25"  value="${obj.contacts}"/>
+				</dd>
+			</dl>	
+			<dl style="width:50%;">
+				<dt style="width:30%;">联系电话：</dt>			
+				<dd style="width:65%;">
+				<input type="text" name="obj.contactPhone"  size="25"  value="${obj.contactPhone}"/>
+				</dd>
+			</dl>						
 			<dl style="width:100%;">
 				<dt style="width:15%;">传感器类型：</dt>			
 				<dd style="width:80%;">
 					<input  name="obj.sensorTypeName" type="text" size="25" value="${obj.sensorTypeName}" readonly="readonly"/>
-					<a class="btnLook" href="device/SensorTypeManage" lookupGroup="obj" rel="" >类型列表</a>	
+					<a class="btnLook" href="device/SensorTypeManage" lookupGroup="obj" rel="st" >类型列表</a>	
 					<span class="info">(点击图标查找传感器类型)</span>
 				
 				</dd>
