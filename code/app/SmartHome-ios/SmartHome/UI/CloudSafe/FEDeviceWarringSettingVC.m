@@ -22,6 +22,7 @@
 #import "FEUserMarkManagerVC.h"
 #import "FEDevicesCache.h"
 #import <SSCommon-Utilities/FEPopPickerView.h>
+#import "FECommonDefine.h"
 
 
 @interface FEDeviceWarringSettingVC ()<FEPopPickerViewDataSource>
@@ -101,7 +102,7 @@
     
     
     FELabel *dlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y, lwidth, height)];
-    dlabel.text = FEString(@"SENSOR_DESCRIPETION");
+    dlabel.text = kString(@"SENSOR_DESCRIPETION");
     [contentview addSubview:dlabel];
     
     FETextField *dtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y, twidth, height)];
@@ -110,7 +111,7 @@
     [contentview addSubview:dtextFeild];
     
     FELabel *elabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + height + yspace, lwidth, height)];
-    elabel.text = FEString(@"SENSOR_EARLY_WARRING");
+    elabel.text = kString(@"SENSOR_EARLY_WARRING");
     [contentview addSubview:elabel];
     
     FETextField *etextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + height + yspace, twidth, height)];
@@ -118,7 +119,7 @@
     [contentview addSubview:etextFeild];
     
     FELabel *vlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 2 * (height + yspace), lwidth, height)];
-    vlabel.text = FEString(@"SENSOR_FIRE_VALUE");
+    vlabel.text = kString(@"SENSOR_FIRE_VALUE");
     [contentview addSubview:vlabel];
     
     FETextField *vtextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 2 * (height + yspace), twidth, height)];
@@ -126,7 +127,7 @@
     [contentview addSubview:vtextFeild];
     
     FELabel *llabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 3 * (height + yspace), lwidth, height)];
-    llabel.text = FEString(@"SENSOR_LABEL");
+    llabel.text = kString(@"SENSOR_LABEL");
     [contentview addSubview:llabel];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -154,11 +155,11 @@
     [add addTarget:self action:@selector(manageUserMark:) forControlEvents:UIControlEventTouchUpInside];
 //    [add setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 //    [add setBackgroundImage:[UIImage imageFromColor:FEGrayButtonColor] forState:UIControlStateNormal];
-    [add setTitle:FEString(@"SENSOR_MANAGE_MARK") forState:UIControlStateNormal];
+    [add setTitle:kString(@"SENSOR_MANAGE_MARK") forState:UIControlStateNormal];
     [contentview addSubview:add];
     
     FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(x, y + 4 * (height + yspace), lwidth, height)];
-    clabel.text = FEString(@"SENSOR_CONTROL");
+    clabel.text = kString(@"SENSOR_CONTROL");
     [contentview addSubview:clabel];
     
     FETextField *ctextFeild = [[FETextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y + 4 * (height + yspace), twidth, height)];
@@ -167,7 +168,7 @@
     FEButton *configbutton = [FEButton buttonWithType:UIButtonTypeCustom];
     configbutton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
     configbutton.frame = CGRectMake(20, contentview.frame.origin.y + contentview.bounds.size.height + 20, self.view.bounds.size.width - 20 * 2, 40);
-    [configbutton setTitle:FEString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
+    [configbutton setTitle:kString(@"SENSOR_CONFIG") forState:UIControlStateNormal];
     [configbutton addTarget:self action:@selector(config:) forControlEvents:UIControlEventTouchUpInside];
     [scrollview addSubview:configbutton];
     
@@ -179,14 +180,14 @@
 -(void)manageUserMark:(UIButton *)button{
     FEUserMarkManagerVC *manager = [FEUserMarkManagerVC new];
     [self.navigationController pushViewController:manager animated:YES];
-//    [self displayHUD:FEString(@"LOADING...")];
+//    [self displayHUD:kString(@"LOADING...")];
     
 }
 
 -(void)selectMark{
     FEPopPickerView *popPicker = [[FEPopPickerView alloc] initFromView:[[AppDelegate sharedDelegate].window viewWithTag:0]];
     popPicker.tlabel.text = @"标签";
-    popPicker.titleColor = FEThemeColor;
+    popPicker.titleColor = [UIColor ThemeColor];
     NSInteger index = -1;
     for (FEUserMark *mark in self.markList) {
         if ([self.markName isEqualToString:mark.mark]) {
@@ -200,7 +201,7 @@
 }
 
 -(void)config:(id)sender{
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     __weak typeof(self) weakself = self;
     FESensor *sensor = [self.sensor copy];
     sensor.mark = self.markName;//self.seletedMark.mark;

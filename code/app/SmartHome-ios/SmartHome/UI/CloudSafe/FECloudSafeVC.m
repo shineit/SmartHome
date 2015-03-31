@@ -23,6 +23,7 @@
 #import "FEUserMarkResponse.h"
 #import "FEMarkRequest.h"
 #import "FEDevicesCache.h"
+#import "FECommonDefine.h"
 
 //DISCRETE_SENSOR(0,"告警类"),
 //CONTIUOUS_SENSOR(1,"模拟类"),
@@ -51,13 +52,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"CLOUD_SAFE");
-        if (SYSTEM_VERSION_UP7) {
-            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"CLOUD_SAFE") image:[UIImage imageNamed:@"tabbar_safe"] selectedImage:nil];
-            self.tabBarItem = tabitem;
-        }else{
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_safe_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_safe"]];
-        }
+        self.title = kString(@"CLOUD_SAFE");
+       
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"CLOUD_SAFE") image:[UIImage imageNamed:@"tabbar_safe"] selectedImage:nil];
+        self.tabBarItem = tabitem;
         
         _deviceList = [NSMutableArray new];
     }
@@ -94,7 +92,7 @@
 }
 
 -(void)initUI{
-//    [self loadRightCustomButtonItemWithTitle:FEString(@"SEARCH") image:nil];
+//    [self loadRightCustomButtonItemWithTitle:kString(@"SEARCH") image:nil];
 //    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
 //    [self.view addSubview:_searchBar];
     
@@ -117,7 +115,7 @@
 }
 
 //-(void)requestSensor{
-////    [self displayHUD:FEString(@"LOADING...")];
+////    [self displayHUD:kString(@"LOADING...")];
 //    FEPage *page = [[FEPage alloc] initWithPageSize:0 currentPage:0 count:0];
 //    FESensorListRequest *request = [[FESensorListRequest alloc] initWithUserID:FELoginUser.userid page:page attributes:nil];
 //    __weak typeof(self) weakself = self;
@@ -213,7 +211,7 @@
 
 #pragma mark - FEContrilViewDelegate
 -(void)controlViewDidSelectAllOpen:(FEControlView *)cview{
-//    [self displayHUD:FEString(@"LOADING...")];
+//    [self displayHUD:kString(@"LOADING...")];
 //    NSMutableArray *allsensors = [NSMutableArray array];
 //    for (NSDictionary *item in self.deviceList) {
 //        [allsensors addObjectsFromArray:item[__SENSOR_LIST]];
@@ -229,7 +227,7 @@
 }
 
 -(void)controlViewDidSelectAllClose:(FEControlView *)cview{
-//    [self displayHUD:FEString(@"LOADING...")];
+//    [self displayHUD:kString(@"LOADING...")];
 //    NSMutableArray *allsensors = [NSMutableArray array];
 //    for (NSDictionary *item in self.deviceList) {
 //        [allsensors addObjectsFromArray:item[__SENSOR_LIST]];
@@ -245,7 +243,7 @@
 }
 
 -(void)changeSensorStatus:(FESensor *)sensor enable:(BOOL)enable{
-    [self displayHUD:FEString(@"操作中...")];
+    [self displayHUD:kString(@"操作中...")];
     if (enable) {
         FESensorOperationRequest *edata = [[FESensorOperationRequest alloc] initWithUserId:FELoginUser.userid enableSensors:@[sensor.id]];
         __weak typeof(self) weakself = self;

@@ -17,8 +17,8 @@
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = FEString(@"HOME_PAGE");
-        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
+        self.title = kString(@"HOME_PAGE");
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
         self.tabBarItem = tabitem;
     }
     return self;

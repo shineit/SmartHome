@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = FEString(@"News");
+    self.title = kString(@"News");
     [self initUI];
 }
 

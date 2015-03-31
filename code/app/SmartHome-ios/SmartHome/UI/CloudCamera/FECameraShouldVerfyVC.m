@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 #import "FECameraVerfyPhoneVC.h"
 #import "FECloudCameraVC.h"
-
+#import "FECommonDefine.h"
 
 @interface FECameraShouldVerfyVC ()<CustomIOS7AlertViewDelegate>
 
@@ -29,13 +29,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"授权登陆");
-        if (SYSTEM_VERSION_UP7) {
-            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"CLOUD_CAMERA") image:[UIImage imageNamed:@"tabbar_camera"] selectedImage:nil];
-            self.tabBarItem = tabitem;
-        }else{
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_camera_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_camera"]];
-        }
+        self.title = kString(@"授权登陆");
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"CLOUD_CAMERA") image:[UIImage imageNamed:@"tabbar_camera"] selectedImage:nil];
+        self.tabBarItem = tabitem;
+        
     }
     return self;
 }

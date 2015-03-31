@@ -7,6 +7,7 @@
 //
 
 #import "FEEnumString.h"
+#import "Define.h"
 
 @implementation FEEnumString
 
@@ -14,7 +15,7 @@
     static NSArray *array = NULL;
     if (!array) {
 
-        array = [NSArray arrayWithObjects:FEString(@"UNKNOW"),FEString(@"掉线"),FEString(@"掉线恢复"),FEString(@"欠压"),FEString(@"欠压恢复"),FEString(@"设防"),FEString(@"撤防"),FEString(@"故障"),FEString(@"故障恢复"),FEString(@"预警"),FEString(@"火警"),@"反馈",@"复位",@"动作",@"动作复位", nil];
+        array = [NSArray arrayWithObjects:kString(@"UNKNOW"),kString(@"掉线"),kString(@"掉线恢复"),kString(@"欠压"),kString(@"欠压恢复"),kString(@"设防"),kString(@"撤防"),kString(@"故障"),kString(@"故障恢复"),kString(@"预警"),kString(@"火警"),@"反馈",@"复位",@"动作",@"动作复位", nil];
     }
     return array[type.integerValue];
 }
@@ -22,7 +23,7 @@
 +(NSString *)deviceType:(NSNumber *)type{
     static NSArray *array = NULL;
     if (!array) {
-        array = [NSArray arrayWithObjects:FEString(@"CONCENTRATOR_ALARM"),FEString(@"HOME_SENSOR"),FEString(@"FIRE_SENSOR"), nil];
+        array = [NSArray arrayWithObjects:kString(@"CONCENTRATOR_ALARM"),kString(@"HOME_SENSOR"),kString(@"FIRE_SENSOR"), nil];
     }
     return array[type.integerValue];
 }
@@ -30,7 +31,7 @@
 +(NSString *)alarmHandledType:(NSNumber *)type{
     static NSArray *array = NULL;
     if (!array) {
-        array = [NSArray arrayWithObjects:FEString(@"NONE_CLEAR"),FEString(@"MANUAL_CLEAR"),FEString(@"AUTO_CLEAR"), nil];
+        array = [NSArray arrayWithObjects:kString(@"NONE_CLEAR"),kString(@"MANUAL_CLEAR"),kString(@"AUTO_CLEAR"), nil];
     }
     return array[type.integerValue];
 }

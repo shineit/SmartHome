@@ -10,4 +10,7 @@
 
 @interface UIColor (Theme)
 
++(UIColor *)ThemeColor;
++(UIColor *)ThemeViewBackColor;
+
 @end

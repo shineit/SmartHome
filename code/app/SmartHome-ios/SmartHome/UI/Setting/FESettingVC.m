@@ -11,6 +11,7 @@
 #import "FEProfileVC.h"
 #import "FESettingItemCell.h"
 #import "FERate.h"
+#import "FECommonDefine.h"
 
 #define _TITLE  @"title"
 #define _IMAGE  @"image"
@@ -31,26 +32,22 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"SETTING");
-        if (SYSTEM_VERSION_UP7) {
-            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"SETTING") image:[UIImage imageNamed:@"tabbar_setting"] selectedImage:nil];
-            self.tabBarItem = tabitem;
-        }else{
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_setting_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_setting"]];
-        }
+        self.title = kString(@"SETTING");
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"SETTING") image:[UIImage imageNamed:@"tabbar_setting"] selectedImage:nil];
+        self.tabBarItem = tabitem;
         
         _settingItem = @[
                         @[
-                          @{_TITLE : FEString(@"PROFILE"),_IMAGE : [UIImage imageNamed:@"setting_profile"],_FUNCTION : [self invocation:@selector(profile)]}
+                          @{_TITLE : kString(@"PROFILE"),_IMAGE : [UIImage imageNamed:@"setting_profile"],_FUNCTION : [self invocation:@selector(profile)]}
                           ],
                         @[
-                          @{_TITLE : FEString(@"ABOUT_US"), _IMAGE : [UIImage imageNamed:@"setting_aboutus"], _FUNCTION : [self invocation:@selector(aboutus)]},
-                          @{_TITLE : FEString(@"RATE_US"), _IMAGE : [UIImage imageNamed:@"setting_rating"], _FUNCTION : [self invocation:@selector(rateus)]}
+                          @{_TITLE : kString(@"ABOUT_US"), _IMAGE : [UIImage imageNamed:@"setting_aboutus"], _FUNCTION : [self invocation:@selector(aboutus)]},
+                          @{_TITLE : kString(@"RATE_US"), _IMAGE : [UIImage imageNamed:@"setting_rating"], _FUNCTION : [self invocation:@selector(rateus)]}
                           ],
                         @[
-                          @{_TITLE : FEString(@"SERVICE"), _IMAGE : [UIImage imageNamed:@"setting_service"], _FUNCTION : [self invocation:@selector(service)]},
-                          @{_TITLE : FEString(@"ABOUT_NEWS"), _IMAGE : [UIImage imageNamed:@"setting_news"], _FUNCTION : [self invocation:@selector(aboutnews)]},
-                          @{_TITLE : FEString(@"FEED_BACK"), _IMAGE : [UIImage imageNamed:@"setting_feedback"], _FUNCTION : [self invocation:@selector(feedback)]}
+                          @{_TITLE : kString(@"SERVICE"), _IMAGE : [UIImage imageNamed:@"setting_service"], _FUNCTION : [self invocation:@selector(service)]},
+                          @{_TITLE : kString(@"ABOUT_NEWS"), _IMAGE : [UIImage imageNamed:@"setting_news"], _FUNCTION : [self invocation:@selector(aboutnews)]},
+                          @{_TITLE : kString(@"FEED_BACK"), _IMAGE : [UIImage imageNamed:@"setting_feedback"], _FUNCTION : [self invocation:@selector(feedback)]}
                           ]
                         ];
     }

@@ -40,3 +40,11 @@ code/app/SmartHome-Android/SmartHome/build/
 
 
 code/app/SmartHome-Android/SmartHome/.classpath
+
+code/app/SmartHome-Android/Enterprise/SmartHome/bin/
+
+code/app/SmartHome-Android/Enterprise/SmartHome/gen/cn/fuego/smart/home/R.java
+
+code/app/SmartHome-Android/Enterprise/SmartHome/gen/cn/fuego/smart/home/Manifest.java
+
+code/app/SmartHome-Android/Enterprise/SmartHome/gen/cn/fuego/smart/home/BuildConfig.java

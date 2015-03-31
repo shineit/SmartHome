@@ -9,6 +9,7 @@
 #import "FEControlView.h"
 #import "FECheckButtonGroup.h"
 #import "FECheckButton.h"
+#import "FECommonDefine.h"
 
 @interface FEControlView ()
 @property (nonatomic, strong) FECheckButtonGroup *checkGroup;
@@ -33,14 +34,14 @@
     self.backgroundColor = [UIColor whiteColor];
     
     FECheckButton *open = [[FECheckButton alloc] initWithFrame:CGRectMake(20, 5, self.bounds.size.width / 2.0f - 20, 30)];
-    [open setTitle:FEString(@"SAFE_ALL_OPEN")];
+    [open setTitle:kString(@"SAFE_ALL_OPEN")];
     [_checkGroup addButton:open];
     [open addObserver:self check:@selector(check:)];
     
     [self addSubview:open];
     
     FECheckButton *close = [[FECheckButton alloc] initWithFrame:CGRectMake(self.bounds.size.width / 2.0f + 20, 5, self.bounds.size.width / 2.0f - 20, 30)];
-    [close setTitle:FEString(@"SAFE_ALL_CLOSE")];
+    [close setTitle:kString(@"SAFE_ALL_CLOSE")];
     [_checkGroup addButton:close];
     [close addObserver:self check:@selector(check:)];
     [self addSubview:close];

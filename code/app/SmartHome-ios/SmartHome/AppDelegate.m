@@ -24,6 +24,7 @@
 #import "YSMobilePages.h"
 #import "FEEmptyVC.h"
 #import "FECameraShouldVerfyVC.h"
+#import "FECommonDefine.h"
 
 @implementation AppDelegate
 
@@ -65,8 +66,8 @@
     
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    FEUserDefaultsSetObjectForKey(devToken, FEDeviceToken);
-    FEUserDefaultsSync;
+    kUserDefaultsSetObjectForKey(devToken, kDeviceToken);
+    kUserDefaultsSync;
 }
 
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{

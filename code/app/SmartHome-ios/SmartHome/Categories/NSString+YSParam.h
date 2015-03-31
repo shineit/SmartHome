@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (YSParam)
-+(NSString *)ysParam:(NSDictionary *)dic method:(NSString *)method;
++(NSString *)ysParam:(NSDictionary *)dic method:(NSString *)method appSecret:(NSString *)appSecret appKey:(NSString *)appKey;
 @end

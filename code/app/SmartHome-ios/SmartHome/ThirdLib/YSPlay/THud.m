@@ -8,7 +8,7 @@
 
 #import "THud.h"
 #import <MBProgressHUD/MBProgressHUD.h>
-#import "AppDelegate.h"
+#import "UIFont+AppFont.h"
 
 @interface THud ()
 
@@ -27,13 +27,13 @@
     return instance;
 }
 
--(id)init{
+-(id)initWithView:(UIView *)view{
     self = [super init];
     if (self) {
-        _hud = [[MBProgressHUD alloc] initWithWindow:[AppDelegate sharedDelegate].window];
+        _hud = [[MBProgressHUD alloc] initWithView:view];
         _hud.labelFont = [UIFont appFontWithSize:12];
         _hud.mode = MBProgressHUDModeText;
-        [[AppDelegate sharedDelegate].window addSubview:_hud];
+        [view addSubview:_hud];
         
     }
     return self;

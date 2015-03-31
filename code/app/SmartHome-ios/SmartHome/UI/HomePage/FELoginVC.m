@@ -12,6 +12,7 @@
 #import "FEWebServiceManager.h"
 #import "FESiginRequest.h"
 #import "FESiginResponse.h"
+#import "FECommonDefine.h"
 
 @interface FELoginVC ()<UITextFieldDelegate>
 
@@ -39,7 +40,7 @@
 }
 
 -(void)initUI{
-    self.view.backgroundColor = FEThemeColor;
+    self.view.backgroundColor = [UIColor ThemeColor];
     //logo
     CGFloat adjust = [UIDevice is4Inch]?40:0;
     
@@ -54,7 +55,7 @@
     [self.view addSubview:textcontent];
 
     FELabel *namelabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 10, 70, 30)];
-    namelabel.text = FEString(@"USER_NAME:");
+    namelabel.text = kString(@"USER_NAME:");
     [textcontent addSubview:namelabel];
     
     //user name textfield
@@ -63,21 +64,21 @@
     username.returnKeyType = UIReturnKeyNext;
     username.keyboardType = UIKeyboardTypeEmailAddress;
     username.borderStyle = UITextBorderStyleNone;
-//    username.placeholder = FEString(@"INPUT_USER_NAME");
+//    username.placeholder = kString(@"INPUT_USER_NAME");
     username.delegate = self;
     [textcontent addSubview:username];
     self.username = username;
     
     
     FELabel *pswlabel = [[FELabel alloc] initWithFrame:CGRectMake(5, 60, 70, 30)];
-    pswlabel.text = FEString(@"USER_PSW:");
+    pswlabel.text = kString(@"USER_PSW:");
     [textcontent addSubview:pswlabel];
     
     FETextField *psw = [[FETextField alloc] initWithFrame:CGRectMake(pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5, pswlabel.frame.origin.y, textcontent.bounds.size.width - (pswlabel.frame.origin.x + pswlabel.bounds.size.width + 5) - 10, 30)];
     psw.text = @"1234";
     psw.returnKeyType = UIReturnKeyDone;
     psw.borderStyle = UITextBorderStyleNone;
-//    psw.placeholder = FEString(@"INPUT_PASSWORD");
+//    psw.placeholder = kString(@"INPUT_PASSWORD");
     psw.secureTextEntry = YES;
     psw.delegate = self;
     [textcontent addSubview:psw];
@@ -87,7 +88,7 @@
     loginbtn.frame = CGRectMake(50, textcontent.frame.origin.y + textcontent.bounds.size.height + 20, self.view.bounds.size.width - 100, 40);
     loginbtn.layer.cornerRadius = 5;
     loginbtn.layer.masksToBounds = YES;
-    [loginbtn setTitle:FEString(@"LOGIN") forState:UIControlStateNormal];
+    [loginbtn setTitle:kString(@"LOGIN") forState:UIControlStateNormal];
     [loginbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginbtn setBackgroundImage:[UIImage imageFromColor:FEButtonColor] forState:UIControlStateNormal];
     [loginbtn addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
@@ -101,13 +102,13 @@
 -(void)login:(UIButton *)button{
     [self hideKeyboard];
     if (![self.username.text isEqualToString:@""] && ![self.password.text isEqualToString:@""]) {
-        [self displayHUD:FEString(@"LOADING")];
+        [self displayHUD:kString(@"LOADING")];
         __weak typeof(self) weakself = self;
     
 //        int returnCode = [[bpushres valueForKey:BPushRequestErrorCodeKey] intValue];
 //        NSString *requestid = [bpushres valueForKey:BPushRequestRequestIdKey];
         
-        FESiginRequest *sdata = [[FESiginRequest alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0" devToken:FEUserDefaultsObjectForKey(FEDeviceToken) push_id:nil push_userid:nil push_channelID:nil];
+        FESiginRequest *sdata = [[FESiginRequest alloc] initWtihUserName:self.username.text password:[self.password.text MD5] clientType:@"1" clientVersion:@"1.0" devToken:kUserDefaultsObjectForKey(kDeviceToken) push_id:nil push_userid:nil push_channelID:nil];
         
         [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FESiginResponse *user){
             NSLog(@"call back");
@@ -125,7 +126,7 @@
             
         }];
     }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:FEString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:FEString(@"OK") otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:kString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:kString(@"OK") otherButtonTitles:nil];
         [alert show];
     }
     

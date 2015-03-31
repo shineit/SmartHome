@@ -36,7 +36,7 @@
     
     
     FELabel *clabel = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset, twidth, theight)];
-    clabel.text = FEString(@"ALARM_CONCENTRATOR");
+    clabel.text = kString(@"ALARM_CONCENTRATOR");
     [self addSubview:clabel];
     
     _controlPoint = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset, vwidth, vheight)];
@@ -44,7 +44,7 @@
     [self addSubview:_controlPoint];
     
     FELabel *dNumber = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset + theight + yspace, twidth, theight)];
-    dNumber.text = FEString(@"ALARM_DEVICENUMBER");
+    dNumber.text = kString(@"ALARM_DEVICENUMBER");
     [self addSubview:dNumber];
     
     _deviceNumber = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset + vheight + yspace, vwidth, vheight)];
@@ -52,7 +52,7 @@
     [self addSubview:_deviceNumber];
     
     FELabel *dtype = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset + 2 * theight + 2 * yspace, twidth, theight)];
-    dtype.text = FEString(@"ALARM_DEVICETYPE");
+    dtype.text = kString(@"ALARM_DEVICETYPE");
     [self addSubview:dtype];
     
     _deviceType = [[FELabel alloc] initWithFrame:CGRectMake(xvoffset, yoffset + 2 * vheight + 2 * yspace, vwidth, vheight)];

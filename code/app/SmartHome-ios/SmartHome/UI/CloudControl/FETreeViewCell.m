@@ -48,7 +48,7 @@
     
     self.controllContentView = [[UIView alloc] initWithFrame:self.contentView.bounds];
     UILabel *label = [[FELabel alloc] initWithFrame:CGRectMake(5, 5, 60, 20)];
-    label.text = FEString(@"编号:");
+    label.text = kString(@"编号:");
     [self.controllContentView addSubview:label];
     
     self.numberLabel = [[FELabel alloc] initWithFrame:CGRectMake(label.frame.origin.x + label.bounds.size.width + 5, 5, 80, 20)];
@@ -58,7 +58,7 @@
     [self.controllContentView addSubview:self.regionLabel];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(self.regionLabel.frame.origin.x - 60 - 5, 5, 60, 20)];
-//    label.text = FEString(<#_S#>)
+//    label.text = kString(<#_S#>)
     [self.controllContentView addSubview:label];
     [self.contentView addSubview:self.controllContentView];
 //    self.indentationLevel

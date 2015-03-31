@@ -14,9 +14,11 @@
 //#import "YSDemoDataModel.h"
 //#import "CAttention.h"
 #import "TipsPublicView.h"
+#import "YSConstStrings.h"
 
 #import "SimpleWifi.h"
 #import "BonjourBrowser.h"
+#import "UIColor+Hex.h"
 
 #define TIPS_VIEW_HEIGHT        200
 

@@ -39,8 +39,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"SERVICE_REQUEST");
-        _ordertype = [NSArray arrayWithObjects:@{@"type":@(0),@"name":FEString(@"ORDER_INSTALL")},@{@"type":@(1),@"name":FEString(@"ORDER_REPAIR")}, nil];
+        self.title = kString(@"SERVICE_REQUEST");
+        _ordertype = [NSArray arrayWithObjects:@{@"type":@(0),@"name":kString(@"ORDER_INSTALL")},@{@"type":@(1),@"name":kString(@"ORDER_REPAIR")}, nil];
     }
     return self;
 }
@@ -71,7 +71,7 @@
     
     //编号
     FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 15, 80, 20)];
-    label.text = FEString(@"ORDER_NUMBER");
+    label.text = kString(@"ORDER_NUMBER");
     [content addSubview:label];
     
     _number = [[FELabel alloc] initWithFrame:CGRectMake(110, 10, 100, 20)];
@@ -80,7 +80,7 @@
     
     //类型
     FELabel *type = [[FELabel alloc] initWithFrame:CGRectMake(10, 65, 60, 20)];
-    type.text = FEString(@"ORDER_TYPE");
+    type.text = kString(@"ORDER_TYPE");
     [content addSubview:type];
     
     //check group
@@ -103,7 +103,7 @@
     
     //名称
     FELabel *title = [[FELabel alloc] initWithFrame:CGRectMake(10, 125, 60, 20)];
-    title.text = FEString(@"ORDER_THEME");
+    title.text = kString(@"ORDER_THEME");
     [scrollcontent addSubview:title];
     
     _titleTextField = [[UITextField alloc] initWithFrame:CGRectMake(80, 120, 220, 30)];
@@ -112,7 +112,7 @@
     [content addSubview:_titleTextField];
     
     FELabel *contentlabel = [[FELabel alloc] initWithFrame:CGRectMake(10, 165, 60, 20)];
-    contentlabel.text = FEString(@"ORDER_CONTENT");
+    contentlabel.text = kString(@"ORDER_CONTENT");
     [content addSubview:contentlabel];
     
     _contentTextField = [[UITextField alloc] initWithFrame:CGRectMake(80, 160, 220, 30)];
@@ -122,7 +122,7 @@
     
     //联系人
     FELabel *contact = [[FELabel alloc] initWithFrame:CGRectMake(10, 235, 70, 20)];
-    contact.text = FEString(@"ORDER_CONTACT");
+    contact.text = kString(@"ORDER_CONTACT");
     [content addSubview:contact];
     
     _contact = [[UITextField alloc] initWithFrame:CGRectMake(85, 230, 205, 30)];
@@ -132,7 +132,7 @@
     
     //电话
     FELabel *phone = [[FELabel alloc] initWithFrame:CGRectMake(10, 275, 70, 20)];
-    phone.text = FEString(@"ORDER_PHONENUMBER");
+    phone.text = kString(@"ORDER_PHONENUMBER");
     [content addSubview:phone];
     
     _phonenumber = [[UITextField alloc] initWithFrame:CGRectMake(85, 270, 205, 30)];
@@ -142,7 +142,7 @@
     
     //adress
     FELabel *adress = [[FELabel alloc] initWithFrame:CGRectMake(10, 315, 70, 20)];
-    adress.text = FEString(@"ORDER_ADRESS");
+    adress.text = kString(@"ORDER_ADRESS");
     [content addSubview:adress];
     
     _address = [[UITextField alloc] initWithFrame:CGRectMake(85, 310, 205, 30)];
@@ -155,14 +155,14 @@
         UIButton *del = [UIButton buttonWithType:UIButtonTypeCustom];
         del.frame = CGRectMake(20, 360, 80, 40);
         [del setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [del setTitle:FEString(@"ORDER_DELET") forState:UIControlStateNormal];
+        [del setTitle:kString(@"ORDER_DELET") forState:UIControlStateNormal];
         [scrollcontent addSubview:del];
         
         //提交按钮
         FEButton *submit = [FEButton buttonWithType:UIButtonTypeCustom];
         submit.frame = CGRectMake(220, 360, 80, 40);
         [submit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [submit setTitle:FEString(@"ORDER_SUBMIT") forState:UIControlStateNormal];
+        [submit setTitle:kString(@"ORDER_SUBMIT") forState:UIControlStateNormal];
         [submit addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
         [scrollcontent addSubview:submit];
     }else if(self.order){
@@ -187,7 +187,7 @@
     FEOrder *order = [[FEOrder alloc] initWithOrderID:[NSString UUID] name:_titleTextField.text type:_ordertype[_checkGroup.checkedindex][@"type"] content:_contentTextField.text creater:FELoginUser.username time:@([[NSDate date] timeIntervalSince1970]) contactname:_contact.text phone:_phonenumber.text address:_address.text status:nil handler:nil handResult:nil handTime:nil];
     FEServiceOrderSetRequest *sdata = [[FEServiceOrderSetRequest alloc] initWithCmd:@"" serviceOrder:order];
     [self hideKeyboard:nil];
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] orederSet:sdata response:^(NSError *error, FEOrderSetResponse *response) {
         [weakself hideHUD:YES];

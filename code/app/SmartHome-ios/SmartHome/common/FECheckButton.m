@@ -7,6 +7,7 @@
 //
 
 #import "FECheckButton.h"
+#import "FELabel.h"
 
 @interface FECheckButton ()
 

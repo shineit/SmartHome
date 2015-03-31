@@ -13,6 +13,7 @@
 #import "FEProfileVC.h"
 #import "FECloudCameraVC.h"
 #import "FECloudSafeVC.h"
+#import "FECommonDefine.h"
 
 @interface FEHomeVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -28,11 +29,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"HOME_PAGE");
-        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
+        self.title = kString(@"HOME_PAGE");
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
         self.tabBarItem = tabitem;
         
-        self.functionItem = @[FEString(@"CLOUD_SAFE"),FEString(@"CURRENT_WARRING"),FEString(@"PROFILE"),FEString(@"CLOUD_CAMERA"),FEString(@"MOD_PSW"),FEString(@"WARRING")];
+        self.functionItem = @[kString(@"CLOUD_SAFE"),kString(@"CURRENT_WARRING"),kString(@"PROFILE"),kString(@"CLOUD_CAMERA"),kString(@"MOD_PSW"),kString(@"WARRING")];
     }
     return self;
 }

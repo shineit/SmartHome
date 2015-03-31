@@ -23,33 +23,33 @@
 -(void)setup{
     self.backgroundColor = [UIColor whiteColor];
     FELabel *des = [[FELabel alloc] initWithFrame:CGRectMake(10, 10+5, 65, 20)];
-    des.text = FEString(@"ALARM_DESCRIPTION");
+    des.text = kString(@"ALARM_DESCRIPTION");
     [self addSubview:des];
     
     _descriptionTextFeild = [[UITextField alloc] initWithFrame:CGRectMake(80, 10, 200, 30)];
     _descriptionTextFeild.borderStyle = UITextBorderStyleRoundedRect;
     _descriptionTextFeild.backgroundColor = [UIColor clearColor];
-    _descriptionTextFeild.placeholder = FEString(@"ALARM_INPUT_DESCRIPTION");
+    _descriptionTextFeild.placeholder = kString(@"ALARM_INPUT_DESCRIPTION");
     [self addSubview:_descriptionTextFeild];
     
     FELabel *el = [[FELabel alloc] initWithFrame:CGRectMake(10, 50+5, 65, 20)];
-    el.text = FEString(@"ALARM_EARLYWARRING");
+    el.text = kString(@"ALARM_EARLYWARRING");
     [self addSubview:el];
     
     _earlyValue = [[UITextField alloc] initWithFrame:CGRectMake(80, 50, 200, 30)];
     _earlyValue.borderStyle = UITextBorderStyleRoundedRect;
     _earlyValue.backgroundColor = [UIColor clearColor];
-    _earlyValue.placeholder = FEString(@"ALARM_INPUT_EARLYWARRING_VALUE");
+    _earlyValue.placeholder = kString(@"ALARM_INPUT_EARLYWARRING_VALUE");
     [self addSubview:_earlyValue];
     
     FELabel *wl = [[FELabel alloc] initWithFrame:CGRectMake(10, 90+5, 65, 20)];
-    wl.text = FEString(@"ALARM_INPUT_VALUE");
+    wl.text = kString(@"ALARM_INPUT_VALUE");
     [self addSubview:wl];
     
     _value = [[UITextField alloc] initWithFrame:CGRectMake(80, 90, 200, 30)];
     _value.borderStyle = UITextBorderStyleRoundedRect;
     _value.backgroundColor = [UIColor clearColor];
-    _value.placeholder = FEString(@"ALARM_INPUT_WARRING_VALUE");
+    _value.placeholder = kString(@"ALARM_INPUT_WARRING_VALUE");
     [self addSubview:_value];
     
     

@@ -8,6 +8,7 @@
 
 #import "BonjourBrowser.h"
 #import <Foundation/NSNetServices.h>
+#import "YSConstStrings.h"
 
 
 // A category on NSNetService that's used to sort NSNetService objects by their name.

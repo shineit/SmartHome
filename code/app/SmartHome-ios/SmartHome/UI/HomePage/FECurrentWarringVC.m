@@ -32,7 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"CURRENT_WARRING");
+        self.title = kString(@"CURRENT_WARRING");
     }
     return self;
 }

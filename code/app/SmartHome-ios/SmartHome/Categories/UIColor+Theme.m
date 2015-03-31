@@ -12,6 +12,14 @@
 
 //+(UIColor *)themeColor{
 //    return FEColor(<#_R#>, <#_G#>, <#_B#>, <#_A#>)
-//}
+//}252, 156, 56, 1
+
++(UIColor *)ThemeColor{
+    return [UIColor colorWithRed:252.0f / 255.0f green:156.0f / 255.0f blue:56.0f / 255.0f alpha:1.0f];
+}
+
++(UIColor *)ThemeViewBackColor{
+    return [UIColor colorWithRed:249.0f / 255.0f green:249.0f / 255.0f blue:249.0f / 255.0f alpha:1.0f];
+}
 
 @end

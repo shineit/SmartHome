@@ -11,6 +11,7 @@
 #import "FEDeviceInfoInputView.h"
 #import "FEAlarm.h"
 #import "FEEnumString.h"
+#import "FECommonDefine.h"
 
 @interface FEWarringDetailVC (){
     FEAlarm *_alarm;
@@ -30,7 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"CLOUD_SAFE");
+        self.title = kString(@"CLOUD_SAFE");
     }
     return self;
 }
@@ -38,9 +39,9 @@
 -(id)initWithAlarm:(FEAlarm *)alarm{
     self = [super init];
     if (self) {
-        self.title = FEString(@"CLOUD_SAFE");
+        self.title = kString(@"CLOUD_SAFE");
         _alarm = alarm;
-        _alarmDevices = [NSArray arrayWithObjects:FEString(@"CONCENTRATOR_ALARM"),FEString(@"HOME_SENSOR"),FEString(@"FIRE_SENSOR"), nil];
+        _alarmDevices = [NSArray arrayWithObjects:kString(@"CONCENTRATOR_ALARM"),kString(@"HOME_SENSOR"),kString(@"FIRE_SENSOR"), nil];
     }
     return self;
 }
@@ -74,19 +75,19 @@
     [scrollview addSubview:typeview];
     
     FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
-    label.textColor = FEThemeColor;
-    label.text = FEString(@"ALARM_ALARM");
+    label.textColor = [UIColor ThemeColor];
+    label.text = kString(@"ALARM_ALARM");
     [typeview addSubview:label];
     
     FELabel *labelAlarmType = [[FELabel alloc] initWithFrame:CGRectMake(75, 10, 100, 20)];
-    labelAlarmType.textColor = FEThemeColor;
+    labelAlarmType.textColor = [UIColor ThemeColor];
     labelAlarmType.text = [FEEnumString alarmType:_alarm.alarmType];
     [typeview addSubview:labelAlarmType];
     
     FEButton *cleanBtn = [FEButton buttonWithType:UIButtonTypeCustom];
     [cleanBtn addTarget:self action:@selector(cleanwarring:) forControlEvents:UIControlEventTouchUpInside];
     cleanBtn.frame = CGRectMake(40, typeview.frame.origin.y + typeview.frame.size.height + 20, 240, 40);
-    [cleanBtn setTitle:FEString(@"ALARM_CLEAN_WARRING") forState:UIControlStateNormal];
+    [cleanBtn setTitle:kString(@"ALARM_CLEAN_WARRING") forState:UIControlStateNormal];
     [scrollview addSubview:cleanBtn];
     
     

@@ -8,6 +8,7 @@
 
 #import "TipsPublicView.h"
 //#import "YSDemoAppDefine.h"
+#import "UIColor+Hex.h"
 
 @implementation TipsPublicView
 

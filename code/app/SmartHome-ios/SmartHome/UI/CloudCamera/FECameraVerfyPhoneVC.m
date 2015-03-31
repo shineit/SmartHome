@@ -35,7 +35,7 @@
     
     NSDictionary *map = @{@"type":@(1),@"userId":FELoginUser.userid,@"phone":self.phoneNumberTextField.text};
 
-    [[YSHTTPClient sharedInstance] requestGetSMSVerificationCodeWithSign:[NSString ysParam:map method:@"msg/get"] complication:^(id responseObject, NSError *error) {
+    [[YSHTTPClient sharedInstance] requestGetSMSVerificationCodeWithSign:[NSString ysParam:map method:@"msg/get" appSecret:YSAppSecret appKey:YSAppKey] complication:^(id responseObject, NSError *error) {
         NSLog(@"%@",responseObject);
     }];
 }

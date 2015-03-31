@@ -24,6 +24,7 @@
 #import "FECameraPlayerVC.h"
 #import "FECameraCode.h"
 #import "FECameraWifiConfigVC.h"
+#import "FECommonDefine.h"
 
 @interface FECloudCameraVC ()<YSPlayerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,ZBarReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -45,14 +46,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"CLOUD_CAMERA");
-        
-        if (SYSTEM_VERSION_UP7) {
-            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"CLOUD_CAMERA") image:[UIImage imageNamed:@"tabbar_camera"] selectedImage:nil];
-            self.tabBarItem = tabitem;
-        }else{
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_camera_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_camera"]];
-        }
+        self.title = kString(@"CLOUD_CAMERA");
+    
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"CLOUD_CAMERA") image:[UIImage imageNamed:@"tabbar_camera"] selectedImage:nil];
+        self.tabBarItem = tabitem;
         
 //        self.cameras = [[NSMutableArray alloc] initWithObjects:@"camera1",@"camera2",@"camera3",@"camera4", nil];
     }
@@ -309,7 +306,17 @@
                 [weakself.tableView reloadData];
             }
             [weakself hideHUD:YES];
-        }];
+       }];
+//#^(id responseObject, NSError *error)block#>
+//        [[YSHTTPClient sharedInstance] :camera.deviceId complition:^(id responseObject, NSError *error) {
+//            NSNumber *resultCode = [responseObject objectForKey:@"resultCode"];
+//            
+//            if (!error && resultCode.integerValue == 200) {
+//                [weakself.cameras removeObject:camera];
+//                [weakself.tableView reloadData];
+//            }
+//            [weakself hideHUD:YES];
+//        }];
 //        [[YSHTTPClient sharedInstance] requestDeleteCameraWithCameraId:camera.deviceId complition:^(id responseObject, NSError *error) {
         
 //        }];

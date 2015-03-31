@@ -16,6 +16,7 @@
 #import "FEOrderListResponse.h"
 #import "FEOrder.h"
 #import "FEResult.h"
+#import "FECommonDefine.h"
 
 @interface FEServiceListVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -31,7 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"ORDER_SERVICE");
+        self.title = kString(@"ORDER_SERVICE");
         _serviceDatas = [NSMutableArray new];
     }
     return self;
@@ -47,7 +48,7 @@
 
 -(void)initUI{
     
-    [self loadRightCustomButtonItemWithTitle:FEString(@"ORDER_ADD") image:nil];
+    [self loadRightCustomButtonItemWithTitle:kString(@"ORDER_ADD") image:nil];
     
     UITableView *table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     table.backgroundColor = [UIColor clearColor];
@@ -65,7 +66,7 @@
 //请求历史
 -(void)requestOrder{
     
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     FEPage *page = [[FEPage alloc] initWithPageSize:10 currentPage:1 count:1];
     FEAttribute *attr = [[FEAttribute alloc] initWithAttrName:@"" value:@""];
     
@@ -120,17 +121,17 @@
     header.backgroundColor = FEColor(229, 229, 229, 1);
     FELabel *label = [[FELabel alloc] initWithFrame:CGRectMake(10, 20, 80, 30)];
     label.textAlignment = NSTextAlignmentLeft;
-    label.text = FEString(@"ORDER_NUMBER");
+    label.text = kString(@"ORDER_NUMBER");
     [header addSubview:label];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(100, 20, 80, 30)];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = FEString(@"ORDER_TYPE");
+    label.text = kString(@"ORDER_TYPE");
     [header addSubview:label];
     
     label = [[FELabel alloc] initWithFrame:CGRectMake(240, 20, 75, 30)];
     label.textAlignment = NSTextAlignmentRight;
-    label.text = FEString(@"ORDER_STATUS");
+    label.text = kString(@"ORDER_STATUS");
     [header addSubview:label];
     return header;
 }

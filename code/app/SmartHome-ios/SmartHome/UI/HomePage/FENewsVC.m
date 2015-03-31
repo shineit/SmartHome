@@ -44,13 +44,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"HOME_PAGE");
-        if (SYSTEM_VERSION_UP7) {
-            UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:FEString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
-            self.tabBarItem = tabitem;
-        }else{
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_home_select"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_home"]];
-        }
+        self.title = kString(@"HOME_PAGE");
+        
+        UITabBarItem *tabitem = [[UITabBarItem alloc] initWithTitle:kString(@"HOME_PAGE") image:[UIImage imageNamed:@"tabbar_home"] selectedImage:nil];
+        self.tabBarItem = tabitem;
         _newsList = [NSMutableArray new];
         _warringList = [NSMutableArray new];
         

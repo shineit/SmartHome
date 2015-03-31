@@ -14,6 +14,7 @@
 #import "FELogoutRequest.h"
 #import "FESigoutResponse.h"
 #import "FEDevicesCache.h"
+#import "FECommonDefine.h"
 
 @interface FEProfileVC ()
 
@@ -26,7 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"PROFILE_TITLE");
+        self.title = kString(@"PROFILE_TITLE");
     }
     return self;
 }
@@ -40,7 +41,7 @@
 
 -(void)initUI{
     
-    [self loadRightCustomButtonItemWithTitle:FEString(@"PRODILE_PASSWORD") image:nil];
+    [self loadRightCustomButtonItemWithTitle:kString(@"PRODILE_PASSWORD") image:nil];
     
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 120)];
     content.backgroundColor = [UIColor whiteColor];
@@ -49,7 +50,7 @@
     CDUser *user = FELoginUser;
     
     FELabel *username = [[FELabel alloc] initWithFrame:CGRectMake(20, 30 , 60, 20)];
-    username.text = FEString(@"PROFILE_USERNAME");
+    username.text = kString(@"PROFILE_USERNAME");
     [content addSubview:username];
     
     FELabel *name = [[FELabel alloc] initWithFrame:CGRectMake(90, 30, 200, 20)];
@@ -57,7 +58,7 @@
     [content addSubview:name];
     
     FELabel *email = [[FELabel alloc] initWithFrame:CGRectMake(20, 70 + 5, 60, 20)];
-    email.text = FEString(@"PROFILE_EMAIL");
+    email.text = kString(@"PROFILE_EMAIL");
     [content addSubview:email];
     
     UITextField *emailText = [[UITextField alloc] initWithFrame:CGRectMake(90, 70, 200, 30)];
@@ -66,12 +67,12 @@
     
     FEButton *mod = [FEButton buttonWithType:UIButtonTypeCustom];
     mod.frame = CGRectMake(20, content.frame.origin.y + content.bounds.size.height + 20, 280, 40);
-    [mod setTitle:FEString(@"PROFILE_MODIFY") forState:UIControlStateNormal];
+    [mod setTitle:kString(@"PROFILE_MODIFY") forState:UIControlStateNormal];
     [self.view addSubview:mod];
     
     FEButton *logout = [FEButton buttonWithType:UIButtonTypeCustom];
     logout.frame = CGRectMake(20, mod.frame.origin.y + mod.bounds.size.height + 20, 280, 40);
-    [logout setTitle:FEString(@"PROFILE_LOGOUT") forState:UIControlStateNormal];
+    [logout setTitle:kString(@"PROFILE_LOGOUT") forState:UIControlStateNormal];
     [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logout];
     
@@ -84,7 +85,7 @@
 
 -(void)logout:(UIButton *)button{
     
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     FELogoutRequest *request = [[FELogoutRequest alloc] initWithUserName:FELoginUser.username];
     __weak typeof(self) weakself = self;
     [[FEWebServiceManager sharedInstance] sigoutWithParam:request response:^(NSError *error, FESigoutResponse *response) {

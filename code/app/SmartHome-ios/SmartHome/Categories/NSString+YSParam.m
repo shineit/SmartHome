@@ -7,10 +7,11 @@
 //
 
 #import "NSString+YSParam.h"
+#import "NSString+MD5.h"
 
 @implementation NSString (YSParam)
 
-+(NSString *)ysParam:(NSDictionary *)dic method:(NSString *)method {
++(NSString *)ysParam:(NSDictionary *)dic method:(NSString *)method appSecret:(NSString *)appSecret appKey:(NSString *)appKey {
     
     long time = [[NSDate date] timeIntervalSince1970];
     
@@ -24,10 +25,10 @@
     NSMutableString *pmstring = [[NSMutableString alloc] initWithString:pstring];
     [pmstring appendFormat:@",method:%@,",method];
     [pmstring appendFormat:@"time:%ld,",time];
-    [pmstring appendFormat:@"secret:%@",YSAppSecret];
+    [pmstring appendFormat:@"secret:%@",appSecret];
     NSString *md5string = [pmstring MD5];
     
-    NSDictionary *systemdic = @{@"ver":@"1.0",@"sign":md5string,@"key":YSAppKey,@"time":@(time)};
+    NSDictionary *systemdic = @{@"ver":@"1.0",@"sign":md5string,@"key":appKey,@"time":@(time)};
     NSDictionary *paramDic = @{@"system":systemdic,@"method":method,@"params":dic,@"id":@"123456"};
     NSData *data = [NSJSONSerialization dataWithJSONObject:paramDic options:NSJSONWritingPrettyPrinted error:nil];
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

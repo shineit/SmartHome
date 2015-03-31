@@ -29,6 +29,7 @@
     #import <ZBUtilities/UIViewController+HUD.h>
     #import "UIFont+AppFont.h"
     #import "YSConstStrings.h"
+#import "FECommonDefine.h"
 
 #define SYSTEM_VERSION_UP7                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
 #define SYSTEM_VERSION_UP6                          ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6)

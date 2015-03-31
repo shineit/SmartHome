@@ -14,6 +14,7 @@
 #import "CDUser.h"
 #import "FEResult.h"
 #import "FEBaseResponse.h"
+#import "FECommonDefine.h"
 
 
 @interface FEModifyPassWord ()<UITextFieldDelegate>
@@ -30,7 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"PSW_MODIFY_PASSWORD");
+        self.title = kString(@"PSW_MODIFY_PASSWORD");
     }
     return self;
 }
@@ -58,7 +59,7 @@
     
     //旧密码
     FELabel *oldpsw = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, yoffset + 5, 80, 20)];
-    oldpsw.text = FEString(@"PSW_OLD_PASSWORD");
+    oldpsw.text = kString(@"PSW_OLD_PASSWORD");
     [content addSubview:oldpsw];
     
     UITextField *oldpswText = [[UITextField alloc] initWithFrame:CGRectMake(oldpsw.frame.origin.x + oldpsw.frame.size.width + 10, yoffset, 200, 30)];
@@ -71,7 +72,7 @@
     
     //新密码
     FELabel *newpsw = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, oldpswText.frame.origin.y + oldpswText.bounds.size.height + 10 + 5, 80, 20)];
-    newpsw.text = FEString(@"PSW_NEW_PSW");
+    newpsw.text = kString(@"PSW_NEW_PSW");
     [content addSubview:newpsw];
     
     UITextField *newpswText = [[UITextField alloc] initWithFrame:CGRectMake(newpsw.frame.origin.x + newpsw.frame.size.width + 10, newpsw.frame.origin.y, 200, 30)];
@@ -84,7 +85,7 @@
     
     //校验密码
     FELabel *confirmpsw = [[FELabel alloc] initWithFrame:CGRectMake(xoffset, newpswText.frame.origin.y + newpswText.bounds.size.height + 10 + 5, 80, 20)];
-    confirmpsw.text = FEString(@"PSW_CONFIRM");
+    confirmpsw.text = kString(@"PSW_CONFIRM");
     [content addSubview:confirmpsw];
     
     UITextField *confirmpswText = [[UITextField alloc] initWithFrame:CGRectMake(confirmpsw.frame.origin.x + confirmpsw.frame.size.width + 10, confirmpsw.frame.origin.y, 200, 30)];
@@ -98,7 +99,7 @@
     FEButton *submit = [FEButton buttonWithType:UIButtonTypeCustom];
     submit.frame = CGRectMake(20, content.frame.origin.y + content.bounds.size.height + 40, self.view.bounds.size.width - 40, 40);
     [submit addTarget:self action:@selector(modify:) forControlEvents:UIControlEventTouchUpInside];
-    [submit setTitle:FEString(@"PSW_MODIFY_PASSWORD") forState:UIControlStateNormal];
+    [submit setTitle:kString(@"PSW_MODIFY_PASSWORD") forState:UIControlStateNormal];
     [self.view addSubview:submit];
     
 }
@@ -109,7 +110,7 @@
     [self hideKeyboard:nil];
     if ([user.password isEqualToString:[self.oldpswText.text MD5]]) {
         if ([self.newpswText.text isEqualToString:self.confirmpswText.text]) {
-            [self displayHUD:FEString(@"LOADING...")];
+            [self displayHUD:kString(@"LOADING...")];
             FEModifyPasswordRequest *mdate = [[FEModifyPasswordRequest alloc] initWithUname:user.username oldPwd:user.password newPwd:[self.newpswText.text MD5]];
             __weak typeof(self) weakself = self;
             [[FEWebServiceManager sharedInstance] modifyPassword:mdate response:^(NSError *error, FEBaseResponse *response) {

@@ -16,6 +16,7 @@
 #import "FEWebServiceManager.h"
 #import "FEUserMarkManagerVC.h"
 #import "AppDelegate.h"
+#import "FECommonDefine.h"
 #import <SSCommon-Utilities/FEPopPickerView.h>
 
 
@@ -86,7 +87,7 @@
     
     
     FELabel *descriptor = [[FELabel alloc] initWithFrame:CGRectMake(x, y, lwidth, height)];
-    descriptor.text = FEString(@"CONTROLL_DESCRIPTION");
+    descriptor.text = kString(@"CONTROLL_DESCRIPTION");
     [contentview addSubview:descriptor];
     
     UITextView *dtextfield = [[UITextView alloc] initWithFrame:CGRectMake(x + lwidth + xspace, y, twidth, height * 3)];
@@ -99,7 +100,7 @@
     self.descripTextField = dtextfield;
     
     FELabel *llabel = [[FELabel alloc] initWithFrame:CGRectMake(x, dtextfield.frame.origin.y + dtextfield.bounds.size.height + yspace, lwidth, height)];
-    llabel.text = FEString(@"CONTROLL_LABEL");
+    llabel.text = kString(@"CONTROLL_LABEL");
     [contentview addSubview:llabel];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -127,11 +128,11 @@
     FEButton *add = [FEButton buttonWithType:UIButtonTypeCustom];
     add.frame = CGRectMake(x + lwidth + xspace + twidth - 90, llabel.frame.origin.y, 90, height);
     [add addTarget:self action:@selector(manageMark:) forControlEvents:UIControlEventTouchUpInside];
-    [add setTitle:FEString(@"CONTROLL_LABEL_MANAGE") forState:UIControlStateNormal];
+    [add setTitle:kString(@"CONTROLL_LABEL_MANAGE") forState:UIControlStateNormal];
     [contentview addSubview:add];
     
     FELabel *rlabel = [[FELabel alloc] initWithFrame:CGRectMake(x, llabel.frame.origin.y + llabel.bounds.size.height + yspace, lwidth, height)];
-    rlabel.text = FEString(@"CONTROLL_REGION");
+    rlabel.text = kString(@"CONTROLL_REGION");
     [contentview addSubview:rlabel];
     
     _regionNumberTextField = [[UITextField alloc] initWithFrame:CGRectMake(x + lwidth + xspace, llabel.frame.origin.y + llabel.bounds.size.height + yspace, twidth, height)];
@@ -142,7 +143,7 @@
     
     FEButton *config = [FEButton buttonWithType:UIButtonTypeCustom];
     config.frame = CGRectMake((self.view.bounds.size.width - 220) / 2.0f, contentview.bounds.size.height + contentview.frame.origin.y + 20, 220, 40);
-    [config setTitle:FEString(@"CONTROLL_CONFIGURE") forState:UIControlStateNormal];
+    [config setTitle:kString(@"CONTROLL_CONFIGURE") forState:UIControlStateNormal];
     [config addTarget:self action:@selector(config:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:config];
     
@@ -153,7 +154,7 @@
 -(void)selectMark{
     FEPopPickerView *popPicker = [[FEPopPickerView alloc] initFromView:[[AppDelegate sharedDelegate].window viewWithTag:0]];
     popPicker.tlabel.text = @"标签";
-    popPicker.titleColor = FEThemeColor;
+    popPicker.titleColor = [UIColor ThemeColor];
     NSInteger index = -1;
     for (FEUserMark *mark in self.marks) {
         if ([self.markName isEqualToString:mark.mark]) {
@@ -196,7 +197,7 @@
 
 -(void)config:(UIButton *)button{
     
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     __weak typeof(self) weakself = self;
     FESensor *sensor = [self.sensor copy];
     sensor.mark = self.markName;

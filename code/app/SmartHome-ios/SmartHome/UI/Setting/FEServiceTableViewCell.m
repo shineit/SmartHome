@@ -23,7 +23,7 @@
     if (self) {
         // Initialization code
         [self setup];
-        _typeArray = [NSArray arrayWithObjects:FEString(@"ORDER_INSTALL"),FEString(@"ORDER_REPAIR"),FEString(@"ORDER_CONSULT"), nil];
+        _typeArray = [NSArray arrayWithObjects:kString(@"ORDER_INSTALL"),kString(@"ORDER_REPAIR"),kString(@"ORDER_CONSULT"), nil];
     }
     return self;
 }
@@ -54,7 +54,7 @@
 
 -(void)configWithOrder:(FEOrder *)order{
     self.numberLabel.text = order.orderID;
-    _statusLabel.text = order.orderStatus.boolValue?FEString(@"ORDER_DEAL"):FEString(@"ORDER_WAIT");
+    _statusLabel.text = order.orderStatus.boolValue?kString(@"ORDER_DEAL"):kString(@"ORDER_WAIT");
     _typeLabel.text = order.orderName; // _typeArray[order.orderType.integerValue];
 }
 

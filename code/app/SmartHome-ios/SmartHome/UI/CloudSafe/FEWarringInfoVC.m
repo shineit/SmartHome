@@ -7,6 +7,7 @@
 //
 
 #import "FEWarringInfoVC.h"
+#import "FECommonDefine.h"
 
 @interface FEWarringInfoVC ()
 
@@ -19,7 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = FEString(@"WARRING_INFO");
+        self.title = kString(@"WARRING_INFO");
     }
     return self;
 }

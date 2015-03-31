@@ -17,6 +17,7 @@
 #import "FECoreDataHandler.h"
 #import "FEBaseResponse.h"
 #import "FEMarkDeletRequest.h"
+#import "FECommonDefine.h"
 
 @interface FEUserMarkManagerVC ()<UITableViewDataSource,UITableViewDelegate,CustomIOS7AlertViewDelegate>
 
@@ -39,9 +40,9 @@
 }
 
 -(void)initUI{
-    [self loadRightCustomButtonItemWithTitle:FEString(@"MAEK_ADD") image:nil];
+    [self loadRightCustomButtonItemWithTitle:kString(@"MAEK_ADD") image:nil];
     
-    self.title = FEString(@"MARK_TITLE");
+    self.title = kString(@"MARK_TITLE");
     _markTableView = [[FETableView alloc] initWithFrame:self.view.bounds];
     _markTableView.dataSource = self;
     _markTableView.delegate = self;
@@ -50,7 +51,7 @@
 }
 
 -(void)rightbarpressed:(UIButton *)button{
-    FEMarkAddPopView *popview = [[FEMarkAddPopView alloc] initWithTitle:FEString(@"New mark") Titles:@[FEString(@"CANCEL"),FEString(@"OK")]];
+    FEMarkAddPopView *popview = [[FEMarkAddPopView alloc] initWithTitle:kString(@"New mark") Titles:@[kString(@"CANCEL"),kString(@"OK")]];
     popview.delegate = self;
     [popview show];
     
@@ -68,7 +69,7 @@
 }
 
 -(void)addMark:(NSString *)str{
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     __weak typeof(self) weakself = self;
     FEUserMark *mark = [[FEUserMark alloc] initWithUserID:FELoginUser.userid mark:str];
     FEMarkSetRequest *markRequest = [[FEMarkSetRequest alloc] initWithMark:mark];
@@ -96,7 +97,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         FEButton *btn = [FEButton buttonWithType:UIButtonTypeCustom];
         [btn addTarget:self action:@selector(deleteMark:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitle:FEString(@"MARK_DELETE") forState:UIControlStateNormal];
+        [btn setTitle:kString(@"MARK_DELETE") forState:UIControlStateNormal];
         btn.frame = CGRectMake(0, 0, 80, 30);
         cell.accessoryView = btn;
         
@@ -130,7 +131,7 @@
 
 -(void)deleteMarkRequest:(FEUserMark *)mark{
     __weak typeof(self) weakself = self;
-    [self displayHUD:FEString(@"LOADING...")];
+    [self displayHUD:kString(@"LOADING...")];
     FEMarkDeletRequest *rdata = [[FEMarkDeletRequest alloc] initWithMark:mark];
     [[FEWebServiceManager sharedInstance] markDelete:rdata response:^(NSError *error, FEBaseResponse *response) {
         if (!error && response.result.errorCode.integerValue == 0) {

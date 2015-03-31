@@ -7,6 +7,7 @@
 //
 
 #import "FECommonNavgationController.h"
+#import "UIColor+Theme.h"
 
 @interface FECommonNavgationController ()
 
@@ -19,14 +20,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor whiteColor]};
-        if (SYSTEM_VERSION_UP7) {
-            self.navigationBar.translucent = NO;
-            self.navigationBar.barTintColor = FEThemeColor;
-             self.navigationBar.tintColor = [UIColor whiteColor];
-        }else{
-            self.navigationBar.tintColor = FEThemeColor;
-        }
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+        self.navigationBar.translucent = NO;
+        self.navigationBar.barTintColor = [UIColor ThemeColor];
+        self.navigationBar.tintColor = [UIColor whiteColor];
        
     }
     return self;
@@ -35,14 +32,10 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        self.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor whiteColor]};
-        if (SYSTEM_VERSION_UP7) {
-            self.navigationBar.translucent = NO;
-            self.navigationBar.barTintColor = FEThemeColor;
-            self.navigationBar.tintColor = [UIColor whiteColor];
-        }else{
-            self.navigationBar.tintColor = FEThemeColor;
-        }
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+        self.navigationBar.translucent = NO;
+        self.navigationBar.barTintColor = [UIColor ThemeColor];
+        self.navigationBar.tintColor = [UIColor whiteColor];
         
     }
     return self;
@@ -51,14 +44,10 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
     self = [super initWithRootViewController:rootViewController];
     if (self) {
-        self.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor whiteColor]};
-        if (SYSTEM_VERSION_UP7) {
-            self.navigationBar.translucent = NO;
-            self.navigationBar.barTintColor = FEThemeColor;
-            self.navigationBar.tintColor = [UIColor whiteColor];
-        }else{
-            self.navigationBar.tintColor = FEThemeColor;
-        }
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+        self.navigationBar.translucent = NO;
+        self.navigationBar.barTintColor = [UIColor ThemeColor];
+        self.navigationBar.tintColor = [UIColor whiteColor];
         
     }
     return self;

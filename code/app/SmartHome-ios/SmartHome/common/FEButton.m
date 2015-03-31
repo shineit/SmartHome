@@ -22,7 +22,7 @@
     btn.layer.cornerRadius = 5;
     btn.layer.masksToBounds = YES;
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageFromColor:FEButtonColor] forState:UIControlStateNormal];
+//    [btn setBackgroundImage:[UIImage imageFromColor:[UIColor grayColor]] forState:UIControlStateNormal];
     return btn;
 }
 
@@ -33,7 +33,7 @@
         self.layer.cornerRadius = 5;
         self.layer.masksToBounds = YES;
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self setBackgroundImage:[UIImage imageFromColor:FEButtonColor] forState:UIControlStateNormal];
+//        [self setBackgroundImage:[UIImage imageFromColor:FEButtonColor] forState:UIControlStateNormal];
     }
     return self;
 }

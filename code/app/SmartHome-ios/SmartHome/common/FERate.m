@@ -7,6 +7,8 @@
 //
 
 #import "FERate.h"
+#import "FECommonDefine.h"
+#import <UIKit/UIKit.h>
 
 @implementation FERate
 
@@ -14,18 +16,18 @@ DEFINE_SINGLETON_FOR_CLASS(FERate);
 
 +(void)load{
     FERate *rate = [FERate sharedFERate];
-    NSInteger runtimes = [FEUserDefaultsObjectForKey(FERunTimes) integerValue];
+    NSInteger runtimes = [kUserDefaultsObjectForKey(kRunTimes) integerValue];
     runtimes++;
-    FEUserDefaultsSetObjectForKey(@(runtimes), FERunTimes);
-    FEUserDefaultsSync;
+    kUserDefaultsSetObjectForKey(@(runtimes), kRunTimes);
+    kUserDefaultsSync;
     
-    if (![FEUserDefaultsObjectForKey(FERateNever) boolValue] && runtimes >= FERateTimes) {
+    if (![kUserDefaultsObjectForKey(kRateNever) boolValue] && runtimes >= kRateTimes) {
         [rate performSelector:@selector(rate:) withObject:nil afterDelay:5];
     }
 }
 
 -(void)rate:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:FEString(@"SMART_HOME") message:FEString(@"RATE_RATE") delegate:self cancelButtonTitle:FEString(@"RATE_LARER") otherButtonTitles:FEString(@"RATE_GOTORATE"),FEString(@"RATE_NEVER"), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:kString(@"SMART_HOME") message:kString(@"RATE_RATE") delegate:self cancelButtonTitle:kString(@"RATE_LARER") otherButtonTitles:kString(@"RATE_GOTORATE"),kString(@"RATE_NEVER"), nil];
     [alert show];
 }
 
@@ -36,13 +38,13 @@ DEFINE_SINGLETON_FOR_CLASS(FERate);
             
         case 1:
             [self rate];
-            FEUserDefaultsSetObjectForKey(@(YES), FERateNever);
-            FEUserDefaultsSync;
+            kUserDefaultsSetObjectForKey(@(YES), kRateNever);
+            kUserDefaultsSync;
             
             break;
         case 2:
-            FEUserDefaultsSetObjectForKey(@(YES), FERateNever);
-            FEUserDefaultsSync;
+            kUserDefaultsSetObjectForKey(@(YES), kRateNever);
+            kUserDefaultsSync;
             break;
         default:
             break;
@@ -51,7 +53,7 @@ DEFINE_SINGLETON_FOR_CLASS(FERate);
 
 //去评分
 -(void)rate{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FEItunesUrlString(FEAppItunesID)]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kItunesUrlString(kAppItunesID)]];
 }
 
 @end

@@ -8,6 +8,11 @@
 
 #import "FETableViewController.h"
 
+typedef NS_ENUM(NSInteger, FENavItemDirection) {
+    FENavItemLeftDirection,
+    FENavItemRightDirection,
+};
+
 @interface FETableViewController ()
 
 @end
@@ -35,23 +40,12 @@
     [bt setBackgroundImage:bimage forState:UIControlStateNormal];
     [bt addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bt];
-    if (SYSTEM_VERSION_UP7) {
-        if (direction==FENavItemLeftDirection) {
-            self.navigationItem.leftBarButtonItem = item;
-        }else {
-            self.navigationItem.rightBarButtonItem = item;
-        }
+    if (direction==FENavItemLeftDirection) {
+        self.navigationItem.leftBarButtonItem = item;
     }else {
-        UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        spaceItem.width = 10;
-        
-        if (direction==FENavItemLeftDirection) {
-            self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-        }else {
-            self.navigationItem.rightBarButtonItems = @[spaceItem,item];
-        }
+        self.navigationItem.rightBarButtonItem = item;
     }
-    
+
     return bt;
 }
 

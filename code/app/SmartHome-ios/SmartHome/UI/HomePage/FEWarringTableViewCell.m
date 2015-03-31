@@ -26,9 +26,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-//        _alarmTypestrings = [NSArray arrayWithObjects:FEString(@"UNKNOW"),FEString(@"OFFLINE_ALARM"),FEString(@"FAULT_ALARM"),FEString(@"SUBPRESSURE_ALARM"),FEString(@"WARN_ALARM"),FEString(@"ERROR_ALARM"),FEString(@"FEEDBACK_ALARM"),FEString(@"ACTION_ALARM"),FEString(@"RESET_ALARM"),FEString(@"SETUP_ALARM"),FEString(@"REMOVE_ALARM"), nil];
-//        _alarmDevices = [NSArray arrayWithObjects:FEString(@"CONCENTRATOR_ALARM"),FEString(@"HOME_SENSOR"),FEString(@"FIRE_SENSOR"), nil];
-//        _handleStatus = [NSArray arrayWithObjects:FEString(@"NONE_CLEAR"),FEString(@"MANUAL_CLEAR"),FEString(@"AUTO_CLEAR"), nil];
+//        _alarmTypestrings = [NSArray arrayWithObjects:kString(@"UNKNOW"),kString(@"OFFLINE_ALARM"),kString(@"FAULT_ALARM"),kString(@"SUBPRESSURE_ALARM"),kString(@"WARN_ALARM"),kString(@"ERROR_ALARM"),kString(@"FEEDBACK_ALARM"),kString(@"ACTION_ALARM"),kString(@"RESET_ALARM"),kString(@"SETUP_ALARM"),kString(@"REMOVE_ALARM"), nil];
+//        _alarmDevices = [NSArray arrayWithObjects:kString(@"CONCENTRATOR_ALARM"),kString(@"HOME_SENSOR"),kString(@"FIRE_SENSOR"), nil];
+//        _handleStatus = [NSArray arrayWithObjects:kString(@"NONE_CLEAR"),kString(@"MANUAL_CLEAR"),kString(@"AUTO_CLEAR"), nil];
         
         [self setup];
     }
@@ -53,7 +53,7 @@
     _statLabel = [[UILabel alloc] initWithFrame:CGRectMake(230, 5, 80, 20)];
     _statLabel.backgroundColor = [UIColor clearColor];
     _statLabel.font = [UIFont appFontWithSize:14];
-    _statLabel.textColor = FEThemeColor;
+    _statLabel.textColor = [UIColor ThemeColor];
     _statLabel.textAlignment = NSTextAlignmentRight;
     _statLabel.text = @"未处理";
     [self.contentView addSubview:_statLabel];

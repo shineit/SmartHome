@@ -7,6 +7,13 @@
 //
 
 #import "FECommonViewController.h"
+#import "FECommonDefine.h"
+#import "UIColor+Theme.h"
+
+typedef NS_ENUM(NSInteger, FENavItemDirection) {
+    FENavItemLeftDirection,
+    FENavItemRightDirection,
+};
 
 @interface FECommonViewController ()
 
@@ -28,14 +35,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:FEString(@"返回") style:UIBarButtonItemStylePlain target:self action:@selector(backPress:)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:kString(@"返回") style:UIBarButtonItemStylePlain target:self action:@selector(backPress:)];
     self.navigationItem.backBarButtonItem = backButton;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    if (SYSTEM_VERSION_UP7) { // 判断是否是IOS7
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    }
-    self.view.backgroundColor = FEViewBackGroundColor;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    self.view.backgroundColor = [UIColor ThemeViewBackColor];
 }
 
 -(void)backPress:(id)sender{
@@ -101,23 +106,12 @@
     [bt setBackgroundImage:bimage forState:UIControlStateNormal];
     [bt addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bt];
-    if (SYSTEM_VERSION_UP7) {
-        if (direction==FENavItemLeftDirection) {
-            self.navigationItem.leftBarButtonItem = item;
-        }else {
-            self.navigationItem.rightBarButtonItem = item;
-        }
+
+    if (direction==FENavItemLeftDirection) {
+        self.navigationItem.leftBarButtonItem = item;
     }else {
-        UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        spaceItem.width = 10;
-        
-        if (direction==FENavItemLeftDirection) {
-            self.navigationItem.leftBarButtonItems = @[spaceItem,item];
-        }else {
-            self.navigationItem.rightBarButtonItems = @[spaceItem,item];
-        }
+        self.navigationItem.rightBarButtonItem = item;
     }
-    
     return bt;
 }
 
