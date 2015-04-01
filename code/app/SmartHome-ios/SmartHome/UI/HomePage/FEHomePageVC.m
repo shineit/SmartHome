@@ -51,7 +51,7 @@
   @{PNG_KEY:@"home_service",ITEM_TITLE:kString(@"申请管理"),ITEM_ACTION:[self getIvocationWith:@selector(toservice)]},
   @{PNG_KEY:@"home_news",ITEM_TITLE:kString(@"新闻公告"),ITEM_ACTION:[self getIvocationWith:@selector(tonews)]}]
   ];
-    self.headerArray = @[kString(@"与安防"),kString(@"设备管理"),kString(@"个人中心")];
+    self.headerArray = @[kString(@"云安防"),kString(@"设备管理"),kString(@"个人中心")];
     [self initUI];
 }
 
