@@ -29,6 +29,17 @@
     return self;
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+        self.navigationBar.translucent = NO;
+        self.navigationBar.barTintColor = [UIColor ThemeColor];
+        self.navigationBar.tintColor = [UIColor whiteColor];
+    }
+    return self;
+}
+
 -(instancetype)init{
     self = [super init];
     if (self) {

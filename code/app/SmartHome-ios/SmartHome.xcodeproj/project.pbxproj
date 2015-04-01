@@ -453,6 +453,10 @@
 		14C6DEF819F55183006384B2 /* FESettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DEF719F55183006384B2 /* FESettingVC.m */; };
 		14C6DEFB19F5EDE4006384B2 /* FENewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DEFA19F5EDE4006384B2 /* FENewsTableViewCell.m */; };
 		14C6DF0119F5F73B006384B2 /* FEWarringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DF0019F5F73B006384B2 /* FEWarringTableViewCell.m */; };
+		14D69BA41ACC340200D8A1CC /* FECompanyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BA31ACC340200D8A1CC /* FECompanyVC.m */; };
+		14D69BA61ACC365C00D8A1CC /* Signin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D69BA51ACC365C00D8A1CC /* Signin.storyboard */; };
+		14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */; };
+		14D69BAC1ACC415000D8A1CC /* FEEStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -852,6 +856,13 @@
 		14C6DEFA19F5EDE4006384B2 /* FENewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FENewsTableViewCell.m; sourceTree = "<group>"; };
 		14C6DEFF19F5F73B006384B2 /* FEWarringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEWarringTableViewCell.h; sourceTree = "<group>"; };
 		14C6DF0019F5F73B006384B2 /* FEWarringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEWarringTableViewCell.m; sourceTree = "<group>"; };
+		14D69BA21ACC340200D8A1CC /* FECompanyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECompanyVC.h; sourceTree = "<group>"; };
+		14D69BA31ACC340200D8A1CC /* FECompanyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECompanyVC.m; sourceTree = "<group>"; };
+		14D69BA51ACC365C00D8A1CC /* Signin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signin.storyboard; sourceTree = "<group>"; };
+		14D69BA71ACC3CD600D8A1CC /* FEEWarringVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEWarringVC.h; sourceTree = "<group>"; };
+		14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEWarringVC.m; sourceTree = "<group>"; };
+		14D69BAA1ACC415000D8A1CC /* FEEStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEStoreVC.h; sourceTree = "<group>"; };
+		14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEStoreVC.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -931,6 +942,7 @@
 				147460881ACA2ABD0031F05E /* LaunchScreen.xib */,
 				1474607D1ACA2ABD0031F05E /* SmartHomePro.xcdatamodeld */,
 				147460761ACA2ABD0031F05E /* Supporting Files */,
+				14D69BA51ACC365C00D8A1CC /* Signin.storyboard */,
 			);
 			path = SmartHomePro;
 			sourceTree = "<group>";
@@ -1069,6 +1081,12 @@
 			children = (
 				149C35281ACC183500826831 /* FEHomeFuncVC.h */,
 				149C35291ACC183500826831 /* FEHomeFuncVC.m */,
+				14D69BA21ACC340200D8A1CC /* FECompanyVC.h */,
+				14D69BA31ACC340200D8A1CC /* FECompanyVC.m */,
+				14D69BA71ACC3CD600D8A1CC /* FEEWarringVC.h */,
+				14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */,
+				14D69BAA1ACC415000D8A1CC /* FEEStoreVC.h */,
+				14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1698,6 +1716,7 @@
 				149C343B1ACA601A00826831 /* BackBnt_sel.png in Resources */,
 				149C34D51ACA601A00826831 /* playback_fullscreen_progress.png in Resources */,
 				149C34611ACA601A00826831 /* full_play_sel.png in Resources */,
+				14D69BA61ACC365C00D8A1CC /* Signin.storyboard in Resources */,
 				149C34951ACA601A00826831 /* ptz_bottom_sel.png in Resources */,
 				149C34431ACA601A00826831 /* deviceManage_img_unonline.png in Resources */,
 				149C344F1ACA601A00826831 /* balanced.png in Resources */,
@@ -1998,6 +2017,8 @@
 				149C31E91ACA3C5200826831 /* FECommonNavgationController.m in Sources */,
 				147461041ACA2B3B0031F05E /* FENews.m in Sources */,
 				149C31F51ACA3C5200826831 /* FETableViewController.m in Sources */,
+				14D69BA41ACC340200D8A1CC /* FECompanyVC.m in Sources */,
+				14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */,
 				147461441ACA2B3B0031F05E /* FEOrderListResponse.m in Sources */,
 				147461061ACA2B3B0031F05E /* FEOrder.m in Sources */,
 				149C350F1ACA601A00826831 /* THud.m in Sources */,
@@ -2006,6 +2027,7 @@
 				149C350B1ACA601A00826831 /* BonjourBrowser.m in Sources */,
 				147461081ACA2B3B0031F05E /* FEPage.m in Sources */,
 				149C320C1ACA3EA400826831 /* NSDate+Formatter.m in Sources */,
+				14D69BAC1ACC415000D8A1CC /* FEEStoreVC.m in Sources */,
 				149C352A1ACC183500826831 /* FEHomeFuncVC.m in Sources */,
 				147461301ACA2B3B0031F05E /* FESensorOperationRequest.m in Sources */,
 				147461161ACA2B3B0031F05E /* FEGetCaTokenRequest.m in Sources */,
