@@ -27,10 +27,29 @@
 #define __METHOD_SENSOR_ENABLE      @"sensor/batch/enable"
 #define __METHOD_SENSOR_DISABLE     @"sensor/batch/disable"
 
+//for smarthome enterprise
+
+//knowledge
+#define __METHOD_KNOWLEDGE_LIST     @"knowledge/list"
+#define __METHOD_KNOWLEDGE_COMMONSENSE @"knowledge/commonsense/list"
+#define __METHOD_KNOWLEDGE_HELP     @"knowledge/help/list"
+//mall
+#define __METHOD_MALL_PRODUCT       @"product/list"
+#define __METHOD_MALL_AD            @"ad/list"
+
+
+
+
+typedef enum : NSUInteger {
+    GET = 0,
+    POST
+} METHOD_TYPE;
+
 
 @interface FERequestBaseData : SSObject
 
 @property (nonatomic, strong, readonly) NSString *method;
+@property (nonatomic, assign, readonly) METHOD_TYPE type;
 
 -(instancetype)initWithMothed:(NSString *)mothed;
 

@@ -23,4 +23,17 @@
     return self;
 }
 
+-(NSArray *)getListFromObject:(id)obj class:(Class)cls{
+    NSArray *objects = obj;
+    NSMutableArray *toObjectList = NULL;
+    if (objects && ![objects isKindOfClass:[NSNull class]]) {
+        toObjectList = [NSMutableArray new];
+        for (id item in objects) {
+            [toObjectList addObject:[[cls alloc] initWithDictionary:item]];
+        }
+    }
+    return toObjectList;
+}
+
+
 @end

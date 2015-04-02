@@ -57,6 +57,8 @@ return shared##className; \
 //never grade
 #define kRateNever                            @"rateNever"
 
+#define kLoginUser                              @"user_key"
+
 //itunes url
 #define kItunesUrlString(_ID)                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",_ID]
 

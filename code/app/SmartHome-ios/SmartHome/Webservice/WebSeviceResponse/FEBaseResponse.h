@@ -15,6 +15,6 @@
 @property (nonatomic, strong, readonly) FEResult *result;
 
 -(id)initWithResponse:(id)obj;
-
+-(NSArray *)getListFromObject:(id)obj class:(Class)cls;
 
 @end

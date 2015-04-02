@@ -14,6 +14,7 @@
     self = [super init];
     if (self) {
         _method = mothed;
+        _type = POST;
     }
     return self;
 }

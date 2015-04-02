@@ -80,6 +80,9 @@
 -(AFHTTPRequestOperation *)SensorBatchDisable:(FESensorOperationRequest *)sdata response:(void (^)(NSError *error, FEBaseResponse *response))block;
 
 
+//this is new method
+//for smarthome enterprise
+-(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata responseclass:(Class)cl response:(void (^)(NSError *error, id response))block;
 
 
 @end

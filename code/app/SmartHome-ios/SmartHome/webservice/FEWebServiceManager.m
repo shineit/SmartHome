@@ -239,6 +239,27 @@
     }];
 }
 
+//this is new method
+//for smarthome enterprise
+-(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata responseclass:(Class)cl response:(void (^)(NSError *error, id response))block{
+    if (rdata.type == GET) {
+        return [self GET:rdata.method parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response %@",responseObject);
+            id rsp = [[cl alloc] initWithResponse:responseObject];
+            block(NULL,rsp);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(error,NULL);
+        }];
+    }else{
+        return [self POST:rdata.method parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response %@",responseObject);
+            block(NULL,[[cl alloc] initWithResponse:responseObject]);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            block(error,NULL);
+        }];
+    }
+}
+
 -(void)showerror:(NSError *)error{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:kString(@"OK") otherButtonTitles:nil];
     [alert show];

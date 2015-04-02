@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "FECommonDefine.h"
+#import "FEMemoryCache.h"
 
 @interface AppDelegate ()
 
@@ -17,14 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
+    FEUser *user = [FEMemoryCache sharedInstance].user;
+    if (!user) {
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
+    }
     
     return YES;
 }
 
 -(void)loadMain{
-    
+    self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

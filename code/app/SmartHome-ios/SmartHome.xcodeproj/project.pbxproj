@@ -458,6 +458,23 @@
 		14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */; };
 		14D69BAC1ACC415000D8A1CC /* FEEStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */; };
 		14D69BAF1ACCD16700D8A1CC /* FEESigninVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BAE1ACCD16700D8A1CC /* FEESigninVC.m */; };
+		14D69BB41ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BB31ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m */; };
+		14D69BB51ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BB31ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m */; };
+		14D69BB81ACD601300D8A1CC /* FEKnowledge.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BB71ACD601300D8A1CC /* FEKnowledge.m */; };
+		14D69BB91ACD601300D8A1CC /* FEKnowledge.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BB71ACD601300D8A1CC /* FEKnowledge.m */; };
+		14D69BBC1ACD64B700D8A1CC /* FEMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BBB1ACD64B700D8A1CC /* FEMemoryCache.m */; };
+		14D69BBD1ACD64B700D8A1CC /* FEMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BBB1ACD64B700D8A1CC /* FEMemoryCache.m */; };
+		14D69BC11ACD667900D8A1CC /* FEKnowLedgeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BC01ACD667900D8A1CC /* FEKnowLedgeListRequest.m */; };
+		14D69BC21ACD667900D8A1CC /* FEKnowLedgeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BC01ACD667900D8A1CC /* FEKnowLedgeListRequest.m */; };
+		14D69BC91ACD689800D8A1CC /* FEKnowLedgeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BC81ACD689800D8A1CC /* FEKnowLedgeListVC.m */; };
+		14D69BCC1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BCB1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m */; };
+		14D69BCF1ACD7ED600D8A1CC /* FEMallProductListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BCE1ACD7ED600D8A1CC /* FEMallProductListRequest.m */; };
+		14D69BD01ACD7ED600D8A1CC /* FEMallProductListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BCE1ACD7ED600D8A1CC /* FEMallProductListRequest.m */; };
+		14D69BD31ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BD21ACD7EFA00D8A1CC /* FEMallProductResponse.m */; };
+		14D69BD41ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BD21ACD7EFA00D8A1CC /* FEMallProductResponse.m */; };
+		14D69BD71ACD7FD600D8A1CC /* FEProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BD61ACD7FD600D8A1CC /* FEProduct.m */; };
+		14D69BD81ACD7FD600D8A1CC /* FEProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BD61ACD7FD600D8A1CC /* FEProduct.m */; };
+		14D69BDB1ACD810A00D8A1CC /* FEMallProductListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BDA1ACD810A00D8A1CC /* FEMallProductListVC.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -866,6 +883,26 @@
 		14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEStoreVC.m; sourceTree = "<group>"; };
 		14D69BAD1ACCD16700D8A1CC /* FEESigninVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEESigninVC.h; sourceTree = "<group>"; };
 		14D69BAE1ACCD16700D8A1CC /* FEESigninVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEESigninVC.m; sourceTree = "<group>"; };
+		14D69BB21ACD5FCC00D8A1CC /* FEKnowledgeListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEKnowledgeListResponse.h; sourceTree = "<group>"; };
+		14D69BB31ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEKnowledgeListResponse.m; sourceTree = "<group>"; };
+		14D69BB61ACD601300D8A1CC /* FEKnowledge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEKnowledge.h; sourceTree = "<group>"; };
+		14D69BB71ACD601300D8A1CC /* FEKnowledge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEKnowledge.m; sourceTree = "<group>"; };
+		14D69BBA1ACD64B700D8A1CC /* FEMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEMemoryCache.h; sourceTree = "<group>"; };
+		14D69BBB1ACD64B700D8A1CC /* FEMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMemoryCache.m; sourceTree = "<group>"; };
+		14D69BBF1ACD667900D8A1CC /* FEKnowLedgeListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEKnowLedgeListRequest.h; sourceTree = "<group>"; };
+		14D69BC01ACD667900D8A1CC /* FEKnowLedgeListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEKnowLedgeListRequest.m; sourceTree = "<group>"; };
+		14D69BC71ACD689800D8A1CC /* FEKnowLedgeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEKnowLedgeListVC.h; sourceTree = "<group>"; };
+		14D69BC81ACD689800D8A1CC /* FEKnowLedgeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEKnowLedgeListVC.m; sourceTree = "<group>"; };
+		14D69BCA1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEKnowLedgeDetailVC.h; sourceTree = "<group>"; };
+		14D69BCB1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEKnowLedgeDetailVC.m; sourceTree = "<group>"; };
+		14D69BCD1ACD7ED600D8A1CC /* FEMallProductListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEMallProductListRequest.h; sourceTree = "<group>"; };
+		14D69BCE1ACD7ED600D8A1CC /* FEMallProductListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMallProductListRequest.m; sourceTree = "<group>"; };
+		14D69BD11ACD7EFA00D8A1CC /* FEMallProductResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEMallProductResponse.h; sourceTree = "<group>"; };
+		14D69BD21ACD7EFA00D8A1CC /* FEMallProductResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMallProductResponse.m; sourceTree = "<group>"; };
+		14D69BD51ACD7FD600D8A1CC /* FEProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEProduct.h; sourceTree = "<group>"; };
+		14D69BD61ACD7FD600D8A1CC /* FEProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEProduct.m; sourceTree = "<group>"; };
+		14D69BD91ACD810A00D8A1CC /* FEMallProductListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEMallProductListVC.h; sourceTree = "<group>"; };
+		14D69BDA1ACD810A00D8A1CC /* FEMallProductListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMallProductListVC.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -962,6 +999,9 @@
 		1474609D1ACA2B3B0031F05E /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
+				14D69BBE1ACD662B00D8A1CC /* request */,
+				14D69BB01ACD5F5200D8A1CC /* model */,
+				14D69BB11ACD5F5200D8A1CC /* response */,
 				1474609E1ACA2B3B0031F05E /* BaseDataModel */,
 				147460B71ACA2B3B0031F05E /* FEWebServiceManager.h */,
 				147460B81ACA2B3B0031F05E /* FEWebServiceManager.m */,
@@ -1092,6 +1132,12 @@
 				14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */,
 				14D69BAD1ACCD16700D8A1CC /* FEESigninVC.h */,
 				14D69BAE1ACCD16700D8A1CC /* FEESigninVC.m */,
+				14D69BC71ACD689800D8A1CC /* FEKnowLedgeListVC.h */,
+				14D69BC81ACD689800D8A1CC /* FEKnowLedgeListVC.m */,
+				14D69BCA1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.h */,
+				14D69BCB1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m */,
+				14D69BD91ACD810A00D8A1CC /* FEMallProductListVC.h */,
+				14D69BDA1ACD810A00D8A1CC /* FEMallProductListVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1122,6 +1168,8 @@
 				149C31E01ACA3C5200826831 /* FETextField.h */,
 				149C31E11ACA3C5200826831 /* FETextField.m */,
 				149C31F81ACA3E0500826831 /* FECommonDefine.h */,
+				14D69BBA1ACD64B700D8A1CC /* FEMemoryCache.h */,
+				14D69BBB1ACD64B700D8A1CC /* FEMemoryCache.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1601,6 +1649,39 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		14D69BB01ACD5F5200D8A1CC /* model */ = {
+			isa = PBXGroup;
+			children = (
+				14D69BB61ACD601300D8A1CC /* FEKnowledge.h */,
+				14D69BB71ACD601300D8A1CC /* FEKnowledge.m */,
+				14D69BD51ACD7FD600D8A1CC /* FEProduct.h */,
+				14D69BD61ACD7FD600D8A1CC /* FEProduct.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		14D69BB11ACD5F5200D8A1CC /* response */ = {
+			isa = PBXGroup;
+			children = (
+				14D69BB21ACD5FCC00D8A1CC /* FEKnowledgeListResponse.h */,
+				14D69BB31ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m */,
+				14D69BD11ACD7EFA00D8A1CC /* FEMallProductResponse.h */,
+				14D69BD21ACD7EFA00D8A1CC /* FEMallProductResponse.m */,
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
+		14D69BBE1ACD662B00D8A1CC /* request */ = {
+			isa = PBXGroup;
+			children = (
+				14D69BBF1ACD667900D8A1CC /* FEKnowLedgeListRequest.h */,
+				14D69BC01ACD667900D8A1CC /* FEKnowLedgeListRequest.m */,
+				14D69BCD1ACD7ED600D8A1CC /* FEMallProductListRequest.h */,
+				14D69BCE1ACD7ED600D8A1CC /* FEMallProductListRequest.m */,
+			);
+			path = request;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2003,6 +2084,7 @@
 				149C31EB1ACA3C5200826831 /* FECommonTabBarController.m in Sources */,
 				149C35151ACA601A00826831 /* WifiAddDeviceViewController.m in Sources */,
 				1474613A1ACA2B3B0031F05E /* NSString+Attribute.m in Sources */,
+				14D69BD01ACD7ED600D8A1CC /* FEMallProductListRequest.m in Sources */,
 				147461121ACA2B3B0031F05E /* FEWebServiceManager.m in Sources */,
 				147461201ACA2B3B0031F05E /* FEMarkSetRequest.m in Sources */,
 				1474611C1ACA2B3B0031F05E /* FEMarkDeletRequest.m in Sources */,
@@ -2021,6 +2103,7 @@
 				149C32BB1ACA5D4C00826831 /* CustomIOS7AlertView.m in Sources */,
 				149C31E91ACA3C5200826831 /* FECommonNavgationController.m in Sources */,
 				147461041ACA2B3B0031F05E /* FENews.m in Sources */,
+				14D69BCC1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m in Sources */,
 				149C31F51ACA3C5200826831 /* FETableViewController.m in Sources */,
 				14D69BA41ACC340200D8A1CC /* FECompanyVC.m in Sources */,
 				14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */,
@@ -2028,6 +2111,7 @@
 				147461061ACA2B3B0031F05E /* FEOrder.m in Sources */,
 				149C350F1ACA601A00826831 /* THud.m in Sources */,
 				1474612C1ACA2B3B0031F05E /* FESensorBatchEnableRequest.m in Sources */,
+				14D69BC21ACD667900D8A1CC /* FEKnowLedgeListRequest.m in Sources */,
 				1474614C1ACA2B3B0031F05E /* FESiginResponse.m in Sources */,
 				149C350B1ACA601A00826831 /* BonjourBrowser.m in Sources */,
 				147461081ACA2B3B0031F05E /* FEPage.m in Sources */,
@@ -2035,9 +2119,13 @@
 				14D69BAC1ACC415000D8A1CC /* FEEStoreVC.m in Sources */,
 				149C352A1ACC183500826831 /* FEHomeFuncVC.m in Sources */,
 				147461301ACA2B3B0031F05E /* FESensorOperationRequest.m in Sources */,
+				14D69BBD1ACD64B700D8A1CC /* FEMemoryCache.m in Sources */,
+				14D69BC91ACD689800D8A1CC /* FEKnowLedgeListVC.m in Sources */,
 				147461161ACA2B3B0031F05E /* FEGetCaTokenRequest.m in Sources */,
+				14D69BD81ACD7FD600D8A1CC /* FEProduct.m in Sources */,
 				149C31F11ACA3C5200826831 /* FERate.m in Sources */,
 				147460791ACA2ABD0031F05E /* main.m in Sources */,
+				14D69BDB1ACD810A00D8A1CC /* FEMallProductListVC.m in Sources */,
 				14D69BAF1ACCD16700D8A1CC /* FEESigninVC.m in Sources */,
 				147461141ACA2B3B0031F05E /* AFHTTPClient+Json.m in Sources */,
 				149C350D1ACA601A00826831 /* SimpleWifi.m in Sources */,
@@ -2050,13 +2138,16 @@
 				147461481ACA2B3B0031F05E /* FESensorListResponse.m in Sources */,
 				1474613C1ACA2B3B0031F05E /* FEBaseResponse.m in Sources */,
 				149C32BD1ACA5D4C00826831 /* GAAlertObj.m in Sources */,
+				14D69BB91ACD601300D8A1CC /* FEKnowledge.m in Sources */,
 				147461421ACA2B3B0031F05E /* FENewsResponse.m in Sources */,
 				149C31E51ACA3C5200826831 /* FECheckButton.m in Sources */,
 				149C32181ACA3EA400826831 /* UIFont+AppFont.m in Sources */,
 				149C32101ACA3EA400826831 /* NSString+UUID.m in Sources */,
+				14D69BD41ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */,
 				147460FC1ACA2B3B0031F05E /* FEAttribute.m in Sources */,
 				147461361ACA2B3B0031F05E /* FEServiceOrederRequest.m in Sources */,
 				1474612A1ACA2B3B0031F05E /* FESensorBatchDisableRequest.m in Sources */,
+				14D69BB51ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m in Sources */,
 				149C31EF1ACA3C5200826831 /* FELabel.m in Sources */,
 				147461181ACA2B3B0031F05E /* FEHistoryAlarmRequest.m in Sources */,
 				147461461ACA2B3B0031F05E /* FEOrderSetResponse.m in Sources */,
@@ -2083,6 +2174,7 @@
 				14B447BD19F6A5FD0078EAB4 /* FEControlObject.m in Sources */,
 				1474614B1ACA2B3B0031F05E /* FESiginResponse.m in Sources */,
 				1474611F1ACA2B3B0031F05E /* FEMarkSetRequest.m in Sources */,
+				14D69BD71ACD7FD600D8A1CC /* FEProduct.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
 				1474612D1ACA2B3B0031F05E /* FESensorListRequest.m in Sources */,
@@ -2101,6 +2193,7 @@
 				147461311ACA2B3B0031F05E /* FESensorSetRequest.m in Sources */,
 				1474612F1ACA2B3B0031F05E /* FESensorOperationRequest.m in Sources */,
 				143CED1B19F88B1E00FEDE61 /* FEProfileVC.m in Sources */,
+				14D69BCF1ACD7ED600D8A1CC /* FEMallProductListRequest.m in Sources */,
 				147461211ACA2B3B0031F05E /* FEModifyPasswordRequest.m in Sources */,
 				14C6DEEC19F54F9C006384B2 /* FELoginVC.m in Sources */,
 				149C350A1ACA601A00826831 /* BonjourBrowser.m in Sources */,
@@ -2130,6 +2223,7 @@
 				149C35161ACA601A00826831 /* YSCamera.m in Sources */,
 				149C31F01ACA3C5200826831 /* FERate.m in Sources */,
 				1474614D1ACA2B3B0031F05E /* FESigoutResponse.m in Sources */,
+				14D69BB81ACD601300D8A1CC /* FEKnowledge.m in Sources */,
 				149C31EA1ACA3C5200826831 /* FECommonTabBarController.m in Sources */,
 				147461391ACA2B3B0031F05E /* NSString+Attribute.m in Sources */,
 				14C6DEE719F54F9C006384B2 /* FEDeviceWarringSettingVC.m in Sources */,
@@ -2138,7 +2232,9 @@
 				147461411ACA2B3B0031F05E /* FENewsResponse.m in Sources */,
 				1474610B1ACA2B3B0031F05E /* FESensor.m in Sources */,
 				149C32151ACA3EA400826831 /* UIColor+Theme.m in Sources */,
+				14D69BBC1ACD64B700D8A1CC /* FEMemoryCache.m in Sources */,
 				14B03B7B1A593838000826C9 /* FEHomeItemCollectionReusableView.m in Sources */,
+				14D69BD31ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */,
 				147461491ACA2B3B0031F05E /* FESensorSetResponse.m in Sources */,
 				147461191ACA2B3B0031F05E /* FELogoutRequest.m in Sources */,
 				14C6DEFB19F5EDE4006384B2 /* FENewsTableViewCell.m in Sources */,
@@ -2177,12 +2273,14 @@
 				143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */,
 				149C31E61ACA3C5200826831 /* FECheckButtonGroup.m in Sources */,
 				1498945E1A4DAF8800903B22 /* FEDevicesCache.m in Sources */,
+				14D69BC11ACD667900D8A1CC /* FEKnowLedgeListRequest.m in Sources */,
 				1499E6FD1A10B025002F5DDB /* FENewsDetailVC.m in Sources */,
 				149C350E1ACA601A00826831 /* THud.m in Sources */,
 				1474614F1ACA2B3B0031F05E /* FEUserMarkResponse.m in Sources */,
 				14B447B319F67DFC0078EAB4 /* FEServiceTableViewCell.m in Sources */,
 				14B447AD19F603E30078EAB4 /* FEDeviceInfoInputView.m in Sources */,
 				147461031ACA2B3B0031F05E /* FENews.m in Sources */,
+				14D69BB41ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m in Sources */,
 				149C320B1ACA3EA400826831 /* NSDate+Formatter.m in Sources */,
 				1474612B1ACA2B3B0031F05E /* FESensorBatchEnableRequest.m in Sources */,
 				14C6DEF219F54F9C006384B2 /* FEServiceRequestVC.m in Sources */,
@@ -2233,7 +2331,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
@@ -2260,7 +2360,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 086A1BD1DAC94419EE01D1F1 /* Pods-SmartHomePro.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
