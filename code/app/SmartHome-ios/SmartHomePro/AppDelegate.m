@@ -17,7 +17,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
+    
     return YES;
+}
+
+-(void)loadMain{
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -122,6 +129,10 @@
             abort();
         }
     }
+}
+
++(AppDelegate *)sharedDelegate{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 @end

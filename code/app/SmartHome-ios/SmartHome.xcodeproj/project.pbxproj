@@ -457,6 +457,7 @@
 		14D69BA61ACC365C00D8A1CC /* Signin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D69BA51ACC365C00D8A1CC /* Signin.storyboard */; };
 		14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */; };
 		14D69BAC1ACC415000D8A1CC /* FEEStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */; };
+		14D69BAF1ACCD16700D8A1CC /* FEESigninVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BAE1ACCD16700D8A1CC /* FEESigninVC.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -863,6 +864,8 @@
 		14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEWarringVC.m; sourceTree = "<group>"; };
 		14D69BAA1ACC415000D8A1CC /* FEEStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEEStoreVC.h; sourceTree = "<group>"; };
 		14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEEStoreVC.m; sourceTree = "<group>"; };
+		14D69BAD1ACCD16700D8A1CC /* FEESigninVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEESigninVC.h; sourceTree = "<group>"; };
+		14D69BAE1ACCD16700D8A1CC /* FEESigninVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEESigninVC.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -938,11 +941,11 @@
 				1474607A1ACA2ABD0031F05E /* AppDelegate.h */,
 				1474607B1ACA2ABD0031F05E /* AppDelegate.m */,
 				147460831ACA2ABD0031F05E /* Main.storyboard */,
+				14D69BA51ACC365C00D8A1CC /* Signin.storyboard */,
 				147460861ACA2ABD0031F05E /* Images.xcassets */,
 				147460881ACA2ABD0031F05E /* LaunchScreen.xib */,
 				1474607D1ACA2ABD0031F05E /* SmartHomePro.xcdatamodeld */,
 				147460761ACA2ABD0031F05E /* Supporting Files */,
-				14D69BA51ACC365C00D8A1CC /* Signin.storyboard */,
 			);
 			path = SmartHomePro;
 			sourceTree = "<group>";
@@ -1087,6 +1090,8 @@
 				14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */,
 				14D69BAA1ACC415000D8A1CC /* FEEStoreVC.h */,
 				14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */,
+				14D69BAD1ACCD16700D8A1CC /* FEESigninVC.h */,
+				14D69BAE1ACCD16700D8A1CC /* FEESigninVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2033,6 +2038,7 @@
 				147461161ACA2B3B0031F05E /* FEGetCaTokenRequest.m in Sources */,
 				149C31F11ACA3C5200826831 /* FERate.m in Sources */,
 				147460791ACA2ABD0031F05E /* main.m in Sources */,
+				14D69BAF1ACCD16700D8A1CC /* FEESigninVC.m in Sources */,
 				147461141ACA2B3B0031F05E /* AFHTTPClient+Json.m in Sources */,
 				149C350D1ACA601A00826831 /* SimpleWifi.m in Sources */,
 				147461341ACA2B3B0031F05E /* FEServiceOrderSetRequest.m in Sources */,
