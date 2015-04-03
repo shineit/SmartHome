@@ -8,6 +8,16 @@
 
 #import "FETableViewController.h"
 
+typedef enum : NSUInteger {
+    FIRE_ALARM,
+    DEVICE_STATUS,
+    CHECK,
+    INFO,
+    MANAGE
+} MENU_TYPE;
+
 @interface FECompanyVC : FETableViewController
+
+@property (nonatomic, assign) MENU_TYPE type;
 
 @end

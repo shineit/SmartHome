@@ -42,6 +42,16 @@
 #define __METHOD_QUERY_COMPANY      @"company/id"
 #define __METHOD_GET_PLAN           @"plan/get"
 
+//fire alarm
+#define __METHOD_FIRE_ALARM         @"sensor/fireAlarm/get"
+
+
+//check
+#define __METHOD_CHECK_LIST         @"check/item/id"
+#define __METHOD_CHECK_LOG_CREATE   @"check/checkLog/create"
+#define __METHOD_CHECK_LOG_GET      @"check/checkLog/get"
+#define __METHOD_DELET_IMG          @"check/img/delete"
+
 
 
 typedef enum : NSUInteger {

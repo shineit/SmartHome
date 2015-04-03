@@ -186,13 +186,69 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YaB-1d-ftG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2501" y="-1564"/>
+            <point key="canvasLocation" x="2501" y="-2026"/>
+        </scene>
+        <!--Device StatusVC-->
+        <scene sceneID="1Fe-Yh-z6n">
+            <objects>
+                <tableViewController id="B4W-qX-htt" customClass="FEDeviceStatusVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HtP-Wl-8Vf" customClass="FETableView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fire_alarm_top" id="7RA-E5-0aO">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="T32-BD-Sa5">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T32-BD-Sa5" id="d08-Tp-rXY">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="B4W-qX-htt" id="JBQ-xO-mte"/>
+                            <outlet property="delegate" destination="B4W-qX-htt" id="nvL-tN-gyr"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nHI-mK-Dyo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2501" y="-1366"/>
+        </scene>
+        <!--Check ListVC-->
+        <scene sceneID="nGM-2M-J97">
+            <objects>
+                <tableViewController id="CYM-0F-W7d" customClass="FECheckListVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="pak-rs-fyP" customClass="FETableView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wnS-Tl-FG9">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wnS-Tl-FG9" id="UMe-eL-vco">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CYM-0F-W7d" id="NuT-WS-rua"/>
+                            <outlet property="delegate" destination="CYM-0F-W7d" id="BNM-BR-TcU"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pcZ-nh-E2l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2501" y="-710"/>
         </scene>
         <!--CompanyVC-->
         <scene sceneID="Lu1-nb-qfE">
             <objects>
                 <tableViewController id="ave-Cr-nWf" customClass="FECompanyVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="GJO-Eo-dDV" customClass="FETableView">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="GJO-Eo-dDV" customClass="FETableView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -220,6 +276,8 @@
                     </tableView>
                     <connections>
                         <segue destination="k1r-3Z-BbA" kind="show" identifier="toWarringSegue" id="lmb-yF-Dro"/>
+                        <segue destination="B4W-qX-htt" kind="show" identifier="deviceStatusSegue" id="HIu-ts-Gfj"/>
+                        <segue destination="CYM-0F-W7d" kind="show" identifier="checkSegue" id="KmA-si-Ko2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z9F-Rx-pnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,10 +288,10 @@
         <scene sceneID="OdP-dp-1DZ">
             <objects>
                 <tableViewController id="xbZ-V7-jaQ" customClass="FEKnowLedgeListVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="YEM-zw-gzc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="YEM-zw-gzc" customClass="FETableView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="knowLedgeItemCell" textLabel="NlU-Fn-M4s" rowHeight="50" style="IBUITableViewCellStyleDefault" id="VLG-us-Na3">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -248,6 +306,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <segue destination="MaU-Zt-uqG" kind="show" id="fD7-HP-Sbj"/>
                                 </connections>

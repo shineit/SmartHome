@@ -491,6 +491,20 @@
 		14D69BF71ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */; };
 		14D69BFA1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */; };
 		14D69BFB1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */; };
+		14D69BFE1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BFD1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m */; };
+		14D69BFF1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BFD1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m */; };
+		14D69C021ACED0C600D8A1CC /* FEFireAlarmResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C011ACED0C600D8A1CC /* FEFireAlarmResponse.m */; };
+		14D69C031ACED0C600D8A1CC /* FEFireAlarmResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C011ACED0C600D8A1CC /* FEFireAlarmResponse.m */; };
+		14D69C061ACED13D00D8A1CC /* FEFireAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C051ACED13D00D8A1CC /* FEFireAlarm.m */; };
+		14D69C071ACED13D00D8A1CC /* FEFireAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C051ACED13D00D8A1CC /* FEFireAlarm.m */; };
+		14D69C0E1ACEDB9800D8A1CC /* FEDeviceStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C0D1ACEDB9800D8A1CC /* FEDeviceStatusVC.m */; };
+		14D69C111ACEDD4D00D8A1CC /* FECheckListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C101ACEDD4D00D8A1CC /* FECheckListVC.m */; };
+		14D69C141ACEDDAE00D8A1CC /* FECheckListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C131ACEDDAE00D8A1CC /* FECheckListRequest.m */; };
+		14D69C151ACEDDAE00D8A1CC /* FECheckListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C131ACEDDAE00D8A1CC /* FECheckListRequest.m */; };
+		14D69C181ACEDEC800D8A1CC /* FECheckListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C171ACEDEC800D8A1CC /* FECheckListResponse.m */; };
+		14D69C191ACEDEC800D8A1CC /* FECheckListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C171ACEDEC800D8A1CC /* FECheckListResponse.m */; };
+		14D69C1C1ACEDEF600D8A1CC /* FECheckItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C1B1ACEDEF600D8A1CC /* FECheckItem.m */; };
+		14D69C1D1ACEDEF600D8A1CC /* FECheckItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C1B1ACEDEF600D8A1CC /* FECheckItem.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -935,6 +949,22 @@
 		14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEQueryPlanByIdResponse.m; sourceTree = "<group>"; };
 		14D69BF81ACEC8C100D8A1CC /* FESensorPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FESensorPlan.h; sourceTree = "<group>"; };
 		14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FESensorPlan.m; sourceTree = "<group>"; };
+		14D69BFC1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEFireAlarmByCidRequest.h; sourceTree = "<group>"; };
+		14D69BFD1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEFireAlarmByCidRequest.m; sourceTree = "<group>"; };
+		14D69C001ACED0C600D8A1CC /* FEFireAlarmResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEFireAlarmResponse.h; sourceTree = "<group>"; };
+		14D69C011ACED0C600D8A1CC /* FEFireAlarmResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEFireAlarmResponse.m; sourceTree = "<group>"; };
+		14D69C041ACED13D00D8A1CC /* FEFireAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEFireAlarm.h; sourceTree = "<group>"; };
+		14D69C051ACED13D00D8A1CC /* FEFireAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEFireAlarm.m; sourceTree = "<group>"; };
+		14D69C0C1ACEDB9800D8A1CC /* FEDeviceStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDeviceStatusVC.h; sourceTree = "<group>"; };
+		14D69C0D1ACEDB9800D8A1CC /* FEDeviceStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEDeviceStatusVC.m; sourceTree = "<group>"; };
+		14D69C0F1ACEDD4D00D8A1CC /* FECheckListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECheckListVC.h; sourceTree = "<group>"; };
+		14D69C101ACEDD4D00D8A1CC /* FECheckListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECheckListVC.m; sourceTree = "<group>"; };
+		14D69C121ACEDDAE00D8A1CC /* FECheckListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECheckListRequest.h; sourceTree = "<group>"; };
+		14D69C131ACEDDAE00D8A1CC /* FECheckListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECheckListRequest.m; sourceTree = "<group>"; };
+		14D69C161ACEDEC800D8A1CC /* FECheckListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECheckListResponse.h; sourceTree = "<group>"; };
+		14D69C171ACEDEC800D8A1CC /* FECheckListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECheckListResponse.m; sourceTree = "<group>"; };
+		14D69C1A1ACEDEF600D8A1CC /* FECheckItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECheckItem.h; sourceTree = "<group>"; };
+		14D69C1B1ACEDEF600D8A1CC /* FECheckItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECheckItem.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1160,6 +1190,8 @@
 				14D69BA31ACC340200D8A1CC /* FECompanyVC.m */,
 				14D69BA71ACC3CD600D8A1CC /* FEEWarringVC.h */,
 				14D69BA81ACC3CD600D8A1CC /* FEEWarringVC.m */,
+				14D69C0C1ACEDB9800D8A1CC /* FEDeviceStatusVC.h */,
+				14D69C0D1ACEDB9800D8A1CC /* FEDeviceStatusVC.m */,
 				14D69BAA1ACC415000D8A1CC /* FEEStoreVC.h */,
 				14D69BAB1ACC415000D8A1CC /* FEEStoreVC.m */,
 				14D69BAD1ACCD16700D8A1CC /* FEESigninVC.h */,
@@ -1170,6 +1202,8 @@
 				14D69BCB1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m */,
 				14D69BD91ACD810A00D8A1CC /* FEMallProductListVC.h */,
 				14D69BDA1ACD810A00D8A1CC /* FEMallProductListVC.m */,
+				14D69C0F1ACEDD4D00D8A1CC /* FECheckListVC.h */,
+				14D69C101ACEDD4D00D8A1CC /* FECheckListVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1692,6 +1726,10 @@
 				14D69BE51ACEC4CC00D8A1CC /* FECompany.m */,
 				14D69BF81ACEC8C100D8A1CC /* FESensorPlan.h */,
 				14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */,
+				14D69C041ACED13D00D8A1CC /* FEFireAlarm.h */,
+				14D69C051ACED13D00D8A1CC /* FEFireAlarm.m */,
+				14D69C1A1ACEDEF600D8A1CC /* FECheckItem.h */,
+				14D69C1B1ACEDEF600D8A1CC /* FECheckItem.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1709,6 +1747,10 @@
 				14D69BED1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m */,
 				14D69BF41ACEC88200D8A1CC /* FEQueryPlanByIdResponse.h */,
 				14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */,
+				14D69C001ACED0C600D8A1CC /* FEFireAlarmResponse.h */,
+				14D69C011ACED0C600D8A1CC /* FEFireAlarmResponse.m */,
+				14D69C161ACEDEC800D8A1CC /* FECheckListResponse.h */,
+				14D69C171ACEDEC800D8A1CC /* FECheckListResponse.m */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -1726,6 +1768,10 @@
 				14D69BE91ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m */,
 				14D69BF01ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.h */,
 				14D69BF11ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m */,
+				14D69BFC1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.h */,
+				14D69BFD1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m */,
+				14D69C121ACEDDAE00D8A1CC /* FECheckListRequest.h */,
+				14D69C131ACEDDAE00D8A1CC /* FECheckListRequest.m */,
 			);
 			path = request;
 			sourceTree = "<group>";
@@ -2117,6 +2163,7 @@
 				149C31E31ACA3C5200826831 /* FEButton.m in Sources */,
 				147460FA1ACA2B3B0031F05E /* FEAlarm.m in Sources */,
 				147460FE1ACA2B3B0031F05E /* FECatoken.m in Sources */,
+				14D69C031ACED0C600D8A1CC /* FEFireAlarmResponse.m in Sources */,
 				147461281ACA2B3B0031F05E /* FERequestBaseData.m in Sources */,
 				14D69BFB1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */,
 				1474607C1ACA2ABD0031F05E /* AppDelegate.m in Sources */,
@@ -2132,7 +2179,9 @@
 				149C32161ACA3EA400826831 /* UIColor+Theme.m in Sources */,
 				149C31EB1ACA3C5200826831 /* FECommonTabBarController.m in Sources */,
 				149C35151ACA601A00826831 /* WifiAddDeviceViewController.m in Sources */,
+				14D69C1D1ACEDEF600D8A1CC /* FECheckItem.m in Sources */,
 				1474613A1ACA2B3B0031F05E /* NSString+Attribute.m in Sources */,
+				14D69C071ACED13D00D8A1CC /* FEFireAlarm.m in Sources */,
 				14D69BD01ACD7ED600D8A1CC /* FEMallProductListRequest.m in Sources */,
 				147461121ACA2B3B0031F05E /* FEWebServiceManager.m in Sources */,
 				147461201ACA2B3B0031F05E /* FEMarkSetRequest.m in Sources */,
@@ -2156,6 +2205,7 @@
 				147461041ACA2B3B0031F05E /* FENews.m in Sources */,
 				14D69BCC1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m in Sources */,
 				14D69BE71ACEC4CC00D8A1CC /* FECompany.m in Sources */,
+				14D69C111ACEDD4D00D8A1CC /* FECheckListVC.m in Sources */,
 				149C31F51ACA3C5200826831 /* FETableViewController.m in Sources */,
 				14D69BA41ACC340200D8A1CC /* FECompanyVC.m in Sources */,
 				14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */,
@@ -2176,6 +2226,8 @@
 				14D69BBD1ACD64B700D8A1CC /* FEMemoryCache.m in Sources */,
 				14D69BC91ACD689800D8A1CC /* FEKnowLedgeListVC.m in Sources */,
 				147461161ACA2B3B0031F05E /* FEGetCaTokenRequest.m in Sources */,
+				14D69C0E1ACEDB9800D8A1CC /* FEDeviceStatusVC.m in Sources */,
+				14D69C191ACEDEC800D8A1CC /* FECheckListResponse.m in Sources */,
 				14D69BD81ACD7FD600D8A1CC /* FEProduct.m in Sources */,
 				149C31F11ACA3C5200826831 /* FERate.m in Sources */,
 				147460791ACA2ABD0031F05E /* main.m in Sources */,
@@ -2194,12 +2246,14 @@
 				149C32BD1ACA5D4C00826831 /* GAAlertObj.m in Sources */,
 				14D69BB91ACD601300D8A1CC /* FEKnowledge.m in Sources */,
 				147461421ACA2B3B0031F05E /* FENewsResponse.m in Sources */,
+				14D69C151ACEDDAE00D8A1CC /* FECheckListRequest.m in Sources */,
 				149C31E51ACA3C5200826831 /* FECheckButton.m in Sources */,
 				149C32181ACA3EA400826831 /* UIFont+AppFont.m in Sources */,
 				149C32101ACA3EA400826831 /* NSString+UUID.m in Sources */,
 				14D69BD41ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */,
 				147460FC1ACA2B3B0031F05E /* FEAttribute.m in Sources */,
 				14D69BDF1ACEC33900D8A1CC /* FEGetCompanyRequest.m in Sources */,
+				14D69BFF1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m in Sources */,
 				14D69BF71ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m in Sources */,
 				147461361ACA2B3B0031F05E /* FEServiceOrederRequest.m in Sources */,
 				1474612A1ACA2B3B0031F05E /* FESensorBatchDisableRequest.m in Sources */,
@@ -2237,6 +2291,7 @@
 				14D69BD71ACD7FD600D8A1CC /* FEProduct.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
+				14D69C141ACEDDAE00D8A1CC /* FECheckListRequest.m in Sources */,
 				1474612D1ACA2B3B0031F05E /* FESensorListRequest.m in Sources */,
 				14C6DEE819F54F9C006384B2 /* FEWarringInfoVC.m in Sources */,
 				1474610F1ACA2B3B0031F05E /* FEUserMark.m in Sources */,
@@ -2259,6 +2314,7 @@
 				149C350A1ACA601A00826831 /* BonjourBrowser.m in Sources */,
 				149C35121ACA601A00826831 /* TipsPublicView.m in Sources */,
 				14C6DE5819F549EE006384B2 /* AppDelegate.m in Sources */,
+				14D69C181ACEDEC800D8A1CC /* FECheckListResponse.m in Sources */,
 				146388F51A84850D00D766FB /* FECameraItemCell.m in Sources */,
 				147461111ACA2B3B0031F05E /* FEWebServiceManager.m in Sources */,
 				147461291ACA2B3B0031F05E /* FESensorBatchDisableRequest.m in Sources */,
@@ -2270,6 +2326,7 @@
 				149C31EE1ACA3C5200826831 /* FELabel.m in Sources */,
 				147461091ACA2B3B0031F05E /* FEResult.m in Sources */,
 				149C350C1ACA601A00826831 /* SimpleWifi.m in Sources */,
+				14D69C1C1ACEDEF600D8A1CC /* FECheckItem.m in Sources */,
 				14B447BA19F698F00078EAB4 /* FECollectionViewCameraCell.m in Sources */,
 				147461131ACA2B3B0031F05E /* AFHTTPClient+Json.m in Sources */,
 				14B03B751A5928C9000826C9 /* FEHomePageVC.m in Sources */,
@@ -2319,6 +2376,7 @@
 				14B03B781A592977000826C9 /* FEHomeItemCell.m in Sources */,
 				148B131B1A887E51009099E7 /* FECameraPlayerVC.m in Sources */,
 				14C6DE5419F549EE006384B2 /* main.m in Sources */,
+				14D69BFE1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m in Sources */,
 				147461071ACA2B3B0031F05E /* FEPage.m in Sources */,
 				14C6DEEA19F54F9C006384B2 /* FECurrentWarringVC.m in Sources */,
 				14D69BFA1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */,
@@ -2330,6 +2388,7 @@
 				147461331ACA2B3B0031F05E /* FEServiceOrderSetRequest.m in Sources */,
 				147460F91ACA2B3B0031F05E /* FEAlarm.m in Sources */,
 				149C32BA1ACA5D4C00826831 /* CustomIOS7AlertView.m in Sources */,
+				14D69C061ACED13D00D8A1CC /* FEFireAlarm.m in Sources */,
 				147461051ACA2B3B0031F05E /* FEOrder.m in Sources */,
 				14B03B361A51A224000826C9 /* FEMarkAddPopView.m in Sources */,
 				143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */,
@@ -2348,6 +2407,7 @@
 				14C6DEF219F54F9C006384B2 /* FEServiceRequestVC.m in Sources */,
 				14A2FA1F1A774CE0007D5017 /* FEEmptyVC.m in Sources */,
 				149C31F61ACA3C5200826831 /* FETextField.m in Sources */,
+				14D69C021ACED0C600D8A1CC /* FEFireAlarmResponse.m in Sources */,
 				14D69BE21ACEC4A900D8A1CC /* FECompanyListResponse.m in Sources */,
 				14D69BEA1ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m in Sources */,
 			);

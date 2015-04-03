@@ -8,10 +8,12 @@
 
 #import "FEHomeFuncVC.h"
 #import "FECommonDefine.h"
+#import "FECompanyVC.h"
 
 #define PNG_KEY @"png"
 #define ITEM_TITLE   @"title"
 #define ITEM_ACTION     @"action"
+
 
 @interface FEHomeFuncVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -94,23 +96,23 @@
 }
 
 -(void)toWarring{
-    [self performSegueWithIdentifier:@"toCompanySegue" sender:self];
+    [self performSegueWithIdentifier:@"toCompanySegue" sender:@(FIRE_ALARM)];
 }
 
 -(void)toDeviceStatus{
-    [self performSegueWithIdentifier:@"toCompanySegue" sender:self];
+    [self performSegueWithIdentifier:@"toCompanySegue" sender:@(DEVICE_STATUS)];
 }
 
 -(void)toRoute{
-    [self performSegueWithIdentifier:@"toCompanySegue" sender:self];
+    [self performSegueWithIdentifier:@"toCompanySegue" sender:@(CHECK)];
 }
 
 -(void)toInfo{
-    [self performSegueWithIdentifier:@"toCompanySegue" sender:self];
+    [self performSegueWithIdentifier:@"toCompanySegue" sender:@(INFO)];
 }
 
 -(void)toManage{
-    [self performSegueWithIdentifier:@"toCompanySegue" sender:self];
+    [self performSegueWithIdentifier:@"toCompanySegue" sender:@(MANAGE)];
 }
 
 -(void)toKnowledge{
@@ -135,14 +137,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toCompanySegue"]) {
+        FECompanyVC *vc = segue.destinationViewController;
+        vc.type = [sender integerValue];
+    }
 }
-*/
+
 
 @end

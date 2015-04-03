@@ -7,6 +7,11 @@
 //
 
 #import "FEEWarringVC.h"
+#import "FEFireAlarmByCidRequest.h"
+#import "FEFireAlarmResponse.h"
+#import "FEWebServiceManager.h"
+#import "FEMemoryCache.h"
+#import "FECompany.h"
 
 @interface FEEWarringVC ()
 
@@ -17,6 +22,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self requestAlarm];
+}
+
+-(void)requestAlarm{
+    if (self.company) {
+        FEFireAlarmByCidRequest *rdata = [[FEFireAlarmByCidRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID comanyId:self.company.companyID page:[[FEPage alloc] initWithPageSize:0 currentPage:0 count:0] filterList:nil];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEFireAlarmResponse class] response:^(NSError *error, id response) {
+            FEFireAlarmResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                
+            }
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

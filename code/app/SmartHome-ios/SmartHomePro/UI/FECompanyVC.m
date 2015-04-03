@@ -11,6 +11,9 @@
 #import "FEGetCompanyRequest.h"
 #import "FEWebServiceManager.h"
 #import "FEMemoryCache.h"
+#import "FEEWarringVC.h"
+#import "FECheckListVC.h"
+#import "FEDeviceStatusVC.h"
 
 @interface FECompanyVC (){
     NSMutableArray *_companys;
@@ -61,19 +64,39 @@
 
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"toWarringSegue" sender:self];
+    
+    FECompany *company = _companys[indexPath.row];
+    
+    if (self.type == FIRE_ALARM) {
+        [self performSegueWithIdentifier:@"toWarringSegue" sender:company];
+    }else if (self.type == DEVICE_STATUS){
+        [self performSegueWithIdentifier:@"deviceStatusSegue" sender:company];
+    }else if (self.type == CHECK){
+        [self performSegueWithIdentifier:@"checkSegue" sender:company];
+    }
+    
 }
 
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toWarringSegue"]) {
+        FEEWarringVC *vc = segue.destinationViewController;
+        vc.company = sender;
+    }else if ([segue.identifier isEqualToString:@"deviceStatusSegue"]){
+        FEDeviceStatusVC *vc = segue.destinationViewController;
+        vc.company = sender;
+    }else if ([segue.identifier isEqualToString:@"checkSegue"]){
+        FECheckListVC *vc = segue.destinationViewController;
+        vc.company = sender;
+    }
 }
-*/
+
 
 @end
