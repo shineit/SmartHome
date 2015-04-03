@@ -7,8 +7,14 @@
 //
 
 #import "FECompanyVC.h"
+#import "FECompanyListResponse.h"
+#import "FEGetCompanyRequest.h"
+#import "FEWebServiceManager.h"
+#import "FEMemoryCache.h"
 
-@interface FECompanyVC ()
+@interface FECompanyVC (){
+    NSMutableArray *_companys;
+}
 
 @end
 
@@ -18,6 +24,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"公司列表";
+    _companys = [NSMutableArray new];
+    [self requestCompany];
+}
+
+-(void)requestCompany{
+    FEGetCompanyRequest *rdata = [[FEGetCompanyRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID page:[[FEPage alloc] initWithPageSize:0 currentPage:0 count:0]];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FECompanyListResponse class] response:^(NSError *error, id response) {
+        FECompanyListResponse *rsp = response;
+        if (!error && rsp.result.errorCode.integerValue == 0) {
+            [_companys addObjectsFromArray:rsp.companyList];
+            [weakself.tableView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,13 +48,14 @@
 
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FECompany *company = _companys[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"companyItemCell" forIndexPath:indexPath];
-    cell.textLabel.text = @"test company";
+    cell.textLabel.text = company.applyName;
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return _companys.count;
 }
 
 

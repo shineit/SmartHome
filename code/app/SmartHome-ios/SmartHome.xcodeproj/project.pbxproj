@@ -475,6 +475,22 @@
 		14D69BD71ACD7FD600D8A1CC /* FEProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BD61ACD7FD600D8A1CC /* FEProduct.m */; };
 		14D69BD81ACD7FD600D8A1CC /* FEProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BD61ACD7FD600D8A1CC /* FEProduct.m */; };
 		14D69BDB1ACD810A00D8A1CC /* FEMallProductListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BDA1ACD810A00D8A1CC /* FEMallProductListVC.m */; };
+		14D69BDE1ACEC33900D8A1CC /* FEGetCompanyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BDD1ACEC33900D8A1CC /* FEGetCompanyRequest.m */; };
+		14D69BDF1ACEC33900D8A1CC /* FEGetCompanyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BDD1ACEC33900D8A1CC /* FEGetCompanyRequest.m */; };
+		14D69BE21ACEC4A900D8A1CC /* FECompanyListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BE11ACEC4A900D8A1CC /* FECompanyListResponse.m */; };
+		14D69BE31ACEC4A900D8A1CC /* FECompanyListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BE11ACEC4A900D8A1CC /* FECompanyListResponse.m */; };
+		14D69BE61ACEC4CC00D8A1CC /* FECompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BE51ACEC4CC00D8A1CC /* FECompany.m */; };
+		14D69BE71ACEC4CC00D8A1CC /* FECompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BE51ACEC4CC00D8A1CC /* FECompany.m */; };
+		14D69BEA1ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BE91ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m */; };
+		14D69BEB1ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BE91ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m */; };
+		14D69BEE1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BED1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m */; };
+		14D69BEF1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BED1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m */; };
+		14D69BF21ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF11ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m */; };
+		14D69BF31ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF11ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m */; };
+		14D69BF61ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */; };
+		14D69BF71ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */; };
+		14D69BFA1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */; };
+		14D69BFB1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -903,6 +919,22 @@
 		14D69BD61ACD7FD600D8A1CC /* FEProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEProduct.m; sourceTree = "<group>"; };
 		14D69BD91ACD810A00D8A1CC /* FEMallProductListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEMallProductListVC.h; sourceTree = "<group>"; };
 		14D69BDA1ACD810A00D8A1CC /* FEMallProductListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEMallProductListVC.m; sourceTree = "<group>"; };
+		14D69BDC1ACEC33900D8A1CC /* FEGetCompanyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEGetCompanyRequest.h; sourceTree = "<group>"; };
+		14D69BDD1ACEC33900D8A1CC /* FEGetCompanyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEGetCompanyRequest.m; sourceTree = "<group>"; };
+		14D69BE01ACEC4A900D8A1CC /* FECompanyListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECompanyListResponse.h; sourceTree = "<group>"; };
+		14D69BE11ACEC4A900D8A1CC /* FECompanyListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECompanyListResponse.m; sourceTree = "<group>"; };
+		14D69BE41ACEC4CC00D8A1CC /* FECompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECompany.h; sourceTree = "<group>"; };
+		14D69BE51ACEC4CC00D8A1CC /* FECompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECompany.m; sourceTree = "<group>"; };
+		14D69BE81ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEGetCompanyByIdRequest.h; sourceTree = "<group>"; };
+		14D69BE91ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEGetCompanyByIdRequest.m; sourceTree = "<group>"; };
+		14D69BEC1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEGetCompanyByIdResponse.h; sourceTree = "<group>"; };
+		14D69BED1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEGetCompanyByIdResponse.m; sourceTree = "<group>"; };
+		14D69BF01ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEQueryPlanByIdRequest.h; sourceTree = "<group>"; };
+		14D69BF11ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEQueryPlanByIdRequest.m; sourceTree = "<group>"; };
+		14D69BF41ACEC88200D8A1CC /* FEQueryPlanByIdResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEQueryPlanByIdResponse.h; sourceTree = "<group>"; };
+		14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEQueryPlanByIdResponse.m; sourceTree = "<group>"; };
+		14D69BF81ACEC8C100D8A1CC /* FESensorPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FESensorPlan.h; sourceTree = "<group>"; };
+		14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FESensorPlan.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1656,6 +1688,10 @@
 				14D69BB71ACD601300D8A1CC /* FEKnowledge.m */,
 				14D69BD51ACD7FD600D8A1CC /* FEProduct.h */,
 				14D69BD61ACD7FD600D8A1CC /* FEProduct.m */,
+				14D69BE41ACEC4CC00D8A1CC /* FECompany.h */,
+				14D69BE51ACEC4CC00D8A1CC /* FECompany.m */,
+				14D69BF81ACEC8C100D8A1CC /* FESensorPlan.h */,
+				14D69BF91ACEC8C100D8A1CC /* FESensorPlan.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1667,6 +1703,12 @@
 				14D69BB31ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m */,
 				14D69BD11ACD7EFA00D8A1CC /* FEMallProductResponse.h */,
 				14D69BD21ACD7EFA00D8A1CC /* FEMallProductResponse.m */,
+				14D69BE01ACEC4A900D8A1CC /* FECompanyListResponse.h */,
+				14D69BE11ACEC4A900D8A1CC /* FECompanyListResponse.m */,
+				14D69BEC1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.h */,
+				14D69BED1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m */,
+				14D69BF41ACEC88200D8A1CC /* FEQueryPlanByIdResponse.h */,
+				14D69BF51ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -1678,6 +1720,12 @@
 				14D69BC01ACD667900D8A1CC /* FEKnowLedgeListRequest.m */,
 				14D69BCD1ACD7ED600D8A1CC /* FEMallProductListRequest.h */,
 				14D69BCE1ACD7ED600D8A1CC /* FEMallProductListRequest.m */,
+				14D69BDC1ACEC33900D8A1CC /* FEGetCompanyRequest.h */,
+				14D69BDD1ACEC33900D8A1CC /* FEGetCompanyRequest.m */,
+				14D69BE81ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.h */,
+				14D69BE91ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m */,
+				14D69BF01ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.h */,
+				14D69BF11ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m */,
 			);
 			path = request;
 			sourceTree = "<group>";
@@ -2070,6 +2118,7 @@
 				147460FA1ACA2B3B0031F05E /* FEAlarm.m in Sources */,
 				147460FE1ACA2B3B0031F05E /* FECatoken.m in Sources */,
 				147461281ACA2B3B0031F05E /* FERequestBaseData.m in Sources */,
+				14D69BFB1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */,
 				1474607C1ACA2ABD0031F05E /* AppDelegate.m in Sources */,
 				147461001ACA2B3B0031F05E /* FEEnumImage.m in Sources */,
 				1474610E1ACA2B3B0031F05E /* FEUser.m in Sources */,
@@ -2093,17 +2142,20 @@
 				147461261ACA2B3B0031F05E /* FERelyUserRequest.m in Sources */,
 				1474611E1ACA2B3B0031F05E /* FEMarkRequest.m in Sources */,
 				149C321A1ACA3EA400826831 /* UIImage+Resize.m in Sources */,
+				14D69BF31ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m in Sources */,
 				149C320E1ACA3EA400826831 /* NSString+MD5.m in Sources */,
 				1474614A1ACA2B3B0031F05E /* FESensorSetResponse.m in Sources */,
 				147461501ACA2B3B0031F05E /* FEUserMarkResponse.m in Sources */,
 				149C35131ACA601A00826831 /* TipsPublicView.m in Sources */,
 				1474610A1ACA2B3B0031F05E /* FEResult.m in Sources */,
+				14D69BEB1ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m in Sources */,
 				149C35171ACA601A00826831 /* YSCamera.m in Sources */,
 				149C31ED1ACA3C5200826831 /* FECommonViewController.m in Sources */,
 				149C32BB1ACA5D4C00826831 /* CustomIOS7AlertView.m in Sources */,
 				149C31E91ACA3C5200826831 /* FECommonNavgationController.m in Sources */,
 				147461041ACA2B3B0031F05E /* FENews.m in Sources */,
 				14D69BCC1ACD7AFC00D8A1CC /* FEKnowLedgeDetailVC.m in Sources */,
+				14D69BE71ACEC4CC00D8A1CC /* FECompany.m in Sources */,
 				149C31F51ACA3C5200826831 /* FETableViewController.m in Sources */,
 				14D69BA41ACC340200D8A1CC /* FECompanyVC.m in Sources */,
 				14D69BA91ACC3CD600D8A1CC /* FEEWarringVC.m in Sources */,
@@ -2114,7 +2166,9 @@
 				14D69BC21ACD667900D8A1CC /* FEKnowLedgeListRequest.m in Sources */,
 				1474614C1ACA2B3B0031F05E /* FESiginResponse.m in Sources */,
 				149C350B1ACA601A00826831 /* BonjourBrowser.m in Sources */,
+				14D69BE31ACEC4A900D8A1CC /* FECompanyListResponse.m in Sources */,
 				147461081ACA2B3B0031F05E /* FEPage.m in Sources */,
+				14D69BEF1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m in Sources */,
 				149C320C1ACA3EA400826831 /* NSDate+Formatter.m in Sources */,
 				14D69BAC1ACC415000D8A1CC /* FEEStoreVC.m in Sources */,
 				149C352A1ACC183500826831 /* FEHomeFuncVC.m in Sources */,
@@ -2145,6 +2199,8 @@
 				149C32101ACA3EA400826831 /* NSString+UUID.m in Sources */,
 				14D69BD41ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */,
 				147460FC1ACA2B3B0031F05E /* FEAttribute.m in Sources */,
+				14D69BDF1ACEC33900D8A1CC /* FEGetCompanyRequest.m in Sources */,
+				14D69BF71ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m in Sources */,
 				147461361ACA2B3B0031F05E /* FEServiceOrederRequest.m in Sources */,
 				1474612A1ACA2B3B0031F05E /* FESensorBatchDisableRequest.m in Sources */,
 				14D69BB51ACD5FCC00D8A1CC /* FEKnowledgeListResponse.m in Sources */,
@@ -2161,11 +2217,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				146D34DE19FB6CE1000F14F5 /* FECloudSafeTableCell.m in Sources */,
+				14D69BE61ACEC4CC00D8A1CC /* FECompany.m in Sources */,
 				14B447C019F6A7C70078EAB4 /* FEControlPointCell.m in Sources */,
 				149C32BC1ACA5D4C00826831 /* GAAlertObj.m in Sources */,
+				14D69BDE1ACEC33900D8A1CC /* FEGetCompanyRequest.m in Sources */,
 				14C6DEF819F55183006384B2 /* FESettingVC.m in Sources */,
+				14D69BF61ACEC88200D8A1CC /* FEQueryPlanByIdResponse.m in Sources */,
 				14950D9F1A7B16ED001416A7 /* FECameraShouldVerfyVC.m in Sources */,
 				14447AEE1A8C505800045B88 /* FECameraCode.m in Sources */,
+				14D69BF21ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m in Sources */,
 				143CED1E19F892B900FEDE61 /* FEModifyPassWord.m in Sources */,
 				149C31F21ACA3C5200826831 /* FETableView.m in Sources */,
 				14B447C319F7890A0078EAB4 /* FEControlView.m in Sources */,
@@ -2222,6 +2282,7 @@
 				14B03B2C1A5191C8000826C9 /* FEUserMarkManagerVC.m in Sources */,
 				149C35161ACA601A00826831 /* YSCamera.m in Sources */,
 				149C31F01ACA3C5200826831 /* FERate.m in Sources */,
+				14D69BEE1ACEC74900D8A1CC /* FEGetCompanyByIdResponse.m in Sources */,
 				1474614D1ACA2B3B0031F05E /* FESigoutResponse.m in Sources */,
 				14D69BB81ACD601300D8A1CC /* FEKnowledge.m in Sources */,
 				149C31EA1ACA3C5200826831 /* FECommonTabBarController.m in Sources */,
@@ -2260,6 +2321,7 @@
 				14C6DE5419F549EE006384B2 /* main.m in Sources */,
 				147461071ACA2B3B0031F05E /* FEPage.m in Sources */,
 				14C6DEEA19F54F9C006384B2 /* FECurrentWarringVC.m in Sources */,
+				14D69BFA1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */,
 				14B4B71D19FE729E00FF6BC0 /* FESettingItemCell.m in Sources */,
 				147461371ACA2B3B0031F05E /* FESiginRequest.m in Sources */,
 				147461431ACA2B3B0031F05E /* FEOrderListResponse.m in Sources */,
@@ -2286,6 +2348,8 @@
 				14C6DEF219F54F9C006384B2 /* FEServiceRequestVC.m in Sources */,
 				14A2FA1F1A774CE0007D5017 /* FEEmptyVC.m in Sources */,
 				149C31F61ACA3C5200826831 /* FETextField.m in Sources */,
+				14D69BE21ACEC4A900D8A1CC /* FECompanyListResponse.m in Sources */,
+				14D69BEA1ACEC6C000D8A1CC /* FEGetCompanyByIdRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

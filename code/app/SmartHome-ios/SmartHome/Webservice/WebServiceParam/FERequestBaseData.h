@@ -37,6 +37,10 @@
 #define __METHOD_MALL_PRODUCT       @"product/list"
 #define __METHOD_MALL_AD            @"ad/list"
 
+//company
+#define __METHOD_COMPANY_LIST       @"company/list"
+#define __METHOD_QUERY_COMPANY      @"company/id"
+#define __METHOD_GET_PLAN           @"plan/get"
 
 
 
