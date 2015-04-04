@@ -41,8 +41,8 @@ public class UploadUtil
 	}
 
 	private static final String TAG = "UploadUtil";
-	private int readTimeOut = 10 * 1000; // 读取超时
-	private int connectTimeout = 10 * 1000; // 超时时间
+	private int readTimeOut = 15 * 1000; // 读取超时
+	private int connectTimeout = 15 * 1000; // 超时时间
 	private static int requestTime = 0;	//请求使用多长时间
 	private static final String CHARSET = "utf-8"; // 设置编码
 	public static final int UPLOAD_SUCCESS_CODE = 1; //上传成功
@@ -261,8 +261,8 @@ public class UploadUtil
 	private OnUploadProcessListener onUploadProcessListener;
 	
 
-	public void setOnUploadProcessListener(
-			OnUploadProcessListener onUploadProcessListener) {
+	public void setOnUploadProcessListener(OnUploadProcessListener onUploadProcessListener)
+	{
 		this.onUploadProcessListener = onUploadProcessListener;
 	}
 
@@ -286,10 +286,7 @@ public class UploadUtil
 		return requestTime;
 	}
 
-	public static interface uploadProcessListener{
-		
-	}
-	
+
 	
 	
 	

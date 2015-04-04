@@ -14,20 +14,21 @@
 
         <TextView
             android:id="@+id/item_btntype_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:gravity="center"
+            android:layout_toLeftOf="@+id/linearLayout1"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20dp"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/content_font_size" />
 
         <LinearLayout
+            android:id="@+id/btn_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="false"
             android:layout_centerVertical="true"
             android:gravity="right|center" >
 
@@ -42,10 +43,10 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/forward_sm" />
 
         </LinearLayout>
-
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,25 +1,14 @@
 package cn.fuego.misp.ui.common.upload;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,7 +37,7 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.select_pic_layout);
+		setContentView(R.layout.misp_select_pic_layout);
 		
 		dialogLayout = (LinearLayout) findViewById(R.id.dialog_layout);
 		dialogLayout.setOnClickListener(this);
@@ -82,7 +71,8 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 	/**
 	 * 拍照获取图片
 	 */
-	private void takePhoto() {
+	private void takePhoto() 
+	{
 		//执行拍照前，应该先判断SD卡是否存在
 		String SDState = Environment.getExternalStorageState();
 		if(SDState.equals(Environment.MEDIA_MOUNTED))
@@ -109,11 +99,13 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 	/***
 	 * 从相册中取图片
 	 */
-	private void pickPhoto() {
-		Intent intent = new Intent();
+	private void pickPhoto() 
+	{
+		//支持高版本照片选取
+		Intent intent = new Intent(Intent.ACTION_PICK);
 		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
 		startActivityForResult(intent, SELECT_PIC_BY_PICK_PHOTO);
+
 	}
 	
 	
@@ -138,8 +130,9 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 	 * @param requestCode
 	 * @param data
 	 */
+
 	private void doPhoto(int requestCode,Intent data){
-		if(requestCode == SELECT_PIC_BY_PICK_PHOTO )  //从相册取图片，有些手机有异常情况，请注意
+		if(requestCode == SELECT_PIC_BY_PICK_PHOTO ) 
 		{
 			if(data == null){
 				Toast.makeText(this, "选择图片文件出错", Toast.LENGTH_LONG).show();
@@ -161,61 +154,14 @@ public class SelectPicActivity extends Activity implements OnClickListener{
 		}
 		Log.i(TAG, "imagePath = "+picPath);
 		/*if(picPath != null && ( picPath.endsWith(".png") || picPath.endsWith(".PNG") ||picPath.endsWith(".jpg") ||picPath.endsWith(".JPG")  ))*/
-		if(picPath !=null)
-		{
-
-            Bitmap b=BitmapFactory.decodeFile(picPath);
-            String name = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-            String fileName = Environment.getExternalStorageDirectory().toString()+File.separator+"compress/image/"+name+".jpg";
-            picPath = fileName;
-            System.out.println(picPath+"----------");
-            File myCaptureFile =new File(fileName);
-			try {
-				if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-				{
-					if(!myCaptureFile.getParentFile().exists())
-					{
-						myCaptureFile.getParentFile().mkdirs();
-					}
-					//BufferedOutputStream baos;
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-					//baos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-					b.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
-				    int options = 100;  
-				        while ( baos.toByteArray().length / 1024>300) {  //循环判断如果压缩后图片是否大于300kb,大于继续压缩         
-				             baos.reset();//重置baos即清空baos  
-				            b.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中  
-				            options -= 10;//每次都减少10  
-				        } 
-					//b.compress(Bitmap.CompressFormat.JPEG, 20, baos);
-				        FileOutputStream fos = new FileOutputStream(myCaptureFile);
-                        fos.write(baos.toByteArray());
-                        fos.flush();
-                        fos.close();
-					baos.flush();
-					baos.close();
-	                //以下原有跳转方式
-	    			lastIntent.putExtra(KEY_PHOTO_PATH, picPath);
-	    			setResult(Activity.RESULT_OK, lastIntent);
-	    			finish();
-				}
-				else
-				{
-		        	
-		        	 Toast toast= Toast.makeText(SelectPicActivity.this, "保存失败，SD卡无效", Toast.LENGTH_SHORT);
-		        	 toast.setGravity(Gravity.CENTER, 0, 0);
-		        	 toast.show();
-		        }
-			} catch (FileNotFoundException e) {
-					e.printStackTrace();
-			} catch (IOException e) {
-					e.printStackTrace();
-			}
-
-			
+		if(picPath !=null){
+			lastIntent.putExtra(KEY_PHOTO_PATH, picPath);
+			setResult(Activity.RESULT_OK, lastIntent);
+			finish();
 		}else{
-			Toast.makeText(this, "选择文件不正确!", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "找不到路径!", Toast.LENGTH_LONG).show();
 			
 		}
 	}
+
 }

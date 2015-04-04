@@ -20,13 +20,13 @@ import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.AlarmSoundService;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class FireAlarmActivity extends MispListActivity<FireAlarmJson>

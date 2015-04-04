@@ -15,10 +15,10 @@ import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.CheckLogCache;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
-import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckItemByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 import cn.sharesdk.framework.ShareSDK;
 

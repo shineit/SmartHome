@@ -13,11 +13,12 @@ import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
+import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.down.model.AlarmPushInfoJson;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class DeviceStatusActivity extends FireAlarmActivity
@@ -100,7 +101,7 @@ public class DeviceStatusActivity extends FireAlarmActivity
 	protected void onDestroy()
 	{
 		Intent intent=new Intent();
-        intent.putExtra("refresh", true);
+        intent.putExtra(IntentCodeConst.HOME_REFRESH, 3);
         intent.setAction("android.intent.action.bageNotify");//action与接收器相同
         sendBroadcast(intent);
 		super.onDestroy();

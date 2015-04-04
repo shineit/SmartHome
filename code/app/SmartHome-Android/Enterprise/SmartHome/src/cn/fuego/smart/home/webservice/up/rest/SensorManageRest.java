@@ -18,8 +18,6 @@ import cn.fuego.smart.home.webservice.up.model.ClearAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.ClearAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetAlarmByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListReq;
 import cn.fuego.smart.home.webservice.up.model.GetHistoryAlarmListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorByIDReq;
@@ -28,6 +26,8 @@ import cn.fuego.smart.home.webservice.up.model.GetSensorListReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorListRsp;
 import cn.fuego.smart.home.webservice.up.model.SetSensorReq;
 import cn.fuego.smart.home.webservice.up.model.SetSensorRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmByIDRsp;
 
 /**
  * 

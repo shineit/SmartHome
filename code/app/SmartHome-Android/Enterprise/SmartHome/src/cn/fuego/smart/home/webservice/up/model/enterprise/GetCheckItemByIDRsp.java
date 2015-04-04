@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.webservice.up.model;
+package cn.fuego.smart.home.webservice.up.model.enterprise;
 
 import java.util.ArrayList;
 import java.util.List;

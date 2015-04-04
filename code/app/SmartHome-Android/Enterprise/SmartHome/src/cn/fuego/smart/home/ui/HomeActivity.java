@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -15,13 +16,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import cn.fuego.common.log.FuegoLog;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.home.R;
 import cn.fuego.smart.home.cache.AppCache;
-import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
+import cn.fuego.smart.home.service.BageNumDataCache;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.common.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
@@ -32,12 +32,13 @@ import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity;
-import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetFireAlarmByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
-import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
+import cn.fuego.smart.home.webservice.up.model.base.BageNumJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 import com.readystatesoftware.viewbadger.BadgeView;
@@ -48,7 +49,10 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 
 	private BadgeView alarmBageView,statusBageView,checkBageView;
 	private Button alarm_btn,status_btn,check_log_btn;
-	private int alarmEnter=0,statusEnter=0,checkLogEnter=0;
+	
+	private List<BageNumJson> alarmNumList=new ArrayList<BageNumJson>();
+	private List<BageNumJson> statusNumList=new ArrayList<BageNumJson>();
+	private List<BageNumJson> checkNumList=new ArrayList<BageNumJson>();
 	@Override
 	public void initRes() 
 	{
@@ -86,8 +90,9 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
    	
     	statusBageView = new BadgeView(HomeActivity.this, status_btn);
     	regBageView(statusBageView);
-    	showAlarmBadge();
-    	
+    	//showAlarmBadge();
+    	showFireAlarmBage();
+    	showFireStatusBage();
     	checkBageView = new BadgeView(HomeActivity.this, check_log_btn);
     	regBageView(checkBageView);
     	showCheckBage();
@@ -97,36 +102,141 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 
 
 	}
-	private void showCheckBage()
+	private void showFireStatusBage()
 	{
-		GetCheckLogByIDReq req = new GetCheckLogByIDReq();
+		GetFireStatusNumByIDReq req = new GetFireStatusNumByIDReq();
 		req.setUserID(AppCache.getInstance().getUser().getUserID());
-		WebServiceContext.getInstance().getCheckManageRest(new MispHttpHandler(){
+		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
 			@Override
 			public void handle(MispHttpMessage message)
 			{
 				if(message.isSuccess())
 				{
-					GetCheckLogByIDRsp rsp = (GetCheckLogByIDRsp) message.getMessage().obj;
-					List<CheckLogJson> logList = rsp.getCheckLogList();
-					int logSize= logList.size();
-					if(logSize!=0)
-					{
-						checkLogEnter=1;
-						if(logSize>99)
+					GetFireStatusNumByIDRsp rsp = (GetFireStatusNumByIDRsp) message.getMessage().obj;
+					statusNumList= rsp.getNumList();
+					BageNumDataCache.getInstance().setStatusBageList(statusNumList);
+			    	int statusCount=0;
+			    	for(BageNumJson json:statusNumList)
+			    	{
+			    		statusCount+=json.getNum();
+			    	}
+			    	if(statusCount!=0)
+			    	{
+
+						if(statusCount>99)
 						{
-							checkBageView.setText("99+");
-							checkBageView.show();
+							statusBageView.setText("99+");
 						}
 						else
 						{
-							checkBageView.setText(String.valueOf(logSize));
-							checkBageView.show();
+							statusBageView.setText(String.valueOf(statusCount));
 						}
-					}
+			    		statusBageView.show();
+			    	}
+			    	else
+			    	{
+			    		if(statusBageView.isShown())
+			    		{
+			    			statusBageView.toggle();
+			    		}
+			    		
+			    	}
+					
 				}
 			}
-		}).getCheckLogByID(req);
+		}).getStatusNum(req);
+		
+	}
+	private void showFireAlarmBage()
+	{
+		GetFireAlarmNumByIDReq req = new GetFireAlarmNumByIDReq();
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
+		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					GetFireAlarmNumByIDRsp rsp = (GetFireAlarmNumByIDRsp) message.getMessage().obj;
+					
+					alarmNumList= rsp.getNumList();
+					BageNumDataCache.getInstance().setAlarmBageList(alarmNumList);
+			    	int alarmCount=0;
+			    	for(BageNumJson json:alarmNumList)
+			    	{
+			    		alarmCount+=json.getNum();
+			    	}
+					if(alarmCount!=0)
+			    	{
+						//alarmBageView=null;
+						if(alarmCount>99)
+						{
+							alarmBageView.setText("99+");
+						}
+						else
+						{
+							alarmBageView.setText(String.valueOf(alarmCount));
+						}
+
+				    	alarmBageView.show();
+			    	}
+					else
+					{
+						if(alarmBageView.isShown())
+						{
+							alarmBageView.toggle();
+						}
+						
+					}
+					
+				}
+			}
+		}).getAlarmNum(req);
+	}
+	private void showCheckBage()
+	{
+		GetCheckLogNumByIDReq req = new GetCheckLogNumByIDReq();
+		req.setUserID(AppCache.getInstance().getUser().getUserID());		
+		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					GetCheckLogNumByIDRsp rsp =  (GetCheckLogNumByIDRsp) message.getMessage().obj;
+					checkNumList= rsp.getNumList();
+					BageNumDataCache.getInstance().setCheckBageList(checkNumList);
+			    	int count=0;
+			    	for(BageNumJson json:checkNumList)
+			    	{
+			    		count+=json.getNum();
+			    	}
+					if(count!=0)
+			    	{
+
+						if(count>99)
+						{
+							checkBageView.setText("99+");
+						}
+						else
+						{
+							checkBageView.setText(String.valueOf(count));
+						}
+
+						checkBageView.show();
+			    	}
+					else
+					{
+						if(checkBageView.isShown())
+						{
+							checkBageView.toggle();
+						}
+						
+					}
+
+				}
+			}
+		}).getCheckNum(req);
 		
 	}
 	//统一bageView样式
@@ -137,80 +247,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		bageView.setTextSize(15);
 		
 	}
-	private void showAlarmBadge()
-	{
+	
 
-		GetFireAlarmByIDReq req= new GetFireAlarmByIDReq();
-		req.setUserID(AppCache.getInstance().getUser().getUserID());
-		WebServiceContext.getInstance().getSensorManageRest(new MispHttpHandler(){
-			@Override
-			public void handle(MispHttpMessage message)
-			{
-				
-				if(message.isSuccess())
-				{
-			    	GetFireAlarmByIDRsp rsp = (GetFireAlarmByIDRsp) message.getMessage().obj;
-					if(!ValidatorUtil.isEmpty(rsp.getFireAlarmList()))
-			    	{
-
-				    	int alarmCount=0,statusCount=0;
-				    	List<FireAlarmJson> tempList =  rsp.getFireAlarmList();
-				    	for(FireAlarmJson json:tempList)
-				    	{
-				    		if(json.getAlarmKind()==AlarmKindEnum.ALARM.getIntValue())
-				    		{
-				    			alarmCount++;
-				    		}
-				    		if(json.getAlarmKind()==AlarmKindEnum.STATUS.getIntValue())
-				    		{
-				    			statusCount++;
-				    		}
-				    	}
-
-				    	if(alarmCount!=0)
-				    	{
-				    		//showMessage("alarmCount:"+alarmCount);
-				    		alarmEnter=1;
-							if(alarmCount>99)
-							{
-								alarmBageView.setText("99+");
-							}
-							else
-							{
-								alarmBageView.setText(String.valueOf(alarmCount));
-							}
-
-					    	alarmBageView.show();
-				    	}
-				    	if(statusCount!=0)
-				    	{
-				    		//showMessage("statusCount:"+statusCount);
-				    		statusEnter=1;
-							if(statusCount>99)
-							{
-								statusBageView.setText("99+");
-							}
-							else
-							{
-								statusBageView.setText(String.valueOf(statusCount));
-							}
-				    		statusBageView.show();
-				    	}
-			    	}
-					
-
-				}
-				else
-				{
-					showMessage(message);
-				}
-				
-				
-			}
-		}).getFireAlarm(req);
-
-		
-	}
 	@Override
 	public void onClick(View v)
 	{
@@ -218,20 +256,11 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		{
 
 		case R.id.home_menu_alarm:
-			if(alarmEnter==1)
-			{
-				alarmBageView.toggle();
-				
-				alarmEnter=0;
-			}
+
 			CompanyListActivity.jump(this, FireAlarmActivity.class);
 			break;
 		case R.id.home_menu_status:
-			if(statusEnter==1)
-			{
-				statusBageView.toggle();
-				statusEnter=0;
-			}
+
 			CompanyListActivity.jump(this, DeviceStatusActivity.class);
 			break;
 		case R.id.home_menu_check:	
@@ -241,11 +270,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			CompanyListActivity.jump(this, CompanyViewActivity.class);
 			break;
 		case R.id.home_menu_manage:
-			if(checkLogEnter==1)
-			{
-				checkBageView.toggle();
-				checkLogEnter=0;
-			}
+
 			CompanyListActivity.jump(this, CheckLogActivity.class);
 			break;
 			
@@ -325,9 +350,11 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			int refreshCode = intent.getIntExtra(IntentCodeConst.HOME_REFRESH, 0);
 			switch(refreshCode)
 			{
-				case 1:showAlarmBadge();
+				case 1:showFireAlarmBage();
 							break;
 				case 2:showCheckBage();
+							break;
+				case 3:showFireStatusBage();
 							break;
 				default:break;
 			}

@@ -12,5 +12,14 @@ public class MispCommonDataSource
 		sexList.add("女");
 		return sexList;
 	}
+	public static List<String> getTypeDataSouce()
+	{
+		List<String> typeList = new ArrayList<String>();
+		
+		
+		return typeList;
+		
+	}
+	
 
 }
