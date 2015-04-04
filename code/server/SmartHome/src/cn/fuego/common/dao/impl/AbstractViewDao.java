@@ -206,7 +206,7 @@ public class AbstractViewDao<E> extends GenricTypeClass<E> implements ViewDao<E>
 		{
 			session = HibernateUtil.getSession();
 			tx = session.beginTransaction();
-			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session);
+			Criteria c = HibernateUtil.getCriteriaByCondition(this.getFeaturedClass(),conditionList, session,false);
 			count = (Long)c.setProjection(Projections.rowCount()).uniqueResult(); 
 			tx.commit();
 		} catch (RuntimeException re)

@@ -20,6 +20,12 @@ import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
 import cn.fuego.smart.home.webservice.up.model.SetCustomerRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDRsp;
 
 
 /**
@@ -73,6 +79,16 @@ public interface UserManageRest
 	@Path("/caToken/get")
 	GetCaTokenByIDRsp getCaToken(GetCaTokenByIDReq req);
 
-
+	@POST
+	@Path("/fireAlarmNum/get")
+	GetFireAlarmNumByIDRsp getAlarmNum(GetFireAlarmNumByIDReq req);
+	
+	@POST
+	@Path("/fireStatusNum/get")
+	GetFireStatusNumByIDRsp getStatusNum(GetFireStatusNumByIDReq req);
+	
+	@POST
+	@Path("/checkLogNum/get")
+	GetCheckLogNumByIDRsp getCheckNum(GetCheckLogNumByIDReq req);
 	
 }

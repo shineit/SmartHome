@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.webservice.up.model;
+package cn.fuego.smart.home.webservice.up.model.enterprise;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 public class GetCheckLogByIDReq extends MispBaseReqJson
 {
 	private int userID;
-	private int companyID;
+	private int companyID=0;
 	private PageJson page;
 	private List<AttributeJson> filterList;
 

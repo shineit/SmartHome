@@ -156,8 +156,7 @@ public final class HibernateUtil
 				s.close();
 		}
 	}
-	
-	public static  Criteria getCriteriaByCondition(Class clazz , List<QueryCondition> conditionList,Session s)
+	public static  Criteria getCriteriaByCondition(Class clazz , List<QueryCondition> conditionList,Session s,boolean needSort)
 	{
 		Criteria c  = s.createCriteria(clazz);
 		if(null != conditionList)
@@ -214,10 +213,16 @@ public final class HibernateUtil
 					 
 					break;	
 				case DESC_ORDER:	
-					 c.addOrder(Order.desc(condition.getAttrName()));
+					if(needSort) 
+					{
+						c.addOrder(Order.desc(condition.getAttrName()));
+					}
 					break;	
 				case ASC_ORDER:	
-					c.addOrder(Order.asc(condition.getAttrName()));
+					if(needSort) 
+					{
+						c.addOrder(Order.asc(condition.getAttrName()));
+					}
 					break;	
 				default:
 				    break;
@@ -227,6 +232,12 @@ public final class HibernateUtil
 		}
 
 		return c;
+	}
+
+	public static  Criteria getCriteriaByCondition(Class clazz , List<QueryCondition> conditionList,Session s)
+	{
+		return getCriteriaByCondition(clazz,conditionList,s,true);
+ 
 	}
 	
 	public static Blob getBlobByFile(File file)

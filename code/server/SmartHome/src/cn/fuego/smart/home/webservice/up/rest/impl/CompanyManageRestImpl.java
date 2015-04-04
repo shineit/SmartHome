@@ -23,14 +23,14 @@ import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.webservice.ModelConvert;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyListReq;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.SensorPlanJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyListReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.rest.CompanyManageRest;
 
  /** 

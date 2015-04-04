@@ -1,4 +1,4 @@
-package cn.fuego.smart.home.webservice.up.model;
+package cn.fuego.smart.home.webservice.up.model.enterprise;
 
 import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;

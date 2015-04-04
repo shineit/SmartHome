@@ -8,20 +8,29 @@
 */ 
 package cn.fuego.smart.home.webservice.up.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
+import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.domain.SystemMenu;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
+import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.domain.CheckLog;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Customer;
 import cn.fuego.smart.home.domain.UserMark;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -42,10 +51,17 @@ import cn.fuego.smart.home.webservice.up.model.SetCustomerReq;
 import cn.fuego.smart.home.webservice.up.model.SetCustomerRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
+import cn.fuego.smart.home.webservice.up.model.base.BageNumJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserMarkJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.rest.UserManageRest;
 
 import com.hikvision.PublicController;
@@ -325,6 +341,65 @@ public class UserManageRestImpl implements UserManageRest
 			log.error("create mark failed",e);
 		}
  
+		return rsp;
+	}
+
+	@Override
+	public GetFireAlarmNumByIDRsp getAlarmNum(GetFireAlarmNumByIDReq req)
+	{
+		GetFireAlarmNumByIDRsp rsp = new GetFireAlarmNumByIDRsp();
+
+		List<BageNumJson> numList = getAlarmNum(req.getUserID(),AlarmKindEnum.ALARM.getIntValue());
+		rsp.getNumList().addAll(numList);
+		return rsp;
+	}
+
+	@Override
+	public GetFireStatusNumByIDRsp getStatusNum(GetFireStatusNumByIDReq req)
+	{
+		GetFireStatusNumByIDRsp rsp = new GetFireStatusNumByIDRsp();
+		List<BageNumJson> numList = getAlarmNum(req.getUserID(),AlarmKindEnum.STATUS.getIntValue());
+		rsp.getNumList().addAll(numList);
+		return rsp;
+	}
+
+	private List<BageNumJson> getAlarmNum(int userID, int kind)
+	{
+		List<BageNumJson> numList = new ArrayList<BageNumJson>();
+		Set<String> companyIDList=MISPServiceContext.getInstance().getMISPPrivilegeManage().getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(userID));
+		for(String companyID:companyIDList)
+		{
+			BageNumJson json = new BageNumJson();
+			json.setCompanyID(Integer.valueOf(companyID));
+			Company company= ServiceContext.getInstance().getCompanyManageService().get(companyID);
+			List<QueryCondition> conditionList= new ArrayList<QueryCondition>();
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID", company.getConcentratorID()));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "kind", kind));
+			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "clearStatus", AlarmClearEnum.NONE_CLEAR.getIntValue()));
+			long count =ServiceContext.getInstance().getFireAlarmService().getDataSource(conditionList).getDataCount();
+			json.setNum(count);
+			numList.add(json);
+		}
+		return numList;
+	}
+
+	@Override
+	public GetCheckLogNumByIDRsp getCheckNum(GetCheckLogNumByIDReq req)
+	{
+		GetCheckLogNumByIDRsp rsp = new GetCheckLogNumByIDRsp();
+		List<BageNumJson> numList = new ArrayList<BageNumJson>();
+
+		Set<String> companyIDList=MISPServiceContext.getInstance().getMISPPrivilegeManage()
+				.getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(req.getUserID()));
+		for(String companyID:companyIDList)
+		{
+			BageNumJson json = new BageNumJson();
+			json.setCompanyID(Integer.valueOf(companyID));			
+			List<CheckLog>  logList=ServiceContext.getInstance().getCheckLogService().getCurrentLog(Integer.valueOf(companyID));
+			json.setNum(logList.size());
+			numList.add(json);
+		}
+		rsp.getNumList().addAll(numList);
 		return rsp;
 	}
 

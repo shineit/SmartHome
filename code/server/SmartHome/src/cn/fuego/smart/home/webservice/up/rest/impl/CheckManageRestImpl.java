@@ -32,12 +32,12 @@ import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogRsp;
 import cn.fuego.smart.home.webservice.up.model.DeleteImgByNameReq;
 import cn.fuego.smart.home.webservice.up.model.DeleteImgByNameRsp;
-import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCheckItemByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCheckLogByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.CheckItemJson;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckItemByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckItemByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogByIDRsp;
 import cn.fuego.smart.home.webservice.up.rest.CheckManageRest;
 
 

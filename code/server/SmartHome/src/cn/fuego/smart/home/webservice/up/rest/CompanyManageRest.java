@@ -5,12 +5,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyByIDRsp;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyListReq;
-import cn.fuego.smart.home.webservice.up.model.GetCompanyListRsp;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyByIDReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyListReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetCompanyListRsp;
 
 /**
  * 
