@@ -14,6 +14,8 @@
 #import "FEEWarringVC.h"
 #import "FECheckListVC.h"
 #import "FEDeviceStatusVC.h"
+#import "FECompanyInfoVC.h"
+
 
 @interface FECompanyVC (){
     NSMutableArray *_companys;
@@ -73,6 +75,8 @@
         [self performSegueWithIdentifier:@"deviceStatusSegue" sender:company];
     }else if (self.type == CHECK){
         [self performSegueWithIdentifier:@"checkSegue" sender:company];
+    }else if (self.type == INFO){
+        [self performSegueWithIdentifier:@"toInfoSegue" sender:company];
     }
     
 }
@@ -94,6 +98,9 @@
         vc.company = sender;
     }else if ([segue.identifier isEqualToString:@"checkSegue"]){
         FECheckListVC *vc = segue.destinationViewController;
+        vc.company = sender;
+    }else if ([segue.identifier isEqualToString:@"toInfoSegue"]){
+        FECompanyInfoVC *vc = segue.destinationViewController;
         vc.company = sender;
     }
 }
