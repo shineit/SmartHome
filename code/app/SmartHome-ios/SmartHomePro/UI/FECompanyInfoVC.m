@@ -7,8 +7,17 @@
 //
 
 #import "FECompanyInfoVC.h"
+#import "FECompany.h"
 
 @interface FECompanyInfoVC ()
+@property (strong, nonatomic) IBOutlet UILabel *companyName;
+@property (strong, nonatomic) IBOutlet UILabel *companyAddress;
+@property (strong, nonatomic) IBOutlet UILabel *compantType;
+@property (strong, nonatomic) IBOutlet UILabel *companyFire;
+@property (strong, nonatomic) IBOutlet UILabel *companyArea;
+@property (strong, nonatomic) IBOutlet UILabel *legalPerson;
+@property (strong, nonatomic) IBOutlet UILabel *manager;
+@property (strong, nonatomic) IBOutlet UILabel *dutyPerson;
 
 @end
 
@@ -17,6 +26,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initUI];
+}
+
+-(void)initUI{
+    self.title = @"基本信息";
+    self.companyName.text = self.company.applyName;
+    self.companyAddress.text = self.company.companyAddr;
+    self.compantType.text = self.company.companyType;
+    self.companyFire.text = self.company.fireRisk;
+    self.companyArea.text = self.company.buildingArea.stringValue;
+    self.legalPerson.text = self.company.legalOfficer;
+    self.manager.text = self.company.fireManager;
+    self.dutyPerson.text = self.company.fireDuty;
 }
 
 - (void)didReceiveMemoryWarning {

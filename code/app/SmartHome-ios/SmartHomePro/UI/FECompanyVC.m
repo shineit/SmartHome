@@ -15,6 +15,7 @@
 #import "FECheckListVC.h"
 #import "FEDeviceStatusVC.h"
 #import "FECompanyInfoVC.h"
+#import "FEManageVC.h"
 
 
 @interface FECompanyVC (){
@@ -77,6 +78,8 @@
         [self performSegueWithIdentifier:@"checkSegue" sender:company];
     }else if (self.type == INFO){
         [self performSegueWithIdentifier:@"toInfoSegue" sender:company];
+    }else if (self.type == MANAGE){
+        [self performSegueWithIdentifier:@"toManageSegue" sender:company];
     }
     
 }
@@ -101,6 +104,9 @@
         vc.company = sender;
     }else if ([segue.identifier isEqualToString:@"toInfoSegue"]){
         FECompanyInfoVC *vc = segue.destinationViewController;
+        vc.company = sender;
+    }else if([segue.identifier isEqualToString:@"toManageSegue"]){
+        FEManageVC *vc = segue.destinationViewController;
         vc.company = sender;
     }
 }

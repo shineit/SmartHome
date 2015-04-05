@@ -1,66 +1,61 @@
 //
-//  FECheckListVC.m
+//  FEManageVC.m
 //  SmartHome
 //
-//  Created by Seven on 15-4-3.
+//  Created by Seven on 15-4-5.
 //  Copyright (c) 2015年 FUEGO. All rights reserved.
 //
 
-#import "FECheckListVC.h"
-//#import "FECheckListRequest.h"
-//#import "FECheckListResponse.h"
-#import "FECheckListRequest.h"
-#import "FECheckListResponse.h"
-
+#import "FEManageVC.h"
 #import "FECheckLogByIdRequest.h"
 #import "FECheckLogByIdResponse.h"
-#include "FEWebServiceManager.h"
-#import "FECompany.h"
+#import "FEWebServiceManager.h"
 #import "FEMemoryCache.h"
+#import "FECompany.h"
 
-@interface FECheckListVC (){
-    NSMutableArray *_checkList;
+@interface FEManageVC (){
+    NSMutableArray *_checkLog;
 }
 
 @end
 
-@implementation FECheckListVC
+@implementation FEManageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"日常巡检";
-    _checkList = [NSMutableArray new];
-    [self requestCheckList];
+    self.title = @"智慧管理";
+    _checkLog = [NSMutableArray new];
+    [self requestLog];
 }
 
--(void)requestCheckList{
-    
-    FECheckListRequest *rdata = [[FECheckListRequest alloc] initWithCid:@(0)];
+-(void)requestLog{
+    FECheckLogByIdRequest *rdata = [[FECheckLogByIdRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID comanyId:self.company.companyID page:[[FEPage alloc] initWithPageSize:0 currentPage:0 count:0] filterList:nil];
     __weak typeof(self) weakself = self;
-    [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FECheckListResponse class] response:^(NSError *error, id response) {
-        FECheckListResponse *rsp = response;
+    [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FECheckLogByIdResponse class] response:^(NSError *error, id response) {
+        FECheckLogByIdResponse *rsp = response;
         if (!error && rsp.result.errorCode.integerValue == 0) {
-            [_checkList addObjectsFromArray:rsp.checkItemList];
+            [_checkLog addObjectsFromArray:rsp.checkLogList];
             [weakself.tableView reloadData];
-
         }
     }];
+    
 }
+
 
 #pragma mark - UITableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FECheckItem *check = _checkList[indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"checkItemCell" forIndexPath:indexPath];
-    cell.textLabel.text = check.itemName;
-    cell.detailTextLabel.text = check.itemSys;
+    
+    FECheckLog *log = _checkLog[indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"manageCell" forIndexPath:indexPath];
+    cell.textLabel.text = log.checkItem;
+    cell.detailTextLabel.text = log.checkSys;
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _checkList.count;
+    return _checkLog.count;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
