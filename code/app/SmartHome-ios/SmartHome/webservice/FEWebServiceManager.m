@@ -30,7 +30,7 @@
 #import <UIKit/UIKit.h>
 #import "Define.h"
 
-#define _BASE_URL @"http://115.231.168.14:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+//#define _BASE_URL @"http://115.231.168.14:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -38,7 +38,7 @@
     static FEWebServiceManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = (FEWebServiceManager *)[[self alloc] initWithBaseURL:[NSURL URLWithString:_BASE_URL]];
+        instance = (FEWebServiceManager *)[[self alloc] initWithBaseURL:[NSURL URLWithString:__SERVICE_BASE_URL]];
     });
     return instance;
 }

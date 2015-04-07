@@ -12,12 +12,17 @@
 #import "FEMallProductListRequest.h"
 #import "FEMallProductResponse.h"
 #import "FEMemoryCache.h"
+#import "FEADRequest.h"
+#import "FEADResponse.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "Define.h"
 
 @interface FEMallProductListVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     NSMutableArray *_products;
 }
 @property (strong, nonatomic) IBOutlet UICollectionView *productCollectionView;
+@property (strong, nonatomic) IBOutlet UIScrollView *adScrollView;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageIndicate;
 
 @end
 
@@ -28,6 +33,7 @@
     // Do any additional setup after loading the view.
     self.title = @"设备商城";
     _products = [NSMutableArray new];
+    [self requestAD];
     [self requestProduct];
     
 }
@@ -45,13 +51,32 @@
     
 }
 
+-(void)requestAD{
+    FEADRequest *rdata = [[FEADRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID page:[[FEPage alloc] initWithPageSize:0 currentPage:0 count:0] filter:nil];
+    __weak typeof(self) weakself = self;
+    [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEADResponse class] response:^(NSError *error, id response) {
+        FEADResponse *rsp = response;
+        if (!error && rsp.result.errorCode.integerValue == 0) {
+            int i = 0;
+            weakself.adScrollView.contentSize = CGSizeMake(weakself.adScrollView.bounds.size.width * rsp.adList.count, weakself.adScrollView.bounds.size.height);
+            for (FEAdvertisement *ad in rsp.adList) {
+                UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0 + i*weakself.adScrollView.bounds.size.width, 0, weakself.adScrollView.bounds.size.width, weakself.adScrollView.bounds.size.height)];
+               
+                [imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(ad.adImg)]];
+                [weakself.adScrollView addSubview:imageView];
+            }
+        }
+    }];
+}
+
 #pragma mark - UICollectionViewDataSource
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     FEProduct *product = _products[indexPath.row];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"productCell" forIndexPath:indexPath];
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-    imageView.backgroundColor = [UIColor redColor];
+//    imageView.backgroundColor = [UIColor redColor];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(product.picLabel)]];
     UILabel *pLabel = (UILabel *)[cell viewWithTag:2];
     pLabel.text = product.name;
     
@@ -62,6 +87,8 @@
     UICollectionReusableView *rView = nil;
     if (kind == UICollectionElementKindSectionHeader) {
         UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView" forIndexPath:indexPath];
+        self.adScrollView = (UIScrollView *)[view viewWithTag:1];
+        self.pageIndicate = (UIPageControl *)[view viewWithTag:2];
         
         return view;
     }
