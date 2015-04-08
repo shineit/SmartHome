@@ -7,7 +7,12 @@
 //
 
 #import "FECommonViewController.h"
+@class FEFireAlarm;
+@class FECompany;
 
 @interface FEDeviceDetailVC : FECommonViewController
+
+@property (nonatomic, strong) FEFireAlarm *device;
+@property (nonatomic, strong) FECompany *company;
 
 @end

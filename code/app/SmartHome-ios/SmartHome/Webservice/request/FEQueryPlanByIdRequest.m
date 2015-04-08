@@ -11,7 +11,7 @@
 @implementation FEQueryPlanByIdRequest
 
 -(id)initWithPid:(NSNumber *)pid{
-    self = [super init];
+    self = [super initWithMothed:__METHOD_GET_PLAN];
     if (self) {
         _planID = pid;
     }

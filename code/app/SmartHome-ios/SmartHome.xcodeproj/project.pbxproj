@@ -14,6 +14,9 @@
 		142FA7041AD42A7900598B11 /* FEAdvertisement.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7031AD42A7900598B11 /* FEAdvertisement.m */; };
 		142FA7051AD42A7900598B11 /* FEAdvertisement.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7031AD42A7900598B11 /* FEAdvertisement.m */; };
 		142FA7081AD4319600598B11 /* FEDeviceDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7071AD4319600598B11 /* FEDeviceDetailVC.m */; };
+		142FA70B1AD54C5400598B11 /* FEPlanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA70A1AD54C5400598B11 /* FEPlanVC.m */; };
+		142FA70E1AD56ED200598B11 /* FECheckOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA70D1AD56ED200598B11 /* FECheckOperationVC.m */; };
+		142FA7111AD5782B00598B11 /* FEUploadImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7101AD5782B00598B11 /* FEUploadImageVC.m */; };
 		143CED1B19F88B1E00FEDE61 /* FEProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 143CED1A19F88B1E00FEDE61 /* FEProfileVC.m */; };
 		143CED1E19F892B900FEDE61 /* FEModifyPassWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 143CED1D19F892B900FEDE61 /* FEModifyPassWord.m */; };
 		143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 143CED2019F9DF0500FEDE61 /* FETreeViewCell.m */; };
@@ -534,6 +537,14 @@
 		142FA7031AD42A7900598B11 /* FEAdvertisement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEAdvertisement.m; sourceTree = "<group>"; };
 		142FA7061AD4319600598B11 /* FEDeviceDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEDeviceDetailVC.h; sourceTree = "<group>"; };
 		142FA7071AD4319600598B11 /* FEDeviceDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEDeviceDetailVC.m; sourceTree = "<group>"; };
+		142FA7091AD54C5400598B11 /* FEPlanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEPlanVC.h; sourceTree = "<group>"; };
+		142FA70A1AD54C5400598B11 /* FEPlanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEPlanVC.m; sourceTree = "<group>"; };
+		142FA70C1AD56ED200598B11 /* FECheckOperationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECheckOperationVC.h; sourceTree = "<group>"; };
+		142FA70D1AD56ED200598B11 /* FECheckOperationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECheckOperationVC.m; sourceTree = "<group>"; };
+		142FA70F1AD5782B00598B11 /* FEUploadImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUploadImageVC.h; sourceTree = "<group>"; };
+		142FA7101AD5782B00598B11 /* FEUploadImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUploadImageVC.m; sourceTree = "<group>"; };
+		142FA7121AD57B6500598B11 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		142FA7131AD57B6500598B11 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
 		143CED1919F88B1E00FEDE61 /* FEProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEProfileVC.h; sourceTree = "<group>"; };
 		143CED1A19F88B1E00FEDE61 /* FEProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEProfileVC.m; sourceTree = "<group>"; };
 		143CED1C19F892B900FEDE61 /* FEModifyPassWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEModifyPassWord.h; sourceTree = "<group>"; };
@@ -1246,6 +1257,12 @@
 				14D69C361AD174A000D8A1CC /* FEManageVC.m */,
 				142FA7061AD4319600598B11 /* FEDeviceDetailVC.h */,
 				142FA7071AD4319600598B11 /* FEDeviceDetailVC.m */,
+				142FA7091AD54C5400598B11 /* FEPlanVC.h */,
+				142FA70A1AD54C5400598B11 /* FEPlanVC.m */,
+				142FA70C1AD56ED200598B11 /* FECheckOperationVC.h */,
+				142FA70D1AD56ED200598B11 /* FECheckOperationVC.m */,
+				142FA70F1AD5782B00598B11 /* FEUploadImageVC.h */,
+				142FA7101AD5782B00598B11 /* FEUploadImageVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1545,6 +1562,8 @@
 		14C6DE4419F549EE006384B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				142FA7121AD57B6500598B11 /* Photos.framework */,
+				142FA7131AD57B6500598B11 /* PhotosUI.framework */,
 				147460681AC988640031F05E /* libSmartHomeService.a */,
 				14B162D51A63EE7B006CF154 /* CoreMotion.framework */,
 				14B162D31A63EE6E006CF154 /* AudioToolbox.framework */,
@@ -2226,11 +2245,13 @@
 				147461281ACA2B3B0031F05E /* FERequestBaseData.m in Sources */,
 				14D69BFB1ACEC8C100D8A1CC /* FESensorPlan.m in Sources */,
 				14D69C251AD027F300D8A1CC /* FECheckLogByIdRequest.m in Sources */,
+				142FA70E1AD56ED200598B11 /* FECheckOperationVC.m in Sources */,
 				1474607C1ACA2ABD0031F05E /* AppDelegate.m in Sources */,
 				147461001ACA2B3B0031F05E /* FEEnumImage.m in Sources */,
 				1474610E1ACA2B3B0031F05E /* FEUser.m in Sources */,
 				149C32121ACA3EA400826831 /* NSString+YSParam.m in Sources */,
 				1474613E1ACA2B3B0031F05E /* FEGetCaTokenResponse.m in Sources */,
+				142FA7111AD5782B00598B11 /* FEUploadImageVC.m in Sources */,
 				1474611A1ACA2B3B0031F05E /* FELogoutRequest.m in Sources */,
 				1474610C1ACA2B3B0031F05E /* FESensor.m in Sources */,
 				149C31F71ACA3C5200826831 /* FETextField.m in Sources */,
@@ -2328,6 +2349,7 @@
 				147461461ACA2B3B0031F05E /* FEOrderSetResponse.m in Sources */,
 				1474607F1ACA2ABD0031F05E /* SmartHomePro.xcdatamodeld in Sources */,
 				147461241ACA2B3B0031F05E /* FENewsRequest.m in Sources */,
+				142FA70B1AD54C5400598B11 /* FEPlanVC.m in Sources */,
 				142FA7011AD42A3B00598B11 /* FEADResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

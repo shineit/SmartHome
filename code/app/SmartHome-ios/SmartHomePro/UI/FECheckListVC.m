@@ -21,6 +21,7 @@
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
 }
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
