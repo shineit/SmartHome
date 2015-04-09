@@ -17,6 +17,8 @@
 		142FA70B1AD54C5400598B11 /* FEPlanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA70A1AD54C5400598B11 /* FEPlanVC.m */; };
 		142FA70E1AD56ED200598B11 /* FECheckOperationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA70D1AD56ED200598B11 /* FECheckOperationVC.m */; };
 		142FA7111AD5782B00598B11 /* FEUploadImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7101AD5782B00598B11 /* FEUploadImageVC.m */; };
+		142FA7181AD636C800598B11 /* FEUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7171AD636C800598B11 /* FEUploadRequest.m */; };
+		142FA7191AD636C800598B11 /* FEUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 142FA7171AD636C800598B11 /* FEUploadRequest.m */; };
 		143CED1B19F88B1E00FEDE61 /* FEProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 143CED1A19F88B1E00FEDE61 /* FEProfileVC.m */; };
 		143CED1E19F892B900FEDE61 /* FEModifyPassWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 143CED1D19F892B900FEDE61 /* FEModifyPassWord.m */; };
 		143CED2119F9DF0500FEDE61 /* FETreeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 143CED2019F9DF0500FEDE61 /* FETreeViewCell.m */; };
@@ -545,6 +547,8 @@
 		142FA7101AD5782B00598B11 /* FEUploadImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUploadImageVC.m; sourceTree = "<group>"; };
 		142FA7121AD57B6500598B11 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		142FA7131AD57B6500598B11 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		142FA7161AD636C800598B11 /* FEUploadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEUploadRequest.h; sourceTree = "<group>"; };
+		142FA7171AD636C800598B11 /* FEUploadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEUploadRequest.m; sourceTree = "<group>"; };
 		143CED1919F88B1E00FEDE61 /* FEProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEProfileVC.h; sourceTree = "<group>"; };
 		143CED1A19F88B1E00FEDE61 /* FEProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEProfileVC.m; sourceTree = "<group>"; };
 		143CED1C19F892B900FEDE61 /* FEModifyPassWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEModifyPassWord.h; sourceTree = "<group>"; };
@@ -1849,6 +1853,8 @@
 				14D69C2F1AD02A2600D8A1CC /* FEDeleteImageRequest.m */,
 				142FA6FA1AD4286D00598B11 /* FEADRequest.h */,
 				142FA6FB1AD4286D00598B11 /* FEADRequest.m */,
+				142FA7161AD636C800598B11 /* FEUploadRequest.h */,
+				142FA7171AD636C800598B11 /* FEUploadRequest.m */,
 			);
 			path = request;
 			sourceTree = "<group>";
@@ -2275,6 +2281,7 @@
 				1474611E1ACA2B3B0031F05E /* FEMarkRequest.m in Sources */,
 				149C321A1ACA3EA400826831 /* UIImage+Resize.m in Sources */,
 				14D69BF31ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m in Sources */,
+				142FA7191AD636C800598B11 /* FEUploadRequest.m in Sources */,
 				149C320E1ACA3EA400826831 /* NSString+MD5.m in Sources */,
 				1474614A1ACA2B3B0031F05E /* FESensorSetResponse.m in Sources */,
 				147461501ACA2B3B0031F05E /* FEUserMarkResponse.m in Sources */,
@@ -2459,6 +2466,7 @@
 				14C6DEE919F54F9C006384B2 /* FECollectionViewCell.m in Sources */,
 				1475A0E01A03D05800EE8353 /* CDUser.m in Sources */,
 				147460FD1ACA2B3B0031F05E /* FECatoken.m in Sources */,
+				142FA7181AD636C800598B11 /* FEUploadRequest.m in Sources */,
 				14950D971A7A64E4001416A7 /* FECameraVerfyPhoneVC.m in Sources */,
 				149C32191ACA3EA400826831 /* UIImage+Resize.m in Sources */,
 				14C6DE8119F54AD3006384B2 /* SmartHome.xcdatamodeld in Sources */,

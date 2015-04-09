@@ -7,10 +7,14 @@
 //
 
 #import "FEUploadImageVC.h"
+#import "FEUploadRequest.h"
+#import "FEWebServiceManager.h"
+#import "Define.h"
 
 @interface FEUploadImageVC ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIView *imageContent;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) FEWebServiceManager *webManager;
 
 @end
 
@@ -74,15 +78,15 @@
     {
         //先把图片转成NSData
         UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil)
-        {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        }
-        else
-        {
-            data = UIImagePNGRepresentation(image);
-        }
+//        NSData *data;
+//        if (UIImagePNGRepresentation(image) == nil)
+//        {
+//            data = UIImageJPEGRepresentation(image, 0.2);
+//        }
+//        else
+//        {
+//            data = UIImagePNGRepresentation(image);
+//        }
         self.imageView.image = image;
 //        //图片保存的路径
 //        //这里将图片放在沙盒的documents文件夹中
@@ -116,6 +120,22 @@
 }
 
 - (IBAction)upload:(id)sender {
+    if (self.imageView.image != nil) {
+        __weak typeof(self) weakself = self;
+        FEUploadRequest *rdata = [[FEUploadRequest alloc] init];
+        self.webManager = [[FEWebServiceManager alloc] initWithBaseURL:[NSURL URLWithString:__SERVICE_BASE_URL]];
+        [self.webManager requstData:rdata appendDAta:^(id<AFMultipartFormData> formDate) {
+            [formDate appendPartWithFileData:UIImageJPEGRepresentation(weakself.imageView.image, 0.2) name:@"upload" fileName:@"test.jpg" mimeType:@"image/pjpeg"];
+//            [formDate appendPartWithFormData:UIImageJPEGRepresentation(weakself.imageView.image, 0.2) name:@"upload"];
+        } responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
+            FEBaseResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                NSLog(@"upload success");
+            }
+        }];
+    }
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

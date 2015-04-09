@@ -48,8 +48,19 @@
     
     FECheckLog *log = _checkLog[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"manageCell" forIndexPath:indexPath];
-    cell.textLabel.text = log.checkItem;
-    cell.detailTextLabel.text = log.checkSys;
+    UILabel *title = (UILabel *)[cell viewWithTag:1];
+    UILabel *detail = (UILabel *)[cell viewWithTag:2];
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:3];
+    UILabel *status = (UILabel *)[cell viewWithTag:4];
+    if (log.abnormalPic) {
+        imageView.hidden = NO;
+    }else{
+        imageView.hidden = YES;
+    }
+    title.text = log.checkItem;
+    detail.text = log.checkSys;
+    status.text = log.checkResult.stringValue;
+    
     return cell;
 }
 

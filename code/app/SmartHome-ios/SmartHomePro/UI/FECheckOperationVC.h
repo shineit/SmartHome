@@ -8,6 +8,11 @@
 
 #import "FECommonViewController.h"
 
+@class FECheckItem;
+@class FECompany;
+
 @interface FECheckOperationVC : FECommonViewController
+@property (nonatomic, strong) FECompany *company;
+@property (nonatomic, strong) FECheckItem *checkItem;
 
 @end

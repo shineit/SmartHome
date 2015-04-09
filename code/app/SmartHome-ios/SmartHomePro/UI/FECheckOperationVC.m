@@ -7,6 +7,10 @@
 //
 
 #import "FECheckOperationVC.h"
+#import "FECheckLog.h"
+#import "FECompany.h"
+#import "FECheckItem.h"
+#import "FEMemoryCache.h"
 
 @interface FECheckOperationVC ()
 @property (strong, nonatomic) IBOutlet UIButton *normalButon;
@@ -15,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionText;
 @property (strong, nonatomic) IBOutlet UIView *imageContent;
+@property (strong, nonatomic) FECheckLog *checkLog;
 
 @end
 
@@ -25,14 +30,21 @@
     // Do any additional setup after loading the view.
     [self selectButton:self.nonOperation];
     self.title = @"日常巡检";
+    _checkLog = [FECheckLog new];
+    self.checkLog.companyID = self.company.companyID;
+    self.checkLog.checkItem = self.checkItem.itemID.stringValue;
+    
 }
 - (IBAction)normal:(id)sender {
+    self.checkLog.checkResult = @(1);
     [self selectButton:sender];
 }
 - (IBAction)exception:(id)sender {
+    self.checkLog.checkResult = @(2);
     [self selectButton:sender];
 }
 - (IBAction)nonOperation:(id)sender {
+    self.checkLog.checkResult = @(0);
     [self selectButton:sender];
     
 }
@@ -54,6 +66,11 @@
 }
 
 - (IBAction)upload:(id)sender {
+    
+}
+
+- (IBAction)save:(id)sender {
+    [[FEMemoryCache sharedInstance] addCheckLog:self.checkLog];
 }
 
 - (void)didReceiveMemoryWarning {

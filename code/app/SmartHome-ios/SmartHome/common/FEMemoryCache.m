@@ -9,6 +9,10 @@
 #import "FEMemoryCache.h"
 #import "FECommonDefine.h"
 
+#import "FECheckLog.h"
+
+NSMutableArray *checkLog;
+
 @implementation FEMemoryCache
 
 +(FEMemoryCache *)sharedInstance{
@@ -26,9 +30,19 @@
         NSDictionary *duser = kUserDefaultsObjectForKey(kLoginUser);
         if (duser) {
             _user = [[FEUser alloc] initWithDictionary:duser];
+            checkLog = [NSMutableArray new];
         }
     }
     return self;
+}
+
+-(void)addCheckLog:(FECheckLog *)clog{
+    [checkLog addObject:clog];
+    
+}
+
+-(void)removeAllCheckLog{
+    [checkLog removeAllObjects];
 }
 
 @end

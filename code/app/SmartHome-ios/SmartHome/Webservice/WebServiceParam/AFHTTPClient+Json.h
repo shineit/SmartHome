@@ -17,4 +17,10 @@
                     parameters:(NSDictionary *)parameters
                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(AFHTTPRequestOperation *)POST:(NSString *)path
+      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                     parameters:(NSDictionary *)parameters
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

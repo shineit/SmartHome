@@ -52,6 +52,9 @@
 #define __METHOD_CHECK_LOG_GET      @"check/checkLog/get"
 #define __METHOD_DELET_IMG          @"check/img/delete"
 
+//upload
+#define __METHOD_UPLOAD             @"UploadFile!uploadFile"
+
 
 
 typedef enum : NSUInteger {

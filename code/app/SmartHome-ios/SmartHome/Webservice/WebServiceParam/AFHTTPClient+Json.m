@@ -41,4 +41,21 @@
     return operation;
 }
 
+-(AFHTTPRequestOperation *)POST:(NSString *)path
+      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                     parameters:(NSDictionary *)parameters
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure{
+    NSMutableURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:path parameters:parameters constructingBodyWithBlock:block];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:nil failure:nil];
+    [operation setCompletionBlockWithSuccess:success failure:failure];
+    AFHTTPRequestOperation *op = [self HTTPRequestOperationWithRequest:request success:nil failure:nil];
+    operation.credential = op.credential;
+    operation.SSLPinningMode = op.SSLPinningMode;
+    operation.allowsInvalidSSLCertificate = op.allowsInvalidSSLCertificate;
+    [self enqueueHTTPRequestOperation:operation];
+    return operation;
+}
+
+
 @end

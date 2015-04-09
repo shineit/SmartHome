@@ -17,8 +17,8 @@
 
 #define kImageURL(_A)           [NSString stringWithFormat:@"http://%@:%@%@%@%@",kServerIP,kServerPort,kBasePath,kImagePath,_A]
 
-#define __SERVICE_BASE_URL    [NSString stringWithFormat:@"http://%@:%@%@/rest",kServerIP,kServerPort,kBasePath]
-
+#define __SERVICE_BASE_URL_REST    [NSString stringWithFormat:@"http://%@:%@%@/rest",kServerIP,kServerPort,kBasePath]
+#define __SERVICE_BASE_URL          [NSString stringWithFormat:@"http://%@:%@%@",kServerIP,kServerPort,kBasePath]
 
 #define kString(_S)                            NSLocalizedString(_S, @"")
 

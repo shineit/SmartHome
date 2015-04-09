@@ -17,6 +17,7 @@
 #include "FEWebServiceManager.h"
 #import "FECompany.h"
 #import "FEMemoryCache.h"
+#import "FECheckOperationVC.h"
 
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
@@ -53,8 +54,12 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FECheckItem *check = _checkList[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"checkItemCell" forIndexPath:indexPath];
-    cell.textLabel.text = check.itemName;
-    cell.detailTextLabel.text = check.itemSys;
+    UILabel *title = (UILabel *)[cell viewWithTag:1];
+    UILabel *detail = (UILabel *)[cell viewWithTag:2];
+    UILabel *operation = (UILabel *)[cell viewWithTag:3];
+    
+    title.text = check.itemName;
+    detail.text = check.itemSys;
     return cell;
 }
 
@@ -68,14 +73,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+//    UITableViewCell *cell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    FECheckItem *check = _checkList[indexPath.row];
+    FECheckOperationVC *vc = segue.destinationViewController;
+    vc.company = self.company;
+    vc.checkItem = check;
 }
-*/
+
 
 @end
