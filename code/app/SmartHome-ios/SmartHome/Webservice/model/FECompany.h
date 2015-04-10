@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) NSNumber *serialVersionUID;
 @property (nonatomic, strong) NSNumber *companyID;
+@property (nonatomic, strong) NSString *companyName;
 @property (nonatomic, strong) NSString *applyName;
 @property (nonatomic, strong) NSString *companyAddr;
 @property (nonatomic, strong) NSString *companyType;

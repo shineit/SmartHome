@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 FUEGO. All rights reserved.
 //
 
-#import "FETableViewController.h"
+#import "FECommonViewController.h"
 @class FECompany;
 
-@interface FECheckListVC : FETableViewController
+@interface FECheckListVC : FECommonViewController
 
 @property (nonatomic, strong) FECompany *company;
 

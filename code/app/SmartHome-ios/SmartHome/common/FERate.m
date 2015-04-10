@@ -14,17 +14,17 @@
 
 DEFINE_SINGLETON_FOR_CLASS(FERate);
 
-+(void)load{
-    FERate *rate = [FERate sharedFERate];
-    NSInteger runtimes = [kUserDefaultsObjectForKey(kRunTimes) integerValue];
-    runtimes++;
-    kUserDefaultsSetObjectForKey(@(runtimes), kRunTimes);
-    kUserDefaultsSync;
-    
-    if (![kUserDefaultsObjectForKey(kRateNever) boolValue] && runtimes >= kRateTimes) {
-        [rate performSelector:@selector(rate:) withObject:nil afterDelay:5];
-    }
-}
+//+(void)load{
+//    FERate *rate = [FERate sharedFERate];
+//    NSInteger runtimes = [kUserDefaultsObjectForKey(kRunTimes) integerValue];
+//    runtimes++;
+//    kUserDefaultsSetObjectForKey(@(runtimes), kRunTimes);
+//    kUserDefaultsSync;
+//    
+//    if (![kUserDefaultsObjectForKey(kRateNever) boolValue] && runtimes >= kRateTimes) {
+//        [rate performSelector:@selector(rate:) withObject:nil afterDelay:5];
+//    }
+//}
 
 -(void)rate:(id)sender{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:kString(@"SMART_HOME") message:kString(@"RATE_RATE") delegate:self cancelButtonTitle:kString(@"RATE_LARER") otherButtonTitles:kString(@"RATE_GOTORATE"),kString(@"RATE_NEVER"), nil];

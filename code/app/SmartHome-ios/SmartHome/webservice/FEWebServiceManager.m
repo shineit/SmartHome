@@ -30,7 +30,7 @@
 #import <UIKit/UIKit.h>
 #import "Define.h"
 
-#define _BASE_URL @"http://115.231.168.14:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
+//#define _BASE_URL @"http://115.231.168.14:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
 @implementation FEWebServiceManager
 
@@ -38,7 +38,7 @@
     static FEWebServiceManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = (FEWebServiceManager *)[[self alloc] initWithBaseURL:[NSURL URLWithString:_BASE_URL]];
+        instance = (FEWebServiceManager *)[[self alloc] initWithBaseURL:[NSURL URLWithString:__SERVICE_BASE_URL_REST]];
     });
     return instance;
 }
@@ -47,6 +47,11 @@
 -(instancetype)initWithBaseURL:(NSURL *)url{
     self = [super initWithBaseURL:url];
     if (self) {
+        
+//        NSMutableSet *mset = [NSMutableSet setWithSet:self.responseSerializer.acceptableContentTypes];
+//        [mset addObject:@"text/html"];
+//        self.responseSerializer.acceptableContentTypes = mset;
+        
         self.parameterEncoding = AFJSONParameterEncoding;
         [self unregisterHTTPOperationClass:[AFHTTPRequestOperation class]];
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
@@ -258,6 +263,16 @@
             block(error,NULL);
         }];
     }
+}
+
+//mul
+-(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata appendDAta:(void (^)(id<AFMultipartFormData> formDate))dataBlock responseclass:(Class)cl response:(void (^)(NSError *error, id response))block{
+    return [self POST:rdata.method constructingBodyWithBlock:dataBlock parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        id rsp = [[cl alloc] initWithResponse:responseObject];
+        block(NULL,rsp);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error,NULL);
+    }];
 }
 
 -(void)showerror:(NSError *)error{

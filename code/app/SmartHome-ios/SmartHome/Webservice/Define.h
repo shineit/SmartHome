@@ -9,6 +9,17 @@
 #ifndef SmartHome_Define_h
 #define SmartHome_Define_h
 
+
+#define kServerIP               @"115.231.168.14"
+#define kServerPort             @"8080"
+#define kBasePath               @"/SmartHome"
+#define kImagePath              @"/upload/"
+
+#define kImageURL(_A)           [NSString stringWithFormat:@"http://%@:%@%@%@%@",kServerIP,kServerPort,kBasePath,kImagePath,_A]
+
+#define __SERVICE_BASE_URL_REST    [NSString stringWithFormat:@"http://%@:%@%@/rest",kServerIP,kServerPort,kBasePath]
+#define __SERVICE_BASE_URL          [NSString stringWithFormat:@"http://%@:%@%@",kServerIP,kServerPort,kBasePath]
+
 #define kString(_S)                            NSLocalizedString(_S, @"")
 
 #endif

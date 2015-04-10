@@ -84,5 +84,8 @@
 //for smarthome enterprise
 -(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata responseclass:(Class)cl response:(void (^)(NSError *error, id response))block;
 
+//mul
+-(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata appendDAta:(void (^)(id<AFMultipartFormData> formDate))dataBlock responseclass:(Class)cl response:(void (^)(NSError *, id))block;
+
 
 @end
