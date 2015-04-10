@@ -18,9 +18,13 @@
 #import "FECompany.h"
 #import "FEMemoryCache.h"
 #import "FECheckOperationVC.h"
+#import "FECheckLogCreateRequest.h"
+
+
 
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
+    NSMutableArray *_checkLogs;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -33,6 +37,7 @@
     // Do any additional setup after loading the view.
     self.title = @"日常巡检";
     _checkList = [NSMutableArray new];
+    _checkLogs = [NSMutableArray new];
     [self requestCheckList];
 }
 
@@ -67,6 +72,22 @@
     return _checkList.count;
 }
 
+- (IBAction)submit:(id)sender {
+    if (_checkLogs.count) {
+        __weak typeof(self) weakself = self;
+        [weakself displayHUD:@"提交中..."];
+        FECheckLogCreateRequest *rdata = [[FECheckLogCreateRequest alloc] initWithCheckLogList:_checkLogs];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
+            FEBaseResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                [weakself.navigationController popViewControllerAnimated:YES];
+            }
+            [weakself hideHUD:YES];
+        }];
+    }else{
+        
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -86,6 +107,7 @@
     FECheckOperationVC *vc = segue.destinationViewController;
     vc.company = self.company;
     vc.checkItem = check;
+    vc.checkLogs = _checkLogs;
 }
 
 

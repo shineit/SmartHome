@@ -122,6 +122,7 @@
 - (IBAction)upload:(id)sender {
     if (self.imageView.image != nil) {
         __weak typeof(self) weakself = self;
+        [weakself displayHUD:@"正在上传..."];
         FEUploadRequest *rdata = [[FEUploadRequest alloc] init];
         self.webManager = [[FEWebServiceManager alloc] initWithBaseURL:[NSURL URLWithString:__SERVICE_BASE_URL]];
         [self.webManager requstData:rdata appendDAta:^(id<AFMultipartFormData> formDate) {
@@ -131,7 +132,12 @@
             FEBaseResponse *rsp = response;
             if (!error && rsp.result.errorCode.integerValue == 0) {
                 NSLog(@"upload success");
+                if ([weakself.delegate respondsToSelector:@selector(didUpLoadImage:withName:)]) {
+                    [weakself.delegate didUpLoadImage:weakself.imageView.image withName:rsp.result.obj];
+                }
+                [weakself.navigationController popViewControllerAnimated:YES];
             }
+            [weakself hideHUD:YES];
         }];
     }
     

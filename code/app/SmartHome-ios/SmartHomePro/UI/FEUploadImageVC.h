@@ -8,6 +8,15 @@
 
 #import "FECommonViewController.h"
 
+@protocol FEUpLoadImageVCDelegate <NSObject>
+
+@optional
+-(void)didUpLoadImage:(UIImage *)image withName:(NSString *)imageName;
+
+@end
+
 @interface FEUploadImageVC : FECommonViewController
+
+@property (nonatomic, weak) id<FEUpLoadImageVCDelegate> delegate;
 
 @end

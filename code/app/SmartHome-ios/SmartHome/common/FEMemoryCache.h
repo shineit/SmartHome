@@ -16,6 +16,6 @@
 +(FEMemoryCache *)sharedInstance;
 -(void)addCheckLog:(FECheckLog *)clog;
 -(void)removeAllCheckLog;
-
+-(NSArray *)getCheckLog;
 
 @end

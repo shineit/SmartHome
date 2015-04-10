@@ -36,6 +36,10 @@ NSMutableArray *checkLog;
     return self;
 }
 
+-(NSArray *)getCheckLog{
+    return checkLog;
+}
+
 -(void)addCheckLog:(FECheckLog *)clog{
     [checkLog addObject:clog];
     

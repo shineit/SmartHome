@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FECommonDefine.h"
 #import "FEMemoryCache.h"
+#import "APService.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     FEUser *user = [FEMemoryCache sharedInstance].user;
+    [self registerPushNotificationOptions:launchOptions];
     if (!user) {
         self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
     }
@@ -30,6 +32,48 @@
 -(void)loadMain{
     self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
 }
+
+#pragma mark - registerPushNotification
+//注册PUSH通知
+- (void)registerPushNotificationOptions:(NSDictionary *)launchOptions{
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //categories
+        [APService
+         registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                             UIUserNotificationTypeSound |
+                                             UIUserNotificationTypeAlert)
+         categories:nil];
+    } else {
+        //categories nil
+        [APService
+         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)
+#else
+         //categories nil
+         categories:nil];
+        [APService
+         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                             UIRemoteNotificationTypeSound |
+                                             UIRemoteNotificationTypeAlert)
+#endif
+         // Required
+         categories:nil];
+    }
+    [APService setupWithOption:launchOptions];
+    
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    
+    [APService registerDeviceToken:deviceToken];
+    
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    kUserDefaultsSetObjectForKey(devToken, kDeviceToken);
+    kUserDefaultsSync;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

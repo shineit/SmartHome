@@ -29,6 +29,7 @@
 		1460811C1A302AF00057EA9A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811B1A302AF00057EA9A /* CoreTelephony.framework */; };
 		1460811E1A302AFF0057EA9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */; };
 		146081201A302B0A0057EA9A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1460811F1A302B0A0057EA9A /* libz.dylib */; };
+		14610D661AD7BCDE00A717F8 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14610D651AD7BCDE00A717F8 /* PushConfig.plist */; };
 		146388F51A84850D00D766FB /* FECameraItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146388F41A84850D00D766FB /* FECameraItemCell.m */; };
 		146388F91A84950000D766FB /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146388F81A84950000D766FB /* Camera.storyboard */; };
 		146D34DE19FB6CE1000F14F5 /* FECloudSafeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146D34DD19FB6CE1000F14F5 /* FECloudSafeTableCell.m */; };
@@ -564,6 +565,7 @@
 		1460811B1A302AF00057EA9A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1460811D1A302AFF0057EA9A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1460811F1A302B0A0057EA9A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		14610D651AD7BCDE00A717F8 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		146388F31A84850C00D766FB /* FECameraItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECameraItemCell.h; sourceTree = "<group>"; };
 		146388F41A84850D00D766FB /* FECameraItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECameraItemCell.m; sourceTree = "<group>"; };
 		146388F81A84950000D766FB /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
@@ -1103,6 +1105,7 @@
 		147460761ACA2ABD0031F05E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				14610D651AD7BCDE00A717F8 /* PushConfig.plist */,
 				147460771ACA2ABD0031F05E /* Info.plist */,
 				147460781ACA2ABD0031F05E /* main.m */,
 			);
@@ -2042,6 +2045,7 @@
 				149C34D31ACA601A00826831 /* playback_fullscreen_playbarline.png in Resources */,
 				149C34971ACA601A00826831 /* ptz_down.png in Resources */,
 				149C34EB1ACA601A00826831 /* button_red_sel.png in Resources */,
+				14610D661AD7BCDE00A717F8 /* PushConfig.plist in Resources */,
 				149C34A11ACA601A00826831 /* ptz_flip_sel.png in Resources */,
 				149C34811ACA601A00826831 /* play_ptz.png in Resources */,
 				149C34551ACA601A00826831 /* flunet.png in Resources */,
@@ -2563,15 +2567,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chao Sun (2P4V8NVH4U)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SmartHomePro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2580,7 +2584,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "faa04138-6731-40f5-adf2-7ff97f9d3412";
 			};
 			name = Debug;
 		};
@@ -2592,11 +2596,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gary Zheng (2S6HA5KBZ5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chao Sun (PYXGNPJVW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chao Sun (PYXGNPJVW5)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				INFOPLIST_FILE = SmartHomePro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2605,7 +2609,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "748788fe-2294-4883-8854-b3834d237cd0";
 			};
 			name = Release;
 		};

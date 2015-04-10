@@ -11,8 +11,9 @@
 #import "FECompany.h"
 #import "FECheckItem.h"
 #import "FEMemoryCache.h"
+#import "FEUploadImageVC.h"
 
-@interface FECheckOperationVC ()
+@interface FECheckOperationVC ()<FEUpLoadImageVCDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *normalButon;
 @property (strong, nonatomic) IBOutlet UIButton *exButton;
 @property (strong, nonatomic) IBOutlet UIButton *nonOperation;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *descriptionText;
 @property (strong, nonatomic) IBOutlet UIView *imageContent;
 @property (strong, nonatomic) FECheckLog *checkLog;
+@property (strong, nonatomic) IBOutlet UIImageView *uploadImageView;
 
 @end
 
@@ -32,11 +34,13 @@
     self.title = @"日常巡检";
     _checkLog = [FECheckLog new];
     self.checkLog.companyID = self.company.companyID;
-    self.checkLog.checkItem = self.checkItem.itemID.stringValue;
+    self.checkLog.checkItem = self.checkItem.itemName;
     
 }
 - (IBAction)normal:(id)sender {
     self.checkLog.checkResult = @(1);
+    self.descriptionText.text = @"";
+    self.checkLog.abnormalPic = nil;
     [self selectButton:sender];
 }
 - (IBAction)exception:(id)sender {
@@ -70,7 +74,10 @@
 }
 
 - (IBAction)save:(id)sender {
-    [[FEMemoryCache sharedInstance] addCheckLog:self.checkLog];
+    self.checkLog.abnormalDesp = self.descriptionText.text;
+    [_checkLogs addObject:self.checkLog];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [[FEMemoryCache sharedInstance] addCheckLog:self.checkLog];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,14 +85,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if (sender == self.uploadButton) {
+        FEUploadImageVC *vc = segue.destinationViewController;
+        vc.delegate = self;
+        
+    }
 }
-*/
+
+#pragma mark - FEUploadImageVCDelegate
+-(void)didUpLoadImage:(UIImage *)image withName:(NSString *)imageName{
+    self.uploadImageView.image = image;
+    self.checkLog.abnormalPic = imageName;
+}
+
 
 @end

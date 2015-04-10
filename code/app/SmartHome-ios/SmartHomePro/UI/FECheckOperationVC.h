@@ -14,5 +14,6 @@
 @interface FECheckOperationVC : FECommonViewController
 @property (nonatomic, strong) FECompany *company;
 @property (nonatomic, strong) FECheckItem *checkItem;
+@property (nonatomic, strong) NSMutableArray *checkLogs;
 
 @end
