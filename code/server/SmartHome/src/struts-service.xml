@@ -43,6 +43,12 @@
 			<result type="dispatcher" name="addUser">/client/manage/addUser.jsp</result>
 				    
 		</action>
+		   	<action name="CustomerManage" class="cn.fuego.smart.home.web.action.sys.CustomerManageAction">
+			<result type="dispatcher">/client/manage/customerManage.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/customerShow.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/customerShow.jsp</result>
+				    
+		</action>
 
  	</package>
     <package name="device"  extends="misp">

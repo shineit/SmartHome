@@ -7,6 +7,7 @@ import cn.fuego.smart.home.service.impl.CheckItemManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CheckLogManageServiceImpl;
 import cn.fuego.smart.home.service.impl.CompanyManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ConcentratorManageServiceImpl;
+import cn.fuego.smart.home.service.impl.CustomerManageServiceImpl;
 import cn.fuego.smart.home.service.impl.FireAlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.FireSensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.HomeAlarmManageServiceImpl;
@@ -50,7 +51,9 @@ public class ServiceContext
 	//巡检相关
 	private CheckLogManageService checkLogService=null;
 	private CheckItemManageService checkItemService=null;
-	
+
+	//用户信息
+	private CustomerManageService customerManageService=null;
 	
 	
 	private ServiceContext()
@@ -229,8 +232,15 @@ public class ServiceContext
 		}
 		return checkItemService;
 	}
-
+	public synchronized CustomerManageService getCustomerManageService()
+	{
+		if (null == customerManageService)
+		{
+			customerManageService =  new  CustomerManageServiceImpl();
+		}
+		return customerManageService;
+	}
 
 	
-
+	
 }

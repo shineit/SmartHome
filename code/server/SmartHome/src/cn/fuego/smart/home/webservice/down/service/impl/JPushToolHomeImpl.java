@@ -31,15 +31,15 @@ import cn.jpush.api.push.model.notification.Notification;
  * @date 2014-12-8 上午10:09:42 
  *  
  */
-public class JPushToolImpl implements PushToolInterface
+public class JPushToolHomeImpl implements PushToolInterface
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
     // demo App defined in resources/jpush-api.conf 
+	//家庭版推送服务器地址
+	private static final String appKey ="97c0f1c1744eacef02d529c1";//"dd1066407b044738b6479275";
+	private static final String masterSecret = "50b48aa6f2c8d4319e13466d";//"2b38ce69b1de2a7fa95706ea";
 
-	//企业版地址
-	private static final String appKey ="acdc6f6b24803e161d743f11";
-	private static final String masterSecret = "ecd4575afdb985180372180b";
 	public static final String TITLE = "Test from API example";
     public static final String ALERT = "Test from API Example - alert";
     public static final String MSG_CONTENT = "Test from API Example - msgContent";

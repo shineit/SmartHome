@@ -93,7 +93,7 @@ public class LoginAction extends MISPAction
     {  
 
     	boolean validateResult=false;
-    	String  strv = (String)ActionContext.getContext().getSession().get("rand"); 
+    	String  strv = (String)ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         
         try
 		{

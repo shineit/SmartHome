@@ -53,6 +53,11 @@ public interface CompanyManageService extends MispCommonService<Company>
 	 * @param companyID
 	 */
 	void deletePermissionByID(UserCompanyModel userPermission);
+	/**
+	 * 删除公司-用户、用户-集中器关联权限
+	 * @param companyID
+	 */
+	void deletePermissionByCompanyID(String companyID);
 
 
 }

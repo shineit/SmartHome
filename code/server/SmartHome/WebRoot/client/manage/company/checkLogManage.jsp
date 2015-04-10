@@ -62,6 +62,7 @@
 			<tr>
 				
  				<th width="10%" align="center">公司编号</th>
+ 				<th width="20%" align="center">公司名称</th>
 				<th width="15%" align="center">项目名称</th>
 				<th width="15%" align="center">项目所属系统</th>
 				<th width="10%" align="center">巡检结果</th>
@@ -75,6 +76,7 @@
  		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.logID}">
 				<td>${e.companyID}</td>
+				<td>${e.companyName}</td>
 				<td>${e.checkItem}</td>			 
  				<td>${e.checkSys}</td>
 				<td>            	

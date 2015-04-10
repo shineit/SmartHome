@@ -19,6 +19,7 @@ public class CheckLogJson implements Serializable
 
 	private long logID;     		//自增长，主键
 	private int  companyID; 		//单位编号，
+	private String  companyName; 	//公司名字，
 	private String checkItem; 		//项目名称；
 	private String checkSys; 		//项目所属系统；
 	private int checkResult;		//巡检结果，0-未设置，1-正常，2-异常
@@ -136,6 +137,15 @@ public class CheckLogJson implements Serializable
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+	
+	public String getCompanyName()
+	{
+		return companyName;
+	}
+	public void setCompanyName(String companyName)
+	{
+		this.companyName = companyName;
 	}
 	@Override
 	public String toString()

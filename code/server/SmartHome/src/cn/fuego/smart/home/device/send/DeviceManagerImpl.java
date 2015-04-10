@@ -15,7 +15,6 @@ import java.util.Random;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.common.util.format.DataTypeConvert;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.smart.home.constant.ErrorMessageConst;

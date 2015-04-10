@@ -18,8 +18,11 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
+import cn.fuego.misp.web.model.message.MispMessageModel;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
+import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.service.PlanManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -42,6 +45,8 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	private PlanManageService service = ServiceContext.getInstance().getPlanManageService();
 	
 	private String planName,floor;
+	
+	private String oldPicName;
 
  	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
@@ -104,6 +109,17 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	
 	
 	@Override
+	public String modify()
+	{
+		String fileName = saveUploadFile();
+		if(!ValidatorUtil.isEmpty(fileName))
+		{
+			deleteUploadFileByName(oldPicName);
+		}
+		this.obj.setPicPath(fileName);
+		return super.modify();
+	}
+	@Override
 	public String show()
 	{
 		if(TableOperateTypeEnum.CREATE.getType().equals(getOperateType()))
@@ -122,6 +138,44 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 		}
 		return this.getNextPage();
 	}
+	@Override
+	public String deleteList()
+	{
+		String[] idList = this.getSelectedIDList();
+
+		for(int i=0;i<idList.length;i++)
+		{
+			String planID = idList[i];
+			if(sensorIsDeleted(planID))
+			{
+				super.deleteList();
+			}
+			else
+			{
+				log.error("delete plan  failed, the planID is"+planID);
+				this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+				//this.getOperateMessage().setMessage("该公司还存在未删除楼层信息！");
+				this.getOperateMessage().setErrorCode(ErrorMessageConst.SENSOR_LIST_NOT_DELETED);
+				return MISP_DONE_PAGE;
+			}
+		}
+
+		return MISP_DONE_PAGE;
+	}
+	
+
+	private boolean sensorIsDeleted(String planID)
+	{
+		List<QueryCondition> conditionList= new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "planNodeID", planID));
+		List<FireSensor> target = ServiceContext.getInstance().getFireSensorManageService().getDataSource(conditionList).getAllPageData();
+		if(!ValidatorUtil.isEmpty(target))
+		{
+			return false;
+		}
+		return true;
+	}
+
 	public Company getCompany()
 	{
 		return company;
@@ -161,6 +215,14 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	public void setFloor(String floor)
 	{
 		this.floor = floor;
+	}
+	public String getOldPicName()
+	{
+		return oldPicName;
+	}
+	public void setOldPicName(String oldPicName)
+	{
+		this.oldPicName = oldPicName;
 	}
  
 	

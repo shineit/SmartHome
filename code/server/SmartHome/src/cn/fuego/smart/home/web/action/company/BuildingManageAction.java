@@ -11,14 +11,20 @@ package cn.fuego.smart.home.web.action.company;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
+import cn.fuego.misp.web.model.message.MispMessageModel;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
+import cn.fuego.smart.home.domain.SensorPlan;
 import cn.fuego.smart.home.service.BuildingManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.BuildingModel;
@@ -32,6 +38,12 @@ import cn.fuego.smart.home.web.model.BuildingModel;
  */
 public class BuildingManageAction extends DWZTableAction<Building>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Log log = LogFactory.getLog(this.getClass());
 	private static String companyID;
 	private static Company company;
 	private static List<BuildingModel> buildingList = new ArrayList<BuildingModel>();
@@ -91,6 +103,44 @@ public class BuildingManageAction extends DWZTableAction<Building>
 			}
 		}
 		return this.getNextPage();
+	}
+
+	
+	@Override
+	public String deleteList()
+	{
+		String[] idList = this.getSelectedIDList();
+		for(int i=0;i<idList.length;i++)
+		{
+			String buildingID = idList[i];
+			if(planIsDeleted(buildingID))
+			{
+				super.deleteList();
+			}
+			else
+			{
+				log.error("delete building  failed, the buildingID is"+buildingID);
+				this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+				//this.getOperateMessage().setMessage("该公司还存在未删除楼层信息！");
+				this.getOperateMessage().setErrorCode(ErrorMessageConst.PLAN_NOT_DELETED);
+				return MISP_DONE_PAGE;
+			}
+		}
+
+		return MISP_DONE_PAGE;
+	}
+	
+
+	private boolean planIsDeleted(String buildingID)
+	{
+		List<QueryCondition> conditionList= new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "buildingID", buildingID));
+		List<SensorPlan> target = ServiceContext.getInstance().getPlanManageService().getDataSource(conditionList).getAllPageData();
+		if(!ValidatorUtil.isEmpty(target))
+		{
+			return false;
+		}
+		return true;
 	}
 
 	/* (non-Javadoc)

@@ -10,6 +10,7 @@
 
 	    <id name="userID" column="USER_ID"> 
 		</id>
+		 <property name="userName" column="USER_NAME"></property>
 	    <property name="customerName" column="CUSTOMER_NAME"></property>
 	    <property name="phone" column="PHONE"></property>
  		<property name="addr" column="ADDR"></property> 

@@ -61,15 +61,15 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 	@Override
 	public List<Company> getCompanyList(int userID)
 	{
+		List<Company> companyList  = new ArrayList<Company>();
 		Set<String> companyIDList=  MISPServiceContext.getInstance().getMISPPrivilegeManage().getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(userID));
  		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		if(!ValidatorUtil.isEmpty(companyIDList))
 		{
 			conditionList.add(new QueryCondition(ConditionTypeEnum.IN,"companyID",new ArrayList<String>(companyIDList)));
+			companyList = DaoContext.getInstance().getCompanyDao().getAll(conditionList);
 		}
-		
-		List<Company> companyList  = new ArrayList<Company>();
-		companyList = DaoContext.getInstance().getCompanyDao().getAll(conditionList);
+
 		return companyList;
 	}
 	
@@ -141,6 +141,19 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 			throw new MISPException(MISPErrorMessageConst.INPUT_NULL);
 		}
 		
+	}
+
+	@Override
+	public void deletePermissionByCompanyID(String companyID)
+	{
+		Set<String> userIDList = MISPServiceContext.getInstance().getMISPPrivilegeManage().getUserIDListByCommpany(companyID);
+		for(String userID:userIDList)
+		{
+			UserCompanyModel uc= new UserCompanyModel();
+			uc.setUserID(userID);
+			uc.setCompanyID(companyID);
+			deletePermissionByID(uc);
+		}
 	}
 
 

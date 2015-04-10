@@ -11,6 +11,7 @@ package cn.fuego.smart.home.webservice.down.service;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
+import cn.fuego.smart.home.webservice.down.service.impl.JPushToolHomeImpl;
 import cn.fuego.smart.home.webservice.down.service.impl.JPushToolImpl;
 
  /** 
@@ -43,7 +44,11 @@ public class PushToolFactory
 		 
 		return new JPushToolImpl();
 	}
-	
+	public synchronized PushToolInterface getHomePushTool()
+	{
+		 
+		return new JPushToolHomeImpl();
+	}
 	/**
 	 * 采用极光推送,获取特定用户推送的推送信息，极光推送采用别名的方式，可以把系统用户名注册到
 	 * 极光推送，所以只要根据系统用户名就可以推送到特定的用户。

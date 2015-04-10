@@ -31,6 +31,7 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.MispConstant;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.misp.web.model.message.MispMessageModel;
+import cn.fuego.smart.home.constant.MarkStatusEnum;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.FireSensor;
@@ -58,6 +59,8 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	private String sensorJson;
 	//用于页面搜索关键字
 	private String 	machineID,loopID,codeID;
+	private MarkStatusEnum[] markStatusList = MarkStatusEnum.values();
+	private String markStatus;
 	//excel 导出
 	private InputStream excelStream ;
 	private String excelName;
@@ -108,6 +111,19 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		{
 			conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"codeID",this.getCodeID()));
  		} 
+		if(!ValidatorUtil.isEmpty(this.getMarkStatus()))
+		{
+			if(this.getMarkStatus().equals(MarkStatusEnum.NONE_MARK.getStrValue()))
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"locationX",0));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"locationY",0));
+			}
+			else
+			{
+				conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"locationX",0));
+				conditionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL,"locationY",0));
+			}
+ 		}
 		return conditionList;
 	}
 
@@ -135,6 +151,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 			ExcelTool tool = ExcelToolFactory.getInstance().getExcelTool();
 			
 			String filePath = MispConstant.getUploadPath() +File.separator+ this.saveUploadFile();
+
 			List<FireSensor> sensorList = tool.readExcel(filePath, getSensorFireExcelMeta());
 			FileUtil.deleteFile(filePath);
 			
@@ -194,12 +211,15 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 			
 			execute();
 			List<FireSensor> sensorList = this.table.getDataSource().getAllPageData();
-			tool.writeExcel(sensorList, filePath, getSensorFireExcelMeta());
-			excelStream = new FileInputStream(new File(filePath));
-			this.setDownloadFile(excelStream);
-			excelName= "fireSensor"+".xls";
-			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
-			return "excel";
+			if(!ValidatorUtil.isEmpty(sensorList))
+			{
+				tool.writeExcel(sensorList, filePath, getSensorFireExcelMeta());
+				excelStream = new FileInputStream(new File(filePath));
+				this.setDownloadFile(excelStream);
+				excelName= "fireSensor"+".xls";
+				this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
+				return "excel";
+			}
 
 		}
 		catch(MISPException e)
@@ -279,6 +299,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		column7.setColumnName("传感器X坐标");
 		column7.setColumn(7);
 		column7.setDataField("locationX");
+		column7.setDefaultValue((float)(0));
 		meta.getColumnMap().put(column7.getColumn(), column7);
 
 		
@@ -286,6 +307,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		column8.setColumnName("传感器Y坐标");
 		column8.setColumn(8);
 		column8.setDataField("locationY");
+		column8.setDefaultValue((float)(0));
 		meta.getColumnMap().put(column8.getColumn(), column8);
 		
 		return meta;
@@ -515,6 +537,38 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 	public void setExcelName(String excelName)
 	{
 		this.excelName = excelName;
+	}
+
+
+
+
+	public MarkStatusEnum[] getMarkStatusList()
+	{
+		return markStatusList;
+	}
+
+
+
+
+	public void setMarkStatusList(MarkStatusEnum[] markStatusList)
+	{
+		this.markStatusList = markStatusList;
+	}
+
+
+
+
+	public String getMarkStatus()
+	{
+		return markStatus;
+	}
+
+
+
+
+	public void setMarkStatus(String markStatus)
+	{
+		this.markStatus = markStatus;
 	}
 
 }

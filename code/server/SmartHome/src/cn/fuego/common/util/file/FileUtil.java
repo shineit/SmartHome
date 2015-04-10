@@ -14,12 +14,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
@@ -82,7 +76,8 @@ public class FileUtil
 	    } 
 	    else
 	    {
-	    	throw new MISPException(MISPErrorMessageConst.ERROR_FILE_NOT_EXIST);
+	    	log.warn("delete file failed,the path is " + filePath);
+	    	//throw new MISPException(MISPErrorMessageConst.ERROR_FILE_NOT_EXIST);
 	    }
 	    return flag;  
 	} 

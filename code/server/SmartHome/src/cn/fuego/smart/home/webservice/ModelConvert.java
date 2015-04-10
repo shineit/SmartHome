@@ -379,6 +379,7 @@ public class ModelConvert
 		CheckLogJson json = new CheckLogJson();
 		json.setLogID(checkLog.getLogID());
 		json.setCompanyID(checkLog.getCompanyID());
+		json.setCompanyName(checkLog.getCompanyName());
 		json.setCheckItem(checkLog.getCheckItem());
 		json.setCheckSys(checkLog.getCheckSys());
 		json.setCheckResult(checkLog.getCheckResult());
@@ -403,12 +404,14 @@ public class ModelConvert
 	{
 		CheckLog checkLog = new CheckLog();
 		checkLog.setCompanyID(checkLogJson.getCompanyID());
+		checkLog.setCompanyName(checkLogJson.getCompanyName());
 		checkLog.setCheckItem(checkLogJson.getCheckItem());
 		checkLog.setCheckResult(checkLogJson.getCheckResult());
 		checkLog.setCheckSys(checkLogJson.getCheckSys());
 		checkLog.setAbnormalDesp(checkLogJson.getAbnormalDesp());
 		checkLog.setAbnormalPic(checkLogJson.getAbnormalPic());
 		checkLog.setChecker(checkLogJson.getChecker());
+		//生成的时间为1970
 		//checkLog.setCheckTime(new Date(checkLogJson.getCheckTime()));
 		checkLog.setHandler(checkLogJson.getHandler());
 		checkLog.setHandleResult(checkLogJson.getHandleResult());

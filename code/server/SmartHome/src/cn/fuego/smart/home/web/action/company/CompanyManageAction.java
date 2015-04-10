@@ -15,6 +15,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
@@ -26,6 +27,9 @@ import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
+import cn.fuego.smart.home.constant.ErrorMessageConst;
+import cn.fuego.smart.home.dao.DaoContext;
+import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.service.CompanyManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -192,6 +196,65 @@ public class CompanyManageAction extends DWZTableAction<Company>
 		}
 		return MISP_DONE_PAGE;
 	}
+	
+	
+	@Override
+	public String deleteList()
+	{
+		String[] idList = this.getSelectedIDList();
+		try
+		{
+			for(int i=0;i<idList.length;i++)
+			{
+				String companyID=idList[i];
+				//Company company = ServiceContext.getInstance().getCompanyManageService().get(companyID);
+				if(buildingIsDeleted(companyID))
+				{
+					//删除用户公司关联权限
+					//删除用户集中器关联权限
+					companyService.deletePermissionByCompanyID(companyID);
+					super.deleteList();
+					
+				}
+				else
+				{
+					log.error("delete company  failed, the companyID is"+companyID);
+					this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+					//this.getOperateMessage().setMessage("该公司还存在未删除楼层信息！");
+					this.getOperateMessage().setErrorCode(ErrorMessageConst.BUILDING_NOT_DELETED);
+					return MISP_DONE_PAGE;
+				}
+			}
+		} 		
+		catch (MISPException e)
+		{
+			
+			log.error("delete company  failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			
+			log.error("delete company  failed",e);
+			this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+			this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+		}
+		return MISP_DONE_PAGE;
+	}
+
+	private boolean buildingIsDeleted(String companyID)
+	{
+		List<QueryCondition> conditionList= new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "companyID", companyID));
+		List<Building> target = ServiceContext.getInstance().getBuildingManageService().getDataSource(conditionList).getAllPageData();
+		if(!ValidatorUtil.isEmpty(target))
+		{
+			return false;
+		}
+		return true;
+	}
+
 	public TableDataModel<SystemUser> getPermissionTable()
 	{
 		return permissionTable;

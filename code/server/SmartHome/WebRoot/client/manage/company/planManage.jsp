@@ -50,6 +50,8 @@
 								<ul class="toolBar">
 									<li><a class="add" href="PlanManage!show.action?selectedID=${selectedID}&operateType=create" target="dialog" mask="true" title="平面图信息"><span>新增</span></a></li>
 									<li><a class="delete" href="PlanManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
+									<li><a class="edit" href="PlanManage!show.action?selectedID={sid_user}&operateType=modify"						
+									 target="dialog" mask="true" title="平面图信息" rel="planModify"><span>修改</span></a></li>
 								</ul>
 							</div>
 							<table class="table" width="100%" layoutH="125">
@@ -58,12 +60,10 @@
 										<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
 										<th width="25%" align="center">平面图名称</th>
 										<th width="15%" align="center">楼层</th>
-										<th width="15%" align="center">描述</th>
-						 
-										
+										<th width="15%" align="center">描述</th>		
 									</tr>
 								</thead>
-								<s:form  id="newsForm"  method="POST"  name="newsForm" >
+								<s:form   method="POST"  >
 								<tbody>
 
 								<c:forEach var="e" items="${table.currentPageData}"> 	

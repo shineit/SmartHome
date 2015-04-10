@@ -8,6 +8,7 @@ import cn.fuego.smart.home.domain.CheckLog;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.Customer;
+import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.HomeSensor;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.SensorType;
@@ -44,6 +45,9 @@ public class DaoContext
 	
 	private Dao<CheckItem> checkItemDao =null;
 	private Dao<CheckLog>  checkLogDao =null;
+	
+	private Dao<FireSensor> fireSensorDao=null;
+
 	private DaoContext()
 	{
 
@@ -168,4 +172,14 @@ public class DaoContext
 		return checkLogDao;
 	}
 
+	public Dao<FireSensor> getFireSensorDao()
+	{
+		if (null == fireSensorDao)
+		{
+			fireSensorDao = new AbstractDao<FireSensor>(FireSensor.class);
+		}
+		return fireSensorDao;
+	}
+
+	
 }

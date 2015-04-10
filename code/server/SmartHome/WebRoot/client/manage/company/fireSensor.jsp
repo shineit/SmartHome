@@ -5,16 +5,26 @@
 <script type="text/javascript">
 function submitFireForm(url)
 {
-    var thisForm = document.fireSearchForm;
-	thisForm.action="device/FireSensorManage!"+url;
-	thisForm.submit();
- 	thisForm.action="device/FireSensorManage";
+	var count = $("#curCount").val();
+	if(count==0)
+	{
+		alertMsg.info("当前无数据导出！");
+	}
+	else
+	{
+	    var thisForm = document.fireSearchForm;
+		thisForm.action="device/FireSensorManage!"+url;
+		thisForm.submit();
+ 		thisForm.action="device/FireSensorManage";
+	}
+
 	
 }
+
 </script>
 <style type="text/css">
 #container1{
-	position:relative; width:99%; height:310px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
+	position:relative; width:99%; height:330px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
 }
 #map1{
 	position:absolute;margin: 0 auto;text-align: center;
@@ -39,7 +49,7 @@ function submitFireForm(url)
 							<s:form  id="pagerForm"   onsubmit="return navTabSearch(this);"  action="device/FireSensorManage" method="post" name="fireSearchForm">
 								<input type="hidden" name="pageNum" value="${pageNum}" />
 								<input type="hidden" name="numPerPage" value="${numPerPage}" />
-							
+								
 							<div class="searchBar">
 								<table class="searchContent">
 									<tr>
@@ -55,6 +65,23 @@ function submitFireForm(url)
 										<td>
 										点号：<input type="text" name="codeID" value="${codeID}"/>
 										</td>
+										<td>
+										<select  name="markStatus" >
+						 					<option value="">标记状态</option>
+												<c:forEach var="st" items="${markStatusList}">
+						  						<c:choose>		       
+							   					 	<c:when test="${st.strValue == markStatus}">  
+	                            		       		<option value="${st.strValue}" selected='selected'> ${st.strValue}</option>
+	                            		 
+	                            	 			 </c:when>
+							   		  			<c:otherwise>  
+							   	   			    <option value="${st.strValue}" > ${st.strValue}</option>
+							   		   			</c:otherwise>
+							   
+						   		 			</c:choose>
+						 					</c:forEach>								
+										</select>
+										</td>	
 										<td>
 										<s:submit  value="查 询" cssClass="mispButton primary"></s:submit>
 										</td>
@@ -82,14 +109,12 @@ function submitFireForm(url)
 									<li><a class="add" href="<%=request.getContextPath()%>/client/manage/company/fireImportShow.jsp" 
 									 target="dialog" mask="true" rel="fsImport" title="导入传感器"><span>数据导入</span></a></li>
 									<li class="line">line</li>
-									<li ><a class="icon" href="#" target="dwzExport" onclick="submitFireForm('downloadSensor')"><span>导出数据</span></a></li>
+									<li ><a class="icon" href="#" target="dwzExport" onclick="submitFireForm('downloadSensor')" targetType=”dialog” ><span>导出数据</span></a></li>
 								</ul>
 							</div>
-							<table class="table" width="100%" layoutH="450">
+							<table class="table" width="100%" layoutH="470">
 								<thead>
 									<tr>
-									<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
-
 										<th width="5%" align="center">标注</th>
 										<th width="15%" align="center">传感器类型</th>
 										<th width="15%" align="center">集中器编号</th>
@@ -98,7 +123,9 @@ function submitFireForm(url)
 										<th width="5%" align="center">点号</th>
 										<th width="15%" align="center">位置描述</th>
 										<th width="10%" align="center">联系人</th>
-										<th width="15%" align="center">联系电话</th>										
+										<!-- <th width="10%" align="center">关联账户</th> -->
+										<th width="15%" align="center">联系电话</th>	
+										<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" >删除</th>									
 									</tr>
 								</thead>
 								<s:form   method="POST"  >
@@ -106,7 +133,7 @@ function submitFireForm(url)
 
 								<c:forEach var="e" items="${table.currentPageData}"> 	
 									<tr target="sid_user" rel="${e.id}">
-										<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>
+										
 										<td><input name="selectedIDList" value="${e.id}" type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
 										<td>${e.sensorTypeName}</td>
 										<td>${e.concentratorID}</td>
@@ -115,7 +142,9 @@ function submitFireForm(url)
 						 				<td>${e.codeID}</td> 		 
 						 				<td>${e.locationDesp}</td>
 						 				<td>${e.contacts}</td>
+						 				<%-- <td>${e.userName}</td> --%>
 						 				<td>${e.contactPhone}</td>
+						 				<td><input name="selectedIDList" value="${e.id}" type="checkbox" style="margin-top:5px;"></td>
 									</tr>
 								</c:forEach>  	
 
@@ -140,7 +169,7 @@ function submitFireForm(url)
 									</select>
 									<span>条，共${page.count}条</span>
 								</div>
-								
+								<input type="hidden" id="curCount" value="${page.count}" />
 								<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 							</div>
@@ -187,7 +216,8 @@ function getOffset(obj)
 
 function bindEvent()
 {
-	getObj("map1").ondblclick = function(oEvent){
+	getObj("map1").onclick = function(oEvent){
+		//alert("OK");
 		oEvent = oEvent || event;
 		 
 		if(null != selectedID)
@@ -296,10 +326,13 @@ function saveMark(sensorID,locationX,locationY)
 	  }
 }
 
- 
+try{
 var json= '<%=request.getAttribute("locationJson")%>';
 var sensorList = $.parseJSON(json);
 var selectedID;
+}catch(e)
+{alert(e);}
+
 init();
 
 function init()

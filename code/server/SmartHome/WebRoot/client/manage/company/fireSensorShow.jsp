@@ -61,6 +61,12 @@
 				<input type="text" name="obj.contacts"  size="25"  value="${obj.contacts}"/>
 				</dd>
 			</dl>	
+<%-- 			<dl style="width:50%;">
+				<dt style="width:30%;">关联账户：</dt>			
+				<dd style="width:65%;">
+				<input type="text" name="obj.userName"  size="25"  value="${obj.userName}"/>
+				</dd>
+			</dl> --%>
 			<dl style="width:50%;">
 				<dt style="width:30%;">联系电话：</dt>			
 				<dd style="width:65%;">

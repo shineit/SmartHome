@@ -12,6 +12,7 @@
 	       <generator class="identity"/> 
 		</id>
 		<property name="companyID" column="COMPANY_ID"></property>
+		<property name="companyName" column="COMPANY_NAME"></property>
 		<property name="checkItem" column="CHECK_ITEM"></property>
 		<property name="checkSys" column="CHECK_SYS"></property>
 		<property name="checkResult" column="CHECK_RESULT"></property>

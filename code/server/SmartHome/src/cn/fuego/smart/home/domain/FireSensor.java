@@ -30,8 +30,8 @@ public class FireSensor implements PersistenceObject
 	private int loopID;    //回路号
 	private int codeID;    //编号
 	private String locationDesp;  //位置描述
-	private float locationX;  //X 偏移，相对当前图片尺寸宽度
-	private float locationY;  //Y 偏移，相当当前图片尺寸高度
+	private float locationX=0;  //X 偏移，相对当前图片尺寸宽度
+	private float locationY=0;  //Y 偏移，相当当前图片尺寸高度
 	
 	
 	private Integer sensorType=0;      //传感器类型
@@ -39,6 +39,7 @@ public class FireSensor implements PersistenceObject
 	
 	private String contacts; //联系人
 	private String contactPhone; //联系电话
+	private String userName; //联系人账户
 	
 	public long getId()
 	{
@@ -145,6 +146,14 @@ public class FireSensor implements PersistenceObject
 	public void setContactPhone(String contactPhone)
 	{
 		this.contactPhone = contactPhone;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
 	}
 
 

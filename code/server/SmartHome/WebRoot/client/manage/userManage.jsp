@@ -70,6 +70,7 @@ function submitForm(url){
 		<ul class="toolBar">
 			<li><a class="add" href="sys/UserManage!show.action?operateType=create" target="dialog" mask="true" title="新增用户"><span>新增用户</span></a></li>
 			<li><a class="delete" href="sys/UserManage!deleteList.action" onclick="submitForm('deleteList')" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除用户</span></a></li>
+		<li><a class="add" href="sys/CustomerManage" target="navTab" rel="customerManage" title="终端用户管理"><span>终端用户管理</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">

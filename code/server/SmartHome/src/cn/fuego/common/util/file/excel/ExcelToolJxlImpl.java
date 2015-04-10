@@ -26,6 +26,7 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.DataCreateUtil;
 import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.meta.ReflectionUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MISPException;
 
@@ -92,7 +93,15 @@ public class ExcelToolJxlImpl implements ExcelTool
 				{
 					cell = sheet.getCell(key, i);
 					ExcelColumnMeta columnMeta = excelMeta.getColumnMap().get(key);
-					ReflectionUtil.setObjetField(obj,columnMeta.getDataField(), cell.getContents());
+					if(!ValidatorUtil.isEmpty(cell.getContents()))
+					{
+						ReflectionUtil.setObjetField(obj,columnMeta.getDataField(), cell.getContents());
+					}
+					else
+					{
+						ReflectionUtil.setObjetField(obj,columnMeta.getDataField(), columnMeta.getDefaultValue());
+					}
+					
 				}
 
 				dataList.add(obj);

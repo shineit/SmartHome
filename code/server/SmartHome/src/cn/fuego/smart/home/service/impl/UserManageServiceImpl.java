@@ -66,7 +66,7 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
         	{
         		Customer newCustomer = new Customer();
         		newCustomer.setUserID(user.getUserID());
-        		newCustomer.setCustomerName(user.getUserName());
+        		newCustomer.setUserName(user.getUserName());
         		DaoContext.getInstance().getCustomerDao().create(newCustomer);
         	}
         	else
@@ -90,6 +90,12 @@ public class UserManageServiceImpl extends MISPUserServiceImpl<SystemUser> imple
 			if(oldUser.getRole()==UserTypeEnum.ADMIN.getTypeValue())
 			{
 				throw new MISPException(MISPErrorMessageConst.ADMIN_NOT_DELETED);
+				 
+			}
+			Customer oldCustomer= getCustomer(Integer.valueOf(userID));
+			if(null!=oldCustomer)
+			{
+				DaoContext.getInstance().getCustomerDao().delete(new QueryCondition(ConditionTypeEnum.EQUAL,"userID",userID));
 			}
 		}
 		//QueryCondition condition = new QueryCondition(ConditionTypeEnum.IN, "userID", userIDList);		

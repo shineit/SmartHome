@@ -103,9 +103,9 @@ public class MISPAction extends ActionSupport
 	{
 		if(!ValidatorUtil.isEmpty(name))
 		{
-			//String path = ServletActionContext.getServletContext().getRealPath("/") + "upload/";
+
 			FileUtil.deleteFile(MispConstant.getUploadPath()+File.separator+name);
-			FileUtil.deleteFile(name);
+			
 		}
 		else
 		{
@@ -116,6 +116,7 @@ public class MISPAction extends ActionSupport
 	{
 		try
 		{
+			ServletActionContext.getResponse().setContentType("application/json");
 			PrintWriter out = ServletActionContext.getResponse().getWriter();
 			out.write(JsonConvert.ObjectToJson(rsp));
 		} catch (IOException e)

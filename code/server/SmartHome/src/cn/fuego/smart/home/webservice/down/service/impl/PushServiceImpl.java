@@ -8,7 +8,10 @@
 */ 
 package cn.fuego.smart.home.webservice.down.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
@@ -16,14 +19,15 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.service.MISPServiceContext;
-import cn.fuego.smart.home.constant.AlarmObjTypeEnmu;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.DeviceKindEunm;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
+import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.domain.Alarm;
 import cn.fuego.smart.home.domain.AlarmType;
 import cn.fuego.smart.home.domain.Company;
+import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -68,16 +72,40 @@ public class PushServiceImpl implements PushService
 			 
 			 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
 			
+
+			 //查询集中器关联用户，需要推送的用户
+			 Set<Integer> userIDSet = new HashSet<Integer>();
 			 if(!ValidatorUtil.isEmpty(userConList))
 			 {
-				for(UserConcentrator userCon : userConList)
+				 for(UserConcentrator userCon : userConList)
+				 {
+					 userIDSet.add(userCon.getUserID());
+				 }
+			 }
+			 //获取传感器中配置的用户
+//			 FireSensor sensor= getFireSensor(alarm.getConcentratorID(), alarm.getObjID(), alarm.getObjID1(), alarm.getObjID2());
+//			 if(!ValidatorUtil.isEmpty(sensor.getUserName()))
+//			 {
+//				 SystemUser user = (SystemUser) ServiceContext.getInstance().getUserManageService().get("userName", sensor.getUserName());
+//				 if(null != user)
+//				 {
+//					 userIDSet.add(user.getUserID());
+//				 }
+//			 }
+			 
+			 
+			 if(!ValidatorUtil.isEmpty(userIDSet))
+			 {
+				for(Integer userCon : userIDSet)
 				{
 						
-					 FuegoPushInfo pushInfo = PushToolFactory.getInstance().getPushInfo(userCon.getUserID());
+					 FuegoPushInfo pushInfo = PushToolFactory.getInstance().getPushInfo(userCon);
 					 
-					 if(DeviceKindEunm.FIRE_CONCENTRATOR == ApplicationProtocol.getObjKindByID(userCon.getConcentratorID()))
+					 if(DeviceKindEunm.FIRE_CONCENTRATOR == ApplicationProtocol.getObjKindByID(alarm.getConcentratorID()))
 					 {
 						 pushFireAlarm(pushInfo,userCon,type,alarm);
+						 
+						 
 					 }	 
 					 else
 					 {
@@ -104,20 +132,21 @@ public class PushServiceImpl implements PushService
 		
 	}
 	
-	private void pushFireAlarm(FuegoPushInfo pushInfo,UserConcentrator userCon,AlarmType type,Alarm alarm)
+	private void pushFireAlarm(FuegoPushInfo pushInfo,int userID,AlarmType type,Alarm alarm)
 	{
-		 Company company = ServiceContext.getInstance().getCompanyManageService().getCompanyByConcentorID(userCon.getConcentratorID());
+		 Company company = ServiceContext.getInstance().getCompanyManageService().getCompanyByConcentorID(alarm.getConcentratorID());
 		 if(null == company)
 		 {
-			 log.warn("the concentor have not been set to any company so no need to push"+userCon.getConcentratorID());
+			 log.warn("the concentor have not been set to any company so no need to push"+alarm.getConcentratorID());
 			 return;
 		 }
-		 if(MISPServiceContext.getInstance().getMISPPrivilegeManage().hasPrivilege(String.valueOf(userCon.getUserID()), PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),String.valueOf(company.getCompanyID())))
+		 if(MISPServiceContext.getInstance().getMISPPrivilegeManage().hasPrivilege(String.valueOf(userID), PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(),String.valueOf(company.getCompanyID())))
 		 {
-			 log.warn("the user have no right for the company.the user id is "+userCon.getUserID() + "the conmpany id is " + company.getCompanyID());
+			 log.warn("the user have no right for the company.the user id is "+userID + "the conmpany id is " + company.getCompanyID());
 			 return;
 		 }
 		 
+
 		 PushMessageJson json = new PushMessageJson();
 		 String title=null;
 		 title = PushMessagTypeEnum.ALRAM_MSG.getStrValue()+type.getTypeName();
@@ -130,9 +159,41 @@ public class PushServiceImpl implements PushService
 		 alarmPushInfo.setAlarmKind(type.getKind());
 		 json.setObj(alarmPushInfo);
  		 PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
+ 		 
+//		 FireSensor sensor= getFireSensor(alarm.getConcentratorID(), alarm.getObjID(), alarm.getObjID1(), alarm.getObjID2());
+//		 if(!ValidatorUtil.isEmpty(sensor.getUserName()))
+//		 {
+//			 pushDutyUser(sensor.getUserName(),pushInfo,title,content,json);
+//		 }
 
 	}
+	
+//	private void pushDutyUser(String userID, FuegoPushInfo pushInfo,	String title, String content, PushMessageJson json)
+//	{
+//		Customer target = DaoContext.getInstance().getCustomerDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,"userID",userID));
+//		if(null!=target)
+//		{
+//			pushInfo.setUserID(userID);
+//	 		PushToolFactory.getInstance().getPushTool().pushNotification(pushInfo,title,content,json);
+//		}
+//		
+//	}
 
+
+
+
+	private FireSensor getFireSensor(long concentratorID, long machineID,int loopID, int codeID)
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"machineID",machineID));
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"loopID",loopID));
+	    conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"codeID",codeID));
+
+		FireSensor sensor = DaoContext.getInstance().getFireSensorDao().getUniRecord(conditionList);
+		return sensor;
+	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.down.service.PushService#pushNews(java.util.List)
 	 */
@@ -149,7 +210,7 @@ public class PushServiceImpl implements PushService
 			 String content = "";
 			 json.setObjType(PushMessagTypeEnum.NEWS_MSG.getIntValue());
 			 json.setObj(e.getNewsID());
-			 PushToolFactory.getInstance().getPushTool().pushAll(title, content, json);
+			 PushToolFactory.getInstance().getHomePushTool().pushAll(title, content, json);
 		 
 		 }
 	}
