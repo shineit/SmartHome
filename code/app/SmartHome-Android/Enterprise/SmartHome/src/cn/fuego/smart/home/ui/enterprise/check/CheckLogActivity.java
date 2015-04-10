@@ -22,15 +22,16 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.LoadImageUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
@@ -99,17 +100,18 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 	@Override
 	public void onItemListClick(AdapterView<?> parent, View view, long id,CheckLogJson item)
 	{
-		
-		String title= item.getCheckItem()+CheckResultEnum.getEnumByInt(item.getCheckResult()).getStrValue();
-		String content = item.getAbnormalDesp();
+	
 		String picUrl= MemoryCache.getImageUrl()+item.getAbnormalPic();
-		showDetail(view, title, content,picUrl);
+		showDetail(view, item, picUrl);
 	}
 
 
-	private void showDetail(View parent, final String title, final String content,final String picUrl)
+
+	private void showDetail(View parent, CheckLogJson item,final String picUrl)
 	{
 		
+		final String title=item.getCheckItem()+CheckResultEnum.getEnumByInt(item.getCheckResult()).getStrValue();
+		final String content =item.getAbnormalDesp();
 		if (popupWindow == null)
 		{		
 			LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
@@ -129,10 +131,18 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 			popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 			
 			TextView txt_title= (TextView) view.findViewById(R.id.pop_window_title);
+			//title= item.getCheckItem()+CheckResultEnum.getEnumByInt(item.getCheckResult()).getStrValue();
 			txt_title.setText(title);
 			TextView txt_content = (TextView) view.findViewById(R.id.pop_window_content);
+			//content = item.getAbnormalDesp();
 			txt_content.setText(content);
-			 
+
+			TextView txt_checker = (TextView) view.findViewById(R.id.check_log_checker);
+			txt_checker.setText(item.getChecker());
+
+			TextView txt_checkDate = (TextView) view.findViewById(R.id.check_log_date);
+			txt_checkDate.setText(DateUtil.getStrTime(item.getCheckTime()));
+			
 			ImageView img_area= (ImageView) view.findViewById(R.id.pop_window_imgarea);
 			LoadImageUtil.getInstance().loadImage(img_area, picUrl);
 		}
@@ -152,8 +162,8 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 			public void onClick(View v)
 			{
 				//showMessage("start email");
-				sendEmail(title, content, picUrl);
-				//sendWeChat(title, content, picUrl);
+				//sendEmail(title, content, picUrl);
+				sendWeChat(title, content, picUrl);
 				
 				
 			}
@@ -237,6 +247,7 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 		sp.setText(content);
 		sp.setImageUrl(abnormalPic);
 		weChat.setPlatformActionListener(this);
+		//sp.setShareType(SSPublishContentMediaTypeNews);
 		weChat.share(sp);
 	}
 	/**

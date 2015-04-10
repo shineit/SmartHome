@@ -16,7 +16,7 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.util.StrUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.ui.base.ExitApplication;

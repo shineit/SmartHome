@@ -15,10 +15,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.BageNumDataCache;
@@ -32,7 +31,10 @@ import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
+import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.BageNumJson;
+import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq;
@@ -45,7 +47,7 @@ import com.readystatesoftware.viewbadger.BadgeView;
 
 public class HomeActivity extends BaseActivtiy implements OnClickListener
 {
-	private FuegoLog log = FuegoLog.getLog(getClass());
+	//private FuegoLog log = FuegoLog.getLog(getClass());
 
 	private BadgeView alarmBageView,statusBageView,checkBageView;
 	private Button alarm_btn,status_btn,check_log_btn;
@@ -99,12 +101,15 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
         //注册广播，接收service中启动的线程发送过来的信息，同时更新UI  
         IntentFilter filter = new IntentFilter("android.intent.action.bageNotify");  
         this.registerReceiver(new HomeReceiver(), filter);  
+        
+        updateCustomer();
 
 
 	}
-	private void showFireStatusBage()
+	//更新用户信息
+	private void updateCustomer()
 	{
-		GetFireStatusNumByIDReq req = new GetFireStatusNumByIDReq();
+		GetCustomerByIDReq req =new GetCustomerByIDReq();
 		req.setUserID(AppCache.getInstance().getUser().getUserID());
 		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
 			@Override
@@ -112,39 +117,16 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			{
 				if(message.isSuccess())
 				{
-					GetFireStatusNumByIDRsp rsp = (GetFireStatusNumByIDRsp) message.getMessage().obj;
-					statusNumList= rsp.getNumList();
-					BageNumDataCache.getInstance().setStatusBageList(statusNumList);
-			    	int statusCount=0;
-			    	for(BageNumJson json:statusNumList)
-			    	{
-			    		statusCount+=json.getNum();
-			    	}
-			    	if(statusCount!=0)
-			    	{
-
-						if(statusCount>99)
-						{
-							statusBageView.setText("99+");
-						}
-						else
-						{
-							statusBageView.setText(String.valueOf(statusCount));
-						}
-			    		statusBageView.show();
-			    	}
-			    	else
-			    	{
-			    		if(statusBageView.isShown())
-			    		{
-			    			statusBageView.toggle();
-			    		}
-			    		
-			    	}
-					
+					GetCustomerByIDRsp rsp =  (GetCustomerByIDRsp) message.getMessage().obj;
+					CustomerJson customer= rsp.getCustomer();
+					if(null!=customer)
+					{
+						AppCache.getInstance().update(customer);
+					}
+				
 				}
 			}
-		}).getStatusNum(req);
+		}).getCustomer(req);
 		
 	}
 	private void showFireAlarmBage()
@@ -161,34 +143,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 					
 					alarmNumList= rsp.getNumList();
 					BageNumDataCache.getInstance().setAlarmBageList(alarmNumList);
-			    	int alarmCount=0;
-			    	for(BageNumJson json:alarmNumList)
-			    	{
-			    		alarmCount+=json.getNum();
-			    	}
-					if(alarmCount!=0)
-			    	{
-						//alarmBageView=null;
-						if(alarmCount>99)
-						{
-							alarmBageView.setText("99+");
-						}
-						else
-						{
-							alarmBageView.setText(String.valueOf(alarmCount));
-						}
-
-				    	alarmBageView.show();
-			    	}
-					else
-					{
-						if(alarmBageView.isShown())
-						{
-							alarmBageView.toggle();
-						}
-						
-					}
-					
+					showBage(alarmBageView,alarmNumList);
+				
 				}
 			}
 		}).getAlarmNum(req);
@@ -206,40 +162,76 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 					GetCheckLogNumByIDRsp rsp =  (GetCheckLogNumByIDRsp) message.getMessage().obj;
 					checkNumList= rsp.getNumList();
 					BageNumDataCache.getInstance().setCheckBageList(checkNumList);
-			    	int count=0;
-			    	for(BageNumJson json:checkNumList)
-			    	{
-			    		count+=json.getNum();
-			    	}
-					if(count!=0)
-			    	{
-
-						if(count>99)
-						{
-							checkBageView.setText("99+");
-						}
-						else
-						{
-							checkBageView.setText(String.valueOf(count));
-						}
-
-						checkBageView.show();
-			    	}
-					else
-					{
-						if(checkBageView.isShown())
-						{
-							checkBageView.toggle();
-						}
-						
-					}
+					showBage(checkBageView, checkNumList);
 
 				}
 			}
 		}).getCheckNum(req);
 		
 	}
-	//统一bageView样式
+	private void showFireStatusBage()
+	{
+		GetFireStatusNumByIDReq req = new GetFireStatusNumByIDReq();
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
+		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					GetFireStatusNumByIDRsp rsp = (GetFireStatusNumByIDRsp) message.getMessage().obj;
+					statusNumList= rsp.getNumList();
+					BageNumDataCache.getInstance().setStatusBageList(statusNumList);
+					showBage(statusBageView,statusNumList);
+			    	
+				}
+			}
+
+
+		}).getStatusNum(req);
+		
+	}
+	/**
+	 * UI显示数字提醒
+	 * @param statusBageView
+	 * @param statusNumList
+	 */
+	private void showBage(BadgeView bageView,	List<BageNumJson> numList)
+	{
+		int count=0;
+    	for(BageNumJson json:numList)
+    	{
+    		count+=json.getNum();
+    	}
+    	if(count!=0)
+    	{
+
+			if(count>99)
+			{
+				bageView.setText("99+");
+			}
+			else
+			{
+				bageView.setText(String.valueOf(count));
+			}
+			bageView.show();
+    	}
+    	else
+    	{
+    		if(bageView.isShown())
+    		{
+    			bageView.toggle();
+    		}
+    		
+    	}
+		
+		
+	}
+	
+	/**
+	 * 注册统一样式bageview
+	 * @param bageView
+	 */
 	private void regBageView(BadgeView bageView)
 	{
 		bageView.setTextColor(Color.RED);

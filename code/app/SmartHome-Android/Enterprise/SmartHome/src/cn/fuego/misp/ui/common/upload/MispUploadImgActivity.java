@@ -7,14 +7,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.MispCommonIDName;
 import cn.fuego.misp.service.MemoryCache;
@@ -25,7 +23,7 @@ import cn.fuego.misp.ui.common.upload.UploadUtil.OnUploadProcessListener;
 import cn.fuego.misp.ui.util.ImgCompressUtil;
 import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.misp.webservice.up.model.MispBaseRspJson;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadProcessListener
 {
@@ -69,18 +67,20 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
         imageView = (ImageView) findViewById(R.id.upload_imgview_area);
         submit_btn_area = findViewById(R.id.submit_btn_area);
         submit_btn_area.setVisibility(View.VISIBLE);
-        //progressView = (ProgressBar) findViewById(R.id.upload_img_progressBar);
-      android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this); 
+        progressView = (ProgressBar) findViewById(R.id.upload_img_progressBar);
+        
+        
+       /// android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this); 
 		//builder.setTitle("正在上传图片，请稍后……");
-		LayoutInflater inflater = LayoutInflater.from(this); 
-		View view = inflater.inflate(MispCommonIDName.layout_misp_download_file, null);
-		progress_txt = (TextView) view.findViewById(MispCommonIDName.misp_upgrade_count_txt);
-		progress_txt.setText("正在上传图片，请稍后……");
-		progressView = (ProgressBar) view.findViewById(MispCommonIDName.misp_uprade_progress_count);
+		//LayoutInflater inflater = LayoutInflater.from(this); 
+		//View view = inflater.inflate(MispCommonIDName.layout_misp_download_file, null);
+		//progress_txt = (TextView) view.findViewById(MispCommonIDName.misp_upgrade_count_txt);
+		//progress_txt.setText("正在上传图片，请稍后……");
+		//progressView = (ProgressBar) view.findViewById(MispCommonIDName.misp_uprade_progress_count);
 
-		builder.setView(view);
-		downloadDialog = builder.create();  
-		downloadDialog.setCanceledOnTouchOutside(false);
+		//builder.setView(view);
+		//downloadDialog = builder.create();  
+		//downloadDialog.setCanceledOnTouchOutside(false);
         
     }
     
@@ -95,9 +95,10 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 		{
 
 		case R.id.upload_img_submitbtn:
+			this.waitDailog.show();
 			if(picPath!=null)
 			{		
-				showToast(this, "开始处理图片！");
+				
 				picPath=ImgCompressUtil.getInstance().copressImg(this, picPath, "SmartHome/compress/");
 				
 				if(picPath!=null)
@@ -153,7 +154,9 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 		String fileKey = "upload";
 		UploadUtil uploadUtil = UploadUtil.getInstance();;
 		uploadUtil.setOnUploadProcessListener(this);   		
+
 		Map<String, String> params = new HashMap<String, String>();
+		params.put("orderId", "111");
 		uploadUtil.uploadFile( picPath,fileKey, requestURL,params);
 	}
 
@@ -164,14 +167,14 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 		
 			case UPLOAD_INIT_PROCESS:
 				//progressBar.setMax(msg.getMessage().arg1);
-				downloadDialog.show(); 
-				totalSize=msg.getMessage().arg1;
+				//downloadDialog.show(); 
+				//totalSize=msg.getMessage().arg1;
 				progressView.setMax(msg.getMessage().arg1);
 				//progress_txt.setText(String.valueOf(totalSize));
 				break;
 			case UPLOAD_IN_PROCESS:
 				progressView.setProgress(msg.getMessage().arg1);
-				processSize=msg.getMessage().arg1;
+				//processSize=msg.getMessage().arg1;
 				//progress_txt.setText(String.valueOf(processSize));
 /*
 				new Thread(new Runnable()
@@ -191,6 +194,7 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 				break;
 			case UPLOAD_FILE_DONE:
 				msg.getMessage().what = MISPErrorMessageConst.SUCCESS;
+				waitDailog.dismiss();
 				if(msg.isSuccess())
 				{
 					closeDialog();

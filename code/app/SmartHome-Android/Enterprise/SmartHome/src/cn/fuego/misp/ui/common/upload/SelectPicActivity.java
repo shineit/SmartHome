@@ -15,7 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 //选择文件操作类
 public class SelectPicActivity extends Activity implements OnClickListener{

@@ -21,7 +21,7 @@ import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.pager.ImagePagerAdapter;
 import cn.fuego.misp.ui.util.LoadImageUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.service.AdDataCache;
 import cn.fuego.smart.home.webservice.up.model.GetAdListReq;

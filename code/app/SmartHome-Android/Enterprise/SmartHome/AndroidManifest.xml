@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.fuego.smart.home"
+    package="cn.fuego.smart.enterprise"
     android:installLocation="internalOnly"
-    android:versionCode="106"
-    android:versionName="1.0.6" >
+    android:versionCode="107"
+    android:versionName="1.0.7" >
 
     <permission
-        android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE"
+        android:name="cn.fuego.smart.enterprise.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- Required  一些系统要求的权限，如访问网络等 -->
-    <uses-permission android:name="cn.fuego.smart.home.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="cn.fuego.smart.enterprise.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -45,14 +45,14 @@
         android:targetSdkVersion="18" />
 
     <application
-        android:name=".SmartHomeApplication"
+        android:name="cn.fuego.smart.home.SmartHomeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
         android:theme="@style/AppBaseTheme"    >
         <activity
-            android:name=".ui.MainActivity"
+            android:name="cn.fuego.smart.home.ui.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -66,29 +66,29 @@
         </activity>
 
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="cn.fuego.smart.home.ui.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".ui.setting.service.ServiceActivity"
+            android:name="cn.fuego.smart.home.ui.setting.service.ServiceActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".ui.setting.service.ServiceApplyActivity"
+            android:name="cn.fuego.smart.home.ui.setting.service.ServiceApplyActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".ui.setting.user.UserManageActivity"
+            android:name="cn.fuego.smart.home.ui.setting.user.UserManageActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".ui.setting.user.UserInfoActivity"
+            android:name="cn.fuego.smart.home.ui.setting.user.UserInfoActivity"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-            android:name=".ui.base.ExitApplication"
+            android:name="cn.fuego.smart.home.ui.base.ExitApplication"
             android:label="@string/app_name" >
         </activity>
 
@@ -101,7 +101,8 @@
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="cn.fuego.smart.home" />
+                <category android:name="cn.fuego.smart.enterprise" />
+               
             </intent-filter>
         </activity>
         <!-- Required  SDK核心功能 -->
@@ -132,7 +133,8 @@
             <intent-filter android:priority="1000" >
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
-                <category android:name="cn.fuego.smart.home" />
+                <category android:name="cn.fuego.smart.enterprise" />
+                
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -173,7 +175,7 @@
                 <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="cn.fuego.smart.home" />
+               <category android:name="cn.fuego.smart.enterprise" />
             </intent-filter>
         </receiver>
 		<!--share SDK required  -->
@@ -192,14 +194,14 @@
 		 </activity>
 		 <!--微信分享回调 -->
 		 <activity
-		 android:name=".wxapi.WXEntryActivity"
+		 android:name="cn.fuego.smart.home.wxapi.WXEntryActivity"
 		 android:theme="@android:style/Theme.Translucent.NoTitleBar"
 		 android:configChanges="keyboardHidden|orientation|screenSize"
 		 android:exported="true"
 		 android:screenOrientation="portrait" /> 
 
         <activity
-            android:name=".ui.HomeActivity"
+            android:name="cn.fuego.smart.home.ui.HomeActivity"
             android:label="@string/app_name" >
         </activity>
 
@@ -207,61 +209,61 @@
             android:name="cn.fuego.smart.home.ui.common.about.AboutUsActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name=".ui.setting.upgrade.UpgradeActivity" >
+        <activity android:name="cn.fuego.smart.home.ui.setting.upgrade.UpgradeActivity" >
         </activity>
 
 
         <!-- 播放告警音服务 -->
-        <service android:name=".service.AlarmSoundService" />
+        <service android:name="cn.fuego.smart.home.service.AlarmSoundService" />
 
         <activity
-            android:name=".ui.enterprise.alarm.FireAlarmActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity"
             android:label="@string/title_activity_fire_alarm" >
         </activity>
         <activity
-            android:name=".ui.enterprise.alarm.FireAlarmViewActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmViewActivity"
             android:label="@string/title_activity_fire_alarm_view" >
         </activity>
         <activity
-            android:name=".ui.enterprise.check.CheckActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.check.CheckActivity"
             android:label="@string/title_activity_check" >
         </activity>
 
         <activity
-            android:name=".ui.enterprise.company.CompanyViewActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity"
             android:label="@string/title_activity_company_info" >
         </activity>
         <activity
-            android:name=".ui.enterprise.company.CompanyListActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity"
             android:label="@string/title_activity_company_list" >
         </activity>
         <activity
-            android:name=".ui.enterprise.check.CheckLogActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity"
             android:label="@string/title_activity_check_log" >
         </activity>
         <activity
-            android:name=".ui.enterprise.check.CheckOperateActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.check.CheckOperateActivity"
             android:label="@string/title_activity_check_operate" >
         </activity>
 
         <activity
-            android:name=".ui.common.knowledge.CommonSenseActivity"
+            android:name="cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity"
             android:label="@string/title_activity_common_sense" >
         </activity>
         <activity
-            android:name=".ui.common.knowledge.ContentViewActivity"
+            android:name="cn.fuego.smart.home.ui.common.knowledge.ContentViewActivity"
             android:label="@string/title_activity_content_view" >
         </activity>
         <activity
-            android:name=".ui.common.mall.ProductMallActivity"
+            android:name="cn.fuego.smart.home.ui.common.mall.ProductMallActivity"
             android:label="@string/title_activity_product_mall" >
         </activity>
         <activity
-            android:name=".ui.common.mall.ProductViewActivity"
+            android:name="cn.fuego.smart.home.ui.common.mall.ProductViewActivity"
             android:label="@string/title_activity_product_view" >
         </activity>
         <activity
-            android:name=".ui.enterprise.alarm.DeviceStatusActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity"
             android:label="@string/title_activity_device_status" >
         </activity>
         <activity
@@ -269,7 +271,7 @@
             android:label="@string/title_activity_misp_upload_img" >
         </activity>
         <activity
-            android:name=".ui.enterprise.alarm.SensorLocationActivity"
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.SensorLocationActivity"
             android:label="@string/title_activity_product_view" >
         </activity>
         <activity
@@ -284,7 +286,7 @@
             android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="97c0f1c1744eacef02d529c1" />
+            android:value="acdc6f6b24803e161d743f11" />
         <!-- </>值来自开发者平台取得的AppKey -->
 
     </application>

@@ -8,7 +8,7 @@ import android.widget.EditText;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.util.StrUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.LoginActivity;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;

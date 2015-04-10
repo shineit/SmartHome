@@ -10,7 +10,7 @@ import cn.fuego.misp.ui.info.MispInfoListActivity;
 import cn.fuego.misp.ui.model.CommonItemMeta;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 
 public class CompanyViewActivity extends MispInfoListActivity

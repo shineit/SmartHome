@@ -68,7 +68,9 @@
                 android:drawablePadding="5dp"
                 android:gravity="left|center_vertical"
                 android:text="未设置"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="invisible" />
+
         </RadioGroup>
 
         <LinearLayout

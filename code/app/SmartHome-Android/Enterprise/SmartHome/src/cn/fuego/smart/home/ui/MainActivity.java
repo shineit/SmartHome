@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.misp.service.MemoryCache;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.ui.jpush.MyReceiver;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 import cn.jpush.android.api.InstrumentedActivity;

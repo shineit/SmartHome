@@ -38,9 +38,10 @@
                 android:background="@null"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="关于我们"
+                android:text="更新/设置"
                 android:textColor="@color/white"
-                android:textSize="@dimen/content_font_size" />
+                android:textSize="@dimen/content_font_size_sm" />
+
         </RelativeLayout>
 
     </LinearLayout>

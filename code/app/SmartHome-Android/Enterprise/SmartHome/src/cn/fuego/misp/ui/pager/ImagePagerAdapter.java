@@ -13,7 +13,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import cn.fuego.misp.ui.util.LoadImageUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class ImagePagerAdapter extends PagerAdapter implements OnPageChangeListener
 {

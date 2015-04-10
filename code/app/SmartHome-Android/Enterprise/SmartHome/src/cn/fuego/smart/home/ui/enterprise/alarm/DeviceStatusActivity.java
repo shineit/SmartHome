@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.JsonConvert;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;

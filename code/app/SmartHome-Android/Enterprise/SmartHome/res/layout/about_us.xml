@@ -4,37 +4,10 @@
     android:background="@color/backcolor"
     android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/head_height"
-        android:background="@color/themecolor" >
-
-        <TextView
-            android:id="@+id/aout_titl0001"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="关于我们"
-            android:textColor="@color/white"
-            android:textSize="@dimen/head_font_size_sm" />
-
-        <Button
-            android:id="@+id/about_us_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignTop="@+id/add_apply"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableLeft="@drawable/back"
-            android:drawablePadding="5dp"
-            android:text="返回"
-            android:textColor="@color/white"
-            android:textSize="@dimen/content_font_size" />
-    </RelativeLayout>
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/misp_tilte_with_back_layout" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -44,12 +17,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingTop="20dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical" >
 
                 <Button
@@ -68,6 +41,44 @@
                     android:textColor="@color/active_color"
                     android:textSize="@dimen/content_font_size" />
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="15dp"
+                    android:src="@drawable/setting_alert" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imageView1"
+                    android:text="告警音设置"
+                    android:textColor="@color/active_color"
+                    android:textSize="@dimen/content_font_size" />
+
+                <CheckBox
+                    android:id="@+id/setting_alarm_sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/checkbox"
+                    android:button="@null" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -1,6 +1,6 @@
 package cn.fuego.misp.constant;
 
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class MispCommonIDName
 {

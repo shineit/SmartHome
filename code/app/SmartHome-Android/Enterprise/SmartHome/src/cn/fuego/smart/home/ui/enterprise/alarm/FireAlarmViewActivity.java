@@ -12,7 +12,7 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;

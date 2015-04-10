@@ -11,7 +11,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ImageDisplayInfo;
 import cn.fuego.misp.ui.pager.ImagePagerAdapter;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class MispImageActivity extends MispBaseActivtiy
 {

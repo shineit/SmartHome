@@ -11,12 +11,14 @@ package cn.fuego.smart.home.service;
 import android.content.Context;
 import android.content.Intent;
 import cn.fuego.common.util.format.JsonConvert;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
 import cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
+import cn.fuego.smart.home.ui.setting.model.ConfigInfo;
 import cn.fuego.smart.home.webservice.down.model.AlarmPushInfoJson;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 
@@ -69,8 +71,13 @@ public class NotificationUtil
 	        switch(pushType)
 	        {
 	        	case LONG_PUSH:
-	    			Intent serviceIntent = new Intent(context, AlarmSoundService.class);
-	    			context.startService(serviceIntent);      		
+	        		ConfigInfo config = AppCache.getInstance().getConfig();
+	        		if(config.isSound())
+	        		{
+		    			Intent serviceIntent = new Intent(context, AlarmSoundService.class);
+		    			context.startService(serviceIntent);
+	        		}
+      		
 	        		//AppShortCutUtil appShortCut= new AppShortCutUtil(context);
 	        		//appShortCut.addBage();
 	        		

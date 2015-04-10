@@ -6,7 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class AlarmSoundService extends Service {
 	

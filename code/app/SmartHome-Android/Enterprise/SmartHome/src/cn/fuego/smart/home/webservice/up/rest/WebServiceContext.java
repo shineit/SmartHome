@@ -16,10 +16,7 @@ public class WebServiceContext
 
 	private static WebServiceContext instance;
 	public static String hostURL = MemoryCache.getRestUrl();
-	//public static String hostURL = "http://192.168.0.102:8080/SmartHome/rest";
-	//public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
-	//public static String hostURL = "http://115.231.168.14:8080/SmartHome/rest";//嘉兴服务器地址
-	//public static String hostURL = "http://192.168.1.104:8080/SmartHome/rest";
+
 	private WebServiceContext()
 	{
 

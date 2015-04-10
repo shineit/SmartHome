@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class MispWaitDailog extends Dialog
 {

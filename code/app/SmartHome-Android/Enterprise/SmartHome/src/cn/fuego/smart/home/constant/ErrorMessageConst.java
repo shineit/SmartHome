@@ -35,6 +35,12 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	public static final int CONCENTRATOR_ID_WRONG = 10007;   //集中器编号输入格式不正确
 	public static final int SENSOR_EXISTED = 10008;			//传感器已经存在。请检查编号
 	
+	  
+	public static final int BUILDING_NOT_DELETED = 10009;   //楼层还未删除
+	public static final int PLAN_NOT_DELETED = 10010;		//平面图还未删除
+	public static final int SENSOR_LIST_NOT_DELETED = 10011;  //传感器尚未删除
+	
+	
 	
  
 }

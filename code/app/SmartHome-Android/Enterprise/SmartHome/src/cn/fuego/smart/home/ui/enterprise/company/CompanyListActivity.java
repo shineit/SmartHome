@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.list.MispListActivity;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.BageNumDataCache;

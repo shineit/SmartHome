@@ -10,7 +10,7 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.CheckLogCache;
@@ -20,13 +20,13 @@ import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckItemByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckItemByIDRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
-import cn.sharesdk.framework.ShareSDK;
 
 public class CheckActivity extends MispListActivity<CheckLogJson>
 {
 
 
 	private int companyID; //默认所有项目，后期考虑实际ID
+	private CompanyJson company;
 	@Override
 	public void initRes()
 	{
@@ -42,7 +42,7 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 		this.activityRes.getButtonIDList().add(R.id.check_submit_btn);
 				
 		Intent intent = this.getIntent();
-		CompanyJson company = (CompanyJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		company = (CompanyJson) intent.getSerializableExtra(ListViewResInfo.SELECT_ITEM);
 		companyID= company.getCompanyID();
 		
 		getCheckItem();
@@ -68,7 +68,8 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 				if (message.isSuccess())
 				{
 					GetCheckItemByIDRsp rsp = (GetCheckItemByIDRsp) message.getMessage().obj;
-					CheckLogCache.getInstance().init(companyID,rsp.getCheckItemList());
+					CheckLogCache.getInstance().init(companyID,company.getCompanyName(),rsp.getCheckItemList());
+					
 					setDataList(CheckLogCache.getInstance().getCheckLogList());
 					repaint();
 				}

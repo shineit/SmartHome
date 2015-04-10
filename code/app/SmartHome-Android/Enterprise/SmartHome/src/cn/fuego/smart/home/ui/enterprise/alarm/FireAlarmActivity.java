@@ -15,7 +15,7 @@ import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.constant.IntentCodeConst;

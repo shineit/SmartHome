@@ -5,7 +5,7 @@ import java.util.List;
 import android.view.View;
 import android.widget.TextView;
 import cn.fuego.misp.ui.list.MispListActivity;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.webservice.up.model.GetCommonSenseListReq;
 import cn.fuego.smart.home.webservice.up.model.GetCommonSenseListRsp;

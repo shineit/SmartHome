@@ -21,7 +21,7 @@ import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispHttpActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetSensorPlanByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;

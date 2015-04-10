@@ -30,7 +30,7 @@ public class CheckLogCache
 
 	private static CheckLogCache instance;
  
-	private String companyID;
+	private String companyID,companyName;
 	private CheckLogCache()
 	{
 		
@@ -45,7 +45,7 @@ public class CheckLogCache
 		return instance;
 	}
 	
-	public void init(int companyID,List<CheckItemJson> checkItemList)
+	public void init(int companyID,String companyName,List<CheckItemJson> checkItemList)
 	{
 		if(!ValidatorUtil.isEmpty(checkItemList))
 		{
@@ -54,9 +54,10 @@ public class CheckLogCache
 			{
 				CheckLogJson temp= new CheckLogJson();
 				temp.setCompanyID(companyID);
+				temp.setCompanyName(companyName);
 				temp.setCheckItem(json.getItemName());
 				temp.setCheckSys(json.getItemSys());
-				temp.setChecker(AppCache.getInstance().getUser().getUserName());
+				temp.setChecker(AppCache.getInstance().getCustomer().getCustomerName());
 				checkLogList.add(temp);
 			}
 			
@@ -102,6 +103,16 @@ public class CheckLogCache
 	public void setCompanyID(String companyID)
 	{
 		this.companyID = companyID;
+	}
+
+	public String getCompanyName()
+	{
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName)
+	{
+		this.companyName = companyName;
 	}
 	
 	

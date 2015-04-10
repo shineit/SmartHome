@@ -7,7 +7,7 @@ import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.LoadImageUtil;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.webservice.up.model.base.ProductJson;
 
 public class ProductViewActivity extends MispBaseActivtiy

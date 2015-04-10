@@ -47,6 +47,7 @@ public class ImgCompressUtil
 	}
 	public String copressImg(Context context,String oldPath,String targetPath)
 	{
+		Toast.makeText(context, "正在处理图片……", Toast.LENGTH_LONG).show();
 		String localPath =null;
 		if(!ValidatorUtil.isEmpty(oldPath))
 		{
@@ -74,7 +75,7 @@ public class ImgCompressUtil
 					//baos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
 					b.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
 				    int options = 100;  
-				        while ( baos.toByteArray().length / 1024>1000) 
+				        while ( baos.toByteArray().length / 1024>250) 
 				        {  //循环判断如果压缩后图片是否大于300kb,大于继续压缩         
 				             baos.reset();//重置baos即清空baos  
 				            b.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中  

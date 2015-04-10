@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ImageDisplayInfo;
-import cn.fuego.smart.home.R;
+import cn.fuego.smart.enterprise.R;
 
 public class MispWebViewActivity extends MispBaseActivtiy
 {

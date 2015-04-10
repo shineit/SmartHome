@@ -4,6 +4,7 @@ import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.dao.SharedPreUtil;
 import cn.fuego.misp.service.MemoryCache;
+import cn.fuego.smart.home.ui.setting.model.ConfigInfo;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
@@ -24,6 +25,8 @@ public class AppCache
 	public static final String USER_CACHE="user";
 	public static final String CUSTOMER_CACHE="customer";
 	public static final String TOKEN_CACHE="token";
+	//个人配置信息
+	public static final String CONFIG_INFO="configInfo";
 	
 	
 	private boolean firstStarted = true;
@@ -138,13 +141,23 @@ public class AppCache
 		return user;
 	}
 
- 
-	 
+	public ConfigInfo getConfig()	 
+	{
+		ConfigInfo info = (ConfigInfo) SharedPreUtil.getInstance().get(CONFIG_INFO);
+		if(null==info)
+		{
+			ConfigInfo newConfig= new ConfigInfo();
+			saveConfig(newConfig);
+			return newConfig;
+		}
+		return info;
+		
+	}
 	
- 
+	public void saveConfig(ConfigInfo info)	 
+	{
 
-	
-
-	
+		SharedPreUtil.getInstance().put(CONFIG_INFO, info);
+	}
 	 
 }
