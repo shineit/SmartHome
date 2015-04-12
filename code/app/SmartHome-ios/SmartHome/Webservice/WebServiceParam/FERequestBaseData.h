@@ -55,6 +55,10 @@
 //upload
 #define __METHOD_UPLOAD             @"UploadFile!uploadFile"
 
+//number
+#define __METHOD_ALARM_NUMBER       @"user/fireAlarmNum/get"
+#define __METHOD_DEVICE_STATUS_NUMBER @"user/fireStatusNum/get"
+#define __METHOD_CHECH_LOG_NUMBER   @"user/checkLogNum/get"
 
 
 typedef enum : NSUInteger {

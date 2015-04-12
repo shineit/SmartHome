@@ -10,6 +10,10 @@
 #import "FECommonDefine.h"
 #import "FEMemoryCache.h"
 #import "APService.h"
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
+
+#define SHARE_SDK_KEY @"643b63797ab7"
 
 @interface AppDelegate ()
 
@@ -25,6 +29,12 @@
     if (!user) {
         self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
     }
+    [ShareSDK registerApp:SHARE_SDK_KEY];//字符串api20为您的ShareSDK的AppKey
+    
+    //添加微信应用 注册网址 http://open.weixin.qq.com
+//    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
+//                           wechatCls:[WXApi class]];
+//    ShareSDK connectWeChatFavWithAppId:@"643b63797ab7" appSecret:<#(NSString *)#> wechatCls:<#(__unsafe_unretained Class)#>
     
     return YES;
 }

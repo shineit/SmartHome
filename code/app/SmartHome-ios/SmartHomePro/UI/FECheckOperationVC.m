@@ -12,6 +12,9 @@
 #import "FECheckItem.h"
 #import "FEMemoryCache.h"
 #import "FEUploadImageVC.h"
+#import "FEImageDeleteRequest.h"
+#import "FEMemoryCache.h"
+#import "FEWebServiceManager.h"
 
 @interface FECheckOperationVC ()<FEUpLoadImageVCDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *normalButon;
@@ -33,24 +36,40 @@
     [self selectButton:self.nonOperation];
     self.title = @"日常巡检";
     _checkLog = [FECheckLog new];
+    self.checkLog.companyName = self.company.companyName;
     self.checkLog.companyID = self.company.companyID;
     self.checkLog.checkItem = self.checkItem.itemName;
+    self.checkLog.checkItemID = self.checkItem.itemID;
     
 }
 - (IBAction)normal:(id)sender {
     self.checkLog.checkResult = @(1);
     self.descriptionText.text = @"";
-    self.checkLog.abnormalPic = nil;
+    [self deleteImage];
+    self.uploadImageView.image = nil;
     [self selectButton:sender];
 }
+
+
 - (IBAction)exception:(id)sender {
     self.checkLog.checkResult = @(2);
+    
     [self selectButton:sender];
 }
 - (IBAction)nonOperation:(id)sender {
     self.checkLog.checkResult = @(0);
     [self selectButton:sender];
     
+}
+
+-(void)deleteImage{
+    if (self.checkLog.abnormalPic) {
+        self.checkLog.abnormalPic = nil;
+        FEImageDeleteRequest *rdata = [[FEImageDeleteRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID imageName:self.checkLog.abnormalPic];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
+            
+        }];
+    }
 }
 
 -(void)selectButton:(UIButton *)btn{

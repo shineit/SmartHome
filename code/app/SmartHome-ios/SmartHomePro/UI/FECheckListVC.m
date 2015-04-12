@@ -41,6 +41,11 @@
     [self requestCheckList];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 -(void)requestCheckList{
     
     FECheckListRequest *rdata = [[FECheckListRequest alloc] initWithCid:@(0)];
@@ -62,7 +67,18 @@
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     UILabel *detail = (UILabel *)[cell viewWithTag:2];
     UILabel *operation = (UILabel *)[cell viewWithTag:3];
-    
+    for (FECheckLog *checkLog in _checkLogs) {
+        if (checkLog.checkItemID.integerValue == check.itemID.integerValue) {
+            if (checkLog.checkResult.integerValue == 0) {
+                operation.text = @"未设置";
+            }else if (checkLog.checkItemID.integerValue == 1){
+                operation.text = @"正常";
+            }else{
+                operation.text = @"异常";
+            }
+            break;
+        }
+    }
     title.text = check.itemName;
     detail.text = check.itemSys;
     return cell;
