@@ -65,6 +65,7 @@
                
                 [imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(ad.adImg)]];
                 [weakself.adScrollView addSubview:imageView];
+                i++;
             }
         }
     }];
@@ -98,6 +99,14 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _products.count;
+}
+
+#pragma mark - UIScrollViewDelegate
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.adScrollView) {
+        NSInteger page = scrollView.contentOffset.x / scrollView.bounds.size.width;
+        self.pageIndicate.currentPage = page;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

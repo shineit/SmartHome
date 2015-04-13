@@ -19,14 +19,15 @@
 #import "FEMemoryCache.h"
 #import "FECheckOperationVC.h"
 #import "FECheckLogCreateRequest.h"
-
-
+#import "UIImage+LogN.h"
+#import "UIColor+Theme.h"
 
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
     NSMutableArray *_checkLogs;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIButton *submitButton;
 
 @end
 
@@ -38,6 +39,7 @@
     self.title = @"日常巡检";
     _checkList = [NSMutableArray new];
     _checkLogs = [NSMutableArray new];
+    [self.submitButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
     [self requestCheckList];
 }
 
@@ -104,6 +106,7 @@
         
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

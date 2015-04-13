@@ -15,6 +15,9 @@
 #import "FEImageDeleteRequest.h"
 #import "FEMemoryCache.h"
 #import "FEWebServiceManager.h"
+#import <ZBUtilities/UIImage+LogN.h>
+#import "UIColor+Theme.h"
+#import "UIColor+Hex.h"
 
 @interface FECheckOperationVC ()<FEUpLoadImageVCDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *normalButon;
@@ -35,6 +38,7 @@
     // Do any additional setup after loading the view.
     [self selectButton:self.nonOperation];
     self.title = @"日常巡检";
+    [self.uploadButton setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x48B805]] forState:UIControlStateNormal];
     _checkLog = [FECheckLog new];
     self.checkLog.companyName = self.company.companyName;
     self.checkLog.companyID = self.company.companyID;

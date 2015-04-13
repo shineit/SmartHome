@@ -356,6 +356,8 @@
 		14B1124F1ADA54D8000B759F /* FEBageNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B1124D1ADA54D8000B759F /* FEBageNumber.m */; };
 		14B112521ADA5581000B759F /* FENumberResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112511ADA5581000B759F /* FENumberResponse.m */; };
 		14B112531ADA5581000B759F /* FENumberResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112511ADA5581000B759F /* FENumberResponse.m */; };
+		14B112561ADB6178000B759F /* UIImage+Cover.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112551ADB6177000B759F /* UIImage+Cover.m */; };
+		14B112571ADB6178000B759F /* UIImage+Cover.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112551ADB6177000B759F /* UIImage+Cover.m */; };
 		14B162CD1A63EE38006CF154 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CB1A63EE38006CF154 /* OpenAL.framework */; };
 		14B162CE1A63EE39006CF154 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CC1A63EE38006CF154 /* OpenGLES.framework */; };
 		14B162D01A63EE44006CF154 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CF1A63EE44006CF154 /* MobileCoreServices.framework */; };
@@ -856,6 +858,8 @@
 		14B1124D1ADA54D8000B759F /* FEBageNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEBageNumber.m; sourceTree = "<group>"; };
 		14B112501ADA5581000B759F /* FENumberResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FENumberResponse.h; sourceTree = "<group>"; };
 		14B112511ADA5581000B759F /* FENumberResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FENumberResponse.m; sourceTree = "<group>"; };
+		14B112541ADB6177000B759F /* UIImage+Cover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Cover.h"; sourceTree = "<group>"; };
+		14B112551ADB6177000B759F /* UIImage+Cover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Cover.m"; sourceTree = "<group>"; };
 		14B162C71A63EDDB006CF154 /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
 		14B162C91A63EE04006CF154 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		14B162CB1A63EE38006CF154 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1317,6 +1321,8 @@
 				149C31F81ACA3E0500826831 /* FECommonDefine.h */,
 				14D69BBA1ACD64B700D8A1CC /* FEMemoryCache.h */,
 				14D69BBB1ACD64B700D8A1CC /* FEMemoryCache.m */,
+				14B112541ADB6177000B759F /* UIImage+Cover.h */,
+				14B112551ADB6177000B759F /* UIImage+Cover.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2388,6 +2394,7 @@
 				149C32181ACA3EA400826831 /* UIFont+AppFont.m in Sources */,
 				149C32101ACA3EA400826831 /* NSString+UUID.m in Sources */,
 				14D69BD41ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */,
+				14B112571ADB6178000B759F /* UIImage+Cover.m in Sources */,
 				147460FC1ACA2B3B0031F05E /* FEAttribute.m in Sources */,
 				14D69BDF1ACEC33900D8A1CC /* FEGetCompanyRequest.m in Sources */,
 				14D69BFF1ACECF2000D8A1CC /* FEFireAlarmByCidRequest.m in Sources */,
@@ -2430,6 +2437,7 @@
 				14D69BD71ACD7FD600D8A1CC /* FEProduct.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
+				14B112561ADB6178000B759F /* UIImage+Cover.m in Sources */,
 				14B111E61ADA2E47000B759F /* SimpleWifi.m in Sources */,
 				14D69C141ACEDDAE00D8A1CC /* FECheckListRequest.m in Sources */,
 				1474612D1ACA2B3B0031F05E /* FESensorListRequest.m in Sources */,

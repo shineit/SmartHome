@@ -10,10 +10,14 @@
 #import "FEUploadRequest.h"
 #import "FEWebServiceManager.h"
 #import "Define.h"
+#import "FEButton.h"
+#import "UIColor+Theme.h"
+#import <ZBUtilities/UIImage+LogN.h>
 
 @interface FEUploadImageVC ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIView *imageContent;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet FEButton *uploadButton;
 @property (strong, nonatomic) FEWebServiceManager *webManager;
 
 @end
@@ -23,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.uploadButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
 }
 
 
@@ -91,7 +96,7 @@
 //        //图片保存的路径
 //        //这里将图片放在沙盒的documents文件夹中
 //        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        
+//
 //        //文件管理器
 //        NSFileManager *fileManager = [NSFileManager defaultManager];
 //        

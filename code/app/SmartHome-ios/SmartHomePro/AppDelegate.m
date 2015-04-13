@@ -29,12 +29,15 @@
     if (!user) {
         self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
     }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
     [ShareSDK registerApp:SHARE_SDK_KEY];//字符串api20为您的ShareSDK的AppKey
     
     //添加微信应用 注册网址 http://open.weixin.qq.com
-//    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
-//                           wechatCls:[WXApi class]];
-//    ShareSDK connectWeChatFavWithAppId:@"643b63797ab7" appSecret:<#(NSString *)#> wechatCls:<#(__unsafe_unretained Class)#>
+    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
+                           wechatCls:[WXApi class]];
+//    [ShareSDK connectWeChatFavWithAppId:@"wx4868b35061f87885" appSecret:@"64020361b8ec4c99936c0e3999a9f249" wechatCls:[WXApi class]];
     
     return YES;
 }

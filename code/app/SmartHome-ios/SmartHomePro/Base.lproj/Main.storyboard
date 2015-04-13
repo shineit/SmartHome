@@ -151,13 +151,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llZ-HV-uGa">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSi-AM-MD7">
-                                        <rect key="frame" x="200" y="10" width="200" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSi-AM-MD7" customClass="FEButton">
+                                        <rect key="frame" x="160" y="10" width="280" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="LAN-EG-AtM"/>
-                                            <constraint firstAttribute="height" constant="30" id="oWR-mw-PIP"/>
+                                            <constraint firstAttribute="width" constant="280" id="LAN-EG-AtM"/>
+                                            <constraint firstAttribute="height" constant="40" id="oWR-mw-PIP"/>
                                         </constraints>
                                         <state key="normal" title="消音">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -176,13 +176,13 @@
                                     <constraint firstAttribute="trailing" secondItem="ZL4-VD-gkz" secondAttribute="trailing" id="93l-vm-Rv0"/>
                                     <constraint firstItem="ZL4-VD-gkz" firstAttribute="top" secondItem="llZ-HV-uGa" secondAttribute="top" id="Hsn-i9-9Yj"/>
                                     <constraint firstAttribute="centerY" secondItem="qSi-AM-MD7" secondAttribute="centerY" id="QTJ-z2-N0A"/>
-                                    <constraint firstAttribute="height" constant="50" id="mSh-Lr-SIs"/>
+                                    <constraint firstAttribute="height" constant="60" id="mSh-Lr-SIs"/>
                                     <constraint firstAttribute="centerX" secondItem="qSi-AM-MD7" secondAttribute="centerX" id="rk1-vY-Sap"/>
                                     <constraint firstItem="ZL4-VD-gkz" firstAttribute="leading" secondItem="llZ-HV-uGa" secondAttribute="leading" id="tVD-Ht-gmU"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9d6-n3-6MR" customClass="FETableView">
-                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fire_alarm_top" id="BxS-5F-W4h">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
@@ -231,6 +231,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="slienceButton" destination="qSi-AM-MD7" id="cdn-da-jxE"/>
                         <outlet property="tableView" destination="9d6-n3-6MR" id="bvn-WC-ueO"/>
                         <segue destination="6at-OC-Tzq" kind="show" identifier="toDeviceSegue" id="HVg-mp-ehg"/>
                     </connections>
@@ -562,6 +563,7 @@
                         <outlet property="alarmTimeLabel" destination="n3I-l1-fLl" id="38l-10-4Rv"/>
                         <outlet property="alarmTypeName" destination="MjN-2E-P7P" id="k0m-eb-OGf"/>
                         <outlet property="codeID" destination="gk7-If-G3y" id="4nD-r6-t3I"/>
+                        <outlet property="locationButton" destination="IyP-sJ-0zM" id="LcK-gk-cO3"/>
                         <outlet property="locationDesp" destination="TNU-Tl-xTE" id="udP-AZ-yct"/>
                         <outlet property="loopIDLabel" destination="lkG-Y9-g6W" id="LAL-hB-OhK"/>
                         <outlet property="machineIDLabel" destination="82F-aQ-aDy" id="NXX-Kf-IuR"/>
@@ -626,7 +628,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0Q-qW-Zga">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0Q-qW-Zga" customClass="FEButton">
                                 <rect key="frame" x="500" y="124" width="80" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="WDr-U5-u2T"/>
@@ -711,9 +713,9 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xwn-wC-mCc">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="140"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwu-zl-Szj">
-                                        <rect key="frame" x="0.0" y="110" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwu-zl-Szj">
+                                        <rect key="frame" x="0.0" y="109" width="41" height="31"/>
+                                        <state key="normal" image="icon_carme">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -730,10 +732,11 @@
                                     <constraint firstAttribute="trailing" secondItem="xwn-wC-mCc" secondAttribute="trailing" id="zLp-vF-8Be"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjm-Rz-tgU">
-                                <rect key="frame" x="200" y="244" width="200" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjm-Rz-tgU" customClass="FEButton">
+                                <rect key="frame" x="160" y="244" width="280" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="dQo-W9-W3P"/>
+                                    <constraint firstAttribute="height" constant="40" id="3tS-RF-igD"/>
+                                    <constraint firstAttribute="width" constant="280" id="dQo-W9-W3P"/>
                                 </constraints>
                                 <state key="normal" title="立即上传">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -755,6 +758,7 @@
                     <connections>
                         <outlet property="imageContent" destination="627-hS-l4h" id="t7e-XO-jzc"/>
                         <outlet property="imageView" destination="xwn-wC-mCc" id="fTm-dz-iRQ"/>
+                        <outlet property="uploadButton" destination="Vjm-Rz-tgU" id="DdG-MY-GRs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJE-m8-OFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -809,11 +813,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ys-PC-ihB">
                                 <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-n1-dzM">
-                                        <rect key="frame" x="200" y="15" width="200" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-n1-dzM" customClass="FEButton">
+                                        <rect key="frame" x="160" y="10" width="280" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="YKm-ny-JEE"/>
-                                            <constraint firstAttribute="width" constant="200" id="ese-y1-zvc"/>
+                                            <constraint firstAttribute="height" constant="40" id="YKm-ny-JEE"/>
+                                            <constraint firstAttribute="width" constant="280" id="ese-y1-zvc"/>
                                         </constraints>
                                         <state key="normal" title="提交">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -822,12 +826,22 @@
                                             <action selector="submit:" destination="Z2A-u7-jmJ" eventType="touchUpInside" id="iz6-7o-oLr"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1z-WW-EdA">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                                        <color key="backgroundColor" red="1" green="0.4941176471" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="Xj2-ha-1ag"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="f1z-WW-EdA" secondAttribute="trailing" id="M18-pb-0TP"/>
                                     <constraint firstAttribute="centerX" secondItem="SKb-n1-dzM" secondAttribute="centerX" id="MEf-LS-xkf"/>
+                                    <constraint firstItem="f1z-WW-EdA" firstAttribute="leading" secondItem="7Ys-PC-ihB" secondAttribute="leading" id="ZTi-bj-XBb"/>
                                     <constraint firstAttribute="height" constant="60" id="dfo-a8-ZS7"/>
                                     <constraint firstAttribute="centerY" secondItem="SKb-n1-dzM" secondAttribute="centerY" id="k2v-DN-lvJ"/>
+                                    <constraint firstItem="f1z-WW-EdA" firstAttribute="top" secondItem="7Ys-PC-ihB" secondAttribute="top" id="z9o-Ca-Qwb"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dvi-7k-6LQ" customClass="FETableView">
@@ -896,6 +910,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="submitButton" destination="SKb-n1-dzM" id="ZCw-X9-qFV"/>
                         <outlet property="tableView" destination="dvi-7k-6LQ" id="8bV-fZ-GED"/>
                     </connections>
                 </viewController>
@@ -1467,7 +1482,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nlD-HW-fR4">
                                     <size key="itemSize" width="140" height="140"/>
-                                    <size key="headerReferenceSize" width="50" height="150"/>
+                                    <size key="headerReferenceSize" width="50" height="120"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
@@ -1513,10 +1528,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYn-li-zda">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="pVm-zP-uJM" id="r3M-Dd-0db"/>
+                                            </connections>
                                         </scrollView>
                                         <pageControl opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="fEd-7Y-mLt">
-                                            <rect key="frame" x="280" y="113" width="39" height="37"/>
+                                            <rect key="frame" x="280" y="83" width="39" height="37"/>
                                         </pageControl>
                                     </subviews>
                                     <constraints>
@@ -1606,12 +1624,13 @@
         <image name="fire" width="24" height="24"/>
         <image name="fire_alarm_top" width="203" height="143"/>
         <image name="home_item_back" width="64" height="64"/>
+        <image name="icon_carme" width="23" height="18"/>
         <image name="mark_img" width="22" height="15"/>
         <image name="prealarm" width="24" height="24"/>
         <image name="radio_selected" width="26" height="26"/>
         <image name="radio_unselected" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nuZ-dc-aEP"/>
+        <segue reference="HVg-mp-ehg"/>
     </inferredMetricsTieBreakers>
 </document>

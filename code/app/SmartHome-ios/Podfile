@@ -26,5 +26,6 @@ target 'SmartHomePro' do
     pod 'ZBarSDK'
     pod 'SSKeychain'
     pod 'TouchJSON'
-	pod 'PhotoZoom', '~> 0.0.2'    
+	pod 'PhotoZoom', '~> 0.0.2'
+    pod 'ZBUtilities'
 end
