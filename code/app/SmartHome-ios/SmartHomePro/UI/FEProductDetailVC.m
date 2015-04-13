@@ -10,10 +10,12 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Define.h"
 #import "FEProduct.h"
+#import "NSString+Size.h"
 
 @interface FEProductDetailVC ()
 @property (strong, nonatomic) IBOutlet UIImageView *productImageView;
 @property (strong, nonatomic) IBOutlet UILabel *productDescription;
+@property (strong, nonatomic) IBOutlet UILabel *productTitleLabel;
 
 @end
 
@@ -24,7 +26,19 @@
     // Do any additional setup after loading the view.
     [self.productImageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(self.product.picLabel)]];
     self.productDescription.text = self.product.desp;
+    self.productTitleLabel.text = self.product.name;
     self.title = @"产品详情";
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        CGSize size = [self.product.name boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 20, 9999) withTextFont:[UIFont systemFontOfSize:16]];
+        return size.height + 20;
+    }else if(indexPath.row == 1){
+         CGSize size = [self.product.desp boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 20, 9999) withTextFont:[UIFont systemFontOfSize:16]];
+        return size.height + 20;
+    }
+    return 44;
 }
 
 - (void)didReceiveMemoryWarning {
