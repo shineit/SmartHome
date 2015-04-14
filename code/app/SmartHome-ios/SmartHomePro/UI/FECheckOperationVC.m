@@ -18,6 +18,7 @@
 #import <ZBUtilities/UIImage+LogN.h>
 #import "UIColor+Theme.h"
 #import "UIColor+Hex.h"
+#import "FECustomer.h"
 
 @interface FECheckOperationVC ()<FEUpLoadImageVCDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *normalButon;
@@ -43,7 +44,8 @@
     self.checkLog.companyName = self.company.companyName;
     self.checkLog.companyID = self.company.companyID;
     self.checkLog.checkItem = self.checkItem.itemName;
-    self.checkLog.checkItemID = self.checkItem.itemID;
+//    self.checkLog.checkItemID = self.checkItem.itemID;
+    self.checkLog.checker = [FEMemoryCache sharedInstance].customer.customerName;
     
 }
 - (IBAction)normal:(id)sender {
@@ -98,7 +100,7 @@
 
 - (IBAction)save:(id)sender {
     self.checkLog.abnormalDesp = self.descriptionText.text;
-    [_checkLogs addObject:self.checkLog];
+    [_checkLogs setObject:self.checkLog forKey:self.checkItem.itemID];
     [self.navigationController popViewControllerAnimated:YES];
 //    [[FEMemoryCache sharedInstance] addCheckLog:self.checkLog];
 }

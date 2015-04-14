@@ -15,6 +15,8 @@
 #import "FENumberResponse.h"
 #import "FEWebServiceManager.h"
 #import "FEMemoryCache.h"
+#import "FECustomerResponse.h"
+#import "FECustomerRequest.h"
 
 #define PNG_KEY @"png"
 #define ITEM_TITLE   @"title"
@@ -54,6 +56,7 @@
       ];
     self.headerArray = @[kString(@"智慧消防"),kString(@"其他信息")];
     [self requestNumber];
+    [self requestCustomer];
 }
 
 -(void)requestNumber{
@@ -109,6 +112,18 @@
     });
 }
 
+-(void)requestCustomer{
+    FECustomerRequest *rdata = [[FECustomerRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID];
+    [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FECustomerResponse class] response:^(NSError *error, id response) {
+        FECustomerResponse *rsp = response;
+        if (!error && rsp) {
+            FECustomer *customer = rsp.customer;
+            [FEMemoryCache sharedInstance].customer = customer;
+//            kUserDefaultsSetObjectForKey(customer.dictionary, kCustomerUser);
+//            kUserDefaultsSync;
+        }
+    }];
+}
 
 #pragma mark - UICollectionViewDataSource
 

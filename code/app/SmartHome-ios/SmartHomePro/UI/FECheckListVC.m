@@ -24,7 +24,7 @@
 
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
-    NSMutableArray *_checkLogs;
+    NSMutableDictionary *_checkLogs;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
@@ -38,7 +38,8 @@
     // Do any additional setup after loading the view.
     self.title = @"日常巡检";
     _checkList = [NSMutableArray new];
-    _checkLogs = [NSMutableArray new];
+//    _checkLogs = [NSMutableArray new];
+    _checkLogs = [NSMutableDictionary new];
     [self.submitButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
     [self requestCheckList];
 }
@@ -69,17 +70,15 @@
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     UILabel *detail = (UILabel *)[cell viewWithTag:2];
     UILabel *operation = (UILabel *)[cell viewWithTag:3];
-    for (FECheckLog *checkLog in _checkLogs) {
-        if (checkLog.checkItemID.integerValue == check.itemID.integerValue) {
-            if (checkLog.checkResult.integerValue == 0) {
-                operation.text = @"未设置";
-            }else if (checkLog.checkItemID.integerValue == 1){
-                operation.text = @"正常";
-            }else{
-                operation.text = @"异常";
-            }
-            break;
+    FECheckLog *checkLog = _checkLogs[check.itemID];
+    if (checkLog) {
+        if (checkLog.checkResult.integerValue == 1){
+            operation.text = @"正常";
+        }else{
+            operation.text = @"异常";
         }
+    }else{
+        operation.text = @"未设置";
     }
     title.text = check.itemName;
     detail.text = check.itemSys;
@@ -94,7 +93,8 @@
     if (_checkLogs.count) {
         __weak typeof(self) weakself = self;
         [weakself displayHUD:@"提交中..."];
-        FECheckLogCreateRequest *rdata = [[FECheckLogCreateRequest alloc] initWithCheckLogList:_checkLogs];
+        
+        FECheckLogCreateRequest *rdata = [[FECheckLogCreateRequest alloc] initWithCheckLogList:_checkLogs.allValues];
         [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
             FEBaseResponse *rsp = response;
             if (!error && rsp.result.errorCode.integerValue == 0) {

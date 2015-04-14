@@ -361,6 +361,12 @@
 		14B1125A1ADBF202000B759F /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112591ADBF202000B759F /* NSString+Size.m */; };
 		14B1125B1ADBF202000B759F /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112591ADBF202000B759F /* NSString+Size.m */; };
 		14B1125E1ADBF39E000B759F /* FEPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B1125D1ADBF39E000B759F /* FEPopView.m */; };
+		14B112611ADC9F34000B759F /* FECustomerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112601ADC9F34000B759F /* FECustomerRequest.m */; };
+		14B112621ADC9F34000B759F /* FECustomerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112601ADC9F34000B759F /* FECustomerRequest.m */; };
+		14B112651ADCA04E000B759F /* FECustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112641ADCA04E000B759F /* FECustomer.m */; };
+		14B112661ADCA04E000B759F /* FECustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112641ADCA04E000B759F /* FECustomer.m */; };
+		14B112691ADCA0F4000B759F /* FECustomerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112681ADCA0F4000B759F /* FECustomerResponse.m */; };
+		14B1126A1ADCA0F4000B759F /* FECustomerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B112681ADCA0F4000B759F /* FECustomerResponse.m */; };
 		14B162CD1A63EE38006CF154 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CB1A63EE38006CF154 /* OpenAL.framework */; };
 		14B162CE1A63EE39006CF154 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CC1A63EE38006CF154 /* OpenGLES.framework */; };
 		14B162D01A63EE44006CF154 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B162CF1A63EE44006CF154 /* MobileCoreServices.framework */; };
@@ -867,6 +873,12 @@
 		14B112591ADBF202000B759F /* NSString+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Size.m"; sourceTree = "<group>"; };
 		14B1125C1ADBF39E000B759F /* FEPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEPopView.h; sourceTree = "<group>"; };
 		14B1125D1ADBF39E000B759F /* FEPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEPopView.m; sourceTree = "<group>"; };
+		14B1125F1ADC9F34000B759F /* FECustomerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECustomerRequest.h; sourceTree = "<group>"; };
+		14B112601ADC9F34000B759F /* FECustomerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECustomerRequest.m; sourceTree = "<group>"; };
+		14B112631ADCA04E000B759F /* FECustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECustomer.h; sourceTree = "<group>"; };
+		14B112641ADCA04E000B759F /* FECustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECustomer.m; sourceTree = "<group>"; };
+		14B112671ADCA0F4000B759F /* FECustomerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FECustomerResponse.h; sourceTree = "<group>"; };
+		14B112681ADCA0F4000B759F /* FECustomerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECustomerResponse.m; sourceTree = "<group>"; };
 		14B162C71A63EDDB006CF154 /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
 		14B162C91A63EE04006CF154 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		14B162CB1A63EE38006CF154 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1944,6 +1956,8 @@
 				142FA7031AD42A7900598B11 /* FEAdvertisement.m */,
 				14B1124C1ADA54D8000B759F /* FEBageNumber.h */,
 				14B1124D1ADA54D8000B759F /* FEBageNumber.m */,
+				14B112631ADCA04E000B759F /* FECustomer.h */,
+				14B112641ADCA04E000B759F /* FECustomer.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1971,6 +1985,8 @@
 				142FA6FF1AD42A3B00598B11 /* FEADResponse.m */,
 				14B112501ADA5581000B759F /* FENumberResponse.h */,
 				14B112511ADA5581000B759F /* FENumberResponse.m */,
+				14B112671ADCA0F4000B759F /* FECustomerResponse.h */,
+				14B112681ADCA0F4000B759F /* FECustomerResponse.m */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -2010,6 +2026,8 @@
 				14B112451ADA4FFC000B759F /* FEDeviceStatusNumRequest.m */,
 				14B112481ADA502F000B759F /* FECheckLogNumRequest.h */,
 				14B112491ADA502F000B759F /* FECheckLogNumRequest.m */,
+				14B1125F1ADC9F34000B759F /* FECustomerRequest.h */,
+				14B112601ADC9F34000B759F /* FECustomerRequest.m */,
 			);
 			path = request;
 			sourceTree = "<group>";
@@ -2318,6 +2336,7 @@
 				1474613E1ACA2B3B0031F05E /* FEGetCaTokenResponse.m in Sources */,
 				142FA7111AD5782B00598B11 /* FEUploadImageVC.m in Sources */,
 				1474611A1ACA2B3B0031F05E /* FELogoutRequest.m in Sources */,
+				14B112661ADCA04E000B759F /* FECustomer.m in Sources */,
 				1474610C1ACA2B3B0031F05E /* FESensor.m in Sources */,
 				149C31F71ACA3C5200826831 /* FETextField.m in Sources */,
 				14B1124F1ADA54D8000B759F /* FEBageNumber.m in Sources */,
@@ -2404,6 +2423,7 @@
 				14D69C311AD02A2600D8A1CC /* FEDeleteImageRequest.m in Sources */,
 				149C31E51ACA3C5200826831 /* FECheckButton.m in Sources */,
 				149C32181ACA3EA400826831 /* UIFont+AppFont.m in Sources */,
+				14B112621ADC9F34000B759F /* FECustomerRequest.m in Sources */,
 				149C32101ACA3EA400826831 /* NSString+UUID.m in Sources */,
 				14B1125B1ADBF202000B759F /* NSString+Size.m in Sources */,
 				14D69BD41ACD7EFA00D8A1CC /* FEMallProductResponse.m in Sources */,
@@ -2420,6 +2440,7 @@
 				147461461ACA2B3B0031F05E /* FEOrderSetResponse.m in Sources */,
 				1474607F1ACA2ABD0031F05E /* SmartHomePro.xcdatamodeld in Sources */,
 				147461241ACA2B3B0031F05E /* FENewsRequest.m in Sources */,
+				14B1126A1ADCA0F4000B759F /* FECustomerResponse.m in Sources */,
 				142FA70B1AD54C5400598B11 /* FEPlanVC.m in Sources */,
 				142FA7011AD42A3B00598B11 /* FEADResponse.m in Sources */,
 			);
@@ -2447,6 +2468,7 @@
 				14B447BD19F6A5FD0078EAB4 /* FEControlObject.m in Sources */,
 				1474614B1ACA2B3B0031F05E /* FESiginResponse.m in Sources */,
 				1474611F1ACA2B3B0031F05E /* FEMarkSetRequest.m in Sources */,
+				14B112611ADC9F34000B759F /* FECustomerRequest.m in Sources */,
 				14D69BD71ACD7FD600D8A1CC /* FEProduct.m in Sources */,
 				14C6DEEB19F54F9C006384B2 /* FEHomeVC.m in Sources */,
 				14C6DEE519F54F9C006384B2 /* FEDeviceControllVC.m in Sources */,
@@ -2519,6 +2541,7 @@
 				147461411ACA2B3B0031F05E /* FENewsResponse.m in Sources */,
 				1474610B1ACA2B3B0031F05E /* FESensor.m in Sources */,
 				14D69C2C1AD028C200D8A1CC /* FECheckLog.m in Sources */,
+				14B112691ADCA0F4000B759F /* FECustomerResponse.m in Sources */,
 				149C32151ACA3EA400826831 /* UIColor+Theme.m in Sources */,
 				14D69BBC1ACD64B700D8A1CC /* FEMemoryCache.m in Sources */,
 				14B03B7B1A593838000826C9 /* FEHomeItemCollectionReusableView.m in Sources */,
@@ -2538,6 +2561,7 @@
 				142FA7181AD636C800598B11 /* FEUploadRequest.m in Sources */,
 				14950D971A7A64E4001416A7 /* FECameraVerfyPhoneVC.m in Sources */,
 				149C32191ACA3EA400826831 /* UIImage+Resize.m in Sources */,
+				14B112651ADCA04E000B759F /* FECustomer.m in Sources */,
 				14C6DE8119F54AD3006384B2 /* SmartHome.xcdatamodeld in Sources */,
 				14B447A619F5FCFE0078EAB4 /* FEDeviceInfoView.m in Sources */,
 				14C6DEEE19F54F9C006384B2 /* FENewsVC.m in Sources */,

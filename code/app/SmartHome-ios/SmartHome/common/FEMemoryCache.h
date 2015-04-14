@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "FEUser.h"
 @class FECheckLog;
+@class FECustomer;
 
 @interface FEMemoryCache : NSObject
 @property (nonatomic, strong) FEUser *user;
+@property (nonatomic, strong) FECustomer *customer;
 
 +(FEMemoryCache *)sharedInstance;
 -(void)addCheckLog:(FECheckLog *)clog;

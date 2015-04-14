@@ -38,6 +38,6 @@
 @property (nonatomic, strong) NSString *handleResult;
 @property (nonatomic, strong) NSNumber *handleTime;
 @property (nonatomic, strong) NSNumber *status;
-@property (nonatomic, strong) NSNumber *checkItemID;
+//@property (nonatomic, strong) NSNumber *checkItemID;
 
 @end

@@ -18,6 +18,8 @@
 #import "FESiginResponse.h"
 #import "FEMemoryCache.h"
 #import <ZBUtilities/UIDevice+ZBUtilites.h>
+#import "FECustomerRequest.h"
+#import "FECustomerResponse.h"
 
 @interface FEESigninVC ()
 @property (strong, nonatomic) IBOutlet FEButton *loginBtn;
@@ -61,9 +63,11 @@
                 [FEMemoryCache sharedInstance].user = lUser;
                 if (lUser) {
                     kUserDefaultsSetObjectForKey(lUser.dictionary, kLoginUser);
+
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [[AppDelegate sharedDelegate] loadMain];
                     });
+                    
                 }
                 
             }
