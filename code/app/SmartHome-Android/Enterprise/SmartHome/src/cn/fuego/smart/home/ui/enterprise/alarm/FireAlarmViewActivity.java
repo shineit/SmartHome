@@ -96,7 +96,7 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		}
 		 
  		new AlertDialog.Builder(FireAlarmViewActivity.this)    
-        .setTitle("客服电话").setMessage(content) 
+        .setTitle("联系电话").setMessage(content) 
                 .setPositiveButton("拨打", new DialogInterface.OnClickListener()
 				{
 

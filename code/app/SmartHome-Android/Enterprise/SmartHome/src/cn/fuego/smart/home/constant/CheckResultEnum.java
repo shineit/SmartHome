@@ -10,7 +10,7 @@ package cn.fuego.smart.home.constant;
 */ 
 public enum CheckResultEnum
 {
-	NONE_SET(0,"未设置"),
+	NONE_SET(0,"未检查"),
 	NORMAL(1,"正常"),
 	ABNORMAL(2,"异常");
 	private int intValue;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
@@ -17,6 +18,7 @@ import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
+import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.AlarmSoundService;
@@ -130,7 +132,15 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 		TextView item_title = (TextView) view.findViewById(R.id.item_alarm_title);
 		item_title.setText(sbTitle.toString());
 		TextView item_content = (TextView) view.findViewById(R.id.item_alarm_content);
-		item_content.setText(StrUtil.noNullStr(item.getLocationDesp()));
+		if(item.getAlarmTypeName().equals(AlarmTypeEnum.OFF_LINE.getStrValue()))
+		{
+			item_content.setText(DateUtil.getStrTime(item.getAlarmTime()));
+		}
+		else
+		{
+			item_content.setText(StrUtil.noNullStr(item.getLocationDesp()));
+		}
+		
 		
 		return view;
 	}
