@@ -111,7 +111,8 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 	@Override
 	public String modify()
 	{
-		String fileName = saveUploadFile();
+		//String fileName = saveUploadFile();
+		String fileName = saveUploadFileCompress(620, 310);
 		if(!ValidatorUtil.isEmpty(fileName))
 		{
 			deleteUploadFileByName(oldPicName);

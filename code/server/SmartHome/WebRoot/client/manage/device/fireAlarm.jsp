@@ -12,6 +12,9 @@
 			<tr>
 				<td>
 					集中器编号：<input type="text" name="filter.concentratorID" value="${filter.concentratorID}" />
+				</td>
+				<td>
+					公司名称：<input type="text" name="filter.companyName" value="${filter.companyName}" />
 				</td>	
                 <td>
 					
@@ -81,11 +84,12 @@
 			<tr>
 				
  				<th width="10%" align="center">集中器编号</th>
+ 				<th width="15%" align="center">公司名称</th>
 				<th width="15%" align="center">传感器类型</th>
 				<th width="15%" align="center">传感器描述</th>
-				<th width="10%" align="center">机号</th>
-				<th width="10%" align="center">回路号</th>
-				<th width="10%" align="center">点号</th>
+				<th width="5%" align="center">机号</th>
+				<th width="5%" align="center">回路号</th>
+				<th width="5%" align="center">点号</th>
 				<th width="10%" align="center">告警类型</th>
 				<th width="10%" align="center">告警时间</th>
 				<th width="10%" align="center">状态</th>
@@ -96,6 +100,7 @@
  		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.id}">
 				<td>${e.concentratorID}</td>
+				<td>${e.companyName}</td>
 				<td>${e.sensorTypeName}</td>			 
  				<td>${e.locationDesp}</td>
  				<td>${e.machineID}</td>

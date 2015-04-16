@@ -307,12 +307,12 @@ public class UserManageRestImpl implements UserManageRest
 		}
 		catch(MISPException e)
 		{
-			log.error("get alarm error",e);
+			log.error("get Customer error",e);
 			rsp.setErrorCode(e.getErrorCode());
 		}
 		catch(Exception e)
 		{
-			log.error("get alarm error",e);
+			log.error("get Customer error",e);
 			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
 		}
 

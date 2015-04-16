@@ -31,7 +31,8 @@ public class CheckLogFilterModel
 
 	private String checkItem; 		//项目名称；
 	private String checkResult;		//巡检结果，0-未设置，1-正常，2-异常
-
+    private String companyName;
+    
 	private String startDate;
 	private String endDate;
 	
@@ -45,7 +46,10 @@ public class CheckLogFilterModel
     	{
     		conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"checkItem",this.getCheckItem()));
     	}
-
+    	if(!ValidatorUtil.isEmpty(this.getCompanyName()))
+    	{
+    		conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"companyName",this.getCompanyName()));
+    	}
     	if(!ValidatorUtil.isEmpty(this.getCheckResult()))
     	{
     		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"checkResult",CheckResultEnum.getEnumByStr(this.getCheckResult()).getIntValue()));
@@ -113,6 +117,16 @@ public class CheckLogFilterModel
 	public void setResultList(CheckResultEnum[] resultList)
 	{
 		this.resultList = resultList;
+	}
+
+	public String getCompanyName()
+	{
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName)
+	{
+		this.companyName = companyName;
 	}
 
 	

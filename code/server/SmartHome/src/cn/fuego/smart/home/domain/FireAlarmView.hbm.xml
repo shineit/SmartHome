@@ -39,6 +39,8 @@
 		 <property name="alarmTypeName" column="ALARM_TYPE_NAME"></property>
 		 <property name="kind" column="KIND"></property>
 		 <property name="pushType" column="PUSH_TYPE"></property>
+	
+		<property name="companyName" column="COMPANY_NAME"></property>
 	</class>
  
 </hibernate-mapping>

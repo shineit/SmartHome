@@ -34,6 +34,7 @@ public class AlarmFilterModel
 	private String clearStatus;   //0未清除 1 手动清除 2自动清除 AlarmClearEnum
 	private String startDate;
 	private String endDate;
+	private String companyName;
 	
 	private String alarmTypeName;
 	private List<String> alarmTypeList;
@@ -49,6 +50,10 @@ public class AlarmFilterModel
     	if(!ValidatorUtil.isEmpty(this.getAlarmTypeName()))
     	{
     		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"alarmTypeName",this.getAlarmTypeName()));
+    	}
+    	if(!ValidatorUtil.isEmpty(this.getCompanyName()))
+    	{
+    		conditionList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE,"companyName",this.getCompanyName()));
     	}
     	if(!ValidatorUtil.isEmpty(this.getClearStatus()))
     	{
@@ -128,6 +133,16 @@ public class AlarmFilterModel
 	public void setAlarmTypeName(String alarmTypeName)
 	{
 		this.alarmTypeName = alarmTypeName;
+	}
+
+	public String getCompanyName()
+	{
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName)
+	{
+		this.companyName = companyName;
 	}
 	
 	

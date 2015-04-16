@@ -13,7 +13,9 @@
 				<td>
 					项目名称：<input type="text" name="filter.checkItem" value="${filter.checkItem}" />
 				</td>	
-							
+				<td>
+					公司名称：<input type="text" name="filter.companyName" value="${filter.companyName}" />
+				</td>				
 				<td>
 					<select  name="filter.checkResult" >
 						 <option value="">巡检结果</option>
@@ -55,12 +57,14 @@
 </div>
 <div class="pageContent">
 	<div class="panelBar">
-
+		<ul class="toolBar">
+			<li><a class="delete" href="CheckLogManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
+		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
 		<thead>
 			<tr>
-				
+				<th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th>
  				<th width="10%" align="center">公司编号</th>
  				<th width="20%" align="center">公司名称</th>
 				<th width="15%" align="center">项目名称</th>
@@ -75,6 +79,7 @@
 
  		<c:forEach var="e" items="${table.currentPageData}"> 	
 			<tr target="sid_user" rel="${e.logID}">
+			     <td><input name="selectedIDList" value="${e.logID}" type="checkbox" style="margin-top:5px;"></td>
 				<td>${e.companyID}</td>
 				<td>${e.companyName}</td>
 				<td>${e.checkItem}</td>			 
