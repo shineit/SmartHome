@@ -14,6 +14,9 @@
 #import "FEFireAlarm.h"
 #import <SDWebImage/SDWebImageManager.h>
 #import "Define.h"
+#import "UIImage+Cover.h"
+#import <ZBUtilities/UIImage+LogN.h>
+#import "FEFireAlarm.h"
 
 
 @interface FEPlanVC ()<PZPhotoViewDelegate>
@@ -34,7 +37,7 @@
 -(void)requestPlan{
     __weak typeof(self) weakself = self;
     [weakself displayHUD:@"加载中..."];
-    FEQueryPlanByIdRequest *rdata = [[FEQueryPlanByIdRequest alloc] initWithPid:self.planID];
+    FEQueryPlanByIdRequest *rdata = [[FEQueryPlanByIdRequest alloc] initWithPid:self.alarm.planID];
     [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEQueryPlanByIdResponse class] response:^(NSError *error, id response) {
         FEQueryPlanByIdResponse *rsp = response;
         if (!error && rsp.result.errorCode.integerValue == 0) {
@@ -42,10 +45,11 @@
             [imanager downloadImageWithURL:[NSURL URLWithString:kImageURL(rsp.plan.picPath)] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                 
             } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                UIImage *coverImage = [image coverPoint:CGPointMake(weakself.alarm.locationX.floatValue, weakself.alarm.locationY.floatValue)];
                 if (image && finished) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [weakself.planImageView prepareForReuse];
-                        [weakself.planImageView displayImage:image];
+                        [weakself.planImageView displayImage:coverImage];
                     });
                 }
                 [weakself hideHUD:YES];

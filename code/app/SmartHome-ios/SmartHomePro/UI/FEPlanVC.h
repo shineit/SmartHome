@@ -7,8 +7,9 @@
 //
 
 #import "FECommonViewController.h"
+#import "FEFireAlarm.h"
 
 @interface FEPlanVC : FECommonViewController
-@property (nonatomic, strong) NSNumber *planID;
-
+//@property (nonatomic, strong) NSNumber *planID;
+@property (nonatomic, strong) FEFireAlarm *alarm;
 @end

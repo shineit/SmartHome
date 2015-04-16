@@ -7,6 +7,7 @@
 //
 
 #import "UIColor+Theme.h"
+#import "UIColor+Hex.h"
 
 @implementation UIColor (Theme)
 
@@ -19,7 +20,8 @@
 }
 
 +(UIColor *)ThemeViewBackColor{
-    return [UIColor colorWithRed:249.0f / 255.0f green:249.0f / 255.0f blue:249.0f / 255.0f alpha:1.0f];
+    
+    return [UIColor colorWithHex:0xE7E6E3];//[UIColor colorWithRed:249.0f / 255.0f green:249.0f / 255.0f blue:249.0f / 255.0f alpha:1.0f];
 }
 
 @end

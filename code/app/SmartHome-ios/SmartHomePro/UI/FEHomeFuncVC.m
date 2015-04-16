@@ -9,6 +9,14 @@
 #import "FEHomeFuncVC.h"
 #import "FECommonDefine.h"
 #import "FECompanyVC.h"
+#import "FEFireAlarmNumRequest.h"
+#import "FEDeviceStatusNumRequest.h"
+#import "FECheckLogNumRequest.h"
+#import "FENumberResponse.h"
+#import "FEWebServiceManager.h"
+#import "FEMemoryCache.h"
+#import "FECustomerResponse.h"
+#import "FECustomerRequest.h"
 
 #define PNG_KEY @"png"
 #define ITEM_TITLE   @"title"
@@ -20,6 +28,9 @@
 @property (nonatomic, strong) NSArray *datasource;
 @property (nonatomic, strong) NSArray *headerArray;
 @property (strong, nonatomic) IBOutlet UICollectionView *funcCollectionView;
+@property (strong, nonatomic) NSArray *alarmArray;
+@property (strong, nonatomic) NSArray *statusArray;
+@property (strong, nonatomic) NSArray *checkLogArray;
 
 @end
 
@@ -44,6 +55,74 @@
         @{PNG_KEY:@"menu_mall",ITEM_TITLE:kString(@"设备商城"),ITEM_ACTION:[self getIvocationWith:@selector(toStore)]}]
       ];
     self.headerArray = @[kString(@"智慧消防"),kString(@"其他信息")];
+    [self requestNumber];
+    [self requestCustomer];
+}
+
+-(void)requestNumber{
+    __weak typeof(self) weakself = self;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, queue, ^{
+        dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+        FEFireAlarmNumRequest *rdata = [[FEFireAlarmNumRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FENumberResponse class] response:^(NSError *error, id response) {
+            FENumberResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                weakself.alarmArray = rsp.numList;
+//                weakself.productNew = response.productList;
+            }
+            dispatch_semaphore_signal(sem);
+        }];
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_async(group, queue, ^{
+        dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+        FEDeviceStatusNumRequest *rdata = [[FEDeviceStatusNumRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FENumberResponse class] response:^(NSError *error, id response) {
+            FENumberResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                weakself.statusArray = rsp.numList;
+//                weak self.sellerList = response.sellerList;
+            }
+            dispatch_semaphore_signal(sem);
+        }];
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_async(group, queue, ^{
+        dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+        FECheckLogNumRequest *rdata = [[FECheckLogNumRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FENumberResponse class] response:^(NSError *error, id response) {
+            FENumberResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                weakself.checkLogArray = rsp.numList;
+//                weakself.productList = response.productList;
+            }
+            dispatch_semaphore_signal(sem);
+        }];
+        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+//        _productRecommendBecome = YES;
+//        [weakself.shopingTableView reloadData];
+        [weakself.funcCollectionView reloadData];
+    });
+}
+
+-(void)requestCustomer{
+    FECustomerRequest *rdata = [[FECustomerRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID];
+    [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FECustomerResponse class] response:^(NSError *error, id response) {
+        FECustomerResponse *rsp = response;
+        if (!error && rsp) {
+            FECustomer *customer = rsp.customer;
+            [FEMemoryCache sharedInstance].customer = customer;
+//            kUserDefaultsSetObjectForKey(customer.dictionary, kCustomerUser);
+//            kUserDefaultsSync;
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -56,6 +135,67 @@
     imageView.image = [UIImage imageNamed:self.datasource[indexPath.section][indexPath.row][PNG_KEY]];
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     label.text = self.datasource[indexPath.section][indexPath.row][ITEM_TITLE];
+    
+    UILabel *numberLabel = (UILabel *)[cell viewWithTag:3];
+    numberLabel.layer.cornerRadius = numberLabel.bounds.size.width / 2.0f;
+    numberLabel.layer.masksToBounds = YES;
+    numberLabel.backgroundColor = [UIColor yellowColor];
+    numberLabel.textColor = [UIColor redColor];
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                if (self.alarmArray.count) {
+                    NSInteger num = 0;
+                    for (FEBageNumber *bage in self.alarmArray) {
+                        num += bage.num.integerValue;
+                    }
+                    numberLabel.hidden = NO;
+                    numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
+                }else{
+                    numberLabel.hidden = YES;
+                }
+                break;
+            case 1:
+                if (self.statusArray.count) {
+                    NSInteger num = 0;
+                    for (FEBageNumber *bage in self.statusArray) {
+                        num += bage.num.integerValue;
+                    }
+                    numberLabel.hidden = NO;
+                    numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
+                }else{
+                    numberLabel.hidden = YES;
+                }
+                break;
+            case 4:
+                if (self.checkLogArray.count) {
+                    NSInteger num = 0;
+                    for (FEBageNumber *bage in self.checkLogArray) {
+                        num += bage.num.integerValue;
+                    }
+                    numberLabel.hidden = NO;
+                    numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
+                }else{
+                    numberLabel.hidden = YES;
+                }
+                break;
+            default:
+                numberLabel.hidden = YES;
+                break;
+        }
+        if (indexPath.row == 0) {
+            
+        }
+        if (indexPath.row == 1) {
+            
+        }
+        if (indexPath.row == 4) {
+            
+        }
+    }else{
+        numberLabel.hidden = YES;
+    }
+    
     return cell;
 }
 
@@ -65,7 +205,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [self.datasource[section] count];
+    return [(NSArray *)self.datasource[section] count];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -148,6 +288,13 @@
     if ([segue.identifier isEqualToString:@"toCompanySegue"]) {
         FECompanyVC *vc = segue.destinationViewController;
         vc.type = [sender integerValue];
+        if (vc.type == FIRE_ALARM) {
+            vc.numbers = self.alarmArray;
+        }else if (vc.type == DEVICE_STATUS){
+            vc.numbers = self.statusArray;
+        }else if(vc.type == MANAGE){
+            vc.numbers = self.checkLogArray;
+        }
     }
 }
 

@@ -11,6 +11,9 @@
 #import "NSDate+Formatter.h"
 #import "FECompany.h"
 #import "FEPlanVC.h"
+#import "FEButton.h"
+#import <ZBUtilities/UIImage+LogN.h>
+#import "UIColor+Theme.h"
 
 @interface FEDeviceDetailVC ()
 @property (strong, nonatomic) IBOutlet UILabel *machineIDLabel;
@@ -21,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *locationDesp;
 @property (strong, nonatomic) IBOutlet UILabel *alarmTypeName;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet FEButton *locationButton;
 
 @end
 
@@ -31,6 +35,7 @@
     // Do any additional setup after loading the view.
     self.title = @"设备信息";
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.locationButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
     [self refreshUI];
 }
 
@@ -61,7 +66,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     FEPlanVC *vc = segue.destinationViewController;
-    vc.planID = self.device.planID;
+    vc.alarm = self.device;
 }
 
 

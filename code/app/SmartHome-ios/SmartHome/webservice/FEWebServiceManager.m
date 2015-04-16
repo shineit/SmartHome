@@ -258,8 +258,11 @@
     }else{
         return [self POST:rdata.method parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response %@",responseObject);
-            block(NULL,[[cl alloc] initWithResponse:responseObject]);
+            id rsp = [[cl alloc] initWithResponse:responseObject];
+            [self showerrorResponse:rsp];
+            block(NULL,rsp);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self showerror:error];
             block(error,NULL);
         }];
     }
@@ -269,8 +272,10 @@
 -(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata appendDAta:(void (^)(id<AFMultipartFormData> formDate))dataBlock responseclass:(Class)cl response:(void (^)(NSError *error, id response))block{
     return [self POST:rdata.method constructingBodyWithBlock:dataBlock parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
         id rsp = [[cl alloc] initWithResponse:responseObject];
+        [self showerrorResponse:rsp];
         block(NULL,rsp);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showerror:error];
         block(error,NULL);
     }];
 }

@@ -28,10 +28,12 @@ NSMutableArray *checkLog;
     self = [super init];
     if (self) {
         NSDictionary *duser = kUserDefaultsObjectForKey(kLoginUser);
+        
         if (duser) {
             _user = [[FEUser alloc] initWithDictionary:duser];
             checkLog = [NSMutableArray new];
         }
+//        NSDictionary *
     }
     return self;
 }

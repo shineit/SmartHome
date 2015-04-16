@@ -16,6 +16,7 @@
 #import "FEDeviceStatusVC.h"
 #import "FECompanyInfoVC.h"
 #import "FEManageVC.h"
+#import "FEBageNumber.h"
 
 
 @interface FECompanyVC (){
@@ -56,7 +57,31 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FECompany *company = _companys[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"companyItemCell" forIndexPath:indexPath];
-    cell.textLabel.text = company.applyName;
+    UILabel *titleLabel = (UILabel *)[cell viewWithTag:1];
+    titleLabel.text = company.applyName;
+    UILabel *numberLabel = (UILabel *)[cell viewWithTag:2];
+    numberLabel.layer.cornerRadius = numberLabel.bounds.size.width / 2.0f;
+    numberLabel.layer.masksToBounds = YES;
+    numberLabel.backgroundColor = [UIColor yellowColor];
+    numberLabel.textColor = [UIColor redColor];
+//    cell.textLabel.text = company.applyName;
+    if (self.numbers) {
+        BOOL hasNum = false;
+        for (FEBageNumber *bage in self.numbers) {
+            if (company.companyID.integerValue == bage.companyID.integerValue) {
+                numberLabel.text = bage.num.stringValue;
+                hasNum = YES;
+                break;
+            }
+        }
+        if (hasNum) {
+            numberLabel.hidden = NO;
+        }else{
+            numberLabel.hidden = YES;
+        }
+    }else{
+        numberLabel.hidden = YES;
+    }
     return cell;
 }
 

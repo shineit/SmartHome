@@ -16,6 +16,7 @@
 #import "FEADResponse.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Define.h"
+#import "FEProductDetailVC.h"
 
 @interface FEMallProductListVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     NSMutableArray *_products;
@@ -64,6 +65,7 @@
                
                 [imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(ad.adImg)]];
                 [weakself.adScrollView addSubview:imageView];
+                i++;
             }
         }
     }];
@@ -99,19 +101,31 @@
     return _products.count;
 }
 
+#pragma mark - UIScrollViewDelegate
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.adScrollView) {
+        NSInteger page = scrollView.contentOffset.x / scrollView.bounds.size.width;
+        self.pageIndicate.currentPage = page;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:sender];
+    FEProduct *product = _products[indexPath.row];
+    FEProductDetailVC *vc = segue.destinationViewController;
+    vc.product = product;
 }
-*/
+
 
 @end

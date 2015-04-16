@@ -16,6 +16,7 @@
 #define __METHOD_SIGOUT             @"user/logout"
 #define __METHOD_MODIFY_PASSWORD    @"user/password/modify"
 #define __METHOD_CATOKEN            @"user/caToken/get"
+#define __METHOD_CUSTOMER           @"user/customer/get"
 
 #define __METHOD_GET_NEWS           @"news/list"  //news
 #define __METHOD_SEVICE_ORDER       @"order/list" //orders
@@ -55,6 +56,10 @@
 //upload
 #define __METHOD_UPLOAD             @"UploadFile!uploadFile"
 
+//number
+#define __METHOD_ALARM_NUMBER       @"user/fireAlarmNum/get"
+#define __METHOD_DEVICE_STATUS_NUMBER @"user/fireStatusNum/get"
+#define __METHOD_CHECH_LOG_NUMBER   @"user/checkLogNum/get"
 
 
 typedef enum : NSUInteger {

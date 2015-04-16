@@ -12,6 +12,13 @@
 #import "FECheckItem.h"
 #import "FEMemoryCache.h"
 #import "FEUploadImageVC.h"
+#import "FEImageDeleteRequest.h"
+#import "FEMemoryCache.h"
+#import "FEWebServiceManager.h"
+#import <ZBUtilities/UIImage+LogN.h>
+#import "UIColor+Theme.h"
+#import "UIColor+Hex.h"
+#import "FECustomer.h"
 
 @interface FECheckOperationVC ()<FEUpLoadImageVCDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *normalButon;
@@ -32,25 +39,43 @@
     // Do any additional setup after loading the view.
     [self selectButton:self.nonOperation];
     self.title = @"日常巡检";
+    [self.uploadButton setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x48B805]] forState:UIControlStateNormal];
     _checkLog = [FECheckLog new];
+    self.checkLog.companyName = self.company.companyName;
     self.checkLog.companyID = self.company.companyID;
     self.checkLog.checkItem = self.checkItem.itemName;
+//    self.checkLog.checkItemID = self.checkItem.itemID;
+    self.checkLog.checker = [FEMemoryCache sharedInstance].customer.customerName;
     
 }
 - (IBAction)normal:(id)sender {
     self.checkLog.checkResult = @(1);
     self.descriptionText.text = @"";
-    self.checkLog.abnormalPic = nil;
+    [self deleteImage];
+    self.uploadImageView.image = nil;
     [self selectButton:sender];
 }
+
+
 - (IBAction)exception:(id)sender {
     self.checkLog.checkResult = @(2);
+    
     [self selectButton:sender];
 }
 - (IBAction)nonOperation:(id)sender {
     self.checkLog.checkResult = @(0);
     [self selectButton:sender];
     
+}
+
+-(void)deleteImage{
+    if (self.checkLog.abnormalPic) {
+        self.checkLog.abnormalPic = nil;
+        FEImageDeleteRequest *rdata = [[FEImageDeleteRequest alloc] initWithUid:[FEMemoryCache sharedInstance].user.userID imageName:self.checkLog.abnormalPic];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
+            
+        }];
+    }
 }
 
 -(void)selectButton:(UIButton *)btn{
@@ -75,7 +100,7 @@
 
 - (IBAction)save:(id)sender {
     self.checkLog.abnormalDesp = self.descriptionText.text;
-    [_checkLogs addObject:self.checkLog];
+    [_checkLogs setObject:self.checkLog forKey:self.checkItem.itemID];
     [self.navigationController popViewControllerAnimated:YES];
 //    [[FEMemoryCache sharedInstance] addCheckLog:self.checkLog];
 }

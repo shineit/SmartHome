@@ -8,6 +8,7 @@
 
 #import "FEKnowLedgeDetailVC.h"
 #import "FEKnowledge.h"
+#import "UIColor+Theme.h"
 
 @interface FEKnowLedgeDetailVC ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
@@ -23,6 +24,10 @@
     self.title = @"消防常识";
     self.titleLabel.text = self.knowledge.title;
     self.contentText.text = self.knowledge.content;
+    self.contentText.layer.borderColor = [UIColor ThemeColor].CGColor;
+    self.contentText.layer.borderWidth = 1.0f;
+    self.contentText.layer.cornerRadius = 4.0f;
+    self.contentText.layer.masksToBounds = YES;
     
 }
 

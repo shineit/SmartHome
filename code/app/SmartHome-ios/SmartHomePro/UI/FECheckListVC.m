@@ -19,14 +19,15 @@
 #import "FEMemoryCache.h"
 #import "FECheckOperationVC.h"
 #import "FECheckLogCreateRequest.h"
-
-
+#import "UIImage+LogN.h"
+#import "UIColor+Theme.h"
 
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
-    NSMutableArray *_checkLogs;
+    NSMutableDictionary *_checkLogs;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIButton *submitButton;
 
 @end
 
@@ -37,8 +38,15 @@
     // Do any additional setup after loading the view.
     self.title = @"日常巡检";
     _checkList = [NSMutableArray new];
-    _checkLogs = [NSMutableArray new];
+//    _checkLogs = [NSMutableArray new];
+    _checkLogs = [NSMutableDictionary new];
+    [self.submitButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
     [self requestCheckList];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 -(void)requestCheckList{
@@ -62,7 +70,16 @@
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     UILabel *detail = (UILabel *)[cell viewWithTag:2];
     UILabel *operation = (UILabel *)[cell viewWithTag:3];
-    
+    FECheckLog *checkLog = _checkLogs[check.itemID];
+    if (checkLog) {
+        if (checkLog.checkResult.integerValue == 1){
+            operation.text = @"正常";
+        }else{
+            operation.text = @"异常";
+        }
+    }else{
+        operation.text = @"未设置";
+    }
     title.text = check.itemName;
     detail.text = check.itemSys;
     return cell;
@@ -76,7 +93,8 @@
     if (_checkLogs.count) {
         __weak typeof(self) weakself = self;
         [weakself displayHUD:@"提交中..."];
-        FECheckLogCreateRequest *rdata = [[FECheckLogCreateRequest alloc] initWithCheckLogList:_checkLogs];
+        
+        FECheckLogCreateRequest *rdata = [[FECheckLogCreateRequest alloc] initWithCheckLogList:_checkLogs.allValues];
         [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
             FEBaseResponse *rsp = response;
             if (!error && rsp.result.errorCode.integerValue == 0) {
@@ -88,6 +106,7 @@
         
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

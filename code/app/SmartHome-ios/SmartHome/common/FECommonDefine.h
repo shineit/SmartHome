@@ -59,6 +59,8 @@ return shared##className; \
 
 #define kLoginUser                              @"user_key"
 
+#define kCustomerUser                           @"customer"
+
 //itunes url
 #define kItunesUrlString(_ID)                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",_ID]
 

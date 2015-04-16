@@ -19,5 +19,6 @@ typedef enum : NSUInteger {
 @interface FECompanyVC : FETableViewController
 
 @property (nonatomic, assign) MENU_TYPE type;
+@property (nonatomic, strong) NSArray *numbers;
 
 @end

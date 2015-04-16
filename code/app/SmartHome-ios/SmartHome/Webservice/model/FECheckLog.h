@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) NSNumber *logID;
 @property (nonatomic, strong) NSNumber *companyID;
+@property (nonatomic, strong) NSString *companyName;
 @property (nonatomic, strong) NSString *checkItem;
 @property (nonatomic, strong) NSString *checkSys;
 @property (nonatomic, strong) NSNumber *checkResult;
@@ -37,5 +38,6 @@
 @property (nonatomic, strong) NSString *handleResult;
 @property (nonatomic, strong) NSNumber *handleTime;
 @property (nonatomic, strong) NSNumber *status;
+//@property (nonatomic, strong) NSNumber *checkItemID;
 
 @end

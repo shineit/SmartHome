@@ -13,11 +13,15 @@
 #import "FEMemoryCache.h"
 #import "FECompany.h"
 #import "FEDeviceDetailVC.h"
+#import "FEButton.h"
+#import <ZBUtilities/UIImage+LogN.h>
+#import "UIColor+Theme.h"
 
 @interface FEEWarringVC ()<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray *_fireAlarm;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet FEButton *slienceButton;
 
 @end
 
@@ -27,6 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _fireAlarm = [NSMutableArray new];
+    [self.slienceButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
     [self requestAlarm];
 }
 

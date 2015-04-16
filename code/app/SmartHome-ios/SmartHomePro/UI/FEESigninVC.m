@@ -17,6 +17,9 @@
 #import "FEWebServiceManager.h"
 #import "FESiginResponse.h"
 #import "FEMemoryCache.h"
+#import <ZBUtilities/UIDevice+ZBUtilites.h>
+#import "FECustomerRequest.h"
+#import "FECustomerResponse.h"
 
 @interface FEESigninVC ()
 @property (strong, nonatomic) IBOutlet FEButton *loginBtn;
@@ -31,6 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.loginBtn setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
+    UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:ges];
 }
 
 - (IBAction)signin:(id)sender {
@@ -58,9 +63,11 @@
                 [FEMemoryCache sharedInstance].user = lUser;
                 if (lUser) {
                     kUserDefaultsSetObjectForKey(lUser.dictionary, kLoginUser);
+
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [[AppDelegate sharedDelegate] loadMain];
                     });
+                    
                 }
                 
             }
@@ -81,6 +88,14 @@
         [self login:nil];
     }
     return YES;
+}
+
+-(void)keyboardWillHide:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [self screenOffset:0];
+}
+
+-(void)keyboardWillShow:(CGRect)newRect duration:(NSTimeInterval)duration{
+    [self screenOffset:[UIDevice is4Inch]?-100:-160];
 }
 
 

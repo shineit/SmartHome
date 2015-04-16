@@ -12,6 +12,13 @@
 #import "FEWebServiceManager.h"
 #import "FEMemoryCache.h"
 #import "FECompany.h"
+#import <ShareSDK/ShareSDK.h>
+#import "Define.h"
+#import "FEPopView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "NSDate+Formatter.h"
+
+
 
 @interface FEManageVC (){
     NSMutableArray *_checkLog;
@@ -66,6 +73,51 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _checkLog.count;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    FECheckLog *log = _checkLog[indexPath.row];
+    __weak typeof(self) weakself = self;
+    FEPopView *pview = [[FEPopView alloc] initFromView:self.view action:^{
+        [weakself share:log];
+    }];
+    [pview.imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(log.abnormalPic)]];
+    pview.tlabel.text = log.checkItem;
+    pview.personLabel.text = [NSString stringWithFormat:@"巡检员:%@",log.checker];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:log.handleTime.integerValue / 1000];
+    pview.timeLabel.text = [NSString stringWithFormat:@"巡检时间:%@",[date defaultFormat]];
+    [pview show];
+    
+}
+
+-(void)share:(FECheckLog *)log{
+    NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeWeixiTimeline, nil];
+    
+    //构造分享内容
+    id<ISSContent> publishContent = [ShareSDK content:@"分享"
+                                       defaultContent:@""
+                                                image:[ShareSDK imageWithPath:kImageURL(log.abnormalPic)]
+                                                title:@"SmartHome"
+                                                  url:@"http://www.mob.com"
+                                          description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
+                                            mediaType:SSPublishContentMediaTypeNews];
+    
+    [ShareSDK oneKeyShareContent:publishContent//内容对象
+                       shareList:shareList//平台类型列表
+                     authOptions:nil//授权选项
+                   statusBarTips:YES
+                          result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {//返回事件
+                              
+                              if (state == SSPublishContentStateSuccess)
+                              {
+                                  NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"分享成功"));
+                              }
+                              else if (state == SSPublishContentStateFail)
+                              {
+                                  NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+                              }
+                          }];
 }
 
 - (void)didReceiveMemoryWarning {

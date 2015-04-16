@@ -25,7 +25,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqd-cl-X9u" customClass="FEButton">
-                                <rect key="frame" x="160" y="295" width="280" height="40"/>
+                                <rect key="frame" x="160" y="309" width="280" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="DXH-gE-v6G"/>
                                     <constraint firstAttribute="width" constant="280" id="dCP-mr-M5j"/>
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lxx-Hp-LXD">
-                                <rect key="frame" x="160" y="185" width="280" height="100"/>
+                                <rect key="frame" x="160" y="199" width="280" height="100"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sigin_input" translatesAutoresizingMaskIntoConstraints="NO" id="hEL-Ky-wsz">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
@@ -49,7 +49,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="密   码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2x-YR-gmV">
-                                        <rect key="frame" x="10" y="60" width="60" height="21"/>
+                                        <rect key="frame" x="10" y="65" width="60" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -62,9 +62,9 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xn-Pk-y7i">
-                                        <rect key="frame" x="78" y="56" width="194" height="30"/>
+                                        <rect key="frame" x="78" y="61" width="194" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="9Wi-l3-X4O" id="Dtv-GT-Xji"/>
                                         </connections>
@@ -80,15 +80,23 @@
                                     <constraint firstItem="hEL-Ky-wsz" firstAttribute="top" secondItem="Lxx-Hp-LXD" secondAttribute="top" id="xqy-Fg-8Af"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智能云防系统" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NS1-nd-LJN">
+                                <rect key="frame" x="240" y="165" width="120" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.4941176471" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Vqd-cl-X9u" firstAttribute="top" secondItem="Lxx-Hp-LXD" secondAttribute="bottom" constant="10" id="5wd-En-Z8Z"/>
+                            <constraint firstItem="NS1-nd-LJN" firstAttribute="top" secondItem="VNI-YO-DY1" secondAttribute="bottom" id="Der-vd-szi"/>
                             <constraint firstAttribute="centerX" secondItem="Lxx-Hp-LXD" secondAttribute="centerX" id="Ll7-2S-Pia"/>
-                            <constraint firstItem="Lxx-Hp-LXD" firstAttribute="top" secondItem="VNI-YO-DY1" secondAttribute="bottom" constant="20" id="NkR-2j-i3t"/>
                             <constraint firstAttribute="centerX" secondItem="VNI-YO-DY1" secondAttribute="centerX" id="RIL-ge-wQz"/>
+                            <constraint firstAttribute="centerX" secondItem="NS1-nd-LJN" secondAttribute="centerX" id="eFM-0I-863"/>
                             <constraint firstAttribute="centerX" secondItem="Vqd-cl-X9u" secondAttribute="centerX" id="w3v-OU-6Zt"/>
                             <constraint firstItem="VNI-YO-DY1" firstAttribute="top" secondItem="u1W-Vz-BdH" secondAttribute="top" constant="20" id="xQd-2s-B1B"/>
+                            <constraint firstItem="Lxx-Hp-LXD" firstAttribute="top" secondItem="NS1-nd-LJN" secondAttribute="bottom" constant="10" id="xdz-vB-SCD"/>
                         </constraints>
                     </view>
                     <connections>
