@@ -474,10 +474,10 @@
 		14D69C341AD0346600D8A1CC /* FECompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C331AD0346600D8A1CC /* FECompanyInfoVC.m */; };
 		14D69C371AD174A000D8A1CC /* FEManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C361AD174A000D8A1CC /* FEManageVC.m */; };
 		14DBF3421ADE321D00DD784C /* FESysSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DBF3411ADE321D00DD784C /* FESysSettingVC.m */; };
-		14DBF3481ADE399200DD784C /* warning.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF3471ADE399200DD784C /* warning.aiff */; };
 		14DBF34C1ADE3DED00DD784C /* ErrorCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */; };
 		14DBF34D1ADE3DED00DD784C /* ErrorCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */; };
 		14DBF3511ADFE43200DD784C /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DBF3501ADFE43200DD784C /* MCSoundBoard.m */; };
+		14DBF3531AE1180500DD784C /* warning.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF3521AE1180500DD784C /* warning.aiff */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -1036,10 +1036,10 @@
 		14D69C361AD174A000D8A1CC /* FEManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEManageVC.m; sourceTree = "<group>"; };
 		14DBF3401ADE321D00DD784C /* FESysSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FESysSettingVC.h; sourceTree = "<group>"; };
 		14DBF3411ADE321D00DD784C /* FESysSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FESysSettingVC.m; sourceTree = "<group>"; };
-		14DBF3471ADE399200DD784C /* warning.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = warning.aiff; sourceTree = "<group>"; };
 		14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ErrorCode.plist; sourceTree = "<group>"; };
 		14DBF34F1ADFE43200DD784C /* MCSoundBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSoundBoard.h; sourceTree = "<group>"; };
 		14DBF3501ADFE43200DD784C /* MCSoundBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSoundBoard.m; sourceTree = "<group>"; };
+		14DBF3521AE1180500DD784C /* warning.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = warning.aiff; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1153,7 +1153,7 @@
 		147460761ACA2ABD0031F05E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				14DBF3471ADE399200DD784C /* warning.aiff */,
+				14DBF3521AE1180500DD784C /* warning.aiff */,
 				14610D651AD7BCDE00A717F8 /* PushConfig.plist */,
 				147460771ACA2ABD0031F05E /* Info.plist */,
 				147460781ACA2ABD0031F05E /* main.m */,
@@ -2147,8 +2147,8 @@
 				14B112281ADA3FAE000B759F /* WeiboSDK.bundle in Resources */,
 				14D69BA61ACC365C00D8A1CC /* Signin.storyboard in Resources */,
 				14B112231ADA3FAE000B759F /* Resource.bundle in Resources */,
-				14DBF3481ADE399200DD784C /* warning.aiff in Resources */,
 				14B1122C1ADA3FAE000B759F /* ShareSDKFlatShareViewUI.bundle in Resources */,
+				14DBF3531AE1180500DD784C /* warning.aiff in Resources */,
 				14610D661AD7BCDE00A717F8 /* PushConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

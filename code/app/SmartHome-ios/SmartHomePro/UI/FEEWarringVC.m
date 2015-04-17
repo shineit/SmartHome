@@ -17,6 +17,9 @@
 #import <ZBUtilities/UIImage+LogN.h>
 #import "UIColor+Theme.h"
 #import "MCSoundBoard.h"
+#import "FEGetCompanyByIdRequest.h"
+#import "FEGetCompanyByIdResponse.h"
+
 
 @interface FEEWarringVC ()<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray *_fireAlarm;
@@ -33,7 +36,22 @@
     // Do any additional setup after loading the view.
     _fireAlarm = [NSMutableArray new];
     [self.slienceButton setBackgroundImage:[UIImage imageFromColor:[UIColor ThemeColor]] forState:UIControlStateNormal];
+    self.title = @"告警信息";
+    [self requestCompany];
     [self requestAlarm];
+}
+
+-(void)requestCompany{
+    if (self.company && !self.company.applyName) {
+        __weak typeof(self) weakself = self;
+        FEGetCompanyByIdRequest *rdata = [[FEGetCompanyByIdRequest alloc] initWithCid:self.company.companyID];
+        [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEGetCompanyByIdResponse class] response:^(NSError *error, id response) {
+            FEGetCompanyByIdResponse *rsp = response;
+            if (!error && rsp.result.errorCode.integerValue == 0) {
+                weakself.company = rsp.company;
+            }
+        }];
+    }
 }
 
 -(void)requestAlarm{

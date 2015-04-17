@@ -17,6 +17,8 @@
 #import "FEMemoryCache.h"
 #import "FECustomerResponse.h"
 #import "FECustomerRequest.h"
+#import "FECompany.h"
+#import "FEEWarringVC.h"
 
 #define PNG_KEY @"png"
 #define ITEM_TITLE   @"title"
@@ -286,6 +288,10 @@
     return invocation;
 }
 
+-(void)toAlarmSegue:(FECompany *)company{
+    [self performSegueWithIdentifier:@"toAlarmSegue" sender:company];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -310,6 +316,9 @@
         }else if(vc.type == MANAGE){
             vc.numbers = self.checkLogArray;
         }
+    }else if([segue.identifier isEqualToString:@"toAlarmSegue"]){
+        FEEWarringVC *vc = segue.destinationViewController;
+        vc.company = sender;
     }
 }
 

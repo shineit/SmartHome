@@ -16,11 +16,13 @@
 #import "WXApi.h"
 #import "MCSoundBoard.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "FEHomeFuncVC.h"
+#import "FECompany.h"
 
 #define SHARE_SDK_KEY @"643b63797ab7"
 
 @interface AppDelegate ()
-
+@property (nonatomic, assign) BOOL runing;
 @end
 
 @implementation AppDelegate
@@ -33,7 +35,8 @@
     if (!user) {
         self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
     }
-    
+    [APService setBadge:0];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     
     [ShareSDK registerApp:SHARE_SDK_KEY];//字符串api20为您的ShareSDK的AppKey
@@ -104,20 +107,35 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAlarmNotification object:userInfo];
     
-    NSNumber *mute = kUserDefaultsObjectForKey(kMute);
-    if (!mute.boolValue) {
-        
-//        [MCSoundBoard playAudioForKey:<#(id)#> fadeInInterval:<#(NSTimeInterval)#>]
-        
-        //declare a system sound
-//        SystemSoundID soundID;
-        //Get a URL for the sound file
-//        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
-        [MCSoundBoard stopAudioForKey:@"loop"];
-        [MCSoundBoard playAudioForKey:@"loop"];
-//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
-//        AudioServicesPlaySystemSound(soundID);
+    NSString *obj = userInfo[@"obj"];
+    NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
+    
+    if (data) {
+        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        if (json) {
+            NSInteger kind = [json[@"alarmKind"] integerValue];
+            if (kind == 2) {
+                if (!self.runing) {
+                   UIViewController *vc = ((UINavigationController *)self.window.rootViewController).topViewController;
+                    if ([vc isKindOfClass:[FEHomeFuncVC class]]) {
+                        FECompany *company = [FECompany new];
+                        company.companyID = json[@"companyID"];
+                        [(FEHomeFuncVC *)vc toAlarmSegue:company];
+                    }
+                    
+                }else{
+                    NSNumber *mute = kUserDefaultsObjectForKey(kMute);
+                    if (!mute.boolValue) {
+                        [MCSoundBoard stopAudioForKey:@"loop"];
+                        [MCSoundBoard playAudioForKey:@"loop"];
+                    }
+                }
+            }
+
+        }
     }
+    
+    
 }
 
 
@@ -127,6 +145,8 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    self.runing = NO;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -137,6 +157,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        self.runing = YES;
+    });
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

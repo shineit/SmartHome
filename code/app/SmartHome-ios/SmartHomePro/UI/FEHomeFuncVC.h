@@ -7,7 +7,8 @@
 //
 
 #import "FECommonViewController.h"
+@class FECompany;
 
 @interface FEHomeFuncVC : FECommonViewController
-
+-(void)toAlarmSegue:(FECompany *)company;
 @end

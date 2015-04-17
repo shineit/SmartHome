@@ -138,6 +138,7 @@
                         <segue destination="ave-Cr-nWf" kind="show" identifier="toCompanySegue" id="vF0-8v-xM8"/>
                         <segue destination="xbZ-V7-jaQ" kind="show" identifier="toFireKnowledgeSegue" id="bcJ-C7-O6e"/>
                         <segue destination="pVm-zP-uJM" kind="show" identifier="toStoreSegue" id="w1s-Ll-8kx"/>
+                        <segue destination="k1r-3Z-BbA" kind="show" identifier="toAlarmSegue" id="1sG-m8-Vo0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hE5-45-9gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1874,6 +1875,7 @@
         <image name="setting_alert" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="1sG-m8-Vo0"/>
         <segue reference="HVg-mp-ehg"/>
     </inferredMetricsTieBreakers>
 </document>
