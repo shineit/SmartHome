@@ -98,7 +98,7 @@ public class MispUploadImgActivity extends MispBaseActivtiy implements OnUploadP
 			this.waitDailog.show();
 			if(picPath!=null)
 			{		
-				
+				Toast.makeText(this, "正在处理图片", Toast.LENGTH_LONG).show();
 				picPath=ImgCompressUtil.getInstance().copressImg(this, picPath, "SmartHome/compress/");
 				
 				if(picPath!=null)

@@ -144,7 +144,11 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 			txt_checkDate.setText(DateUtil.getStrTime(item.getCheckTime()));
 			
 			ImageView img_area= (ImageView) view.findViewById(R.id.pop_window_imgarea);
-			LoadImageUtil.getInstance().loadImage(img_area, picUrl);
+			if(!ValidatorUtil.isEmpty(picUrl))
+			{
+				LoadImageUtil.getInstance().loadImage(img_area, picUrl);
+			}
+			
 		}
 
 		window=CheckLogActivity.this.getWindow();

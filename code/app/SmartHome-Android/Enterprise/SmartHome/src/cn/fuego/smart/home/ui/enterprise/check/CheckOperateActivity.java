@@ -272,7 +272,8 @@ public class CheckOperateActivity extends MispBaseActivtiy implements OnCheckedC
         isExit.setMessage("该操作将清除图片资源？");  
         // 添加选择按钮并注册监听  
         isExit.setButton("确定", listener);  
-        isExit.setButton2("取消", listener);  
+        isExit.setButton2("取消", listener); 
+        isExit.setCancelable(false);
         // 显示对话框  
         isExit.show(); 
 		
