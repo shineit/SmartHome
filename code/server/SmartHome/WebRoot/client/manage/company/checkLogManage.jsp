@@ -87,8 +87,15 @@
 				<td>            	
 				<c:forEach var="r" items="${filter.resultList}">
 						  <c:choose>		       
-							   <c:when test="${r.intValue == e.checkResult}">  
-	                             ${r.strValue}
+							   <c:when test="${r.intValue == e.checkResult}"> 
+							   ${r.strValue}
+							   <c:if test="${e.checkResult==2}">
+							   				
+				               <a style="color:blue !important;text-decoration:underline;" title="异常信息" target="dialog" 
+				               href="<%=request.getContextPath()%>/client/manage/company/checkLogAbdesp.jsp?infoContent=${e.abnormalDesp}&picUrl=${e.abnormalPic}" 
+				                rel="Menu${selectedMenuID}" mask="true" >点击查看详情</a>
+
+							   </c:if> 
 							   </c:when>
 							   <c:otherwise></c:otherwise>					   
 						   </c:choose>

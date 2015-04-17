@@ -58,7 +58,7 @@ public class ReflectionUtil
 		try
 		{
 			Class fieldClass = clazz.getDeclaredField(fieldName).getType();
-			if(!value.getClass().equals(fieldClass))
+			if(null!=value&&!value.getClass().equals(fieldClass))
 			{
 				String strValue = value.toString();
 				object = DataTypeConvert.convertStrToObject(strValue, fieldClass);	

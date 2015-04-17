@@ -77,7 +77,7 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		    ServiceContext.getInstance().getAlarmManageService().create(alarm);
 		    
 		    //集中器重新上电需要把所有未清除的告警 清除
-		    ServiceContext.getInstance().getAlarmManageService().clearAlarm(concentrator.getConcentratorID());
+		    //ServiceContext.getInstance().getAlarmManageService().clearAlarm(concentrator.getConcentratorID());
 	 
 		    //ServiceContext.getInstance().getSensorManageService().syncSensorList(concentrator.getConcentratorID());
 	    }

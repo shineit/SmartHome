@@ -10,7 +10,9 @@ package cn.fuego.smart.home.webservice.down.service.impl;
 
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.JsonConvert;
+import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
+import cn.fuego.smart.home.webservice.down.model.AlarmPushInfoJson;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.fuego.smart.home.webservice.down.service.PushToolInterface;
 import cn.jpush.api.JPushClient;
@@ -118,6 +120,7 @@ public class JPushToolImpl implements PushToolInterface
 		        				.addExtra("objType", objType).build())
 		        		.addPlatformNotification(IosNotification.newBuilder()
 		        				.incrBadge(1)
+		        				.setSound("default")
 		        				.addExtra("obj", obj)
 		        				.addExtra("objType", objType).build())
 		        		.build())
@@ -138,13 +141,32 @@ public class JPushToolImpl implements PushToolInterface
 		        				.addExtra("objType", objType).build())
 		        		.addPlatformNotification(IosNotification.newBuilder()
 		        				.incrBadge(1)
+		        				.setSound(getSoundByType(msgObj.getObj()))
 		        				.addExtra("obj", obj)
 		        				.addExtra("objType", objType).build())
 		        		.build())
 		        .build();
 		return payLoad;
 	}
-
+	/**
+	 * ios 声音设置问题
+	 * @param obj
+	 * @return
+	 */
+	private String getSoundByType(Object obj)
+	{
+		AlarmPushInfoJson alarm=(AlarmPushInfoJson) obj;
+		if(alarm!=null)
+		{
+			if(alarm.getPushType()==AlarmPushTypeEnum.LONG_PUSH.getIntValue())
+			{
+				return "warning";
+			}
+			
+		}
+		
+		return "default";
+	}
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.down.service.PushToolInterface#pushMessage(cn.fuego.smart.home.service.cache.FuegoPushInfo, java.lang.Object)
 	 */
