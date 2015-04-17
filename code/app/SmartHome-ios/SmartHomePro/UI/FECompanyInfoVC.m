@@ -10,7 +10,7 @@
 #import "FECompany.h"
 
 @interface FECompanyInfoVC ()
-@property (strong, nonatomic) IBOutlet UILabel *companyName;
+@property (strong, nonatomic) IBOutlet UILabel *applyName;
 @property (strong, nonatomic) IBOutlet UILabel *companyAddress;
 @property (strong, nonatomic) IBOutlet UILabel *compantType;
 @property (strong, nonatomic) IBOutlet UILabel *companyFire;
@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *legalPerson;
 @property (strong, nonatomic) IBOutlet UILabel *manager;
 @property (strong, nonatomic) IBOutlet UILabel *dutyPerson;
+@property (strong, nonatomic) IBOutlet UILabel *companyName;
+@property (strong, nonatomic) IBOutlet UILabel *companyPhone;
 
 @end
 
@@ -31,14 +33,16 @@
 
 -(void)initUI{
     self.title = @"基本信息";
-    self.companyName.text = self.company.applyName;
+    self.companyName.text = self.company.companyName;
+    self.applyName.text = self.company.applyName;
     self.companyAddress.text = self.company.companyAddr;
     self.compantType.text = self.company.companyType;
     self.companyFire.text = self.company.fireRisk;
     self.companyArea.text = self.company.buildingArea.stringValue;
     self.legalPerson.text = self.company.legalOfficer;
-    self.manager.text = self.company.fireManager;
+    self.manager.text = [NSString stringWithFormat:@"%@\n%@",self.company.fireManager,self.company.managerPhone];
     self.dutyPerson.text = self.company.fireDuty;
+    self.companyPhone.text = self.company.officerPhone;
 }
 
 - (void)didReceiveMemoryWarning {

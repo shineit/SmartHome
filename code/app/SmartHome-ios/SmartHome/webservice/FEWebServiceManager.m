@@ -287,9 +287,19 @@
 
 -(void)showerrorResponse:(FEBaseResponse *)response{
     if (response.result.errorCode.integerValue != 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:[NSString stringWithFormat:@"error code %@",response.result.errorCode] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:[self getErrorCode:response.result.errorCode.stringValue] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
+}
+
+-(NSString *)getErrorCode:(NSString *)code{
+    static NSDictionary *errorCode = NULL;
+    if (!errorCode) {
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ErrorCode" ofType:@"plist"];
+        errorCode = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    }
+    return errorCode[code];
 }
 
 @end

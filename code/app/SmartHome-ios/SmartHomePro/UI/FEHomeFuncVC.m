@@ -55,9 +55,21 @@
         @{PNG_KEY:@"menu_mall",ITEM_TITLE:kString(@"设备商城"),ITEM_ACTION:[self getIvocationWith:@selector(toStore)]}]
       ];
     self.headerArray = @[kString(@"智慧消防"),kString(@"其他信息")];
-    [self requestNumber];
+//    [self requestNumber];
     [self requestCustomer];
+    __weak typeof(self) weakself = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:kAlarmNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [weakself requestNumber];
+    }];
+    
 }
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestNumber];
+}
+
 
 -(void)requestNumber{
     __weak typeof(self) weakself = self;
@@ -119,8 +131,6 @@
         if (!error && rsp) {
             FECustomer *customer = rsp.customer;
             [FEMemoryCache sharedInstance].customer = customer;
-//            kUserDefaultsSetObjectForKey(customer.dictionary, kCustomerUser);
-//            kUserDefaultsSync;
         }
     }];
 }
@@ -143,41 +153,46 @@
     numberLabel.textColor = [UIColor redColor];
     if (indexPath.section == 0) {
         switch (indexPath.row) {
-            case 0:
-                if (self.alarmArray.count) {
+            case 0:{
                     NSInteger num = 0;
                     for (FEBageNumber *bage in self.alarmArray) {
                         num += bage.num.integerValue;
                     }
-                    numberLabel.hidden = NO;
-                    numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
-                }else{
-                    numberLabel.hidden = YES;
+                    if (num) {
+                        numberLabel.hidden = NO;
+                        numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
+                    }else{
+                        numberLabel.hidden = YES;
+                    }
                 }
                 break;
-            case 1:
-                if (self.statusArray.count) {
-                    NSInteger num = 0;
-                    for (FEBageNumber *bage in self.statusArray) {
-                        num += bage.num.integerValue;
-                    }
+            case 1:{
+                NSInteger num = 0;
+                for (FEBageNumber *bage in self.statusArray) {
+                    num += bage.num.integerValue;
+                }
+                if (num) {
+                    
                     numberLabel.hidden = NO;
                     numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
                 }else{
                     numberLabel.hidden = YES;
                 }
+            }
                 break;
-            case 4:
-                if (self.checkLogArray.count) {
-                    NSInteger num = 0;
-                    for (FEBageNumber *bage in self.checkLogArray) {
-                        num += bage.num.integerValue;
-                    }
+            case 4:{
+                NSInteger num = 0;
+                for (FEBageNumber *bage in self.checkLogArray) {
+                    num += bage.num.integerValue;
+                }
+                if (num) {
                     numberLabel.hidden = NO;
                     numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num];
                 }else{
                     numberLabel.hidden = YES;
                 }
+
+            }
                 break;
             default:
                 numberLabel.hidden = YES;

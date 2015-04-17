@@ -61,6 +61,10 @@ return shared##className; \
 
 #define kCustomerUser                           @"customer"
 
+#define kMute                                   @"mute"
+
+#define kAlarmNotification                      @"alarmNotification"
+
 //itunes url
 #define kItunesUrlString(_ID)                  [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",_ID]
 

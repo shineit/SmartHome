@@ -12,7 +12,7 @@
 
 -(UIImage *)coverPoint:(CGPoint)point{
     
-    return [self addMsakImage:nil msakRect:CGRectMake(point.x - 10, point.y - 10, 10, 10)];
+    return [self addMsakImage:nil msakRect:CGRectMake(point.x - 10, point.y - 10, 20, 20)];
     
 }
 
@@ -22,13 +22,21 @@
     [self drawInRect:CGRectMake(0, 0, self.size.width, self.size.height)];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetRGBFillColor(context, 1.0f, 0, 0, 1);
+//    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
     CGContextFillEllipseInRect(context, rect);
     //四个参数为水印图片的位置
     [maskImage drawInRect:rect];
     UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    if (resultingImage.size.width > resultingImage.size.height) {
+        return [UIImage imageWithCGImage:resultingImage.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    }
     return resultingImage;
+//    return [UIImage imageWithCGImage:resultingImage.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    
+//    return resultingImage;
 }
 
 @end

@@ -21,6 +21,7 @@
 #import "FECheckLogCreateRequest.h"
 #import "UIImage+LogN.h"
 #import "UIColor+Theme.h"
+#import "FECommonDefine.h"
 
 @interface FECheckListVC (){
     NSMutableArray *_checkList;
@@ -78,7 +79,7 @@
             operation.text = @"异常";
         }
     }else{
-        operation.text = @"未设置";
+        operation.text = @"未检查";
     }
     title.text = check.itemName;
     detail.text = check.itemSys;
@@ -98,7 +99,10 @@
         [[FEWebServiceManager sharedInstance] requstData:rdata responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
             FEBaseResponse *rsp = response;
             if (!error && rsp.result.errorCode.integerValue == 0) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kAlarmNotification object:nil];
                 [weakself.navigationController popViewControllerAnimated:YES];
+                
             }
             [weakself hideHUD:YES];
         }];

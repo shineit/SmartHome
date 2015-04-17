@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *personLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UILabel *contentLabel;
 @property (strong, nonatomic) void (^action)();
 
 - (id)initFromView:(UIView *)view action:(void(^)())action;

@@ -17,7 +17,7 @@
 #import "FEPopView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSDate+Formatter.h"
-
+#import "FECommonDefine.h"
 
 
 @interface FEManageVC (){
@@ -66,7 +66,15 @@
     }
     title.text = log.checkItem;
     detail.text = log.checkSys;
-    status.text = log.checkResult.stringValue;
+    NSString *result = @"";
+    if (log.checkResult.integerValue == 0) {
+        result = @"未设置";
+    }else if (log.checkResult.integerValue == 1){
+        result = @"正常";
+    }else{
+        result = @"异常";
+    }
+    status.text = result;
     
     return cell;
 }
@@ -82,42 +90,60 @@
     FEPopView *pview = [[FEPopView alloc] initFromView:self.view action:^{
         [weakself share:log];
     }];
+    pview.contentLabel.text = log.abnormalDesp;
     [pview.imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(log.abnormalPic)]];
     pview.tlabel.text = log.checkItem;
     pview.personLabel.text = [NSString stringWithFormat:@"巡检员:%@",log.checker];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:log.handleTime.integerValue / 1000];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:log.checkTime.integerValue / 1000];
     pview.timeLabel.text = [NSString stringWithFormat:@"巡检时间:%@",[date defaultFormat]];
     [pview show];
     
 }
 
 -(void)share:(FECheckLog *)log{
-    NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeWeixiTimeline, nil];
-    
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:@"分享"
+    id<ISSContent> publishContent = [ShareSDK content:log.abnormalDesp
                                        defaultContent:@""
-                                                image:[ShareSDK imageWithPath:kImageURL(log.abnormalPic)]
-                                                title:@"SmartHome"
-                                                  url:@"http://www.mob.com"
-                                          description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
-                                            mediaType:SSPublishContentMediaTypeNews];
+                                                image:[ShareSDK imageWithUrl:kImageURL(log.abnormalPic)]
+                                                title:@"智慧消防"
+                                                  url:kImageURL(log.abnormalPic)
+                                          description:nil
+                                            mediaType:SSPublishContentMediaTypeImage];
     
-    [ShareSDK oneKeyShareContent:publishContent//内容对象
-                       shareList:shareList//平台类型列表
-                     authOptions:nil//授权选项
+    
+    [ShareSDK clientShareContent:publishContent //内容对象
+                            type:ShareTypeWeixiSession //平台类型
                    statusBarTips:YES
                           result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {//返回事件
                               
                               if (state == SSPublishContentStateSuccess)
                               {
-                                  NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"分享成功"));
+                                  NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"分享成功!"));
                               }
                               else if (state == SSPublishContentStateFail)
                               {
-                                  NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"分享失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                  [alert show];
+                                  NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"分享失败!"), [error errorCode], [error errorDescription]);
                               }
                           }];
+    
+    
+//    [ShareSDK oneKeyShareContent:publishContent//内容对象
+//                       shareList:shareList//平台类型列表
+//                     authOptions:nil//授权选项
+//                   statusBarTips:YES
+//                          result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {//返回事件
+//                              
+//                              if (state == SSPublishContentStateSuccess)
+//                              {
+//                                  NSLog(NSLocalizedString(@"TEXT_SHARE_SUC", @"分享成功"));
+//                              }
+//                              else if (state == SSPublishContentStateFail)
+//                              {
+//                                  NSLog(NSLocalizedString(@"TEXT_SHARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+//                              }
+//                          }];
 }
 
 - (void)didReceiveMemoryWarning {

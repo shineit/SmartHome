@@ -16,6 +16,7 @@
 #import "FEButton.h"
 #import <ZBUtilities/UIImage+LogN.h>
 #import "UIColor+Theme.h"
+#import "MCSoundBoard.h"
 
 @interface FEEWarringVC ()<UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray *_fireAlarm;
@@ -68,6 +69,10 @@
     FEFireAlarm *alarm = _fireAlarm[indexPath.row];
     [self performSegueWithIdentifier:@"toDeviceSegue" sender:alarm];
     
+}
+
+- (IBAction)mute:(id)sender {
+    [MCSoundBoard stopAudioForKey:@"loop"];
 }
 
 

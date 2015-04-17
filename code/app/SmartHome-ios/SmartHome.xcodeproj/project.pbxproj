@@ -473,6 +473,11 @@
 		14D69C311AD02A2600D8A1CC /* FEDeleteImageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C2F1AD02A2600D8A1CC /* FEDeleteImageRequest.m */; };
 		14D69C341AD0346600D8A1CC /* FECompanyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C331AD0346600D8A1CC /* FECompanyInfoVC.m */; };
 		14D69C371AD174A000D8A1CC /* FEManageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D69C361AD174A000D8A1CC /* FEManageVC.m */; };
+		14DBF3421ADE321D00DD784C /* FESysSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DBF3411ADE321D00DD784C /* FESysSettingVC.m */; };
+		14DBF3481ADE399200DD784C /* warning.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF3471ADE399200DD784C /* warning.aiff */; };
+		14DBF34C1ADE3DED00DD784C /* ErrorCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */; };
+		14DBF34D1ADE3DED00DD784C /* ErrorCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */; };
+		14DBF3511ADFE43200DD784C /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DBF3501ADFE43200DD784C /* MCSoundBoard.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -1029,6 +1034,12 @@
 		14D69C331AD0346600D8A1CC /* FECompanyInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FECompanyInfoVC.m; sourceTree = "<group>"; };
 		14D69C351AD174A000D8A1CC /* FEManageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEManageVC.h; sourceTree = "<group>"; };
 		14D69C361AD174A000D8A1CC /* FEManageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEManageVC.m; sourceTree = "<group>"; };
+		14DBF3401ADE321D00DD784C /* FESysSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FESysSettingVC.h; sourceTree = "<group>"; };
+		14DBF3411ADE321D00DD784C /* FESysSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FESysSettingVC.m; sourceTree = "<group>"; };
+		14DBF3471ADE399200DD784C /* warning.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = warning.aiff; sourceTree = "<group>"; };
+		14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ErrorCode.plist; sourceTree = "<group>"; };
+		14DBF34F1ADFE43200DD784C /* MCSoundBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSoundBoard.h; sourceTree = "<group>"; };
+		14DBF3501ADFE43200DD784C /* MCSoundBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSoundBoard.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1125,6 +1136,7 @@
 		147460751ACA2ABD0031F05E /* SmartHomePro */ = {
 			isa = PBXGroup;
 			children = (
+				14DBF34E1ADFE43200DD784C /* Sound */,
 				149C31A81ACA3B1900826831 /* UI */,
 				1474607A1ACA2ABD0031F05E /* AppDelegate.h */,
 				1474607B1ACA2ABD0031F05E /* AppDelegate.m */,
@@ -1141,6 +1153,7 @@
 		147460761ACA2ABD0031F05E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				14DBF3471ADE399200DD784C /* warning.aiff */,
 				14610D651AD7BCDE00A717F8 /* PushConfig.plist */,
 				147460771ACA2ABD0031F05E /* Info.plist */,
 				147460781ACA2ABD0031F05E /* main.m */,
@@ -1151,6 +1164,7 @@
 		1474609D1ACA2B3B0031F05E /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
+				14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */,
 				14D69BBE1ACD662B00D8A1CC /* request */,
 				14D69BB01ACD5F5200D8A1CC /* model */,
 				14D69BB11ACD5F5200D8A1CC /* response */,
@@ -1310,6 +1324,8 @@
 				14B1123E1ADA4933000B759F /* FEProductDetailVC.m */,
 				14B1125C1ADBF39E000B759F /* FEPopView.h */,
 				14B1125D1ADBF39E000B759F /* FEPopView.m */,
+				14DBF3401ADE321D00DD784C /* FESysSettingVC.h */,
+				14DBF3411ADE321D00DD784C /* FESysSettingVC.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2032,6 +2048,16 @@
 			path = request;
 			sourceTree = "<group>";
 		};
+		14DBF34E1ADFE43200DD784C /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				14DBF34F1ADFE43200DD784C /* MCSoundBoard.h */,
+				14DBF3501ADFE43200DD784C /* MCSoundBoard.m */,
+			);
+			name = Sound;
+			path = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2114,12 +2140,14 @@
 			files = (
 				14B112261ADA3FAE000B759F /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				14B112221ADA3FAE000B759F /* ShareSDKLocalizable.strings in Resources */,
+				14DBF34D1ADE3DED00DD784C /* ErrorCode.plist in Resources */,
 				147460851ACA2ABD0031F05E /* Main.storyboard in Resources */,
 				1474608A1ACA2ABD0031F05E /* LaunchScreen.xib in Resources */,
 				147460871ACA2ABD0031F05E /* Images.xcassets in Resources */,
 				14B112281ADA3FAE000B759F /* WeiboSDK.bundle in Resources */,
 				14D69BA61ACC365C00D8A1CC /* Signin.storyboard in Resources */,
 				14B112231ADA3FAE000B759F /* Resource.bundle in Resources */,
+				14DBF3481ADE399200DD784C /* warning.aiff in Resources */,
 				14B1122C1ADA3FAE000B759F /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				14610D661AD7BCDE00A717F8 /* PushConfig.plist in Resources */,
 			);
@@ -2139,6 +2167,7 @@
 				14B111871ADA2E47000B759F /* balanced.png in Resources */,
 				14B111CE1ADA2E47000B759F /* public_long_btn.png in Resources */,
 				14B111C81ADA2E47000B759F /* playback_fullscreen_playbar.png in Resources */,
+				14DBF34C1ADE3DED00DD784C /* ErrorCode.plist in Resources */,
 				14B111DF1ADA2E47000B759F /* connect3.png in Resources */,
 				14B111AE1ADA2E47000B759F /* ptz_flip2.png in Resources */,
 				14B1119F1ADA2E47000B759F /* play_play.png in Resources */,
@@ -2347,6 +2376,7 @@
 				14D69C1D1ACEDEF600D8A1CC /* FECheckItem.m in Sources */,
 				142FA7081AD4319600598B11 /* FEDeviceDetailVC.m in Sources */,
 				14B1123F1ADA4933000B759F /* FEProductDetailVC.m in Sources */,
+				14DBF3511ADFE43200DD784C /* MCSoundBoard.m in Sources */,
 				1474613A1ACA2B3B0031F05E /* NSString+Attribute.m in Sources */,
 				14D69C071ACED13D00D8A1CC /* FEFireAlarm.m in Sources */,
 				14D69BD01ACD7ED600D8A1CC /* FEMallProductListRequest.m in Sources */,
@@ -2363,6 +2393,7 @@
 				149C321A1ACA3EA400826831 /* UIImage+Resize.m in Sources */,
 				14D69BF31ACEC80E00D8A1CC /* FEQueryPlanByIdRequest.m in Sources */,
 				142FA7191AD636C800598B11 /* FEUploadRequest.m in Sources */,
+				14DBF3421ADE321D00DD784C /* FESysSettingVC.m in Sources */,
 				149C320E1ACA3EA400826831 /* NSString+MD5.m in Sources */,
 				1474614A1ACA2B3B0031F05E /* FESensorSetResponse.m in Sources */,
 				147461501ACA2B3B0031F05E /* FEUserMarkResponse.m in Sources */,
@@ -2771,7 +2802,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "bd14c854-9849-4687-a6d6-fb1cceb38393";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2805,7 +2836,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "d3367f23-56b2-4a4d-8244-b81af1020056";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";

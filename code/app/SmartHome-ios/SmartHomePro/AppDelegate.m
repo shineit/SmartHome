@@ -6,12 +6,16 @@
 //  Copyright (c) 2015年 FUEGO. All rights reserved.
 //
 
+#import "FECommonDefine.h"
+
 #import "AppDelegate.h"
 #import "FECommonDefine.h"
 #import "FEMemoryCache.h"
 #import "APService.h"
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
+#import "MCSoundBoard.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 #define SHARE_SDK_KEY @"643b63797ab7"
 
@@ -38,6 +42,13 @@
     [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
                            wechatCls:[WXApi class]];
 //    [ShareSDK connectWeChatFavWithAppId:@"wx4868b35061f87885" appSecret:@"64020361b8ec4c99936c0e3999a9f249" wechatCls:[WXApi class]];
+    
+    //注册声音
+    NSString *path = [NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/warning.aiff"];
+    [MCSoundBoard addAudioAtPath:path forKey:@"loop"];
+    AVAudioPlayer *player = [MCSoundBoard audioPlayerForKey:@"loop"];
+    
+    player.numberOfLoops = -1;
     
     return YES;
 }
@@ -85,6 +96,28 @@
     NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     kUserDefaultsSetObjectForKey(devToken, kDeviceToken);
     kUserDefaultsSync;
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    
+    NSLog(@"notification: %@",userInfo);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAlarmNotification object:userInfo];
+    
+    NSNumber *mute = kUserDefaultsObjectForKey(kMute);
+    if (!mute.boolValue) {
+        
+//        [MCSoundBoard playAudioForKey:<#(id)#> fadeInInterval:<#(NSTimeInterval)#>]
+        
+        //declare a system sound
+//        SystemSoundID soundID;
+        //Get a URL for the sound file
+//        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
+        [MCSoundBoard stopAudioForKey:@"loop"];
+        [MCSoundBoard playAudioForKey:@"loop"];
+//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)filePath, &soundID);
+//        AudioServicesPlaySystemSound(soundID);
+    }
 }
 
 

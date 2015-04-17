@@ -74,6 +74,10 @@
     [share setTitle:@"分享到微信" forState:UIControlStateNormal];
     [tview addSubview:share];
     
+    _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(2, 42, self.bounds.size.width - 4, 18)];
+    [self addSubview:_contentLabel];
+    
+    
     UIView *imageBack = [[UIView alloc] initWithFrame:CGRectMake(10, 60, self.bounds.size.width - 20, self.bounds.size.height - 60 - 40)];
     [self addSubview:imageBack];
     imageBack.layer.cornerRadius = 2.0f;

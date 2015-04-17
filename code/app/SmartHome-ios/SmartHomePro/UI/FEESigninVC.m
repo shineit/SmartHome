@@ -20,6 +20,7 @@
 #import <ZBUtilities/UIDevice+ZBUtilites.h>
 #import "FECustomerRequest.h"
 #import "FECustomerResponse.h"
+#import "APService.h"
 
 @interface FEESigninVC ()
 @property (strong, nonatomic) IBOutlet FEButton *loginBtn;
@@ -47,13 +48,14 @@
 -(void)login:(UIButton *)button{
     [self hideKeyboard];
     if (![self.usernameTextFeild.text isEqualToString:@""] && ![self.pwdTextFeild.text isEqualToString:@""]) {
-        [self displayHUD:kString(@"LOADING")];
+        [self displayHUD:kString(@"登陆中...")];
         __weak typeof(self) weakself = self;
         
         //        int returnCode = [[bpushres valueForKey:BPushRequestErrorCodeKey] intValue];
         //        NSString *requestid = [bpushres valueForKey:BPushRequestRequestIdKey];
         
         FESiginRequest *sdata = [[FESiginRequest alloc] initWtihUserName:self.usernameTextFeild.text password:[self.pwdTextFeild.text MD5] clientType:@"1" clientVersion:@"1.0" devToken:kUserDefaultsObjectForKey(kDeviceToken) push_id:nil push_userid:nil push_channelID:nil];
+        
         
         [[FEWebServiceManager sharedInstance] siginWithParam:sdata response:^(NSError *error, FESiginResponse *user){
             NSLog(@"call back");
@@ -62,6 +64,8 @@
                 FEUser *lUser = user.user;
                 [FEMemoryCache sharedInstance].user = lUser;
                 if (lUser) {
+                    //[NSSet setWithObjects:lUser.userName, nil ]
+                    [APService setTags:[NSSet set] alias:lUser.userName callbackSelector:@selector(callback) object:nil];
                     kUserDefaultsSetObjectForKey(lUser.dictionary, kLoginUser);
 
                     dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -78,6 +82,10 @@
         [alert show];
     }
     
+}
+
+-(void)callback{
+    NSLog(@"dddd");
 }
 
 #pragma mark - UITextFeildDelegate

@@ -13,6 +13,7 @@
 #import "FEMemoryCache.h"
 #import "FEWebServiceManager.h"
 #import "FEDeviceDetailVC.h"
+#import "NSDate+Formatter.h"
 
 @interface FEDeviceStatusVC (){
     NSMutableArray *_dataSource;
@@ -51,8 +52,15 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FEFireAlarm *fireAlarm = _dataSource[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"deviceStatusCell" forIndexPath:indexPath];
-    cell.textLabel.text = fireAlarm.alarmTypeName;
-    cell.detailTextLabel.text = fireAlarm.locationDesp;
+    
+    
+    if ([fireAlarm.alarmTypeName isEqualToString:@"集中器离线"]) {
+        cell.textLabel.text = [NSString stringWithFormat:@"发生%@",fireAlarm.alarmTypeName];
+        cell.detailTextLabel.text = [[NSDate dateWithTimeIntervalSince1970:fireAlarm.alarmTime.integerValue / 1000] defaultFormat];
+    }else{
+        cell.textLabel.text = [NSString stringWithFormat:@"%@发生%@",fireAlarm.sensorTypeName,fireAlarm.alarmTypeName];
+        cell.detailTextLabel.text = fireAlarm.locationDesp;
+    }
     
     return cell;
 }
@@ -64,7 +72,7 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FEFireAlarm *alarm = _dataSource[indexPath.row];
-    if (alarm.alarmKind.integerValue == 1) {
+    if (![alarm.alarmTypeName isEqualToString:@"集中器离线"]) {
         [self performSegueWithIdentifier:@"toDeviceDetailSegue" sender:alarm];
     }
 }

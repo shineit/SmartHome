@@ -22,4 +22,6 @@
 
 #define kString(_S)                            NSLocalizedString(_S, @"")
 
+#define kCall(_PHONE)       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingString:_PHONE]]];
+
 #endif

@@ -69,8 +69,10 @@
         BOOL hasNum = false;
         for (FEBageNumber *bage in self.numbers) {
             if (company.companyID.integerValue == bage.companyID.integerValue) {
-                numberLabel.text = bage.num.stringValue;
-                hasNum = YES;
+                if (bage.num.intValue != 0) {
+                    numberLabel.text = bage.num.stringValue;
+                    hasNum = YES;
+                }
                 break;
             }
         }
