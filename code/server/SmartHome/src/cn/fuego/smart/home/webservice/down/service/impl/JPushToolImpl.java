@@ -155,16 +155,16 @@ public class JPushToolImpl implements PushToolInterface
 	 */
 	private String getSoundByType(Object obj)
 	{
-		AlarmPushInfoJson alarm=(AlarmPushInfoJson) obj;
+/*		AlarmPushInfoJson alarm=(AlarmPushInfoJson) obj;
 		if(alarm!=null)
 		{
 			if(alarm.getPushType()==AlarmPushTypeEnum.LONG_PUSH.getIntValue())
 			{
-				return "warning";
+				return "warning.aiff";
 			}
 			
 		}
-		
+		*/
 		return "default";
 	}
 	/* (non-Javadoc)
