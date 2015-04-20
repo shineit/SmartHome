@@ -16,13 +16,14 @@
 #import "WXApi.h"
 #import "MCSoundBoard.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "FEHomeFuncVC.h"
+#import "FEENavgationController.h"
 #import "FECompany.h"
 
 #define SHARE_SDK_KEY @"643b63797ab7"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UIAlertViewDelegate>
 @property (nonatomic, assign) BOOL runing;
+@property (nonatomic, strong) FECompany *company;
 @end
 
 @implementation AppDelegate
@@ -35,8 +36,6 @@
     if (!user) {
         self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Signin" bundle:nil] instantiateInitialViewController];
     }
-    [APService setBadge:0];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     
     [ShareSDK registerApp:SHARE_SDK_KEY];//字符串api20为您的ShareSDK的AppKey
@@ -109,19 +108,19 @@
     
     NSString *obj = userInfo[@"obj"];
     NSData *data = [obj dataUsingEncoding:NSUTF8StringEncoding];
-    
+    [APService setBadge:0];
     if (data) {
         id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if (json) {
             NSInteger kind = [json[@"alarmKind"] integerValue];
             if (kind == 2) {
+                FECompany *company = [FECompany new];
+                self.company = company;
+                company.companyID = json[@"companyID"];
                 if (!self.runing) {
-                   UIViewController *vc = ((UINavigationController *)self.window.rootViewController).topViewController;
-                    if ([vc isKindOfClass:[FEHomeFuncVC class]]) {
-                        FECompany *company = [FECompany new];
-                        company.companyID = json[@"companyID"];
-                        [(FEHomeFuncVC *)vc toAlarmSegue:company];
-                    }
+                    FEENavgationController *vc = (FEENavgationController *)self.window.rootViewController;
+                    [vc toAlarmSegue:company];
+    
                     
                 }else{
                     NSNumber *mute = kUserDefaultsObjectForKey(kMute);
@@ -129,6 +128,9 @@
                         [MCSoundBoard stopAudioForKey:@"loop"];
                         [MCSoundBoard playAudioForKey:@"loop"];
                     }
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"告警" message:[userInfo valueForKeyPath:@"aps.alert"] delegate:self cancelButtonTitle:@"查看" otherButtonTitles:@"取消", nil];
+                    [alert show];
                 }
             }
 
@@ -136,6 +138,15 @@
     }
     
     
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        FEENavgationController *vc = (FEENavgationController *)self.window.rootViewController;
+        [vc toAlarmSegue:self.company];
+    }else{
+        [MCSoundBoard stopAudioForKey:@"loop"];
+    }
 }
 
 
@@ -157,6 +168,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAlarmNotification object:nil];
+    [APService setBadge:0];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         self.runing = YES;
     });

@@ -288,9 +288,6 @@
     return invocation;
 }
 
--(void)toAlarmSegue:(FECompany *)company{
-    [self performSegueWithIdentifier:@"toAlarmSegue" sender:company];
-}
 
 
 - (void)didReceiveMemoryWarning {

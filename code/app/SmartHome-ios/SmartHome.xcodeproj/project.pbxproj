@@ -478,6 +478,7 @@
 		14DBF34D1ADE3DED00DD784C /* ErrorCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF34B1ADE3DED00DD784C /* ErrorCode.plist */; };
 		14DBF3511ADFE43200DD784C /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DBF3501ADFE43200DD784C /* MCSoundBoard.m */; };
 		14DBF3531AE1180500DD784C /* warning.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 14DBF3521AE1180500DD784C /* warning.aiff */; };
+		14DBF3561AE14E4F00DD784C /* FEENavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DBF3551AE14E4F00DD784C /* FEENavgationController.m */; };
 		4EF2F8FFEA3157CFF4DE68EF /* libPods-SmartHomePro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4974E5D035CED3131C44721 /* libPods-SmartHomePro.a */; };
 		6742205139CD33BB3C0E147A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADDC9E0CBB270A6C9C44FF2C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -1040,6 +1041,8 @@
 		14DBF34F1ADFE43200DD784C /* MCSoundBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSoundBoard.h; sourceTree = "<group>"; };
 		14DBF3501ADFE43200DD784C /* MCSoundBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSoundBoard.m; sourceTree = "<group>"; };
 		14DBF3521AE1180500DD784C /* warning.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = warning.aiff; sourceTree = "<group>"; };
+		14DBF3541AE14E4F00DD784C /* FEENavgationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FEENavgationController.h; sourceTree = "<group>"; };
+		14DBF3551AE14E4F00DD784C /* FEENavgationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FEENavgationController.m; sourceTree = "<group>"; };
 		694C5B2A78409CA9251E1346 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ADDC9E0CBB270A6C9C44FF2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF976ED91C711DFD96560A8 /* Pods-SmartHomePro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomePro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomePro/Pods-SmartHomePro.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1326,6 +1329,8 @@
 				14B1125D1ADBF39E000B759F /* FEPopView.m */,
 				14DBF3401ADE321D00DD784C /* FESysSettingVC.h */,
 				14DBF3411ADE321D00DD784C /* FESysSettingVC.m */,
+				14DBF3541AE14E4F00DD784C /* FEENavgationController.h */,
+				14DBF3551AE14E4F00DD784C /* FEENavgationController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2471,6 +2476,7 @@
 				147461461ACA2B3B0031F05E /* FEOrderSetResponse.m in Sources */,
 				1474607F1ACA2ABD0031F05E /* SmartHomePro.xcdatamodeld in Sources */,
 				147461241ACA2B3B0031F05E /* FENewsRequest.m in Sources */,
+				14DBF3561AE14E4F00DD784C /* FEENavgationController.m in Sources */,
 				14B1126A1ADCA0F4000B759F /* FECustomerResponse.m in Sources */,
 				142FA70B1AD54C5400598B11 /* FEPlanVC.m in Sources */,
 				142FA7011AD42A3B00598B11 /* FEADResponse.m in Sources */,

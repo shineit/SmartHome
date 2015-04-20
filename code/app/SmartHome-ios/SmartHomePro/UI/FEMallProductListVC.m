@@ -20,6 +20,8 @@
 
 @interface FEMallProductListVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>{
     NSMutableArray *_products;
+    NSArray *_adList;
+    BOOL _runing;
 }
 @property (strong, nonatomic) IBOutlet UICollectionView *productCollectionView;
 @property (strong, nonatomic) IBOutlet UIScrollView *adScrollView;
@@ -33,10 +35,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"设备商城";
+    self.pageIndicate.numberOfPages = 0;
     _products = [NSMutableArray new];
+    _runing = YES;
     [self requestAD];
     [self requestProduct];
     
+}
+
+-(void)dealloc{
+    _runing = NO;
 }
 
 -(void)requestProduct{
@@ -67,8 +75,32 @@
                 [weakself.adScrollView addSubview:imageView];
                 i++;
             }
+            _adList = rsp.adList;
+            weakself.pageIndicate.numberOfPages = rsp.adList.count;
+            [weakself autoScroll];
         }
     }];
+}
+
+-(void)autoScroll{
+    __weak typeof(self) weakself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSInteger index = 0;
+        while (_runing) {
+            if (_adList && weakself.pageIndicate.numberOfPages != 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakself.adScrollView scrollRectToVisible:CGRectMake(index*weakself.adScrollView.bounds.size.width, 0, weakself.adScrollView.bounds.size.width, 10) animated:YES];
+                    weakself.pageIndicate.currentPage = index;
+                });
+                index++;
+                if (index >= _adList.count) {
+                    index = 0;
+                }
+            }
+            
+            sleep(3);
+        }
+    });
 }
 
 #pragma mark - UICollectionViewDataSource
