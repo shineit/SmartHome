@@ -75,8 +75,8 @@ public class MinaServer
 			acceptor.bind();
 		} catch (IOException e)
 		{
-			log.error("bind port failed");
-			throw new MISPException();
+			log.error("bind port failed",e);
+			throw new MISPException(e);
 		}
 	}
 

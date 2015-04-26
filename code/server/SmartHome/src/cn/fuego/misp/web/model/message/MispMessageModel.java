@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.misp.web.model.message;
 
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 
 /** 
@@ -44,8 +45,11 @@ public class MispMessageModel
 	}
 	public String getMessage()
 	{
-		message = MISPErrorMessageConst.getMessageByErrorCode(errorCode);
-		return message;
+		if(ValidatorUtil.isEmpty(message))
+		{
+			return MISPErrorMessageConst.getMessageByErrorCode(errorCode);
+		}
+		else return message;
 	}
 	public void setMessage(String message)
 	{

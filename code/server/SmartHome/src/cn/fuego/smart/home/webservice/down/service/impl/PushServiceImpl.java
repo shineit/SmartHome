@@ -61,19 +61,20 @@ public class PushServiceImpl implements PushService
 			 if(null == type)
 			 {
 				 log.warn("can not find the alarm type,the type id "+alarm.getAlarmType());
-				 break;
+				 continue;
 			 }
 			 if(AlarmPushTypeEnum.NO_PUSH.getIntValue() == type.getPushType())
 			 {
 				 log.warn("the type no need to push,the "+type);
-				 break;
+				 continue;
 			 }
-			 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
-			 
-			 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
+
 			
 
 			 //查询集中器关联用户，需要推送的用户
+			 QueryCondition conditon = new QueryCondition(ConditionTypeEnum.EQUAL, UserConcentrator.attr_concentratorID,String.valueOf(alarm.getConcentratorID()));
+			 
+			 List<UserConcentrator> userConList = ServiceContext.getInstance().getConcentratorManageService().get(UserConcentrator.class, conditon);
 			 Set<Integer> userIDSet = new HashSet<Integer>();
 			 if(!ValidatorUtil.isEmpty(userConList))
 			 {
@@ -81,6 +82,10 @@ public class PushServiceImpl implements PushService
 				 {
 					 userIDSet.add(userCon.getUserID());
 				 }
+			 }
+			 else
+			 {
+				 log.warn("can not find relate user by concentrator id " + alarm.getConcentratorID());
 			 }
 			 //获取传感器中配置的用户
 //			 FireSensor sensor= getFireSensor(alarm.getConcentratorID(), alarm.getObjID(), alarm.getObjID1(), alarm.getObjID2());
@@ -103,6 +108,7 @@ public class PushServiceImpl implements PushService
 					 
 					 if(DeviceKindEunm.FIRE_CONCENTRATOR == ApplicationProtocol.getObjKindByID(alarm.getConcentratorID()))
 					 {
+						 log.info("the concentor is fire,so push fire alarm");
 						 pushFireAlarm(pushInfo,userCon,type,alarm);
 						 
 						 

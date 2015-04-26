@@ -43,12 +43,20 @@ public class DeviceListener implements ServletContextListener
 	@Override
 	public void contextInitialized(ServletContextEvent arg0)
 	{
-		log.info("now start device message server");
-		int port = Integer.valueOf(SystemConfigInfo.getServerPort());
-		MinaServer server = MinaServer.getInstance();
-		server.init(port);
-		server.start();
-		log.info("server load sucess");
+		try
+		{
+			log.info("now start device message server");
+			int port = Integer.valueOf(SystemConfigInfo.getServerPort());
+			MinaServer server = MinaServer.getInstance();
+			server.init(port);
+			server.start();
+			log.info("server load sucess");
+		}
+		catch(Exception e)
+		{
+			log.error("device listner failed", e);
+		}
+
 		
 	} 
 

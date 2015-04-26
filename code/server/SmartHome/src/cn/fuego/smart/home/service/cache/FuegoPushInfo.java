@@ -56,6 +56,12 @@ public class FuegoPushInfo
 	{
 		this.userID = userID;
 	}
+	@Override
+	public String toString()
+	{
+		return "FuegoPushInfo [deviceType=" + deviceType + ", appID=" + appID
+				+ ", deviceID=" + deviceID + ", userID=" + userID + "]";
+	}
 
 	
 

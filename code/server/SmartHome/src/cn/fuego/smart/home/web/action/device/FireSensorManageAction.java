@@ -286,12 +286,14 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 		column5.setColumnName("联系人");
 		column5.setColumn(5);
 		column5.setDataField("contacts");
+		column5.setDefaultValue("");
 		meta.getColumnMap().put(column5.getColumn(), column5);
 	
 		ExcelColumnMeta column6 = new ExcelColumnMeta();
 		column6.setColumnName("联系人电话");
 		column6.setColumn(6);
 		column6.setDataField("contactPhone");
+		column6.setDefaultValue("");
 		meta.getColumnMap().put(column6.getColumn(), column6);
 		
 		

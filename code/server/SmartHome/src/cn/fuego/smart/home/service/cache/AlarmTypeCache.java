@@ -11,6 +11,7 @@ package cn.fuego.smart.home.service.cache;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.log.FuegoLog;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.AlarmType;
 
@@ -23,6 +24,7 @@ import cn.fuego.smart.home.domain.AlarmType;
  */
 public class AlarmTypeCache
 {
+	private FuegoLog log = FuegoLog.getLog(getClass());
 	private static AlarmTypeCache instance;
 	
 	private List<AlarmType> dataList;
@@ -44,6 +46,7 @@ public class AlarmTypeCache
 	public void reload()
 	{
 		dataList = DaoContext.getInstance().getDao(AlarmType.class).getAll();
+		log.info("the alarm type is " + dataList);
 	}
 	
 	public AlarmType getAlarmType(int typeID)

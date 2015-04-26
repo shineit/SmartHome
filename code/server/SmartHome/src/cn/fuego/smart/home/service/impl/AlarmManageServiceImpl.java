@@ -130,7 +130,7 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 			if(null == alarmType)
 			{
 				log.error("can not find the alarm type,so discard the alarm. the alarm is "+alarm);
-				break;
+				continue;
 			}
 			
 			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
@@ -201,12 +201,14 @@ public class AlarmManageServiceImpl extends MispCommonServiceImpl<Alarm> impleme
 		}
 		
 		//super.create(objList); 
+		log.info("alarm need to check push or not " + realAlarmList);
 		WebServiceContext.getInstance().getPushService().pushAlarm(realAlarmList);
 	}
  
 	@Override
 	public void clearAlarm(long concentratorID)
 	{
+		log.info("now clear alarm of " + concentratorID);
 		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"concentratorID",concentratorID));
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL,"clearStatus",AlarmClearEnum.NONE_CLEAR.getIntValue()));

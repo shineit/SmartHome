@@ -14,6 +14,7 @@ import java.util.List;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
@@ -62,6 +63,25 @@ public class FireSensorManageServiceImpl extends MispCommonServiceImpl<FireSenso
 
 		FireSensor sensor = this.getDao().getUniRecord(conditionList);
 		return sensor;
+	}
+
+	@Override
+	public void modifyOnConcentID(String oldConcentID, long newConcentID)
+	{
+		QueryCondition qc = new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID", oldConcentID);
+		List<FireSensor> fs= this.get(qc);
+		if(ValidatorUtil.isEmpty(fs))
+		{
+			return;
+		}
+		else
+		{
+			List<QueryCondition> conditionList= new ArrayList<QueryCondition>();
+			conditionList.add(qc);
+			this.ModifyByCondition(conditionList, "concentratorID", newConcentID);
+		}
+		
+		
 	}
 
  

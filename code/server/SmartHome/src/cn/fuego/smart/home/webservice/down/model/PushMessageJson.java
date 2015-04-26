@@ -37,6 +37,11 @@ public class PushMessageJson
 	{
 		this.obj = obj;
 	}
+	@Override
+	public String toString()
+	{
+		return "PushMessageJson [objType=" + objType + ", obj=" + obj + "]";
+	}
 	 
 	
 }

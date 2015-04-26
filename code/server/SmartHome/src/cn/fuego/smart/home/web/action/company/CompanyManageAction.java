@@ -31,6 +31,8 @@ import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
+import cn.fuego.smart.home.domain.FireSensor;
+import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.CompanyManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.CompanyFilterModel;
@@ -60,8 +62,8 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	private TableDataModel<SystemUser> permissionTable = new TableDataModel<SystemUser>();
 	
 	private UserCompanyModel userPermission= new UserCompanyModel();
-	
-
+	//修改集中器会产生一系列影响
+	private String oldConcentID;
 	
 	
 	/* (non-Javadoc)
@@ -80,6 +82,47 @@ public class CompanyManageAction extends DWZTableAction<Company>
 		return this.filter.getConidtionList();
 	}
 	
+	@Override
+	public String modify()
+	{
+		
+		if(!ValidatorUtil.isEmpty(this.getOldConcentID())&&!this.getOldConcentID().equals("0"))
+		{
+			if(!String.valueOf(this.obj.getConcentratorID()).equals(this.getOldConcentID()))
+			{
+				//先判断现有公司中是否还存在该集中器
+				Company c= ServiceContext.getInstance().getCompanyManageService().getCompanyByConcentorID(this.obj.getConcentratorID());
+				
+				if(null!=c)
+				{
+					log.warn("modify company on concentratorID failed, the ID is:"+this.obj.getConcentratorID());
+					this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+					this.getOperateMessage().setMessage("该集中器已经被公司:"+c.getCompanyName()+"关联!");
+					return MISP_DONE_PAGE;
+				}
+				else
+				{
+					try
+					{
+						//删除若存在的用户-集中器-公司关联关系		
+						companyService.deletePermissionByCompanyID(String.valueOf(this.obj.getCompanyID()));
+						//修改关联的传感器信息
+						ServiceContext.getInstance().getFireSensorManageService().modifyOnConcentID(this.getOldConcentID(),this.obj.getConcentratorID());
+					}
+					catch (Exception e)
+					{
+						log.error("modify company on concentratorID failed",e);
+						this.getOperateMessage().setStatusCode(MispMessageModel.FAILURE_CODE);
+						this.getOperateMessage().setErrorCode(MISPErrorMessageConst.OPERATE_FAILED);
+						return MISP_DONE_PAGE;
+					}
+				}
+			}
+		}
+		
+				
+		return super.modify();
+	}
 	@Override
 	public String show()
 	{
@@ -279,5 +322,14 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	{
 		this.filter = filter;
 	}
+	public String getOldConcentID()
+	{
+		return oldConcentID;
+	}
+	public void setOldConcentID(String oldConcentID)
+	{
+		this.oldConcentID = oldConcentID;
+	}
 
+	
 }

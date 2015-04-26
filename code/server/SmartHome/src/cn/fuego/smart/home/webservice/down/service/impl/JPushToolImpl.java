@@ -53,7 +53,7 @@ public class JPushToolImpl implements PushToolInterface
 	@Override
 	public void pushNotification(FuegoPushInfo pushInfo, String title,String content,PushMessageJson msgObj)
 	{
-		log.info("now push message by jpush,pushInfo is " + pushInfo);
+		log.info("now push message by jpush,pushInfo is " + pushInfo + ",the title is " + title + ",content is " + ", the push message is " + msgObj);
 		String alias = pushInfo.getUserID();
  
 
@@ -83,7 +83,7 @@ public class JPushToolImpl implements PushToolInterface
 	@Override
 	public void pushAll(String title, String content, PushMessageJson msgObj)
 	{
-		log.info("now push message. the tile is " + title);
+		log.info("now push message by jpush," +",the title is " + title + ",content is " + ", the push message is " + msgObj);
  
 		 
 		PushPayload payLoad = buildForAll(title,msgObj);

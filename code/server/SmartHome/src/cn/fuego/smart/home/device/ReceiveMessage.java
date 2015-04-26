@@ -169,6 +169,7 @@ public class ReceiveMessage
 
 		 
 		}
+		log.info("recieve device alarm" + alarmList);
 		return alarmList;
 	}
 	

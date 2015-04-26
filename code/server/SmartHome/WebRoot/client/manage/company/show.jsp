@@ -26,6 +26,7 @@
 		<div class="pageFormContent" layoutH="58">
 			<input type="hidden" name="obj.companyID" value="${obj.companyID}"/>
 			<input type="hidden" name="operateType" value="${operateType}" id="companyShowType"/>
+			<input type="hidden" name="oldConcentID" value="${obj.concentratorID}"/>
 			<dl style="width:50%;">
 				<dt style="width:25%;">单位名称：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.companyName"  size="30"  value="${obj.companyName}" class="required"/></dd>

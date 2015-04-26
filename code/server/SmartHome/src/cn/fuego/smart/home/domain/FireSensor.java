@@ -37,9 +37,9 @@ public class FireSensor implements PersistenceObject
 	private Integer sensorType=0;      //传感器类型
 	private String sensorTypeName="未命名";  //传感器类型名称
 	
-	private String contacts; //联系人
-	private String contactPhone; //联系电话
-	private String userName; //联系人账户
+	private String contacts=""; //联系人
+	private String contactPhone=""; //联系电话
+	private String userName=""; //联系人账户
 	
 	public long getId()
 	{

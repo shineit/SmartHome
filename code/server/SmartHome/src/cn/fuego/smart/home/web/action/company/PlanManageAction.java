@@ -116,8 +116,12 @@ public class PlanManageAction extends DWZTableAction<SensorPlan>
 		if(!ValidatorUtil.isEmpty(fileName))
 		{
 			deleteUploadFileByName(oldPicName);
+			this.obj.setPicPath(fileName);
 		}
-		this.obj.setPicPath(fileName);
+		else
+		{
+			this.obj.setPicPath(oldPicName);
+		}
 		return super.modify();
 	}
 	@Override

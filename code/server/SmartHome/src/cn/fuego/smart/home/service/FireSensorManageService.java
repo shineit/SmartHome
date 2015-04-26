@@ -22,6 +22,9 @@ public interface FireSensorManageService extends MispCommonService<FireSensor>
 {
 
 	public FireSensor getFireSensor(long concentratorID, int machineID,int loopID, int codeID);
+
+	
+	public void modifyOnConcentID(String oldConcentID, long newConcentID);
  
 	
 }

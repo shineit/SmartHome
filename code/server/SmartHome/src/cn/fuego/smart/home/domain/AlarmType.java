@@ -73,5 +73,13 @@ public class AlarmType
 	{
 		this.feedbackID = feedbackID;
 	}
+	@Override
+	public String toString()
+	{
+		return "AlarmType [typeID=" + typeID + ", typeName=" + typeName
+				+ ", kind=" + kind + ", pushType=" + pushType + ", isFeedback="
+				+ isFeedback + ", feedbackID=" + feedbackID + "]";
+	}
+	
 	
 }
