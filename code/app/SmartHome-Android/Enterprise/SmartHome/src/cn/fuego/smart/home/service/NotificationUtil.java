@@ -16,6 +16,7 @@ import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
+import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.setting.model.ConfigInfo;
@@ -67,6 +68,7 @@ public class NotificationUtil
 		//AlarmPushInfoJson alarmPushInfo =(AlarmPushInfoJson) pushMsg.getObj();
 		if(alarmPushInfo!=null)
 		{
+			
 			AlarmPushTypeEnum pushType= AlarmPushTypeEnum.getEnumByInt(alarmPushInfo.getPushType());
 	        switch(pushType)
 	        {

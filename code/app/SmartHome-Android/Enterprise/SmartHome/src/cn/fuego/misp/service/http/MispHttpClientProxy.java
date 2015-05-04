@@ -17,8 +17,6 @@ import java.util.Map;
 
 import org.apache.http.client.HttpClient;
 
-import android.os.Handler;
-
 /**
  * @ClassName: MispClientProxy
  * @Description: TODO

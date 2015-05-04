@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.smart.enterprise.R;
 

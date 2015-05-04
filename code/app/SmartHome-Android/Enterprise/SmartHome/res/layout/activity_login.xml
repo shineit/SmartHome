@@ -19,9 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="智能云防系统"
+        android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/active_color" />
+        android:textColor="@color/active_color"
+        android:textSize="@dimen/head_font_size_sm" />
 
     <LinearLayout
         android:layout_width="match_parent"

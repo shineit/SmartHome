@@ -27,7 +27,6 @@ import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.smart.enterprise.R;
-import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.base.ExitApplication;
 import cn.fuego.smart.home.webservice.up.model.base.ClientVersionJson;
 

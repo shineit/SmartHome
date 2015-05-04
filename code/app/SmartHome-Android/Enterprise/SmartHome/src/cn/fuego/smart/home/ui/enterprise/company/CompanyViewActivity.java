@@ -5,12 +5,10 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
 import cn.fuego.misp.ui.info.MispInfoListActivity;
 import cn.fuego.misp.ui.model.CommonItemMeta;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
-import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 
 public class CompanyViewActivity extends MispInfoListActivity

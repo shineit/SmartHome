@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
@@ -100,10 +101,11 @@ public class DeviceStatusActivity extends FireAlarmActivity
 	@Override
 	protected void onDestroy()
 	{
-		Intent intent=new Intent();
+/*		Intent intent=new Intent();
         intent.putExtra(IntentCodeConst.HOME_REFRESH, 3);
         intent.setAction("android.intent.action.bageNotify");//action与接收器相同
-        sendBroadcast(intent);
+        sendBroadcast(intent);*/
+        AppCache.getInstance().setHomeRefreshFlag(2);
 		super.onDestroy();
 	}
 

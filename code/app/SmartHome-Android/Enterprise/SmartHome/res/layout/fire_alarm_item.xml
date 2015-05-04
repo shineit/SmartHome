@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2#楼3层 503室"
-            android:textColor="@color/backcolor"
+            android:textColor="@color/gray"
             android:textSize="@dimen/content_font_size_sm"
             android:visibility="visible" />
 

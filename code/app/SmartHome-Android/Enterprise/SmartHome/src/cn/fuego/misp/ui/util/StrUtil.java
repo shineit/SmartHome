@@ -11,7 +11,6 @@ package cn.fuego.misp.ui.util;
 import java.security.MessageDigest;
 
 import android.widget.EditText;
-
 import cn.fuego.common.util.validate.ValidatorUtil;
 
 /** 

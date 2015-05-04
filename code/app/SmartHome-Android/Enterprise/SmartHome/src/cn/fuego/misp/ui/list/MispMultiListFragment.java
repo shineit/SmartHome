@@ -1,23 +1,18 @@
 package cn.fuego.misp.ui.list;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.http.MispHttpMessage;
-import cn.fuego.misp.ui.base.MispHttpFragment;
-import cn.fuego.misp.ui.model.FragmentResInfo;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 
 public abstract class MispMultiListFragment<E> extends MispBaseListFragment<E> implements

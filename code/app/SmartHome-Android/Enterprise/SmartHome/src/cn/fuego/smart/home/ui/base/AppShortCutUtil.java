@@ -14,8 +14,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.widget.Toast;
+import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.MainActivity;
 
 /** 
@@ -28,18 +31,34 @@ import cn.fuego.smart.home.ui.MainActivity;
 public class AppShortCutUtil extends Activity
 {
 	private final static String lancherActivityClassName = MainActivity.class.getName();
-
+	private static AppShortCutUtil instance;
 	private static Context mContext;
+	/**
+	 * 单例模式获取
+	 * @return
+	 */
+	public static AppShortCutUtil getInstance(Context context) 
+	{
+		if (null == instance)
+		{
+			instance = new AppShortCutUtil(context);
+		}
+		return instance;
 
-    public AppShortCutUtil(Context context)
-    {
-    	this.mContext=context;
-    }
+	}
+	private AppShortCutUtil(Context context)
+	{
+		this.mContext=context;
+	}
 	public void addBage()
 	{
 
 		//临时调整，待修改
-		sendBadgeNumber(String.valueOf("!"));
+		int num = AppCache.getInstance().getAppBageNum();
+
+		sendBadgeNumber(String.valueOf(num));
+
+		
 		
 	}
 	   public void sendBadgeNumber(String number) 
@@ -59,15 +78,17 @@ public class AppShortCutUtil extends Activity
 	       }
 	       else if (Build.MANUFACTURER.equalsIgnoreCase("samsung"))
 	       {
-	           sendToSony(number);
+
+	           sendToSamsumg(number);
 	       } 
 	       else if (Build.MANUFACTURER.toLowerCase().contains("sony"))
 	       {
-	           sendToSamsumg(number);
+	           sendToSony(number);
 	       }
 	       else 
 	       {
-	           Toast.makeText(mContext, "Not Support", Toast.LENGTH_LONG).show();
+	           //Toast.makeText(mContext, "Not Support", Toast.LENGTH_LONG).show();
+	    	   //break;
 	       }
 	   }
 
@@ -102,7 +123,7 @@ public class AppShortCutUtil extends Activity
 	       localIntent.putExtra("com.sonyericsson.home.intent.extra.badge.PACKAGE_NAME",mContext.getPackageName());//包名
 	       mContext.sendBroadcast(localIntent);
 
-	       Toast.makeText(mContext, "Sony," + "isSendOk", Toast.LENGTH_LONG).show();
+	      // Toast.makeText(mContext, "Sony," + "isSendOk", Toast.LENGTH_LONG).show();
 	   }
 
 	   private  void sendToSamsumg(String number) 
@@ -116,5 +137,6 @@ public class AppShortCutUtil extends Activity
 	   }
 
 
+   
 
 }

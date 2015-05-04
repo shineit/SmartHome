@@ -12,8 +12,6 @@ import java.lang.reflect.Proxy;
 
 import org.apache.http.client.HttpClient;
 
-import android.os.Handler;
-
  /** 
  * @ClassName: MispProxyFactory 
  * @Description: TODO

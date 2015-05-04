@@ -32,6 +32,7 @@ import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
@@ -262,10 +263,11 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 	protected void onDestroy()
 	{
 		ShareSDK.stopSDK(this);
-		Intent intent=new Intent();
+/*		Intent intent=new Intent();
         intent.putExtra(IntentCodeConst.HOME_REFRESH, 2);
         intent.setAction("android.intent.action.bageNotify");//action与接收器相同
-        sendBroadcast(intent);
+        sendBroadcast(intent);*/
+		AppCache.getInstance().setHomeRefreshFlag(3);
 		super.onDestroy();
 	}
 	@Override

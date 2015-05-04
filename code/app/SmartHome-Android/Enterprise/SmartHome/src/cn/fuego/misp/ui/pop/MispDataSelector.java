@@ -3,7 +3,6 @@ package cn.fuego.misp.ui.pop;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.widget.TextView;
 
 

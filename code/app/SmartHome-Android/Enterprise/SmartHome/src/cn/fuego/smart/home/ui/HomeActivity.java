@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +20,8 @@ import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
-import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.BageNumDataCache;
+import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.common.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
@@ -55,6 +56,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	private List<BageNumJson> alarmNumList=new ArrayList<BageNumJson>();
 	private List<BageNumJson> statusNumList=new ArrayList<BageNumJson>();
 	private List<BageNumJson> checkNumList=new ArrayList<BageNumJson>();
+	
+	private int backRunFlag=0;
 	@Override
 	public void initRes() 
 	{
@@ -98,14 +101,74 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
     	checkBageView = new BadgeView(HomeActivity.this, check_log_btn);
     	regBageView(checkBageView);
     	showCheckBage();
-        //注册广播，接收service中启动的线程发送过来的信息，同时更新UI  
+/*        //注册广播，接收service中启动的线程发送过来的信息，同时更新UI  
         IntentFilter filter = new IntentFilter("android.intent.action.bageNotify");  
-        this.registerReceiver(new HomeReceiver(), filter);  
+        this.registerReceiver(new HomeReceiver(), filter);  */
         
         updateCustomer();
+        
+        //注册广播  ,监听home键
+        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(  
+                Intent.ACTION_CLOSE_SYSTEM_DIALOGS)); 
 
+        //AppShortCutUtil.getInstance(this).createShortCut();
+	}
+	
+	@Override
+	protected void onRestart()
+	{
+		
+		super.onRestart();
+		//程序后台运行
+		if(backRunFlag!=0)
+		{
+			//this.showToast(this, "restart!");
+	    	showFireAlarmBage();
+	    	showFireStatusBage();
+	    	showCheckBage();
+	    	backRunFlag=0;
+	    	
+	    	AppCache.getInstance().setAppBageNum(0);
+	    	AppShortCutUtil.getInstance(this).sendBadgeNumber("0");
+		}
+		//刷新首页数字提醒
+		switch (AppCache.getInstance().getHomeRefreshFlag())
+		{
+		case 1:showFireAlarmBage();
+			break;
+		case 2:showFireStatusBage();
+			break;
+		case 3:showCheckBage();
+			break;
+		default :break;	
+		}
+		AppCache.getInstance().setHomeRefreshFlag(0);
 
 	}
+
+	/** 
+     * 监听是否点击了home键将客户端推到后台 
+     */  
+    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {  
+        String SYSTEM_REASON = "reason";  
+        String SYSTEM_HOME_KEY = "homekey";  
+        String SYSTEM_HOME_KEY_LONG = "recentapps";  
+           
+        @Override  
+        public void onReceive(Context context, Intent intent) {  
+            String action = intent.getAction();  
+            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {  
+                String reason = intent.getStringExtra(SYSTEM_REASON);  
+                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {  
+                     //表示按了home键,程序到了后台  
+                   // Toast.makeText(getApplicationContext(), "home", 1).show();  
+                backRunFlag=1;
+                }else if(TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)){  
+                    //表示长按home键,显示最近使用的程序列表  
+                }  
+            }   
+        }  
+    };
 	//更新用户信息
 	private void updateCustomer()
 	{
@@ -308,7 +371,10 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
             isExit.show();  
   
         }  
-          
+        if(keyCode == KeyEvent.KEYCODE_HOME) 
+        {
+        	this.showToast(this, "home");
+        }
         return false;  
           
     }  
@@ -332,7 +398,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
         }  
     };
 
-    class HomeReceiver extends BroadcastReceiver
+/*    class HomeReceiver extends BroadcastReceiver
     {
 
 		@Override
@@ -352,7 +418,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			}
 
 		}
-	};
+	};*/
      
 	
 }

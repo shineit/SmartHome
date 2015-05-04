@@ -31,9 +31,10 @@ public class AppCache
 	
 	private boolean firstStarted = true;
 	private boolean started = false;
-
-	
-	
+   //app桌面图标标志
+	private int appBageNum=0;
+	//首页刷新标志
+	private int homeRefreshFlag=0;
  
 
 	public boolean isFirstStarted()
@@ -159,5 +160,32 @@ public class AppCache
 
 		SharedPreUtil.getInstance().put(CONFIG_INFO, info);
 	}
-	 
+
+	public int getAppBageNum()
+	{
+		return appBageNum;
+	}
+
+	public void setAppBageNum(int appBageNum)
+	{
+		this.appBageNum = appBageNum;
+	}
+
+	public void incBage()
+	{
+		appBageNum++;
+		
+	}
+
+	public int getHomeRefreshFlag()
+	{
+		return homeRefreshFlag;
+	}
+
+	public void setHomeRefreshFlag(int homeRefreshFlag)
+	{
+		this.homeRefreshFlag = homeRefreshFlag;
+	}
+	
+	
 }

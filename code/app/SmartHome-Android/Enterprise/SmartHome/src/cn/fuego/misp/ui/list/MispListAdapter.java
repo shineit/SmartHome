@@ -2,13 +2,12 @@ package cn.fuego.misp.ui.list;
 
 import java.util.List;
 
-import cn.fuego.misp.ui.model.ListViewResInfo;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import cn.fuego.misp.ui.model.ListViewResInfo;
 
 public class MispListAdapter<E> extends ArrayAdapter<E>
 {

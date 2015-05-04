@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.service.NotificationUtil;
 import cn.fuego.smart.home.ui.MainActivity;
+import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -45,6 +47,10 @@ public class MyReceiver extends BroadcastReceiver
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知 __bundle extra_extra"+bundle.getString(JPushInterface.EXTRA_EXTRA));
             
             String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            
+			AppCache.getInstance().incBage();
+			AppShortCutUtil.getInstance(context).addBage();
+			
             NotificationUtil.getInstance().playAlarm(context, extras);
             
            // Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
@@ -53,6 +59,10 @@ public class MyReceiver extends BroadcastReceiver
             Log.d(TAG, "[MyReceiver] jtest用户点击打开了通知");
 
     		String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+    		//通过点击通知栏进入app,需要清除桌面数字提醒
+    		AppCache.getInstance().setAppBageNum(0);
+    		AppShortCutUtil.getInstance(context).sendBadgeNumber("0");
+    		
     		NotificationUtil.getInstance().showNotifcation(context, extras);
     		
            	Log.d(TAG, "[MyReceiver] bundle extra_extra"+bundle.getString(JPushInterface.EXTRA_EXTRA));

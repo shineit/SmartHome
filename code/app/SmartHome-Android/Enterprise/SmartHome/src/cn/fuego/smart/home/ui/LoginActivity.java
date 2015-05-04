@@ -97,7 +97,7 @@ public class LoginActivity extends MispBaseActivtiy
 	{
  
  
-		
+		this.waitDailog.show();
 		LoginReq req = new LoginReq();
 		req.setPassword(StrUtil.MD5(pwd));
 		req.setUserName(userName);
@@ -115,7 +115,7 @@ public class LoginActivity extends MispBaseActivtiy
 
 				if (message.isSuccess())
 				{
-			 
+					waitDailog.dismiss();
 					LoginRsp rsp = (LoginRsp) message.getMessage().obj;
 			 
 					AppCache.getInstance().update(rsp.getToken(), rsp.getUser(), rsp.getCustomer());

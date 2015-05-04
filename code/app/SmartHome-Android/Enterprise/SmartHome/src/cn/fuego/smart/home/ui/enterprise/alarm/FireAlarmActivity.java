@@ -17,6 +17,7 @@ import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
@@ -178,10 +179,11 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	@Override
 	protected void onDestroy()
 	{
-		Intent intent=new Intent();
+/*		Intent intent=new Intent();
         intent.putExtra(IntentCodeConst.HOME_REFRESH, 1);
         intent.setAction("android.intent.action.bageNotify");//action与接收器相同
-        sendBroadcast(intent);
+        sendBroadcast(intent);*/
+        AppCache.getInstance().setHomeRefreshFlag(1);
 		super.onDestroy();
 	}
 

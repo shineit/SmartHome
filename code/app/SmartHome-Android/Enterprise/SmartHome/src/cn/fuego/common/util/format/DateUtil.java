@@ -1,6 +1,5 @@
 package cn.fuego.common.util.format;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
