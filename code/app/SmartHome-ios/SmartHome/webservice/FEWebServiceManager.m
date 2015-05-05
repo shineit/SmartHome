@@ -29,6 +29,7 @@
 #import "AFHTTPClient+Json.h"
 #import <UIKit/UIKit.h>
 #import "Define.h"
+#import "FECommonDefine.h"
 
 //#define _BASE_URL @"http://115.231.168.14:8080/SmartHome/rest" //@"http://163.125.217.158:9000/SmartHome/rest/"
 
@@ -281,7 +282,7 @@
 }
 
 -(void)showerror:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:kString(@"OK") otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:kAppName message:[NSString stringWithFormat:@"%@",error.localizedDescription] delegate:nil cancelButtonTitle:kString(@"OK") otherButtonTitles:nil];
     [alert show];
 }
 

@@ -39,6 +39,7 @@ return shared##className; \
 #define kAppBuildVersion                       [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
 #define kRateTimes                            [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"RateTimes"] integerValue]
 #define kAppItunesID                           [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppItunesIdentifier"]
+#define kAppName                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
 
 //NSUserDefaults
 

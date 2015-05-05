@@ -52,7 +52,7 @@
     self.machineIDLabel.text = self.device.machineID.stringValue;
     self.loopIDLabel.text = self.device.loopID.stringValue;
     self.codeID.text = self.device.codeID.stringValue;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.device.alarmTime.integerValue / 1000];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.device.alarmTime.doubleValue / 1000];
     
     self.alarmTimeLabel.text = [date defaultFormat];//self.device.alarmTime.stringValue;
     self.sensorTypeName.text = self.device.sensorTypeName;

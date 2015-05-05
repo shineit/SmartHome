@@ -94,7 +94,8 @@
     [pview.imageView sd_setImageWithURL:[NSURL URLWithString:kImageURL(log.abnormalPic)]];
     pview.tlabel.text = log.checkItem;
     pview.personLabel.text = [NSString stringWithFormat:@"巡检员:%@",log.checker];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:log.checkTime.integerValue / 1000];
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:log.checkTime.doubleValue / 1000];
     pview.timeLabel.text = [NSString stringWithFormat:@"巡检时间:%@",[date defaultFormat]];
     [pview show];
     

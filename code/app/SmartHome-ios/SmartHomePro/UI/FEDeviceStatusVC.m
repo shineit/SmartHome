@@ -56,7 +56,7 @@
     
     if ([fireAlarm.alarmTypeName isEqualToString:@"集中器离线"]) {
         cell.textLabel.text = [NSString stringWithFormat:@"发生%@",fireAlarm.alarmTypeName];
-        cell.detailTextLabel.text = [[NSDate dateWithTimeIntervalSince1970:fireAlarm.alarmTime.integerValue / 1000] defaultFormat];
+        cell.detailTextLabel.text = [[NSDate dateWithTimeIntervalSince1970:fireAlarm.alarmTime.doubleValue / 1000] defaultFormat];
     }else{
         cell.textLabel.text = [NSString stringWithFormat:@"%@发生%@",fireAlarm.sensorTypeName,fireAlarm.alarmTypeName];
         cell.detailTextLabel.text = fireAlarm.locationDesp;

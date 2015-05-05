@@ -131,7 +131,15 @@
         FEUploadRequest *rdata = [[FEUploadRequest alloc] init];
         self.webManager = [[FEWebServiceManager alloc] initWithBaseURL:[NSURL URLWithString:__SERVICE_BASE_URL]];
         [self.webManager requstData:rdata appendDAta:^(id<AFMultipartFormData> formDate) {
-            [formDate appendPartWithFileData:UIImageJPEGRepresentation(weakself.imageView.image, 0.2) name:@"upload" fileName:@"test.jpg" mimeType:@"image/pjpeg"];
+            UIImage *image = weakself.imageView.image;
+            NSData *imagedata;
+            long compress = 0.6;
+            do{
+                imagedata = UIImageJPEGRepresentation(image, compress);
+                image = [UIImage imageWithData:imagedata];
+                NSLog(@"image size %dKB",imagedata.length / 1024);
+            }while (imagedata.length / 1024 > 250);
+            [formDate appendPartWithFileData:imagedata name:@"upload" fileName:@"test.jpg" mimeType:@"image/pjpeg"];
 //            [formDate appendPartWithFormData:UIImageJPEGRepresentation(weakself.imageView.image, 0.2) name:@"upload"];
         } responseclass:[FEBaseResponse class] response:^(NSError *error, id response) {
             FEBaseResponse *rsp = response;

@@ -126,7 +126,7 @@
             
         }];
     }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SmartHome" message:kString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:kString(@"OK") otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:kAppName message:kString(@"PLS_INPUT_") delegate:nil cancelButtonTitle:kString(@"OK") otherButtonTitles:nil];
         [alert show];
     }
     
