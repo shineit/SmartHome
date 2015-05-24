@@ -16,6 +16,7 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
+import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.CheckLogStatusEnum;
 import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.domain.CheckLog;
@@ -68,6 +69,20 @@ public class CheckLogManageServiceImpl extends MispCommonServiceImpl<CheckLog> i
 		this.ModifyByCondition(condtionList, "status", CheckLogStatusEnum.PREVIOUS.getIntValue());
 		
 		super.create(userID, objList);
+	}
+
+	@Override
+	public List<CheckLog> getCheckLog(int companyID, PageModel page, int status)
+	{
+		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
+		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "companyID", companyID));
+		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "checkResult", CheckResultEnum.ABNORMAL.getIntValue()));
+		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "status",status));
+		
+		List<CheckLog> logList = new ArrayList<CheckLog>();
+		logList = this.getDao().getAll(condtionList, page.getStartNum(), page.getPageSize());
+		
+		return logList;
 	}
 
 	 

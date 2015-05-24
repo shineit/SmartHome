@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.view.Gravity;
@@ -67,6 +68,7 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 		this.activityRes.setAvtivityView(R.layout.activity_check_log);
 		this.activityRes.setName("智慧管理");
 		//this.activityRes.getButtonIDList().add(R.id.check_log_email_btn);
+		this.activityRes.setSaveBtnName("历史查询");
 		this.listViewRes.setListView(R.id.check_log_list);
 		this.listViewRes.setListItemView(R.layout.item_check);
 	
@@ -82,7 +84,7 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 		TextView txt_title= (TextView) view.findViewById(R.id.item_check_title);
 		txt_title.setText(item.getCheckItem());		
 		TextView txt_content= (TextView) view.findViewById(R.id.item_check_content);
-		txt_content.setText(item.getCheckSys());
+		txt_content.setText(DateUtil.getStrTime(item.getCheckTime()));
 		TextView txt_result= (TextView) view.findViewById(R.id.item_check_result);
 		txt_result.setText(CheckResultEnum.getEnumByInt(item.getCheckResult()).getStrValue());
 		ImageView icon_result= (ImageView) view.findViewById(R.id.item_check_img);
@@ -96,6 +98,18 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 		}
 		
 		return view;
+	}
+
+	@Override
+	public void saveOnClick(View v)
+	{
+		Intent i = new Intent();
+		i.setClass(this, CheckLogHistroyActivity.class);
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+		Bundle mBundle= new Bundle();
+		mBundle.putSerializable(IntentCodeConst.COMPANY_INFO, company);
+        i.putExtras(mBundle);
+		this.startActivity(i);
 	}
 
 	@Override

@@ -10,14 +10,23 @@
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/misp_tilte_with_save_layout" />
+        layout="@layout/misp_tilte_with_back_layout" />
 
     <ListView
-        android:id="@+id/check_log_list"
+        android:id="@+id/alarm_history_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" >
+        android:divider="@color/backcolor"
+        android:dividerHeight="1dp"
+        android:visibility="visible" >
 
     </ListView>
+
+    <ImageView
+        android:id="@+id/alarm_history_safeinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/safemsg"
+        android:visibility="gone" />
 
 </LinearLayout>

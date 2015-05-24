@@ -88,6 +88,8 @@ public interface SensorManageRest
 	@Path("/fireAlarm/get")
 	public GetFireAlarmByIDRsp getFireAlarm(GetFireAlarmByIDReq req);
 	
- 
+	@POST
+	@Path("/fireAlarmHistory/get")
+	public GetFireAlarmByIDRsp getFireAlarmHistory(GetFireAlarmByIDReq req); 
  
 }

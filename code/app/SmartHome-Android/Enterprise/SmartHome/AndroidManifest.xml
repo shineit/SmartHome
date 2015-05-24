@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.fuego.smart.enterprise"
     android:installLocation="internalOnly"
-    android:versionCode="113"
-    android:versionName="1.1.3" >
+    android:versionCode="114"
+    android:versionName="1.1.4" >
 
     <permission
         android:name="cn.fuego.smart.enterprise.permission.JPUSH_MESSAGE"
@@ -205,14 +205,12 @@
             android:name="cn.fuego.smart.home.ui.HomeActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name="cn.fuego.smart.home.ui.common.about.AboutUsActivity"
             android:label="@string/app_name" >
         </activity>
         <activity android:name="cn.fuego.smart.home.ui.setting.upgrade.UpgradeActivity" >
         </activity>
-
 
         <!-- 播放告警音服务 -->
         <service android:name="cn.fuego.smart.home.service.AlarmSoundService" />
@@ -278,10 +276,8 @@
         <activity
             android:name="cn.fuego.misp.ui.common.upload.SelectPicActivity"
             android:theme="@style/DialogStyleBottom" />
-        
-                
-                
-         <!-- Required  . Enable it you can get statistics data with channel .jPush-->
+
+        <!-- Required  . Enable it you can get statistics data with channel .jPush -->
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />
@@ -289,7 +285,14 @@
             android:name="JPUSH_APPKEY"
             android:value="acdc6f6b24803e161d743f11" />
         <!-- </>值来自开发者平台取得的AppKey -->
-
+        <activity
+            android:name="cn.fuego.smart.home.ui.enterprise.alarm.AlarmHistoryActivity"
+            android:label="@string/title_activity_alarm_history" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.enterprise.check.CheckLogHistroyActivity"
+            android:label="@string/title_activity_check_log_histroy" >
+        </activity>
     </application>
 
 </manifest>

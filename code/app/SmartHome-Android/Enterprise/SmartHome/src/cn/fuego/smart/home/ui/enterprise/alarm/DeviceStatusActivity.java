@@ -7,16 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import cn.fuego.common.log.FuegoLog;
-import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmTypeEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.constant.IntentCodeConst;
-import cn.fuego.smart.home.webservice.down.model.AlarmPushInfoJson;
-import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 import cn.fuego.smart.home.webservice.up.model.base.FireAlarmJson;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmByIDReq;
@@ -24,7 +20,7 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 public class DeviceStatusActivity extends FireAlarmActivity
 {
-	private FuegoLog log = FuegoLog.getLog(getClass());
+	//private FuegoLog log = FuegoLog.getLog(getClass());
 
 	@Override
 	public void initRes()
@@ -32,28 +28,6 @@ public class DeviceStatusActivity extends FireAlarmActivity
  
 		super.initRes();
 		this.activityRes.setName("设备状态");
-		AlarmPushInfoJson a = new AlarmPushInfoJson();
-		a.setCompanyID(8);
-		a.setPushType(2);
-		String b = JsonConvert.ObjectToJson(a);
-		AlarmPushInfoJson c = (AlarmPushInfoJson) JsonConvert.jsonToObject(b, AlarmPushInfoJson.class);
-		log.error(""+c);
-		Object obj = JsonConvert.jsonToObject(b, Object.class);
-		String objS = JsonConvert.ObjectToJson(obj);
-		log.info(objS);
-		
-		PushMessageJson json = new PushMessageJson();
-		json.setObj(a);
-		json.setObjType(1);
-		String json1 = JsonConvert.ObjectToJson(json);
-		PushMessageJson pOjb = (PushMessageJson) JsonConvert.jsonToObject(json1, PushMessageJson.class);
-		Object aaaa = pOjb.getObj();
-		String aaas = JsonConvert.ObjectToJson(aaaa);
-		
-		AlarmPushInfoJson aaa = (AlarmPushInfoJson) JsonConvert.jsonToObject(aaas, AlarmPushInfoJson.class);
-		
-		log.info(""+aaa);
-
 	}
  
 
@@ -64,6 +38,21 @@ public class DeviceStatusActivity extends FireAlarmActivity
 		super.onCreate(savedInstanceState);
 		View btn_area = findViewById(R.id.alarm_btn_area);
 		btn_area.setVisibility(View.GONE);
+	}
+	
+
+	@Override
+	public void saveOnClick(View v)
+	{
+		Intent i = new Intent();
+		i.setClass(this, AlarmHistoryActivity.class);
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+		Bundle mBundle= new Bundle();
+		mBundle.putSerializable(IntentCodeConst.COMPANY_INFO, company);
+		mBundle.putString(IntentCodeConst.COMPANY_ID, String.valueOf(companyID));
+		mBundle.putString(IntentCodeConst.ALARM_KIND, String.valueOf(AlarmKindEnum.STATUS.getIntValue()));
+        i.putExtras(mBundle);
+		this.startActivity(i);
 	}
 
 

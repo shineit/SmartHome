@@ -20,6 +20,7 @@ import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.model.page.PageModel;
+import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.constant.SensorSetCmdEnum;
 import cn.fuego.smart.home.domain.FireAlarmView;
@@ -344,6 +345,26 @@ public class SensorManageRestImpl implements SensorManageRest
 	@Override
 	public GetFireAlarmByIDRsp getFireAlarm(GetFireAlarmByIDReq req)
 	{
+		
+	
+		return getFireAlarm(req,AlarmClearEnum.NONE_CLEAR.getIntValue());
+	}
+
+
+	@Override
+	public GetFireAlarmByIDRsp getFireAlarmHistory(GetFireAlarmByIDReq req)
+	{
+
+		return getFireAlarm(req,AlarmClearEnum.AUTO_CLEAR.getIntValue());
+	}
+	/**
+	 * 获取告警记录通用方法
+	 * @param req
+	 * @param status
+	 * @return
+	 */
+	private GetFireAlarmByIDRsp getFireAlarm(GetFireAlarmByIDReq req,int status)
+	{
 		GetFireAlarmByIDRsp rsp = new GetFireAlarmByIDRsp();
 		try
 		{
@@ -354,16 +375,23 @@ public class SensorManageRestImpl implements SensorManageRest
 				page.setPageSize(req.getPage().getPageSize());
 				page.setCurrentPage(req.getPage().getCurrentPage());
 			}
+			else
+			{
+				page.setPageSize(0);
+				page.setCurrentPage(0);
+			}
 			List<FireAlarmView> fireAlarmList= new ArrayList<FireAlarmView>();
 			//如果请求无companyID则根据userID查询
 			if(ValidatorUtil.isEmpty(req.getCompanyID()))
 			{
-				Set<String> companyIDList=MISPServiceContext.getInstance().getMISPPrivilegeManage().getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(req.getUserID()));
+				Set<String> companyIDList=MISPServiceContext.getInstance().getMISPPrivilegeManage()
+						.getObjectIDListByUser(PrivilegeAccessObjTypeEnum.COMPANY.getObjectType(), String.valueOf(req.getUserID()));
 				if(!ValidatorUtil.isEmpty(companyIDList))
 				{
 					for(String id:companyIDList)
 					{
-						List<FireAlarmView> tempList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(id,page.getStartNum(),page.getPageSize(),req.getFilterList());
+						List<FireAlarmView> tempList= ServiceContext.getInstance().getFireAlarmService()
+								.getFireAlarmByCompany(id,page.getStartNum(),page.getPageSize(),req.getFilterList(),status);
 						fireAlarmList.addAll(tempList);
 					}
 					
@@ -372,7 +400,8 @@ public class SensorManageRestImpl implements SensorManageRest
 			}
 			else
 			{
-				fireAlarmList= ServiceContext.getInstance().getFireAlarmService().getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList());
+				fireAlarmList= ServiceContext.getInstance().getFireAlarmService().
+						getFireAlarmByCompany(req.getCompanyID(),page.getStartNum(),page.getPageSize(),req.getFilterList(),status);
 			}
 			
 			
@@ -391,8 +420,7 @@ public class SensorManageRestImpl implements SensorManageRest
 		{
 			log.error("get FireAlarm error",e);
 			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
-		}	
+		}
 		return rsp;
 	}
-
 }

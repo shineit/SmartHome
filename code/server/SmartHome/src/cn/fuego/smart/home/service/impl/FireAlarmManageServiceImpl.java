@@ -15,7 +15,6 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
-import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AttributeConst;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.FireAlarmView;
@@ -34,7 +33,8 @@ public class FireAlarmManageServiceImpl extends MispCommonServiceImpl<FireAlarmV
 {
 
 	@Override
-	public List<FireAlarmView> getFireAlarmByCompany(String companyID,int startNum, int pageSize, List<AttributeJson> filterList)
+	public List<FireAlarmView> getFireAlarmByCompany(String companyID,int startNum, int pageSize, 
+			List<AttributeJson> filterList, int status)
 	{
 		Company company=ServiceContext.getInstance().getCompanyManageService().get(Integer.valueOf(companyID));
 		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
@@ -57,10 +57,13 @@ public class FireAlarmManageServiceImpl extends MispCommonServiceImpl<FireAlarmV
 			}
 			
 		}
-		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "clearStatus", AlarmClearEnum.NONE_CLEAR.getIntValue()));
+		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "clearStatus", status));
 	 	condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
 	 	fireAlarmList.addAll(this.getDao(FireAlarmView.class).getAll(condtionList, startNum, pageSize));
 	 	
 	 	return fireAlarmList;
 	}
+
+
+	
 }

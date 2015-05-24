@@ -29,10 +29,11 @@ package javax.ws.rs.core;
  * limitations under the License.
  */
 
-import javax.ws.rs.ext.MessageBodyWriter;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+import javax.ws.rs.ext.MessageBodyWriter;
 
 /**
  * Represents a response entity of a generic type {@code T}.

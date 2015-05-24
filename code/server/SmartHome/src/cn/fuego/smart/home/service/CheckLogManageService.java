@@ -11,6 +11,7 @@ package cn.fuego.smart.home.service;
 import java.util.List;
 
 import cn.fuego.misp.service.MispCommonService;
+import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.domain.CheckLog;
 
 
@@ -25,5 +26,10 @@ public interface CheckLogManageService extends MispCommonService<CheckLog>
 {
  
 	List<CheckLog> getCurrentLog(int companyID);
+
+	//通用获取巡检日志的方法，
+	//分页信息，状态
+	List<CheckLog> getCheckLog(int companyID, PageModel page, int status);
+	
 
 }

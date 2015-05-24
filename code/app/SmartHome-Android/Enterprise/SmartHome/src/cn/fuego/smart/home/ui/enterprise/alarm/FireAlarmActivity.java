@@ -37,12 +37,16 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 
 	protected CompanyJson company;
 	protected int companyID;
+	
+	private ImageView safeInfo;
 	@Override
 	public void initRes()
 	{
 		
 		this.activityRes.setAvtivityView(R.layout.activity_fire_alarm);
 		this.activityRes.setName("智慧告警");
+		this.activityRes.setSaveBtnName("历史查询");
+		
 		this.setAdapterForScrollView();
 		this.listViewRes.setListView(R.id.fire_alarm_list);
 		this.activityRes.getButtonIDList().add(R.id.fire_alarm_mute_btn);
@@ -65,6 +69,15 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 
 	}
 	
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		safeInfo = (ImageView) findViewById(R.id.fire_alarm_safemsg);
+	}
+
 
 	private void loadCompayInfo(int companyID)
 	{
@@ -100,6 +113,21 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 			stopService(serviceIntent);
 		}
 	}
+
+	@Override
+	public void saveOnClick(View v)
+	{
+		Intent i = new Intent();
+		i.setClass(this, AlarmHistoryActivity.class);
+		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+		Bundle mBundle= new Bundle();
+		mBundle.putSerializable(IntentCodeConst.COMPANY_INFO, company);
+		mBundle.putString(IntentCodeConst.COMPANY_ID, String.valueOf(companyID));
+		mBundle.putString(IntentCodeConst.ALARM_KIND, String.valueOf(AlarmKindEnum.ALARM.getIntValue()));
+        i.putExtras(mBundle);
+		this.startActivity(i);
+	}
+
 
 	@Override
 	public void onItemListClick(AdapterView<?> parent, View view, long id,	FireAlarmJson item)
@@ -171,6 +199,7 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 		if(ValidatorUtil.isEmpty(rsp.getFireAlarmList()))
 		{
 			showToast(this, "当前无异常信息！");
+			safeInfo.setVisibility(View.VISIBLE);
 		}
 		return rsp.getFireAlarmList();
 	}

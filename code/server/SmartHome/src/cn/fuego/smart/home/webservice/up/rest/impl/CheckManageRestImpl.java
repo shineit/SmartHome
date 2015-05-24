@@ -21,6 +21,7 @@ import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.service.MISPException;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.constant.MispConstant;
+import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.CheckLogStatusEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.CheckItem;
@@ -186,6 +187,54 @@ public class CheckManageRestImpl implements CheckManageRest
 		}
 	
 		return rsp;
+	}
+
+	@Override
+	public GetCheckLogByIDRsp getCheckLogHistory(GetCheckLogByIDReq req)
+	{
+		GetCheckLogByIDRsp rsp = new GetCheckLogByIDRsp();
+		try
+		{ 
+			PageModel page = new PageModel();
+			
+			if(null != req.getPage())
+			{
+				page.setPageSize(req.getPage().getPageSize());
+				page.setCurrentPage(req.getPage().getCurrentPage());
+			}
+			else
+			{
+				page.setPageSize(0);
+				page.setCurrentPage(0);
+			}
+			
+			List<CheckLog> logList =new ArrayList<CheckLog>();
+
+			logList= ServiceContext.getInstance().getCheckLogService()
+					.getCheckLog(req.getCompanyID(),page,CheckLogStatusEnum.PREVIOUS.getIntValue());
+	
+		
+			for(CheckLog log : logList)
+			{
+				CheckLogJson json = ModelConvert.checkLogToJson(log);
+				rsp.getCheckLogList().add(json);
+			}
+			
+			 
+		} 		
+		catch(MISPException e)
+		{
+			log.error("get CheckLog history error",e);
+			rsp.setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{
+			log.error("get CheckLog history error",e);
+			rsp.setErrorCode(ErrorMessageConst.ERROR_QUREY_FAILED);
+		}
+
+		return rsp;
+		
 	}
 
 

@@ -45,6 +45,10 @@ public interface CheckManageRest
 	@POST
 	@Path("/img/delete")
 	DeleteImgByNameRsp deleteImgByName(DeleteImgByNameReq req);
+	
+	@POST
+	@Path("/checkLog/get/history")
+	GetCheckLogByIDRsp getCheckLogHistory(GetCheckLogByIDReq req);
 
 
 }

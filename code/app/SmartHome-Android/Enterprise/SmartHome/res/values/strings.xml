@@ -21,7 +21,6 @@
     <string name="error_network">Failed to init due to network exception.</string>
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
-
     <string name="home_menu_alarm">智慧告警</string>
     <string name="home_menu_status">设备状态</string>
     <string name="home_menu_check">日常巡检</string>
@@ -42,5 +41,7 @@
     <string name="title_activity_product_view">ProductViewActivity</string>
     <string name="title_activity_device_status">DeviceStatusActivity</string>
     <string name="title_activity_misp_upload_img">MispUploadImgActivity</string>
+    <string name="title_activity_alarm_history">AlarmHistoryActivity</string>
+    <string name="title_activity_check_log_histroy">CheckLogHistroyActivity</string>
 
 </resources>

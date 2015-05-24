@@ -19,11 +19,12 @@
 
 package javax.ws.rs.core;
 
-import javax.ws.rs.ext.RuntimeDelegate;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.ws.rs.ext.RuntimeDelegate;
 
 /**
  * Defines the contract between a returned instance and the runtime when
