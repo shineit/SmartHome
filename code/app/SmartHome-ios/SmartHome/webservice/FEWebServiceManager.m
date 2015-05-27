@@ -25,8 +25,8 @@
 #import "FESensorSetResponse.h"
 #import "FEMarkDeletRequest.h"
 #import "FEUserMarkResponse.h"
-#import <AFNetworking/AFJSONRequestOperation.h>
-#import "AFHTTPClient+Json.h"
+//#import <AFNetworking/AFJSONRequestOperation.h>
+//#import "AFHTTPClient+Json.h"
 #import <UIKit/UIKit.h>
 #import "Define.h"
 #import "FECommonDefine.h"
@@ -49,15 +49,15 @@
     self = [super initWithBaseURL:url];
     if (self) {
         
-//        NSMutableSet *mset = [NSMutableSet setWithSet:self.responseSerializer.acceptableContentTypes];
-//        [mset addObject:@"text/html"];
-//        self.responseSerializer.acceptableContentTypes = mset;
+        NSMutableSet *mset = [NSMutableSet setWithSet:self.responseSerializer.acceptableContentTypes];
+        [mset addObject:@"text/html"];
+        self.responseSerializer.acceptableContentTypes = mset;
         
-        self.parameterEncoding = AFJSONParameterEncoding;
-        [self unregisterHTTPOperationClass:[AFHTTPRequestOperation class]];
-        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+//        self.parameterEncoding = AFJSONParameterEncoding;
+//        [self unregisterHTTPOperationClass:[AFHTTPRequestOperation class]];
+//        [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         
-//        self.requestSerializer = [AFJSONRequestSerializer serializer];
+        self.requestSerializer = [AFJSONRequestSerializer serializer];
     }
     return self;
 }
@@ -271,7 +271,8 @@
 
 //mul
 -(AFHTTPRequestOperation *)requstData:(FERequestBaseData *)rdata appendDAta:(void (^)(id<AFMultipartFormData> formDate))dataBlock responseclass:(Class)cl response:(void (^)(NSError *error, id response))block{
-    return [self POST:rdata.method constructingBodyWithBlock:dataBlock parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    return [self POST:rdata.method parameters:rdata.dictionary constructingBodyWithBlock:dataBlock success:^(AFHTTPRequestOperation *operation, id responseObject) {
         id rsp = [[cl alloc] initWithResponse:responseObject];
         [self showerrorResponse:rsp];
         block(NULL,rsp);
@@ -279,6 +280,15 @@
         [self showerror:error];
         block(error,NULL);
     }];
+    
+//    return [self POST:rdata.method constructingBodyWithBlock:dataBlock parameters:rdata.dictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        id rsp = [[cl alloc] initWithResponse:responseObject];
+//        [self showerrorResponse:rsp];
+//        block(NULL,rsp);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [self showerror:error];
+//        block(error,NULL);
+//    }];
 }
 
 -(void)showerror:(NSError *)error{

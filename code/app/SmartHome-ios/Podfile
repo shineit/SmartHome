@@ -7,8 +7,8 @@ inhibit_all_warnings!
 pod 'ZBUtilities'
 pod 'RATreeView'
 pod 'HMSegmentedControl'
-pod 'AFNetworking', '~> 1.3.4'
-#pod 'AFNetworking', '~> 2.5.0'
+#pod 'AFNetworking', '~> 1.3.4'
+pod 'AFNetworking'
 #pod 'JSONKit'
 pod 'ZBarSDK'
 pod 'SSKeychain'
@@ -21,7 +21,7 @@ pod 'SSCommon-Utilities', :git => 'https://github.com/Seven-Sun/SSCommon-Utiliti
 target 'SmartHomePro' do
     
     pod 'SSCommon-Utilities', :git => 'https://github.com/Seven-Sun/SSCommon-Utilities.git'
-    pod 'AFNetworking', '~> 1.3.4'
+    pod 'AFNetworking'
     pod 'ZBUtilities'
     pod 'ZBarSDK'
     pod 'SSKeychain'

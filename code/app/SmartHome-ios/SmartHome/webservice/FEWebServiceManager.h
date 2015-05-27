@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 FUEGO. All rights reserved.
 //
 
-#import <AFNetworking/AFHTTPClient.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "FESiginRequest.h"
 #import "FENewsRequest.h"
 #import "FEServiceOrederRequest.h"
@@ -37,7 +37,7 @@
 @class FEUserMarkResponse;
 
 
-@interface FEWebServiceManager : AFHTTPClient
+@interface FEWebServiceManager : AFHTTPRequestOperationManager
 
 //DEFINE_SINGLETON_FOR_HEADER(FEWebServiceManager);
 

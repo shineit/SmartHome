@@ -33,6 +33,7 @@
 @property (strong, nonatomic) NSArray *alarmArray;
 @property (strong, nonatomic) NSArray *statusArray;
 @property (strong, nonatomic) NSArray *checkLogArray;
+@property (assign, nonatomic) BOOL isUpdateProcess;
 
 @end
 
@@ -42,8 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = kString(@"首页");
-    
-    
+    _isUpdateProcess = NO;
     
     self.datasource =
     @[
@@ -74,6 +74,9 @@
 
 
 -(void)requestNumber{
+    if (self.isUpdateProcess) {
+        return;
+    }
     __weak typeof(self) weakself = self;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_group_t group = dispatch_group_create();
@@ -122,6 +125,7 @@
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
 //        _productRecommendBecome = YES;
 //        [weakself.shopingTableView reloadData];
+        weakself.isUpdateProcess = NO;
         [weakself.funcCollectionView reloadData];
     });
 }

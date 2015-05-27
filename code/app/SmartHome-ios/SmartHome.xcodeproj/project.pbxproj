@@ -67,7 +67,6 @@
 		147461111ACA2B3B0031F05E /* FEWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460B81ACA2B3B0031F05E /* FEWebServiceManager.m */; };
 		147461121ACA2B3B0031F05E /* FEWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460B81ACA2B3B0031F05E /* FEWebServiceManager.m */; };
 		147461131ACA2B3B0031F05E /* AFHTTPClient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460BB1ACA2B3B0031F05E /* AFHTTPClient+Json.m */; };
-		147461141ACA2B3B0031F05E /* AFHTTPClient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460BB1ACA2B3B0031F05E /* AFHTTPClient+Json.m */; };
 		147461151ACA2B3B0031F05E /* FEGetCaTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460BD1ACA2B3B0031F05E /* FEGetCaTokenRequest.m */; };
 		147461161ACA2B3B0031F05E /* FEGetCaTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460BD1ACA2B3B0031F05E /* FEGetCaTokenRequest.m */; };
 		147461171ACA2B3B0031F05E /* FEHistoryAlarmRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 147460BF1ACA2B3B0031F05E /* FEHistoryAlarmRequest.m */; };
@@ -2115,6 +2114,11 @@
 				TargetAttributes = {
 					147460731ACA2ABD0031F05E = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -2440,7 +2444,6 @@
 				147460791ACA2ABD0031F05E /* main.m in Sources */,
 				14D69BDB1ACD810A00D8A1CC /* FEMallProductListVC.m in Sources */,
 				14D69BAF1ACCD16700D8A1CC /* FEESigninVC.m in Sources */,
-				147461141ACA2B3B0031F05E /* AFHTTPClient+Json.m in Sources */,
 				147461341ACA2B3B0031F05E /* FEServiceOrderSetRequest.m in Sources */,
 				147461401ACA2B3B0031F05E /* FEHistoryAlarmResponse.m in Sources */,
 				142FA7051AD42A7900598B11 /* FEAdvertisement.m in Sources */,
