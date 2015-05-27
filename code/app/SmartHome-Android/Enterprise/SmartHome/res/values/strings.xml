@@ -28,6 +28,7 @@
     <string name="home_menu_info">基本信息</string>
     <string name="home_menu_fireknowledge">消防常识</string>
     <string name="home_menu_mall">设备商城</string>
+    <string name="home_menu_productauth">产品查询</string>
     <string name="title_activity_fire_alarm">FireAlarmActivity</string>
     <string name="title_activity_fire_alarm_view">FireAlarmViewActivity</string>
     <string name="title_activity_check">CheckActivity</string>

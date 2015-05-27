@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,11 +14,17 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.common.MispWebViewActivity;
+import cn.fuego.misp.ui.model.ImageDisplayInfo;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.service.BageNumDataCache;
@@ -58,6 +65,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	private List<BageNumJson> checkNumList=new ArrayList<BageNumJson>();
 	
 	private int backRunFlag=0;
+	
+	private final String product_auth_baseURL="http://114.112.48.163/lableFind.jsp?isFirst=isNotFirst&start=0&curPageNum=null&queryValue=1&recordFactoryId=&lableCode=";
 	@Override
 	public void initRes() 
 	{
@@ -71,6 +80,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		this.activityRes.getButtonIDList().add(R.id.home_menu_knowledge);
 		this.activityRes.getButtonIDList().add(R.id.home_menu_mall);
 		this.activityRes.getButtonIDList().add(R.id.home_about_us_btn);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_productauth);
 	} 
 	public static void jump(Context context)
 	{
@@ -328,6 +338,10 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 
 			CompanyListActivity.jump(this, CheckLogActivity.class);
 			break;
+		case R.id.home_menu_productauth:
+			//CompanyListActivity.jump(this, CheckLogActivity.class);
+			openDialog();
+			break;
 			
 		case R.id.home_menu_knowledge:
 			jumpActivity(CommonSenseActivity.class);
@@ -343,6 +357,37 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		
 	}
 
+	private void openDialog()
+	{
+		 Builder dialog = new AlertDialog.Builder(this);
+		 dialog.setCancelable(false);
+		 dialog.setTitle("请输入产品编码");
+		 LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		 LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_product_auth, null);
+		 dialog.setView(layout);
+		 final EditText code_text = (EditText)layout.findViewById(R.id.product_code);
+		     
+		 dialog.setPositiveButton("查询", new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) {
+		        	String labelCode=code_text.getText().toString().trim();
+		        	if(!ValidatorUtil.isEmpty(labelCode))
+		        	{
+		        		ImageDisplayInfo displayInfo = new ImageDisplayInfo();
+		        		displayInfo.setTilteName("产品查询");
+						displayInfo.setUrl(product_auth_baseURL+labelCode);
+		    			MispWebViewActivity.jump(HomeActivity.this, displayInfo);
+		        	}
+		        	else
+		        	{
+		        		showToast(HomeActivity.this, "输入不能为空！");
+		        	}
+		        }
+		    });
+		     
+		 dialog.setNegativeButton("取消", null);
+		 dialog.show();	
+		
+	}
 	private void jumpActivity(Class jumpActivityClass)
 	{
 		Intent i= new Intent();

@@ -13,7 +13,6 @@ import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.CheckResultEnum;
-import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.service.CheckLogCache;
 import cn.fuego.smart.home.webservice.up.model.CreateCheckLogReq;
 import cn.fuego.smart.home.webservice.up.model.base.CheckLogJson;
@@ -109,6 +108,12 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 
 	private void submitCheckLog()
 	{
+
+		if(!CheckLogCache.getInstance().isChecked())
+		{
+			showToast(this, "请至少检查一项纪录");
+			return;
+		}
 		this.waitDailog.show();
 		CreateCheckLogReq req = new CreateCheckLogReq();
 		

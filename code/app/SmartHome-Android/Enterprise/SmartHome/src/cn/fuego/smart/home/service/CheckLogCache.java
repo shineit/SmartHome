@@ -31,6 +31,9 @@ public class CheckLogCache
 	private static CheckLogCache instance;
  
 	private String companyID,companyName;
+	
+	private boolean isChecked=false;
+	
 	private CheckLogCache()
 	{
 		
@@ -50,6 +53,7 @@ public class CheckLogCache
 		if(!ValidatorUtil.isEmpty(checkItemList))
 		{
 			checkLogList.clear();
+			isChecked=false;
 			for(CheckItemJson json :checkItemList)
 			{
 				CheckLogJson temp= new CheckLogJson();
@@ -70,6 +74,10 @@ public class CheckLogCache
 	
 	public void update(CheckLogJson json)
 	{
+		if(!isChecked)
+		{
+			isChecked=true;
+		}
 		for(CheckLogJson e :checkLogList)
 		{
 			if(e.equals(json))
@@ -113,6 +121,16 @@ public class CheckLogCache
 	public void setCompanyName(String companyName)
 	{
 		this.companyName = companyName;
+	}
+
+	public boolean isChecked()
+	{
+		return isChecked;
+	}
+
+	public void setChecked(boolean isChecked)
+	{
+		this.isChecked = isChecked;
 	}
 	
 	
