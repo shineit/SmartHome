@@ -19,13 +19,14 @@
 #import "FECustomerRequest.h"
 #import "FECompany.h"
 #import "FEEWarringVC.h"
+#import "FEProductWebVC.h"
 
 #define PNG_KEY @"png"
 #define ITEM_TITLE   @"title"
 #define ITEM_ACTION     @"action"
 
 
-@interface FEHomeFuncVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface FEHomeFuncVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSArray *datasource;
 @property (nonatomic, strong) NSArray *headerArray;
@@ -51,7 +52,8 @@
         @{PNG_KEY:@"menu_control",ITEM_TITLE:kString(@"设备状态"),ITEM_ACTION:[self getIvocationWith:@selector(toDeviceStatus)]},
         @{PNG_KEY:@"menu_area",ITEM_TITLE:kString(@"日常巡检"),ITEM_ACTION:[self getIvocationWith:@selector(toRoute)]},
         @{PNG_KEY:@"menu_account",ITEM_TITLE:kString(@"基本信息"),ITEM_ACTION:[self getIvocationWith:@selector(toInfo)]},
-        @{PNG_KEY:@"menu_plane",ITEM_TITLE:kString(@"智慧管理"),ITEM_ACTION:[self getIvocationWith:@selector(toManage)]}],
+        @{PNG_KEY:@"menu_plane",ITEM_TITLE:kString(@"智慧管理"),ITEM_ACTION:[self getIvocationWith:@selector(toManage)]},
+        @{PNG_KEY:@"menu_product_auth",ITEM_TITLE:kString(@"产品查询"),ITEM_ACTION:[self getIvocationWith:@selector(queryProduct)]}],
       
       @[@{PNG_KEY:@"menu_note",ITEM_TITLE:kString(@"消防常识"),ITEM_ACTION:[self getIvocationWith:@selector(toKnowledge)]},
         @{PNG_KEY:@"menu_mall",ITEM_TITLE:kString(@"设备商城"),ITEM_ACTION:[self getIvocationWith:@selector(toStore)]}]
@@ -276,6 +278,14 @@
     [self performSegueWithIdentifier:@"toCompanySegue" sender:@(MANAGE)];
 }
 
+-(void)queryProduct{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入产品编码" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+
+
 -(void)toKnowledge{
     [self performSegueWithIdentifier:@"toFireKnowledgeSegue" sender:self];
 }
@@ -299,6 +309,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        [self performSegueWithIdentifier:@"productSegue" sender:[alertView textFieldAtIndex:0].text];
+    }
+}
+
 
 
 #pragma mark - Navigation
@@ -320,6 +337,9 @@
     }else if([segue.identifier isEqualToString:@"toAlarmSegue"]){
         FEEWarringVC *vc = segue.destinationViewController;
         vc.company = sender;
+    }else if([segue.identifier isEqualToString:@"productSegue"]){
+        FEProductWebVC *vc = segue.destinationViewController;
+        vc.productID = sender;
     }
 }
 

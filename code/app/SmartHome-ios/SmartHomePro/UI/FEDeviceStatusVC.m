@@ -14,6 +14,7 @@
 #import "FEWebServiceManager.h"
 #import "FEDeviceDetailVC.h"
 #import "NSDate+Formatter.h"
+#import "FEHistoryVC.h"
 
 @interface FEDeviceStatusVC (){
     NSMutableArray *_dataSource;
@@ -92,9 +93,16 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    FEDeviceDetailVC *vc = segue.destinationViewController;
-    vc.company = self.company;
-    vc.device = sender;
+    if ([segue.identifier isEqualToString:@"toDeviceDetailSegue"]) {
+        FEDeviceDetailVC *vc = segue.destinationViewController;
+        vc.company = self.company;
+        vc.device = sender;
+    }else if ([segue.identifier isEqualToString:@"historySegue"]){
+        FEHistoryVC *vc = segue.destinationViewController;
+        vc.type = DEVICE_STATUS;
+        vc.company = self.company;
+    }
+    
 }
 
 

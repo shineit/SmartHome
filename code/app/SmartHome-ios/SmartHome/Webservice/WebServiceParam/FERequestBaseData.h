@@ -45,13 +45,14 @@
 
 //fire alarm
 #define __METHOD_FIRE_ALARM         @"sensor/fireAlarm/get"
-
+#define __METHOD_ALARM_HISTORY      @"sensor/fireAlarmHistory/get"
 
 //check
 #define __METHOD_CHECK_LIST         @"check/item/id"
 #define __METHOD_CHECK_LOG_CREATE   @"check/checkLog/create"
 #define __METHOD_CHECK_LOG_GET      @"check/checkLog/get"
 #define __METHOD_DELET_IMG          @"check/img/delete"
+#define __METHOD_CHECK_HISTORY      @"check/checkLog/get/history"
 
 //upload
 #define __METHOD_UPLOAD             @"UploadFile!uploadFile"

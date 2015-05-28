@@ -18,6 +18,7 @@
 #import "UIColor+Theme.h"
 #import "MCSoundBoard.h"
 #import "FEGetCompanyByIdRequest.h"
+#import "FEHistoryVC.h"
 #import "FEGetCompanyByIdResponse.h"
 
 
@@ -26,6 +27,7 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet FEButton *slienceButton;
+@property (strong, nonatomic) IBOutlet UIImageView *footer;
 
 @end
 
@@ -39,6 +41,7 @@
     self.title = @"告警信息";
     [self requestCompany];
     [self requestAlarm];
+    self.tableView.tableFooterView = nil;
 }
 
 -(void)requestCompany{
@@ -64,6 +67,11 @@
             if (!error && rsp.result.errorCode.integerValue == 0) {
                 [_fireAlarm addObjectsFromArray:rsp.fireAlarmList];
                 [weakself.tableView reloadData];
+                if (_fireAlarm.count) {
+                    weakself.tableView.tableFooterView = nil;
+                }else{
+                    weakself.tableView.tableFooterView = weakself.footer;
+                }
             }
         }];
     }
@@ -106,9 +114,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    FEDeviceDetailVC *vc = segue.destinationViewController;
-    vc.company = self.company;
-    vc.device = sender;
+    if ([segue.identifier isEqualToString:@"toDeviceSegue"]) {
+        FEDeviceDetailVC *vc = segue.destinationViewController;
+        vc.company = self.company;
+        vc.device = sender;
+    }else if([segue.identifier isEqualToString:@"historySegue"]){
+        FEHistoryVC *vc = segue.destinationViewController;
+        vc.type = FIRE_ALARM;
+        vc.company = self.company;
+        
+    }
+    
 }
 
 
