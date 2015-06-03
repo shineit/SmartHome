@@ -70,6 +70,7 @@ public class AlarmFilterModel
 		}
 		//时间降序排列
 		conditionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"alarmTime"));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.ASC_ORDER,"id"));
 		return conditionList;
     }
 

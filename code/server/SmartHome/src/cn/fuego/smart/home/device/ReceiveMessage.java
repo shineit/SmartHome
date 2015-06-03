@@ -125,44 +125,45 @@ public class ReceiveMessage
 				int machineID = getIntValue(i+2,i+2);
 				int loopID = getIntValue(i+3,i+3);
 				int codeID = getIntValue(i+4,i+4);
-				FireSensor sensor = ServiceContext.getInstance().getFireSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
 				
-		
-				if(null != sensor)
+				alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
+				alarm.setObjID(machineID);
+				alarm.setObjID1(loopID);
+				alarm.setObjID2(codeID);
+				FireSensor sensor = ServiceContext.getInstance().getFireSensorManageService().getFireSensor(this.concentratorID, machineID, loopID,codeID);
+  				if(null != sensor)
 				{
-					
-					alarm.setObjType(AlarmObjTypeEnmu.FIRE_SENSOR.getIntValue());
-					alarm.setObjID(sensor.getMachineID());
-					alarm.setObjID1(sensor.getLoopID());
-					alarm.setObjID2(sensor.getCodeID());
-					alarmList.add(alarm);
+ 					alarmList.add(alarm);
 				}
 				else
 				{
-					log.error("can not find the sensor by the alarm so discard it.the alarm is " + alarm);
+					log.error("can not find the sensor by the alarm so discard it.the machineID " + alarm);
 				}
 
 			}
 			else
 			{
-				long sensorID = this.getLongValue(i,i+3);
-				int channelID = getIntValue(i+4,i+4);;
-				 HomeSensor sensor = ServiceContext.getInstance().getSensorManageService().getHomeSensor(this.concentratorID, sensorID, channelID);
-					if(null != sensor)
-					{
-						alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
-						alarm.setObjID(sensor.getSensorID());
-						alarm.setObjID1(sensor.getChannelID());
-						alarmList.add(alarm);
-					}
-					else
-					{
-						log.error("can not find the sensor by the alarm so discard it");
-						log.error("can not get sensor by concentrator is "+this.concentratorID + ",sensor id is" + sensorID + ",channel is is " + channelID);
-	 
-					}
-			 
+				long sensorID = this.getLongValue(i, i + 3);
+				int channelID = getIntValue(i + 4, i + 4);
+				 
+				alarm.setObjID(sensorID);
+				alarm.setObjID1(channelID);
+				HomeSensor sensor = ServiceContext
+						.getInstance()
+						.getSensorManageService()
+						.getHomeSensor(this.concentratorID, sensorID, channelID);
+				if (null != sensor)
+				{
+					alarm.setObjType(AlarmObjTypeEnmu.HOME_SENSOR.getIntValue());
 
+					alarmList.add(alarm);
+				} else
+				{
+					log.error("can not find the sensor by the alarm so discard it");
+					log.error("can not get sensor by concentrator is " + this.concentratorID + ",sensor id is" + sensorID
+							+ ",channel is is " + channelID);
+
+				}
 				
 			}
 				

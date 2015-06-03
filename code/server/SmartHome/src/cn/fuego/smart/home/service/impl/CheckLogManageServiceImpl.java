@@ -76,9 +76,10 @@ public class CheckLogManageServiceImpl extends MispCommonServiceImpl<CheckLog> i
 	{
 		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
 		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "companyID", companyID));
-		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "checkResult", CheckResultEnum.ABNORMAL.getIntValue()));
-		condtionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "status",status));
-		
+		//不等于方法有问题以后再改
+		condtionList.add(new QueryCondition(ConditionTypeEnum.NOT_EQUAL, "checkResult", CheckResultEnum.NONE_SET.getIntValue()));
+
+		condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER, "checkTime"));
 		List<CheckLog> logList = new ArrayList<CheckLog>();
 		logList = this.getDao().getAll(condtionList, page.getStartNum(), page.getPageSize());
 		

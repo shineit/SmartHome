@@ -40,6 +40,7 @@
 <div class="pageContent">
 	<s:form method="post" action="device/ConcentratorManage" class="pageForm required-validate" name="concentForm" onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
 		<input type="hidden" name="selectedID" value="${obj.concentratorID}" />
+		<input type="hidden" name="obj.concentratorKind" value="${obj.concentratorKind}" />
 		<div class="pageFormContent" layoutH="58">
             
 			<dl style="width:100%;">
