@@ -77,7 +77,12 @@ function resetForm(objForm){
 <!-- 图片上传预览js -->
 
 <script src="<%=request.getContextPath()%>/client/lib/newJS/uploadPreview.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KYG3EoZed6p8UMSCZlQ3VmCp"></script>
+<script  src="http://api.map.baidu.com/api?v=2.0&ak=KYG3EoZed6p8UMSCZlQ3VmCp" type="text/javascript"></script>
+<!-- 图片放大js&css -->
+<link href="<%=request.getContextPath()%>/client/lib/newCSS/e-zoom.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="<%=request.getContextPath()%>/client/lib/newJS/e-smart-zoom-jquery.js" type="text/javascript"></script>
+
+
 </head>
 
 <body scroll="no">

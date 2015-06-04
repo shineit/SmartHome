@@ -17,14 +17,13 @@ function submitFireForm(url)
 		thisForm.submit();
  		thisForm.action="device/FireSensorManage";
 	}
-
 	
 }
 
 </script>
 <style type="text/css">
-#container1{
-	position:relative; width:99%; height:330px; border:1px solid #CCC; overflow:auto;padding:5px;text-align: center;
+.container1{
+	position:relative; width: 48%; height:330px; border:1px solid #CCC; overflow:hidden;padding:5px;text-align: center;
 }
 #map1{
 	position:absolute;margin: 0 auto;text-align: center;
@@ -34,6 +33,9 @@ function submitFireForm(url)
 }
 .mark2{
 	position:absolute; width:6px; height:6px; font-size:0px; background:#0000FF;
+}	
+.imgContainer1 {
+	position:absolute;margin: 0 auto;text-align: left;
 }
 </style>
 <div class="pageContent" >
@@ -45,6 +47,20 @@ function submitFireForm(url)
 				<jsp:include page="buildingTree.jsp"/>
 				
 				<div id="jbsxBox" class="unitBox" style="margin-left:246px;">
+							<div class="pageContent">
+
+			<div class="container1" style="float:left;">
+			<div id="map1" >
+				<img   src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}"/> 
+			</div>
+
+			</div>
+			<div   style="float: right;position:relative; width: 48%; height:330px; border:1px solid #CCC; overflow:hidden;padding:5px;">
+				<div id="imgContainer1" class="imgContainer1">
+				<img  id="imageFullScreen" src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}"/> 
+				</div>
+			</div>
+			</div>
 					<div class="pageHeader" style="border:1px #B8D0D6 solid">
 							<s:form  id="pagerForm"   onsubmit="return navTabSearch(this);"  action="device/FireSensorManage" method="post" name="fireSearchForm">
 								<input type="hidden" name="pageNum" value="${pageNum}" />
@@ -96,8 +112,9 @@ function submitFireForm(url)
 							</s:form>
 						</div>
 
-						<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
-						<div class="panelBar">
+					<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
+
+					<div class="panelBar">
 								<ul class="toolBar">
 									<li><a class="add" href="FireSensorManage!show.action?selectedID=${selectedID}&operateType=create" 
 									 target="dialog" mask="true" rel="fsNew" title="传感器信息"><span>新增</span></a></li>
@@ -134,7 +151,7 @@ function submitFireForm(url)
 								<c:forEach var="e" items="${table.currentPageData}"> 	
 									<tr target="sid_user" rel="${e.id}">
 										
-										<td><input name="selectedIDList" value="${e.id}" type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
+										<td><input name="radioGroup" value="${e.id}"  type="radio" style="margin-top:5px;" onclick="selectMark(${e.id});"></td>
 										<td>${e.sensorTypeName}</td>
 										<td>${e.concentratorID}</td>
 										<td>${e.machineID}</td>
@@ -173,12 +190,10 @@ function submitFireForm(url)
 								<div class="pagination" targetType="navTab" totalCount="${page.count}" numPerPage="${page.pageSize}" pageNumShown="10" currentPage="${page.currentPage}"></div>
 
 							</div>
-						</div>
-						<div id="container1" >
-    <div id="map1">
-		<img src="<%=request.getContextPath()%>/upload/${sensorPlan.picPath}"  max-width="90%"/>
-    </div>
-</div>
+					</div>
+
+
+			
 				</div>
 	
 			</div>
@@ -190,7 +205,30 @@ function submitFireForm(url)
 	</div>
 </div>
 <script type="text/javascript">
+//全局变量
 var mark = [];
+var sensorList;
+var selectedID=null;
+
+ $(document).ready(function() {        
+        $('#imageFullScreen').smartZoom({'containerClass':'zoomableContainer'});        
+		 try{
+				var json= '<%=request.getAttribute("locationJson")%>';
+				sensorList = $.parseJSON(json);
+				init(); 
+			}catch(e)
+			{
+				alert(e);
+			} 
+    });
+//图片放大js
+
+//初始化函数
+ function init()
+{
+	bindEvent();
+	loadMark();
+}
 
  
 function getObj(id)
@@ -213,35 +251,61 @@ function getOffset(obj)
 	}
 	return {x : x, y : y, };
 }
+function refreshPoint(rect)
+{ 
+  var p=getObj("imgContainer1");
+  for(var i=0; i<sensorList.length; i++)
+	{
 
+		if(getMarkByID(sensorList[i].id,"r")!=null)
+		{
+			p.removeChild(getMarkByID(sensorList[i].id,"r"));
+		}
+		var oldX=sensorList[i].locationX;
+		var oldY=sensorList[i].locationY;
+
+		var newX= oldX*rect.scale+rect.x;
+ 		var newY= oldY*rect.scale+rect.y;
+  		addMark(p,newX,newY,sensorList[i].id,"r");
+	}
+  if(selectedID!=null)
+  {
+	//alert(selectedID);
+	getMarkByID(selectedID,"r").className ="mark2";
+  }
+  
+}
 function bindEvent()
 {
-	getObj("map1").onclick = function(oEvent){
-		//alert("OK");
-		oEvent = oEvent || event;
-		 
+	getObj("imageFullScreen").ondblclick = function(oEvent){
+		oEvent = oEvent || event;		 
 		if(null != selectedID)
 		{
-		 
 		  var container = getMapContainer();
-		  var offset = getOffset(container);
-		  var x = oEvent.clientX - offset.x;
-		  var y = oEvent.clientY - offset.y;
-		
-		 container.removeChild(getObj("mark1"+selectedID));
-		  addMark(container, x, y, selectedID);
+		  var p = getRightMapContainer();
+		  var offset = getOffset(p);
+		  var x2 = oEvent.clientX - offset.x;
+		  var y2 = oEvent.clientY - offset.y;			 
+		  p.removeChild(getMarkByID(selectedID,"r"));
+		  addMark(p, x2, y2, selectedID,"r");
+
+		  var x = oEvent.offsetX|| oEvent.layerX;//firefox用后者
+		  var y = oEvent.offsetY|| oEvent.layerY;//firefox用后者
+		  container.removeChild(getMarkByID(selectedID,"l"));
+		  addMark(container, x, y, selectedID,"l");
+
 		  selectMark(selectedID);
- 
 		  saveMark(selectedID,x,y);
+		  
 		}
 
 	};
 }
-
-function getMarkByID(id)
+//side 定义方向，r;l两个变量
+function getMarkByID(id,side)
 {
 
-   return getObj("mark1"+id);
+   return getObj("mark"+side+id);
 }
 
 function getMapContainer()
@@ -249,7 +313,12 @@ function getMapContainer()
 
    return getObj("map1");
 }
- 
+function getRightMapContainer()
+{
+
+   return getObj("imgContainer1");
+}
+
 function selectMark(id)
 {
  	if(null != selectedID)
@@ -258,34 +327,40 @@ function selectMark(id)
 	}
 	selectedID = id;
 	
-	if(null != getMarkByID(id))
+	if(null != getMarkByID(id,"l"))
 	{
-		getMarkByID(id).className ="mark2";
-	
+		getMarkByID(id,"l").className ="mark2";
+	}
+	if(getMarkByID(id,"r")!=null)
+	{
+		getMarkByID(id,"r").className ="mark2";
 	}
 
 }
 
 function unSelectMark(id)
 {
-	if(null != getMarkByID(id))
+	if(null != getMarkByID(id,"l"))
 	{
-		getMarkByID(id).className ="mark1";
-	
+		getMarkByID(id,"l").className ="mark1";	
 	}
- 
+	if(getMarkByID(id,"r")!=null)
+	{
+		getMarkByID(id,"r").className ="mark1";
+	}
 }
 
-function addMark(p, x, y, index)
+//side 定义方向，r;l两个变量
+ function addMark(p, x, y,index,side)
 {
-     
+    //alert("add:x="+x+";y="+y);
  	var div = document.createElement("div");
-	div.id = "mark1" + index;
+	div.id = "mark"+side+index;
 	div.className = "mark1";
 	div.style.left = x + "px";
 	div.style.top = y + "px";
 	p.appendChild(div);
-}
+} 
 
 function loadMark(){
  
@@ -293,17 +368,20 @@ function loadMark(){
 	 for(var i=0; i<sensorList.length; i++)
 	 {
 	 
-		 addMark(container, sensorList[i].locationX, sensorList[i].locationY, sensorList[i].id);
+		 addMark(container, sensorList[i].locationX, sensorList[i].locationY, sensorList[i].id,"l");
+		 addMark(getRightMapContainer(),sensorList[i].locationX, sensorList[i].locationY, sensorList[i].id,"r");
 	 }
-}
+} 
 
 
 function saveMark(sensorID,locationX,locationY)
 {
+	 var oldIndex=0;
 	 for(var i=0; i<sensorList.length; i++)
 	 { 
 	    if(sensorList[i].id == sensorID)
 	    {
+	      oldIndex=i;
 	      sensorList[i].locationX = locationX;
 	      sensorList[i].locationY = locationY;
 	      var sensorJson = JSON.stringify(sensorList[i]);
@@ -312,13 +390,27 @@ function saveMark(sensorID,locationX,locationY)
 					url : "device/FireSensorManage!modifyLocation.action",
 					dataType : "text",
 					data : {
-						sensorJson : sensorJson
+						sensorJson : sensorJson,
 					},
 					success : function(json) {
-						if (json == 'false') {
-							$("#warn").html("位置修改失败");
-						}  
-
+						if (json == 'false')
+						 {
+							alert("位置修改失败");
+						 } 
+						else
+						{
+							//alert(oldIndex);
+							if(oldIndex+1<sensorList.length)
+							{
+								$("input[type='radio'][name='radioGroup']").get(oldIndex+1).checked = true; 
+								selectMark(sensorList[oldIndex+1].id);
+							}
+							else
+							{
+								alert("已标记到最后一项");
+							}
+							
+						}
 					}
 
 				});
@@ -326,20 +418,6 @@ function saveMark(sensorID,locationX,locationY)
 	  }
 }
 
-try{
-var json= '<%=request.getAttribute("locationJson")%>';
-var sensorList = $.parseJSON(json);
-var selectedID;
-}catch(e)
-{alert(e);}
 
-init();
-
-function init()
-{
-	bindEvent();
-	loadMark();
-}
-
- 
+			
 </script>
