@@ -25,6 +25,7 @@ public class UserModel
 	private String password;
 	private int accountType;
 	private Date regDate;
+	private String org_id;
 	private String validateCode;
 	public int getUserID()
 	{
@@ -74,6 +75,14 @@ public class UserModel
 	public void setValidateCode(String validateCode)
 	{
 		this.validateCode = validateCode;
+	}
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
 	}
 
 	

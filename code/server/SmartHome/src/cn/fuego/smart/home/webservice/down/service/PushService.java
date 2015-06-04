@@ -23,6 +23,7 @@ import cn.fuego.smart.home.domain.News;
 public interface PushService
 {
 	void pushAlarm(List<Alarm> alarmList);
-	void pushNews(List<News> newsList);
+	public void pushNews(List<News> newsList,int userID);
+ 
 
 }

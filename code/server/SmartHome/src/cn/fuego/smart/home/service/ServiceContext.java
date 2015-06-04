@@ -13,6 +13,7 @@ import cn.fuego.smart.home.service.impl.FireSensorManageServiceImpl;
 import cn.fuego.smart.home.service.impl.HomeAlarmManageServiceImpl;
 import cn.fuego.smart.home.service.impl.KnowledgeManageServiceImpl;
 import cn.fuego.smart.home.service.impl.NewsManageServiceImpl;
+import cn.fuego.smart.home.service.impl.OrgManageServiceImpl;
 import cn.fuego.smart.home.service.impl.PlanManageServiceImpl;
 import cn.fuego.smart.home.service.impl.ProductManageServiceImpl;
 import cn.fuego.smart.home.service.impl.SensorManageServiceImpl;
@@ -241,6 +242,11 @@ public class ServiceContext
 		return customerManageService;
 	}
 
-	
+	public synchronized OrgManageService getOrgManageService()
+	{
+ 
+		return  new  OrgManageServiceImpl();
+	}
+
 	
 }

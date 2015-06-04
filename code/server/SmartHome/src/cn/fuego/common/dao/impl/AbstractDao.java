@@ -9,12 +9,14 @@
 package cn.fuego.common.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.Dao;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.hibernate.util.HibernateUtil;
@@ -36,7 +38,7 @@ public class AbstractDao<E> extends AbstractViewDao<E> implements Dao<E>
 	/**
 	 * @param clazz
 	 */
-	public AbstractDao(Class clazz)
+	public AbstractDao(Class<E> clazz)
 	{
 		super(clazz);
 		// TODO Auto-generated constructor stub
@@ -66,7 +68,7 @@ public class AbstractDao<E> extends AbstractViewDao<E> implements Dao<E>
 		log.info("the create success.");
 
 	}
-	public void create(List<E> objList)
+	public void create(Collection<E> objList)
 	{
         log.info("the object class is " + getFeaturedClass());
         if (ValidatorUtil.isEmpty(objList))
@@ -126,7 +128,7 @@ public class AbstractDao<E> extends AbstractViewDao<E> implements Dao<E>
 		log.info("the update success.");
 	}
 	
-	 public void update(List<E> objList)
+	 public void update(Collection<E> objList)
      {
          log.info("the object class is " + getFeaturedClass());
          if (ValidatorUtil.isEmpty(objList))
@@ -208,5 +210,19 @@ public class AbstractDao<E> extends AbstractViewDao<E> implements Dao<E>
 		}
 		this.delete(conditionList);
 	}
+
+	/* (non-Javadoc)
+	 * @see cn.fuego.common.dao.Dao#deleteAll()
+	 */
+	@Override
+	public void deleteAll()
+	{
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+ 
+		this.delete(conditionList);
+		
+	}
+
+ 
 
 }

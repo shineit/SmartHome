@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.webservice.down.service.impl;
 
+import java.util.List;
+
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.JsonConvert;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
@@ -150,6 +152,16 @@ public class JPushToolHomeImpl implements PushToolInterface
 	 */
 	@Override
 	public void pushMessage(FuegoPushInfo pushInfo, PushMessageJson msgObj)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	/* (non-Javadoc)
+	 * @see cn.fuego.smart.home.webservice.down.service.PushToolInterface#pushTags(java.util.List, java.lang.String, java.lang.String, cn.fuego.smart.home.webservice.down.model.PushMessageJson)
+	 */
+	@Override
+	public void pushTags(List<String> tags, String title, String content,
+			PushMessageJson msgObj)
 	{
 		// TODO Auto-generated method stub
 		

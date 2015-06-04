@@ -78,8 +78,10 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	@Override
 	public List<QueryCondition> getFilterCondition()
 	{
-		// TODO Auto-generated method stub
-		return this.filter.getConidtionList();
+    	List<QueryCondition>  conditionList = this.filter.getConidtionList();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.LIKE_LEFT, "org_id", this.getLoginUser().getOrg_id()));
+
+		return conditionList;
 	}
 	
 	@Override
@@ -240,6 +242,13 @@ public class CompanyManageAction extends DWZTableAction<Company>
 		return MISP_DONE_PAGE;
 	}
 	
+	@Override
+	public void CreateCallFoward(Company obj)
+	{
+		// TODO Auto-generated method stub
+		super.CreateCallFoward(obj);
+		obj.setOrg_id(this.getLoginUser().getOrg_id());
+	}
 	
 	@Override
 	public String deleteList()

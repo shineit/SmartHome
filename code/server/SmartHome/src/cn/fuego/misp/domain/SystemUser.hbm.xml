@@ -16,7 +16,8 @@
             <property name="role" column="role"  length='20' ></property>
             <property name="regDate" column="reg_date"  ></property>
 			<property name="status" column="status"  not-null="true" ></property>
-	
+			<property name="org_id" column="org_id"  not-null="true" ></property>
+			
 				
 	</class>
 </hibernate-mapping>

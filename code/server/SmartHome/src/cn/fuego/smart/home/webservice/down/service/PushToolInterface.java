@@ -8,6 +8,8 @@
 */ 
 package cn.fuego.smart.home.webservice.down.service;
 
+import java.util.List;
+
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 
@@ -22,5 +24,7 @@ public interface PushToolInterface
 {
  	void pushNotification(FuegoPushInfo pushInfo, String title,String content,PushMessageJson msgObj);
 	void pushAll(String title,String content,PushMessageJson msgObj);
+	public void pushTags(List<String> tags ,String title,String content,PushMessageJson msgObj);
+
 	void pushMessage(FuegoPushInfo pushInfo,PushMessageJson msgObj);
 }

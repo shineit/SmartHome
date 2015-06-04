@@ -30,6 +30,8 @@ public class SystemUser implements PersistenceObject
 	private Date regDate=DateUtil.getCurrentDate();
 	private int status; //0-已创建，1-已申请，2-已注册，3-已注销
 	
+	private String org_id;
+	
 	
 	public static String getUserIDAttr()
 	{
@@ -93,6 +95,16 @@ public class SystemUser implements PersistenceObject
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
 	}
 	
 

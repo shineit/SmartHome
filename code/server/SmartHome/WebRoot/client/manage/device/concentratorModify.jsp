@@ -47,6 +47,10 @@
 				<dt style="width:15%;">编号：</dt>			
 				<dd style="width:80%;"><input type="text" name="obj.concentratorID"  size="30" readonly="readonly" value="${obj.concentratorID}"/></dd>		 
 			</dl>
+		   <dl style="width:100%;">
+				<dt style="width:15%;">密码：</dt>			
+				<dd style="width:80%;"><input type="text" name="obj.password"  value="${obj.password}"  maxlength="500"></input></dd>
+			</dl>	
 			<dl style="width:100%;">
 				<dt style="width:15%;">IP地址：</dt>			
 				<dd style="width:80%;"><input type="text" name="obj.ipAddr"  size="30" value="${obj.ipAddr}" readonly="readonly"/></dd>
@@ -59,7 +63,8 @@
 			<dl style="width:100%;">
 				<dt style="width:15%;">描述：</dt>			
 				<dd style="width:80%;"><textarea name="obj.description" cols="80" rows="8" maxlength="500">${obj.description}</textarea></dd>
-			</dl>						
+			</dl>	
+				
 		</div>		
 
 		<div class="formBar"  style="">

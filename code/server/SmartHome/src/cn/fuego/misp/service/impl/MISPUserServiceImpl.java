@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.MISPOperLogConsant;
 import cn.fuego.misp.dao.MISPDaoContext;
@@ -52,6 +53,23 @@ public class MISPUserServiceImpl<E> extends MispCommonServiceImpl<SystemUser> im
 	}
 	
 	
+	
+	
+	@Override
+	public void validatorForCreate(SystemUser obj)
+	{
+		// TODO Auto-generated method stub
+		super.validatorForCreate(obj);
+		List<SystemUser> user  = this.get("userName", obj.getUserName());
+		if(!ValidatorUtil.isEmpty(user))
+		{
+			throw new MISPException(MISPErrorMessageConst.USER_EXISTED);
+		}
+	}
+
+
+
+
 	private SystemUser getSystemUserByUserName(String userName)
 	{
 		SystemUser targetUser = (SystemUser) MISPDaoContext.getInstance().getSystemUserDao().getUniRecord(new QueryCondition(ConditionTypeEnum.EQUAL,SystemUser.getUserNameAttr(),userName));

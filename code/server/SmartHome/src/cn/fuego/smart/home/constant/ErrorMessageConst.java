@@ -39,6 +39,9 @@ public class ErrorMessageConst extends MISPErrorMessageConst
 	public static final int BUILDING_NOT_DELETED = 10009;   //楼层还未删除
 	public static final int PLAN_NOT_DELETED = 10010;		//平面图还未删除
 	public static final int SENSOR_LIST_NOT_DELETED = 10011;  //传感器尚未删除
+	public static final int CONCENTRATOR_PASSWORD_WRONG=10012;  //集中器密码错误
+	public static final int CONCENTRATOR_HAVE_BIND=10013;  //集中器已经被绑定
+
 	
 	
 	

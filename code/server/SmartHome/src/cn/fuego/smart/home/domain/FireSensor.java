@@ -41,6 +41,8 @@ public class FireSensor implements PersistenceObject
 	private String contactPhone=""; //联系电话
 	private String userName=""; //联系人账户
 	
+	private String org_id;
+	
 	public long getId()
 	{
 		return id;
@@ -155,6 +157,15 @@ public class FireSensor implements PersistenceObject
 	{
 		this.userName = userName;
 	}
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
+	}
 
+	
 
 }

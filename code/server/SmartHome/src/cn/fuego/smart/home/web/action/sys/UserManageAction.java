@@ -41,7 +41,10 @@ public class UserManageAction extends DWZTableAction<SystemUser>
     @Override
     public List<QueryCondition> getFilterCondition()
     {
-       return this.filter.getConidtionList();	
+    	List<QueryCondition>  conditionList = this.filter.getConidtionList();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "org_id", this.getLoginUser().getOrg_id()));
+
+       return conditionList;	
     }
  
 	public MispCommonService<SystemUser> getService()
@@ -78,6 +81,14 @@ public class UserManageAction extends DWZTableAction<SystemUser>
 			}
 		}
 		return super.deleteList();
+	}
+
+	@Override
+	public void CreateCallFoward(SystemUser obj)
+	{
+		// TODO Auto-generated method stub
+		super.CreateCallFoward(obj);
+		obj.setOrg_id(this.getLoginUser().getOrg_id());
 	}
 	
 	

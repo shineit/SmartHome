@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.sun.mail.imap.Utility.Condition;
+
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.datasource.AbstractDataSource;
@@ -29,6 +31,7 @@ import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.device.ApplicationProtocol;
 import cn.fuego.smart.home.domain.Company;
+import cn.fuego.smart.home.domain.Concentrator;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.CompanyManageService;
 import cn.fuego.smart.home.service.ServiceContext;
@@ -45,6 +48,21 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 {
 	private FuegoLog log = FuegoLog.getLog(getClass());
 
+	
+	@Override
+	public void validatorForCreate(Company obj)
+	{
+ 		List<Company> company = this.get("concentratorID", obj.getConcentratorID());
+		if(!ValidatorUtil.isEmpty(company))
+		{
+			log.error("the concentrator id have been bind by other other. " + company);
+			throw new MISPException(ErrorMessageConst.CONCENTRATOR_HAVE_BIND);
+		}
+		
+		 
+		super.validatorForCreate(obj);
+	}
+
 	@Override
 	public void validator(Company obj)
 	{
@@ -56,6 +74,24 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 			
 			throw new MISPException(ErrorMessageConst.CONCENTRATOR_ID_WRONG);
 		}
+		Concentrator concentrator = ServiceContext.getInstance().getConcentratorManageService().get(obj.getConcentratorID());
+		
+		if(null == concentrator)
+		{
+			log.error("can not find the concentrator id");
+			throw new MISPException(ErrorMessageConst.CONCENTRATOR_NOT_EXISTED);
+
+		}
+		
+ 		if(ValidatorUtil.isEmpty(obj.getPassword()) || obj.getPassword().equals(concentrator.getPassword()))
+		{
+			log.warn("concetrator password is wrong");
+			throw new MISPException(ErrorMessageConst.CONCENTRATOR_PASSWORD_WRONG);
+		}
+ 		
+		
+		 
+	
 	}
 
 	@Override

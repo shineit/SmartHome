@@ -17,6 +17,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.metadata.ClassMetadata;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.GenricTypeClass;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.dao.ViewDao;
@@ -211,7 +212,7 @@ public class AbstractViewDao<E> extends GenricTypeClass<E> implements ViewDao<E>
 			tx.commit();
 		} catch (RuntimeException re)
 		{
-			log.error("getAll error",re);
+			log.error("get count error",re);
 
 			throw re;
 		} finally
@@ -226,5 +227,7 @@ public class AbstractViewDao<E> extends GenricTypeClass<E> implements ViewDao<E>
 		return count;
 
 	}
+
+ 
  
 }

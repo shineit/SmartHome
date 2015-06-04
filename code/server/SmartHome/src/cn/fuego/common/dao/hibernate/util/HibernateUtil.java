@@ -164,6 +164,11 @@ public final class HibernateUtil
 			for(QueryCondition condition:conditionList)
 			{
 				Object valueObject = null;
+				if(null == condition.getOperate() || null == condition.getAttrName() )
+				{
+					log.warn("the condition is invalid" + condition);
+					continue;
+				}
 				if(null != condition.getFirstValue())
 				{
 					valueObject = ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), condition.getFirstValue());
@@ -172,6 +177,12 @@ public final class HibernateUtil
 				{
 				case INCLUDLE:
 					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
+					break;
+				case LIKE_LEFT:
+					c.add(Restrictions.like(condition.getAttrName(),condition.getFirstValue()+"%"));
+					break;
+				case LIKE_RIGHT:
+					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()));
 					break;
 				case EXCLUDLE:
 					c.add(Restrictions.like(condition.getAttrName(),"%"+condition.getFirstValue()+"%"));
@@ -194,10 +205,7 @@ public final class HibernateUtil
 				case LOWER_EQ:	
 					c.add(Restrictions.le(condition.getAttrName(),valueObject));
 					break;	
-				case BETWEEN:	
-					Object secondValueObject = ReflectionUtil.convertToFieldObject(clazz, condition.getAttrName(), condition.getSecondValue());
-					c.add(Restrictions.between(condition.getAttrName(),valueObject,secondValueObject));
-					break;	
+ 
 				case IN:
 					List<Object> listObject = new ArrayList<Object>();
 					for(Object e : condition.getListValue())

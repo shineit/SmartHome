@@ -8,11 +8,11 @@
 */ 
 package cn.fuego.smart.home.webservice.down.service.impl;
 
+import java.util.List;
+
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.format.JsonConvert;
-import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.service.cache.FuegoPushInfo;
-import cn.fuego.smart.home.webservice.down.model.AlarmPushInfoJson;
 import cn.fuego.smart.home.webservice.down.model.PushMessageJson;
 import cn.fuego.smart.home.webservice.down.service.PushToolInterface;
 import cn.jpush.api.JPushClient;
@@ -78,6 +78,31 @@ public class JPushToolImpl implements PushToolInterface
         }
 		
 	}
+	
+	public void pushTags(List<String> tags ,String title,String content,PushMessageJson msgObj)
+	{
+		log.info("now push message by jpush," +",the title is " + title + ",content is " + ", the push message is " + msgObj);
+		 
+		 
+		PushPayload payLoad = buildForTags(tags,title,msgObj);
+		
+        JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
+        try {
+            PushResult result = jpushClient.sendPush(payLoad);
+            log.info("Got result - " + result);
+            
+        } catch (APIConnectionException e) {
+        	log.error("Connection error. Should retry later. ", e);
+            
+        } catch (APIRequestException e) {
+        	log.error("Error response from JPush server. Should review and fix it. ", e);
+        	log.info("HTTP Status: " + e.getStatus());
+        	log.info("Error Code: " + e.getErrorCode());
+        	log.info("Error Message: " + e.getErrorMessage());
+        	log.info("Msg ID: " + e.getMsgId());
+        }
+	}
+	
 	/* (non-Javadoc)
 	 * @see cn.fuego.smart.home.webservice.down.service.PushToolInterface#pushAll(java.lang.String, java.lang.String, cn.fuego.smart.home.webservice.down.model.PushMessageJson)
 	 */
@@ -128,6 +153,30 @@ public class JPushToolImpl implements PushToolInterface
 		        .setOptions(Options.newBuilder()
                         .setApnsProduction(true)
                         .build())
+		        .build();
+		return payLoad;
+	}
+	private PushPayload buildForTags(List<String> tags,String title,PushMessageJson msgObj)
+	{
+		int objType = msgObj.getObjType();
+		String obj = JsonConvert.ObjectToJson(msgObj.getObj());
+		PushPayload payLoad = PushPayload.newBuilder()
+				.setPlatform(Platform.android_ios())
+		        .setAudience(Audience.tag(tags))
+		        .setNotification(Notification.newBuilder()
+		        		.setAlert(title)
+		        		.addPlatformNotification(AndroidNotification.newBuilder()
+		        				.addExtra("obj", obj)
+		        				.addExtra("objType", objType).build())
+		        		.addPlatformNotification(IosNotification.newBuilder()
+		        				.incrBadge(1)
+		        				.setSound(getSoundByType(msgObj.getObj()))
+		        				.addExtra("obj", obj)
+		        				.addExtra("objType", objType).build())
+		        		.build())
+		        .setOptions(Options.newBuilder()
+                        .setApnsProduction(true)
+                        .build())		
 		        .build();
 		return payLoad;
 	}

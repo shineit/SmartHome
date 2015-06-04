@@ -49,6 +49,13 @@
  			<result type="dispatcher" name="modify">/client/manage/customerShow.jsp</result>
 				    
 		</action>
+ 		
+ 		<action name="OrgManage" class="cn.fuego.smart.home.web.action.sys.OrgManageAction">
+			<result type="dispatcher">/client/manage/sys/index.jsp</result>
+ 			<result type="dispatcher" name="create">/client/manage/sys/show.jsp</result>
+ 			<result type="dispatcher" name="modify">/client/manage/sys/show.jsp</result>
+				    
+		</action>
 
  	</package>
     <package name="device"  extends="misp">

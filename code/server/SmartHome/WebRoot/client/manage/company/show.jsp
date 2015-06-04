@@ -35,6 +35,12 @@
 				<dt style="width:25%;">集中器编号：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.concentratorID"  size="30"  value="${obj.concentratorID}" class="required"/></dd>
 			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">集中器密码：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.password"  size="30"  value="${obj.password}" class="required"/></dd>
+			</dl>
+						 
+			
 <%-- 			<dl style="width:50%;">
 				<dt style="width:25%;">集中器编号：</dt>			
 				<dd style="width:70%;">				

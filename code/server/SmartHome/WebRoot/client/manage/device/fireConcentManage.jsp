@@ -64,6 +64,8 @@
 				
 				<th width="10%" align="center">编号</th>
 				<th width="15%" align="center">IP地址</th>
+			    <th width="15%" align="center">端口号</th>
+				
 				<th width="15%" align="center">名称</th>
 				<th width="25%" align="center">集中器描述</th>
 				<th width="10%" align="center">状态</th>
@@ -78,6 +80,8 @@
 				
 	            <td>${e.concentratorID}</td>
 	            <td>${e.ipAddr}</td>
+	            <td>${e.port}</td>
+	            
 	            <td>${e.name}</td>
 	            <td>${e.description}</td>
 	            <td>

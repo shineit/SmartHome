@@ -18,6 +18,7 @@
 		 </property>
 		 <property name="date" column="RELEASE_DATE"></property>
 		 <property name="status" column="STATUS"></property>		 
+		 <property name="org_id" column="org_id"></property>
 		 
 	</class>
 </hibernate-mapping>

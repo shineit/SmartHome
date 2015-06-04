@@ -24,6 +24,8 @@
 		 <property name="contacts" column="CONTACTS"></property>	
 		 <property name="contactPhone" column="CONTACT_PHONE"></property>
 		 <property name="userName" column="USER_NAME"></property>	
+		 		<property name="org_id" column="org_id"></property>
+		 
 	</class>
  
 </hibernate-mapping>

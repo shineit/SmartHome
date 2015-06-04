@@ -68,6 +68,7 @@ public class LoginAction extends MISPAction
 			user.setUserID(systemUser.getUserID());
 			user.setRegDate(systemUser.getRegDate());
 			user.setAccountType(systemUser.getRole());
+			user.setOrg_id(systemUser.getOrg_id());
 			// Loading MenuTree
 			menuTreeItem = MISPServiceContext.getInstance().getUserService().getMenuTreeByUserID(user.getUserID());
 

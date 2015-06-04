@@ -25,11 +25,13 @@ public interface ViewDao<E>
 {
 	String getUniPriKey();
 	List<E> getAll();
+	
 	long getCount(List<QueryCondition> conditionList);
 	List<E> getAll(List<QueryCondition> conditionList);
 	List<E> getAll(List<QueryCondition> conditionList,int startNum,int pageSize);
 	List<E> getAll(QueryCondition condition);
 
+ 
 	E getUniRecord(QueryCondition condition);
 	E getUniRecord(List<QueryCondition> conditionList);
 

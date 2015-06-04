@@ -27,6 +27,7 @@ public class Company implements PersistenceObject
 	
 	public static final String PRI_KEY = "companyID";
 	private long concentratorID=0;     //集中器编号
+	private String password;
 	private int companyID;					//单位编号，自增长，主键
 	private String companyName; 			//单位名称，可变需控制长度
 	private String applyName;				//使用名称，可变需控制长度
@@ -44,6 +45,8 @@ public class Company implements PersistenceObject
 	private String extendInfo;				//扩展字段，其他信息补充
 	
 	private String fireRisk;                //火灾危险性
+	
+	private String org_id;
 	
 	
 	public long getConcentratorID()
@@ -173,6 +176,22 @@ public class Company implements PersistenceObject
 	public void setFireRisk(String fireRisk)
 	{
 		this.fireRisk = fireRisk;
+	}
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	public void setPassword(String password)
+	{
+		this.password = password;
 	}
 
 	

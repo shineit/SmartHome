@@ -73,6 +73,8 @@ function submitFormC(url){
 				<!-- <th width="5%" align="center"><input type="checkbox" group="selectedIDList" class="checkboxCtrl" style="margin-top:5px;"></th> -->			
 				<th width="10%" align="center">编号</th>
 				<th width="15%" align="center">IP地址</th>
+				<th width="15%" align="center">端口号</th>
+				
 				<th width="15%" align="center">名称</th>
 				<th width="25%" align="center">集中器描述</th>
 				<th width="10%" align="center">状态</th>
@@ -89,6 +91,8 @@ function submitFormC(url){
 				<%-- <td><input name="selectedIDList" value="${e.concentratorID}" type="checkbox" style="margin-top:5px;"></td> --%>	        
 	            <td>${e.concentratorID}</td>
 	            <td>${e.ipAddr}</td>
+	            <td>${e.port}</td>
+ 	            
 	            <td>${e.name}</td>
 	            <td>${e.description}</td>
 	            <td>

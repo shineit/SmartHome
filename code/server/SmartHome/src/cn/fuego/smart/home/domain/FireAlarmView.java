@@ -56,6 +56,7 @@ public class FireAlarmView implements PersistenceObject
 	private int kind;			//0-告警；1-设备状态；
 	private int pushType;		//0-不推送；1-推送不长鸣；2-退送且长鸣
 	private String companyName;     //公司名字
+	private String org_id;
 	public int getId()
 	{
 		return id;
@@ -271,6 +272,14 @@ public class FireAlarmView implements PersistenceObject
 	public void setCompanyName(String companyName)
 	{
 		this.companyName = companyName;
+	}
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
 	}
 	
 

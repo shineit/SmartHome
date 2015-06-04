@@ -29,13 +29,14 @@ public interface Dao<E> extends ViewDao<E>
 
 	void create(E object);
 	
-	void create(List<E> objList);
+	void create(Collection<E> objList);
 
 
 	void update(E object);
 	
-	void update(List<E> objList);
-
+	void update(Collection<E> objList);
+	
+ 	void deleteAll();
  
 	void delete(List<QueryCondition> conditionList);
 	

@@ -165,6 +165,7 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 				sensor.setPlanNodeID(sensorPlan.getPlanID());
 				sensor.setSensorTypeName(SensorTypeCache.getInstance().getSensorType(sensor.getSensorType()).getTypeName());
 				
+				sensor.setOrg_id(this.getLoginUser().getOrg_id());
 				service.validatorForCreate(sensor);
 /*				if(sensor.getId()==0)
 				{
@@ -382,6 +383,17 @@ public class FireSensorManageAction extends DWZTableAction<FireSensor>
 			}
 		}
 		return this.getNextPage();
+	}
+
+
+
+
+	@Override
+	public void CreateCallFoward(FireSensor obj)
+	{
+		// TODO Auto-generated method stub
+		super.CreateCallFoward(obj);
+		obj.setOrg_id(this.getLoginUser().getOrg_id());
 	}
 
 

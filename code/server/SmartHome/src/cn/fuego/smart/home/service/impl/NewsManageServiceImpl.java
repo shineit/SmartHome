@@ -47,7 +47,7 @@ public class NewsManageServiceImpl extends MispCommonServiceImpl<News> implement
 		super.create(userID, obj);
 		List<News> objList = new ArrayList<News>();
 		objList.add(obj);
-		WebServiceContext.getInstance().getPushService().pushNews(objList);
+		WebServiceContext.getInstance().getPushService().pushNews(objList,userID);
 		
 		
 	}

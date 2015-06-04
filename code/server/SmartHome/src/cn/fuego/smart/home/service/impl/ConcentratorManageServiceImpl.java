@@ -119,6 +119,8 @@ public class ConcentratorManageServiceImpl extends MispCommonServiceImpl<Concent
 		{
 			log.info("the concentrator is offline.the concentrator "+ old);
 			old.setStatus(ConcentratorStatusEnum.OFFLINE.getIntValue());
+			old.setAddr("");
+			old.setPort(0);
 			
 			this.modify(old);
 			Alarm alarm = getConcentorAlarm(old,AlarmTypeEnum.OFF_LINE);

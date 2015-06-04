@@ -32,6 +32,10 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	private int numPerPage = 20;
 	private int pageNum = 1;
 	
+	public void CreateCallFoward(E obj)
+	{
+		
+	}
 	
 	public PageModel getPage()
 	{
@@ -61,6 +65,7 @@ public abstract class DWZTableAction<E> extends TableAction<E>
 	{
 		try
 		{
+			CreateCallFoward(this.getObj());
 			this.getService().create(this.getLoginUser().getUserID(),this.getObj());
 			this.getOperateMessage().setCallbackType(MispMessageModel.CLOSE_CURENT_PAGE);
 			

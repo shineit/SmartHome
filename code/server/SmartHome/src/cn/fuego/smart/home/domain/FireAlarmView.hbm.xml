@@ -41,6 +41,7 @@
 		 <property name="pushType" column="PUSH_TYPE"></property>
 	
 		<property name="companyName" column="COMPANY_NAME"></property>
+		<property name="org_id" column="org_id"></property>
 	</class>
  
 </hibernate-mapping>

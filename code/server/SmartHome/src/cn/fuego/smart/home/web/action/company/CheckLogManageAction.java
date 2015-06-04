@@ -8,12 +8,16 @@
 */ 
 package cn.fuego.smart.home.web.action.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.smart.home.domain.CheckLog;
+import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.service.CheckLogManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.CheckLogFilterModel;
@@ -47,8 +51,24 @@ public class CheckLogManageAction extends DWZTableAction<CheckLog>
 	@Override
 	public List<QueryCondition> getFilterCondition()
 	{
-		// TODO Auto-generated method stub
-		return this.filter.getConidtionList();
+		List<QueryCondition> conditionList = super.getFilterCondition();
+		if(null == conditionList)
+		{
+			conditionList = new ArrayList<QueryCondition>();
+		}
+		
+		//只能看到自己公司的巡检日志
+		QueryCondition comCon = new QueryCondition(ConditionTypeEnum.EQUAL, "org_id",this.getLoginUser().getOrg_id());
+		List<Company> comList = MISPDaoContext.getInstance().getDao(Company.class).getAll(comCon);
+		
+		List<Integer> commID = new ArrayList<Integer>();
+		for(Company comm : comList)
+		{
+			commID.add(comm.getCompanyID());
+		}
+		conditionList.add( new QueryCondition(ConditionTypeEnum.EQUAL, "companyID",commID));
+
+    	return conditionList;
 	}
 	public CheckLogFilterModel getFilter()
 	{

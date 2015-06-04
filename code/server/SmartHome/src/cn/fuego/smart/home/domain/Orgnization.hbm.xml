@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.smart.home.domain">
+	<class name="Organization" table="misp_org">
+
+	    <id name="org_uuid" column="org_uuid"> 
+	        <generator class="uuid.hex"/> 
+		</id>
+		<property name="org_id" column="org_id"></property>
+	    <property name="org_parent_id" column="org_parent_id"></property>
+	    <property name="org_name" column="org_name"></property>
+ 		<property name="org_desp" column="org_desp"></property> 
+ 		<property name="admin_role" column="admin_role"></property> 
+ 		<property name="admin_name" column="admin_name"></property> 
+ 		
+ 	</class>
+</hibernate-mapping>

@@ -10,6 +10,7 @@ package cn.fuego.smart.home.web.action.device;
 
 import java.util.List;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
@@ -43,7 +44,10 @@ public class FireAlarmManageAction extends DWZTableAction<FireAlarmView>
 	public List<QueryCondition> getFilterCondition()
 	{
  
-		return this.getFilter().getConidtionList();
+    	List<QueryCondition>  conditionList = this.filter.getConidtionList();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.LIKE_LEFT, "org_id", this.getLoginUser().getOrg_id()));
+
+		return conditionList;
 	}
 
 	public AlarmFilterModel getFilter()

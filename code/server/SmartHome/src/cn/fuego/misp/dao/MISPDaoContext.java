@@ -104,5 +104,9 @@ public class MISPDaoContext
 		return clientVersionDao;
 	}	
  
+	public <T> Dao<T> getDao(Class<T> clazz)
+	{
+		return new AbstractDao<T>(clazz);
+	}
 	 
 }

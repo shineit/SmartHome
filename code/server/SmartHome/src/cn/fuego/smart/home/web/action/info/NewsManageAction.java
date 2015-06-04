@@ -8,12 +8,15 @@
 */ 
 package cn.fuego.smart.home.web.action.info;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MispCommonService;
 import cn.fuego.misp.web.action.basic.DWZTableAction;
 import cn.fuego.smart.home.domain.News;
@@ -46,8 +49,15 @@ public class NewsManageAction extends DWZTableAction<News>
     @Override
     public List<QueryCondition> getFilterCondition()
     {
-      	
-    	return this.newsFilter.getConidtionList();
+		List<QueryCondition> conditionList = super.getFilterCondition();
+		if(null == conditionList)
+		{
+			conditionList = new ArrayList<QueryCondition>();
+		}
+ 
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "org_id",this.getLoginUser().getOrg_id()));
+
+    	return conditionList;
     	
     }
     
@@ -77,6 +87,14 @@ public class NewsManageAction extends DWZTableAction<News>
 	{
 		// TODO Auto-generated method stub
 		return this.newsService;
+	}
+	
+	@Override
+	public void CreateCallFoward(News obj)
+	{
+		// TODO Auto-generated method stub
+		super.CreateCallFoward(obj);
+		obj.setOrg_id(this.getLoginUser().getOrg_id());
 	}
 
 }

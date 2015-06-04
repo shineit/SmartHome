@@ -26,6 +26,8 @@
 		 <property name="extendInfo" column="EXTEND_INFO"></property>
  		<property name="officerPhone" column="OFFICER_PHONE"></property>
  		<property name="fireRisk" column="FIRE_RISK"></property>
+        <property name="org_id" column="org_id"></property>
+ 		
 	</class>
  
 </hibernate-mapping>

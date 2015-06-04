@@ -18,6 +18,8 @@ import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
+import cn.fuego.misp.dao.MISPDaoContext;
+import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.DeviceKindEunm;
@@ -29,6 +31,7 @@ import cn.fuego.smart.home.domain.AlarmType;
 import cn.fuego.smart.home.domain.Company;
 import cn.fuego.smart.home.domain.FireSensor;
 import cn.fuego.smart.home.domain.News;
+import cn.fuego.smart.home.domain.Organization;
 import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.service.cache.AlarmTypeCache;
@@ -204,8 +207,32 @@ public class PushServiceImpl implements PushService
 	 * @see cn.fuego.smart.home.webservice.down.service.PushService#pushNews(java.util.List)
 	 */
 	@Override
-	public void pushNews(List<News> newsList)
+	public void pushNews(List<News> newsList,int userID)
 	{
+		 SystemUser user = MISPServiceContext.getInstance().getUserService().get(userID);
+		 if(null == user)
+		 {
+			 log.info("can not find the user");
+			 return;
+		 }
+		 
+		 QueryCondition condition = new QueryCondition(ConditionTypeEnum.LIKE_LEFT, "org_id",user.getOrg_id());
+		 
+		 List<Organization> orgList = MISPDaoContext.getInstance().getDao(Organization.class).getAll(condition);
+		 
+		 List<String> tags = new ArrayList<String>();
+		 if(!ValidatorUtil.isEmpty(orgList))
+		 {
+			 for(Organization org : orgList)
+			 {
+				 tags.add(org.getOrg_id());
+			 }
+		 }
+		 else
+		 {
+			 log.info("no tags need to push");
+			 return;
+		 }
 		 
 		 for(News e : newsList)
 		 {
@@ -216,7 +243,7 @@ public class PushServiceImpl implements PushService
 			 String content = "";
 			 json.setObjType(PushMessagTypeEnum.NEWS_MSG.getIntValue());
 			 json.setObj(e.getNewsID());
-			 PushToolFactory.getInstance().getHomePushTool().pushAll(title, content, json);
+			 PushToolFactory.getInstance().getPushTool().pushTags(tags,title, content, json);
 		 
 		 }
 	}

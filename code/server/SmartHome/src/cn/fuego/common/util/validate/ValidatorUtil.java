@@ -8,6 +8,7 @@
 */ 
 package cn.fuego.common.util.validate;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -29,7 +30,7 @@ public class ValidatorUtil
 		return ValidatorRules.isValid( ValidatorRules.isLength(min, maxLength), value);
 		 
 	}
-	public static boolean isEmpty(List list)
+	public static boolean isEmpty(Collection list)
 	{
 		if(null == list)
 		{
@@ -41,18 +42,7 @@ public class ValidatorUtil
 		}
 		return false;
 	}
-	public static boolean isEmpty(Set list)
-	{
-		if(null == list)
-		{
-			return true;
-		}
-		if(list.isEmpty())
-		{
-			return true;
-		}
-		return false;
-	}
+ 
 	public static boolean isEmpty(String str)
 	{
 		if(null == str)

@@ -1,6 +1,7 @@
 package cn.fuego.smart.home.domain;
 
 import cn.fuego.common.domain.PersistenceObject;
+import cn.fuego.common.util.SystemConfigInfo;
 import cn.fuego.smart.home.constant.DeviceKindEunm;
 
 /**
@@ -27,6 +28,8 @@ public class Concentrator implements PersistenceObject
 	private String description;		//集中器描述(预留字段)
 	private String addr;			//集中器地址(预留字段)
 	private String mark;			//自定义标签(预留字段)
+	
+	private String password = SystemConfigInfo.getDefaultPassword(); 
 	
 	private int concentratorKind = DeviceKindEunm.HOME_CONCENTRATOR.getIntValue();
 	
@@ -154,6 +157,14 @@ public class Concentrator implements PersistenceObject
 				+ ", locationNS=" + locationNS + ", locationWE=" + locationWE
 				+ ", name=" + name + ", description=" + description + ", addr="
 				+ addr + ", mark=" + mark + "]";
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	public void setPassword(String password)
+	{
+		this.password = password;
 	}
 	
 	

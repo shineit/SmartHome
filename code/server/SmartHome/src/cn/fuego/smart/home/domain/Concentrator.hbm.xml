@@ -20,6 +20,8 @@
 		 <property name="description" column="DESCRIPTION"></property>	
 		 <property name="addr" column="ADDR"></property>
 		 <property name="mark" column="MARK"></property>
+	    <property name="password" column="password"></property>
+		 
 		 <property name="concentratorKind" column="CONCENTRATOR_KIND"></property>
 		 		 		 	 
 
