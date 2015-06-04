@@ -33,6 +33,7 @@ import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.common.about.AboutUsActivity;
 import cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity;
 import cn.fuego.smart.home.ui.common.mall.ProductMallActivity;
+import cn.fuego.smart.home.ui.common.news.NewsPageActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
@@ -81,6 +82,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		this.activityRes.getButtonIDList().add(R.id.home_menu_mall);
 		this.activityRes.getButtonIDList().add(R.id.home_about_us_btn);
 		this.activityRes.getButtonIDList().add(R.id.home_menu_productauth);
+		this.activityRes.getButtonIDList().add(R.id.home_menu_news);
 	} 
 	public static void jump(Context context)
 	{
@@ -351,6 +353,9 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			break;
 		case R.id.home_about_us_btn:
 			jumpActivity(AboutUsActivity.class);
+			break;
+		case R.id.home_menu_news:
+			jumpActivity(NewsPageActivity.class);
 			break;
 		default:break;
 		}

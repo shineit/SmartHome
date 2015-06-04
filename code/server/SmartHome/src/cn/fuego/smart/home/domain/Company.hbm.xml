@@ -27,7 +27,10 @@
  		<property name="officerPhone" column="OFFICER_PHONE"></property>
  		<property name="fireRisk" column="FIRE_RISK"></property>
         <property name="org_id" column="org_id"></property>
- 		
+        <property name="maintainer_unit" column="maintainer_unit"></property>
+        <property name="maintainer_name" column="maintainer_name"></property>
+        <property name="fire_cert" column="fire_cert"></property>
+
 	</class>
  
 </hibernate-mapping>

@@ -262,6 +262,7 @@ public class ModelConvert
 		json.setUserID(user.getUserID());
 		json.setUserName(user.getUserName());
 		json.setRole(user.getRole());
+		json.setOrg_id(user.getOrg_id());
 		return json;
 	}
 	public static SystemUser jsonToUser(UserJson userJson)
@@ -270,6 +271,7 @@ public class ModelConvert
 		user.setUserID(userJson.getUserID());
 		user.setUserName(userJson.getUserName());
 		user.setRole(userJson.getRole());
+		user.setOrg_id(userJson.getOrg_id());
 		return user;
 	}	
 	public static CustomerJson customerToJson(Customer customer)

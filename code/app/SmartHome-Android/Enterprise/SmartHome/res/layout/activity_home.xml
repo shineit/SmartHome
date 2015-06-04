@@ -229,12 +229,16 @@
                         android:textSize="@dimen/content_font_size_sm" />
 
                     <Button
-                        android:id="@+id/button1"
-                        android:layout_column="2"
-                        android:layout_gravity="center_horizontal|top"
-                        android:layout_row="0"
-                        android:background="@drawable/menu_borde_noner"
-                        android:paddingBottom="10dp" />
+                        android:id="@+id/home_menu_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:background="@drawable/menu_border"
+                        android:drawableTop="@drawable/menu_news"
+                        android:gravity="center_vertical|center_horizontal|bottom"
+                        android:paddingBottom="10dp"
+                        android:text="@string/home_menu_news"
+                        android:textSize="@dimen/content_font_size_sm" />
 
                 </GridLayout>
             </LinearLayout>

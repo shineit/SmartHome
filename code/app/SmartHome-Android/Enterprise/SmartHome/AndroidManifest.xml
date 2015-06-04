@@ -262,6 +262,10 @@
             android:label="@string/title_activity_product_view" >
         </activity>
         <activity
+            android:name="cn.fuego.smart.home.ui.common.news.NewsPageActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity"
             android:label="@string/title_activity_device_status" >
         </activity>
@@ -296,6 +300,10 @@
         <activity
             android:name="cn.fuego.smart.home.ui.enterprise.check.CheckLogHistroyActivity"
             android:label="@string/title_activity_check_log_histroy" >
+        </activity>
+        <activity
+            android:name="cn.fuego.smart.home.ui.common.news.NewsViewActivity"
+            android:label="@string/title_activity_news_view" >
         </activity>
     </application>
 

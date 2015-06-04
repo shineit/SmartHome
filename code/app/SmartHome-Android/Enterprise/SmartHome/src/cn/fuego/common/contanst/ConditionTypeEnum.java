@@ -18,19 +18,21 @@ package cn.fuego.common.contanst;
 
 public enum  ConditionTypeEnum
 {
-	INCLUDLE("包含",1),
-	EXCLUDLE("不包含",2), 
-	EQUAL("等于",3), 
-	NOT_EQUAL("不等于",4), 
-	BIGER("大于",5), 
-	BIGER_EQ("大于等于",6),
-	LOWER("小于",7), 
-	LOWER_EQ("小于等于",8),  
-	BETWEEN("之间",9),
-	IN("属于",10),
-	FALSE("始终为假",11),
-	DESC_ORDER("降序",12),
-	ASC_ORDER("升序",13);
+	INCLUDLE("include",1),
+	EXCLUDLE("exclude",2), 
+	EQUAL("equal",3), 
+	NOT_EQUAL("not_equal",4), 
+	BIGER("biger",5), 
+	BIGER_EQ("biger_eq",6),
+	LOWER("lower",7), 
+	LOWER_EQ("lower_eq",8),  
+	IN("in",10),
+	FALSE("false",11),
+	DESC_ORDER("desc",12),
+	
+	ASC_ORDER("asc",13),
+	LIKE_LEFT("like_left",14),
+	LIKE_RIGHT("like_right",15);
     // 成员变量  
     private String typeName;  
     private int typeValue;
@@ -49,6 +51,16 @@ public enum  ConditionTypeEnum
 		return typeValue;
 	}
  
-	
+	public static ConditionTypeEnum getEnumByStr(String strValue)
+	{
+		for (ConditionTypeEnum c : ConditionTypeEnum.values())
+		{
+			if (strValue.equals(c.typeName))
+			{
+				return c;
+			}
+		}
+		return null;
+	} 
   
 }

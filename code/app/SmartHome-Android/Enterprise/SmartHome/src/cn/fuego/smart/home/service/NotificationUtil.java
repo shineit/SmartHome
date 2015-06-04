@@ -16,7 +16,7 @@ import cn.fuego.smart.home.constant.AlarmKindEnum;
 import cn.fuego.smart.home.constant.AlarmPushTypeEnum;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.constant.PushMessagTypeEnum;
-import cn.fuego.smart.home.ui.base.AppShortCutUtil;
+import cn.fuego.smart.home.ui.common.news.NewsViewActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.DeviceStatusActivity;
 import cn.fuego.smart.home.ui.enterprise.alarm.FireAlarmActivity;
 import cn.fuego.smart.home.ui.setting.model.ConfigInfo;
@@ -107,6 +107,7 @@ public class NotificationUtil
         switch(msgType)
         {
         	case NEWS_MSG:
+        		showNews(context, pushMsg);
         		break;
         	case ALRAM_MSG: 
         		showAlarm(context, pushMsg);
@@ -116,6 +117,20 @@ public class NotificationUtil
         
         }
 
+	}
+	/**
+	 * 点击通知栏查看新闻信息
+	 * @param context
+	 * @param pushMsg
+	 */
+	private void showNews(Context context, PushMessageJson pushMsg)
+	{
+		Intent i = new Intent();
+		i.setClass(context, NewsViewActivity.class);
+		i.putExtra(IntentCodeConst.NEWS_ID,  String.valueOf(pushMsg.getObj()));
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        context.startActivity(i); 
+		
 	}
 	/**
 	 * 点击通知栏获取告警信息

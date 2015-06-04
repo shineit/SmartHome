@@ -18,8 +18,8 @@ package cn.fuego.smart.home.constant;
 */ 
 public enum AlarmKindEnum
 {
-	ALARM(2,"报警项"),
-	STATUS(1,"异常项");
+	ALARM(2,"智慧告警"),
+	STATUS(1,"设备状态");
  
 	private int intValue;
 	private String strValue;

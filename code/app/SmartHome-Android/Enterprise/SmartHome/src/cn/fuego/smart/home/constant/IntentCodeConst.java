@@ -29,4 +29,6 @@ public class IntentCodeConst
 	public static final String HOME_REFRESH="home_refresh";//刷新首页bageNum广播参数
 	
 	public static final String ALARM_KIND = "alarm_kind"; //查看历史记录时,需要传入告警类型
+	
+	public static final String NEWS_ID = "newsID";
 }

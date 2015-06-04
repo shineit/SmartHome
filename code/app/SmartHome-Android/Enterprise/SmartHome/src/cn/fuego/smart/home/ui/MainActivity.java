@@ -1,15 +1,21 @@
 package cn.fuego.smart.home.ui;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import cn.fuego.common.log.FuegoLog;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.ui.jpush.MyReceiver;
 import cn.fuego.smart.home.webservice.up.rest.interceptor.AuthInterceptor;
 import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 public class MainActivity extends InstrumentedActivity 
 {
@@ -37,14 +43,20 @@ public class MainActivity extends InstrumentedActivity
 			public void onFinish()
 			{
  
-				 if(!MemoryCache.isLogined())
+				 if(!MemoryCache.isLogined()||AppCache.getInstance().getUser().getOrg_id()==null
+						 ||ValidatorUtil.isEmpty(AppCache.getInstance().getUser().getOrg_id()))
 				 {
 					 LoginActivity.jump(MainActivity.this, HomeActivity.class);
 					 
 				 }
 				 else
 				 {
-					 HomeActivity.jump(MainActivity.this);
+					//注册推送信息
+					Set<String> tags=  new HashSet<String>();
+					tags.add(AppCache.getInstance().getUser().getOrg_id());
+					JPushInterface.setAliasAndTags(MainActivity.this,AppCache.getInstance().getUser().getUserName(), tags, mAliasCallback);
+						
+					HomeActivity.jump(MainActivity.this);
 					 
 				 }
 				 
@@ -61,13 +73,31 @@ public class MainActivity extends InstrumentedActivity
 		}.start();
 		
 	}
-	
+	private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
 
-	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
-	private void init(){
-		 JPushInterface.init(getApplicationContext());
-	}
-
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+ 
+            switch (code) {
+            case 0:
+                log.info("Set tag and alias success");
+                log.info("the user is " + AppCache.getInstance().getUser());
+                break;
+                
+            case 6002:
+                 log.error("Failed to set alias and tags due to timeout. Try again after 60s.");
+                 log.error("the user is " + AppCache.getInstance().getUser());
+                break;
+            
+            default:
+      
+                log.error("Failed with errorCode" + code);
+                log.error("the user is " + AppCache.getInstance().getUser());
+            }
+           
+        }
+	    
+	};	
 
 	@Override
 	protected void onResume() {

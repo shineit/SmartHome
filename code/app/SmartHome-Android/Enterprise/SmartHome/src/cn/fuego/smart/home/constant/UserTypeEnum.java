@@ -21,6 +21,7 @@ public enum UserTypeEnum
 	UNION("联防用户",2),
 	REGION_ADMIN("区域管理员",3),
 	ENTERPRISE("企业用户",4),
+	SUB_ADMIN("子级管理员",5),
 	LOW_ADMIN("普通管理员",88),
 	ADMIN("超级管理员",99); 
 	private String type;

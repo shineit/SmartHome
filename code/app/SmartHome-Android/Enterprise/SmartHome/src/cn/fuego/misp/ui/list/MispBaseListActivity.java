@@ -34,7 +34,7 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	private boolean isAdapterForScrollView = false;
 	private ListView listView;
 	
-
+	private boolean isPage=false; //是否分页加载
 	public void setAdapterForScrollView()
 	{
 		this.isAdapterForScrollView = true;
@@ -69,6 +69,7 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 				 listView = (ListView) findViewById(this.listViewRes.getListView());
 				if(null != listView)
 				{
+
 					listView.setAdapter(adapter);
 					listView.setOnItemClickListener(this);
 				}
@@ -129,7 +130,10 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 	{
 		if (message.isSuccess())
 		{
-			this.dataList.clear();
+			if(!isPage)
+			{
+				this.dataList.clear();
+			}	
 
 			List<E> newData = loadListRecv(message.getMessage().obj);
 			if (!ValidatorUtil.isEmpty(newData))
@@ -199,6 +203,30 @@ public abstract class MispBaseListActivity<E> extends MispHttpActivtiy implement
 			this.startActivityForResult(intent, 1);
 		}
 		
+	}
+
+
+	public MispListAdapter<E> getAdapter()
+	{
+		return adapter;
+	}
+
+
+	public void setAdapter(MispListAdapter<E> adapter)
+	{
+		this.adapter = adapter;
+	}
+
+
+	public boolean isPage()
+	{
+		return isPage;
+	}
+
+
+	public void setPage(boolean isPage)
+	{
+		this.isPage = isPage;
 	}
 	
 

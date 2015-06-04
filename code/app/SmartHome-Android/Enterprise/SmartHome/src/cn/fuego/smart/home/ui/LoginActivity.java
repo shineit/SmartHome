@@ -1,5 +1,6 @@
 package cn.fuego.smart.home.ui;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import android.content.Context;
@@ -105,8 +106,6 @@ public class LoginActivity extends MispBaseActivtiy
  		req.setDevToken(getDeviceID());
 		
 		req.setPush_userID(req.getUserName());
-		
-		JPushInterface.setAliasAndTags(this, userName, null, mAliasCallback);
 
 		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
 			@Override
@@ -117,7 +116,10 @@ public class LoginActivity extends MispBaseActivtiy
 				{
 					waitDailog.dismiss();
 					LoginRsp rsp = (LoginRsp) message.getMessage().obj;
-			 
+					Set<String> tags=  new HashSet<String>();
+					tags.add(rsp.getUser().getOrg_id());
+					JPushInterface.setAliasAndTags(LoginActivity.this, rsp.getUser().getUserName(), tags, mAliasCallback);
+					
 					AppCache.getInstance().update(rsp.getToken(), rsp.getUser(), rsp.getCustomer());
 					Class jumpClass = (Class) getIntent().getSerializableExtra(JUMP_SOURCE);
 		            jumpIntent( jumpClass);
