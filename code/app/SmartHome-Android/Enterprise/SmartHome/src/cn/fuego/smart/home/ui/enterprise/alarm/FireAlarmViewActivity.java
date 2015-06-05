@@ -12,6 +12,7 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 import cn.fuego.misp.ui.model.ListViewResInfo;
+import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
@@ -59,7 +60,7 @@ public class FireAlarmViewActivity extends MispBaseActivtiy
 		txt_alarmtime.setText(DateUtil.getStrTime(fireAlarm.getAlarmTime()));
 		
 		TextView txt_companyName= (TextView) findViewById(R.id.fire_alarm_company_name);
-		txt_companyName.setText(company.getApplyName());
+		txt_companyName.setText(StrUtil.noNullStr(company.getApplyName()));
 		
 		TextView txt_contacts = (TextView) findViewById(R.id.fire_alarm_contacts);
 		txt_contacts.setText(fireAlarm.getContacts());

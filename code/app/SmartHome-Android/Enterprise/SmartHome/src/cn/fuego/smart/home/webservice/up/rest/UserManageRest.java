@@ -26,6 +26,8 @@ import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetInitDataReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetInitDataRsp;
 
 
 /**
@@ -90,5 +92,9 @@ public interface UserManageRest
 	@POST
 	@Path("/checkLogNum/get")
 	GetCheckLogNumByIDRsp getCheckNum(GetCheckLogNumByIDReq req);
+	
+	@POST
+	@Path("/InitData/get")
+	GetInitDataRsp getInitData(GetInitDataReq req);	
 	
 }

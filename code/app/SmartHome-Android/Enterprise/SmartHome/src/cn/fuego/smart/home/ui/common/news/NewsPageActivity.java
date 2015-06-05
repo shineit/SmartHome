@@ -13,6 +13,7 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsListRsp;
 import cn.fuego.smart.home.webservice.up.model.base.NewsJson;
@@ -75,6 +76,7 @@ public class NewsPageActivity extends MispListActivity<NewsJson> implements OnSc
 	{
 		this.waitDailog.show();
 		GetNewsListReq req = new GetNewsListReq();
+		req.setOrg_id(AppCache.getInstance().getUser().getOrg_id());
 		PageJson page = new PageJson();
 		page.setPageSize(defPageSize);
 		page.setCurrentPage(curPage);

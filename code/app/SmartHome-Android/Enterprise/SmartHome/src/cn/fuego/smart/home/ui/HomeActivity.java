@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,6 +29,7 @@ import cn.fuego.misp.ui.model.ImageDisplayInfo;
 import cn.fuego.smart.enterprise.R;
 import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.service.BageNumDataCache;
+import cn.fuego.smart.home.service.CompanyDataCache;
 import cn.fuego.smart.home.ui.base.AppShortCutUtil;
 import cn.fuego.smart.home.ui.base.BaseActivtiy;
 import cn.fuego.smart.home.ui.common.about.AboutUsActivity;
@@ -40,16 +42,15 @@ import cn.fuego.smart.home.ui.enterprise.check.CheckActivity;
 import cn.fuego.smart.home.ui.enterprise.check.CheckLogActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyListActivity;
 import cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity;
-import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDReq;
-import cn.fuego.smart.home.webservice.up.model.GetCustomerByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.base.BageNumJson;
-import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetCheckLogNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetInitDataReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetInitDataRsp;
 import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 
 import com.readystatesoftware.viewbadger.BadgeView;
@@ -68,6 +69,8 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	private int backRunFlag=0;
 	
 	private final String product_auth_baseURL="http://114.112.48.163/lableFind.jsp?isFirst=isNotFirst&start=0&curPageNum=null&queryValue=1&recordFactoryId=&lableCode=";
+	
+	private Dialog dialog;
 	@Override
 	public void initRes() 
 	{
@@ -97,7 +100,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
     	alarm_btn = (Button) findViewById(R.id.home_menu_alarm);
     	status_btn = (Button) findViewById(R.id.home_menu_status);
     	check_log_btn = (Button) findViewById(R.id.home_menu_manage);
@@ -107,25 +110,63 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
    	
     	statusBageView = new BadgeView(HomeActivity.this, status_btn);
     	regBageView(statusBageView);
-    	//showAlarmBadge();
-    	showFireAlarmBage();
-    	showFireStatusBage();
+
     	checkBageView = new BadgeView(HomeActivity.this, check_log_btn);
     	regBageView(checkBageView);
-    	showCheckBage();
+    	    	
+
 /*        //注册广播，接收service中启动的线程发送过来的信息，同时更新UI  
         IntentFilter filter = new IntentFilter("android.intent.action.bageNotify");  
         this.registerReceiver(new HomeReceiver(), filter);  */
-        
-        updateCustomer();
+
         
         //注册广播  ,监听home键
         registerReceiver(mHomeKeyEventReceiver, new IntentFilter(  
                 Intent.ACTION_CLOSE_SYSTEM_DIALOGS)); 
+        
+        initData();
 
-        //AppShortCutUtil.getInstance(this).createShortCut();
 	}
-	
+    //初始化数据
+	private void initData()
+	{
+		dialog=this.waitDailog.LoadingDialog(this, "正在初始化数据……");
+		dialog.show();
+		GetInitDataReq req = new GetInitDataReq();
+		req.setUser_id(AppCache.getInstance().getUser().getUserID());
+		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					dialog.dismiss();
+					GetInitDataRsp rsp = (GetInitDataRsp) message.getMessage().obj;
+
+					//更新提醒数字信息
+					BageNumDataCache.getInstance().classifyNumList(rsp.getNumList());
+					//更新用户信息
+					if(null!=rsp.getCustomer())
+					{
+						AppCache.getInstance().update(rsp.getCustomer());
+					}
+					//更新公司信息
+					CompanyDataCache.getInstance().getCompanyList().clear();
+					CompanyDataCache.getInstance().getCompanyList().addAll(rsp.getCompanyList());
+					//初始化数字提醒图标
+					showBage(alarmBageView,BageNumDataCache.getInstance().getAlarmBageList());
+					showBage(statusBageView,BageNumDataCache.getInstance().getStatusBageList());
+					showBage(checkBageView,BageNumDataCache.getInstance().getCheckBageList());
+				}
+				else
+				{
+					showMessage(message);
+				}
+			}
+		}).getInitData(req);
+		
+		
+	}
 	@Override
 	protected void onRestart()
 	{
@@ -181,29 +222,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
             }   
         }  
     };
-	//更新用户信息
-	private void updateCustomer()
-	{
-		GetCustomerByIDReq req =new GetCustomerByIDReq();
-		req.setUserID(AppCache.getInstance().getUser().getUserID());
-		WebServiceContext.getInstance().getUserManageRest(new MispHttpHandler(){
-			@Override
-			public void handle(MispHttpMessage message)
-			{
-				if(message.isSuccess())
-				{
-					GetCustomerByIDRsp rsp =  (GetCustomerByIDRsp) message.getMessage().obj;
-					CustomerJson customer= rsp.getCustomer();
-					if(null!=customer)
-					{
-						AppCache.getInstance().update(customer);
-					}
-				
-				}
-			}
-		}).getCustomer(req);
-		
-	}
+
 	private void showFireAlarmBage()
 	{
 		GetFireAlarmNumByIDReq req = new GetFireAlarmNumByIDReq();
@@ -219,7 +238,7 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 					alarmNumList= rsp.getNumList();
 					BageNumDataCache.getInstance().setAlarmBageList(alarmNumList);
 					showBage(alarmBageView,alarmNumList);
-				
+					//dialog.dismiss();
 				}
 			}
 		}).getAlarmNum(req);
@@ -323,8 +342,15 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 		{
 
 		case R.id.home_menu_alarm:
-
-			CompanyListActivity.jump(this, FireAlarmActivity.class);
+			if(CompanyDataCache.getInstance().isHasCompany())
+			{
+				CompanyListActivity.jump(this, FireAlarmActivity.class);
+			}
+			else
+			{
+				jumpActivity(FireAlarmActivity.class);
+			}
+			
 			break;
 		case R.id.home_menu_status:
 
@@ -341,7 +367,6 @@ public class HomeActivity extends BaseActivtiy implements OnClickListener
 			CompanyListActivity.jump(this, CheckLogActivity.class);
 			break;
 		case R.id.home_menu_productauth:
-			//CompanyListActivity.jump(this, CheckLogActivity.class);
 			openDialog();
 			break;
 			

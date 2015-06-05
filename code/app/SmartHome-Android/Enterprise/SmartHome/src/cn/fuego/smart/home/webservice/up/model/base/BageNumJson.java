@@ -24,6 +24,7 @@ public class BageNumJson implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int bageKind; //数字提醒类型，0告警，1，设备状态，2
 	private long num;
 	private int companyID;
 
@@ -43,11 +44,20 @@ public class BageNumJson implements Serializable
 	{
 		this.companyID = companyID;
 	}
+	public int getBageKind()
+	{
+		return bageKind;
+	}
+	public void setBageKind(int bageKind)
+	{
+		this.bageKind = bageKind;
+	}
 	@Override
 	public String toString()
 	{
-		return "BageNumJson [num=" + num + ", companyID=" + companyID + "]";
+		return "BageNumJson [bageKind=" + bageKind + ", num=" + num
+				+ ", companyID=" + companyID + "]";
 	}
-	
+
 	
 }

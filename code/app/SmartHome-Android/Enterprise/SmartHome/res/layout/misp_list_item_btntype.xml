@@ -9,15 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="1dp" >
+        android:layout_gravity="center_vertical" >
 
         <TextView
             android:id="@+id/item_btntype_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@+id/linearLayout1"
             android:gravity="left|center_vertical"
             android:paddingLeft="20dp"
@@ -30,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:gravity="right|center" >
 
             <TextView

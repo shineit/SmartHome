@@ -11,6 +11,8 @@ package cn.fuego.smart.home.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.smart.home.constant.BageKindEnum;
 import cn.fuego.smart.home.webservice.up.model.base.BageNumJson;
 
 
@@ -43,6 +45,38 @@ public class BageNumDataCache
 		
 	}
 
+	public void classifyNumList(List<BageNumJson> numList)
+	{
+		if(!ValidatorUtil.isEmpty(numList))
+		{
+			clear();
+			for(BageNumJson json:numList)
+			{
+				switch (BageKindEnum.getEnumByInt(json.getBageKind()))
+				{
+				case ALARM:
+					alarmBageList.add(json);
+					break;
+				case STATUS:
+					statusBageList.add(json);
+					break;
+				case CHECK_LOG:
+					checkBageList.add(json);
+					break;
+				default:
+					break;					
+				}
+				
+			}
+		}
+
+	}
+	private void clear()
+	{
+		alarmBageList.clear();
+		statusBageList.clear();
+		checkBageList.clear();
+	}
 	public List<BageNumJson> getAlarmBageList()
 	{
 		return alarmBageList;

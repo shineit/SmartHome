@@ -35,8 +35,8 @@ import cn.fuego.smart.home.webservice.up.rest.WebServiceContext;
 public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 {
 
-	protected CompanyJson company;
-	protected int companyID;
+	protected CompanyJson company= new CompanyJson();
+	protected int companyID=0;
 	
 	private ImageView safeInfo;
 	@Override
@@ -64,7 +64,10 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 		else
 		{
 			companyID =intent.getIntExtra(IntentCodeConst.COMPANY_ID, 0);
-			loadCompayInfo(companyID);
+			if(companyID!=0)
+			{
+				loadCompayInfo(companyID);
+			}
 		}
 
 	}

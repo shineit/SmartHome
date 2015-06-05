@@ -5,10 +5,16 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import cn.fuego.misp.service.MemoryCache;
+import cn.fuego.misp.ui.common.display.MispImageActivity;
 import cn.fuego.misp.ui.info.MispInfoListActivity;
 import cn.fuego.misp.ui.model.CommonItemMeta;
+import cn.fuego.misp.ui.model.ImageDisplayInfo;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
+import cn.fuego.smart.enterprise.MispImgViewActivity;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 
 public class CompanyViewActivity extends MispInfoListActivity
@@ -66,12 +72,30 @@ public class CompanyViewActivity extends MispInfoListActivity
 			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "消防安全责任人", StrUtil.noNullStr(company.getFireDuty())+
 					"\n"+StrUtil.noNullStr(company.getDutyPhone())));
 
-
+			list.add(new CommonItemMeta(CommonItemMeta.DIVIDER_ITEM, null, null));
+			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "维保单位", company.getMaintainerUnit()));
+			list.add(new CommonItemMeta(CommonItemMeta.TEXT_CONTENT, "维保人员", company.getMaintainerName()));
+			
+			list.add(new CommonItemMeta(CommonItemMeta.BUTTON_TO_EDIT_ITEM, "消防证书", "查看详情"));
+			list.add(new CommonItemMeta(CommonItemMeta.DIVIDER_ITEM, null, null));
 			
 		}
 	 
 		
 		return list;
+	}
+
+	@Override
+	public void onItemListClick(AdapterView<?> parent, View view, long id,	CommonItemMeta item)
+	{
+		if(item.getTitle().equals("消防证书"))
+		{
+			ImageDisplayInfo img= new ImageDisplayInfo();
+			img.setTilteName("消防证书");
+			img.setUrl(MemoryCache.getImageUrl()+company.getFireCert());
+			
+			MispImgViewActivity.jump(CompanyViewActivity.this, img);
+		}
 	}
 
  

@@ -35,8 +35,8 @@ public class AppCache
 	private int appBageNum=0;
 	//首页刷新标志
 	private int homeRefreshFlag=0;
- 
 
+	
 	public boolean isFirstStarted()
 	{
 		String startStr = (String) SharedPreUtil.getInstance().get("isFirstStarted");
@@ -186,6 +186,7 @@ public class AppCache
 	{
 		this.homeRefreshFlag = homeRefreshFlag;
 	}
-	
+
+
 	
 }

@@ -30,16 +30,15 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
-
-	<uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>  
+    <uses-permission android:name="android.permission.CALL_PHONE" >
+    </uses-permission>
     <!-- 后台自启动. -->
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
 
-    <!--share SDK required  -->
-    
-    
+    <!-- share SDK required -->
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
@@ -50,11 +49,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
-        android:theme="@style/AppBaseTheme"    >
+        android:theme="@style/AppBaseTheme" >
         <activity
             android:name="cn.fuego.smart.home.ui.MainActivity"
-            android:label="@string/app_name"
             android:configChanges="locale|keyboard|screenSize"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,7 +64,6 @@
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="cn.fuego.smart.home.ui.LoginActivity"
             android:label="@string/app_name"
@@ -87,7 +85,6 @@
             android:name="cn.fuego.smart.home.ui.setting.user.UserInfoActivity"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name="cn.fuego.smart.home.ui.base.ExitApplication"
             android:label="@string/app_name" >
@@ -103,7 +100,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="cn.fuego.smart.enterprise" />
-               
             </intent-filter>
         </activity>
         <!-- Required  SDK核心功能 -->
@@ -135,7 +131,6 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
                 <category android:name="cn.fuego.smart.enterprise" />
-                
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -176,31 +171,32 @@
                 <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-               <category android:name="cn.fuego.smart.enterprise" />
+                <category android:name="cn.fuego.smart.enterprise" />
             </intent-filter>
         </receiver>
-		<!--share SDK required  -->
-		<activity
-		 android:name="cn.sharesdk.framework.ShareSDKUIShell"
-		 android:theme="@android:style/Theme.Translucent.NoTitleBar"
-		 android:configChanges="keyboardHidden|orientation|screenSize"
-		 android:screenOrientation="portrait"
-		 android:windowSoftInputMode="stateHidden|adjustResize" >
-		 <intent-filter>
-		 <data android:scheme="tencent100371282" />
-		 <action android:name="android.intent.action.VIEW" />
-		 <category android:name="android.intent.category.BROWSABLE" />
-		 <category android:name="android.intent.category.DEFAULT" />
-		 </intent-filter>
-		 </activity>
-		 <!--微信分享回调 -->
-		 <activity
-		 android:name="cn.fuego.smart.home.wxapi.WXEntryActivity"
-		 android:theme="@android:style/Theme.Translucent.NoTitleBar"
-		 android:configChanges="keyboardHidden|orientation|screenSize"
-		 android:exported="true"
-		 android:screenOrientation="portrait" /> 
+        <!-- share SDK required -->
+        <activity
+            android:name="cn.sharesdk.framework.ShareSDKUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <data android:scheme="tencent100371282" />
 
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 微信分享回调 -->
+        <activity
+            android:name="cn.fuego.smart.home.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="cn.fuego.smart.home.ui.HomeActivity"
             android:label="@string/app_name" >
@@ -227,7 +223,6 @@
             android:name="cn.fuego.smart.home.ui.enterprise.check.CheckActivity"
             android:label="@string/title_activity_check" >
         </activity>
-
         <activity
             android:name="cn.fuego.smart.home.ui.enterprise.company.CompanyViewActivity"
             android:label="@string/title_activity_company_info" >
@@ -244,7 +239,6 @@
             android:name="cn.fuego.smart.home.ui.enterprise.check.CheckOperateActivity"
             android:label="@string/title_activity_check_operate" >
         </activity>
-
         <activity
             android:name="cn.fuego.smart.home.ui.common.knowledge.CommonSenseActivity"
             android:label="@string/title_activity_common_sense" >
@@ -272,6 +266,10 @@
         <activity
             android:name="cn.fuego.misp.ui.common.upload.MispUploadImgActivity"
             android:label="@string/title_activity_misp_upload_img" >
+        </activity>
+        <activity
+            android:name="cn.fuego.misp.ui.common.display.MispImageActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="cn.fuego.smart.home.ui.enterprise.alarm.SensorLocationActivity"
@@ -304,6 +302,10 @@
         <activity
             android:name="cn.fuego.smart.home.ui.common.news.NewsViewActivity"
             android:label="@string/title_activity_news_view" >
+        </activity>
+        <activity
+            android:name=".MispImgViewActivity"
+            android:label="@string/title_activity_misp_img_view" >
         </activity>
     </application>
 

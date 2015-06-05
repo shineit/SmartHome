@@ -66,8 +66,7 @@ public class MispImageActivity extends MispBaseActivtiy
 	{
  
 		ImagePagerAdapter adapter = new ImagePagerAdapter(this,group,urlList);
-	    viewPager.setAdapter(adapter);  
-	   
+	    viewPager.setAdapter(adapter);  	   
 	 
 	    viewPager.setCurrentItem(0); 
 	    viewPager.setOnPageChangeListener(adapter);

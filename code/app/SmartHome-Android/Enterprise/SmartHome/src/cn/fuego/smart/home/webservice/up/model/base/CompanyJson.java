@@ -34,6 +34,12 @@ public class CompanyJson implements Serializable
 	private String extendInfo;				//扩展字段，其他信息补充
 	
 	private String fireRisk;                //火灾危险性
+	
+	private String maintainerUnit;         //消防维保单位
+	private String maintainerName; 		//消防维保人员
+	private String fireCert; 		//消防维保证书图片
+	
+	private String org_id;
 
 	public int getCompanyID()
 	{
@@ -145,6 +151,46 @@ public class CompanyJson implements Serializable
 		this.managerPhone = managerPhone;
 	}
 
+	public String getMaintainerUnit()
+	{
+		return maintainerUnit;
+	}
+
+	public void setMaintainerUnit(String maintainerUnit)
+	{
+		this.maintainerUnit = maintainerUnit;
+	}
+
+	public String getMaintainerName()
+	{
+		return maintainerName;
+	}
+
+	public void setMaintainerName(String maintainerName)
+	{
+		this.maintainerName = maintainerName;
+	}
+
+	public String getFireCert()
+	{
+		return fireCert;
+	}
+
+	public void setFireCert(String fireCert)
+	{
+		this.fireCert = fireCert;
+	}
+
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
+	}
+
 	public String getFireDuty()
 	{
 		return fireDuty;
@@ -196,8 +242,13 @@ public class CompanyJson implements Serializable
 				+ ", officerPhone=" + officerPhone + ", fireManager="
 				+ fireManager + ", managerPhone=" + managerPhone
 				+ ", fireDuty=" + fireDuty + ", dutyPhone=" + dutyPhone
-				+ ", extendInfo=" + extendInfo + ", fireRisk=" + fireRisk + "]";
+				+ ", extendInfo=" + extendInfo + ", fireRisk=" + fireRisk
+				+ ", maintainerUnit=" + maintainerUnit + ", maintainerName="
+				+ maintainerName + ", fireCert=" + fireCert + ", org_id="
+				+ org_id + "]";
 	}
+
+
 	
 	
  
