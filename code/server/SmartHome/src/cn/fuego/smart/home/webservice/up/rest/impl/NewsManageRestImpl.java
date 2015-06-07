@@ -16,15 +16,13 @@ import org.apache.commons.logging.LogFactory;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.misp.domain.SystemUser;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.service.MISPException;
-import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.web.model.page.PageModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.News;
 import cn.fuego.smart.home.service.NewsManageService;
 import cn.fuego.smart.home.service.ServiceContext;
-import cn.fuego.smart.home.service.cache.AppLoginCache;
 import cn.fuego.smart.home.webservice.ModelConvert;
 import cn.fuego.smart.home.webservice.up.model.GetNewsByIDReq;
 import cn.fuego.smart.home.webservice.up.model.GetNewsByIDRsp;
@@ -61,11 +59,11 @@ public class NewsManageRestImpl implements NewsManageRest
 		}
 		List<QueryCondition> condtionList = new ArrayList<QueryCondition>();
 		condtionList.add(new QueryCondition(ConditionTypeEnum.DESC_ORDER,"date"));
-		int userID=AppLoginCache.getUserID(req.getToken());
-		SystemUser user=MISPServiceContext.getInstance().getUserService().get(userID);
-		if(user!=null)
+
+		List<String> orgIDList=ServiceContext.getInstance().getOrgManageService().getAllParent(req.getOrg_id());
+		if(ValidatorUtil.isEmpty(orgIDList))
 		{
-			condtionList.add(new QueryCondition(ConditionTypeEnum.LIKE_LEFT, "org_id", user.getOrg_id()));
+			condtionList.add(new QueryCondition(ConditionTypeEnum.IN, "org_id", orgIDList));
 		}
 		List<News> newsList = newsService.getDataSource(condtionList).getCurrentPageData(page.getStartNum(),page.getPageSize());
 		for(News e : newsList)

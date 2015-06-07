@@ -86,6 +86,19 @@ public class CheckLogManageServiceImpl extends MispCommonServiceImpl<CheckLog> i
 		return logList;
 	}
 
+	@Override
+	public long getLogNumByCompany(int companyID, int status, int result)
+	{
+		long num=0;
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "companyID", companyID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "checkResult", result));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "status",status));
+		
+		num = this.getDataSource(conditionList).getDataCount();
+		return num;
+	}
+
 	 
 	
  

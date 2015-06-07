@@ -33,7 +33,8 @@
 	<mapping resource="cn/fuego/misp/domain/Privilege.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/SystemIDType.hbm.xml" />
 	<mapping resource="cn/fuego/misp/domain/OperLog.hbm.xml" />
-	
+	<mapping resource="cn/fuego/misp/domain/SystemToken.hbm.xml" />
+		
 	<mapping resource="cn/fuego/smart/home/domain/Orgnization.hbm.xml" />
 	
 	<mapping resource="cn/fuego/smart/home/domain/News.hbm.xml" />
@@ -47,12 +48,10 @@
 	<mapping resource="cn/fuego/smart/home/domain/Concentrator.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/UserMark.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Customer.hbm.xml" />
-	<mapping
-		resource="cn/fuego/smart/home/domain/ClientVersion.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/ClientVersion.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/SensorType.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/SensorPlan.hbm.xml" />
-	<mapping
-		resource="cn/fuego/smart/home/domain/Advertisement.hbm.xml" />
+	<mapping resource="cn/fuego/smart/home/domain/Advertisement.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/AlarmType.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/CheckItem.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/CheckLog.hbm.xml" />
@@ -60,7 +59,6 @@
 	<mapping resource="cn/fuego/smart/home/domain/Knowledge.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Product.hbm.xml" />
 	<mapping resource="cn/fuego/smart/home/domain/Building.hbm.xml" />
-
 
 
 

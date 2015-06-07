@@ -17,6 +17,7 @@ import cn.fuego.smart.home.webservice.up.model.base.PageJson;
  */
 public class GetNewsListReq extends MispBaseReqJson
 {
+	private String org_id;
 	private PageJson page;
  
 	private List<AttributeJson> filterList;
@@ -41,12 +42,24 @@ public class GetNewsListReq extends MispBaseReqJson
 		this.filterList = filterList;
 	}
 
+	public String getOrg_id()
+	{
+		return org_id;
+	}
+
+	public void setOrg_id(String org_id)
+	{
+		this.org_id = org_id;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "GetNewsListReq [page=" + page + ", filterList=" + filterList
-				+ "]";
+		return "GetNewsListReq [org_id=" + org_id + ", page=" + page
+				+ ", filterList=" + filterList + "]";
 	}
+
+
 	
 	
 }

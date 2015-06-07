@@ -352,6 +352,11 @@ public class ModelConvert
 		json.setLegalOfficer(company.getLegalOfficer());
 		json.setManagerPhone(company.getManagerPhone());
 		json.setOfficerPhone(company.getOfficerPhone());
+		//2015-06-05 新增 字段
+		json.setMaintainerUnit(company.getMaintainerUnit());
+		json.setMaintainerName(company.getMaintainerName());
+		json.setFireCert(company.getFireCert());
+		json.setOrg_id(company.getOrg_id());
 		
 		return json;
 		

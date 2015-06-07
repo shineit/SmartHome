@@ -12,6 +12,7 @@
 	       <generator class="identity"/> 
 		</id>
 		<property name="concentratorID" column="CONCENTRATOR_ID"></property>
+		<property name="password" column="password"></property>
 		 <property name="companyName" column="COMPANY_NAME"></property>
 		 <property name="applyName" column="APPLY_NAME"></property>
 		 <property name="companyAddr" column="COMPANY_ADDR"></property>
@@ -26,11 +27,12 @@
 		 <property name="extendInfo" column="EXTEND_INFO"></property>
  		<property name="officerPhone" column="OFFICER_PHONE"></property>
  		<property name="fireRisk" column="FIRE_RISK"></property>
-        <property name="org_id" column="org_id"></property>
-        <property name="maintainer_unit" column="maintainer_unit"></property>
-        <property name="maintainer_name" column="maintainer_name"></property>
-        <property name="fire_cert" column="fire_cert"></property>
 
+        <property name="maintainerUnit" column="MAINTAINER_UNIT"></property>
+        <property name="maintainerName" column="MAINTAINER_NAME"></property>
+        <property name="fireCert" column="FIRE_CERT"></property>
+      
+        <property name="org_id" column="org_id"></property>
 	</class>
  
 </hibernate-mapping>

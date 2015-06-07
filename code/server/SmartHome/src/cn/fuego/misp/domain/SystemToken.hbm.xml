@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+	
+<hibernate-mapping
+	package="cn.fuego.misp.domain">
+	<class name="SystemToken" table="misp_token">
+			<id name="token_id" column="token_id" >
+			</id>    
+            <property name="obj_id" column="obj_id"  ></property>
+            <property name="token_type" column="token_type"   ></property>
+
+	</class>
+</hibernate-mapping>

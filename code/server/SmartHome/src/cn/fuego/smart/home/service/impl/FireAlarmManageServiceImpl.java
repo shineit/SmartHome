@@ -63,6 +63,35 @@ public class FireAlarmManageServiceImpl extends MispCommonServiceImpl<FireAlarmV
 	 	
 	 	return fireAlarmList;
 	}
+	/**
+	 * 根据公司编号获取该状态下的告警数目
+	 */
+	@Override
+	public long getAlarmNumByCompany(int companyID, int status, int alarmKind)
+	{
+		long num=0;
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		Company company=ServiceContext.getInstance().getCompanyManageService().get(companyID);
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "concentratorID", company.getConcentratorID()));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "kind", alarmKind));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "status", status));		
+		num =this.getDataSource(conditionList).getDataCount();
+		
+		return num;
+	}
+	@Override
+	public long getAlarmNumByUser(int userID, int status, int alarmKind)
+	{
+		long num=0;
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "userID", userID));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "kind", alarmKind));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "status", status));		
+		num =this.getDataSource(conditionList).getDataCount();		
+		return num;
+	}
+	
+
 
 
 	

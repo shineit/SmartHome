@@ -35,7 +35,7 @@ public class FireAlarmView implements PersistenceObject
 	//通过concenratorID关联concentrator表
 	private Integer status;			//集中器状态，0 离线 1在线
 	private String concentDesp;		//集中器描述
-	
+	private int concentratorKind;   //集中器种类
     //通过objID关联FireSensor表	
 	private Integer planID;
 	private Integer machineID; //机号
@@ -50,6 +50,8 @@ public class FireAlarmView implements PersistenceObject
 	
 	private String contacts; //联系人
 	private String contactPhone; //联系电话
+	private int userID; //传感器联系人编号
+	private String userName; //传感器联系人
 	
 	private String alarmTypeName; //新增，告警类型名称
 	
@@ -280,6 +282,30 @@ public class FireAlarmView implements PersistenceObject
 	public void setOrg_id(String org_id)
 	{
 		this.org_id = org_id;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+	public int getConcentratorKind()
+	{
+		return concentratorKind;
+	}
+	public void setConcentratorKind(int concentratorKind)
+	{
+		this.concentratorKind = concentratorKind;
+	}
+	public int getUserID()
+	{
+		return userID;
+	}
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
 	}
 	
 

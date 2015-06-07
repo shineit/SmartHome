@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.format.DataCreateUtil;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.misp.constant.MISPErrorMessageConst;
 import cn.fuego.misp.constant.PrivilegeAccessObjTypeEnum;
 import cn.fuego.misp.domain.SystemMenu;
@@ -27,6 +28,9 @@ import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MISPUserServiceImpl;
 import cn.fuego.smart.home.constant.AlarmClearEnum;
 import cn.fuego.smart.home.constant.AlarmKindEnum;
+import cn.fuego.smart.home.constant.BageKindEnum;
+import cn.fuego.smart.home.constant.CheckLogStatusEnum;
+import cn.fuego.smart.home.constant.CheckResultEnum;
 import cn.fuego.smart.home.constant.ClientTypeEnum;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
 import cn.fuego.smart.home.domain.CheckLog;
@@ -52,6 +56,7 @@ import cn.fuego.smart.home.webservice.up.model.SetCustomerRsp;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkReq;
 import cn.fuego.smart.home.webservice.up.model.SetUserMarkRsp;
 import cn.fuego.smart.home.webservice.up.model.base.BageNumJson;
+import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.CustomerJson;
 import cn.fuego.smart.home.webservice.up.model.base.MenuJson;
 import cn.fuego.smart.home.webservice.up.model.base.UserJson;
@@ -62,6 +67,8 @@ import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDReq
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireAlarmNumByIDRsp;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDReq;
 import cn.fuego.smart.home.webservice.up.model.enterprise.GetFireStatusNumByIDRsp;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetInitDataReq;
+import cn.fuego.smart.home.webservice.up.model.enterprise.GetInitDataRsp;
 import cn.fuego.smart.home.webservice.up.rest.UserManageRest;
 
 import com.hikvision.PublicController;
@@ -403,7 +410,132 @@ public class UserManageRestImpl implements UserManageRest
 		return rsp;
 	}
 
+	@Override
+	public GetInitDataRsp getInitData(GetInitDataReq req)
+	{
+		GetInitDataRsp rsp = new GetInitDataRsp();
+		try
+		{
+			//获取用户信息
+			Customer customer= ServiceContext.getInstance().getUserManageService().getCustomer(req.getUserID());
+			CustomerJson customerJson = ModelConvert.customerToJson(customer);
+			rsp.setCustomer(customerJson);
+			//获取公司列表信息
+			List<Company> companyList = ServiceContext.getInstance().getCompanyManageService().getCompanyList(req.getUserID());
+			//如果用户包含该公司的状况如下
+			if(!ValidatorUtil.isEmpty(companyList))
+			{
+				for(Company company : companyList)
+				{
+					CompanyJson json = ModelConvert.companyToJson(company);
+					rsp.getCompanyList().add(json);	
+					
+					BageNumJson bage1 = new BageNumJson();
+					bage1.setCompanyID(company.getCompanyID());
+					bage1.setBageKind(BageKindEnum.ALARM.getIntValue());
+					bage1.setNum(getBageNumByCompany(company.getCompanyID(),BageKindEnum.ALARM.getIntValue()));
+					rsp.getNumList().add(bage1);
+					
+					BageNumJson bage2 = new BageNumJson();
+					bage2.setCompanyID(company.getCompanyID());
+					bage2.setBageKind(BageKindEnum.STATUS.getIntValue());
+					bage2.setNum(getBageNumByCompany(company.getCompanyID(), BageKindEnum.STATUS.getIntValue()));
+					rsp.getNumList().add(bage2);
+					
+					BageNumJson bage3 = new BageNumJson();
+					bage3.setCompanyID(company.getCompanyID());
+					bage3.setBageKind(BageKindEnum.CHECK_LOG.getIntValue());
+					bage3.setNum(getBageNumByCompany(company.getCompanyID(), BageKindEnum.CHECK_LOG.getIntValue()));
+					rsp.getNumList().add(bage3);
+					
+				}
+			}
+			else
+			{
+				BageNumJson bage1= new BageNumJson();
+				bage1.setBageKind(BageKindEnum.ALARM.getIntValue());
+				bage1.setNum(getBageNumByUser(req.getUserID(),BageKindEnum.ALARM.getIntValue()));
+				rsp.getNumList().add(bage1);
+				
+				BageNumJson bage2= new BageNumJson();
+				bage2.setBageKind(BageKindEnum.STATUS.getIntValue());
+				bage2.setNum(getBageNumByUser(req.getUserID(),BageKindEnum.STATUS.getIntValue()));
+				rsp.getNumList().add(bage2);				
 
+			}
+	
+			
+		}
+		catch(MISPException e)
+		{
+			log.error("app get InitData failed",e);
+			rsp.setErrorCode(e.getErrorCode());
+		}
+		catch(Exception e)
+		{		    
+			log.error("app get InitData",e);
+			rsp.setErrorCode(ErrorMessageConst.OPERATE_FAILED);
+		}
+		return rsp;
+	}
+
+
+	/**
+     * 通用方法，根据公司编号查找各类提醒数字
+     * @param companyID
+     * @param bageKind
+     * @return
+     */
+	private long getBageNumByCompany(int companyID, int bageKind)
+	{
+		long num =0;
+		if(companyID!=0)
+		{
+			switch(BageKindEnum.getEnumByInt(bageKind))
+			{
+			case ALARM:
+				num = ServiceContext.getInstance().getFireAlarmService()
+				.getAlarmNumByCompany(companyID,AlarmClearEnum.NONE_CLEAR.getIntValue(),AlarmKindEnum.ALARM.getIntValue());
+				break;
+			case STATUS:
+				num = ServiceContext.getInstance().getFireAlarmService()
+				.getAlarmNumByCompany(companyID,AlarmClearEnum.NONE_CLEAR.getIntValue(),AlarmKindEnum.STATUS.getIntValue());
+				break;
+			case CHECK_LOG:
+				num = ServiceContext.getInstance().getCheckLogService()
+				.getLogNumByCompany(companyID, CheckLogStatusEnum.LATEST.getIntValue(), CheckResultEnum.ABNORMAL.getIntValue());
+				break;
+			default:
+				break;
+			}
+		}
+
+		return num;
+	}
+	/**
+	 * 根据用户编号查找各类提醒
+	 * @param userID
+	 * @param bageKind
+	 * @return
+	 */
+    private long getBageNumByUser(int userID, int bageKind)
+	{
+    	long num =0;
+    	if(userID!=0)
+    	{
+    		switch(BageKindEnum.getEnumByInt(bageKind))
+			{
+			case ALARM:
+				num = ServiceContext.getInstance().getFireAlarmService().getAlarmNumByUser(userID,AlarmClearEnum.NONE_CLEAR.getIntValue(),AlarmKindEnum.ALARM.getIntValue());
+			case STATUS:
+				num = ServiceContext.getInstance().getFireAlarmService().getAlarmNumByUser(userID,AlarmClearEnum.NONE_CLEAR.getIntValue(),AlarmKindEnum.STATUS.getIntValue());
+				break;
+			default:
+				break;
+			}
+    	}
+		return num;
+	}
 
 
 }

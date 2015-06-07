@@ -28,4 +28,9 @@ public interface FireAlarmManageService extends MispCommonService<FireAlarmView>
 	List<FireAlarmView> getFireAlarmByCompany(String companyID, int startNum,int pageSize,
 			List<AttributeJson> filterList, int status);
 
+	//根据公司编号获取当前告警数目
+	long getAlarmNumByCompany(int companyID, int status, int alarmKind);
+    //根据用户编号获取各种告警数目
+	long getAlarmNumByUser(int userID, int status, int alarmKind);
+
 }

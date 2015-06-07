@@ -30,6 +30,9 @@ public interface CheckLogManageService extends MispCommonService<CheckLog>
 	//通用获取巡检日志的方法，
 	//分页信息，状态
 	List<CheckLog> getCheckLog(int companyID, PageModel page, int status);
+
+	//根据公司编号获取异常巡检记录数
+	long getLogNumByCompany(int companyID, int status,int result);
 	
 
 }

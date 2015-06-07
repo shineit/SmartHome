@@ -24,7 +24,8 @@
 		 <property name="status" column="STATUS"></property>
 		 <property name="concentDesp" column="CONCENT_DESP"></property>
 		 <property name="planID" column="PLAN_ID"></property>
-		 
+		 <property name="concentratorKind" column="CONCENTRATOR_KIND"></property>
+
 		 <property name="machineID" column="MACHINE_ID"></property>
 		 <property name="loopID" column="LOOP_ID"></property>
 		 <property name="codeID" column="CODE_ID"></property>
@@ -35,7 +36,9 @@
 		 <property name="sensorTypeName" column="SENSOR_TYPE_NAME"></property>	
 		 <property name="contacts" column="CONTACTS"></property>	
 		 <property name="contactPhone" column="CONTACT_PHONE"></property>			 
-
+		 <property name="userName" column="USER_NAME"></property>
+		 <property name="userID" column="USER_ID"></property>
+		 
 		 <property name="alarmTypeName" column="ALARM_TYPE_NAME"></property>
 		 <property name="kind" column="KIND"></property>
 		 <property name="pushType" column="PUSH_TYPE"></property>

@@ -83,7 +83,7 @@ public class CompanyManageServiceImpl extends MispCommonServiceImpl<Company>  im
 
 		}
 		
- 		if(ValidatorUtil.isEmpty(obj.getPassword()) || obj.getPassword().equals(concentrator.getPassword()))
+ 		if(ValidatorUtil.isEmpty(obj.getPassword()) || !obj.getPassword().equals(concentrator.getPassword()))
 		{
 			log.warn("concetrator password is wrong");
 			throw new MISPException(ErrorMessageConst.CONCENTRATOR_PASSWORD_WRONG);

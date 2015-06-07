@@ -15,7 +15,6 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.misp.dao.MISPDaoContext;
 import cn.fuego.misp.domain.SystemUser;
 import cn.fuego.misp.service.MISPServiceContext;
 import cn.fuego.misp.service.impl.MispCommonServiceImpl;
@@ -77,9 +76,18 @@ public class OrgManageServiceImpl extends MispCommonServiceImpl<Organization> im
 				String code = "";
 				for(int i=0;i<strs.length-1;i++)
 				{
-				    code = code + strs[i];
+				    if(code=="")
+				    {
+				    	code = strs[i];
+				    }
+				    else
+				    {
+				    	code = code +"."+ strs[i];
+				    }
+					
 				    String parent = new String(code);
 				    idList.add(parent);
+					
 				}
 			}
 		}

@@ -4,10 +4,12 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <script type="text/javascript">
       $(function () {
-			$.pdialog.resizeDialog({style: {width: 660,height:400}}, 				
+			$.pdialog.resizeDialog({style: {width: 700,height:450,}}, 				
 			$.pdialog.getCurrent(), "");
         });//dialog 宽度重新定义
-        
+     //图片预览js
+    $("#up1").uploadPreview({ Img: "ImgPr1",ImgType:["jpg","bmp","png"] });    
+    
     var operate = $("#companyShowType").val();
 	if(operate=="create")
 	{
@@ -22,11 +24,15 @@
 </script>
 	
 <div class="pageContent">
-	<s:form method="post" action="company/CompanyManage" class="pageForm required-validate"  onsubmit="return iframeCallback(this,dialogAjaxDone);"  >
+	<s:form method="post" action="company/CompanyManage" class="pageForm required-validate"  
+	onsubmit="return iframeCallback(this,dialogAjaxDone);"  enctype="multipart/form-data" >
 		<div class="pageFormContent" layoutH="58">
 			<input type="hidden" name="obj.companyID" value="${obj.companyID}"/>
 			<input type="hidden" name="operateType" value="${operateType}" id="companyShowType"/>
 			<input type="hidden" name="oldConcentID" value="${obj.concentratorID}"/>
+			<input type="hidden" name="oldCert" value="${obj.fireCert}"/>
+			<input type="hidden" name="obj.org_id" value="${obj.org_id}"/>
+			
 			<dl style="width:50%;">
 				<dt style="width:25%;">单位名称：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.companyName"  size="30"  value="${obj.companyName}" class="required"/></dd>
@@ -108,7 +114,31 @@
 			<dl style="width:50%;">
 				<dt style="width:25%;">责任人手机：</dt>			
 				<dd style="width:70%;"><input type="text" name="obj.dutyPhone"  size="30" value="${obj.dutyPhone}" /></dd>
-			</dl>																		
+			</dl>
+			<dl style="width:50%;">
+				<dt style="width:25%;">维保单位：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.maintainerUnit"  size="30" value="${obj.fireDuty}" /></dd>
+			</dl>	
+			<dl style="width:50%;">
+				<dt style="width:25%;">维保人员：</dt>			
+				<dd style="width:70%;"><input type="text" name="obj.maintainerName"  size="30" value="${obj.dutyPhone}" /></dd>
+			</dl>
+			<dl class="nowrap" style="height:200px !important;margin-top: 10px !important;">
+				<dt style="width:12%;">消防证书：</dt>			
+				<dd style="width:50%;" >
+					<div style="width:300px; height:150px; border:solid 1px #CCC; line-height:21px; background:#FFF;">
+						<div >
+							<img id="ImgPr1" src="<%=request.getContextPath()%>/upload/${obj.fireCert}" height="150" width="300" alt="待上传图片">
+						</div>
+					</div>
+				</dd>
+				<dd style="width:30%;">
+						<div>
+							<s:file name="upload" id="up1"  ></s:file>
+						</div>
+						<span class="info">上传图片只支持bmp与jpg格式</span>
+				</dd>		 
+			</dl>																			
 		</div>		
 
 		<div class="formBar">

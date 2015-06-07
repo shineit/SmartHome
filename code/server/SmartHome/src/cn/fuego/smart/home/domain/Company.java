@@ -46,9 +46,9 @@ public class Company implements PersistenceObject
 	
 	private String fireRisk;                //火灾危险性
 	
-	private String maintainer_unit;         //消防维保单位
-	private String maintainer_name; 		//消防维保人员
-	private String fire_cert; 		//消防维保证书图片
+	private String maintainerUnit;         //消防维保单位
+	private String maintainerName; 		//消防维保人员
+	private String fireCert; 		//消防维保证书图片
 	
 	private String org_id;
 	
@@ -197,29 +197,29 @@ public class Company implements PersistenceObject
 	{
 		this.password = password;
 	}
-	public String getMaintainer_unit()
+	public String getMaintainerUnit()
 	{
-		return maintainer_unit;
+		return maintainerUnit;
 	}
-	public void setMaintainer_unit(String maintainer_unit)
+	public void setMaintainerUnit(String maintainerUnit)
 	{
-		this.maintainer_unit = maintainer_unit;
+		this.maintainerUnit = maintainerUnit;
 	}
-	public String getMaintainer_name()
+	public String getMaintainerName()
 	{
-		return maintainer_name;
+		return maintainerName;
 	}
-	public void setMaintainer_name(String maintainer_name)
+	public void setMaintainerName(String maintainerName)
 	{
-		this.maintainer_name = maintainer_name;
+		this.maintainerName = maintainerName;
 	}
-	public String getFire_cert()
+	public String getFireCert()
 	{
-		return fire_cert;
+		return fireCert;
 	}
-	public void setFire_cert(String fire_cert)
+	public void setFireCert(String fireCert)
 	{
-		this.fire_cert = fire_cert;
+		this.fireCert = fireCert;
 	}
 
 	

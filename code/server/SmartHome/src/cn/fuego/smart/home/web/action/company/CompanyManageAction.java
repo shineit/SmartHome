@@ -28,11 +28,8 @@ import cn.fuego.misp.web.constant.TableOperateTypeEnum;
 import cn.fuego.misp.web.model.message.MispMessageModel;
 import cn.fuego.misp.web.model.page.TableDataModel;
 import cn.fuego.smart.home.constant.ErrorMessageConst;
-import cn.fuego.smart.home.dao.DaoContext;
 import cn.fuego.smart.home.domain.Building;
 import cn.fuego.smart.home.domain.Company;
-import cn.fuego.smart.home.domain.FireSensor;
-import cn.fuego.smart.home.domain.UserConcentrator;
 import cn.fuego.smart.home.service.CompanyManageService;
 import cn.fuego.smart.home.service.ServiceContext;
 import cn.fuego.smart.home.web.model.CompanyFilterModel;
@@ -65,7 +62,7 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	//修改集中器会产生一系列影响
 	private String oldConcentID;
 	
-	
+	private String oldCert;
 	/* (non-Javadoc)
 	 * @see cn.fuego.misp.web.action.basic.TableAction#getService()
 	 */
@@ -85,9 +82,21 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	}
 	
 	@Override
+	public String create()
+	{
+		String fileName = saveUploadFile();
+ 		this.obj.setFireCert(fileName);
+		return super.create();
+	}
+	@Override
 	public String modify()
 	{
-		
+		String fileName = saveUploadFile();
+		if(!ValidatorUtil.isEmpty(fileName))
+		{
+			deleteUploadFileByName(oldCert);
+			this.obj.setFireCert(fileName);
+		}
 		if(!ValidatorUtil.isEmpty(this.getOldConcentID())&&!this.getOldConcentID().equals("0"))
 		{
 			if(!String.valueOf(this.obj.getConcentratorID()).equals(this.getOldConcentID()))
@@ -338,6 +347,14 @@ public class CompanyManageAction extends DWZTableAction<Company>
 	public void setOldConcentID(String oldConcentID)
 	{
 		this.oldConcentID = oldConcentID;
+	}
+	public String getOldCert()
+	{
+		return oldCert;
+	}
+	public void setOldCert(String oldCert)
+	{
+		this.oldCert = oldCert;
 	}
 
 	

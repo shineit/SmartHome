@@ -37,7 +37,7 @@
 			<li><a class="add" href="CompanyManage!show.action?operateType=create" target="dialog" mask="true" title="公司信息"><span>新增</span></a></li>
 			<li><a class="delete" href="CompanyManage!deleteList.action" target="selectedTodo" rel="selectedIDList" title="确定要删除所选信息吗?"><span>删除</span></a></li>
 			<li><a class="edit" href="CompanyManage!show.action?selectedID={sid_user}&operateType=modify"						
-				target="dialog" mask="true" title="公司信息"><span>修改</span></a></li>
+				target="dialog" mask="true" title="公司信息" ><span>修改</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="113">
