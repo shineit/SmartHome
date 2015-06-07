@@ -208,7 +208,7 @@ public class CheckLogActivity extends MispListActivity<CheckLogJson> implements 
 	public void loadSendList()
 	{
 		GetCheckLogByIDReq req = new GetCheckLogByIDReq();
-
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
 		req.setCompanyID(company.getCompanyID());
 		//PageJson page = new PageJson();		
 		//page.setCurrentPage(curPage);

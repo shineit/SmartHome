@@ -3,6 +3,7 @@ package cn.fuego.smart.home.ui.enterprise.check;
 import android.content.Intent;
 import android.os.Bundle;
 import cn.fuego.smart.enterprise.R;
+import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.constant.IntentCodeConst;
 import cn.fuego.smart.home.webservice.up.model.base.CompanyJson;
 import cn.fuego.smart.home.webservice.up.model.base.PageJson;
@@ -42,7 +43,7 @@ public class CheckLogHistroyActivity extends CheckLogActivity
 	public void loadSendList()
 	{
 		GetCheckLogByIDReq req = new GetCheckLogByIDReq();
-
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
 		req.setCompanyID(company.getCompanyID());
 		PageJson page = new PageJson();			
 		page.setPageSize(defPageSize);

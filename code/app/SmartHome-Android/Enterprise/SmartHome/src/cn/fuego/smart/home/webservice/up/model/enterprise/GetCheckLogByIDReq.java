@@ -3,13 +3,12 @@ package cn.fuego.smart.home.webservice.up.model.enterprise;
 import java.util.List;
 
 import cn.fuego.misp.webservice.up.model.MispBaseReqJson;
-import cn.fuego.smart.home.cache.AppCache;
 import cn.fuego.smart.home.webservice.up.model.base.AttributeJson;
 import cn.fuego.smart.home.webservice.up.model.base.PageJson;
 
 public class GetCheckLogByIDReq extends MispBaseReqJson
 {
-	private int userID=AppCache.getInstance().getUser().getUserID();
+	private int userID;
 	private int companyID=0;
 	private PageJson page;
 	private List<AttributeJson> filterList;

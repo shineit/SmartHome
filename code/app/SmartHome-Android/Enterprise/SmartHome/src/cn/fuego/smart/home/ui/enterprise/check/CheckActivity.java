@@ -57,6 +57,7 @@ public class CheckActivity extends MispListActivity<CheckLogJson>
 	{
 		GetCheckItemByIDReq req = new GetCheckItemByIDReq();
 		//req.setCompanyID(companyID);
+		//默认共同模板
 		req.setCompanyID(0);
 		WebServiceContext.getInstance().getCheckManageRest(new MispHttpHandler()
 		{

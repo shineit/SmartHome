@@ -183,6 +183,10 @@ public class FireAlarmActivity extends MispListActivity<FireAlarmJson>
 	{
 		this.waitDailog.show();
 		GetFireAlarmByIDReq req= new GetFireAlarmByIDReq();
+		//新加userID，用于指定用户接受告警
+		req.setUserID(AppCache.getInstance().getUser().getUserID());
+		req.setUserName(AppCache.getInstance().getUser().getUserName());
+		
         req.setCompanyID(String.valueOf(companyID));
     	List<AttributeJson> attrList = new ArrayList<AttributeJson>();
     	AttributeJson attr = new AttributeJson();

@@ -7,11 +7,6 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 public class MemoryCache
 {
 	private static String token;
-
-//	//private static String serverIp = "115.231.168.14"; //嘉兴服务器地址
-//	//private static String serverIp = "192.168.1.107"; //本地1
-//	private static String serverIp = "192.168.0.103"; //本地2
-//	//public static String hostURL = "http://120.24.217.173:8080/SmartHome/rest";//阿里云地址
 	
 	private static String version = "0.1";
 	private static String serverIp =  "115.231.168.14";
